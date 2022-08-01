@@ -13,17 +13,18 @@
       4 "gno.land/r/moul_basics_args_v1"
       4 "gno.land/r/moul_basics_hello_v1"
      11 "gno.land/r/ismatest"
-   4048 null
+   4128 null
 ```
 
 ## top realm calls
 ```
       1 "test2.gno.land/r/users"
+      2 "gno.land/r/boards/public.gno"
       2 "gno.land/r/ismatest"
       2 "test2.gno.land/r/boards"
       3 "gno.land/r/moul_basics_render_v1"
-    132 "gno.land/r/boards"
-    190 "gno.land/r/users"
-   3751 null
+    152 "gno.land/r/boards"
+    195 "gno.land/r/users"
+   3804 null
 ```
 
