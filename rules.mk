@@ -38,5 +38,5 @@ loop:
 			git push; \
 		); \
 		date; \
-		sleep 600; \
+		sleep $(LOOP_DURATION); \
 	done
