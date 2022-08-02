@@ -1,20 +1,5 @@
-fetch:
-	gnotxport export --remote test2.gno.land:36657
-	wc -l txexport.log
-	tail -n 1 txexport.log
+REMOTE = test2.gno.land:36657
+SHORTNAME = test2
+LOOP_DURATION = 50000
 
-stats:
-	echo "# test2.gno.land" > README.md
-	echo >> README.md
-
-	echo "## addpkgs" >> README.md
-	echo '```' >> README.md
-	cat txexport.log | jq '.msg[].package.Path' | sort | uniq -c | sort -n >> README.md
-	echo '```' >> README.md
-	echo >> README.md
-
-	echo "## top realm calls" >> README.md
-	echo '```' >> README.md
-	cat txexport.log | jq '.msg[].pkg_path' | sort | uniq -c | sort -n >> README.md
-	echo '```' >> README.md
-	echo >> README.md
+-include ../rules.mk
