@@ -9,6 +9,12 @@ stats:
 	echo "# test1.gno.land" > README.md
 	echo >> README.md
 
+	echo "## TXs" >> README.md
+	echo '```' >> README.md
+	zcat txexport.log.gz | wc -l >> README.md
+	echo '```' >> README.md
+	echo >> README.md
+
 	echo "## addpkgs" >> README.md
 	echo '```' >> README.md
 	zcat txexport.log.gz | jq '.msg[].package.Path' | sort | uniq -c | sort -n >> README.md
