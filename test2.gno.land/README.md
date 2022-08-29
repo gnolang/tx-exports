@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-14927
+16387
 ```
 
 ## addpkgs
@@ -18,7 +18,7 @@
       4 "gno.land/r/moul_basics_args_v1"
       4 "gno.land/r/moul_basics_hello_v1"
      11 "gno.land/r/ismatest"
-  14894 null
+  16354 null
 ```
 
 ## top realm calls
@@ -31,8 +31,8 @@
       3 "gno.land/r/moul_basics_render_v1"
       4 "test2.gno.land/r/boards"
       4 "test2.gno.land/r/users"
-   1548 "gno.land/r/users"
-   2168 "gno.land/r/boards"
-  11193 null
+   1831 "gno.land/r/users"
+   2541 "gno.land/r/boards"
+  11997 null
 ```
 
