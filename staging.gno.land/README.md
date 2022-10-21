@@ -8,12 +8,13 @@
 ## addpkgs
 ```
       1 "gno.land/r/faucettest2"
-      2 null
+      7 null
 ```
 
 ## top realm calls
 ```
       3 null
+      5 "gno.land/r/faucettest2"
 ```
 
 ## top faucet requesters
