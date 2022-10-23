@@ -2,19 +2,17 @@
 
 ## TXs
 ```
-12
+13
 ```
 
 ## addpkgs
 ```
-      2 "gno.land/r/faucettest2"
-      6 null
+      1 null
 ```
 
 ## top realm calls
 ```
-      3 "gno.land/r/faucettest2"
-      5 null
+      1 null
 ```
 
 ## top faucet requesters
