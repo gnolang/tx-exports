@@ -7,7 +7,7 @@
 
 ## addpkgs
 ```
-      1 null
+      1 "gno.land/r/faucettest2"
 ```
 
 ## top realm calls
