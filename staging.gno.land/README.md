@@ -2,16 +2,18 @@
 
 ## TXs
 ```
-18
+20
 ```
 
 ## addpkgs
 ```
-      5 null
+      7 null
 ```
 
 ## top realm calls
 ```
+      1 "gno.land/r/boards"
+      1 "gno.land/r/users"
       5 null
 ```
 
