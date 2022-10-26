@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-36732
+36739
 ```
 
 ## addpkgs
@@ -23,7 +23,7 @@
       4 "gno.land/r/moul_basics_args_v1"
       4 "gno.land/r/moul_basics_hello_v1"
      11 "gno.land/r/ismatest"
-  36693 null
+  36700 null
 ```
 
 ## top realm calls
@@ -45,8 +45,8 @@
      11 "gno.land/r/banktest"
      20 "boards"
    4885 "gno.land/r/users"
-   6164 "gno.land/r/boards"
-  25613 null
+   6165 "gno.land/r/boards"
+  25619 null
 ```
 
 ## top faucet requesters
