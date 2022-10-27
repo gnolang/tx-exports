@@ -2,16 +2,18 @@
 
 ## TXs
 ```
-36739
+36741
 ```
 
 ## addpkgs
 ```
       1 "'gno.land/r/ismatest'"
       1 "'gno.land/r/jumaru_render_v1'"
+      1 "github.com/slashbinslashnoname/gno-grc20"
       1 "gno.land/r/jumaru_render_v1"
       1 "gno.land/r/moul_basics_001"
       1 "gno.land/r/moul_basics_render_v1"
+      1 "gno.land/r/slashcoin"
       1 "gno.land/r/test_basic_v123"
       1 "gno.land/r/test_basics_hello_v1"
       2 "'gno.land/r/isma_test'"
@@ -46,7 +48,7 @@
      20 "boards"
    4885 "gno.land/r/users"
    6165 "gno.land/r/boards"
-  25619 null
+  25621 null
 ```
 
 ## top faucet requesters
