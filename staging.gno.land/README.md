@@ -2,19 +2,17 @@
 
 ## TXs
 ```
-23
+24
 ```
 
 ## addpkgs
 ```
-     10 null
+      1 null
 ```
 
 ## top realm calls
 ```
-      1 "gno.land/r/users"
-      4 "gno.land/r/boards"
-      5 null
+      1 "gno.land/r/demo/types"
 ```
 
 ## top faucet requesters
