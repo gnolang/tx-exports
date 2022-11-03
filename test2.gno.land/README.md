@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-36789
+36795
 ```
 
 ## addpkgs
@@ -10,6 +10,7 @@
       1 "'gno.land/r/ismatest'"
       1 "'gno.land/r/jumaru_render_v1'"
       1 "github.com/slashbinslashnoname/gno-grc20"
+      1 "gno.land/r/hyojin_test1"
       1 "gno.land/r/jumaru_render_v1"
       1 "gno.land/r/moul_basics_001"
       1 "gno.land/r/moul_basics_render_v1"
@@ -25,11 +26,12 @@
       4 "gno.land/r/moul_basics_args_v1"
       4 "gno.land/r/moul_basics_hello_v1"
      11 "gno.land/r/ismatest"
-  36748 null
+  36753 null
 ```
 
 ## top realm calls
 ```
+      1 "gno.land/r/CreateReply"
       1 "gno.land/r/boards/pavel_lv"
       1 "gno.land/r/boards:pavel_lv"
       1 "gno.land/r/hi"
@@ -43,14 +45,14 @@
       2 "gno.land/r/ismatest"
       2 "users"
       4 "test2.gno.land/r/boards"
-      5 "gno.land/r/moul_basics_render_v1"
+      6 "gno.land/r/moul_basics_render_v1"
       9 "gno.land/r/moul_basics_args_v1"
       9 "test2.gno.land/r/users"
      11 "gno.land/r/banktest"
      20 "boards"
-   4898 "gno.land/r/users"
+   4899 "gno.land/r/users"
    6167 "gno.land/r/boards"
-  25649 null
+  25652 null
 ```
 
 ## top faucet requesters
