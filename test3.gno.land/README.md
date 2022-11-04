@@ -2,24 +2,120 @@
 
 ## TXs
 ```
-85
+1044
 ```
 
 ## addpkgs
 ```
-     76 null
+   1044 null
 ```
 
 ## top realm calls
 ```
-      4 "gno.land/r/gnoland/blog"
-      7 "gno.land/r/demo/boards"
-      8 "gno.land/r/users"
-     28 "gno.land/r/demo/users"
-     29 null
+      6 "gno.land/r/gnoland/blog"
+      9 "gno.land/r/users"
+     10 "gno.land/r/demo/boards"
+     29 "gno.land/r/demo/users"
+    990 null
 ```
 
 ## top faucet requesters
 ```
+g1lld8mxccnegkcgs50swtzrd9324w6rewkgcle7	36	1800000000
+g1qh0ah6kzznnt762dr0zskqvz7k99w5mrdsejs3	34	1700000000
+g17zmvsrtrcsvlqg2vk606mve8xlse3yvajc36we	28	1400000000
+g1xnqma79q3syw9arnqyk27k5drjtlvkggygtsn7	24	1200000000
+g1wtx9dgjpjfhq60dge0l0dpdqlq7fwkufgdmspz	22	1100000000
+g1t3lwfe8z7c368jxawqgzenq2fdpj3zc35h8se5	22	1100000000
+g1nk0fjeefp52fwnkdysv8n6pwlmwvlftjq687ua	22	1100000000
+g145u07dc50yekj7c86zu098tsm5k0y0kldaphma	22	1100000000
+g1yerm2ptxr9mzcevy2rx2rmzem57yfqhtl2x5uc	20	1000000000
+g1wecxmk84rng8p6mqqt72970qykfhcwtcmm9veh	20	1000000000
+g1w5wzzu96kvczpy84d0ne7xhlwhvymvjqnrwpe9	20	1000000000
+g1uqklwgy94wcvspx39wa4393tgd7gajzrznj0lx	20	1000000000
+g1tu4gthnl22tmnq3svcgphec52svyszj0g3223d	20	1000000000
+g1thjpqzgnvqyy4e0d9qv6kzxwgn9wc2cp7erh65	20	1000000000
+g1s5pvdv6twydh7ew73xlcm8udsq7mkq09mr0nyk	20	1000000000
+g1pn7mqv35p9syr3w27vmth6t82zzqxzwt4j4wkf	20	1000000000
+g1mcf6vdkgxchpm6evzkc2a9hstxcwpve3gjx6m5	20	1000000000
+g1kp3mpu72hsdx044plh8arkw95vnqp5w805elh8	20	1000000000
+g1jtk8w3pwnedevqcsypnv8hvlsgdf2csxp90h0w	20	1000000000
+g1jnfsw4g24g8zhzn6lzmmeqculr2pek0kflzdw6	20	1000000000
+g1jfrvp52zvwwfpv6x2yy4m0dx9nyyg2aktqguu3	20	1000000000
+g1j9h5e953cewqjj0e0kt532a7uxaww2kwksw32g	20	1000000000
+g1gy63culm8ys9sj8r6hvh7s8g7w9lgcyxym6sss	20	1000000000
+g1gksn2ackgnzpytjqslsuuthywlcxp5qg7nrdeq	20	1000000000
+g1g34crqr7unemfeatj220prclpa0fpdlm2vt425	20	1000000000
+g1d0kexw5w5d5zxsz7squy08tk3mqhvltywfmnqd	20	1000000000
+g1aqyp6yeyyjlm8xkd9805g02cl8vh2djrgq2vky	20	1000000000
+g1amcdkwsa8wqvw4lxsntpwq9ed68pjrrz933r49	20	1000000000
+g19zlv60s4ryz8e0aztmqj4kp336j89utmzjranl	20	1000000000
+g19pgruvvyynttth47d726lxraeggfcgeamgt5ey	20	1000000000
+g17tz7p9s98wgpslmsa2qn96hgjwsxcfplww3j34	20	1000000000
+g1776qfps8s4fr23n8vlp2kkna6shs8ylv4t633f	20	1000000000
+g16sf4dnlhw9deayg5d9jxyr5y0rcqff4g3pan6g	20	1000000000
+g15se4060gkdkgyuf7f30423dnt5m6r5cdt3un9s	20	1000000000
+g15qakmv02wf60kefdypukfs9kkh0trjuslwwkvk	20	1000000000
+g14me9dnsxs42a77ajxg686lf50rdc2s7uf84ygv	20	1000000000
+g146aeysey6sqlfekkxqtq340wrtlnxt7h72r7hj	20	1000000000
+g10ccschpwmmftxz4upupe8gvrauj9rh0r2a09k7	20	1000000000
+g1g30umza3f6fuufm3lkw0he468rt7fcpl9lmy8q	18	900000000
+g1dnga8cmutu5sw0cfdg958sa8yr3y4j93kfn9g9	18	900000000
+g1932xcep4g6qsp3ktvky9khzx2rcptlwyw90n6r	18	900000000
+g16cs872ct4w6s93g5ghjvzrmr02wkl56p7lyxwz	18	900000000
+g14zkq2dpa2dqngs3fuq7sd3fn2crzs8hwuepkpx	18	900000000
+g12gngf8z4my09sjly0v0wqw42d4uja730vkysls	18	900000000
+g1xx7vcwyhtcdq8t6hcpm34sjn2drh8wayrwyrma	16	800000000
+g1xjl8mfqycp4hcm5jvud37ruv68zk0thhadqw9c	16	800000000
+g1r0568r5hd9ydq80fk7gkhmrmvh4nhnml9uxw06	16	800000000
+g1lp7phg4stp0nslx5k2awffw0pkv4t2575xl7vg	16	800000000
+g1jmuv7zpeqq038k5ungvscshcumtps7yu7y02x0	16	800000000
+g1gp4j9lrxdrk85ws4v8rpt8rvkz507hus9lf9h3	16	800000000
+g1g4nlu7ph7sfckx636tkr0h9rn5kfps7v46hg54	16	800000000
+g1ffzxha57dh0qgv9ma5v393ur0zexfvp6lsjpae	16	800000000
+g19a5q4uryhys0f6x7rl4e9kfng40ndkns7z7vxw	16	800000000
+g190kchc6zlsv3uaesypxkep322km7j8tqdqu687	16	800000000
+g18slt92n2zk070hj7zts89kqyutes6gtnrql7zm	16	800000000
+g18a4rxzm3su6xjrxwky383l0gnw5gm5zv9xzcwp	16	800000000
+g1w26r0ju602j0cy48skq0a7tm00g0q8phfvztcr	14	700000000
+g1st944cmaesj0m4yuturjderrgksxs04svae2zx	14	700000000
+g1s8ge6g08298whpnmd80ap9wad9wlcczgeamk2x	14	700000000
+g1khgzuc0gy6h5kyz7rq9ns2y3rq5z7vjgxgqvpt	14	700000000
+g1jtdhutjgcxl7pk538zufp3txl8agsuhny69ytf	14	700000000
+g1gpjsfjz5f8cqetnhqu7pdpvfvg63zhgyxeuuhz	14	700000000
+g1dxflk29mfq0438vlx9ra3r8pd5pf7ak2zlupfe	14	700000000
+g1cs5elh749fmc3mhqp5040nj4qlu24x4rex0s6p	14	700000000
+g1cmed856w8l9af94aqr0aqtjn6ezjul4g4r2l9g	14	700000000
+g102sprn20yukthu6xwhwahpvtj6l72whdvfnp7p	14	700000000
+g1znlqmz3y2asv279eaahcagt502wv68sgkfaq47	12	600000000
+g1x3t8k33yqc58c8frlq5fp4t3xz0w8mlnf3dlsh	12	600000000
+g1wsw873tedf23frppn99zlfpahpu0f0d45wsu6n	12	600000000
+g1wh8zahm9rnt7eluznfy3yphnjkdc6hmvj3uvu2	12	600000000
+g1vcd86awfrtnca8tdg0hdazvkrr243xppr6g8rz	12	600000000
+g1pjwxrm6rpnckzv4x0wallmswr4xc7fqs5e4js2	12	600000000
+g1p7pq5pdk5l6tyq4a57g9e2zwm5970kuv9jn8qt	12	600000000
+g1nvxcyqexy9qtkzq0su37smrxys70uyjy0fj0lj	12	600000000
+g1nkrgyeqt20wxq5t0k3m8np39ua7pkcex4av6pu	12	600000000
+g1n5ezx8mht7vjf3sf37wf2ngg7n5u395mnwtxr7	12	600000000
+g1mw7s0k7kgxy473s8uu5f9l0vj9268h8aqt5kf3	12	600000000
+g1kggfkne6dzzpkf4arret76dqwzrpgvla9chju9	12	600000000
+g1j8tqvelnnx8pyqlp6vwrlk2erq4d6x9c72rv6v	12	600000000
+g1hu3p95r6zf8n748kvswk632erzw925um7ef8e5	12	600000000
+g1g7y7rttjqkwc7rk5200xhdf2emmna2k0vfjvw0	12	600000000
+g1e3wqwyq9xqakktu8hdnvqqy6ac3r4n2662qwan	12	600000000
+g1e36pgllkk39el09fnygp8fua0gte7s4hvsu47x	12	600000000
+g1d9567zhg57tt65uwaglxf89nrtz27z99ca7fq8	12	600000000
+g1cz645c2vzzvq25qcya9j2pxll5wclfx2ewrhm4	12	600000000
+g1cgwrl3gfg5d2yjxusagykdwk4jtzzjhqxeau0h	12	600000000
+g1apvwpzpfj3n9jrxseqzdhpjk53ul2sk4muk977	12	600000000
+g1965lpdp3jrg769mwvcnumhnp9htt548p6n0neu	12	600000000
+g17lxr849a0mtrfwr8c3d99ay8jskvhaug8xpw6t	12	600000000
+g10l5xkykyx5xacazgqycwmatl4yfrdrewjrfest	12	600000000
+g1x647f9vszace64pd0js9hncfmmahqu2gjh3lkr	10	500000000
+g1q2rnacpnqyh2csywwvyk0cnuqqkkz29ymue98t	10	500000000
+g1mxt0yfmalc8f5zcyun000lkl9v7409u493u6h2	10	500000000
+g1kxslk28fd9gdscm9703k66kuz87fp6zzsha8ke	10	500000000
+g1d0a0p3mu0cpu57nrqgrgpn666cvtsvz8zuxja2	10	500000000
+g124h5lx3jdu7yttpy63c7haqgcsk67tl7u4hz5l	10	500000000
 ```
 
