@@ -2,17 +2,17 @@
 
 ## TXs
 ```
-26
+31
 ```
 
 ## addpkgs
 ```
-     13 null
+     18 null
 ```
 
 ## top realm calls
 ```
-     13 null
+     18 null
 ```
 
 ## top faucet requesters
