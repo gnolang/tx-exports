@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-20312
+20338
 ```
 
 ## addpkgs
@@ -12,8 +12,10 @@
       1 "gno.land/r/demo/banker_v2"
       1 "gno.land/r/demo/banker_v3"
       1 "gno.land/r/demo/bar20"
+      1 "gno.land/r/hyojin_test1"
+      3 "gno.land/r/demo/hyojin_hello1"
       4 "gno.land/r/demo/banker"
-  20303 null
+  20325 null
 ```
 
 ## top realm calls
@@ -25,13 +27,14 @@
       1 "gno.land/r/demo/banker_v3"
       1 "gnoland.space/r/boards"
       2 "gno.land/r/demo/bar20"
+      2 "gno.land/r/demo/hyojin_hello1"
       4 "gno.land/r/demo/banker"
       6 "gno.land/r/gnoland/blog"
-     10 "gno.land/r/boards"
+     11 "gno.land/r/boards"
      14 "gno.land/r/users"
-     42 "gno.land/r/demo/boards"
-     48 "gno.land/r/demo/users"
-  20180 null
+     50 "gno.land/r/demo/users"
+     54 "gno.land/r/demo/boards"
+  20189 null
 ```
 
 ## top faucet requesters
