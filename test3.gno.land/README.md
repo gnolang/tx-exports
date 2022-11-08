@@ -2,20 +2,33 @@
 
 ## TXs
 ```
-20338
+20382
 ```
 
 ## addpkgs
 ```
+      1 "gno.land/p/demo/dom"
       1 "gno.land/r/demo/banker.v1"
       1 "gno.land/r/demo/banker_v1"
       1 "gno.land/r/demo/banker_v2"
       1 "gno.land/r/demo/banker_v3"
       1 "gno.land/r/demo/bar20"
       1 "gno.land/r/hyojin_test1"
+      1 "gno.land/r/moul/basics-hello-v1"
+      1 "gno.land/r/moul/basics/grc20/v1"
+      1 "gno.land/r/moul/basics_args_v1"
+      1 "gno.land/r/moul/basics_hello_v1"
+      2 "gno.land/p/demo/grc/exts/vault"
+      2 "gno.land/r/moul/basics/args/v1"
+      2 "gno.land/r/moul/basics/data/v1"
+      2 "gno.land/r/moul/basics/render/v1"
       3 "gno.land/r/demo/hyojin_hello1"
+      3 "gno.land/r/moul/basics/hello/v1"
+      3 "gno.land/r/moul/basics/import/v1"
+      3 "gno.land/r/moul/basics/vault/v1"
+      3 "gno.land/r/moul/basics/wikipedia_coin/v1"
       4 "gno.land/r/demo/banker"
-  20325 null
+  20344 null
 ```
 
 ## top realm calls
@@ -25,16 +38,24 @@
       1 "gno.land/r/demo/banker_v1"
       1 "gno.land/r/demo/banker_v2"
       1 "gno.land/r/demo/banker_v3"
+      1 "gno.land/r/moul/basics/grc20/v1"
+      1 "gno.land/r/moul/basics/hello/v1"
+      1 "gno.land/r/moul/basics/import/v1"
       1 "gnoland.space/r/boards"
       2 "gno.land/r/demo/bar20"
       2 "gno.land/r/demo/hyojin_hello1"
+      2 "gno.land/r/moul/basics/args/v1"
+      2 "gno.land/r/moul/basics/data/v1"
+      2 "gno.land/r/moul/basics/render/v1"
+      2 "gno.land/r/moul/basics/vault/v1"
       4 "gno.land/r/demo/banker"
+      5 "gno.land/r/moul/basics/wikipedia_coin/v1"
       6 "gno.land/r/gnoland/blog"
      11 "gno.land/r/boards"
      14 "gno.land/r/users"
      50 "gno.land/r/demo/users"
      54 "gno.land/r/demo/boards"
-  20189 null
+  20217 null
 ```
 
 ## top faucet requesters
