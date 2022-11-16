@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-20481
+20495
 ```
 
 ## addpkgs
@@ -34,7 +34,7 @@
       3 "gno.land/r/moul/basics/vault/v1"
       3 "gno.land/r/moul/basics/wikipedia_coin/v1"
       4 "gno.land/r/demo/banker"
-  20435 null
+  20449 null
 ```
 
 ## top realm calls
@@ -58,14 +58,14 @@
       2 "gno.land/r/moul/basics/vault/v1"
       3 "gno.land/r/demo/destroy"
       4 "gno.land/r/demo/banker"
-      5 "gno.land/r/demo/minter"
       5 "gno.land/r/moul/basics/wikipedia_coin/v1"
       8 "gno.land/r/gnoland/blog"
+      9 "gno.land/r/demo/minter"
      11 "gno.land/r/boards"
      14 "gno.land/r/users"
-     53 "gno.land/r/demo/users"
+     54 "gno.land/r/demo/users"
      73 "gno.land/r/demo/boards"
-  20282 null
+  20291 null
 ```
 
 ## top faucet requesters
