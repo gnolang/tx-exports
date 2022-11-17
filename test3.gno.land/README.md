@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-20495
+20543
 ```
 
 ## addpkgs
@@ -14,7 +14,14 @@
       1 "gno.land/r/demo/banker_v3"
       1 "gno.land/r/demo/bar20"
       1 "gno.land/r/demo/destroy"
+      1 "gno.land/r/demo/market"
+      1 "gno.land/r/demo/market0"
+      1 "gno.land/r/demo/market01"
       1 "gno.land/r/demo/minter"
+      1 "gno.land/r/demo/nft"
+      1 "gno.land/r/demo/nft2"
+      1 "gno.land/r/demo/nft4"
+      1 "gno.land/r/demo/recall"
       1 "gno.land/r/demo/token"
       1 "gno.land/r/disperze/tokens"
       1 "gno.land/r/hyojin_test1"
@@ -24,6 +31,8 @@
       1 "gno.land/r/moul/basics_hello_v1"
       1 "gno.land/r/tokens"
       2 "gno.land/p/demo/grc/exts/vault"
+      2 "gno.land/r/demo/nft1"
+      2 "gno.land/r/demo/nft3"
       2 "gno.land/r/moul/basics/args/v1"
       2 "gno.land/r/moul/basics/data/v1"
       2 "gno.land/r/moul/basics/render/v1"
@@ -34,7 +43,7 @@
       3 "gno.land/r/moul/basics/vault/v1"
       3 "gno.land/r/moul/basics/wikipedia_coin/v1"
       4 "gno.land/r/demo/banker"
-  20449 null
+  20486 null
 ```
 
 ## top realm calls
@@ -44,6 +53,10 @@
       1 "gno.land/r/demo/banker_v1"
       1 "gno.land/r/demo/banker_v2"
       1 "gno.land/r/demo/banker_v3"
+      1 "gno.land/r/demo/market0"
+      1 "gno.land/r/demo/nft1"
+      1 "gno.land/r/demo/nft2"
+      1 "gno.land/r/demo/nft3"
       1 "gno.land/r/demo/token"
       1 "gno.land/r/disperze/tokens"
       1 "gno.land/r/moul/basics/grc20/v1"
@@ -56,16 +69,19 @@
       2 "gno.land/r/moul/basics/data/v1"
       2 "gno.land/r/moul/basics/render/v1"
       2 "gno.land/r/moul/basics/vault/v1"
-      3 "gno.land/r/demo/destroy"
+      3 "gno.land/r/demo/market01"
+      3 "gno.land/r/demo/nft4"
       4 "gno.land/r/demo/banker"
+      4 "gno.land/r/demo/destroy"
       5 "gno.land/r/moul/basics/wikipedia_coin/v1"
+      7 "gno.land/r/demo/recall"
       8 "gno.land/r/gnoland/blog"
-      9 "gno.land/r/demo/minter"
      11 "gno.land/r/boards"
      14 "gno.land/r/users"
+     17 "gno.land/r/demo/minter"
      54 "gno.land/r/demo/users"
      73 "gno.land/r/demo/boards"
-  20291 null
+  20313 null
 ```
 
 ## top faucet requesters
