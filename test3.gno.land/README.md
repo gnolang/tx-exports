@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-20561
+20634
 ```
 
 ## addpkgs
@@ -29,7 +29,9 @@
       1 "gno.land/r/moul/basics/grc20/v1"
       1 "gno.land/r/moul/basics_args_v1"
       1 "gno.land/r/moul/basics_hello_v1"
+      1 "gno.land/r/test/nft"
       1 "gno.land/r/tokens"
+      1 "gno.land/r/wallet/minterv1"
       2 "gno.land/p/demo/grc/exts/vault"
       2 "gno.land/r/demo/nft1"
       2 "gno.land/r/demo/nft3"
@@ -43,7 +45,8 @@
       3 "gno.land/r/moul/basics/vault/v1"
       3 "gno.land/r/moul/basics/wikipedia_coin/v1"
       4 "gno.land/r/demo/banker"
-  20504 null
+      7 "gno.land/r/wallet/minterv2"
+  20568 null
 ```
 
 ## top realm calls
@@ -69,19 +72,22 @@
       2 "gno.land/r/moul/basics/data/v1"
       2 "gno.land/r/moul/basics/render/v1"
       2 "gno.land/r/moul/basics/vault/v1"
+      2 "gno.land/r/test/nft"
       3 "gno.land/r/demo/market01"
       3 "gno.land/r/demo/nft4"
+      3 "gno.land/r/wallet/minterv1"
       4 "gno.land/r/demo/banker"
-      4 "gno.land/r/demo/destroy"
+      5 "gno.land/r/demo/destroy"
       5 "gno.land/r/moul/basics/wikipedia_coin/v1"
       7 "gno.land/r/demo/recall"
       8 "gno.land/r/gnoland/blog"
+      9 "gno.land/r/wallet/minterv2"
      11 "gno.land/r/boards"
      14 "gno.land/r/users"
-     17 "gno.land/r/demo/minter"
+     25 "gno.land/r/demo/minter"
      56 "gno.land/r/demo/users"
      73 "gno.land/r/demo/boards"
-  20329 null
+  20379 null
 ```
 
 ## top faucet requesters
