@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-20362
+20361
 ```
 
 ## addpkgs
@@ -11,7 +11,7 @@
       1 "gno.land/r/test1/v1v1"
       1 "gno.land/r/test1/v1v2"
       3 "gno.land/p/demo/avl"
-    516 null
+    518 null
 ```
 
 ## top realm calls
@@ -21,7 +21,7 @@
       5 "gno.land/r/users"
      43 "gno.land/r/demo/users"
     112 "gno.land/r/demo/boards"
-    156 "gno.land/r/demo/minter"
+    158 "gno.land/r/demo/minter"
     203 null
 ```
 
