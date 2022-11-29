@@ -12,7 +12,7 @@
       1 "gno.land/r/test1/v1v2"
       2 "gno.land/r/gnoland/faucetv2"
       3 "gno.land/p/demo/avl"
-    660 null
+    661 null
 ```
 
 ## top realm calls
@@ -24,7 +24,7 @@
      65 "gno.land/r/demo/users"
     165 "gno.land/r/demo/boards"
     209 null
-    218 "gno.land/r/demo/minter"
+    219 "gno.land/r/demo/minter"
 ```
 
 ## top faucet requesters
