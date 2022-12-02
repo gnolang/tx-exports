@@ -14,7 +14,7 @@
       2 "gno.land/r/gnoland/faucetv2"
       2 "gno.land/r/pwnh4/meetup"
       3 "gno.land/p/demo/avl"
-    755 null
+    756 null
 ```
 
 ## top realm calls
@@ -27,7 +27,7 @@
      82 "gno.land/r/demo/users"
     174 "gno.land/r/demo/boards"
     235 "gno.land/r/demo/minter"
-    258 null
+    259 null
 ```
 
 ## top faucet requesters
