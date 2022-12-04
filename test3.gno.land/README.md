@@ -14,7 +14,7 @@
       2 "gno.land/r/gnoland/faucetv2"
       2 "gno.land/r/pwnh4/meetup"
       3 "gno.land/p/demo/avl"
-    762 null
+    763 null
 ```
 
 ## top realm calls
@@ -25,7 +25,7 @@
       5 "gno.land/r/rich_wallet/minter_v1"
       6 "gno.land/r/users"
      86 "gno.land/r/demo/users"
-    174 "gno.land/r/demo/boards"
+    175 "gno.land/r/demo/boards"
     236 "gno.land/r/demo/minter"
     260 null
 ```
