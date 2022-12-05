@@ -14,20 +14,20 @@
       2 "gno.land/r/gnoland/faucetv2"
       2 "gno.land/r/pwnh4/meetup"
       3 "gno.land/p/demo/avl"
-    763 null
+    771 null
 ```
 
 ## top realm calls
 ```
       1 "gno.land"
       2 "gno.land/r/gnoland/blog"
-      3 "gno.land/r/boards"
+      5 "gno.land/r/boards"
       5 "gno.land/r/rich_wallet/minter_v1"
       6 "gno.land/r/users"
-     86 "gno.land/r/demo/users"
-    175 "gno.land/r/demo/boards"
-    236 "gno.land/r/demo/minter"
-    260 null
+     87 "gno.land/r/demo/users"
+    178 "gno.land/r/demo/boards"
+    237 "gno.land/r/demo/minter"
+    261 null
 ```
 
 ## top faucet requesters
