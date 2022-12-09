@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-19418
+19412
 ```
 
 ## addpkgs
@@ -35,6 +35,7 @@
       1 "gno.land/r/nq/quangtokentwo"
       1 "gno.land/r/q/quangtokenone"
       1 "gno.land/r/q/quangtokentwo"
+      1 "gno.land/r/q/tokenone"
       1 "gno.land/r/qq/quangtokenone"
       1 "gno.land/r/qq/quangtokentwo"
       1 "gno.land/r/qqq/quangtokentwo"
@@ -65,7 +66,7 @@
       9 "gno.land/r/demo/sotatoken1"
       9 "gno.land/r/q/quangdex"
      18 "gno.land/r/demo/dex"
-   1035 null
+   1081 null
 ```
 
 ## top realm calls
@@ -88,6 +89,7 @@
       2 "test3.gno.land/r/demo/users"
       3 "gno.land/r/demo/dex100"
       3 "gno.land/r/demo/types"
+      3 "gno.land/r/q/tokenone"
       4 "gno.land/r/demo/dex4"
       4 "gno.land/r/demo/onetoken"
       4 "gno.land/r/gnoland/blog"
@@ -97,10 +99,10 @@
       9 "gno.land/r/boards"
       9 "gno.land/r/demo/dex3"
      13 "gno.land/r/demo/token20"
-    125 "gno.land/r/demo/users"
-    265 "gno.land/r/demo/boards"
-    291 "gno.land/r/demo/minter"
-    393 null
+    131 "gno.land/r/demo/users"
+    283 "gno.land/r/demo/boards"
+    295 "gno.land/r/demo/minter"
+    409 null
 ```
 
 ## top faucet requesters
