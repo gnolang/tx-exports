@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-19311
+19310
 ```
 
 ## addpkgs
@@ -67,7 +67,7 @@
       9 "gno.land/r/demo/sotatoken1"
       9 "gno.land/r/q/quangdex"
      18 "gno.land/r/demo/dex"
-   1994 null
+   2028 null
 ```
 
 ## top realm calls
@@ -102,10 +102,10 @@
      12 "gno.land/r/boards"
      13 "gno.land/r/demo/token20"
      18 "gno.land/r/users"
-    212 "gno.land/r/demo/users"
+    232 "gno.land/r/demo/users"
     422 "gno.land/r/demo/boards"
     666 null
-    706 "gno.land/r/demo/minter"
+    720 "gno.land/r/demo/minter"
 ```
 
 ## top faucet requesters
