@@ -67,7 +67,7 @@
       9 "gno.land/r/demo/sotatoken1"
       9 "gno.land/r/q/quangdex"
      18 "gno.land/r/demo/dex"
-   2309 null
+   2317 null
 ```
 
 ## top realm calls
@@ -103,8 +103,8 @@
      13 "gno.land/r/demo/token20"
      19 "gno.land/r/users"
     328 "gno.land/r/demo/users"
-    423 "gno.land/r/demo/boards"
-    693 null
+    426 "gno.land/r/demo/boards"
+    698 null
     876 "gno.land/r/demo/minter"
 ```
 
