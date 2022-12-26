@@ -67,7 +67,7 @@
       9 "gno.land/r/demo/sotatoken1"
       9 "gno.land/r/q/quangdex"
      18 "gno.land/r/demo/dex"
-   2596 null
+   2611 null
 ```
 
 ## top realm calls
@@ -103,10 +103,10 @@
      12 "gno.land/r/boards"
      13 "gno.land/r/demo/token20"
      21 "gno.land/r/users"
-    350 "gno.land/r/demo/users"
+    356 "gno.land/r/demo/users"
     448 "gno.land/r/demo/boards"
-    833 null
-    973 "gno.land/r/demo/minter"
+    839 null
+    976 "gno.land/r/demo/minter"
 ```
 
 ## top faucet requesters
