@@ -2,14 +2,19 @@
 
 ## TXs
 ```
-19275
+17994
 ```
 
 ## addpkgs
 ```
+      1 "gno.land/p/demo/avol"
+      1 "gno.land/p/demo/avolo"
       1 "gno.land/p/demo/phutest/hello"
+      1 "gno.land/p/demo/trongvip"
+      1 "gno.land/p/demo/trongvip1"
       1 "gno.land/r/demo/12312312312"
-      1 "gno.land/r/demo/boards"
+      1 "gno.land/r/demo/boards-trongvip"
+      1 "gno.land/r/demo/boardss"
       1 "gno.land/r/demo/dex1"
       1 "gno.land/r/demo/dex12"
       1 "gno.land/r/demo/dex42"
@@ -30,6 +35,7 @@
       1 "gno.land/r/demo/token6"
       1 "gno.land/r/demo/token8"
       1 "gno.land/r/demo/token9"
+      1 "gno.land/r/demo/trongvip1"
       1 "gno.land/r/mm/minter_v1"
       1 "gno.land/r/nq/quangtokenone"
       1 "gno.land/r/nq/quangtokentwo"
@@ -45,6 +51,7 @@
       1 "gno.land/r/test1/v1v1"
       1 "gno.land/r/test1/v1v2"
       2 "gno.land/p/demo/board"
+      2 "gno.land/r/demo/boards"
       2 "gno.land/r/demo/dex2"
       2 "gno.land/r/demo/dex3"
       2 "gno.land/r/demo/dex4"
@@ -63,15 +70,16 @@
       4 "gno.land/r/demo/dex100"
       4 "gno.land/r/demo/token20"
       5 "gno.land/p/demo/phutest"
-      8 "gno.land/p/demo/avl"
       9 "gno.land/r/demo/sotatoken1"
       9 "gno.land/r/q/quangdex"
+     10 "gno.land/p/demo/avl"
      18 "gno.land/r/demo/dex"
-   2701 null
+   2721 null
 ```
 
 ## top realm calls
 ```
+      1 "app.gno.tools/r/demo/boards"
       1 "contract/dex_demo"
       1 "gno.land"
       1 "gno.land/p/demo/phutest/dex_demo"
@@ -101,12 +109,12 @@
       9 "gno.land/r/demo/dex3"
      10 "gno.land/r/q/tokenone"
      13 "gno.land/r/demo/token20"
-     14 "gno.land/r/boards"
+     18 "gno.land/r/boards"
      21 "gno.land/r/users"
     368 "gno.land/r/demo/users"
-    457 "gno.land/r/demo/boards"
-    879 null
-   1003 "gno.land/r/demo/minter"
+    466 "gno.land/r/demo/boards"
+    890 null
+   1008 "gno.land/r/demo/minter"
 ```
 
 ## top faucet requesters
