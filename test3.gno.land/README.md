@@ -74,7 +74,7 @@
       9 "gno.land/r/q/quangdex"
      10 "gno.land/p/demo/avl"
      18 "gno.land/r/demo/dex"
-   2729 null
+   2750 null
 ```
 
 ## top realm calls
@@ -113,8 +113,8 @@
      24 "gno.land/r/users"
     369 "gno.land/r/demo/users"
     468 "gno.land/r/demo/boards"
-    890 null
-   1010 "gno.land/r/demo/minter"
+    910 null
+   1011 "gno.land/r/demo/minter"
 ```
 
 ## top faucet requesters
