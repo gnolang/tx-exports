@@ -7,12 +7,10 @@
 
 ## addpkgs
 ```
-     18 null
 ```
 
 ## top realm calls
 ```
-     18 null
 ```
 
 ## top faucet requesters
