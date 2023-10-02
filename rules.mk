@@ -1,5 +1,5 @@
 fetch:
-	gnotxport export --remote $(REMOTE)
+	gnotxsync export --remote $(REMOTE)
 	wc -l txexport.log
 	tail -n 1 txexport.log
 	rm -f txexport-*.log
