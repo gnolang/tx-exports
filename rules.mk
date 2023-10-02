@@ -3,7 +3,7 @@ fetch:
 	wc -l txexport.log
 	tail -n 1 txexport.log
 	rm -f txexport-*.log
-	split --lines=10000 --additional-suffix=.log txexport.log txexport-
+	split --lines=1000 --additional-suffix=.log txexport.log txexport-
 
 stats:
 	echo "# $(REMOTE)" > README.md
