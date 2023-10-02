@@ -1,5 +1,5 @@
 fetch:
-	gnotxsync export --remote $(REMOTE)
+	go run github.com/gnolang/gno/gno.land/cmd/gnotxsync export --remote $(REMOTE)
 	wc -l txexport.log
 	tail -n 1 txexport.log
 	rm -f txexport-*.log
