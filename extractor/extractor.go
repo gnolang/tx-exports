@@ -118,14 +118,13 @@ func main() {
 
 	err = filepath.Walk(logDir, walker)
 	if err != nil {
-		fmt.Println("Error walking directory:", err)
+		fmt.Println("Error walking directory: ", err)
 	}
 
 	//goroutine for each log file
 	var wg sync.WaitGroup
 	for _, file := range logFiles {
 		wg.Add(1)
-		fmt.Printf("opening goroutine for: %s\n", file)
 		go processFile(file, &wg)
 	}
 	wg.Wait()
