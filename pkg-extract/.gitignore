@@ -1,0 +1,5 @@
+.idea
+logs
+extracted
+.env
+go.sum
