@@ -1,4 +1,4 @@
-package extractor
+package main
 
 import (
 	"encoding/json"

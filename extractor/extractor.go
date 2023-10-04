@@ -1,4 +1,4 @@
-package extractor
+package main
 
 import (
 	"bufio"
@@ -7,6 +7,7 @@ import (
 	"github.com/joho/godotenv"
 	"log"
 	"os"
+	"path/filepath"
 	"strings"
 	"sync"
 )
@@ -100,17 +101,32 @@ func main() {
 	logDir = os.Getenv("LOGS_DIR")
 	extractionDir = os.Getenv("EXTRACTION_DIR")
 
-	// read log files
-	entries, err := os.ReadDir(logDir)
-	if err != nil {
-		log.Fatal(err)
+	logFiles := []string{}
+
+	walker := func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			fmt.Println("Error accessing file:", err)
+			return err
+		}
+
+		if !info.IsDir() && strings.HasSuffix(info.Name(), ".log") {
+			logFiles = append(logFiles, path)
+		}
+
+		return nil
 	}
 
-	// goroutine for each log file
+	err = filepath.Walk(logDir, walker)
+	if err != nil {
+		fmt.Println("Error walking directory:", err)
+	}
+
+	//goroutine for each log file
 	var wg sync.WaitGroup
-	for _, e := range entries {
+	for _, file := range logFiles {
 		wg.Add(1)
-		go processFile(logDir+e.Name(), &wg)
+		fmt.Printf("opening goroutine for: %s\n", file)
+		go processFile(file, &wg)
 	}
 	wg.Wait()
 }
