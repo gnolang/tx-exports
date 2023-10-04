@@ -1,4 +1,4 @@
-module pkg-extract
+module extractor
 
 go 1.21.0
 
