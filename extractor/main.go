@@ -127,7 +127,8 @@ func execExtract(ctx context.Context, cfg *extractorCfg) error {
 
 			// Process messages
 			for _, msg := range msgs {
-				outputDir := strings.TrimLeft(msg.Package.Path, "gno.land/")
+
+				outputDir := filepath.Join(cfg.outputDir, strings.TrimLeft(msg.Package.Path, "gno.land/"))
 
 				// Write dir before writing files
 				if dirWriteErr := os.MkdirAll(outputDir, os.ModePerm); dirWriteErr != nil {
@@ -202,18 +203,18 @@ func processSourceFile(filePath string) ([]vm.MsgAddPackage, error) {
 	reader := bufio.NewReader(file)
 
 	// Used to track what was parsed in the past
-	//touchMap := make(map[string]vm.MsgAddPackage)
+	touchMap := make(map[string]vm.MsgAddPackage)
 
 	// Msg array to be returned for further processing
 	msgArr := make([]vm.MsgAddPackage, 0)
 
 	// Buffer to handle lines longer than 64kb
-	//tempBuf := make([]byte, MaxScanTokenSize)
+	tempBuf := make([]byte, 0)
 
 	i := 0
 	for {
 		var tx std.Tx
-		line, _, err := reader.ReadLine()
+		line, isPrefix, err := reader.ReadLine()
 
 		// Exit if no more lines in file
 		if err != nil {
@@ -223,50 +224,51 @@ func processSourceFile(filePath string) ([]vm.MsgAddPackage, error) {
 			}
 		}
 
-		//// If line is too long, save it in a temporary buffer and continue reading line
-		//if isPrefix {
-		//	tempBuf = append(tempBuf, line...)
-		//	continue
-		//}
-		//
-		//// Handle long lines
-		//if len(tempBuf) != 0 {
-		//	// Append last part of line to temporary buffer
-		//	tempBuf = append(tempBuf, line...)
-		//
-		//	// Use line variable to pass it on to amino
-		//	line = tempBuf
-		//}
+		// If line is too long, save it in a temporary buffer and continue reading line
+		if isPrefix {
+			tempBuf = append(tempBuf, line...)
+			continue
+		}
+
+		// Handle long lines
+		if len(tempBuf) != 0 {
+			// Append last part of line to temporary buffer
+			tempBuf = append(tempBuf, line...)
+
+			// Use line variable to pass it on to amino
+			line = tempBuf
+		}
 
 		if aminoErr := amino.UnmarshalJSON(line, &tx); aminoErr != nil {
 			fmt.Printf("Error while parsing amino JSON at line %d: %v\n", i, aminoErr.Error())
 			continue
 		}
 
-		fmt.Println(tx)
+		// Reset tempBuf in case it was used for a long line
+		if tempBuf != nil {
+			tempBuf = nil
+		}
 
-		//// Reset tempBuf in case it was used for a long line
-		//if tempBuf != nil {
-		//	tempBuf = nil
-		//}
+		for _, msg := range tx.Msgs {
+			// Only MsgAddPkg should be parsed
 
-		//for _, msg := range tx.Msgs {
-		//	// Only MsgAddPkg should be parsed
-		//	if msg.Type() != "/vm.m_addpkg" {
-		//		continue
-		//	}
-		//
-		//	msgAddPkg := msg.(vm.MsgAddPackage)
-		//	path := msgAddPkg.Package.Path
-		//
-		//	if _, parsed := touchMap[path]; parsed {
-		//		// Package already parsed
-		//		continue
-		//	}
-		//
-		//	touchMap[path] = msgAddPkg
-		//	msgArr = append(msgArr, msgAddPkg)
-		//}
+			if msg.Type() != "add_package" {
+				continue
+			}
+
+			msgAddPkg := msg.(vm.MsgAddPackage)
+
+			path := msgAddPkg.Package.Path
+
+			if _, parsed := touchMap[path]; parsed {
+				// Package already parsed
+				continue
+			}
+
+			touchMap[path] = msgAddPkg
+			msgArr = append(msgArr, msgAddPkg)
+
+		}
 		i++
 	}
 
