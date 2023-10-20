@@ -21,7 +21,6 @@ import (
 // Define constants
 const (
 	packageMetadataFile = "pkg_metadata.json"
-	MaxScanTokenSize    = 64 * 1024
 )
 
 // Define errors
@@ -70,8 +69,8 @@ func (c *extractorCfg) registerFlags(fs *flag.FlagSet) {
 	fs.StringVar(
 		&c.fileType,
 		"file-type",
-		".log",
-		"the file type for analysis, with a preceding period (ex .type)",
+		".jsonl",
+		"the file type for analysis, with a preceding period (ie .jsonl)",
 	)
 
 	fs.StringVar(
@@ -170,7 +169,6 @@ func writePackageFiles(msg vm.MsgAddPackage, outputDir string) error {
 // writePackageMetadata writes the package metadata to the output directory
 func writePackageMetadata(metadata Metadata, outputDir string) error {
 
-	fmt.Println("writing metadata: ", outputDir)
 	// Get the output path
 	writePath := filepath.Join(outputDir, packageMetadataFile)
 
@@ -219,7 +217,6 @@ func processSourceFile(filePath string) ([]vm.MsgAddPackage, error) {
 		// Exit if no more lines in file
 		if err != nil {
 			if errors.Is(err, io.EOF) {
-				fmt.Println("Reading file finished...")
 				break
 			}
 		}
