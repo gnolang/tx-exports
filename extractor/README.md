@@ -11,7 +11,7 @@ The extractor takes in three arguments:
 
 ```
 USAGE
-  [flags] [<arg>...]
+  [flags]
 
 The Gno source code extractor service
 

@@ -23,13 +23,6 @@ const (
 	packageMetadataFile = "pkg_metadata.json"
 )
 
-// Define errors
-var (
-	errInvalidFileType  = errors.New("invalid file type specified")
-	errInvalidSourceDir = errors.New("invalid source directory")
-	errInvalidOutputDir = errors.New("invalid output directory")
-)
-
 // Define extractor config
 type extractorCfg struct {
 	fileType  string
@@ -48,7 +41,7 @@ func main() {
 
 	// Create the command
 	cmd := &ffcli.Command{
-		ShortUsage: "[flags] [<arg>...]",
+		ShortUsage: "[flags]",
 		LongHelp:   "The Gno / TM2 source code extractor service",
 		FlagSet:    fs,
 		Exec: func(ctx context.Context, _ []string) error {
@@ -56,7 +49,7 @@ func main() {
 		},
 	}
 
-	// Run the command
+	// Run the command11
 	if err := cmd.ParseAndRun(context.Background(), os.Args[1:]); err != nil {
 		_, _ = fmt.Fprintf(os.Stderr, "%+v", err)
 
@@ -92,17 +85,17 @@ func (c *extractorCfg) registerFlags(fs *flag.FlagSet) {
 func execExtract(ctx context.Context, cfg *extractorCfg) error {
 	// Check the file type is valid
 	if cfg.fileType == "" {
-		return errInvalidFileType
+		return errors.New("invalid file type specified")
 	}
 
 	// Check the source dir is valid
 	if cfg.sourceDir == "" {
-		return errInvalidSourceDir
+		return errors.New("invalid source directory")
 	}
 
 	// Check the output dir is valid
 	if cfg.outputDir == "" {
-		return errInvalidOutputDir
+		return errors.New("invalid output directory")
 	}
 
 	// Find the files that need to be analyzed
