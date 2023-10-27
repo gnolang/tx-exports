@@ -22,16 +22,16 @@ import (
 )
 
 const (
-	NumSourceFiles    = 20
-	NumTx             = 100
-	NumMsg            = 200
-	MaxFilesPerPkg    = 100
-	MaxFileBodyLength = 200
-	MsgPerTx          = NumMsg / NumTx
-	TxPerSourceFile   = NumTx / NumSourceFiles
-	MaxDepositAmount  = 5000
-	MaxArgs           = 2
-	SourceFileType    = ".log"
+	numSourceFiles    = 20
+	numTx             = 100
+	numMsg            = 200
+	maxFilesPerPkg    = 100
+	maxFileBodyLength = 200
+	msgPerTx          = numMsg / numTx
+	txPerSourceFile   = numTx / numSourceFiles
+	maxDepositAmount  = 5000
+	maxArgs           = 2
+	sourceFileType    = ".log"
 )
 
 var (
@@ -40,16 +40,18 @@ var (
 
 // Tests
 func TestFindFilePaths(t *testing.T) {
+	t.Parallel()
+
 	tempDir, err := os.MkdirTemp(".", "test")
 	if err != nil {
 		t.Fatal(err)
 	}
 	defer os.RemoveAll(tempDir)
 
-	testFiles := make([]string, NumSourceFiles)
+	testFiles := make([]string, numSourceFiles)
 
-	for i := 0; i < NumSourceFiles; i++ {
-		testFiles[i] = "sourceFile" + strconv.Itoa(i) + SourceFileType
+	for i := 0; i < numSourceFiles; i++ {
+		testFiles[i] = "sourceFile" + strconv.Itoa(i) + sourceFileType
 	}
 
 	for _, file := range testFiles {
@@ -93,6 +95,8 @@ func TestFindFilePaths(t *testing.T) {
 }
 
 func TestProcessSourceFiles(t *testing.T) {
+	t.Parallel()
+
 	mockMsgs, mockMsgsAddPackage := generateMockMsgs(t)
 	sourceFiles := generateSourceFiles(t, mockMsgs)
 
@@ -118,6 +122,8 @@ func TestProcessSourceFiles(t *testing.T) {
 }
 
 func TestWritePackageMetadata(t *testing.T) {
+	t.Parallel()
+
 	_, mockMsgsAddPackage := generateMockMsgs(t)
 
 	// Make temp dir
@@ -171,6 +177,8 @@ func TestWritePackageMetadata(t *testing.T) {
 }
 
 func TestWritePackageFiles(t *testing.T) {
+	t.Parallel()
+
 	_, mockMsgsAddPackage := generateMockMsgs(t)
 
 	tempDir, err := os.MkdirTemp(".", "test")
@@ -217,21 +225,21 @@ func generateSourceFiles(t *testing.T, mockMsgs []std.Msg) []string {
 	}
 
 	var (
-		mockTx    = make([]std.Tx, NumTx)
-		testFiles = make([]string, NumSourceFiles)
+		mockTx    = make([]std.Tx, numTx)
+		testFiles = make([]string, numSourceFiles)
 	)
 
 	// Generate transactions to wrap messages
 	for i := range mockTx { // num
 		mockTx[i] = std.Tx{
-			Msgs: mockMsgs[:MsgPerTx],
+			Msgs: mockMsgs[:msgPerTx],
 		}
-		mockMsgs = mockMsgs[MsgPerTx:]
+		mockMsgs = mockMsgs[msgPerTx:]
 	}
 
 	// Generate source file names
-	for i := 0; i < NumSourceFiles; i++ {
-		testFiles[i] = "sourceFile" + strconv.Itoa(i) + SourceFileType
+	for i := 0; i < numSourceFiles; i++ {
+		testFiles[i] = "sourceFile" + strconv.Itoa(i) + sourceFileType
 	}
 
 	// Generate source files
@@ -246,17 +254,17 @@ func generateSourceFiles(t *testing.T, mockMsgs []std.Msg) []string {
 			t.Fatal(err)
 		}
 
-		for _, tx := range mockTx[:TxPerSourceFile] {
+		for _, tx := range mockTx[:txPerSourceFile] {
 
-			err := writeTxToFile(tx, file)
+			err := writeTxToFile(tx, file, t)
 			if err != nil {
 				t.Fatal(err)
 			}
 		}
-		mockTx = mockTx[TxPerSourceFile:]
+		mockTx = mockTx[txPerSourceFile:]
 	}
 
-	for i := 0; i < NumSourceFiles; i++ {
+	for i := 0; i < numSourceFiles; i++ {
 		testFiles[i] = filepath.Join(tempDir, testFiles[i])
 	}
 
@@ -288,14 +296,14 @@ func generateMockMsgs(t *testing.T) ([]std.Msg, []vm.MsgAddPackage) {
 
 	pkgID := 0
 
-	for i := 0; i < NumMsg; i++ {
+	for i := 0; i < numMsg; i++ {
 
 		var (
 			randNum          = int(r.Uint32())
 			msg              std.Msg
 			randAddressIndex = randNum % len(testAddresses)
-			callerAddr       = addressFromString(testAddresses[randAddressIndex])
-			deposit          = std.NewCoins(std.NewCoin("foo", int64(randNum%MaxDepositAmount+1)))
+			callerAddr       = addressFromString(testAddresses[randAddressIndex], t)
+			deposit          = std.NewCoins(std.NewCoin("foo", int64(randNum%maxDepositAmount+1)))
 			path             = "gno.land/"
 			pkgName          = "package" + strconv.Itoa(pkgID)
 		)
@@ -314,10 +322,10 @@ func generateMockMsgs(t *testing.T) ([]std.Msg, []vm.MsgAddPackage) {
 
 			path += pkgName
 
-			for j := 0; j < randNum%MaxFilesPerPkg+1; j++ {
+			for j := 0; j < randNum%maxFilesPerPkg+1; j++ {
 				file := &std.MemFile{
 					Name: "t" + strconv.Itoa(j) + ".gno",
-					Body: randString(int(r.Uint32()) % MaxFileBodyLength),
+					Body: randString(int(r.Uint32()) % maxFileBodyLength),
 				}
 				files = append(files, file)
 			}
@@ -335,7 +343,7 @@ func generateMockMsgs(t *testing.T) ([]std.Msg, []vm.MsgAddPackage) {
 			break
 		case 1: // Making vm.MsgCall msg
 
-			args := make([]string, MaxArgs-randNum%2)
+			args := make([]string, maxArgs-randNum%2)
 			for i := range args {
 				args[i] = randString(10)
 			}
@@ -355,7 +363,7 @@ func generateMockMsgs(t *testing.T) ([]std.Msg, []vm.MsgAddPackage) {
 
 			msg = bank.MsgSend{
 				FromAddress: callerAddr,
-				ToAddress:   addressFromString(ta[randNum%len(ta)]),
+				ToAddress:   addressFromString(ta[randNum%len(ta)], t),
 				Amount:      deposit,
 			}
 		}
@@ -366,10 +374,10 @@ func generateMockMsgs(t *testing.T) ([]std.Msg, []vm.MsgAddPackage) {
 	return ret, addPkgRet
 }
 
-func addressFromString(addr string) crypto.Address {
+func addressFromString(addr string, t *testing.T) crypto.Address {
 	ret, err := crypto.AddressFromString(addr)
 	if err != nil {
-		fmt.Errorf("cannot convert string to address, %v", err)
+		t.Errorf("cannot convert string to address, %v", err)
 	}
 	return ret
 }
@@ -382,23 +390,22 @@ func randString(length int) string {
 	return string(b)
 }
 
-func writeTxToFile(tx std.Tx, file *os.File) error {
-
+func writeTxToFile(tx std.Tx, file *os.File, t *testing.T) error {
 	data, err := amino.MarshalJSON(tx)
 	if err != nil {
-		return fmt.Errorf("unable to marshal JSON data, %w", err)
+		t.Errorf("unable to marshal JSON data, %v", err)
 	}
 
 	// Write the JSON data as a line to the file
 	_, err = file.Write(data)
 	if err != nil {
-		return fmt.Errorf("unable to write to output, %w", err)
+		t.Errorf("unable to write to output, %v", err)
 	}
 
 	// Write a newline character to separate JSON objects
 	_, err = file.Write([]byte("\n"))
 	if err != nil {
-		return fmt.Errorf("unable to write newline output, %w", err)
+		t.Errorf("unable to write newline output, %v", err)
 	}
 
 	return nil
