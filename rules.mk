@@ -14,8 +14,8 @@ fetch:
 
 
 fetch-all:
-	@for i in `seq $(FROM_BLOCK) $(MAX_INTERVAL) $(TO_BLOCK)`; do \
-		make -C . fetch; \
+	@for i in `seq $(FROM_BLOCK) $(MAX_INTERVAL) $(LATEST_BLOCK_HEIGHT)`; do \
+		make -C . fetch FROM_BLOCK="$$i"; \
 	done
 
 stats:
