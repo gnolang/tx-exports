@@ -1,0 +1,22 @@
+name: Backup testnets
+
+on:
+  # Triggers the workflow every day at 1am
+  schedule:
+    - cron: "0 1 * * *"
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    name: "backup ${{ matrix.testnet }}"
+    strategy:
+      fail-fast: false
+      matrix:
+        testnet:
+          - test1.gno.land
+          - test2.gno.land
+          - test3.gno.land
+
+    steps:
+      - name: Run backup script
+        run: make -C ${{ matrix.testnet }} fetch

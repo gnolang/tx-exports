@@ -3,4 +3,4 @@
 
 package deps
 
-import _ "github.com/gnolang/gno/gno.land/cmd/gnotxsync"
+import _ "github.com/gnolang/tx-archive/cmd"

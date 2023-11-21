@@ -1,9 +1,22 @@
+
 fetch:
-	go run github.com/gnolang/gno/gno.land/cmd/gnotxsync export --remote $(REMOTE)
-	wc -l txexport.log
-	tail -n 1 txexport.log
-	rm -f txexport-*.log
-	split --lines=1000 --additional-suffix=.log txexport.log txexport-
+	@echo "Backup from: $(FROM_BLOCK) to $(TO_BLOCK)"
+	go run github.com/gnolang/tx-archive/cmd backup \
+		--remote $(REMOTE) \
+		--legacy=true \
+		--from-block $(FROM_BLOCK) \
+		--to-block   $(TO_BLOCK) \
+		--output-path backup_$(shell printf '%06d' $(FROM_BLOCK))-$(TO_BLOCK).jsonl
+
+    # Update metadata
+	@cat metadata.json | jq -a '.latest_block_height = $(TO_BLOCK)' > /tmp/aa.json
+	@mv /tmp/aa.json metadata.json
+
+
+fetch-all:
+	@for i in `seq $(FROM_BLOCK) $(MAX_INTERVAL) $(TO_BLOCK)`; do \
+		make -C . fetch; \
+	done
 
 stats:
 	echo "# $(REMOTE)" > README.md
