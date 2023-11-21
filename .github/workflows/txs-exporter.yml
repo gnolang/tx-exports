@@ -7,16 +7,25 @@ on:
 
 jobs:
   backup:
-    runs-on: ubuntu-latest
     name: "backup ${{ matrix.testnet }}"
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
     strategy:
       fail-fast: false
       matrix:
         testnet:
-          - test1.gno.land
           - test2.gno.land
           - test3.gno.land
 
     steps:
+      - uses: actions/checkout@v4
+
       - name: Run backup script
         run: make -C ${{ matrix.testnet }} fetch
+
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: update ${{ matrix.testnet }} backup"
