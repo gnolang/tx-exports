@@ -2,6 +2,8 @@ REMOTE = test2.gno.land:36657
 SHORTNAME = test2
 LOOP_DURATION = 50000
 
+MAX_INTERVAL = 10000
+
 FROM_BLOCK = $(shell cat metadata.json | jq -r '.latest_block_height')
 TO_BLOCK = $(shell curl -s $(REMOTE)/status | jq -r '.result.sync_info.latest_block_height')
 
