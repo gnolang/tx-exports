@@ -6,7 +6,7 @@ fetch:
 		--legacy=true \
 		--from-block $(FROM_BLOCK) \
 		--to-block   $(TO_BLOCK) \
-		--output-path backup_$(shell printf '%06d' $(FROM_BLOCK))-$(TO_BLOCK).jsonl
+		--output-path backup_$(shell printf '%07d' $(FROM_BLOCK))-$(shell printf '%07d' $(TO_BLOCK)).jsonl
 
     # Update metadata
 	@cat metadata.json | jq -a '.latest_block_height = $(TO_BLOCK)' > /tmp/aa.json
