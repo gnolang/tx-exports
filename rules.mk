@@ -3,7 +3,6 @@ fetch:
 	@echo "Backup from: $(FROM_BLOCK) to $(TO_BLOCK)"
 	go run github.com/gnolang/tx-archive/cmd backup \
 		--remote $(REMOTE) \
-		--legacy=true \
 		--from-block $(FROM_BLOCK) \
 		--to-block   $(TO_BLOCK) \
 		--output-path backup_$(shell printf '%07d' $(FROM_BLOCK))-$(shell printf '%07d' $(TO_BLOCK)).jsonl
