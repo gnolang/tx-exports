@@ -31,6 +31,9 @@ jobs:
       - name: Run backup script
         run: make -C ${{ matrix.testnet }} fetch
 
+      - name: Run stats script
+        run: make -C ${{ matrix.testnet }} stats
+
       - name: Run git pull
         run: git pull
 
