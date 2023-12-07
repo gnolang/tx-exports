@@ -1,0 +1,42 @@
+name: Backup testnets
+
+on:
+  # allow to run workflow manually
+  workflow_dispatch: {}
+
+  # Triggers the workflow every day at 1am
+  schedule:
+    - cron: "0 1 * * *"
+
+jobs:
+  backup:
+    name: "backup ${{ matrix.testnet }}"
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    permissions:
+      contents: write
+
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        testnet:
+          - test2.gno.land
+          - test3.gno.land
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run backup script
+        run: make -C ${{ matrix.testnet }} fetch
+
+      - name: Run stats script
+        run: make -C ${{ matrix.testnet }} stats
+
+      - name: Run git pull
+        run: git pull
+
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: update ${{ matrix.testnet }} backup"
