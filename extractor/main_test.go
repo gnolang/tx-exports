@@ -224,7 +224,7 @@ func generateSourceFiles(t *testing.T, mockMsgs []std.Msg) []string {
 		require.NoError(t, err)
 
 		for _, tx := range mockTx[:txPerSourceFile] {
-			err := writeTxToFile(tx, file, t)
+			err := writeTxToFile(t, tx, file)
 			if err != nil {
 				t.Fatal(err)
 			}
