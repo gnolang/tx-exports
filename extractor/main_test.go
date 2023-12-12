@@ -44,8 +44,7 @@ func TestFindFilePaths(t *testing.T) {
 
 	tempDir, err := os.MkdirTemp(".", "test")
 	require.NoError(t, err)
-
-	defer os.RemoveAll(tempDir)
+	t.Cleanup(removeDir(t, tempDir))
 
 	testFiles := make([]string, numSourceFiles)
 
@@ -123,6 +122,7 @@ func TestWritePackageMetadata(t *testing.T) {
 	// Make temp dir
 	tempDir, err := os.MkdirTemp(".", "test")
 	require.NoError(t, err)
+	t.Cleanup(removeDir(t, tempDir))
 
 	for _, msg := range mockMsgsAddPackage {
 		md := metadataFromMsg(msg)
@@ -155,11 +155,6 @@ func TestWritePackageMetadata(t *testing.T) {
 		err = json.Unmarshal(raw, &unmarshalledMetadata)
 		require.NoError(t, err)
 
-		t.Cleanup(func() {
-			err := os.RemoveAll(tempDir)
-			require.NoError(t, err)
-		})
-
 		require.Equal(t, md, unmarshalledMetadata)
 	}
 }
@@ -171,6 +166,7 @@ func TestWritePackageFiles(t *testing.T) {
 
 	tempDir, err := os.MkdirTemp(".", "test")
 	require.NoError(t, err)
+	t.Cleanup(removeDir(t, tempDir))
 
 	for _, msg := range mockMsgsAddPackage {
 		// Get output dir
@@ -191,10 +187,6 @@ func TestWritePackageFiles(t *testing.T) {
 			require.Equal(t, f.Body, string(contents))
 		}
 	}
-	t.Cleanup(func() {
-		err := os.RemoveAll(tempDir)
-		require.NoError(t, err)
-	})
 }
 
 // Helpers
@@ -203,6 +195,7 @@ func generateSourceFiles(t *testing.T, mockMsgs []std.Msg) []string {
 
 	tempDir, err := os.MkdirTemp(".", "test")
 	require.NoError(t, err)
+	t.Cleanup(removeDir(t, tempDir))
 
 	var (
 		mockTx    = make([]std.Tx, numTx)
@@ -245,11 +238,6 @@ func generateSourceFiles(t *testing.T, mockMsgs []std.Msg) []string {
 	for i := 0; i < numSourceFiles; i++ {
 		testFiles[i] = filepath.Join(tempDir, testFiles[i])
 	}
-
-	t.Cleanup(func() {
-		err := os.RemoveAll(tempDir)
-		require.NoError(t, err)
-	})
 
 	return testFiles
 }
@@ -376,4 +364,11 @@ func writeTxToFile(tx std.Tx, file *os.File, t *testing.T) error {
 	require.NoError(t, err)
 
 	return nil
+}
+
+func removeDir(t *testing.T, dirPath string) func() {
+	return func() {
+		err := os.RemoveAll(dirPath)
+		require.NoError(t, err)
+	}
 }
