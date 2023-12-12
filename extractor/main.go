@@ -49,7 +49,7 @@ func main() {
 		},
 	}
 
-	// Run the command11
+	// Run the command
 	if err := cmd.ParseAndRun(context.Background(), os.Args[1:]); err != nil {
 		_, _ = fmt.Fprintf(os.Stderr, "%+v", err)
 
