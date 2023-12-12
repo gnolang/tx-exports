@@ -351,7 +351,7 @@ func randString(length int) string {
 	return string(b)
 }
 
-func writeTxToFile(tx std.Tx, file *os.File, t *testing.T) error {
+func writeTxToFile(t *testing.T, tx std.Tx, file *os.File) error {
 	data, err := amino.MarshalJSON(tx)
 	require.NoError(t, err)
 
