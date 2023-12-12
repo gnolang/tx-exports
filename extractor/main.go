@@ -265,8 +265,7 @@ func findFilePaths(startPath string, fileType string) ([]string, error) {
 
 	walkFn := func(path string, info os.FileInfo, err error) error {
 		if err != nil {
-			fmt.Println("Error accessing file:", err)
-			return err
+			return fmt.Errorf("error accessing file: %v", err)
 		}
 
 		// Check if the file is a dir
