@@ -200,7 +200,6 @@ func extractAddMessages(filePath string) ([]vm.MsgAddPackage, error) {
 	// Buffer to handle lines longer than 64kb
 	tempBuf := make([]byte, 0)
 
-	i := 0
 	for {
 		var tx std.Tx
 		line, isPrefix, err := reader.ReadLine()
@@ -228,7 +227,7 @@ func extractAddMessages(filePath string) ([]vm.MsgAddPackage, error) {
 		}
 
 		if aminoErr := amino.UnmarshalJSON(line, &tx); aminoErr != nil {
-			fmt.Printf("Error while parsing amino JSON at line %d: %v\n", i, aminoErr.Error())
+			fmt.Printf("Error while parsing amino JSON at line: %v\nLine:%s\n", aminoErr.Error(), line)
 			continue
 		}
 
@@ -255,7 +254,6 @@ func extractAddMessages(filePath string) ([]vm.MsgAddPackage, error) {
 			touchMap[path] = msgAddPkg
 			msgArr = append(msgArr, msgAddPkg)
 		}
-		i++
 	}
 
 	return msgArr, cleanup()
