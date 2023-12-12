@@ -297,7 +297,6 @@ func generateMockMsgs(t *testing.T) ([]std.Msg, []vm.MsgAddPackage) {
 	pkgID := 0
 
 	for i := 0; i < numMsg; i++ {
-
 		var (
 			randNum          = int(r.Uint32())
 			msg              std.Msg

@@ -119,7 +119,6 @@ func execExtract(ctx context.Context, cfg *extractorCfg) error {
 
 			// Process messages
 			for _, msg := range msgs {
-
 				outputDir := filepath.Join(cfg.outputDir, strings.TrimLeft(msg.Package.Path, "gno.land/"))
 
 				// Write dir before writing files
@@ -161,7 +160,6 @@ func writePackageFiles(msg vm.MsgAddPackage, outputDir string) error {
 
 // writePackageMetadata writes the package metadata to the output directory
 func writePackageMetadata(metadata Metadata, outputDir string) error {
-
 	// Get the output path
 	writePath := filepath.Join(outputDir, packageMetadataFile)
 
@@ -241,7 +239,6 @@ func processSourceFile(filePath string) ([]vm.MsgAddPackage, error) {
 
 		for _, msg := range tx.Msgs {
 			// Only MsgAddPkg should be parsed
-
 			if msg.Type() != "add_package" {
 				continue
 			}
@@ -257,7 +254,6 @@ func processSourceFile(filePath string) ([]vm.MsgAddPackage, error) {
 
 			touchMap[path] = msgAddPkg
 			msgArr = append(msgArr, msgAddPkg)
-
 		}
 		i++
 	}
