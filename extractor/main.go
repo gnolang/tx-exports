@@ -112,7 +112,7 @@ func execExtract(ctx context.Context, cfg *extractorCfg) error {
 
 		g.Go(func() error {
 			// Extract messages
-			msgs, processErr := processSourceFile(sourceFile)
+			msgs, processErr := extractAddMessages(sourceFile)
 			if processErr != nil {
 				return processErr
 			}
@@ -176,7 +176,7 @@ func writePackageMetadata(metadata Metadata, outputDir string) error {
 	return nil
 }
 
-func processSourceFile(filePath string) ([]vm.MsgAddPackage, error) {
+func extractAddMessages(filePath string) ([]vm.MsgAddPackage, error) {
 	file, openErr := os.Open(filePath)
 	if openErr != nil {
 		return nil, fmt.Errorf("unable to open file, %w", openErr)

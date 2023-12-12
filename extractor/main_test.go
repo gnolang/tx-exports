@@ -102,7 +102,7 @@ func TestProcessSourceFiles(t *testing.T) {
 
 	var results []vm.MsgAddPackage
 	for _, sf := range sourceFiles {
-		res, err := processSourceFile(sf)
+		res, err := extractAddMessages(sf)
 		if err != nil {
 			t.Fatal(err)
 		}
