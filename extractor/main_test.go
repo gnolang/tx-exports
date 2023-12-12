@@ -157,10 +157,7 @@ func TestWritePackageMetadata(t *testing.T) {
 
 		t.Cleanup(func() {
 			err := os.RemoveAll(tempDir)
-			if err != nil {
-				fmt.Printf("could not clean up temp dir, %v", err)
-				return
-			}
+			require.NoError(t, err)
 		})
 
 		require.Equal(t, md, unmarshalledMetadata)
