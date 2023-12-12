@@ -78,13 +78,11 @@ func TestFindFilePaths(t *testing.T) {
 		return expectedResults[i] < expectedResults[j]
 	})
 
-	if len(results) != len(expectedResults) {
-		t.Fatalf("Expected %d results, but got %d", len(expectedResults), len(results))
-	}
+	require.Equal(t, len(results), len(expectedResults))
 
 	for i, result := range results {
 		if result != expectedResults[i] {
-			t.Fatalf("Expected %s, but got %s", expectedResults[i], result)
+			require.Equal(t, result, expectedResults[i])
 		}
 	}
 }
@@ -226,7 +224,6 @@ func generateSourceFiles(t *testing.T, mockMsgs []std.Msg) []string {
 		require.NoError(t, err)
 
 		for _, tx := range mockTx[:txPerSourceFile] {
-
 			err := writeTxToFile(tx, file, t)
 			if err != nil {
 				t.Fatal(err)
@@ -277,9 +274,7 @@ func generateMockMsgs(t *testing.T) ([]std.Msg, []vm.MsgAddPackage) {
 		}
 
 		switch randNum % 3 {
-
 		case 0: // Making vm.MsgAddPackage msg
-
 			var files []*std.MemFile
 
 			path += pkgName
@@ -304,7 +299,6 @@ func generateMockMsgs(t *testing.T) ([]std.Msg, []vm.MsgAddPackage) {
 			addPkgRet = append(addPkgRet, msg.(vm.MsgAddPackage))
 			break
 		case 1: // Making vm.MsgCall msg
-
 			args := make([]string, maxArgs-randNum%2)
 			for i := range args {
 				args[i] = randString(10)
@@ -319,7 +313,6 @@ func generateMockMsgs(t *testing.T) ([]std.Msg, []vm.MsgAddPackage) {
 			}
 			break
 		case 2: // Making bank.MsgSend
-
 			// Remove already used address
 			ta := append(testAddresses[:randAddressIndex], testAddresses[randAddressIndex+1:]...)
 
