@@ -43,9 +43,8 @@ func TestFindFilePaths(t *testing.T) {
 	t.Parallel()
 
 	tempDir, err := os.MkdirTemp(".", "test")
-	if err != nil {
-		t.Fatal(err)
-	}
+	require.NoError(t, err)
+
 	defer os.RemoveAll(tempDir)
 
 	testFiles := make([]string, numSourceFiles)
@@ -56,18 +55,15 @@ func TestFindFilePaths(t *testing.T) {
 
 	for _, file := range testFiles {
 		filePath := filepath.Join(tempDir, file)
-		if err := os.MkdirAll(filepath.Dir(filePath), os.ModePerm); err != nil {
-			t.Fatal(err)
-		}
-		if _, err := os.Create(filePath); err != nil {
-			t.Fatal(err)
-		}
+		err := os.MkdirAll(filepath.Dir(filePath), os.ModePerm)
+		require.NoError(t, err)
+
+		_, err = os.Create(filePath)
+		require.NoError(t, err)
 	}
 
 	results, err := findFilePaths(tempDir, ".log")
-	if err != nil {
-		t.Fatal(err)
-	}
+	require.NoError(t, err)
 
 	expectedResults := make([]string, 0, len(testFiles))
 
@@ -89,7 +85,7 @@ func TestFindFilePaths(t *testing.T) {
 
 	for i, result := range results {
 		if result != expectedResults[i] {
-			t.Errorf("Expected %s, but got %s", expectedResults[i], result)
+			t.Fatalf("Expected %s, but got %s", expectedResults[i], result)
 		}
 	}
 }
@@ -103,9 +99,7 @@ func TestProcessSourceFiles(t *testing.T) {
 	var results []vm.MsgAddPackage
 	for _, sf := range sourceFiles {
 		res, err := extractAddMessages(sf)
-		if err != nil {
-			t.Fatal(err)
-		}
+		require.NoError(t, err)
 		results = append(results, res...)
 	}
 
@@ -128,9 +122,7 @@ func TestWritePackageMetadata(t *testing.T) {
 
 	// Make temp dir
 	tempDir, err := os.MkdirTemp(".", "test")
-	if err != nil {
-		t.Fatal(err)
-	}
+	require.NoError(t, err)
 
 	for _, msg := range mockMsgsAddPackage {
 		md := metadataFromMsg(msg)
@@ -139,12 +131,11 @@ func TestWritePackageMetadata(t *testing.T) {
 		outputDir := filepath.Join(tempDir, strings.TrimLeft(msg.Package.Path, "gno.land/"))
 
 		// Write dir before writing metadata
-		if dirWriteErr := os.MkdirAll(outputDir, os.ModePerm); dirWriteErr != nil {
-			t.Fatal(dirWriteErr)
-		}
+		err := os.MkdirAll(outputDir, os.ModePerm)
+		require.NoError(t, err)
 
 		// Write the metadata
-		err := writePackageMetadata(md, outputDir)
+		err = writePackageMetadata(md, outputDir)
 		require.NoError(t, err)
 
 		// Read file
@@ -182,21 +173,18 @@ func TestWritePackageFiles(t *testing.T) {
 	_, mockMsgsAddPackage := generateMockMsgs(t)
 
 	tempDir, err := os.MkdirTemp(".", "test")
-	if err != nil {
-		t.Fatal(err)
-	}
+	require.NoError(t, err)
 
 	for _, msg := range mockMsgsAddPackage {
 		// Get output dir
 		outputDir := filepath.Join(tempDir, strings.TrimLeft(msg.Package.Path, "gno.land/"))
 
 		// Write dir before writing metadata
-		if dirWriteErr := os.MkdirAll(outputDir, os.ModePerm); dirWriteErr != nil {
-			t.Fatal(dirWriteErr)
-		}
+		err := os.MkdirAll(outputDir, os.ModePerm)
+		require.NoError(t, err)
 
 		// Write the metadata
-		err := writePackageFiles(msg, outputDir)
+		err = writePackageFiles(msg, outputDir)
 		require.NoError(t, err)
 
 		// Read & compare file
@@ -208,10 +196,7 @@ func TestWritePackageFiles(t *testing.T) {
 	}
 	t.Cleanup(func() {
 		err := os.RemoveAll(tempDir)
-		if err != nil {
-			fmt.Printf("could not clean up temp dir, %v", err)
-			return
-		}
+		require.NoError(t, err)
 	})
 }
 
@@ -220,9 +205,7 @@ func generateSourceFiles(t *testing.T, mockMsgs []std.Msg) []string {
 	t.Helper()
 
 	tempDir, err := os.MkdirTemp(".", "test")
-	if err != nil {
-		t.Fatal(err)
-	}
+	require.NoError(t, err)
 
 	var (
 		mockTx    = make([]std.Tx, numTx)
@@ -245,14 +228,12 @@ func generateSourceFiles(t *testing.T, mockMsgs []std.Msg) []string {
 	// Generate source files
 	for _, file := range testFiles {
 		filePath := filepath.Join(tempDir, file)
-		if err := os.MkdirAll(filepath.Dir(filePath), os.ModePerm); err != nil {
-			t.Fatal(err)
-		}
-		file, err := os.Create(filePath)
 
-		if err != nil {
-			t.Fatal(err)
-		}
+		err := os.MkdirAll(filepath.Dir(filePath), os.ModePerm)
+		require.NoError(t, err)
+
+		file, err := os.Create(filePath)
+		require.NoError(t, err)
 
 		for _, tx := range mockTx[:txPerSourceFile] {
 
@@ -270,10 +251,7 @@ func generateSourceFiles(t *testing.T, mockMsgs []std.Msg) []string {
 
 	t.Cleanup(func() {
 		err := os.RemoveAll(tempDir)
-		if err != nil {
-			fmt.Printf("could not clean up temp dir, %v", err)
-			return
-		}
+		require.NoError(t, err)
 	})
 
 	return testFiles
@@ -375,9 +353,8 @@ func generateMockMsgs(t *testing.T) ([]std.Msg, []vm.MsgAddPackage) {
 
 func addressFromString(addr string, t *testing.T) crypto.Address {
 	ret, err := crypto.AddressFromString(addr)
-	if err != nil {
-		t.Errorf("cannot convert string to address, %v", err)
-	}
+	require.NoError(t, err)
+
 	return ret
 }
 
@@ -391,21 +368,15 @@ func randString(length int) string {
 
 func writeTxToFile(tx std.Tx, file *os.File, t *testing.T) error {
 	data, err := amino.MarshalJSON(tx)
-	if err != nil {
-		t.Errorf("unable to marshal JSON data, %v", err)
-	}
+	require.NoError(t, err)
 
 	// Write the JSON data as a line to the file
 	_, err = file.Write(data)
-	if err != nil {
-		t.Errorf("unable to write to output, %v", err)
-	}
+	require.NoError(t, err)
 
 	// Write a newline character to separate JSON objects
 	_, err = file.Write([]byte("\n"))
-	if err != nil {
-		t.Errorf("unable to write newline output, %v", err)
-	}
+	require.NoError(t, err)
 
 	return nil
 }
