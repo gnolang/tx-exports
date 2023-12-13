@@ -139,10 +139,7 @@ func TestWritePackageMetadata(t *testing.T) {
 
 		raw, isPrefix, err := reader.ReadLine()
 		require.NoError(t, err)
-
-		if isPrefix {
-			t.Fatalf("Metadata longer then buffer max size at %s\n", outputDir)
-		}
+		require.Equal(t, isPrefix, false)
 
 		err = json.Unmarshal(raw, &unmarshalledMetadata)
 		require.NoError(t, err)
