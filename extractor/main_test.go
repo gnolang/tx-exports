@@ -2,14 +2,14 @@ package main
 
 import (
 	"bufio"
+	crand "crypto/rand"
+	"encoding/base64"
 	"encoding/json"
-	"fmt"
 	"github.com/gnolang/gno/gno.land/pkg/sdk/vm"
 	"github.com/gnolang/gno/tm2/pkg/amino"
 	"github.com/gnolang/gno/tm2/pkg/crypto"
 	"github.com/gnolang/gno/tm2/pkg/sdk/bank"
 	"github.com/gnolang/gno/tm2/pkg/std"
-	"github.com/go-test/deep"
 	"github.com/stretchr/testify/require"
 	"math/rand"
 	"os"
@@ -32,10 +32,6 @@ const (
 	maxDepositAmount  = 5000
 	maxArgs           = 2
 	sourceFileType    = ".log"
-)
-
-var (
-	chars = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890\\n\\t!@#$%^&*()_+><?|:{}~")
 )
 
 // Tests
@@ -87,7 +83,7 @@ func TestFindFilePaths(t *testing.T) {
 	}
 }
 
-func TestProcessSourceFiles(t *testing.T) {
+func TestExtractAddMessages(t *testing.T) {
 	t.Parallel()
 
 	mockMsgs, mockMsgsAddPackage := generateMockMsgs(t)
@@ -107,9 +103,7 @@ func TestProcessSourceFiles(t *testing.T) {
 		return mockMsgsAddPackage[i].Package.Name < mockMsgsAddPackage[j].Package.Name
 	})
 
-	if diff := deep.Equal(results, mockMsgsAddPackage); diff != nil {
-		fmt.Println(diff)
-	}
+	require.Equal(t, results, mockMsgsAddPackage)
 }
 
 func TestWritePackageMetadata(t *testing.T) {
@@ -241,6 +235,7 @@ func generateSourceFiles(t *testing.T, mockMsgs []std.Msg) []string {
 
 func generateMockMsgs(t *testing.T) ([]std.Msg, []vm.MsgAddPackage) {
 	t.Helper()
+
 	r := rand.New(rand.NewSource(time.Now().UnixNano()))
 
 	testAddresses := []string{
@@ -282,7 +277,7 @@ func generateMockMsgs(t *testing.T) ([]std.Msg, []vm.MsgAddPackage) {
 			for j := 0; j < randNum%maxFilesPerPkg+1; j++ {
 				file := &std.MemFile{
 					Name: "t" + strconv.Itoa(j) + ".gno",
-					Body: randString(int(r.Uint32()) % maxFileBodyLength),
+					Body: randString(t, int(r.Uint32())%maxFileBodyLength),
 				}
 				files = append(files, file)
 			}
@@ -301,7 +296,7 @@ func generateMockMsgs(t *testing.T) ([]std.Msg, []vm.MsgAddPackage) {
 		case 1: // Making vm.MsgCall msg
 			args := make([]string, maxArgs-randNum%2)
 			for i := range args {
-				args[i] = randString(10)
+				args[i] = randString(t, 10)
 			}
 
 			msg = vm.MsgCall{
@@ -336,12 +331,11 @@ func addressFromString(addr string, t *testing.T) crypto.Address {
 	return ret
 }
 
-func randString(length int) string {
-	b := make([]rune, length)
-	for i := range b {
-		b[i] = chars[rand.Intn(len(chars))]
-	}
-	return string(b)
+func randString(t *testing.T, length int) string {
+	t.Helper()
+	buf := make([]byte, length)
+	_, _ = crand.Read(buf)
+	return base64.StdEncoding.EncodeToString(buf)
 }
 
 func writeTxToFile(t *testing.T, tx std.Tx, file *os.File) error {
