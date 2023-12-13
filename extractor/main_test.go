@@ -22,16 +22,12 @@ import (
 )
 
 const (
-	numSourceFiles    = 20
-	numTx             = 100
-	numMsg            = 200
-	maxFilesPerPkg    = 100
-	maxFileBodyLength = 200
-	msgPerTx          = numMsg / numTx
-	txPerSourceFile   = numTx / numSourceFiles
-	maxDepositAmount  = 5000
-	maxArgs           = 2
-	sourceFileType    = ".log"
+	numSourceFiles  = 20
+	numTx           = 100
+	numMsg          = 200
+	msgPerTx        = numMsg / numTx
+	txPerSourceFile = numTx / numSourceFiles
+	sourceFileType  = ".log"
 )
 
 // Tests
@@ -250,13 +246,17 @@ func generateMockMsgs(t *testing.T) ([]std.Msg, []vm.MsgAddPackage) {
 
 	for i := 0; i < numMsg; i++ {
 		var (
-			randNum          = int(r.Uint32())
-			msg              std.Msg
-			randAddressIndex = randNum % len(testAddresses)
-			callerAddr       = addressFromString(testAddresses[randAddressIndex], t)
-			deposit          = std.NewCoins(std.NewCoin("foo", int64(randNum%maxDepositAmount+1)))
-			path             = "gno.land/"
-			pkgName          = "package" + strconv.Itoa(pkgID)
+			randNum           = int(r.Uint32())
+			msg               std.Msg
+			randAddressIndex  = randNum % len(testAddresses)
+			maxDepositAmount  = 5000
+			callerAddr        = addressFromString(testAddresses[randAddressIndex], t)
+			deposit           = std.NewCoins(std.NewCoin("foo", int64(randNum%maxDepositAmount+1)))
+			path              = "gno.land/"
+			pkgName           = "package" + strconv.Itoa(pkgID)
+			maxArgs           = 2
+			maxFileBodyLength = 200
+			maxFilesPerPkg    = 100
 		)
 
 		if randNum%2 == 0 {
