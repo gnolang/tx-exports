@@ -247,6 +247,9 @@ func extractAddMessages(filePath string) ([]vm.MsgAddPackage, error) {
 			    //TODO: throw error
 			}
 
+			if msgAddPkg.Package == nil {
+				// TODO: throw error
+			}
 			path := msgAddPkg.Package.Path
 
 			if _, parsed := touchMap[path]; parsed {
