@@ -205,10 +205,11 @@ func extractAddMessages(filePath string) ([]vm.MsgAddPackage, error) {
 		line, isPrefix, err := reader.ReadLine()
 
 		// Exit if no more lines in file
+		if errors.Is(err, io.EOF) {
+			break
+		}
 		if err != nil {
-			if errors.Is(err, io.EOF) {
-				break
-			}
+			return nil, fmt.Errorf("error reading lines; %w", err)
 		}
 
 		// If line is too long, save it in a temporary buffer and continue reading line
@@ -227,7 +228,7 @@ func extractAddMessages(filePath string) ([]vm.MsgAddPackage, error) {
 		}
 
 		if err := amino.UnmarshalJSON(line, &tx); err != nil {
-			fmt.Printf("Error while parsing amino JSON at line: %v\nLine:%s\n", err, line)
+			fmt.Errorf("Error while parsing amino JSON at line: %w\nLine:%s\n", err, line)
 			continue
 		}
 
@@ -244,11 +245,11 @@ func extractAddMessages(filePath string) ([]vm.MsgAddPackage, error) {
 
 			msgAddPkg, ok := msg.(vm.MsgAddPackage)
 			if !ok {
-			    //TODO: throw error
+				return nil, errors.New("could not cast into MsgAddPackage")
 			}
 
 			if msgAddPkg.Package == nil {
-				// TODO: throw error
+				return nil, errors.New("MsgAddPackage is nil")
 			}
 			path := msgAddPkg.Package.Path
 
@@ -271,7 +272,7 @@ func findFilePaths(startPath string, fileType string) ([]string, error) {
 
 	walkFn := func(path string, info os.FileInfo, err error) error {
 		if err != nil {
-			return fmt.Errorf("error accessing file: %v", err)
+			return fmt.Errorf("error accessing file: %w", err)
 		}
 
 		// Check if the file is a dir
@@ -292,7 +293,7 @@ func findFilePaths(startPath string, fileType string) ([]string, error) {
 
 	// Walk the directory root recursively
 	if walkErr := filepath.Walk(startPath, walkFn); walkErr != nil {
-		return nil, fmt.Errorf("unable to walk directory, %v", walkErr)
+		return nil, fmt.Errorf("unable to walk directory, %w", walkErr)
 	}
 
 	return filePaths, nil
