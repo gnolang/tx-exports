@@ -85,7 +85,7 @@ func (c *extractorCfg) registerFlags(fs *flag.FlagSet) {
 func execExtract(ctx context.Context, cfg *extractorCfg) error {
 	// Check the file type is valid
 	if cfg.fileType == "" {
-		return errors.New("invalid file type specified")
+		return errors.New("no file type specified")
 	}
 
 	// Check the source dir is valid
