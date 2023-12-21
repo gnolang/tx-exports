@@ -177,9 +177,9 @@ func writePackageMetadata(metadata Metadata, outputDir string) error {
 }
 
 func extractAddMessages(filePath string) ([]vm.MsgAddPackage, error) {
-	file, openErr := os.Open(filePath)
-	if openErr != nil {
-		return nil, fmt.Errorf("unable to open file, %w", openErr)
+	file, err := os.Open(filePath)
+	if err != nil {
+		return nil, fmt.Errorf("unable to open file, %w", err)
 	}
 
 	cleanup := func() error {
