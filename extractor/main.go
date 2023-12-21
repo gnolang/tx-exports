@@ -226,8 +226,8 @@ func extractAddMessages(filePath string) ([]vm.MsgAddPackage, error) {
 			line = tempBuf
 		}
 
-		if aminoErr := amino.UnmarshalJSON(line, &tx); aminoErr != nil {
-			fmt.Printf("Error while parsing amino JSON at line: %v\nLine:%s\n", aminoErr.Error(), line)
+		if err := amino.UnmarshalJSON(line, &tx); err != nil {
+			fmt.Printf("Error while parsing amino JSON at line: %v\nLine:%s\n", err, line)
 			continue
 		}
 
