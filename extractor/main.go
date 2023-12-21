@@ -242,7 +242,10 @@ func extractAddMessages(filePath string) ([]vm.MsgAddPackage, error) {
 				continue
 			}
 
-			msgAddPkg := msg.(vm.MsgAddPackage)
+			msgAddPkg, ok := msg.(vm.MsgAddPackage)
+			if !ok {
+			    //TODO: throw error
+			}
 
 			path := msgAddPkg.Package.Path
 
