@@ -192,7 +192,7 @@ func extractAddMessages(filePath string) ([]vm.MsgAddPackage, error) {
 	reader := bufio.NewReader(file)
 
 	// Used to track what was parsed in the past
-	touchMap := make(map[string]vm.MsgAddPackage)
+	touchMap := make(map[string]bool)
 
 	// Msg array to be returned for further processing
 	msgArr := make([]vm.MsgAddPackage, 0)
