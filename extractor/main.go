@@ -251,7 +251,7 @@ func extractAddMessages(filePath string) ([]vm.MsgAddPackage, error) {
 				continue
 			}
 
-			touchMap[path] = msgAddPkg
+			touchMap[path] = true
 			msgArr = append(msgArr, msgAddPkg)
 		}
 	}
