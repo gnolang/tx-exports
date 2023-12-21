@@ -35,8 +35,8 @@ func TestFindFilePaths(t *testing.T) {
 	t.Parallel()
 
 	tempDir, err := os.MkdirTemp(".", "test")
-	require.NoError(t, err)
 	t.Cleanup(removeDir(t, tempDir))
+	require.NoError(t, err)
 
 	testFiles := make([]string, numSourceFiles)
 
@@ -109,8 +109,8 @@ func TestWritePackageMetadata(t *testing.T) {
 
 	// Make temp dir
 	tempDir, err := os.MkdirTemp(".", "test")
-	require.NoError(t, err)
 	t.Cleanup(removeDir(t, tempDir))
+	require.NoError(t, err)
 
 	for _, msg := range mockMsgsAddPackage {
 		md := metadataFromMsg(msg)
@@ -150,8 +150,8 @@ func TestWritePackageFiles(t *testing.T) {
 	_, mockMsgsAddPackage := generateMockMsgs(t)
 
 	tempDir, err := os.MkdirTemp(".", "test")
-	require.NoError(t, err)
 	t.Cleanup(removeDir(t, tempDir))
+	require.NoError(t, err)
 
 	for _, msg := range mockMsgsAddPackage {
 		// Get output dir
@@ -179,8 +179,8 @@ func generateSourceFiles(t *testing.T, mockMsgs []std.Msg) []string {
 	t.Helper()
 
 	tempDir, err := os.MkdirTemp(".", "test")
-	require.NoError(t, err)
 	t.Cleanup(removeDir(t, tempDir))
+	require.NoError(t, err)
 
 	var (
 		mockTx    = make([]std.Tx, numTx)
