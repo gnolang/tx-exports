@@ -310,7 +310,7 @@ func generateMockMsgs(t *testing.T) ([]std.Msg, []vm.MsgAddPackage) {
 
 			msg = bank.MsgSend{
 				FromAddress: callerAddr,
-				ToAddress:   addressFromString(ta[randNum%len(ta)], t),
+				ToAddress:   addressFromString(t, ta [randNum%len(ta)),
 				Amount:      deposit,
 			}
 		}
@@ -321,7 +321,9 @@ func generateMockMsgs(t *testing.T) ([]std.Msg, []vm.MsgAddPackage) {
 	return ret, addPkgRet
 }
 
-func addressFromString(addr string, t *testing.T) crypto.Address {
+func addressFromString(t *testing.T, addr string) crypto.Address {
+	t.Helper()
+
 	ret, err := crypto.AddressFromString(addr)
 	require.NoError(t, err)
 
