@@ -23,6 +23,12 @@ const (
 	packageMetadataFile = "pkg_metadata.json"
 )
 
+var (
+	errInvalidFileType  = errors.New("no file type specified")
+	errInvalidSourceDir = errors.New("invalid source directory")
+	errInvalidOutputDir = errors.New("invalid output directory")
+)
+
 // Define extractor config
 type extractorCfg struct {
 	fileType  string
@@ -85,23 +91,27 @@ func (c *extractorCfg) registerFlags(fs *flag.FlagSet) {
 func execExtract(ctx context.Context, cfg *extractorCfg) error {
 	// Check the file type is valid
 	if cfg.fileType == "" {
-		return errors.New("no file type specified")
+		return errInvalidFileType
 	}
 
 	// Check the source dir is valid
 	if cfg.sourceDir == "" {
-		return errors.New("invalid source directory")
+		return errInvalidSourceDir
 	}
 
 	// Check the output dir is valid
 	if cfg.outputDir == "" {
-		return errors.New("invalid output directory")
+		return errInvalidOutputDir
 	}
 
 	// Find the files that need to be analyzed
 	sourceFiles, findErr := findFilePaths(cfg.sourceDir, cfg.fileType)
 	if findErr != nil {
 		return fmt.Errorf("unable to find file paths, %w", findErr)
+	}
+
+	if len(sourceFiles) == 0 {
+		fmt.Println("no source files found, exiting.")
 	}
 
 	// Concurrently process the source files

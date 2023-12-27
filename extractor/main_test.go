@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"context"
 	crand "crypto/rand"
 	"encoding/base64"
 	"encoding/json"
@@ -31,6 +32,77 @@ const (
 )
 
 // Tests
+func TestHappyFlow(t *testing.T) {
+	ctx := context.Background()
+
+	// Set correct config
+	cfg := &extractorCfg{
+		fileType:  ".log",
+		sourceDir: ".",
+		outputDir: ".",
+	}
+
+	// Generate mock messages & mock files
+	mockStdMsg, _ := generateMockMsgs(t)
+	_ = generateSourceFiles(t, mockStdMsg)
+
+	// Try extraction
+	err := execExtract(ctx, cfg)
+	require.NoError(t, err)
+
+}
+
+func TestSadFlow(t *testing.T) {
+	ctx := context.Background()
+
+	// Set correct config
+	cfg := &extractorCfg{
+		fileType:  ".log",
+		sourceDir: ".",
+		outputDir: ".",
+	}
+
+	// Do not generate any test messages or files
+
+	// Try extraction
+	err := execExtract(ctx, cfg)
+	require.NoError(t, err)
+}
+
+func TestErrors(t *testing.T) {
+	var ctx context.Context
+
+	// Test invalid filetype error
+	cfg := &extractorCfg{
+		fileType:  "",
+		sourceDir: ".",
+		outputDir: ".",
+	}
+
+	err := execExtract(ctx, cfg)
+	require.Equal(t, err, errInvalidFileType)
+
+	// Test invalid source dir error
+	cfg = &extractorCfg{
+		fileType:  ".log",
+		sourceDir: "",
+		outputDir: ".",
+	}
+
+	err = execExtract(ctx, cfg)
+	require.Equal(t, err, errInvalidSourceDir)
+
+	// Test invalid output dir error
+	cfg = &extractorCfg{
+		fileType:  ".log",
+		sourceDir: ".",
+		outputDir: "",
+	}
+
+	err = execExtract(ctx, cfg)
+	require.Equal(t, err, errInvalidOutputDir)
+}
+
 func TestFindFilePaths(t *testing.T) {
 	t.Parallel()
 
@@ -250,7 +322,7 @@ func generateMockMsgs(t *testing.T) ([]std.Msg, []vm.MsgAddPackage) {
 			msg               std.Msg
 			randAddressIndex  = randNum % len(testAddresses)
 			maxDepositAmount  = 5000
-			callerAddr        = addressFromString(testAddresses[randAddressIndex], t)
+			callerAddr        = addressFromString(t, testAddresses[randAddressIndex])
 			deposit           = std.NewCoins(std.NewCoin("foo", int64(randNum%maxDepositAmount+1)))
 			path              = "gno.land/"
 			pkgName           = "package" + strconv.Itoa(pkgID)
@@ -310,7 +382,7 @@ func generateMockMsgs(t *testing.T) ([]std.Msg, []vm.MsgAddPackage) {
 
 			msg = bank.MsgSend{
 				FromAddress: callerAddr,
-				ToAddress:   addressFromString(t, ta [randNum%len(ta)),
+				ToAddress:   addressFromString(t, ta[randNum%len(ta)]),
 				Amount:      deposit,
 			}
 		}
