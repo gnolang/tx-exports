@@ -92,16 +92,18 @@ func TestValidFlow(t *testing.T) {
 	require.NoError(t, err)
 	t.Cleanup(removeDir(t, outputDir))
 
+	sourcePath := "."
+
 	// Set correct config
 	cfg := &extractorCfg{
 		fileType:  sourceFileType,
-		sourceDir: ".",
+		sourceDir: sourcePath,
 		outputDir: outputDir,
 	}
 
 	// Generate mock messages & mock files
 	mockStdMsg, mockAddPkgMsg := generateMockMsgs(t)
-	_ = generateSourceFiles(t, mockStdMsg)
+	_ = generateSourceFiles(t, mockStdMsg, sourcePath)
 
 	// Perform extraction
 	err = execExtract(ctx, cfg)
@@ -200,8 +202,9 @@ func TestFindFilePaths(t *testing.T) {
 func TestExtractAddMessages(t *testing.T) {
 	t.Parallel()
 
+	sourcePath := "."
 	mockMsgs, mockMsgsAddPackage := generateMockMsgs(t)
-	sourceFiles := generateSourceFiles(t, mockMsgs)
+	sourceFiles := generateSourceFiles(t, mockMsgs, sourcePath)
 
 	var results []vm.MsgAddPackage
 	for _, sf := range sourceFiles {
@@ -293,10 +296,10 @@ func TestWritePackageFiles(t *testing.T) {
 }
 
 // Helpers
-func generateSourceFiles(t *testing.T, mockMsgs []std.Msg) []string {
+func generateSourceFiles(t *testing.T, mockMsgs []std.Msg, sourcePath string) []string {
 	t.Helper()
 
-	tempDir, err := os.MkdirTemp(".", "test")
+	tempDir, err := os.MkdirTemp(sourcePath, "test")
 	require.NoError(t, err)
 	t.Cleanup(removeDir(t, tempDir))
 
