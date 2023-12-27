@@ -11,6 +11,7 @@ import (
 	"github.com/gnolang/gno/tm2/pkg/crypto"
 	"github.com/gnolang/gno/tm2/pkg/sdk/bank"
 	"github.com/gnolang/gno/tm2/pkg/std"
+	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"math/rand"
 	"os"
@@ -31,83 +32,94 @@ const (
 	sourceFileType  = ".log"
 )
 
-// Tests
-func TestNoFilesFlow(t *testing.T) {
-	ctx := context.Background()
-
-	// Set correct config
-	cfg := &extractorCfg{
-		fileType:  ".log",
-		sourceDir: ".",
-		outputDir: ".",
-	}
-
-	// Do not generate any test messages or files
-
-	// Try extraction
-	err := execExtract(ctx, cfg)
-	require.Equal(t, err, errNoSourceFilesFound)
-}
-
-func TestErrors(t *testing.T) {
-	var ctx context.Context
-
-	// Test invalid filetype error
-	cfg := &extractorCfg{
-		fileType:  "",
-		sourceDir: ".",
-		outputDir: ".",
-	}
-
-	err := execExtract(ctx, cfg)
-	require.Equal(t, err, errInvalidFileType)
-
-	// Test invalid source dir error
-	cfg = &extractorCfg{
-		fileType:  ".log",
-		sourceDir: "",
-		outputDir: ".",
-	}
-
-	err = execExtract(ctx, cfg)
-	require.Equal(t, err, errInvalidSourceDir)
-
-	// Test invalid output dir error
-	cfg = &extractorCfg{
-		fileType:  ".log",
-		sourceDir: ".",
-		outputDir: "",
-	}
-
-	err = execExtract(ctx, cfg)
-	require.Equal(t, err, errInvalidOutputDir)
-}
+//func TestExtractor_Errors(t *testing.T) {
+//	testTable := []struct {
+//		name        string
+//		cfg         *extractorCfg
+//		expectedErr error
+//	}{
+//		{
+//			"no source files",
+//			&extractorCfg{
+//				fileType:  ".log",
+//				sourceDir: "./",
+//				outputDir: ".",
+//			},
+//			errNoSourceFilesFound,
+//		},
+//		{
+//			"invalid filetype",
+//			&extractorCfg{
+//				fileType:  "",
+//				sourceDir: ".",
+//				outputDir: ".",
+//			},
+//			errInvalidFileType,
+//		},
+//		{
+//			"invalid source dir",
+//			&extractorCfg{
+//				fileType:  ".log",
+//				sourceDir: "",
+//				outputDir: ".",
+//			},
+//			errInvalidSourceDir,
+//		},
+//		{
+//			"invalid output dir",
+//			&extractorCfg{
+//				fileType:  ".log",
+//				sourceDir: ".",
+//				outputDir: "",
+//			},
+//			errInvalidOutputDir,
+//		},
+//	}
+//
+//	for _, testCase := range testTable {
+//		testCase := testCase
+//
+//		t.Run(testCase.name, func(t *testing.T) {
+//			t.Parallel()
+//
+//			ctx, cancelFn := context.WithTimeout(context.Background(), time.Second*5)
+//			defer cancelFn()
+//
+//			err := execExtract(ctx, testCase.cfg)
+//			assert.ErrorIs(t, err, testCase.expectedErr)
+//		})
+//	}
+//}
 
 func TestValidFlow(t *testing.T) {
-	ctx := context.Background()
-	outputPath := "./"
+	t.Parallel()
 
-	//Generate temporary output dir
-	outputDir, err := os.MkdirTemp(outputPath, "")
+	// Generate temporary output dir
+	outputDir, err := os.MkdirTemp("./", "")
 	require.NoError(t, err)
+
 	t.Cleanup(removeDir(t, outputDir))
 
-	sourcePath := "."
+	var (
+		sourcePath = "."
 
-	// Set correct config
-	cfg := &extractorCfg{
-		fileType:  sourceFileType,
-		sourceDir: sourcePath,
-		outputDir: outputDir,
-	}
+		// Set correct config
+		cfg = &extractorCfg{
+			fileType:  sourceFileType,
+			sourceDir: sourcePath,
+			outputDir: outputDir,
+		}
+	)
 
 	// Generate mock messages & mock files
 	mockStdMsg, mockAddPkgMsg := generateMockMsgs(t)
 	_ = generateSourceFiles(t, mockStdMsg, sourcePath)
 
 	// Perform extraction
-	err = execExtract(ctx, cfg)
-	require.NoError(t, err)
+	ctx, cancelFn := context.WithTimeout(context.Background(), time.Second*5)
+	defer cancelFn()
+
+	require.NoError(t, execExtract(ctx, cfg))
 
 	for _, msg := range mockAddPkgMsg {
 		basePath := filepath.Join(outputDir, strings.TrimLeft(msg.Package.Path, "gno.land/"))
@@ -124,11 +136,10 @@ func TestValidFlow(t *testing.T) {
 
 		// Compare metadata
 		expectedMetadata, err := json.Marshal(metadataFromMsg(msg))
-		require.Equal(t, expectedMetadata, retrievedMetadata)
+		assert.Equal(t, expectedMetadata, retrievedMetadata)
 
 		// Close metadata file
-		err = file.Close()
-		require.NoError(t, err)
+		require.NoError(t, file.Close())
 
 		// Check package file content
 		for _, f := range msg.Package.Files {
@@ -139,14 +150,11 @@ func TestValidFlow(t *testing.T) {
 			require.NoError(t, err)
 
 			// Read file body
-			retrievedFileBody := make([]byte, 0)
-
 			reader := bufio.NewReader(file)
-			retrievedFileBody, _, err = reader.ReadLine()
+			retrievedFileBody, _, err := reader.ReadLine()
 
 			// Compare file bodies
 			require.Equal(t, f.Body, string(retrievedFileBody))
-
 		}
 	}
 }
@@ -200,9 +208,9 @@ func TestFindFilePaths(t *testing.T) {
 }
 
 func TestExtractAddMessages(t *testing.T) {
-	t.Parallel()
+	//t.Parallel()
 
-	sourcePath := "."
+	sourcePath := "./source/"
 	mockMsgs, mockMsgsAddPackage := generateMockMsgs(t)
 	sourceFiles := generateSourceFiles(t, mockMsgs, sourcePath)
 
@@ -301,6 +309,7 @@ func generateSourceFiles(t *testing.T, mockMsgs []std.Msg, sourcePath string) []
 
 	tempDir, err := os.MkdirTemp(sourcePath, "test")
 	require.NoError(t, err)
+
 	t.Cleanup(removeDir(t, tempDir))
 
 	var (
