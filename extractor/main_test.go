@@ -32,27 +32,7 @@ const (
 )
 
 // Tests
-func TestHappyFlow(t *testing.T) {
-	ctx := context.Background()
-
-	// Set correct config
-	cfg := &extractorCfg{
-		fileType:  ".log",
-		sourceDir: ".",
-		outputDir: ".",
-	}
-
-	// Generate mock messages & mock files
-	mockStdMsg, _ := generateMockMsgs(t)
-	_ = generateSourceFiles(t, mockStdMsg)
-
-	// Try extraction
-	err := execExtract(ctx, cfg)
-	require.NoError(t, err)
-
-}
-
-func TestSadFlow(t *testing.T) {
+func TestNoFilesFlow(t *testing.T) {
 	ctx := context.Background()
 
 	// Set correct config
@@ -66,7 +46,7 @@ func TestSadFlow(t *testing.T) {
 
 	// Try extraction
 	err := execExtract(ctx, cfg)
-	require.NoError(t, err)
+	require.Equal(t, err, errNoSourceFilesFound)
 }
 
 func TestErrors(t *testing.T) {
@@ -101,6 +81,72 @@ func TestErrors(t *testing.T) {
 
 	err = execExtract(ctx, cfg)
 	require.Equal(t, err, errInvalidOutputDir)
+}
+
+func TestValidFlow(t *testing.T) {
+	ctx := context.Background()
+	outputPath := "./"
+
+	//Generate temporary output dir
+	outputDir, err := os.MkdirTemp(outputPath, "")
+	require.NoError(t, err)
+	t.Cleanup(removeDir(t, outputDir))
+
+	// Set correct config
+	cfg := &extractorCfg{
+		fileType:  sourceFileType,
+		sourceDir: ".",
+		outputDir: outputDir,
+	}
+
+	// Generate mock messages & mock files
+	mockStdMsg, mockAddPkgMsg := generateMockMsgs(t)
+	_ = generateSourceFiles(t, mockStdMsg)
+
+	// Perform extraction
+	err = execExtract(ctx, cfg)
+	require.NoError(t, err)
+
+	for _, msg := range mockAddPkgMsg {
+		basePath := filepath.Join(outputDir, strings.TrimLeft(msg.Package.Path, "gno.land/"))
+
+		// Get metadata path & open metadata file
+		metadataPath := filepath.Join(basePath, packageMetadataFile)
+		file, err := os.Open(metadataPath)
+		require.NoError(t, err)
+
+		// Read Metadata
+		reader := bufio.NewReader(file)
+		retrievedMetadata, _, err := reader.ReadLine()
+		require.NoError(t, err)
+
+		// Compare metadata
+		expectedMetadata, err := json.Marshal(metadataFromMsg(msg))
+		require.Equal(t, expectedMetadata, retrievedMetadata)
+
+		// Close metadata file
+		err = file.Close()
+		require.NoError(t, err)
+
+		// Check package file content
+		for _, f := range msg.Package.Files {
+			filePath := filepath.Join(basePath, f.Name)
+
+			// Open file
+			file, err := os.Open(filePath)
+			require.NoError(t, err)
+
+			// Read file body
+			retrievedFileBody := make([]byte, 0)
+
+			reader := bufio.NewReader(file)
+			retrievedFileBody, _, err = reader.ReadLine()
+
+			// Compare file bodies
+			require.Equal(t, f.Body, string(retrievedFileBody))
+
+		}
+	}
 }
 
 func TestFindFilePaths(t *testing.T) {
@@ -346,7 +392,7 @@ func generateMockMsgs(t *testing.T) ([]std.Msg, []vm.MsgAddPackage) {
 			for j := 0; j < randNum%maxFilesPerPkg+1; j++ {
 				file := &std.MemFile{
 					Name: "t" + strconv.Itoa(j) + ".gno",
-					Body: randString(t, int(r.Uint32())%maxFileBodyLength),
+					Body: randString(t, int(r.Uint32())%maxFileBodyLength+1),
 				}
 				files = append(files, file)
 			}

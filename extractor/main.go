@@ -24,9 +24,10 @@ const (
 )
 
 var (
-	errInvalidFileType  = errors.New("no file type specified")
-	errInvalidSourceDir = errors.New("invalid source directory")
-	errInvalidOutputDir = errors.New("invalid output directory")
+	errInvalidFileType    = errors.New("no file type specified")
+	errInvalidSourceDir   = errors.New("invalid source directory")
+	errInvalidOutputDir   = errors.New("invalid output directory")
+	errNoSourceFilesFound = errors.New("no source files found, exiting")
 )
 
 // Define extractor config
@@ -111,7 +112,7 @@ func execExtract(ctx context.Context, cfg *extractorCfg) error {
 	}
 
 	if len(sourceFiles) == 0 {
-		fmt.Println("no source files found, exiting.")
+		return errNoSourceFilesFound
 	}
 
 	// Concurrently process the source files
