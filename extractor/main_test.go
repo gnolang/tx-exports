@@ -32,88 +32,88 @@ const (
 	sourceFileType  = ".log"
 )
 
-//func TestExtractor_Errors(t *testing.T) {
-//	testTable := []struct {
-//		name        string
-//		cfg         *extractorCfg
-//		expectedErr error
-//	}{
-//		{
-//			"no source files",
-//			&extractorCfg{
-//				fileType:  ".log",
-//				sourceDir: "./",
-//				outputDir: ".",
-//			},
-//			errNoSourceFilesFound,
-//		},
-//		{
-//			"invalid filetype",
-//			&extractorCfg{
-//				fileType:  "",
-//				sourceDir: ".",
-//				outputDir: ".",
-//			},
-//			errInvalidFileType,
-//		},
-//		{
-//			"invalid source dir",
-//			&extractorCfg{
-//				fileType:  ".log",
-//				sourceDir: "",
-//				outputDir: ".",
-//			},
-//			errInvalidSourceDir,
-//		},
-//		{
-//			"invalid output dir",
-//			&extractorCfg{
-//				fileType:  ".log",
-//				sourceDir: ".",
-//				outputDir: "",
-//			},
-//			errInvalidOutputDir,
-//		},
-//	}
-//
-//	for _, testCase := range testTable {
-//		testCase := testCase
-//
-//		t.Run(testCase.name, func(t *testing.T) {
-//			t.Parallel()
-//
-//			ctx, cancelFn := context.WithTimeout(context.Background(), time.Second*5)
-//			defer cancelFn()
-//
-//			err := execExtract(ctx, testCase.cfg)
-//			assert.ErrorIs(t, err, testCase.expectedErr)
-//		})
-//	}
-//}
+func TestExtractor_Errors(t *testing.T) {
+	testTable := []struct {
+		name        string
+		cfg         *extractorCfg
+		expectedErr error
+	}{
+		{
+			"no source files",
+			&extractorCfg{
+				fileType:  ".log",
+				sourceDir: "./",
+				outputDir: ".",
+			},
+			errNoSourceFilesFound,
+		},
+		{
+			"invalid filetype",
+			&extractorCfg{
+				fileType:  "",
+				sourceDir: ".",
+				outputDir: ".",
+			},
+			errInvalidFileType,
+		},
+		{
+			"invalid source dir",
+			&extractorCfg{
+				fileType:  ".log",
+				sourceDir: "",
+				outputDir: ".",
+			},
+			errInvalidSourceDir,
+		},
+		{
+			"invalid output dir",
+			&extractorCfg{
+				fileType:  ".log",
+				sourceDir: ".",
+				outputDir: "",
+			},
+			errInvalidOutputDir,
+		},
+	}
+
+	for _, testCase := range testTable {
+		testCase := testCase
+
+		t.Run(testCase.name, func(t *testing.T) {
+			t.Parallel()
+
+			ctx, cancelFn := context.WithTimeout(context.Background(), time.Second*5)
+			defer cancelFn()
+
+			err := execExtract(ctx, testCase.cfg)
+			assert.ErrorIs(t, err, testCase.expectedErr)
+		})
+	}
+}
 
 func TestValidFlow(t *testing.T) {
 	t.Parallel()
 
 	// Generate temporary output dir
-	outputDir, err := os.MkdirTemp("./", "")
+	outputDir, err := os.MkdirTemp(".", "output")
 	require.NoError(t, err)
-
 	t.Cleanup(removeDir(t, outputDir))
 
-	var (
-		sourcePath = "."
+	// Generate temporary source dir
+	sourceDir, err := os.MkdirTemp(".", "source")
+	require.NoError(t, err)
+	t.Cleanup(removeDir(t, sourceDir))
 
-		// Set correct config
-		cfg = &extractorCfg{
-			fileType:  sourceFileType,
-			sourceDir: sourcePath,
-			outputDir: outputDir,
-		}
-	)
+	// Set correct config
+	var cfg = &extractorCfg{
+		fileType:  sourceFileType,
+		sourceDir: sourceDir,
+		outputDir: outputDir,
+	}
 
 	// Generate mock messages & mock files
 	mockStdMsg, mockAddPkgMsg := generateMockMsgs(t)
-	_ = generateSourceFiles(t, mockStdMsg, sourcePath)
+	_ = generateSourceFiles(t, sourceDir, mockStdMsg)
 
 	// Perform extraction
 	ctx, cancelFn := context.WithTimeout(context.Background(), time.Second*5)
@@ -154,7 +154,7 @@ func TestValidFlow(t *testing.T) {
 			retrievedFileBody, _, err := reader.ReadLine()
 
 			// Compare file bodies
-			require.Equal(t, f.Body, string(retrievedFileBody))
+			assert.Equal(t, f.Body, string(retrievedFileBody))
 		}
 	}
 }
@@ -208,11 +208,14 @@ func TestFindFilePaths(t *testing.T) {
 }
 
 func TestExtractAddMessages(t *testing.T) {
-	//t.Parallel()
+	t.Parallel()
 
-	sourcePath := "./source/"
+	tempDir, err := os.MkdirTemp(".", "test")
+	require.NoError(t, err)
+	t.Cleanup(removeDir(t, tempDir))
+
 	mockMsgs, mockMsgsAddPackage := generateMockMsgs(t)
-	sourceFiles := generateSourceFiles(t, mockMsgs, sourcePath)
+	sourceFiles := generateSourceFiles(t, tempDir, mockMsgs)
 
 	var results []vm.MsgAddPackage
 	for _, sf := range sourceFiles {
@@ -272,7 +275,6 @@ func TestWritePackageMetadata(t *testing.T) {
 		require.Equal(t, md, unmarshalledMetadata)
 	}
 }
-
 func TestWritePackageFiles(t *testing.T) {
 	t.Parallel()
 
@@ -304,13 +306,8 @@ func TestWritePackageFiles(t *testing.T) {
 }
 
 // Helpers
-func generateSourceFiles(t *testing.T, mockMsgs []std.Msg, sourcePath string) []string {
+func generateSourceFiles(t *testing.T, dir string, mockMsgs []std.Msg) []string {
 	t.Helper()
-
-	tempDir, err := os.MkdirTemp(sourcePath, "test")
-	require.NoError(t, err)
-
-	t.Cleanup(removeDir(t, tempDir))
 
 	var (
 		mockTx    = make([]std.Tx, numTx)
@@ -318,7 +315,7 @@ func generateSourceFiles(t *testing.T, mockMsgs []std.Msg, sourcePath string) []
 	)
 
 	// Generate transactions to wrap messages
-	for i := range mockTx { // num
+	for i := range mockTx {
 		mockTx[i] = std.Tx{
 			Msgs: mockMsgs[:msgPerTx],
 		}
@@ -332,7 +329,7 @@ func generateSourceFiles(t *testing.T, mockMsgs []std.Msg, sourcePath string) []
 
 	// Generate source files
 	for _, file := range testFiles {
-		filePath := filepath.Join(tempDir, file)
+		filePath := filepath.Join(dir, file)
 
 		err := os.MkdirAll(filepath.Dir(filePath), os.ModePerm)
 		require.NoError(t, err)
@@ -350,7 +347,7 @@ func generateSourceFiles(t *testing.T, mockMsgs []std.Msg, sourcePath string) []
 	}
 
 	for i := 0; i < numSourceFiles; i++ {
-		testFiles[i] = filepath.Join(tempDir, testFiles[i])
+		testFiles[i] = filepath.Join(dir, testFiles[i])
 	}
 
 	return testFiles
