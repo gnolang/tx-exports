@@ -25,16 +25,16 @@ const (
 
 var (
 	errInvalidFileType    = errors.New("no file type specified")
-	errInvalidSourceDir   = errors.New("invalid source directory")
+	errInvalidSourceDir   = errors.New("invalid source")
 	errInvalidOutputDir   = errors.New("invalid output directory")
 	errNoSourceFilesFound = errors.New("no source files found, exiting")
 )
 
 // Define extractor config
 type extractorCfg struct {
-	fileType  string
-	sourceDir string
-	outputDir string
+	fileType   string
+	sourcePath string
+	outputDir  string
 }
 
 func main() {
@@ -74,10 +74,10 @@ func (c *extractorCfg) registerFlags(fs *flag.FlagSet) {
 	)
 
 	fs.StringVar(
-		&c.sourceDir,
-		"source-dir",
-		".",
-		"the root folder containing transaction data",
+		&c.sourcePath,
+		"source-path",
+		"",
+		"the source folder or file containing transaction data",
 	)
 
 	fs.StringVar(
@@ -96,7 +96,7 @@ func execExtract(ctx context.Context, cfg *extractorCfg) error {
 	}
 
 	// Check the source dir is valid
-	if cfg.sourceDir == "" {
+	if cfg.sourcePath == "" {
 		return errInvalidSourceDir
 	}
 
@@ -105,22 +105,32 @@ func execExtract(ctx context.Context, cfg *extractorCfg) error {
 		return errInvalidOutputDir
 	}
 
-	// Find the files that need to be analyzed
-	sourceFiles, findErr := findFilePaths(cfg.sourceDir, cfg.fileType)
-	if findErr != nil {
-		return fmt.Errorf("unable to find file paths, %w", findErr)
+	// Check if source is valid
+	source, err := os.Stat(cfg.sourcePath)
+	if err != nil {
+		return fmt.Errorf("unable to open source, %w", err)
 	}
 
-	if len(sourceFiles) == 0 {
-		return errNoSourceFilesFound
+	var sourceFiles []string
+	// If source is dir, walk it and add to sourceFiles
+	if source.IsDir() {
+		sourceFiles, findErr := findFilePaths(cfg.sourcePath, cfg.fileType)
+		if findErr != nil {
+			return fmt.Errorf("unable to find file paths, %w", findErr)
+		}
+
+		if len(sourceFiles) == 0 {
+			return errNoSourceFilesFound
+		}
+	} else {
+		// If source is not dir, open the file directly
+		sourceFiles = append(sourceFiles, cfg.sourcePath)
 	}
 
 	// Concurrently process the source files
 	g, ctx := errgroup.WithContext(ctx)
 
 	for _, sourceFile := range sourceFiles {
-		sourceFile := sourceFile
-
 		g.Go(func() error {
 			// Extract messages
 			msgs, processErr := extractAddMessages(sourceFile)

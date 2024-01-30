@@ -41,36 +41,36 @@ func TestExtractor_Errors(t *testing.T) {
 		{
 			"no source files",
 			&extractorCfg{
-				fileType:  ".log",
-				sourceDir: "./",
-				outputDir: ".",
+				fileType:   ".log",
+				sourcePath: "./",
+				outputDir:  ".",
 			},
 			errNoSourceFilesFound,
 		},
 		{
 			"invalid filetype",
 			&extractorCfg{
-				fileType:  "",
-				sourceDir: ".",
-				outputDir: ".",
+				fileType:   "",
+				sourcePath: ".",
+				outputDir:  ".",
 			},
 			errInvalidFileType,
 		},
 		{
 			"invalid source dir",
 			&extractorCfg{
-				fileType:  ".log",
-				sourceDir: "",
-				outputDir: ".",
+				fileType:   ".log",
+				sourcePath: "",
+				outputDir:  ".",
 			},
 			errInvalidSourceDir,
 		},
 		{
 			"invalid output dir",
 			&extractorCfg{
-				fileType:  ".log",
-				sourceDir: ".",
-				outputDir: "",
+				fileType:   ".log",
+				sourcePath: ".",
+				outputDir:  "",
 			},
 			errInvalidOutputDir,
 		},
@@ -106,9 +106,9 @@ func TestValidFlow(t *testing.T) {
 
 	// Set correct config
 	var cfg = &extractorCfg{
-		fileType:  sourceFileType,
-		sourceDir: sourceDir,
-		outputDir: outputDir,
+		fileType:   sourceFileType,
+		sourcePath: sourceDir,
+		outputDir:  outputDir,
 	}
 
 	// Generate mock messages & mock files
