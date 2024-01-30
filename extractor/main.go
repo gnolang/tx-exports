@@ -25,7 +25,7 @@ const (
 
 var (
 	errInvalidFileType    = errors.New("no file type specified")
-	errInvalidSourceDir   = errors.New("invalid source")
+	errInvalidSourceDir   = errors.New("invalid source directory")
 	errInvalidOutputDir   = errors.New("invalid output directory")
 	errNoSourceFilesFound = errors.New("no source files found, exiting")
 )
@@ -75,9 +75,9 @@ func (c *extractorCfg) registerFlags(fs *flag.FlagSet) {
 
 	fs.StringVar(
 		&c.sourcePath,
-		"source-path",
-		"",
-		"the source folder or file containing transaction data",
+		"source-dir",
+		".",
+		"the root folder containing transaction data",
 	)
 
 	fs.StringVar(
@@ -105,6 +105,16 @@ func execExtract(ctx context.Context, cfg *extractorCfg) error {
 		return errInvalidOutputDir
 	}
 
+	//// Find the files that need to be analyzed
+	//sourceFiles, findErr := findFilePaths(cfg.sourcePath, cfg.fileType)
+	//if findErr != nil {
+	//	return fmt.Errorf("unable to find file paths, %w", findErr)
+	//}
+	//
+	//if len(sourceFiles) == 0 {
+	//	return errNoSourceFilesFound
+	//}
+
 	// Check if source is valid
 	source, err := os.Stat(cfg.sourcePath)
 	if err != nil {
@@ -112,25 +122,29 @@ func execExtract(ctx context.Context, cfg *extractorCfg) error {
 	}
 
 	var sourceFiles []string
+	var findErr error
+
 	// If source is dir, walk it and add to sourceFiles
 	if source.IsDir() {
-		sourceFiles, findErr := findFilePaths(cfg.sourcePath, cfg.fileType)
+		sourceFiles, findErr = findFilePaths(cfg.sourcePath, cfg.fileType)
 		if findErr != nil {
 			return fmt.Errorf("unable to find file paths, %w", findErr)
-		}
-
-		if len(sourceFiles) == 0 {
-			return errNoSourceFilesFound
 		}
 	} else {
 		// If source is not dir, open the file directly
 		sourceFiles = append(sourceFiles, cfg.sourcePath)
 	}
 
+	if len(sourceFiles) == 0 {
+		return errNoSourceFilesFound
+	}
+
 	// Concurrently process the source files
 	g, ctx := errgroup.WithContext(ctx)
 
 	for _, sourceFile := range sourceFiles {
+		sourceFile := sourceFile
+
 		g.Go(func() error {
 			// Extract messages
 			msgs, processErr := extractAddMessages(sourceFile)
