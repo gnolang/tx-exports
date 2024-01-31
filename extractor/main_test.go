@@ -310,14 +310,16 @@ func generateSourceFiles(t *testing.T, dir string, mockMsgs []std.Msg) []string 
 	t.Helper()
 
 	var (
-		mockTx    = make([]std.Tx, numTx)
+		mockTx    = make([]TxData, numTx)
 		testFiles = make([]string, numSourceFiles)
 	)
 
 	// Generate transactions to wrap messages
 	for i := range mockTx {
-		mockTx[i] = std.Tx{
-			Msgs: mockMsgs[:msgPerTx],
+		mockTx[i] = TxData{
+			Tx: std.Tx{
+				Msgs: mockMsgs[:msgPerTx],
+			},
 		}
 		mockMsgs = mockMsgs[msgPerTx:]
 	}
@@ -464,7 +466,7 @@ func randString(t *testing.T, length int) string {
 	return base64.StdEncoding.EncodeToString(buf)
 }
 
-func writeTxToFile(t *testing.T, tx std.Tx, file *os.File) error {
+func writeTxToFile(t *testing.T, tx TxData, file *os.File) error {
 	t.Helper()
 
 	data, err := amino.MarshalJSON(tx)

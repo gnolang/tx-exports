@@ -9,7 +9,6 @@ import (
 	"fmt"
 	"github.com/gnolang/gno/gno.land/pkg/sdk/vm"
 	"github.com/gnolang/gno/tm2/pkg/amino"
-	"github.com/gnolang/gno/tm2/pkg/std"
 	"github.com/peterbourgon/ff/v3/ffcli"
 	"golang.org/x/sync/errgroup"
 	"io"
@@ -104,16 +103,6 @@ func execExtract(ctx context.Context, cfg *extractorCfg) error {
 	if cfg.outputDir == "" {
 		return errInvalidOutputDir
 	}
-
-	//// Find the files that need to be analyzed
-	//sourceFiles, findErr := findFilePaths(cfg.sourcePath, cfg.fileType)
-	//if findErr != nil {
-	//	return fmt.Errorf("unable to find file paths, %w", findErr)
-	//}
-	//
-	//if len(sourceFiles) == 0 {
-	//	return errNoSourceFilesFound
-	//}
 
 	// Check if source is valid
 	source, err := os.Stat(cfg.sourcePath)
@@ -236,7 +225,7 @@ func extractAddMessages(filePath string) ([]vm.MsgAddPackage, error) {
 	tempBuf := make([]byte, 0)
 
 	for {
-		var tx std.Tx
+		var tx TxData
 		line, isPrefix, err := reader.ReadLine()
 
 		// Exit if no more lines in file
@@ -272,7 +261,7 @@ func extractAddMessages(filePath string) ([]vm.MsgAddPackage, error) {
 			tempBuf = nil
 		}
 
-		for _, msg := range tx.Msgs {
+		for _, msg := range tx.Tx.Msgs {
 			// Only MsgAddPkg should be parsed
 			if msg.Type() != "add_package" {
 				continue
