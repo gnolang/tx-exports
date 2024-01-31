@@ -104,24 +104,10 @@ func execExtract(ctx context.Context, cfg *extractorCfg) error {
 		return errInvalidOutputDir
 	}
 
-	// Check if source is valid
-	source, err := os.Stat(cfg.sourcePath)
-	if err != nil {
-		return fmt.Errorf("unable to open source, %w", err)
-	}
-
-	var sourceFiles []string
-	var findErr error
-
-	// If source is dir, walk it and add to sourceFiles
-	if source.IsDir() {
-		sourceFiles, findErr = findFilePaths(cfg.sourcePath, cfg.fileType)
-		if findErr != nil {
-			return fmt.Errorf("unable to find file paths, %w", findErr)
-		}
-	} else {
-		// If source is not dir, open the file directly
-		sourceFiles = append(sourceFiles, cfg.sourcePath)
+	// Find the files that need to be analyzed
+	sourceFiles, findErr := findFilePaths(cfg.sourcePath, cfg.fileType)
+	if findErr != nil {
+		return fmt.Errorf("unable to find file paths, %w", findErr)
 	}
 
 	if len(sourceFiles) == 0 {
@@ -132,6 +118,7 @@ func execExtract(ctx context.Context, cfg *extractorCfg) error {
 	g, ctx := errgroup.WithContext(ctx)
 
 	for _, sourceFile := range sourceFiles {
+		// Redeclare locally for thread safety
 		sourceFile := sourceFile
 
 		g.Go(func() error {
