@@ -24,12 +24,10 @@ import (
 )
 
 const (
-	numSourceFiles  = 20
-	numTx           = 100
-	numMsg          = 200
-	msgPerTx        = numMsg / numTx
-	txPerSourceFile = numTx / numSourceFiles
-	sourceFileType  = ".log"
+	numTx          = 100
+	numMsg         = 200
+	msgPerTx       = numMsg / numTx
+	sourceFileType = ".log"
 )
 
 func TestExtractor_Errors(t *testing.T) {
@@ -41,36 +39,36 @@ func TestExtractor_Errors(t *testing.T) {
 		{
 			"no source files",
 			&extractorCfg{
-				fileType:  ".log",
-				sourceDir: "./",
-				outputDir: ".",
+				fileType:   ".log",
+				sourcePath: "./",
+				outputDir:  ".",
 			},
 			errNoSourceFilesFound,
 		},
 		{
 			"invalid filetype",
 			&extractorCfg{
-				fileType:  "",
-				sourceDir: ".",
-				outputDir: ".",
+				fileType:   "",
+				sourcePath: ".",
+				outputDir:  ".",
 			},
 			errInvalidFileType,
 		},
 		{
 			"invalid source dir",
 			&extractorCfg{
-				fileType:  ".log",
-				sourceDir: "",
-				outputDir: ".",
+				fileType:   ".log",
+				sourcePath: "",
+				outputDir:  ".",
 			},
 			errInvalidSourceDir,
 		},
 		{
 			"invalid output dir",
 			&extractorCfg{
-				fileType:  ".log",
-				sourceDir: ".",
-				outputDir: "",
+				fileType:   ".log",
+				sourcePath: ".",
+				outputDir:  "",
 			},
 			errInvalidOutputDir,
 		},
@@ -80,7 +78,7 @@ func TestExtractor_Errors(t *testing.T) {
 		testCase := testCase
 
 		t.Run(testCase.name, func(t *testing.T) {
-			t.Parallel()
+			// t.Parallel()
 
 			ctx, cancelFn := context.WithTimeout(context.Background(), time.Second*5)
 			defer cancelFn()
@@ -91,8 +89,76 @@ func TestExtractor_Errors(t *testing.T) {
 	}
 }
 
-func TestValidFlow(t *testing.T) {
-	t.Parallel()
+func TestValidFlow_Dir(t *testing.T) {
+	// t.Parallel()
+
+	// Generate temporary output dir
+	outputDir, err := os.MkdirTemp(".", "outputDir")
+	require.NoError(t, err)
+	t.Cleanup(removeDir(t, outputDir))
+
+	// Generate temporary source dir
+	sourceDir, err := os.MkdirTemp(".", "sourceDir")
+	require.NoError(t, err)
+	t.Cleanup(removeDir(t, sourceDir))
+
+	// Set correct config
+	var cfg = &extractorCfg{
+		fileType:   sourceFileType,
+		sourcePath: sourceDir,
+		outputDir:  outputDir,
+	}
+
+	// Generate mock messages & mock files
+	mockStdMsg, mockAddPkgMsg := generateMockMsgs(t)
+	_ = generateSourceFiles(t, sourceDir, mockStdMsg, 20)
+
+	// Perform extraction
+	ctx, cancelFn := context.WithTimeout(context.Background(), time.Second*5)
+	defer cancelFn()
+
+	require.NoError(t, execExtract(ctx, cfg))
+
+	for _, msg := range mockAddPkgMsg {
+		basePath := filepath.Join(outputDir, strings.TrimLeft(msg.Package.Path, "gno.land/"))
+
+		// Get metadata path & open metadata file
+		metadataPath := filepath.Join(basePath, packageMetadataFile)
+		file, err := os.Open(metadataPath)
+		require.NoError(t, err)
+
+		// Read Metadata
+		reader := bufio.NewReader(file)
+		retrievedMetadata, _, err := reader.ReadLine()
+		require.NoError(t, err)
+
+		// Compare metadata
+		expectedMetadata, err := json.Marshal(metadataFromMsg(msg))
+		assert.Equal(t, expectedMetadata, retrievedMetadata)
+
+		// Close metadata file
+		require.NoError(t, file.Close())
+
+		// Check package file content
+		for _, f := range msg.Package.Files {
+			filePath := filepath.Join(basePath, f.Name)
+
+			// Open file
+			file, err := os.Open(filePath)
+			require.NoError(t, err)
+
+			// Read file body
+			reader := bufio.NewReader(file)
+			retrievedFileBody, _, err := reader.ReadLine()
+
+			// Compare file bodies
+			assert.Equal(t, f.Body, string(retrievedFileBody))
+		}
+	}
+}
+
+func TestValidFlow_SingleFile(t *testing.T) {
+	// t.Parallel()
 
 	// Generate temporary output dir
 	outputDir, err := os.MkdirTemp(".", "output")
@@ -106,14 +172,14 @@ func TestValidFlow(t *testing.T) {
 
 	// Set correct config
 	var cfg = &extractorCfg{
-		fileType:  sourceFileType,
-		sourceDir: sourceDir,
-		outputDir: outputDir,
+		fileType:   sourceFileType,
+		sourcePath: sourceDir,
+		outputDir:  outputDir,
 	}
 
 	// Generate mock messages & mock files
 	mockStdMsg, mockAddPkgMsg := generateMockMsgs(t)
-	_ = generateSourceFiles(t, sourceDir, mockStdMsg)
+	_ = generateSourceFiles(t, sourceDir, mockStdMsg, 1)
 
 	// Perform extraction
 	ctx, cancelFn := context.WithTimeout(context.Background(), time.Second*5)
@@ -160,12 +226,13 @@ func TestValidFlow(t *testing.T) {
 }
 
 func TestFindFilePaths(t *testing.T) {
-	t.Parallel()
+	// t.Parallel()
 
 	tempDir, err := os.MkdirTemp(".", "test")
 	require.NoError(t, err)
 	t.Cleanup(removeDir(t, tempDir))
 
+	numSourceFiles := 20
 	testFiles := make([]string, numSourceFiles)
 
 	for i := 0; i < numSourceFiles; i++ {
@@ -208,14 +275,14 @@ func TestFindFilePaths(t *testing.T) {
 }
 
 func TestExtractAddMessages(t *testing.T) {
-	t.Parallel()
+	// t.Parallel()
 
 	tempDir, err := os.MkdirTemp(".", "test")
 	require.NoError(t, err)
 	t.Cleanup(removeDir(t, tempDir))
 
 	mockMsgs, mockMsgsAddPackage := generateMockMsgs(t)
-	sourceFiles := generateSourceFiles(t, tempDir, mockMsgs)
+	sourceFiles := generateSourceFiles(t, tempDir, mockMsgs, 20)
 
 	var results []vm.MsgAddPackage
 	for _, sf := range sourceFiles {
@@ -235,7 +302,7 @@ func TestExtractAddMessages(t *testing.T) {
 }
 
 func TestWritePackageMetadata(t *testing.T) {
-	t.Parallel()
+	// t.Parallel()
 
 	_, mockMsgsAddPackage := generateMockMsgs(t)
 
@@ -276,7 +343,7 @@ func TestWritePackageMetadata(t *testing.T) {
 	}
 }
 func TestWritePackageFiles(t *testing.T) {
-	t.Parallel()
+	// t.Parallel()
 
 	_, mockMsgsAddPackage := generateMockMsgs(t)
 
@@ -306,12 +373,13 @@ func TestWritePackageFiles(t *testing.T) {
 }
 
 // Helpers
-func generateSourceFiles(t *testing.T, dir string, mockMsgs []std.Msg) []string {
+func generateSourceFiles(t *testing.T, dir string, mockMsgs []std.Msg, numSourceFiles int) []string {
 	t.Helper()
 
 	var (
-		mockTx    = make([]std.Tx, numTx)
-		testFiles = make([]string, numSourceFiles)
+		mockTx          = make([]std.Tx, numTx)
+		testFiles       = make([]string, numSourceFiles)
+		txPerSourceFile = 5
 	)
 
 	// Generate transactions to wrap messages
