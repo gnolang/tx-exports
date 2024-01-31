@@ -11,6 +11,7 @@ import (
 	"github.com/gnolang/gno/tm2/pkg/crypto"
 	"github.com/gnolang/gno/tm2/pkg/sdk/bank"
 	"github.com/gnolang/gno/tm2/pkg/std"
+	"github.com/gnolang/tx-archive/types"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"math/rand"
@@ -41,36 +42,36 @@ func TestExtractor_Errors(t *testing.T) {
 		{
 			"no source files",
 			&extractorCfg{
-				fileType:   ".log",
-				sourcePath: "./",
-				outputDir:  ".",
+				fileType:  ".log",
+				sourceDir: "./",
+				outputDir: ".",
 			},
 			errNoSourceFilesFound,
 		},
 		{
 			"invalid filetype",
 			&extractorCfg{
-				fileType:   "",
-				sourcePath: ".",
-				outputDir:  ".",
+				fileType:  "",
+				sourceDir: ".",
+				outputDir: ".",
 			},
 			errInvalidFileType,
 		},
 		{
 			"invalid source dir",
 			&extractorCfg{
-				fileType:   ".log",
-				sourcePath: "",
-				outputDir:  ".",
+				fileType:  ".log",
+				sourceDir: "",
+				outputDir: ".",
 			},
 			errInvalidSourceDir,
 		},
 		{
 			"invalid output dir",
 			&extractorCfg{
-				fileType:   ".log",
-				sourcePath: ".",
-				outputDir:  "",
+				fileType:  ".log",
+				sourceDir: ".",
+				outputDir: "",
 			},
 			errInvalidOutputDir,
 		},
@@ -106,9 +107,9 @@ func TestValidFlow(t *testing.T) {
 
 	// Set correct config
 	var cfg = &extractorCfg{
-		fileType:   sourceFileType,
-		sourcePath: sourceDir,
-		outputDir:  outputDir,
+		fileType:  sourceFileType,
+		sourceDir: sourceDir,
+		outputDir: outputDir,
 	}
 
 	// Generate mock messages & mock files
@@ -310,13 +311,13 @@ func generateSourceFiles(t *testing.T, dir string, mockMsgs []std.Msg) []string 
 	t.Helper()
 
 	var (
-		mockTx    = make([]TxData, numTx)
+		mockTx    = make([]types.TxData, numTx)
 		testFiles = make([]string, numSourceFiles)
 	)
 
 	// Generate transactions to wrap messages
 	for i := range mockTx {
-		mockTx[i] = TxData{
+		mockTx[i] = types.TxData{
 			Tx: std.Tx{
 				Msgs: mockMsgs[:msgPerTx],
 			},
@@ -466,7 +467,7 @@ func randString(t *testing.T, length int) string {
 	return base64.StdEncoding.EncodeToString(buf)
 }
 
-func writeTxToFile(t *testing.T, tx TxData, file *os.File) error {
+func writeTxToFile(t *testing.T, tx types.TxData, file *os.File) error {
 	t.Helper()
 
 	data, err := amino.MarshalJSON(tx)

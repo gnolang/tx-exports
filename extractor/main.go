@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"github.com/gnolang/gno/gno.land/pkg/sdk/vm"
 	"github.com/gnolang/gno/tm2/pkg/amino"
+	"github.com/gnolang/tx-archive/types"
 	"github.com/peterbourgon/ff/v3/ffcli"
 	"golang.org/x/sync/errgroup"
 	"io"
@@ -31,9 +32,9 @@ var (
 
 // Define extractor config
 type extractorCfg struct {
-	fileType   string
-	sourcePath string
-	outputDir  string
+	fileType  string
+	sourceDir string
+	outputDir string
 }
 
 func main() {
@@ -73,7 +74,7 @@ func (c *extractorCfg) registerFlags(fs *flag.FlagSet) {
 	)
 
 	fs.StringVar(
-		&c.sourcePath,
+		&c.sourceDir,
 		"source-dir",
 		".",
 		"the root folder containing transaction data",
@@ -95,7 +96,7 @@ func execExtract(ctx context.Context, cfg *extractorCfg) error {
 	}
 
 	// Check the source dir is valid
-	if cfg.sourcePath == "" {
+	if cfg.sourceDir == "" {
 		return errInvalidSourceDir
 	}
 
@@ -105,7 +106,7 @@ func execExtract(ctx context.Context, cfg *extractorCfg) error {
 	}
 
 	// Find the files that need to be analyzed
-	sourceFiles, findErr := findFilePaths(cfg.sourcePath, cfg.fileType)
+	sourceFiles, findErr := findFilePaths(cfg.sourceDir, cfg.fileType)
 	if findErr != nil {
 		return fmt.Errorf("unable to find file paths, %w", findErr)
 	}
@@ -212,7 +213,7 @@ func extractAddMessages(filePath string) ([]vm.MsgAddPackage, error) {
 	tempBuf := make([]byte, 0)
 
 	for {
-		var tx TxData
+		var tx types.TxData
 		line, isPrefix, err := reader.ReadLine()
 
 		// Exit if no more lines in file
