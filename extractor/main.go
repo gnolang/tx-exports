@@ -77,7 +77,7 @@ func (c *extractorCfg) registerFlags(fs *flag.FlagSet) {
 		&c.sourcePath,
 		"source-path",
 		"",
-		"the root folder containing transaction data",
+		"the source file or folder containing transaction data",
 	)
 
 	fs.StringVar(

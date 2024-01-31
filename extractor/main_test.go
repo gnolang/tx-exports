@@ -23,12 +23,7 @@ import (
 	"time"
 )
 
-const (
-	numTx          = 100
-	numMsg         = 200
-	msgPerTx       = numMsg / numTx
-	sourceFileType = ".log"
-)
+const sourceFileType = ".jsonl"
 
 func TestExtractor_Errors(t *testing.T) {
 	testTable := []struct {
@@ -78,7 +73,7 @@ func TestExtractor_Errors(t *testing.T) {
 		testCase := testCase
 
 		t.Run(testCase.name, func(t *testing.T) {
-			// t.Parallel()
+			t.Parallel()
 
 			ctx, cancelFn := context.WithTimeout(context.Background(), time.Second*5)
 			defer cancelFn()
@@ -90,7 +85,7 @@ func TestExtractor_Errors(t *testing.T) {
 }
 
 func TestValidFlow_Dir(t *testing.T) {
-	// t.Parallel()
+	t.Parallel()
 
 	// Generate temporary output dir
 	outputDir, err := os.MkdirTemp(".", "outputDir")
@@ -157,16 +152,16 @@ func TestValidFlow_Dir(t *testing.T) {
 	}
 }
 
-func TestValidFlow_SingleFile(t *testing.T) {
-	// t.Parallel()
+func TestValidFlow_File(t *testing.T) {
+	t.Parallel()
 
 	// Generate temporary output dir
-	outputDir, err := os.MkdirTemp(".", "output")
+	outputDir, err := os.MkdirTemp(".", "outputDir")
 	require.NoError(t, err)
 	t.Cleanup(removeDir(t, outputDir))
 
 	// Generate temporary source dir
-	sourceDir, err := os.MkdirTemp(".", "source")
+	sourceDir, err := os.MkdirTemp(".", "sourceDir")
 	require.NoError(t, err)
 	t.Cleanup(removeDir(t, sourceDir))
 
@@ -226,7 +221,7 @@ func TestValidFlow_SingleFile(t *testing.T) {
 }
 
 func TestFindFilePaths(t *testing.T) {
-	// t.Parallel()
+	t.Parallel()
 
 	tempDir, err := os.MkdirTemp(".", "test")
 	require.NoError(t, err)
@@ -248,7 +243,7 @@ func TestFindFilePaths(t *testing.T) {
 		require.NoError(t, err)
 	}
 
-	results, err := findFilePaths(tempDir, ".log")
+	results, err := findFilePaths(tempDir, sourceFileType)
 	require.NoError(t, err)
 
 	expectedResults := make([]string, 0, len(testFiles))
@@ -275,7 +270,7 @@ func TestFindFilePaths(t *testing.T) {
 }
 
 func TestExtractAddMessages(t *testing.T) {
-	// t.Parallel()
+	t.Parallel()
 
 	tempDir, err := os.MkdirTemp(".", "test")
 	require.NoError(t, err)
@@ -302,7 +297,7 @@ func TestExtractAddMessages(t *testing.T) {
 }
 
 func TestWritePackageMetadata(t *testing.T) {
-	// t.Parallel()
+	t.Parallel()
 
 	_, mockMsgsAddPackage := generateMockMsgs(t)
 
@@ -343,7 +338,7 @@ func TestWritePackageMetadata(t *testing.T) {
 	}
 }
 func TestWritePackageFiles(t *testing.T) {
-	// t.Parallel()
+	t.Parallel()
 
 	_, mockMsgsAddPackage := generateMockMsgs(t)
 
@@ -377,9 +372,10 @@ func generateSourceFiles(t *testing.T, dir string, mockMsgs []std.Msg, numSource
 	t.Helper()
 
 	var (
-		mockTx          = make([]std.Tx, numTx)
-		testFiles       = make([]string, numSourceFiles)
 		txPerSourceFile = 5
+		mockTx          = make([]std.Tx, txPerSourceFile*numSourceFiles)
+		testFiles       = make([]string, numSourceFiles)
+		msgPerTx        = len(mockMsgs) / len(mockTx)
 	)
 
 	// Generate transactions to wrap messages
@@ -436,6 +432,7 @@ func generateMockMsgs(t *testing.T) ([]std.Msg, []vm.MsgAddPackage) {
 
 	var ret []std.Msg
 	var addPkgRet []vm.MsgAddPackage
+	numMsg := 100
 
 	pkgID := 0
 
