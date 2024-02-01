@@ -105,25 +105,22 @@ func execExtract(ctx context.Context, cfg *extractorCfg) error {
 		return errInvalidOutputDir
 	}
 
-	var (
-		sourceFiles []string
-		findErr     error
-	)
-
 	// Check if source is valid
 	source, err := os.Stat(cfg.sourcePath)
 	if err != nil {
 		return fmt.Errorf("unable to stat source path, %w", err)
 	}
+
+	var sourceFiles []string
+	sourceFiles = append(sourceFiles, cfg.sourcePath)
+
 	// If source is dir, walk it and add to sourceFiles
 	if source.IsDir() {
+		var findErr error
 		sourceFiles, findErr = findFilePaths(cfg.sourcePath, cfg.fileType)
 		if findErr != nil {
 			return fmt.Errorf("unable to find file paths, %w", findErr)
 		}
-	} else {
-		// If source is not dir, open the file directly*
-		sourceFiles = append(sourceFiles, cfg.sourcePath)
 	}
 
 	if len(sourceFiles) == 0 {
