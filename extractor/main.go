@@ -105,10 +105,12 @@ func execExtract(ctx context.Context, cfg *extractorCfg) error {
 		return errInvalidOutputDir
 	}
 
-	var sourceFiles []string
-	var findErr error
+	var (
+		sourceFiles []string
+		findErr     error
+	)
 
-	// Check if source is valid*
+	// Check if source is valid
 	source, err := os.Stat(cfg.sourcePath)
 	if err != nil {
 		return fmt.Errorf("unable to open source, %w", err)
