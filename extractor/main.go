@@ -161,7 +161,6 @@ func execExtract(ctx context.Context, cfg *extractorCfg) error {
 				if writeErr := writePackageMetadata(metadataFromMsg(msg), outputDir); writeErr != nil {
 					return writeErr
 				}
-
 			}
 
 			return nil
