@@ -113,7 +113,7 @@ func execExtract(ctx context.Context, cfg *extractorCfg) error {
 	// Check if source is valid
 	source, err := os.Stat(cfg.sourcePath)
 	if err != nil {
-		return fmt.Errorf("unable to open source, %w", err)
+		return fmt.Errorf("unable to stat source path, %w", err)
 	}
 	// If source is dir, walk it and add to sourceFiles
 	if source.IsDir() {
