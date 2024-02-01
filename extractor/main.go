@@ -32,9 +32,9 @@ var (
 
 // Define extractor config
 type extractorCfg struct {
-	fileType  string
-	sourceDir string
-	outputDir string
+	fileType   string
+	sourcePath string
+	outputDir  string
 }
 
 func main() {
@@ -74,10 +74,10 @@ func (c *extractorCfg) registerFlags(fs *flag.FlagSet) {
 	)
 
 	fs.StringVar(
-		&c.sourceDir,
-		"source-dir",
-		".",
-		"the root folder containing transaction data",
+		&c.sourcePath,
+		"source-path",
+		"",
+		"the source file or folder containing transaction data",
 	)
 
 	fs.StringVar(
@@ -96,7 +96,7 @@ func execExtract(ctx context.Context, cfg *extractorCfg) error {
 	}
 
 	// Check the source dir is valid
-	if cfg.sourceDir == "" {
+	if cfg.sourcePath == "" {
 		return errInvalidSourceDir
 	}
 
@@ -105,10 +105,22 @@ func execExtract(ctx context.Context, cfg *extractorCfg) error {
 		return errInvalidOutputDir
 	}
 
-	// Find the files that need to be analyzed
-	sourceFiles, findErr := findFilePaths(cfg.sourceDir, cfg.fileType)
-	if findErr != nil {
-		return fmt.Errorf("unable to find file paths, %w", findErr)
+	// Check if source is valid
+	source, err := os.Stat(cfg.sourcePath)
+	if err != nil {
+		return fmt.Errorf("unable to stat source path, %w", err)
+	}
+
+	var sourceFiles []string
+	sourceFiles = append(sourceFiles, cfg.sourcePath)
+
+	// If source is dir, walk it and add to sourceFiles
+	if source.IsDir() {
+		var findErr error
+		sourceFiles, findErr = findFilePaths(cfg.sourcePath, cfg.fileType)
+		if findErr != nil {
+			return fmt.Errorf("unable to find file paths, %w", findErr)
+		}
 	}
 
 	if len(sourceFiles) == 0 {
