@@ -224,7 +224,7 @@ func extractAddMessages(filePath string) ([]vm.MsgAddPackage, error) {
 	tempBuf := make([]byte, 0)
 
 	for {
-		var tx types.TxData
+		var txData types.TxData
 		line, isPrefix, err := reader.ReadLine()
 
 		// Exit if no more lines in file
@@ -250,7 +250,7 @@ func extractAddMessages(filePath string) ([]vm.MsgAddPackage, error) {
 			line = tempBuf
 		}
 
-		if err := amino.UnmarshalJSON(line, &tx); err != nil {
+		if err := amino.UnmarshalJSON(line, &txData); err != nil {
 			fmt.Errorf("Error while parsing amino JSON at line: %w\nLine:%s\n", err, line)
 			continue
 		}
@@ -260,7 +260,7 @@ func extractAddMessages(filePath string) ([]vm.MsgAddPackage, error) {
 			tempBuf = nil
 		}
 
-		for _, msg := range tx.Tx.Msgs {
+		for _, msg := range txData.Tx.Msgs {
 			// Only MsgAddPkg should be parsed
 			if msg.Type() != "add_package" {
 				continue
