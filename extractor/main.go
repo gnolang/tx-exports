@@ -9,7 +9,7 @@ import (
 	"fmt"
 	"github.com/gnolang/gno/gno.land/pkg/sdk/vm"
 	"github.com/gnolang/gno/tm2/pkg/amino"
-	"github.com/gnolang/gno/tm2/pkg/std"
+	"github.com/gnolang/tx-archive/types"
 	"github.com/peterbourgon/ff/v3/ffcli"
 	"golang.org/x/sync/errgroup"
 	"io"
@@ -58,7 +58,7 @@ func main() {
 
 	// Run the command
 	if err := cmd.ParseAndRun(context.Background(), os.Args[1:]); err != nil {
-		fmt.Fprintf(os.Stderr, "%+v", err)
+		_, _ = fmt.Fprintf(os.Stderr, "%+v", err)
 
 		os.Exit(1)
 	}
@@ -224,7 +224,7 @@ func extractAddMessages(filePath string) ([]vm.MsgAddPackage, error) {
 	tempBuf := make([]byte, 0)
 
 	for {
-		var tx std.Tx
+		var tx types.TxData
 		line, isPrefix, err := reader.ReadLine()
 
 		// Exit if no more lines in file
@@ -260,7 +260,7 @@ func extractAddMessages(filePath string) ([]vm.MsgAddPackage, error) {
 			tempBuf = nil
 		}
 
-		for _, msg := range tx.Msgs {
+		for _, msg := range tx.Tx.Msgs {
 			// Only MsgAddPkg should be parsed
 			if msg.Type() != "add_package" {
 				continue
