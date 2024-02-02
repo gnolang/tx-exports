@@ -13,6 +13,7 @@ import (
 	"github.com/peterbourgon/ff/v3/ffcli"
 	"golang.org/x/sync/errgroup"
 	"io"
+	"log/slog"
 	"os"
 	"path/filepath"
 	"strings"
@@ -58,8 +59,7 @@ func main() {
 
 	// Run the command
 	if err := cmd.ParseAndRun(context.Background(), os.Args[1:]); err != nil {
-		_, _ = fmt.Fprintf(os.Stderr, "%+v", err)
-
+		slog.Error("%+v", err)
 		os.Exit(1)
 	}
 }
@@ -251,7 +251,7 @@ func extractAddMessages(filePath string) ([]vm.MsgAddPackage, error) {
 		}
 
 		if err := amino.UnmarshalJSON(line, &txData); err != nil {
-			_ = fmt.Errorf("Error while parsing amino JSON at line: %w\nLine:%s\n", err, line)
+			slog.Error("Error while parsing amino JSON at line: %w\nLine:%s\n", err, line)
 			continue
 		}
 
