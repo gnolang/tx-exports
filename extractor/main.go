@@ -21,6 +21,7 @@ import (
 // Define constants
 const (
 	packageMetadataFile = "pkg_metadata.json"
+	gnoscanPathURL      = "https://gnoscan.io/realms/details?path="
 )
 
 var (
