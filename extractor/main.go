@@ -59,7 +59,8 @@ func main() {
 
 	// Run the command
 	if err := cmd.ParseAndRun(context.Background(), os.Args[1:]); err != nil {
-		slog.Error("%+v", err)
+		slog.Error("command parse error", "error", err)
+
 		os.Exit(1)
 	}
 }
@@ -251,7 +252,7 @@ func extractAddMessages(filePath string) ([]vm.MsgAddPackage, error) {
 		}
 
 		if err := amino.UnmarshalJSON(line, &txData); err != nil {
-			slog.Error("Error while parsing amino JSON at line: %w\nLine:%s\n", err, line)
+			slog.Error("error while parsing amino JSON", "error", err, "line", line)
 			continue
 		}
 
