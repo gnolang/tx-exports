@@ -385,7 +385,6 @@ func generateSourceFiles(t *testing.T, dir string, mockMsgs []std.Msg, numSource
 			Tx: std.Tx{
 				Msgs: mockMsgs[:msgPerTx],
 			},
-			BlockNum: 0, // not used
 		}
 		mockMsgs = mockMsgs[msgPerTx:]
 	}
