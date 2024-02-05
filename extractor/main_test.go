@@ -11,6 +11,7 @@ import (
 	"github.com/gnolang/gno/tm2/pkg/crypto"
 	"github.com/gnolang/gno/tm2/pkg/sdk/bank"
 	"github.com/gnolang/gno/tm2/pkg/std"
+	"github.com/gnolang/tx-archive/types"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"math/rand"
@@ -373,15 +374,17 @@ func generateSourceFiles(t *testing.T, dir string, mockMsgs []std.Msg, numSource
 
 	var (
 		txPerSourceFile = 5
-		mockTx          = make([]std.Tx, txPerSourceFile*numSourceFiles)
+		mockTx          = make([]types.TxData, txPerSourceFile*numSourceFiles)
 		testFiles       = make([]string, numSourceFiles)
 		msgPerTx        = len(mockMsgs) / len(mockTx)
 	)
 
 	// Generate transactions to wrap messages
 	for i := range mockTx {
-		mockTx[i] = std.Tx{
-			Msgs: mockMsgs[:msgPerTx],
+		mockTx[i] = types.TxData{
+			Tx: std.Tx{
+				Msgs: mockMsgs[:msgPerTx],
+			},
 		}
 		mockMsgs = mockMsgs[msgPerTx:]
 	}
@@ -529,7 +532,7 @@ func randString(t *testing.T, length int) string {
 	return base64.StdEncoding.EncodeToString(buf)
 }
 
-func writeTxToFile(t *testing.T, tx std.Tx, file *os.File) error {
+func writeTxToFile(t *testing.T, tx types.TxData, file *os.File) error {
 	t.Helper()
 
 	data, err := amino.MarshalJSON(tx)
