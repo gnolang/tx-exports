@@ -45,6 +45,10 @@ stats:
 	echo '```' >> README.md
 	echo >> README.md
 
+
+extractor:
+	../bin/gnotx-extractor -source-path .
+
 loop:
 	while true; do \
 		( \
