@@ -27,12 +27,21 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "^1.22.0"
+
+      - name: Build gnotx-extractor
+        run: make -C extractor build
 
       - name: Run backup script
         run: make -C ${{ matrix.testnet }} fetch
 
       - name: Run stats script
         run: make -C ${{ matrix.testnet }} stats
+
+      - name: Run stats script
+        run: make -C ${{ matrix.testnet }} extractor
 
       - name: Run git pull
         run: git pull
