@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-3973
+4006
 ```
 
 ## addpkgs
@@ -21,14 +21,18 @@
       7 "gno.land/p/demo5/premier"
       7 "gno.land/p/GRXToken/GRX"
       6 "gno.land/p/demo2/greeting"
+      6 "gno.land/p/demo/teritori/follow"
       5 "gno.land/r/enki/providing"
       5 "gno.land/r/demo2/greeting"
       5 "gno.land/r/demo/james/nft"
       5 "gno.land/r/demo/hyperborea"
+      5 "gno.land/r/demo/follow"
       5 "gno.land/p/test10/hello"
+      5 "gno.land/p/demo/follow"
       4 "gno.land/r/test/test"
       4 "gno.land/r/test/hello"
       4 "gno.land/r/demo/yep"
+      4 "gno.land/r/demo/teritori/follow_2"
       4 "gno.land/r/demo/pump"
       4 "gno.land/r/demo/jefft0_test2_boards"
       4 "gno.land/r/demo/jack"
@@ -107,6 +111,7 @@
       2 "gno.land/r/demo/trin"
       2 "gno.land/r/demo/tolu"
       2 "gno.land/r/demo/testing"
+      2 "gno.land/r/demo/test"
       2 "gno.land/r/demo/soju"
       2 "gno.land/r/demo/ripl"
       2 "gno.land/r/demo/pukika"
@@ -368,7 +373,8 @@
       1 "gno.land/r/demo/testingse"
       1 "gno.land/r/demo/testing1"
       1 "gno.land/r/demo/test11/hello"
-      1 "gno.land/r/demo/test"
+      1 "gno.land/r/demo/teritori/follow"
+      1 "gno.land/r/demo/teritori/escrow"
       1 "gno.land/r/demo/tapsi"
       1 "gno.land/r/demo/tango"
       1 "gno.land/r/demo/swl"
@@ -956,7 +962,7 @@
 
 ## top realm calls
 ```
-   1064 "gno.land/r/demo/minter"
+   1069 "gno.land/r/demo/minter"
      93 "gno.land/r/demo/tong"
      87 "gno.land/r/duysygame/test22"
      82 "gno.land/r/demo/users"
@@ -1025,6 +1031,7 @@
       1 "gno.land/r/demo/james"
       1 "gno.land/r/demo/hoho12345678901234567890"
       1 "gno.land/r/demo/greeting"
+      1 "gno.land/r/demo/follow"
       1 "gno.land/r/demo/eagle"
       1 "gno.land/r/demo/doge"
       1 "gno.land/r/demo/dape2"
