@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-4007
+4018
 ```
 
 ## addpkgs
@@ -209,6 +209,11 @@
       1 "gno.land/r/test4/hello"
       1 "gno.land/r/test2/poll1"
       1 "gno.land/r/test2/hello"
+      1 "gno.land/r/test14/hello"
+      1 "gno.land/r/test13/hello"
+      1 "gno.land/r/test12/hello"
+      1 "gno.land/r/test11/poll"
+      1 "gno.land/r/test11/hello"
       1 "gno.land/r/test10/poll"
       1 "gno.land/r/test1/test"
       1 "gno.land/r/test1/poll1"
@@ -962,7 +967,7 @@
 
 ## top realm calls
 ```
-   1069 "gno.land/r/demo/minter"
+   1070 "gno.land/r/demo/minter"
      93 "gno.land/r/demo/tong"
      87 "gno.land/r/duysygame/test22"
      82 "gno.land/r/demo/users"
@@ -982,10 +987,10 @@
       5 "gno.land/r/foo"
       5 "gno.land/r/bar"
       5 "gno.land/p/demo/realmpackagetest"
+      4 "gno.land/r/test4/poll"
       4 "gno.land/r/duysygame/test17"
       4 "gno.land/r/demo3/greeting"
       3 "ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ"
-      3 "gno.land/r/test4/poll"
       3 "gno.land/r/test10/poll"
       3 "gno.land/r/test/poll3"
       3 "gno.land/r/duysygame/test9"
@@ -994,6 +999,7 @@
       3 "gno.land/p/hello/hello"
       2 "gno.land/r/xyz/greeting"
       2 "gno.land/r/test2/poll1"
+      2 "gno.land/r/test11/poll"
       2 "gno.land/r/test1/poll1"
       2 "gno.land/r/test1/greeting"
       2 "gno.land/r/stuyk/userinvokes4"
