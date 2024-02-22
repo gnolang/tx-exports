@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-4022
+4117
 ```
 
 ## addpkgs
@@ -96,6 +96,7 @@
       2 "gno.land/r/t/a"
       2 "gno.land/r/stuyk/userinvokes4"
       2 "gno.land/r/lali/greeting"
+      2 "gno.land/r/jetrix/firstgnoapp"
       2 "gno.land/r/jemoeder/test"
       2 "gno.land/r/irreverentsimplicity/flippando"
       2 "gno.land/r/hello/hello"
@@ -245,6 +246,7 @@
       1 "gno.land/r/kedover/kedover"
       1 "gno.land/r/jon/greeting"
       1 "gno.land/r/jhkjlhjkhlk/1"
+      1 "gno.land/r/jetrix/hello"
       1 "gno.land/r/jalbi/hello"
       1 "gno.land/r/huhuhuhuhuh/huhuhuhuhuh"
       1 "gno.land/r/hellogoodbye/hellogoodbye"
@@ -967,7 +969,7 @@
 
 ## top realm calls
 ```
-   1072 "gno.land/r/demo/minter"
+   1117 "gno.land/r/demo/minter"
      93 "gno.land/r/demo/tong"
      87 "gno.land/r/duysygame/test22"
      82 "gno.land/r/demo/users"
