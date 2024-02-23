@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-4117
+4164
 ```
 
 ## addpkgs
@@ -11,6 +11,7 @@
      13 "gno.land/p/duysygame/test2"
      12 "gno.land/p/demo/hello"
      11 "gno.land/r/clockwork/tictactoe"
+      9 "gno.land/r/demo2/greeting"
       9 "gno.land/r/demo/jefft0_test1_boards"
       9 "gno.land/p/test/hello"
       8 "gno.land/r/demo/demo"
@@ -23,7 +24,6 @@
       6 "gno.land/p/demo2/greeting"
       6 "gno.land/p/demo/teritori/follow"
       5 "gno.land/r/enki/providing"
-      5 "gno.land/r/demo2/greeting"
       5 "gno.land/r/demo/james/nft"
       5 "gno.land/r/demo/hyperborea"
       5 "gno.land/r/demo/follow"
@@ -31,6 +31,7 @@
       5 "gno.land/p/demo/follow"
       4 "gno.land/r/test/test"
       4 "gno.land/r/test/hello"
+      4 "gno.land/r/demo22/greeting"
       4 "gno.land/r/demo/yep"
       4 "gno.land/r/demo/teritori/follow_2"
       4 "gno.land/r/demo/pump"
@@ -201,6 +202,7 @@
       2 "gno.land/p/1/2"
       1 "gno.land/r1/a"
       1 "gno.land/r/xyz/greeting"
+      1 "gno.land/r/xcv/foo"
       1 "gno.land/r/tnam0x/test"
       1 "gno.land/r/tests/tictactoe"
       1 "gno.land/r/test99/me22"
@@ -287,6 +289,9 @@
       1 "gno.land/r/deploy/test"
       1 "gno.land/r/demos/greeting"
       1 "gno.land/r/demofromme/d123"
+      1 "gno.land/r/demo5/atom1"
+      1 "gno.land/r/demo5/ahnge2000"
+      1 "gno.land/r/demo4/greeting"
       1 "gno.land/r/demo3/counter"
       1 "gno.land/r/demo2/ciph2"
       1 "gno.land/r/demo/zlj"
@@ -414,6 +419,7 @@
       1 "gno.land/r/demo/rept"
       1 "gno.land/r/demo/ren"
       1 "gno.land/r/demo/reizzas"
+      1 "gno.land/r/demo/realmyo"
       1 "gno.land/r/demo/rannuener"
       1 "gno.land/r/demo/qwe"
       1 "gno.land/r/demo/queezus"
@@ -566,6 +572,7 @@
       1 "gno.land/r/demo/genzo"
       1 "gno.land/r/demo/gem"
       1 "gno.land/r/demo/gelo"
+      1 "gno.land/r/demo/gbtc"
       1 "gno.land/r/demo/gbapo"
       1 "gno.land/r/demo/ganja"
       1 "gno.land/r/demo/fuck"
@@ -592,6 +599,8 @@
       1 "gno.land/r/demo/dogee"
       1 "gno.land/r/demo/dogecoin"
       1 "gno.land/r/demo/der"
+      1 "gno.land/r/demo/demorealm"
+      1 "gno.land/r/demo/demo123"
       1 "gno.land/r/demo/demo1"
       1 "gno.land/r/demo/deep"
       1 "gno.land/r/demo/dede"
@@ -836,6 +845,7 @@
       1 "gno.land/p/demo6/hello"
       1 "gno.land/p/demo5/ufmtt"
       1 "gno.land/p/demo5/hello"
+      1 "gno.land/p/demo5/atom1"
       1 "gno.land/p/demo4/ufmtt"
       1 "gno.land/p/demo4/chess"
       1 "gno.land/p/demo3/tapas"
@@ -969,7 +979,7 @@
 
 ## top realm calls
 ```
-   1117 "gno.land/r/demo/minter"
+   1126 "gno.land/r/demo/minter"
      93 "gno.land/r/demo/tong"
      87 "gno.land/r/duysygame/test22"
      82 "gno.land/r/demo/users"
