@@ -11,7 +11,7 @@ import (
 
 var (
 	boo  *grc20.AdminToken
-	admin std.Address = "g1kcwsplxyxz5pruc5hy9whwjxwwh35s4v37yqrr"
+	admin std.Address = "g1hqzeju0p0eup9rgxa0pxvyc0y7wnzjrdvppsy5"
 )
 
 func init() {
