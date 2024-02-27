@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-4246
+4271
 ```
 
 ## addpkgs
@@ -243,6 +243,7 @@
       1 "gno.land/r/marbella/huecoco"
       1 "gno.land/r/lk/lk"
       1 "gno.land/r/limkortsigf/limkortsigf"
+      1 "gno.land/r/leon/addrtostring"
       1 "gno.land/r/lali/greeting2"
       1 "gno.land/r/kush/hello"
       1 "gno.land/r/kedover/kedover"
@@ -979,8 +980,8 @@
 
 ## top realm calls
 ```
-   1158 "gno.land/r/demo/minter"
-    101 "gno.land/r/demo/users"
+   1163 "gno.land/r/demo/minter"
+    102 "gno.land/r/demo/users"
      93 "gno.land/r/demo/tong"
      87 "gno.land/r/duysygame/test22"
      81 "gno.land/r/demo/boards"
