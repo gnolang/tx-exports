@@ -8,4 +8,7 @@ Currently, it contains the following:
   - `test2.gno.land`
   - `test1.gno.land`
   - `staging.gno.land`
-- Gno code extracted from raw transactions in the respective `extracted` folders.
+- Gno code extracted from raw transactions in the respective `extracted` folders
+- A Go program used to extract Gno code from raw transactions; located in `extractor/`
+
+This repo has a Github Action that fetches transaction data and runs the extractor once every 24 hours.
