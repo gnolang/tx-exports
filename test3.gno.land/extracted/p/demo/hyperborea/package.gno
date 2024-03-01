@@ -1,11 +1,9 @@
-package foo
+package hello
 
-import (
-  "std
-  "strings
-  
-  "gno.land/p/demo/grc/grc20
-  "gno.land/p/demo/ufmt
+func Render(path string) string {
+  return "Hello World!"
+}
+gno.land/p/demo/ufmt
   "gno.land/r/demo/users"
 )
 

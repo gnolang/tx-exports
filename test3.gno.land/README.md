@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-4349
+4398
 ```
 
 ## addpkgs
@@ -24,6 +24,7 @@
       6 "gno.land/p/demo2/greeting"
       6 "gno.land/p/demo/teritori/follow"
       5 "gno.land/r/enki/providing"
+      5 "gno.land/r/devx8/hello"
       5 "gno.land/r/demo/james/nft"
       5 "gno.land/r/demo/hyperborea"
       5 "gno.land/r/demo/follow"
@@ -59,6 +60,7 @@
       3 "gno.land/r/demo/panda"
       3 "gno.land/r/demo/lukoil"
       3 "gno.land/r/demo/james/nft1"
+      3 "gno.land/r/demo/hello"
       3 "gno.land/r/demo/gnoph"
       3 "gno.land/r/demo/gemcoin"
       3 "gno.land/r/demo/cho"
@@ -102,11 +104,13 @@
       2 "gno.land/r/jetrix/firstgnoapp"
       2 "gno.land/r/jemoeder/test"
       2 "gno.land/r/irreverentsimplicity/flippando"
+      2 "gno.land/r/helloMuss/muss"
       2 "gno.land/r/hello/hello"
       2 "gno.land/r/enkianknight/returning"
       2 "gno.land/r/enkianknight/helping"
       2 "gno.land/r/duysygame/test20"
       2 "gno.land/r/duysygame/test18"
+      2 "gno.land/r/demo8/hello"
       2 "gno.land/r/demo3/greeting"
       2 "gno.land/r/demo/yty"
       2 "gno.land/r/demo/yfd"
@@ -123,7 +127,6 @@
       2 "gno.land/r/demo/keyboardvvorrier"
       2 "gno.land/r/demo/james"
       2 "gno.land/r/demo/honey"
-      2 "gno.land/r/demo/hello"
       2 "gno.land/r/demo/harambe"
       2 "gno.land/r/demo/goob"
       2 "gno.land/r/demo/gggg1111"
@@ -209,6 +212,7 @@
       1 "gno.land/r/zhrand/hello"
       1 "gno.land/r/xyz/greeting"
       1 "gno.land/r/xcv/foo"
+      1 "gno.land/r/totoslip/hello"
       1 "gno.land/r/tnam0x/test"
       1 "gno.land/r/thomilx/hello"
       1 "gno.land/r/tests/tictactoe"
@@ -304,6 +308,8 @@
       1 "gno.land/r/duysygame/test12"
       1 "gno.land/r/duysygame/test11"
       1 "gno.land/r/duysygame/test10"
+      1 "gno.land/r/devx9/hello"
+      1 "gno.land/r/devx10/hello"
       1 "gno.land/r/devx1/hello"
       1 "gno.land/r/devx/hello"
       1 "gno.land/r/devoker/devoker"
@@ -314,9 +320,13 @@
       1 "gno.land/r/demofromme/d123"
       1 "gno.land/r/demo5/atom1"
       1 "gno.land/r/demo5/ahnge2000"
+      1 "gno.land/r/demo45/hello"
+      1 "gno.land/r/demo44/hello"
       1 "gno.land/r/demo4/greeting"
       1 "gno.land/r/demo3/counter"
       1 "gno.land/r/demo2/ciph2"
+      1 "gno.land/r/demo11/hello"
+      1 "gno.land/r/demo10/hello"
       1 "gno.land/r/demo/zlj"
       1 "gno.land/r/demo/zihu"
       1 "gno.land/r/demo/zeezus"
@@ -407,6 +417,8 @@
       1 "gno.land/r/demo/thatlike"
       1 "gno.land/r/demo/testingse"
       1 "gno.land/r/demo/testing1"
+      1 "gno.land/r/demo/test21/hello"
+      1 "gno.land/r/demo/test20/hello"
       1 "gno.land/r/demo/test11/hello"
       1 "gno.land/r/demo/teritori/follow"
       1 "gno.land/r/demo/teritori/escrow"
@@ -1005,7 +1017,7 @@
 
 ## top realm calls
 ```
-   1166 "gno.land/r/demo/minter"
+   1172 "gno.land/r/demo/minter"
     102 "gno.land/r/demo/users"
      93 "gno.land/r/demo/tong"
      87 "gno.land/r/duysygame/test22"
@@ -1018,8 +1030,9 @@
      20 "gno.land/r/duysyland/erc20"
      19 "gno.land/r/position"
      16 "gno.land/r/demo/gnoph"
-     11 "gno.land/r/boom/boom"
+     15 "gno.land/r/boom/boom"
      10 "gno.land/r/pool"
+      8 "gno.land/r/test10/poll"
       7 "gno.land/r/test/minter_v1"
       7 "gno.land/r/demo/skull"
       5 "gno.land/r/foo"
@@ -1029,7 +1042,6 @@
       4 "gno.land/r/duysygame/test17"
       4 "gno.land/r/demo3/greeting"
       3 "ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ"
-      3 "gno.land/r/test10/poll"
       3 "gno.land/r/test/poll3"
       3 "gno.land/r/duysygame/test9"
       3 "gno.land/r/devx/hello"
