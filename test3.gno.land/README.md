@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-4398
+4408
 ```
 
 ## addpkgs
@@ -308,6 +308,8 @@
       1 "gno.land/r/duysygame/test12"
       1 "gno.land/r/duysygame/test11"
       1 "gno.land/r/duysygame/test10"
+      1 "gno.land/r/drutdesign/hello"
+      1 "gno.land/r/draftdesign2/hello"
       1 "gno.land/r/devx9/hello"
       1 "gno.land/r/devx10/hello"
       1 "gno.land/r/devx1/hello"
@@ -416,6 +418,8 @@
       1 "gno.land/r/demo/thc"
       1 "gno.land/r/demo/thatlike"
       1 "gno.land/r/demo/testingse"
+      1 "gno.land/r/demo/testing1115"
+      1 "gno.land/r/demo/testing1111"
       1 "gno.land/r/demo/testing1"
       1 "gno.land/r/demo/test21/hello"
       1 "gno.land/r/demo/test20/hello"
@@ -1039,6 +1043,7 @@
       5 "gno.land/r/bar"
       5 "gno.land/p/demo/realmpackagetest"
       4 "gno.land/r/test4/poll"
+      4 "gno.land/r/test2/poll1"
       4 "gno.land/r/duysygame/test17"
       4 "gno.land/r/demo3/greeting"
       3 "ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ"
@@ -1048,7 +1053,6 @@
       3 "gno.land/r/demo/jefft0_test2_boards"
       3 "gno.land/p/hello/hello"
       2 "gno.land/r/xyz/greeting"
-      2 "gno.land/r/test2/poll1"
       2 "gno.land/r/test11/poll"
       2 "gno.land/r/test1/poll1"
       2 "gno.land/r/test1/greeting"
@@ -1082,6 +1086,8 @@
       1 "gno.land/r/duysygame/test14"
       1 "gno.land/r/duysygame/test13"
       1 "gno.land/r/duysygame/test11"
+      1 "gno.land/r/drutdesign/hello"
+      1 "gno.land/r/draftdesign2/hello"
       1 "gno.land/r/demo2/greeting"
       1 "gno.land/r/demo/wugnot"
       1 "gno.land/r/demo/what"
