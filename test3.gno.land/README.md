@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-4412
+4420
 ```
 
 ## addpkgs
@@ -279,6 +279,9 @@
       1 "gno.land/r/hello_test/hello"
       1 "gno.land/r/hello"
       1 "gno.land/r/hehe"
+      1 "gno.land/r/hallo/hallodemo"
+      1 "gno.land/r/hallo/hallo"
+      1 "gno.land/r/hallo/1"
       1 "gno.land/r/guzelk/fairy"
       1 "gno.land/r/gnomerna/hello"
       1 "gno.land/r/gno/hello"
@@ -324,9 +327,11 @@
       1 "gno.land/r/demo5/ahnge2000"
       1 "gno.land/r/demo45/hello"
       1 "gno.land/r/demo44/hello"
+      1 "gno.land/r/demo4/hallo"
       1 "gno.land/r/demo4/greeting"
       1 "gno.land/r/demo3/counter"
       1 "gno.land/r/demo2/ciph2"
+      1 "gno.land/r/demo1566/hallo"
       1 "gno.land/r/demo11/hello"
       1 "gno.land/r/demo10/hello"
       1 "gno.land/r/demo/zlj"
@@ -1021,7 +1026,7 @@
 
 ## top realm calls
 ```
-   1175 "gno.land/r/demo/minter"
+   1176 "gno.land/r/demo/minter"
     102 "gno.land/r/demo/users"
      93 "gno.land/r/demo/tong"
      87 "gno.land/r/duysygame/test22"
