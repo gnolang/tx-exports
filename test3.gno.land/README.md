@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-4420
+4447
 ```
 
 ## addpkgs
@@ -112,6 +112,7 @@
       2 "gno.land/r/duysygame/test18"
       2 "gno.land/r/demo8/hello"
       2 "gno.land/r/demo3/greeting"
+      2 "gno.land/r/demo11/hello"
       2 "gno.land/r/demo/yty"
       2 "gno.land/r/demo/yfd"
       2 "gno.land/r/demo/ybv"
@@ -260,6 +261,8 @@
       1 "gno.land/r/mydemo/greeting"
       1 "gno.land/r/mpj/greeting"
       1 "gno.land/r/marbella/huecoco"
+      1 "gno.land/r/malek/test1"
+      1 "gno.land/r/malek/hello"
       1 "gno.land/r/lopez35/hello"
       1 "gno.land/r/lk/lk"
       1 "gno.land/r/limkortsigf/limkortsigf"
@@ -275,6 +278,7 @@
       1 "gno.land/r/jetrix/hello"
       1 "gno.land/r/jalbi/hello"
       1 "gno.land/r/huhuhuhuhuh/huhuhuhuhuh"
+      1 "gno.land/r/hellototo/hello"
       1 "gno.land/r/hellogoodbye/hellogoodbye"
       1 "gno.land/r/hello_test/hello"
       1 "gno.land/r/hello"
@@ -332,7 +336,7 @@
       1 "gno.land/r/demo3/counter"
       1 "gno.land/r/demo2/ciph2"
       1 "gno.land/r/demo1566/hallo"
-      1 "gno.land/r/demo11/hello"
+      1 "gno.land/r/demo12/hello"
       1 "gno.land/r/demo10/hello"
       1 "gno.land/r/demo/zlj"
       1 "gno.land/r/demo/zihu"
@@ -1031,9 +1035,9 @@
      93 "gno.land/r/demo/tong"
      87 "gno.land/r/duysygame/test22"
      81 "gno.land/r/demo/boards"
+     65 "gno.land/r/gnoland/faucet"
      65 "gno.land/r/duysygame/test21"
      53 "gno.land/r/gnoland/blog"
-     47 "gno.land/r/gnoland/faucet"
      26 "gno.land/r/demo/foo20"
      21 "gno.land/r/duysygame/test19"
      20 "gno.land/r/duysyland/erc20"
