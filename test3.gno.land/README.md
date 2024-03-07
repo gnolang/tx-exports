@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-4447
+4463
 ```
 
 ## addpkgs
@@ -54,6 +54,7 @@
       3 "gno.land/r/test1/hello"
       3 "gno.land/r/test/test1"
       3 "gno.land/r/rifatmax/rifat"
+      3 "gno.land/r/oui/seto"
       3 "gno.land/r/demo/ygf"
       3 "gno.land/r/demo/ydf"
       3 "gno.land/r/demo/was"
@@ -72,6 +73,7 @@
       3 "gno.land/r/demo/Chamb"
       3 "gno.land/r/demo/BTR"
       3 "gno.land/r/demo/Alva"
+      3 "gno.land/r/asdsd/asdsd"
       3 "gno.land/r/Demo/Bad"
       3 "gno.land/p/tet/hello"
       3 "gno.land/p/stuyk/test"
@@ -149,6 +151,7 @@
       2 "gno.land/r/demo/0XLIQ"
       2 "gno.land/r/delo/counter_test"
       2 "gno.land/r/danielx/wow"
+      2 "gno.land/r/asdsd/asdsds"
       2 "gno.land/r/anunnakis/sailing"
       2 "gno.land/r/Test/demo"
       2 "gno.land/r/Alva/Alvadama"
@@ -227,6 +230,7 @@
       1 "gno.land/r/test2/poll1"
       1 "gno.land/r/test2/hello"
       1 "gno.land/r/test13/hello"
+      1 "gno.land/r/test123/test123"
       1 "gno.land/r/test12/hello"
       1 "gno.land/r/test11/poll"
       1 "gno.land/r/test11/hello"
@@ -256,6 +260,8 @@
       1 "gno.land/r/qwe"
       1 "gno.land/r/projects/token"
       1 "gno.land/r/nastyqueen/hello"
+      1 "gno.land/r/namespace/seto"
+      1 "gno.land/r/namespace/counter"
       1 "gno.land/r/namespace/BoomBaby"
       1 "gno.land/r/mytoken/mytoken"
       1 "gno.land/r/mydemo/greeting"
@@ -1030,7 +1036,7 @@
 
 ## top realm calls
 ```
-   1176 "gno.land/r/demo/minter"
+   1178 "gno.land/r/demo/minter"
     102 "gno.land/r/demo/users"
      93 "gno.land/r/demo/tong"
      87 "gno.land/r/duysygame/test22"
@@ -1045,7 +1051,7 @@
      16 "gno.land/r/demo/gnoph"
      15 "gno.land/r/boom/boom"
      10 "gno.land/r/pool"
-      8 "gno.land/r/test10/poll"
+      9 "gno.land/r/test10/poll"
       7 "gno.land/r/test/minter_v1"
       7 "gno.land/r/demo/skull"
       5 "gno.land/r/foo"
