@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-4499
+4516
 ```
 
 ## addpkgs
@@ -11,6 +11,7 @@
      13 "gno.land/p/duysygame/test2"
      12 "gno.land/p/demo/hello"
      11 "gno.land/r/clockwork/tictactoe"
+     10 "gno.land/r/leon/whitelistfactory1"
       9 "gno.land/r/demo2/greeting"
       9 "gno.land/r/demo/jefft0_test1_boards"
       9 "gno.land/p/test/hello"
@@ -107,6 +108,7 @@
       2 "gno.land/r/stuyk/userinvokes4"
       2 "gno.land/r/rozaser/blackpink"
       2 "gno.land/r/rozaser/Blackpink"
+      2 "gno.land/r/leon/whitelist_wpackagename"
       2 "gno.land/r/lali/greeting"
       2 "gno.land/r/jetrix/firstgnoapp"
       2 "gno.land/r/jemoeder/test"
@@ -176,6 +178,7 @@
       2 "gno.land/p/moon/shary"
       2 "gno.land/p/michelle/helloworld"
       2 "gno.land/p/leon/whitelist"
+      2 "gno.land/p/leon/avl"
       2 "gno.land/p/jesus/jesus"
       2 "gno.land/p/irreverentsimplicity/hello"
       2 "gno.land/p/ink/boards"
@@ -852,6 +855,8 @@
       1 "gno.land/p/marbella/hueco"
       1 "gno.land/p/long/longtest"
       1 "gno.land/p/lll/ll"
+      1 "gno.land/p/leon/whitelist1"
+      1 "gno.land/p/leon/whietlistv1"
       1 "gno.land/p/kim/rocket"
       1 "gno.land/p/kim/jesus"
       1 "gno.land/p/kim/heaven"
@@ -875,6 +880,7 @@
       1 "gno.land/p/gnogno/OR"
       1 "gno.land/p/gno/gno"
       1 "gno.land/p/gfhfh/555"
+      1 "gno.land/p/fzth_gnoland/whitelist"
       1 "gno.land/p/fuckcex/fuckcex"
       1 "gno.land/p/foo/hello"
       1 "gno.land/p/foo/foo"
