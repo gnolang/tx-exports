@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-4516
+4533
 ```
 
 ## addpkgs
@@ -34,6 +34,7 @@
       5 "gno.land/p/test10/hello"
       5 "gno.land/p/demo/whitelist"
       5 "gno.land/p/demo/follow"
+      4 "gno.land/r/token/ethtoken"
       4 "gno.land/r/test/test"
       4 "gno.land/r/test/hello"
       4 "gno.land/r/demo22/greeting"
@@ -60,6 +61,8 @@
       3 "gno.land/r/test/test1"
       3 "gno.land/r/rifatmax/rifat"
       3 "gno.land/r/oui/seto"
+      3 "gno.land/r/nft/bapenft"
+      3 "gno.land/r/hello/hello"
       3 "gno.land/r/demo/ygf"
       3 "gno.land/r/demo/ydf"
       3 "gno.land/r/demo/was"
@@ -108,13 +111,14 @@
       2 "gno.land/r/stuyk/userinvokes4"
       2 "gno.land/r/rozaser/blackpink"
       2 "gno.land/r/rozaser/Blackpink"
+      2 "gno.land/r/pengu/whitelistfactory"
+      2 "gno.land/r/pengu/whitelist"
       2 "gno.land/r/leon/whitelist_wpackagename"
       2 "gno.land/r/lali/greeting"
       2 "gno.land/r/jetrix/firstgnoapp"
       2 "gno.land/r/jemoeder/test"
       2 "gno.land/r/irreverentsimplicity/flippando"
       2 "gno.land/r/helloMuss/muss"
-      2 "gno.land/r/hello/hello"
       2 "gno.land/r/enkianknight/returning"
       2 "gno.land/r/enkianknight/helping"
       2 "gno.land/r/duysygame/test20"
@@ -773,6 +777,7 @@
       1 "gno.land/r/anunnakis/rising"
       1 "gno.land/r/antho_gno/hello"
       1 "gno.land/r/alikarim/hello"
+      1 "gno.land/r/alextest/alextest"
       1 "gno.land/r/alexis/helloo"
       1 "gno.land/r/alexis/hello"
       1 "gno.land/r/Genzo/Genzo"
@@ -780,6 +785,7 @@
       1 "gno.land/r/Chaddi/Chaddi_test"
       1 "gno.land/r/BoomBaby/BoomBaby"
       1 "gno.land/r/Alva/Alva"
+      1 "gno.land/r/AlexTest/AlexTest"
       1 "gno.land/r/Alex/Alex"
       1 "gno.land/r/123/123"
       1 "gno.land/p/zqce/zce"
@@ -842,6 +848,7 @@
       1 "gno.land/p/polllll/polllll"
       1 "gno.land/p/pj/seven"
       1 "gno.land/p/pj/bunny"
+      1 "gno.land/p/pengu/whitelist"
       1 "gno.land/p/noob/noob"
       1 "gno.land/p/nathalie/hello2"
       1 "gno.land/p/namespace/name"
