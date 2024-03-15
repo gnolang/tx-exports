@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-4598
+4615
 ```
 
 ## addpkgs
@@ -298,6 +298,7 @@
       1 "gno.land/r/lopez35/hello"
       1 "gno.land/r/lk/lk"
       1 "gno.land/r/limkortsigf/limkortsigf"
+      1 "gno.land/r/leon/mytoken"
       1 "gno.land/r/leon/counter"
       1 "gno.land/r/leon/addrtostring"
       1 "gno.land/r/lali/greeting2"
@@ -371,6 +372,7 @@
       1 "gno.land/r/demo4/greeting"
       1 "gno.land/r/demo3/counter"
       1 "gno.land/r/demo2/mouss"
+      1 "gno.land/r/demo2/good"
       1 "gno.land/r/demo2/ciph2"
       1 "gno.land/r/demo1566/hallo"
       1 "gno.land/r/demo12/hello"
@@ -645,6 +647,7 @@
       1 "gno.land/r/demo/greeting"
       1 "gno.land/r/demo/graper"
       1 "gno.land/r/demo/gopher"
+      1 "gno.land/r/demo/googl"
       1 "gno.land/r/demo/goo"
       1 "gno.land/r/demo/gntest3"
       1 "gno.land/r/demo/gnotest2"
@@ -782,6 +785,7 @@
       1 "gno.land/r/demo/Alva4"
       1 "gno.land/r/demo/1_b_c"
       1 "gno.land/r/demo/1"
+      1 "gno.land/r/demmo2/hello"
       1 "gno.land/r/delo/test"
       1 "gno.land/r/delo/counter"
       1 "gno.land/r/clockwork/tictactoe1"
@@ -1092,22 +1096,22 @@
      65 "gno.land/r/gnoland/faucet"
      65 "gno.land/r/duysygame/test21"
      53 "gno.land/r/gnoland/blog"
+     27 "gno.land/r/boom/boom"
      26 "gno.land/r/demo/foo20"
      21 "gno.land/r/duysygame/test19"
      20 "gno.land/r/duysyland/erc20"
      19 "gno.land/r/position"
-     19 "gno.land/r/boom/boom"
      16 "gno.land/r/demo/gnoph"
+     11 "gno.land/r/test10/poll"
      10 "gno.land/r/pool"
-      9 "gno.land/r/test10/poll"
       7 "gno.land/r/test/minter_v1"
+      7 "gno.land/r/grc20token/mytoken"
       7 "gno.land/r/demo/skull"
       5 "gno.land/r/foo"
       5 "gno.land/r/bar"
       5 "gno.land/p/demo/realmpackagetest"
       4 "gno.land/r/test4/poll"
       4 "gno.land/r/test2/poll1"
-      4 "gno.land/r/grc20token/mytoken"
       4 "gno.land/r/duysygame/test17"
       4 "gno.land/r/demo3/greeting"
       3 "ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ"
