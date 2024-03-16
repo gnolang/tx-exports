@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-4615
+4617
 ```
 
 ## addpkgs
@@ -1088,7 +1088,7 @@
 
 ## top realm calls
 ```
-   1185 "gno.land/r/demo/minter"
+   1186 "gno.land/r/demo/minter"
     103 "gno.land/r/demo/users"
      94 "gno.land/r/demo/tong"
      87 "gno.land/r/duysygame/test22"
@@ -1102,7 +1102,7 @@
      20 "gno.land/r/duysyland/erc20"
      19 "gno.land/r/position"
      16 "gno.land/r/demo/gnoph"
-     11 "gno.land/r/test10/poll"
+     12 "gno.land/r/test10/poll"
      10 "gno.land/r/pool"
       7 "gno.land/r/test/minter_v1"
       7 "gno.land/r/grc20token/mytoken"
