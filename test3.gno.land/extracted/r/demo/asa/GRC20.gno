@@ -11,7 +11,7 @@ import (
 
 var (
 	asa  *grc20.AdminToken
-	admin std.Address = "g19xw9uzlcr3jefwx6dpmr6c0erg5kc65zlj8r4e"
+	admin std.Address = "g1hqzeju0p0eup9rgxa0pxvyc0y7wnzjrdvppsy5"
 )
 
 func init() {

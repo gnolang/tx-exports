@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-4620
+4631
 ```
 
 ## addpkgs
@@ -26,6 +26,7 @@
       6 "gno.land/r/demo/kazainft"
       6 "gno.land/p/demo2/greeting"
       6 "gno.land/p/demo/teritori/follow"
+      5 "gno.land/r/hello/hello"
       5 "gno.land/r/enki/providing"
       5 "gno.land/r/devx8/hello"
       5 "gno.land/r/demo/whitelistfactory"
@@ -65,7 +66,6 @@
       3 "gno.land/r/oui/seto"
       3 "gno.land/r/nft/bapenft"
       3 "gno.land/r/leon/pollr"
-      3 "gno.land/r/hello/hello"
       3 "gno.land/r/demo/ygf"
       3 "gno.land/r/demo/ydf"
       3 "gno.land/r/demo/was"
@@ -103,6 +103,7 @@
       3 "gno.land/p/TESTY/MEME"
       3 "gno.land/p/AlvaToken/Alva"
       3 "gno.land/p/Alva/Alva"
+      2 "gno.land/r/whatevertest/whatever"
       2 "gno.land/r/wgnot"
       2 "gno.land/r/token/omen"
       2 "gno.land/r/test42/hello42"
@@ -123,6 +124,7 @@
       2 "gno.land/r/jetrix/firstgnoapp"
       2 "gno.land/r/jemoeder/test"
       2 "gno.land/r/irreverentsimplicity/flippando"
+      2 "gno.land/r/hellotest/hellotest"
       2 "gno.land/r/helloMuss/muss"
       2 "gno.land/r/enkianknight/returning"
       2 "gno.land/r/enkianknight/helping"
@@ -262,6 +264,7 @@
       1 "gno.land/r/test/test123"
       1 "gno.land/r/test/poll3"
       1 "gno.land/r/test/panda"
+      1 "gno.land/r/test/mytesthelloworld"
       1 "gno.land/r/test/main"
       1 "gno.land/r/test/lion"
       1 "gno.land/r/test/helloo"
@@ -315,7 +318,10 @@
       1 "gno.land/r/hellototo/hello"
       1 "gno.land/r/hellogoodbye/hellogoodbye"
       1 "gno.land/r/hello_test/hello"
+      1 "gno.land/r/helloTest/helloTest"
+      1 "gno.land/r/helloTest/hello"
       1 "gno.land/r/hello11156/hello11156"
+      1 "gno.land/r/hello/hellotest"
       1 "gno.land/r/hello"
       1 "gno.land/r/hehe"
       1 "gno.land/r/hallo/hallodemo"
