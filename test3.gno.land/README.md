@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-4642
+4669
 ```
 
 ## addpkgs
@@ -41,6 +41,7 @@
       4 "gno.land/r/test/test"
       4 "gno.land/r/test/hello"
       4 "gno.land/r/leon/poll"
+      4 "gno.land/r/digix666/mytoken"
       4 "gno.land/r/demo22/greeting"
       4 "gno.land/r/demo/yep"
       4 "gno.land/r/demo/teritori/follow_2"
@@ -130,6 +131,7 @@
       2 "gno.land/r/enkianknight/helping"
       2 "gno.land/r/duysygame/test20"
       2 "gno.land/r/duysygame/test18"
+      2 "gno.land/r/digix666/whitelistfactory"
       2 "gno.land/r/demo8/hello"
       2 "gno.land/r/demo3/greeting"
       2 "gno.land/r/demo11/hello"
@@ -239,6 +241,7 @@
       1 "gno.land/r/zhrand/hello"
       1 "gno.land/r/xyz/greeting"
       1 "gno.land/r/xcv/foo"
+      1 "gno.land/r/whitelist/DIGIX666"
       1 "gno.land/r/totoslip/hello"
       1 "gno.land/r/tnam0x/test"
       1 "gno.land/r/thomilx/hello"
@@ -296,6 +299,8 @@
       1 "gno.land/r/maleknft/maleknft"
       1 "gno.land/r/malekNFTtoken/malekNFTtoken"
       1 "gno.land/r/malekNFT/malekNFTtoken"
+      1 "gno.land/r/malek/whitelistfactory"
+      1 "gno.land/r/malek/whitelist"
       1 "gno.land/r/malek/test1"
       1 "gno.land/r/malek/hello"
       1 "gno.land/r/lopez35/hello"
@@ -361,6 +366,9 @@
       1 "gno.land/r/duysygame/test10"
       1 "gno.land/r/drutdesign/hello"
       1 "gno.land/r/draftdesign2/hello"
+      1 "gno.land/r/digxi666/whitelist"
+      1 "gno.land/r/digix666/whitlist"
+      1 "gno.land/r/digix666/whitelist"
       1 "gno.land/r/devx9/hello"
       1 "gno.land/r/devx10/hello"
       1 "gno.land/r/devx1/hello"
@@ -471,6 +479,7 @@
       1 "gno.land/r/demo/tigaki"
       1 "gno.land/r/demo/tibuktu"
       1 "gno.land/r/demo/throughyou"
+      1 "gno.land/r/demo/thox"
       1 "gno.land/r/demo/thot"
       1 "gno.land/r/demo/thetoo"
       1 "gno.land/r/demo/thc"
@@ -845,6 +854,8 @@
       1 "gno.land/p/xzx/fgf"
       1 "gno.land/p/xkgjxfkg/dsfisd"
       1 "gno.land/p/winkerl/test"
+      1 "gno.land/p/whitelist/digix666_test"
+      1 "gno.land/p/whitelist/digix666"
       1 "gno.land/p/vasi/moca"
       1 "gno.land/p/tnam0x/test"
       1 "gno.land/p/tictactoe/tictactoe"
@@ -900,6 +911,7 @@
       1 "gno.land/p/michelle/hello2"
       1 "gno.land/p/marbella/hueco/v2"
       1 "gno.land/p/marbella/hueco"
+      1 "gno.land/p/malek/whitelist"
       1 "gno.land/p/long/longtest"
       1 "gno.land/p/lll/ll"
       1 "gno.land/p/leon/whitelist1"
@@ -1101,13 +1113,13 @@
 ```
    1187 "gno.land/r/demo/minter"
     105 "gno.land/r/demo/users"
-     94 "gno.land/r/demo/tong"
+     95 "gno.land/r/demo/tong"
      87 "gno.land/r/duysygame/test22"
      81 "gno.land/r/demo/boards"
      65 "gno.land/r/gnoland/faucet"
      65 "gno.land/r/duysygame/test21"
      53 "gno.land/r/gnoland/blog"
-     27 "gno.land/r/boom/boom"
+     30 "gno.land/r/boom/boom"
      26 "gno.land/r/demo/foo20"
      21 "gno.land/r/duysygame/test19"
      20 "gno.land/r/duysyland/erc20"
@@ -1128,6 +1140,7 @@
       3 "ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ"
       3 "gno.land/r/test11/poll"
       3 "gno.land/r/test/poll3"
+      3 "gno.land/r/malek/whitelistfactory"
       3 "gno.land/r/duysygame/test9"
       3 "gno.land/r/devx/hello"
       3 "gno.land/r/demo/jefft0_test2_boards"
