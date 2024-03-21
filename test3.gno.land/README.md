@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-4669
+4689
 ```
 
 ## addpkgs
@@ -1113,7 +1113,7 @@
 ```
    1187 "gno.land/r/demo/minter"
     105 "gno.land/r/demo/users"
-     95 "gno.land/r/demo/tong"
+     96 "gno.land/r/demo/tong"
      87 "gno.land/r/duysygame/test22"
      81 "gno.land/r/demo/boards"
      65 "gno.land/r/gnoland/faucet"
@@ -1125,7 +1125,7 @@
      20 "gno.land/r/duysyland/erc20"
      19 "gno.land/r/position"
      16 "gno.land/r/demo/gnoph"
-     12 "gno.land/r/test10/poll"
+     15 "gno.land/r/test10/poll"
      10 "gno.land/r/pool"
       7 "gno.land/r/test/minter_v1"
       7 "gno.land/r/grc20token/mytoken"
