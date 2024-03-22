@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-4689
+4699
 ```
 
 ## addpkgs
@@ -148,6 +148,7 @@
       2 "gno.land/r/demo/soju"
       2 "gno.land/r/demo/ripl"
       2 "gno.land/r/demo/pukika"
+      2 "gno.land/r/demo/nested/path/example"
       2 "gno.land/r/demo/keyboardvvorrier"
       2 "gno.land/r/demo/james"
       2 "gno.land/r/demo/honey"
@@ -806,6 +807,7 @@
       1 "gno.land/r/demmo2/hello"
       1 "gno.land/r/delo/test"
       1 "gno.land/r/delo/counter"
+      1 "gno.land/r/cvcvcv/hello"
       1 "gno.land/r/clockwork/tictactoe1"
       1 "gno.land/r/chaddi/chaddi"
       1 "gno.land/r/bugswe/bugswe"
@@ -1121,11 +1123,11 @@
      53 "gno.land/r/gnoland/blog"
      30 "gno.land/r/boom/boom"
      26 "gno.land/r/demo/foo20"
+     22 "gno.land/r/test10/poll"
      21 "gno.land/r/duysygame/test19"
      20 "gno.land/r/duysyland/erc20"
      19 "gno.land/r/position"
      16 "gno.land/r/demo/gnoph"
-     15 "gno.land/r/test10/poll"
      10 "gno.land/r/pool"
       7 "gno.land/r/test/minter_v1"
       7 "gno.land/r/grc20token/mytoken"
