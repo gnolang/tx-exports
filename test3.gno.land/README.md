@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-4699
+4733
 ```
 
 ## addpkgs
@@ -26,6 +26,7 @@
       6 "gno.land/r/demo/kazainft"
       6 "gno.land/p/demo2/greeting"
       6 "gno.land/p/demo/teritori/follow"
+      5 "gno.land/r/tokenno/tokenno"
       5 "gno.land/r/hello/hello"
       5 "gno.land/r/enki/providing"
       5 "gno.land/r/devx8/hello"
@@ -34,6 +35,8 @@
       5 "gno.land/r/demo/hyperborea"
       5 "gno.land/r/demo/hello"
       5 "gno.land/r/demo/follow"
+      5 "gno.land/r/defianon/test"
+      5 "gno.land/r/32/bv"
       5 "gno.land/p/test10/hello"
       5 "gno.land/p/demo/whitelist"
       5 "gno.land/p/demo/follow"
@@ -106,6 +109,8 @@
       3 "gno.land/p/Alva/Alva"
       2 "gno.land/r/whatevertest/whatever"
       2 "gno.land/r/wgnot"
+      2 "gno.land/r/tokenpl/tokenpl"
+      2 "gno.land/r/tokenPop/tokenPop"
       2 "gno.land/r/token/omen"
       2 "gno.land/r/test42/hello42"
       2 "gno.land/r/test14/hello"
@@ -116,6 +121,7 @@
       2 "gno.land/r/stuyk/userinvokes4"
       2 "gno.land/r/rozaser/blackpink"
       2 "gno.land/r/rozaser/Blackpink"
+      2 "gno.land/r/planb/helloworld"
       2 "gno.land/r/pengu/whitelistfactory"
       2 "gno.land/r/pengu/whitelist"
       2 "gno.land/r/maleknft/maleknfttoken"
@@ -287,6 +293,7 @@
       1 "gno.land/r/rawr/counter"
       1 "gno.land/r/qwe"
       1 "gno.land/r/projects/token"
+      1 "gno.land/r/planb/hello"
       1 "gno.land/r/nft/kazainft"
       1 "gno.land/r/nastyqueen/hello"
       1 "gno.land/r/namespace/seto"
@@ -317,6 +324,7 @@
       1 "gno.land/r/kryzzz/hello"
       1 "gno.land/r/kennethy/hello"
       1 "gno.land/r/kedover/kedover"
+      1 "gno.land/r/ju/oiu"
       1 "gno.land/r/jon/greeting"
       1 "gno.land/r/jhkjlhjkhlk/1"
       1 "gno.land/r/jetrix/hello"
@@ -807,6 +815,10 @@
       1 "gno.land/r/demmo2/hello"
       1 "gno.land/r/delo/test"
       1 "gno.land/r/delo/counter"
+      1 "gno.land/r/defianon/testing"
+      1 "gno.land/r/defianon/posted"
+      1 "gno.land/r/defianon/net3"
+      1 "gno.land/r/defianon/firsttry"
       1 "gno.land/r/cvcvcv/hello"
       1 "gno.land/r/clockwork/tictactoe1"
       1 "gno.land/r/chaddi/chaddi"
@@ -1123,7 +1135,7 @@
      53 "gno.land/r/gnoland/blog"
      30 "gno.land/r/boom/boom"
      26 "gno.land/r/demo/foo20"
-     22 "gno.land/r/test10/poll"
+     23 "gno.land/r/test10/poll"
      21 "gno.land/r/duysygame/test19"
      20 "gno.land/r/duysyland/erc20"
      19 "gno.land/r/position"
