@@ -11,12 +11,12 @@ import (
 
 var (
 	grass  *grc20.AdminToken
-	admin std.Address = "g148vmqxzgp4yc996pasredy3v9sw8sxzsgem0qv"
+	admin std.Address = "g10jtus48tdlp93l9jw9q0tws5jh7gmpjdtyqkxh"
 )
 
 func init() {
 	grass = grc20.NewAdminToken("grassToken", "grass", 6)
-	grass.Mint(admin, 2443000) // @administrator
+	grass.Mint(admin, 1000000000) // @administrator
 }
 
 // method proxies as public functions.
