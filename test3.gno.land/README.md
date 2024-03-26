@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-4756
+4760
 ```
 
 ## addpkgs
@@ -1134,7 +1134,7 @@
      65 "gno.land/r/gnoland/faucet"
      65 "gno.land/r/duysygame/test21"
      53 "gno.land/r/gnoland/blog"
-     37 "gno.land/r/test10/poll"
+     39 "gno.land/r/test10/poll"
      32 "gno.land/r/boom/boom"
      26 "gno.land/r/demo/foo20"
      21 "gno.land/r/duysygame/test19"
