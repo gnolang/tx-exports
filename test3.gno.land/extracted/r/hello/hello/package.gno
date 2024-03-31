@@ -1,5 +1,5 @@
 package hello
 
-func Render() {
-  return "Hello World!"
+func Render(path string) string {
+	return "Hello World!"
 }

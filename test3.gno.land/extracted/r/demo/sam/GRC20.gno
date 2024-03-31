@@ -1,4 +1,4 @@
-package grass
+package sam
 
 import (
 	"std"
@@ -10,13 +10,13 @@ import (
 )
 
 var (
-	grass  *grc20.AdminToken
-	admin std.Address = "g10jtus48tdlp93l9jw9q0tws5jh7gmpjdtyqkxh"
+	sam  *grc20.AdminToken
+	admin std.Address = "g13hsacd5wjejd9r4p7gp49psyl5w3jqw0x35cxj"
 )
 
 func init() {
-	grass = grc20.NewAdminToken("grassToken", "grass", 6)
-	grass.Mint(admin, 1000000000) // @administrator
+	sam = grc20.NewAdminToken("SamToken", "SAM", 6)
+	sam.Mint(admin, 1000000000) // @administrator
 }
 
 // method proxies as public functions.
@@ -25,11 +25,11 @@ func init() {
 // getters.
 
 func TotalSupply() uint64 {
-	return grass.TotalSupply()
+	return sam.TotalSupply()
 }
 
 func BalanceOf(owner users.AddressOrName) uint64 {
-	balance, err := grass.BalanceOf(owner.Resolve())
+	balance, err := sam.BalanceOf(owner.Resolve())
 	if err != nil {
 		panic(err)
 	}
@@ -37,7 +37,7 @@ func BalanceOf(owner users.AddressOrName) uint64 {
 }
 
 func Allowance(owner, spender users.AddressOrName) uint64 {
-	allowance, err := grass.Allowance(owner.Resolve(), spender.Resolve())
+	allowance, err := sam.Allowance(owner.Resolve(), spender.Resolve())
 	if err != nil {
 		panic(err)
 	}
@@ -48,17 +48,17 @@ func Allowance(owner, spender users.AddressOrName) uint64 {
 
 func Transfer(to users.AddressOrName, amount uint64) {
 	caller := std.GetOrigCaller()
-	grass.Transfer(caller, to.Resolve(), amount)
+	sam.Transfer(caller, to.Resolve(), amount)
 }
 
 func Approve(spender users.AddressOrName, amount uint64) {
 	caller := std.GetOrigCaller()
-	grass.Approve(caller, spender.Resolve(), amount)
+	sam.Approve(caller, spender.Resolve(), amount)
 }
 
 func TransferFrom(from, to users.AddressOrName, amount uint64) {
 	caller := std.GetOrigCaller()
-	grass.TransferFrom(caller, from.Resolve(), to.Resolve(), amount)
+	sam.TransferFrom(caller, from.Resolve(), to.Resolve(), amount)
 }
 
 // administration.
@@ -66,13 +66,13 @@ func TransferFrom(from, to users.AddressOrName, amount uint64) {
 func Mint(address users.AddressOrName, amount uint64) {
 	caller := std.GetOrigCaller()
 	assertIsAdmin(caller)
-	grass.Mint(address.Resolve(), amount)
+	sam.Mint(address.Resolve(), amount)
 }
 
 func Burn(address users.AddressOrName, amount uint64) {
 	caller := std.GetOrigCaller()
 	assertIsAdmin(caller)
-	grass.Burn(address.Resolve(), amount)
+	sam.Burn(address.Resolve(), amount)
 }
 
 // render.
@@ -84,10 +84,10 @@ func Render(path string) string {
 
 	switch {
 	case path == "":
-		return grass.RenderHome()
+		return sam.RenderHome()
 	case c == 2 && parts[0] == "balance":
 		owner := users.AddressOrName(parts[1])
-		balance, _ := grass.BalanceOf(owner.Resolve())
+		balance, _ := sam.BalanceOf(owner.Resolve())
 		return ufmt.Sprintf("%d\n", balance)
 	default:
 		return "404\n"

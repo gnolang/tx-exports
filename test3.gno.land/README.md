@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-4772
+4790
 ```
 
 ## addpkgs
@@ -144,6 +144,7 @@
       2 "gno.land/r/demo/yty"
       2 "gno.land/r/demo/yfd"
       2 "gno.land/r/demo/ybv"
+      2 "gno.land/r/demo/yas"
       2 "gno.land/r/demo/wonka"
       2 "gno.land/r/demo/whitelistFactory"
       2 "gno.land/r/demo/users"
@@ -443,9 +444,10 @@
       1 "gno.land/r/demo/ycv"
       1 "gno.land/r/demo/ybn"
       1 "gno.land/r/demo/yayy"
-      1 "gno.land/r/demo/yas"
+      1 "gno.land/r/demo/yaso"
       1 "gno.land/r/demo/yah"
       1 "gno.land/r/demo/xxx"
+      1 "gno.land/r/demo/xois"
       1 "gno.land/r/demo/wynn"
       1 "gno.land/r/demo/wompwomp"
       1 "gno.land/r/demo/wjk"
@@ -528,6 +530,7 @@
       1 "gno.land/r/demo/seoul"
       1 "gno.land/r/demo/sato"
       1 "gno.land/r/demo/samewere"
+      1 "gno.land/r/demo/sam"
       1 "gno.land/r/demo/safer"
       1 "gno.land/r/demo/saf"
       1 "gno.land/r/demo/sadie"
@@ -554,6 +557,7 @@
       1 "gno.land/r/demo/plaalala"
       1 "gno.land/r/demo/pitjongi"
       1 "gno.land/r/demo/pisser"
+      1 "gno.land/r/demo/pinty"
       1 "gno.land/r/demo/pintjongi"
       1 "gno.land/r/demo/periscope"
       1 "gno.land/r/demo/peezus"
@@ -589,6 +593,7 @@
       1 "gno.land/r/demo/memess"
       1 "gno.land/r/demo/meme"
       1 "gno.land/r/demo/maximus"
+      1 "gno.land/r/demo/mars"
       1 "gno.land/r/demo/madeyou"
       1 "gno.land/r/demo/mad"
       1 "gno.land/r/demo/lukoil2"
@@ -703,7 +708,9 @@
       1 "gno.land/r/demo/fret2"
       1 "gno.land/r/demo/fret"
       1 "gno.land/r/demo/foo"
+      1 "gno.land/r/demo/fish"
       1 "gno.land/r/demo/first"
+      1 "gno.land/r/demo/etsh"
       1 "gno.land/r/demo/emma"
       1 "gno.land/r/demo/egyegy"
       1 "gno.land/r/demo/eed"
@@ -734,6 +741,7 @@
       1 "gno.land/r/demo/cyril"
       1 "gno.land/r/demo/csabika"
       1 "gno.land/r/demo/counterran"
+      1 "gno.land/r/demo/coco"
       1 "gno.land/r/demo/cmg"
       1 "gno.land/r/demo/cipher"
       1 "gno.land/r/demo/cichy"
@@ -1126,7 +1134,7 @@
 
 ## top realm calls
 ```
-   1190 "gno.land/r/demo/minter"
+   1194 "gno.land/r/demo/minter"
     105 "gno.land/r/demo/users"
      96 "gno.land/r/demo/tong"
      87 "gno.land/r/duysygame/test22"
