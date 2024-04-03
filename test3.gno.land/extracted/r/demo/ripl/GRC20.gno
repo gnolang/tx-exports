@@ -1,4 +1,4 @@
-package RIPL
+package ripl
 
 import (
 	"std"
@@ -10,13 +10,13 @@ import (
 )
 
 var (
-	RIPL  *grc20.AdminToken
-	admin std.Address = "g1mdgdlen0nzzcycl7fq6dwyqq9qvlnm06gx5h9p"
+	ripl  *grc20.AdminToken
+	admin std.Address = "g1jcsmkq74jr6uxfpfcytjvruyuqje7lqk2zfxxp"
 )
 
 func init() {
-	RIPL = grc20.NewAdminToken("RIPLToken", "RIPL", 6)
-	RIPL.Mint(admin, 1000000000) // @administrator
+	ripl = grc20.NewAdminToken("RiplToken", "RIPL", 6)
+	ripl.Mint(admin, 1000000000) // @administrator
 }
 
 // method proxies as public functions.
@@ -25,11 +25,11 @@ func init() {
 // getters.
 
 func TotalSupply() uint64 {
-	return RIPL.TotalSupply()
+	return ripl.TotalSupply()
 }
 
 func BalanceOf(owner users.AddressOrName) uint64 {
-	balance, err := RIPL.BalanceOf(owner.Resolve())
+	balance, err := ripl.BalanceOf(owner.Resolve())
 	if err != nil {
 		panic(err)
 	}
@@ -37,7 +37,7 @@ func BalanceOf(owner users.AddressOrName) uint64 {
 }
 
 func Allowance(owner, spender users.AddressOrName) uint64 {
-	allowance, err := RIPL.Allowance(owner.Resolve(), spender.Resolve())
+	allowance, err := ripl.Allowance(owner.Resolve(), spender.Resolve())
 	if err != nil {
 		panic(err)
 	}
@@ -48,17 +48,17 @@ func Allowance(owner, spender users.AddressOrName) uint64 {
 
 func Transfer(to users.AddressOrName, amount uint64) {
 	caller := std.GetOrigCaller()
-	RIPL.Transfer(caller, to.Resolve(), amount)
+	ripl.Transfer(caller, to.Resolve(), amount)
 }
 
 func Approve(spender users.AddressOrName, amount uint64) {
 	caller := std.GetOrigCaller()
-	RIPL.Approve(caller, spender.Resolve(), amount)
+	ripl.Approve(caller, spender.Resolve(), amount)
 }
 
 func TransferFrom(from, to users.AddressOrName, amount uint64) {
 	caller := std.GetOrigCaller()
-	RIPL.TransferFrom(caller, from.Resolve(), to.Resolve(), amount)
+	ripl.TransferFrom(caller, from.Resolve(), to.Resolve(), amount)
 }
 
 // administration.
@@ -66,13 +66,13 @@ func TransferFrom(from, to users.AddressOrName, amount uint64) {
 func Mint(address users.AddressOrName, amount uint64) {
 	caller := std.GetOrigCaller()
 	assertIsAdmin(caller)
-	RIPL.Mint(address.Resolve(), amount)
+	ripl.Mint(address.Resolve(), amount)
 }
 
 func Burn(address users.AddressOrName, amount uint64) {
 	caller := std.GetOrigCaller()
 	assertIsAdmin(caller)
-	RIPL.Burn(address.Resolve(), amount)
+	ripl.Burn(address.Resolve(), amount)
 }
 
 // render.
@@ -84,10 +84,10 @@ func Render(path string) string {
 
 	switch {
 	case path == "":
-		return RIPL.RenderHome()
+		return ripl.RenderHome()
 	case c == 2 && parts[0] == "balance":
 		owner := users.AddressOrName(parts[1])
-		balance, _ := RIPL.BalanceOf(owner.Resolve())
+		balance, _ := ripl.BalanceOf(owner.Resolve())
 		return ufmt.Sprintf("%d\n", balance)
 	default:
 		return "404\n"
