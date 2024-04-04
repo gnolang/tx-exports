@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-4826
+4835
 ```
 
 ## addpkgs
@@ -250,6 +250,7 @@
       1 "gno.land/r/xyz/greeting"
       1 "gno.land/r/xcv/foo"
       1 "gno.land/r/whitelist/DIGIX666"
+      1 "gno.land/r/try/gloomajin_001"
       1 "gno.land/r/truongkai/truong"
       1 "gno.land/r/totoslip/hello"
       1 "gno.land/r/tnam0x/test"
