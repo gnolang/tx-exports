@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-4835
+4842
 ```
 
 ## addpkgs
@@ -18,6 +18,7 @@
       8 "gno.land/r/demo/demo"
       8 "gno.land/p/duysyland/duysytoken"
       8 "gno.land/p/duysygame/gamedemo"
+      7 "gno.land/r/test/test"
       7 "gno.land/r/demo/GemCoin"
       7 "gno.land/p/test/test"
       7 "gno.land/p/demo5/premier"
@@ -41,7 +42,6 @@
       5 "gno.land/p/demo/whitelist"
       5 "gno.land/p/demo/follow"
       4 "gno.land/r/token/ethtoken"
-      4 "gno.land/r/test/test"
       4 "gno.land/r/test/hello"
       4 "gno.land/r/leon/poll"
       4 "gno.land/r/digix666/mytoken"
@@ -90,6 +90,7 @@
       3 "gno.land/r/demo/BTR"
       3 "gno.land/r/demo/Alva"
       3 "gno.land/r/asdsd/asdsd"
+      3 "gno.land/r/Gloomajin/TRY_001"
       3 "gno.land/r/Demo/Bad"
       3 "gno.land/p/tet/hello"
       3 "gno.land/p/stuyk/test"
