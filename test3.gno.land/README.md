@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-4902
+4986
 ```
 
 ## addpkgs
@@ -70,6 +70,7 @@
       3 "gno.land/r/oui/seto"
       3 "gno.land/r/nft/bapenft"
       3 "gno.land/r/leon/pollr"
+      3 "gno.land/r/feedback/feedback"
       3 "gno.land/r/demo/ygf"
       3 "gno.land/r/demo/ydf"
       3 "gno.land/r/demo/was"
@@ -134,6 +135,9 @@
       2 "gno.land/r/irreverentsimplicity/flippando"
       2 "gno.land/r/hellotest/hellotest"
       2 "gno.land/r/helloMuss/muss"
+      2 "gno.land/r/goodbyetest/goodbyetest"
+      2 "gno.land/r/feedback/simplefeedback"
+      2 "gno.land/r/feedback/newfeedback"
       2 "gno.land/r/enkianknight/returning"
       2 "gno.land/r/enkianknight/helping"
       2 "gno.land/r/duysygame/test20"
@@ -269,6 +273,7 @@
       1 "gno.land/r/test13/hello"
       1 "gno.land/r/test123/test123"
       1 "gno.land/r/test12/hello"
+      1 "gno.land/r/test110/hello"
       1 "gno.land/r/test11/poll"
       1 "gno.land/r/test11/hello"
       1 "gno.land/r/test10/poll"
@@ -351,6 +356,7 @@
       1 "gno.land/r/guzelk/fairy"
       1 "gno.land/r/grc721token/myNFTtoken"
       1 "gno.land/r/grc20token/grc20token"
+      1 "gno.land/r/goodbye/goodbyetest"
       1 "gno.land/r/gnomerna/hello"
       1 "gno.land/r/gno/hello"
       1 "gno.land/r/gbenni/hello"
@@ -573,6 +579,7 @@
       1 "gno.land/r/demo/ook"
       1 "gno.land/r/demo/oof"
       1 "gno.land/r/demo/omen"
+      1 "gno.land/r/demo/okaypriv"
       1 "gno.land/r/demo/ofwas"
       1 "gno.land/r/demo/ocsi"
       1 "gno.land/r/demo/nowmust"
@@ -1141,20 +1148,21 @@
 ```
    1197 "gno.land/r/demo/minter"
     105 "gno.land/r/demo/users"
-    100 "gno.land/r/demo/tong"
+    101 "gno.land/r/demo/tong"
      87 "gno.land/r/duysygame/test22"
      81 "gno.land/r/demo/boards"
      65 "gno.land/r/gnoland/faucet"
      65 "gno.land/r/duysygame/test21"
      53 "gno.land/r/gnoland/blog"
-     47 "gno.land/r/test10/poll"
-     46 "gno.land/r/boom/boom"
+     49 "gno.land/r/test10/poll"
+     47 "gno.land/r/boom/boom"
      26 "gno.land/r/demo/foo20"
      21 "gno.land/r/duysygame/test19"
      20 "gno.land/r/duysyland/erc20"
      19 "gno.land/r/position"
      16 "gno.land/r/demo/gnoph"
      10 "gno.land/r/pool"
+      9 "gno.land/r/feedback/feedback"
       7 "gno.land/r/test/minter_v1"
       7 "gno.land/r/grc20token/mytoken"
       7 "gno.land/r/demo/skull"
@@ -1181,6 +1189,8 @@
       2 "gno.land/r/kennethy/hello"
       2 "gno.land/r/ilker/counter"
       2 "gno.land/r/gno/hello"
+      2 "gno.land/r/feedback/simplefeedback"
+      2 "gno.land/r/feedback/newfeedback"
       2 "gno.land/r/duysygame/test6"
       2 "gno.land/r/duysygame/test5"
       2 "gno.land/r/duysygame/test18"
