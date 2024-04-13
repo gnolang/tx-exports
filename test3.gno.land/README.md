@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-5019
+5043
 ```
 
 ## addpkgs
@@ -262,6 +262,7 @@
       1 "gno.land/r/totoslip/hello"
       1 "gno.land/r/tnam0x/test"
       1 "gno.land/r/thomilx/hello"
+      1 "gno.land/r/testx/hello"
       1 "gno.land/r/tests/tictactoe"
       1 "gno.land/r/test99/me22"
       1 "gno.land/r/test7/hello"
@@ -269,6 +270,7 @@
       1 "gno.land/r/test42/taoshi"
       1 "gno.land/r/test4/poll"
       1 "gno.land/r/test4/hello"
+      1 "gno.land/r/test30/hello"
       1 "gno.land/r/test23/hello"
       1 "gno.land/r/test21/hello"
       1 "gno.land/r/test20/hello"
@@ -1149,14 +1151,14 @@
 
 ## top realm calls
 ```
-   1200 "gno.land/r/demo/minter"
+   1201 "gno.land/r/demo/minter"
     105 "gno.land/r/demo/users"
     101 "gno.land/r/demo/tong"
      87 "gno.land/r/duysygame/test22"
      81 "gno.land/r/demo/boards"
      65 "gno.land/r/gnoland/faucet"
      65 "gno.land/r/duysygame/test21"
-     56 "gno.land/r/test10/poll"
+     60 "gno.land/r/test10/poll"
      53 "gno.land/r/gnoland/blog"
      48 "gno.land/r/boom/boom"
      26 "gno.land/r/demo/foo20"
@@ -1164,8 +1166,8 @@
      20 "gno.land/r/duysyland/erc20"
      19 "gno.land/r/position"
      16 "gno.land/r/demo/gnoph"
+     12 "gno.land/r/feedback/simplefeedback"
      10 "gno.land/r/pool"
-      9 "gno.land/r/feedback/simplefeedback"
       9 "gno.land/r/feedback/feedback"
       7 "gno.land/r/test/minter_v1"
       7 "gno.land/r/grc20token/mytoken"
@@ -1178,6 +1180,7 @@
       4 "gno.land/r/duysygame/test17"
       4 "gno.land/r/demo3/greeting"
       3 "ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ"
+      3 "gno.land/r/test20/hello"
       3 "gno.land/r/test11/poll"
       3 "gno.land/r/test/poll3"
       3 "gno.land/r/malek/whitelistfactory"
@@ -1205,7 +1208,6 @@
       2 "gno.land/r/demo/kazai"
       2 "gno.land/r/demo/gemcoin"
       2 "g14qvahvnnllzwl9ehn3mkph248uapsehwgfe4pt"
-      1 "gno.land/r/test20/hello"
       1 "gno.land/r/test1/greetings"
       1 "gno.land/r/stuyk/userinvokes3"
       1 "gno.land/r/rawr/counter"
@@ -1245,6 +1247,7 @@
       1 "gno.land/p/marbella/hueco/v2"
       1 "gno.land/p/demo/hiba"
       1 "gno.land/p/demo/hello"
+      1 "gno.land/kazai/user"
       1 "gno.land/e/marbella/huecoco"
       1 "efg"
       1 "asd321"

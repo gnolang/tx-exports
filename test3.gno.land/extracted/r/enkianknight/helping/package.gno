@@ -1,13 +1,5 @@
-package helping
+package hello
 
-var (  
-  helping string
-)
- 
- func SetHelping(msg string) {
-  helping=msg
-}
-
-func GetHelping() string {
-  return helping
+func Render(path string) string {
+  return "Hello World!"
 }
