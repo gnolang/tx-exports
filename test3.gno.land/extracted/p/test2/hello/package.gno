@@ -1,13 +1,5 @@
 package hello
 
-var {
-  hello string
-}
-
-func SetHello(msg string){
-  hello = msg
-}
-
-func GetHello() string {
-  return hello
+func Render(path string) string {
+  return "Hello World!"
 }
