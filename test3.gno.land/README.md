@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-5045
+5050
 ```
 
 ## addpkgs
@@ -190,6 +190,7 @@
       2 "gno.land/r/danielx/wow"
       2 "gno.land/r/asdsd/asdsds"
       2 "gno.land/r/asd/hello"
+      2 "gno.land/r/ars/counter"
       2 "gno.land/r/anunnakis/sailing"
       2 "gno.land/r/Test/demo"
       2 "gno.land/r/Alva/Alvadama"
@@ -1234,6 +1235,7 @@
       1 "gno.land/r/demo/jefft0_test1_boards"
       1 "gno.land/r/demo/james"
       1 "gno.land/r/demo/hoho12345678901234567890"
+      1 "gno.land/r/demo/hello"
       1 "gno.land/r/demo/greeting"
       1 "gno.land/r/demo/follow"
       1 "gno.land/r/demo/faucet"
