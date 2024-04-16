@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-5050
+5066
 ```
 
 ## addpkgs
@@ -1152,7 +1152,7 @@
 
 ## top realm calls
 ```
-   1201 "gno.land/r/demo/minter"
+   1203 "gno.land/r/demo/minter"
     105 "gno.land/r/demo/users"
     101 "gno.land/r/demo/tong"
      87 "gno.land/r/duysygame/test22"
@@ -1166,8 +1166,8 @@
      21 "gno.land/r/duysygame/test19"
      20 "gno.land/r/duysyland/erc20"
      19 "gno.land/r/position"
+     16 "gno.land/r/feedback/simplefeedback"
      16 "gno.land/r/demo/gnoph"
-     12 "gno.land/r/feedback/simplefeedback"
      10 "gno.land/r/pool"
       9 "gno.land/r/feedback/feedback"
       7 "gno.land/r/test/minter_v1"
@@ -1178,6 +1178,7 @@
       5 "gno.land/p/demo/realmpackagetest"
       4 "gno.land/r/test4/poll"
       4 "gno.land/r/test2/poll1"
+      4 "gno.land/r/ilker2/hello"
       4 "gno.land/r/duysygame/test17"
       4 "gno.land/r/demo3/greeting"
       3 "ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ"
@@ -1185,7 +1186,6 @@
       3 "gno.land/r/test11/poll"
       3 "gno.land/r/test/poll3"
       3 "gno.land/r/malek/whitelistfactory"
-      3 "gno.land/r/ilker2/hello"
       3 "gno.land/r/duysygame/test9"
       3 "gno.land/r/devx/hello"
       3 "gno.land/r/demo/jefft0_test2_boards"
