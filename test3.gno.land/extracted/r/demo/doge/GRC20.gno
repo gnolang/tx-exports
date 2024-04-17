@@ -11,12 +11,12 @@ import (
 
 var (
 	doge  *grc20.AdminToken
-	admin std.Address = "g16q43q86hleg3ggavtv08rnh5nytahpkga7ts7r"
+	admin std.Address = "g1dgztjqjvaa6fh7qqwewhqsnc9ny2dz33yllk8d"
 )
 
 func init() {
-	doge = grc20.NewAdminToken("dogeToken", "doge", 6)
-	doge.Mint(admin, 1000000000) // @administrator
+	doge = grc20.NewAdminToken("doge", "doge", 6)
+	doge.Mint(admin, 4200000000) // @administrator
 }
 
 // method proxies as public functions.

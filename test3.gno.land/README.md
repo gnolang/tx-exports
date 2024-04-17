@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-5066
+5079
 ```
 
 ## addpkgs
@@ -25,6 +25,7 @@
       7 "gno.land/p/GRXToken/GRX"
       6 "gno.land/r/grc20token/mytoken"
       6 "gno.land/r/demo/kazainft"
+      6 "gno.land/r/demo/hello"
       6 "gno.land/p/demo2/greeting"
       6 "gno.land/p/demo/teritori/follow"
       5 "gno.land/r/tokenno/tokenno"
@@ -34,7 +35,6 @@
       5 "gno.land/r/demo/whitelistfactory"
       5 "gno.land/r/demo/james/nft"
       5 "gno.land/r/demo/hyperborea"
-      5 "gno.land/r/demo/hello"
       5 "gno.land/r/demo/follow"
       5 "gno.land/r/defianon/test"
       5 "gno.land/r/32/bv"
@@ -284,6 +284,7 @@
       1 "gno.land/r/test11/poll"
       1 "gno.land/r/test11/hello"
       1 "gno.land/r/test10/poll"
+      1 "gno.land/r/test10/hello"
       1 "gno.land/r/test1/test"
       1 "gno.land/r/test1/poll1"
       1 "gno.land/r/test1/greeting"
@@ -1163,16 +1164,17 @@
      53 "gno.land/r/gnoland/blog"
      48 "gno.land/r/boom/boom"
      26 "gno.land/r/demo/foo20"
+     21 "gno.land/r/feedback/simplefeedback"
      21 "gno.land/r/duysygame/test19"
      20 "gno.land/r/duysyland/erc20"
      19 "gno.land/r/position"
-     16 "gno.land/r/feedback/simplefeedback"
      16 "gno.land/r/demo/gnoph"
      10 "gno.land/r/pool"
       9 "gno.land/r/feedback/feedback"
       7 "gno.land/r/test/minter_v1"
       7 "gno.land/r/grc20token/mytoken"
       7 "gno.land/r/demo/skull"
+      6 "gno.land/r/test20/hello"
       5 "gno.land/r/foo"
       5 "gno.land/r/bar"
       5 "gno.land/p/demo/realmpackagetest"
@@ -1182,7 +1184,6 @@
       4 "gno.land/r/duysygame/test17"
       4 "gno.land/r/demo3/greeting"
       3 "ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ"
-      3 "gno.land/r/test20/hello"
       3 "gno.land/r/test11/poll"
       3 "gno.land/r/test/poll3"
       3 "gno.land/r/malek/whitelistfactory"
