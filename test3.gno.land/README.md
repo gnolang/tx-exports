@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-5079
+5112
 ```
 
 ## addpkgs
@@ -258,6 +258,7 @@
       1 "gno.land/r/xyz/greeting"
       1 "gno.land/r/xcv/foo"
       1 "gno.land/r/whitelist/DIGIX666"
+      1 "gno.land/r/vadymspace/hello"
       1 "gno.land/r/try/gloomajin_001"
       1 "gno.land/r/truongkai/truong"
       1 "gno.land/r/totoslip/hello"
@@ -272,6 +273,7 @@
       1 "gno.land/r/test4/poll"
       1 "gno.land/r/test4/hello"
       1 "gno.land/r/test30/hello"
+      1 "gno.land/r/test24/hello"
       1 "gno.land/r/test23/hello"
       1 "gno.land/r/test21/hello"
       1 "gno.land/r/test20/hello"
@@ -1155,20 +1157,21 @@
 ```
    1203 "gno.land/r/demo/minter"
     105 "gno.land/r/demo/users"
-    101 "gno.land/r/demo/tong"
+    102 "gno.land/r/demo/tong"
      87 "gno.land/r/duysygame/test22"
      81 "gno.land/r/demo/boards"
+     67 "gno.land/r/test10/poll"
      65 "gno.land/r/gnoland/faucet"
      65 "gno.land/r/duysygame/test21"
-     60 "gno.land/r/test10/poll"
      53 "gno.land/r/gnoland/blog"
      48 "gno.land/r/boom/boom"
      26 "gno.land/r/demo/foo20"
-     21 "gno.land/r/feedback/simplefeedback"
+     23 "gno.land/r/feedback/simplefeedback"
      21 "gno.land/r/duysygame/test19"
      20 "gno.land/r/duysyland/erc20"
      19 "gno.land/r/position"
      16 "gno.land/r/demo/gnoph"
+     12 "gno.land/r/test24/hello"
      10 "gno.land/r/pool"
       9 "gno.land/r/feedback/feedback"
       7 "gno.land/r/test/minter_v1"
@@ -1210,6 +1213,7 @@
       2 "gno.land/r/demo/kazai"
       2 "gno.land/r/demo/gemcoin"
       2 "g14qvahvnnllzwl9ehn3mkph248uapsehwgfe4pt"
+      1 "gno.land/r/vadymspace/hello"
       1 "gno.land/r/test1/greetings"
       1 "gno.land/r/stuyk/userinvokes3"
       1 "gno.land/r/rawr/counter"

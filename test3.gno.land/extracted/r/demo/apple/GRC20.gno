@@ -11,11 +11,11 @@ import (
 
 var (
 	apple  *grc20.AdminToken
-	admin std.Address = "g1c4pdj3lx0t8n9k5yay2gnw2ewkxxdxhnknnvqz"
+	admin std.Address = "g1hqzeju0p0eup9rgxa0pxvyc0y7wnzjrdvppsy5"
 )
 
 func init() {
-	apple = grc20.NewAdminToken("Apple", "APPLE", 6)
+	apple = grc20.NewAdminToken("appleToken", "apple", 6)
 	apple.Mint(admin, 1000000000) // @administrator
 }
 
