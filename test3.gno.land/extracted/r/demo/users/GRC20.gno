@@ -1,4 +1,4 @@
-package foo
+package test
 
 import (
 	"std"
@@ -10,13 +10,13 @@ import (
 )
 
 var (
-	foo  *grc20.AdminToken
-	admin std.Address = "g14nddjdkaqh3r84rs69txay6vqt8e4mf730v5ym"
+	test  *grc20.AdminToken
+	admin std.Address = "g1fq4akfudp3aenz9kmkvh4pf6sr0yvxcr3eq703"
 )
 
 func init() {
-	foo = grc20.NewAdminToken("FooToken", "FOO", 6)
-	foo.Mint(admin, 1000000000) // @administrator
+	test = grc20.NewAdminToken("testToken", "test", 6)
+	test.Mint(admin, 55555555555555) // @administrator
 }
 
 // method proxies as public functions.
@@ -25,11 +25,11 @@ func init() {
 // getters.
 
 func TotalSupply() uint64 {
-	return foo.TotalSupply()
+	return test.TotalSupply()
 }
 
 func BalanceOf(owner users.AddressOrName) uint64 {
-	balance, err := foo.BalanceOf(owner.Resolve())
+	balance, err := test.BalanceOf(owner.Resolve())
 	if err != nil {
 		panic(err)
 	}
@@ -37,7 +37,7 @@ func BalanceOf(owner users.AddressOrName) uint64 {
 }
 
 func Allowance(owner, spender users.AddressOrName) uint64 {
-	allowance, err := foo.Allowance(owner.Resolve(), spender.Resolve())
+	allowance, err := test.Allowance(owner.Resolve(), spender.Resolve())
 	if err != nil {
 		panic(err)
 	}
@@ -48,17 +48,17 @@ func Allowance(owner, spender users.AddressOrName) uint64 {
 
 func Transfer(to users.AddressOrName, amount uint64) {
 	caller := std.GetOrigCaller()
-	foo.Transfer(caller, to.Resolve(), amount)
+	test.Transfer(caller, to.Resolve(), amount)
 }
 
 func Approve(spender users.AddressOrName, amount uint64) {
 	caller := std.GetOrigCaller()
-	foo.Approve(caller, spender.Resolve(), amount)
+	test.Approve(caller, spender.Resolve(), amount)
 }
 
 func TransferFrom(from, to users.AddressOrName, amount uint64) {
 	caller := std.GetOrigCaller()
-	foo.TransferFrom(caller, from.Resolve(), to.Resolve(), amount)
+	test.TransferFrom(caller, from.Resolve(), to.Resolve(), amount)
 }
 
 // administration.
@@ -66,13 +66,13 @@ func TransferFrom(from, to users.AddressOrName, amount uint64) {
 func Mint(address users.AddressOrName, amount uint64) {
 	caller := std.GetOrigCaller()
 	assertIsAdmin(caller)
-	foo.Mint(address.Resolve(), amount)
+	test.Mint(address.Resolve(), amount)
 }
 
 func Burn(address users.AddressOrName, amount uint64) {
 	caller := std.GetOrigCaller()
 	assertIsAdmin(caller)
-	foo.Burn(address.Resolve(), amount)
+	test.Burn(address.Resolve(), amount)
 }
 
 // render.
@@ -84,10 +84,10 @@ func Render(path string) string {
 
 	switch {
 	case path == "":
-		return foo.RenderHome()
+		return test.RenderHome()
 	case c == 2 && parts[0] == "balance":
 		owner := users.AddressOrName(parts[1])
-		balance, _ := foo.BalanceOf(owner.Resolve())
+		balance, _ := test.BalanceOf(owner.Resolve())
 		return ufmt.Sprintf("%d\n", balance)
 	default:
 		return "404\n"

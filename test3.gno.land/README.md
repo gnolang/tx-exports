@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-5173
+5187
 ```
 
 ## addpkgs
@@ -1164,14 +1164,14 @@
     103 "gno.land/r/demo/tong"
      87 "gno.land/r/duysygame/test22"
      82 "gno.land/r/demo/boards"
-     69 "gno.land/r/test10/poll"
+     70 "gno.land/r/test10/poll"
      65 "gno.land/r/gnoland/faucet"
      65 "gno.land/r/duysygame/test21"
      54 "gno.land/r/gnoland/blog"
      49 "gno.land/r/boom/boom"
-     31 "gno.land/r/test24/hello"
+     35 "gno.land/r/test24/hello"
+     28 "gno.land/r/feedback/simplefeedback"
      26 "gno.land/r/demo/foo20"
-     25 "gno.land/r/feedback/simplefeedback"
      21 "gno.land/r/duysygame/test19"
      20 "gno.land/r/duysyland/erc20"
      19 "gno.land/r/position"
