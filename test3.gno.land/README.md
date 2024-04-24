@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-5187
+5228
 ```
 
 ## addpkgs
@@ -257,6 +257,7 @@
       1 "gno.land/r/zhrand/hello_test"
       1 "gno.land/r/zhrand/hello"
       1 "gno.land/r/xyz/greeting"
+      1 "gno.land/r/xjss/hello"
       1 "gno.land/r/xcv/foo"
       1 "gno.land/r/whitelist/DIGIX666"
       1 "gno.land/r/vadymspace/hello"
@@ -360,6 +361,9 @@
       1 "gno.land/r/hello_test/hello"
       1 "gno.land/r/helloTest/helloTest"
       1 "gno.land/r/helloTest/hello"
+      1 "gno.land/r/hello34/hello"
+      1 "gno.land/r/hello15/hello"
+      1 "gno.land/r/hello144/hello"
       1 "gno.land/r/hello11156/hello11156"
       1 "gno.land/r/hello/hellotest"
       1 "gno.land/r/hello"
@@ -1160,17 +1164,17 @@
 ## top realm calls
 ```
    1205 "gno.land/r/demo/minter"
-    107 "gno.land/r/demo/users"
+    108 "gno.land/r/demo/users"
     103 "gno.land/r/demo/tong"
      87 "gno.land/r/duysygame/test22"
      82 "gno.land/r/demo/boards"
-     70 "gno.land/r/test10/poll"
+     71 "gno.land/r/test10/poll"
      65 "gno.land/r/gnoland/faucet"
      65 "gno.land/r/duysygame/test21"
      54 "gno.land/r/gnoland/blog"
+     49 "gno.land/r/feedback/simplefeedback"
      49 "gno.land/r/boom/boom"
      35 "gno.land/r/test24/hello"
-     28 "gno.land/r/feedback/simplefeedback"
      26 "gno.land/r/demo/foo20"
      21 "gno.land/r/duysygame/test19"
      20 "gno.land/r/duysyland/erc20"
@@ -1183,6 +1187,7 @@
       7 "gno.land/r/demo/skull"
       6 "gno.land/r/test20/hello"
       6 "gno.land/r/ilker2/hello"
+      6 "gno.land/r/demo/foo"
       5 "gno.land/r/test11/poll"
       5 "gno.land/r/foo"
       5 "gno.land/r/bar"
@@ -1201,12 +1206,14 @@
       3 "gno.land/r/demo/jefft0_test2_boards"
       3 "gno.land/p/hello/hello"
       2 "gno.land/r/xyz/greeting"
+      2 "gno.land/r/xjss/hello"
       2 "gno.land/r/vadymspace/hello"
       2 "gno.land/r/test1/poll1"
       2 "gno.land/r/test1/greeting"
       2 "gno.land/r/stuyk/userinvokes4"
       2 "gno.land/r/kennethy/hello"
       2 "gno.land/r/ilker/counter"
+      2 "gno.land/r/hello144/hello"
       2 "gno.land/r/gno/hello"
       2 "gno.land/r/feedback/newfeedback"
       2 "gno.land/r/duysygame/test6"
