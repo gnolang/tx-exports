@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-5371
+5391
 ```
 
 ## addpkgs
@@ -43,6 +43,7 @@
       5 "gno.land/p/demo/follow"
       4 "gno.land/r/token/ethtoken"
       4 "gno.land/r/test/hello"
+      4 "gno.land/r/sdm96/debugz/v1"
       4 "gno.land/r/leon/poll"
       4 "gno.land/r/digix666/mytoken"
       4 "gno.land/r/demo22/greeting"
@@ -123,6 +124,7 @@
       2 "gno.land/r/test/minter_v1"
       2 "gno.land/r/t/a"
       2 "gno.land/r/stuyk/userinvokes4"
+      2 "gno.land/r/sdm96/debugz/v2"
       2 "gno.land/r/rozaser/blackpink"
       2 "gno.land/r/rozaser/Blackpink"
       2 "gno.land/r/planb/helloworld"
@@ -307,6 +309,7 @@
       1 "gno.land/r/stuyk/userinvokes"
       1 "gno.land/r/starknode/cringe"
       1 "gno.land/r/silversurf/hello"
+      1 "gno.land/r/sdm96/debugz"
       1 "gno.land/r/sad/greeting"
       1 "gno.land/r/ruslank/dragon"
       1 "gno.land/r/rrigor/blackpink"
@@ -944,6 +947,11 @@
       1 "gno.land/p/sfdv/zeqfg"
       1 "gno.land/p/sfdv/zefa"
       1 "gno.land/p/sfdv/sqzv"
+      1 "gno.land/p/sdm96/testpkgs/v5/hello"
+      1 "gno.land/p/sdm96/testpkgs/v4/hello"
+      1 "gno.land/p/sdm96/testpkgs/v3/hello"
+      1 "gno.land/p/sdm96/testpkgs/v2/hello"
+      1 "gno.land/p/sdm96/testpkgs/v1/hello"
       1 "gno.land/p/sdfsf/sfsf"
       1 "gno.land/p/sdc/sqvd"
       1 "gno.land/p/sda/sa"
@@ -1178,13 +1186,13 @@
      87 "gno.land/r/duysygame/test22"
      85 "gno.land/r/boom/boom"
      82 "gno.land/r/demo/boards"
-     79 "gno.land/r/test10/poll"
+     81 "gno.land/r/test10/poll"
      65 "gno.land/r/gnoland/faucet"
      65 "gno.land/r/duysygame/test21"
      62 "gno.land/r/feedback/simplefeedback"
      54 "gno.land/r/gnoland/blog"
-     45 "gno.land/r/test24/hello"
-     33 "gno.land/r/hello144/hello"
+     47 "gno.land/r/test24/hello"
+     36 "gno.land/r/hello144/hello"
      26 "gno.land/r/demo/foo20"
      21 "gno.land/r/duysygame/test19"
      20 "gno.land/r/duysyland/erc20"
