@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-5391
+5396
 ```
 
 ## addpkgs
@@ -1180,13 +1180,13 @@
 
 ## top realm calls
 ```
-   1205 "gno.land/r/demo/minter"
+   1207 "gno.land/r/demo/minter"
     109 "gno.land/r/demo/users"
     103 "gno.land/r/demo/tong"
      87 "gno.land/r/duysygame/test22"
      85 "gno.land/r/boom/boom"
+     83 "gno.land/r/test10/poll"
      82 "gno.land/r/demo/boards"
-     81 "gno.land/r/test10/poll"
      65 "gno.land/r/gnoland/faucet"
      65 "gno.land/r/duysygame/test21"
      62 "gno.land/r/feedback/simplefeedback"
