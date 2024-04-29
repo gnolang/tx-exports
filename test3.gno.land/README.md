@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-5396
+5398
 ```
 
 ## addpkgs
@@ -1189,7 +1189,7 @@
      82 "gno.land/r/demo/boards"
      65 "gno.land/r/gnoland/faucet"
      65 "gno.land/r/duysygame/test21"
-     62 "gno.land/r/feedback/simplefeedback"
+     64 "gno.land/r/feedback/simplefeedback"
      54 "gno.land/r/gnoland/blog"
      47 "gno.land/r/test24/hello"
      36 "gno.land/r/hello144/hello"
