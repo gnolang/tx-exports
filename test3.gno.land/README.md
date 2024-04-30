@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-5398
+5424
 ```
 
 ## addpkgs
@@ -309,7 +309,12 @@
       1 "gno.land/r/stuyk/userinvokes"
       1 "gno.land/r/starknode/cringe"
       1 "gno.land/r/silversurf/hello"
+      1 "gno.land/r/sdm96/testpkgs/v9/hello"
+      1 "gno.land/r/sdm96/testpkgs/v11/hello"
+      1 "gno.land/r/sdm96/testpkgs/v10/hello"
+      1 "gno.land/r/sdm96/simplefeedback/v1/simplefeedback"
       1 "gno.land/r/sdm96/debugz"
+      1 "gno.land/r/sdm95/feedback/v1"
       1 "gno.land/r/sad/greeting"
       1 "gno.land/r/ruslank/dragon"
       1 "gno.land/r/rrigor/blackpink"
@@ -870,6 +875,7 @@
       1 "gno.land/r/defianon/net3"
       1 "gno.land/r/defianon/firsttry"
       1 "gno.land/r/cvcvcv/hello"
+      1 "gno.land/r/connecttesting/v1v1v1"
       1 "gno.land/r/clockwork/tictactoe1"
       1 "gno.land/r/chaddi/chaddi"
       1 "gno.land/r/bugswe/bugswe"
@@ -947,10 +953,13 @@
       1 "gno.land/p/sfdv/zeqfg"
       1 "gno.land/p/sfdv/zefa"
       1 "gno.land/p/sfdv/sqzv"
+      1 "gno.land/p/sdm96/testpkgs/v9/hello"
+      1 "gno.land/p/sdm96/testpkgs/v7/hello"
       1 "gno.land/p/sdm96/testpkgs/v5/hello"
       1 "gno.land/p/sdm96/testpkgs/v4/hello"
       1 "gno.land/p/sdm96/testpkgs/v3/hello"
       1 "gno.land/p/sdm96/testpkgs/v2/hello"
+      1 "gno.land/p/sdm96/testpkgs/v10/hello"
       1 "gno.land/p/sdm96/testpkgs/v1/hello"
       1 "gno.land/p/sdfsf/sfsf"
       1 "gno.land/p/sdc/sqvd"
@@ -1184,15 +1193,15 @@
     109 "gno.land/r/demo/users"
     103 "gno.land/r/demo/tong"
      87 "gno.land/r/duysygame/test22"
-     85 "gno.land/r/boom/boom"
-     83 "gno.land/r/test10/poll"
+     87 "gno.land/r/boom/boom"
+     85 "gno.land/r/test10/poll"
      82 "gno.land/r/demo/boards"
+     69 "gno.land/r/feedback/simplefeedback"
      65 "gno.land/r/gnoland/faucet"
      65 "gno.land/r/duysygame/test21"
-     64 "gno.land/r/feedback/simplefeedback"
      54 "gno.land/r/gnoland/blog"
      47 "gno.land/r/test24/hello"
-     36 "gno.land/r/hello144/hello"
+     37 "gno.land/r/hello144/hello"
      26 "gno.land/r/demo/foo20"
      21 "gno.land/r/duysygame/test19"
      20 "gno.land/r/duysyland/erc20"
