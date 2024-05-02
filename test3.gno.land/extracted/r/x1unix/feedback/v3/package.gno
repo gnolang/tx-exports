@@ -5,14 +5,30 @@ import (
 	"strings"
 	"time"
 
-	"gno.land/p/demo/seqid"
 	"gno.land/p/demo/ufmt"
 )
 
-const maxCharsCount = 256
+
+const (
+	maxCharsCount = 256
+	notFoundIndex = -1
+
+	// ownerAddr is wallet address of realm admin.
+	ownerAddr = std.Address("g15ruzptpql4dpuyzej0wkt5rq6r26kw4nxu9fwd")
+)
+
+var (
+	// HTML escaping.
+	htmlQuot = []byte("&#34;") // shorter than "&quot;"
+	htmlApos = []byte("&#39;") // shorter than "&apos;" and apos was not in HTML until HTML5
+	htmlAmp  = []byte("&amp;")
+	htmlLt   = []byte("&lt;")
+	htmlGt   = []byte("&gt;")
+	htmlNull = []byte("\uFFFD")
+)
 
 type Feedback struct {
-	ID        seqid.ID
+	ID        int
 	User      std.Address
 	Content   string
 	Response  string
@@ -20,37 +36,77 @@ type Feedback struct {
 	RespondAt time.Time
 }
 
-func newAddrSet(items ...std.Address) map[std.Address]struct{} {
-	set := make(map[std.Address]struct{}, len(items))
-	for _, v := range items {
-		set[v] = struct{}{}
-	}
-	return set
-}
-
 var (
-	nextID    seqid.ID
+	nextID    = 1
 	isLocked  = false
-	feedbacks map[seqid.ID]Feedback
-	ownerAddr = std.Address(
-		// TODO: put realm's owner address
-		"g1fdk37llu9sfu9mdupmzjx34v2nrrdnk2757e0j",
-	)
-	modsAddrs = newAddrSet(
-		// TODO: add mod wallets
-		"g1fdk37llu9sfu9mdupmzjx34v2nrrdnk2757e0j",
-	)
+	feedbacks = []Feedback{}
+	modAddrs  = []std.Address{}
 )
 
-func isModerator(addr std.Address) bool {
-	_, ok := modsAddrs[addr]
-	return ok
+func stripHtml(input string) string {
+	// Copy from Go's `template.HTMLEscape`.
+	// See: $GOROOT/src/text/template/funcs.go
+
+	// Avoid allocation if we can.
+	if !strings.ContainsAny(input, "'\"&<>\000") {
+		return input
+	}
+
+	b := []byte(input)
+	w := strings.Builder{}
+	last := 0
+	for i, c := range b {
+		var html []byte
+		switch c {
+		case '\000':
+			html = htmlNull
+		case '"':
+			html = htmlQuot
+		case '\'':
+			html = htmlApos
+		case '&':
+			html = htmlAmp
+		case '<':
+			html = htmlLt
+		case '>':
+			html = htmlGt
+		default:
+			continue
+		}
+		w.Write(b[last:i])
+		w.Write(html)
+		last = i + 1
+	}
+
+	w.Write(b[last:])
+	return w.String()
+}
+
+func findFeedback(id int) (int, bool) {
+	// TODO: use avl and seqid when will move to test4
+	for i := range feedbacks {
+		if feedbacks[i].ID == id {
+			return i, true
+		}
+	}
+
+	return notFoundIndex, false
+}
+
+func findModerator(addr std.Address) int {
+	for i, modAddr := range modAddrs {
+		if modAddr == addr {
+			return i
+		}
+	}
+
+	return notFoundIndex
 }
 
 // assertIsModerator checks whether a current caller is owner or a moderator.
 func assertIsModerator() {
 	actorId := std.GetOrigCaller()
-	isAllowed := actorId == ownerAddr || isModerator(actorId)
+	isAllowed := actorId == ownerAddr || findModerator(actorId) != notFoundIndex
 	if !isAllowed {
 		panic("Access Denied")
 	}
@@ -99,43 +155,43 @@ func SubmitFeedback(message string) string {
 		panic("Message is too long")
 	}
 
-	id := nextID.Next()
-	feedbacks[id] = Feedback{
+	id := nextID
+	feedbacks = append(feedbacks, Feedback{
 		ID:        id,
 		User:      std.GetOrigCaller(),
-		Content:   message,
+		Content:   stripHtml(message),
 		CreatedAt: time.Now(),
-	}
+	})
 
+	nextID++
 	return ufmt.Sprintf("Feedback submitted successfully with ID: %d", id)
 }
 
 // BanFeedback used by moderation team to remove feedbacks which violate code of conduct.
-func BanFeedback(feedbackID seqid.ID) string {
+func BanFeedback(feedbackID int) string {
 	assertIsModerator()
-	assertNotLocked()
 
-	feedback, ok := feedbacks[feedbackID]
+	i, ok := findFeedback(feedbackID)
 	if !ok {
 		panic("Feedback not found")
 	}
 
 	// Still keep the record but remove a harmful message.
-	feedback.Content = ""
-	feedbacks[feedbackID] = feedback
+	feedbacks[i].Content = ""
 	return "Feedback was removed by a moderator"
 }
 
 // RespondToFeedback allows any moderator or realm owner to leave a response to a feedback.
-func RespondToFeedback(feedbackID seqid.ID, response string) string {
-	assertIsModerator()
+func RespondToFeedback(feedbackID int, response string) string {
 	assertNotLocked()
+	assertIsModerator()
 
-	feedback, ok := feedbacks[feedbackID]
+	i, ok := findFeedback(feedbackID)
 	if !ok {
 		panic("Feedback not found")
 	}
 
+	feedback := feedbacks[i]
 	if feedback.Response != "" {
 		panic("Feedback already has a response")
 	}
@@ -150,18 +206,40 @@ func RespondToFeedback(feedbackID seqid.ID, response string) string {
 	}
 
 	feedback.RespondAt = time.Now()
-	feedback.Response = response
-	feedbacks[feedbackID] = feedback
+	feedback.Response = stripHtml(response)
+	feedbacks[i] = feedback
 
 	return "Response recorded successfully"
 }
 
+// AddModerator adds a new wallet address to a list of moderators.
+func AddModerator(addr std.Address) string {
+	i := findModerator(addr)
+	if i != notFoundIndex {
+		panic("Entry already exists")
+	}
+
+	modAddrs = append(modAddrs, addr)
+	return "Success"
+}
+
+// RemoveModerator removes a wallet address from a list of moderators.
+func RemoveModerator(addr std.Address) string {
+	i := findModerator(addr)
+	if i == notFoundIndex {
+		panic("Entry not found")
+	}
+
+	modAddrs = append(modAddrs[:i], modAddrs[i+1:]...)
+	return "Success"
+}
+
 // Render displays all feedback and responses.
-func Render(path string) string {
+func Render(_ string) string {
 	sb := strings.Builder{}
 	sb.WriteString("# Feedback Collection\n")
-	for id, fb := range feedbacks {
-		sb.WriteString(ufmt.Sprintf("## Feedback #%d\n", id))
+	for _, fb := range feedbacks {
+		sb.WriteString(ufmt.Sprintf("## Feedback #%d\n", fb.ID))
 		sb.WriteString(ufmt.Sprintf("From `%s` at %s\n\n", fb.User, fb.CreatedAt.Format(time.RFC1123)))
 		if fb.Content == "" {
 			sb.WriteString("*Feedback was removed by a moderator*")
@@ -174,11 +252,10 @@ func Render(path string) string {
 			continue
 		}
 
-		sb.WriteString("### Response")
-		sb.WriteString(ufmt.Sprintf("At %s\n\n", fb.CreatedAt.Format(time.RFC1123)))
+		sb.WriteString("### Response\n")
+		sb.WriteString(ufmt.Sprintf("At %s\n\n", fb.RespondAt.Format(time.RFC1123)))
 		sb.WriteString(fb.Response)
 		sb.WriteString("\n\n")
 	}
 	return sb.String()
 }
-
