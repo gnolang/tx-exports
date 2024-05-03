@@ -1,4 +1,4 @@
-package yas
+package lll
 
 import (
 	"std"
@@ -10,26 +10,26 @@ import (
 )
 
 var (
-	yas  *grc20.AdminToken
-	admin std.Address = "g1s67msjqmq0jwyzqlm8y578stkxppzyrt6nuhsw"
+	lll   *grc20.AdminToken
+	admin std.Address = "g17zumnvtv34mpzcva2n7jnux9jnq9kdau7km580" // TODO: helper to change admin
 )
 
 func init() {
-	yas = grc20.NewAdminToken("YasToken", "YAS", 6)
-	yas.Mint(admin, 1000000000) // @administrator
+	lll = grc20.NewAdminToken("Cryptopunkstar", "LLL", 4)
+	lll.Mint(admin, 1000000*100000)                                    // @administrator (1M)
+	lll.Mint("g15gf7qdnvczcc95v6r6d9vxxd64u6nl37cj648y", 100000*100000) // @cryptopunkstar (100k)
 }
 
 // method proxies as public functions.
-//
 
 // getters.
 
 func TotalSupply() uint64 {
-	return yas.TotalSupply()
+	return lll.TotalSupply()
 }
 
 func BalanceOf(owner users.AddressOrName) uint64 {
-	balance, err := yas.BalanceOf(owner.Resolve())
+	balance, err := lll.BalanceOf(owner.Resolve())
 	if err != nil {
 		panic(err)
 	}
@@ -37,7 +37,7 @@ func BalanceOf(owner users.AddressOrName) uint64 {
 }
 
 func Allowance(owner, spender users.AddressOrName) uint64 {
-	allowance, err := yas.Allowance(owner.Resolve(), spender.Resolve())
+	allowance, err := lll.Allowance(owner.Resolve(), spender.Resolve())
 	if err != nil {
 		panic(err)
 	}
@@ -48,17 +48,26 @@ func Allowance(owner, spender users.AddressOrName) uint64 {
 
 func Transfer(to users.AddressOrName, amount uint64) {
 	caller := std.GetOrigCaller()
-	yas.Transfer(caller, to.Resolve(), amount)
+	lll.Transfer(caller, to.Resolve(), amount)
 }
 
 func Approve(spender users.AddressOrName, amount uint64) {
 	caller := std.GetOrigCaller()
-	yas.Approve(caller, spender.Resolve(), amount)
+	lll.Approve(caller, spender.Resolve(), amount)
 }
 
 func TransferFrom(from, to users.AddressOrName, amount uint64) {
 	caller := std.GetOrigCaller()
-	yas.TransferFrom(caller, from.Resolve(), to.Resolve(), amount)
+	lll.TransferFrom(caller, from.Resolve(), to.Resolve(), amount)
+}
+
+// faucet.
+
+func Faucet() {
+	// FIXME: add limits?
+	// FIXME: add payment in gnot?
+	caller := std.GetOrigCaller()
+	lll.Mint(caller, 1000*10000) // 1k
 }
 
 // administration.
@@ -66,17 +75,16 @@ func TransferFrom(from, to users.AddressOrName, amount uint64) {
 func Mint(address users.AddressOrName, amount uint64) {
 	caller := std.GetOrigCaller()
 	assertIsAdmin(caller)
-	yas.Mint(address.Resolve(), amount)
+	lll.Mint(address.Resolve(), amount)
 }
 
 func Burn(address users.AddressOrName, amount uint64) {
 	caller := std.GetOrigCaller()
 	assertIsAdmin(caller)
-	yas.Burn(address.Resolve(), amount)
+	lll.Burn(address.Resolve(), amount)
 }
 
-// render.
-//
+// render le rendu
 
 func Render(path string) string {
 	parts := strings.Split(path, "/")
@@ -84,16 +92,16 @@ func Render(path string) string {
 
 	switch {
 	case path == "":
-		return yas.RenderHome()
+		return lll.RenderHome()
 	case c == 2 && parts[0] == "balance":
 		owner := users.AddressOrName(parts[1])
-		balance, _ := yas.BalanceOf(owner.Resolve())
+		balance, _ := lll.BalanceOf(owner.Resolve())
 		return ufmt.Sprintf("%d\n", balance)
 	default:
 		return "404\n"
 	}
 }
-
+// secure access for admin :)
 func assertIsAdmin(address std.Address) {
 	if address != admin {
 		panic("restricted access")
