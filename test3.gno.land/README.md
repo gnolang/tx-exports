@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-6066
+6073
 ```
 
 ## addpkgs
@@ -1300,7 +1300,7 @@
    1208 "gno.land/r/demo/minter"
     110 "gno.land/r/demo/users"
     103 "gno.land/r/demo/tong"
-     93 "gno.land/r/test10/poll"
+     94 "gno.land/r/test10/poll"
      91 "gno.land/r/boom/boom"
      87 "gno.land/r/duysygame/test22"
      82 "gno.land/r/demo/boards"
