@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-6073
+6101
 ```
 
 ## addpkgs
@@ -323,6 +323,8 @@
       1 "gno.land/r/thomilx/hello"
       1 "gno.land/r/testx/hello"
       1 "gno.land/r/tests/tictactoe"
+      1 "gno.land/r/testees/hello_world"
+      1 "gno.land/r/testees/hello"
       1 "gno.land/r/test99/me22"
       1 "gno.land/r/test99/hello"
       1 "gno.land/r/test7/hello"
@@ -383,6 +385,7 @@
       1 "gno.land/r/sdm/feedback/v1"
       1 "gno.land/r/sad/greeting"
       1 "gno.land/r/ruslank/dragon"
+      1 "gno.land/r/rsky/b069"
       1 "gno.land/r/rrigor/blackpink"
       1 "gno.land/r/rozaser/hello"
       1 "gno.land/r/romka_h/hello"
@@ -987,6 +990,7 @@
       1 "gno.land/r/beden/beden"
       1 "gno.land/r/banditia/bandit"
       1 "gno.land/r/bakerik/hello"
+      1 "gno.land/r/b069/rsky"
       1 "gno.land/r/asdsad/asdasd/mytoken"
       1 "gno.land/r/asdasd/asdads"
       1 "gno.land/r/asdad/hello"
