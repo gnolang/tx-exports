@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-6101
+6147
 ```
 
 ## addpkgs
@@ -475,6 +475,8 @@
       1 "gno.land/r/grc721token/myNFTtoken"
       1 "gno.land/r/grc20token/grc20token"
       1 "gno.land/r/goodbye/goodbyetest"
+      1 "gno.land/r/gnostudio/testhello"
+      1 "gno.land/r/gnostudio/hello"
       1 "gno.land/r/gnostudio/feedback_v1"
       1 "gno.land/r/gnomerna/hello"
       1 "gno.land/r/gno/hello"
@@ -1302,14 +1304,14 @@
 ## top realm calls
 ```
    1208 "gno.land/r/demo/minter"
-    110 "gno.land/r/demo/users"
+    112 "gno.land/r/demo/users"
     103 "gno.land/r/demo/tong"
-     94 "gno.land/r/test10/poll"
+     97 "gno.land/r/test10/poll"
      91 "gno.land/r/boom/boom"
      87 "gno.land/r/duysygame/test22"
      82 "gno.land/r/demo/boards"
      81 "gno.land/r/gnoland/faucet"
-     69 "gno.land/r/feedback/simplefeedback"
+     76 "gno.land/r/feedback/simplefeedback"
      65 "gno.land/r/duysygame/test21"
      54 "gno.land/r/gnoland/blog"
      49 "gno.land/r/test24/hello"
@@ -1323,12 +1325,13 @@
      13 "gno.land/r/sdm/feedback/v3"
      12 "gno.land/r/x1unix/sf/v5"
      12 "gno.land/r/demo/foo"
+     11 "gno.land/r/jeronimoalbi/poll_v1"
+     11 "gno.land/r/gnostudio/feedback_v1"
      10 "gno.land/r/sdm/somedudefeedbacktest_1"
      10 "gno.land/r/sdm/feedback/v2"
      10 "gno.land/r/pool"
      10 "gno.land/r/feedback/feedback"
       7 "gno.land/r/test/minter_v1"
-      7 "gno.land/r/jeronimoalbi/poll_v1"
       7 "gno.land/r/grc20token/mytoken"
       7 "gno.land/r/demo/skull"
       6 "gno.land/r/xjss/hello"
@@ -1377,7 +1380,6 @@
       2 "gno.land/r/ilker/counter"
       2 "gno.land/r/hellotest/poll"
       2 "gno.land/r/hello36/hello"
-      2 "gno.land/r/gnostudio/feedback_v1"
       2 "gno.land/r/gno/hello"
       2 "gno.land/r/feedback/feedbackdenystest2"
       2 "gno.land/r/duysygame/test6"

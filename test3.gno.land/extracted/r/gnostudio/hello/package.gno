@@ -1,5 +1,5 @@
 package hello
 
-func Test1(option1 []string) string {
+func Render(path string) string {
   return "Hello World!"
 }
