@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-6147
+6255
 ```
 
 ## addpkgs
@@ -383,6 +383,7 @@
       1 "gno.land/r/sdm/feedback/v5"
       1 "gno.land/r/sdm/feedback/v2"
       1 "gno.land/r/sdm/feedback/v1"
+      1 "gno.land/r/sdm/echo"
       1 "gno.land/r/sad/greeting"
       1 "gno.land/r/ruslank/dragon"
       1 "gno.land/r/rsky/b069"
@@ -1306,12 +1307,12 @@
    1208 "gno.land/r/demo/minter"
     112 "gno.land/r/demo/users"
     103 "gno.land/r/demo/tong"
-     97 "gno.land/r/test10/poll"
-     91 "gno.land/r/boom/boom"
+     98 "gno.land/r/test10/poll"
+     93 "gno.land/r/boom/boom"
      87 "gno.land/r/duysygame/test22"
      82 "gno.land/r/demo/boards"
      81 "gno.land/r/gnoland/faucet"
-     76 "gno.land/r/feedback/simplefeedback"
+     77 "gno.land/r/feedback/simplefeedback"
      65 "gno.land/r/duysygame/test21"
      54 "gno.land/r/gnoland/blog"
      49 "gno.land/r/test24/hello"
@@ -1319,12 +1320,12 @@
      26 "gno.land/r/demo/foo20"
      21 "gno.land/r/duysygame/test19"
      20 "gno.land/r/duysyland/erc20"
+     19 "gno.land/r/sdm/somedudefeedbacktest_8"
      19 "gno.land/r/position"
-     18 "gno.land/r/sdm/somedudefeedbacktest_8"
+     17 "gno.land/r/demo/foo"
      16 "gno.land/r/demo/gnoph"
      13 "gno.land/r/sdm/feedback/v3"
      12 "gno.land/r/x1unix/sf/v5"
-     12 "gno.land/r/demo/foo"
      11 "gno.land/r/jeronimoalbi/poll_v1"
      11 "gno.land/r/gnostudio/feedback_v1"
      10 "gno.land/r/sdm/somedudefeedbacktest_1"
@@ -1376,6 +1377,7 @@
       2 "gno.land/r/test1/greeting"
       2 "gno.land/r/stuyk/userinvokes4"
       2 "gno.land/r/sdm/feedback/v5"
+      2 "gno.land/r/sdm/echo"
       2 "gno.land/r/kennethy/hello"
       2 "gno.land/r/ilker/counter"
       2 "gno.land/r/hellotest/poll"
