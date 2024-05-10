@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-6298
+6338
 ```
 
 ## addpkgs
@@ -109,6 +109,7 @@
       3 "gno.land/r/demo/BTR"
       3 "gno.land/r/demo/Alva"
       3 "gno.land/r/asdsd/asdsd"
+      3 "gno.land/r/alanrsoares/svgen"
       3 "gno.land/r/Gloomajin/TRY_001"
       3 "gno.land/r/Demo/Bad"
       3 "gno.land/p/tet/hello"
@@ -237,6 +238,7 @@
       2 "gno.land/r/asd/hello"
       2 "gno.land/r/ars/counter"
       2 "gno.land/r/anunnakis/sailing"
+      2 "gno.land/r/alanrsoares/svgen2"
       2 "gno.land/r/Test/demo"
       2 "gno.land/r/Alva/Alvadama"
       2 "gno.land/r/22/33"
@@ -329,6 +331,7 @@
       1 "gno.land/r/test99/me22"
       1 "gno.land/r/test99/hello"
       1 "gno.land/r/test7/hello"
+      1 "gno.land/r/test50/hello"
       1 "gno.land/r/test5/hello"
       1 "gno.land/r/test42/taoshi"
       1 "gno.land/r/test4/poll"
@@ -455,6 +458,7 @@
       1 "gno.land/r/huhuhuhuhuh/huhuhuhuhuh"
       1 "gno.land/r/hi2/hello"
       1 "gno.land/r/hellototo/hello"
+      1 "gno.land/r/hellotestfmt/hellotestfmt"
       1 "gno.land/r/hellogoodbye/hellogoodbye"
       1 "gno.land/r/hello_test/hello"
       1 "gno.land/r/helloTest/helloTest"
@@ -1010,6 +1014,9 @@
       1 "gno.land/r/alextest/alextest"
       1 "gno.land/r/alexis/helloo"
       1 "gno.land/r/alexis/hello"
+      1 "gno.land/r/alanrsoares/svgen4"
+      1 "gno.land/r/alanrsoares/svgen3"
+      1 "gno.land/r/alanrsoares/hello"
       1 "gno.land/r/Genzo/Genzo"
       1 "gno.land/r/Demo/bad"
       1 "gno.land/r/Chaddi/Chaddi_test"
@@ -1317,7 +1324,7 @@
      87 "gno.land/r/duysygame/test22"
      82 "gno.land/r/demo/boards"
      81 "gno.land/r/gnoland/faucet"
-     78 "gno.land/r/feedback/simplefeedback"
+     79 "gno.land/r/feedback/simplefeedback"
      65 "gno.land/r/duysygame/test21"
      54 "gno.land/r/gnoland/blog"
      49 "gno.land/r/test24/hello"
@@ -1328,15 +1335,16 @@
      19 "gno.land/r/sdm/somedudefeedbacktest_8"
      19 "gno.land/r/position"
      19 "gno.land/r/demo/foo"
+     16 "gno.land/r/jeronimoalbi/poll_v1"
      16 "gno.land/r/demo/gnoph"
      13 "gno.land/r/sdm/feedback/v3"
+     13 "gno.land/r/gnostudio/feedback_v1"
      12 "gno.land/r/x1unix/sf/v5"
-     12 "gno.land/r/jeronimoalbi/poll_v1"
-     11 "gno.land/r/gnostudio/feedback_v1"
      10 "gno.land/r/sdm/somedudefeedbacktest_1"
      10 "gno.land/r/sdm/feedback/v2"
      10 "gno.land/r/pool"
      10 "gno.land/r/feedback/feedback"
+      8 "gno.land/r/test50/hello"
       7 "gno.land/r/test/minter_v1"
       7 "gno.land/r/grc20token/mytoken"
       7 "gno.land/r/demo/skull"
@@ -1449,6 +1457,8 @@
       1 "gno.land/r/demo/ajan_test1"
       1 "gno.land/r/demo"
       1 "gno.land/r/alexis/hello"
+      1 "gno.land/r/alanrsoares/svgen2"
+      1 "gno.land/r/alanrsoares/svgen"
       1 "gno.land/p/marbella/hueco/v2"
       1 "gno.land/p/demo/hiba"
       1 "gno.land/p/demo/hello"
