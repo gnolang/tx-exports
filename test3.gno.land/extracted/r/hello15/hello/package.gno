@@ -1,5 +1,9 @@
 package hello
 
-func Render(path string) string {
+func B(path []string) string {
+  return "Hello World!"
+}
+
+func A(path string) string {
   return "Hello World!"
 }

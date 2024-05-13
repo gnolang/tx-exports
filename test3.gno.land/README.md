@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-6491
+6504
 ```
 
 ## addpkgs
@@ -341,6 +341,7 @@
       1 "gno.land/r/testa1/poll"
       1 "gno.land/r/test99/me22"
       1 "gno.land/r/test99/hello"
+      1 "gno.land/r/test98/hello"
       1 "gno.land/r/test8/poll_v1"
       1 "gno.land/r/test7/hello"
       1 "gno.land/r/test50/hello"
@@ -507,6 +508,7 @@
       1 "gno.land/r/goodbye/goodbyetest"
       1 "gno.land/r/gnostudio/testhello"
       1 "gno.land/r/gnostudio/hello"
+      1 "gno.land/r/gnostudio/gnoyourdate"
       1 "gno.land/r/gnostudio/feedback_v1"
       1 "gno.land/r/gnomerna/hello"
       1 "gno.land/r/gno/hello"
@@ -1351,7 +1353,7 @@
      87 "gno.land/r/duysygame/test22"
      82 "gno.land/r/demo/boards"
      81 "gno.land/r/gnoland/faucet"
-     80 "gno.land/r/feedback/simplefeedback"
+     81 "gno.land/r/feedback/simplefeedback"
      65 "gno.land/r/duysygame/test21"
      54 "gno.land/r/gnoland/blog"
      49 "gno.land/r/test24/hello"
@@ -1393,6 +1395,7 @@
       4 "gno.land/r/x1unix/sf/v3"
       4 "gno.land/r/x1unix/feedback/v11"
       4 "gno.land/r/testa1/poll"
+      4 "gno.land/r/test98/hello"
       4 "gno.land/r/test4/poll_v1"
       4 "gno.land/r/test4/poll"
       4 "gno.land/r/test2/poll1"
@@ -1402,6 +1405,7 @@
       4 "gno.land/r/sdm/feedback/v1"
       4 "gno.land/r/michelle/mymoodboard"
       4 "gno.land/r/michelle/mood"
+      4 "gno.land/r/gnostudio/gnoyourdate"
       4 "gno.land/r/duysygame/test17"
       4 "gno.land/r/demo3/greeting"
       4 "gno.land/r/demo2/dpxtr"
