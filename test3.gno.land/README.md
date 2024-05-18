@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-6750
+6756
 ```
 
 ## addpkgs
@@ -171,6 +171,7 @@
       2 "gno.land/r/pengu/whitelist"
       2 "gno.land/r/michelle/mymoodstatus"
       2 "gno.land/r/michelle/mymoodboard"
+      2 "gno.land/r/michelle/mood_v1"
       2 "gno.land/r/michelle/mood"
       2 "gno.land/r/maleknft/maleknfttoken"
       2 "gno.land/r/leon/whitelist_wpackagename"
@@ -498,6 +499,7 @@
       1 "gno.land/r/joke/Kent"
       1 "gno.land/r/jj/hello"
       1 "gno.land/r/jhkjlhjkhlk/1"
+      1 "gno.land/r/jhjhjjhj/gnomymood"
       1 "gno.land/r/jetrix/hello"
       1 "gno.land/r/jeronimoalbi2/testpoll"
       1 "gno.land/r/jeronimoalbi/poll_v1"
@@ -1511,6 +1513,7 @@
       1 "gno.land/r/stuyk/userinvokes3"
       1 "gno.land/r/rawr/counter"
       1 "gno.land/r/mpj/greeting"
+      1 "gno.land/r/michelle/mood_v1"
       1 "gno.land/r/marbella/huecoco"
       1 "gno.land/r/lk/lk"
       1 "gno.land/r/lali/greeting"
