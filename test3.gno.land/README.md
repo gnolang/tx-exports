@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-6757
+6762
 ```
 
 ## addpkgs
@@ -179,6 +179,7 @@
       2 "gno.land/r/lali/greeting"
       2 "gno.land/r/jetrix/firstgnoapp"
       2 "gno.land/r/jeronimoalbi/test/poll"
+      2 "gno.land/r/jeronimoalbi/mood_v0"
       2 "gno.land/r/jeronimoalbi/example1"
       2 "gno.land/r/jemoeder/test"
       2 "gno.land/r/j/jj"
@@ -503,6 +504,7 @@
       1 "gno.land/r/jetrix/hello"
       1 "gno.land/r/jeronimoalbi2/testpoll"
       1 "gno.land/r/jeronimoalbi/poll_v1"
+      1 "gno.land/r/jeronimoalbi/mood_v01"
       1 "gno.land/r/jeronimo/testpoll"
       1 "gno.land/r/jero/poll"
       1 "gno.land/r/jalbi/hello"
@@ -1518,6 +1520,8 @@
       1 "gno.land/r/lk/lk"
       1 "gno.land/r/lali/greeting"
       1 "gno.land/r/kryzzz/hello"
+      1 "gno.land/r/jeronimoalbi/mood_v01"
+      1 "gno.land/r/jeronimoalbi/mood_v0"
       1 "gno.land/r/hello33/hello"
       1 "gno.land/r/gnostudio/hello"
       1 "gno.land/r/feedback/feedbackdenystest3"
