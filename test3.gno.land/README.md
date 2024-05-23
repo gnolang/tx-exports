@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-6811
+6837
 ```
 
 ## addpkgs
@@ -29,6 +29,7 @@
       6 "gno.land/r/hello/hello"
       6 "gno.land/r/grc20token/mytoken"
       6 "gno.land/r/demo/kazainft"
+      6 "gno.land/r/bluehoneybadger/person"
       6 "gno.land/p/demo2/greeting"
       6 "gno.land/p/demo/teritori/follow"
       5 "gno.land/r/x1unix/schematest_6"
@@ -45,7 +46,6 @@
       5 "gno.land/r/demo/hyperborea"
       5 "gno.land/r/demo/follow"
       5 "gno.land/r/defianon/test"
-      5 "gno.land/r/bluehoneybadger/person"
       5 "gno.land/r/32/bv"
       5 "gno.land/p/test10/hello"
       5 "gno.land/p/demo2/hello"
@@ -358,6 +358,7 @@
       1 "gno.land/r/thomilx/hello"
       1 "gno.land/r/testx/hello"
       1 "gno.land/r/tests/tictactoe"
+      1 "gno.land/r/testperson/person"
       1 "gno.land/r/testooo/hello"
       1 "gno.land/r/testnamespace/mood"
       1 "gno.land/r/testest2/poll_v1"
@@ -1406,8 +1407,8 @@
 ## top realm calls
 ```
    1209 "gno.land/r/demo/minter"
+    123 "gno.land/r/demo/users"
     115 "gno.land/r/test10/poll"
-    114 "gno.land/r/demo/users"
     111 "gno.land/r/gnoland/faucet"
     103 "gno.land/r/demo/tong"
     100 "gno.land/r/boom/boom"
