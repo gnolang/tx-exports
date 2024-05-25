@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-6856
+6864
 ```
 
 ## addpkgs
@@ -1444,11 +1444,11 @@
       8 "gno.land/r/test5/poll_v1"
       8 "gno.land/r/test15/poll"
       8 "gno.land/r/test13/poll_v1"
+      8 "gno.land/r/game/tictacgno_2"
       7 "gno.land/r/testa1/poll"
       7 "gno.land/r/test18/poll"
       7 "gno.land/r/test/minter_v1"
       7 "gno.land/r/grc20token/mytoken"
-      7 "gno.land/r/game/tictacgno_2"
       7 "gno.land/r/demo/skull"
       6 "gno.land/r/xjss/hello"
       6 "gno.land/r/test20/hello"
