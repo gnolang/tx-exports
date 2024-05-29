@@ -1,19 +1,24 @@
 package counter
 
 import (
-    "gno.land/p/demo/ufmt"
+	"gno.land/p/demo/ufmt"
+	"std"
 )
 
 var count int
 
 func Increment() {
-    count++
+	count++
+	std.Emit("TestEmit", "Increment", count)
 }
 
 func Decrement() {
-    count--
+	count--
 }
 
 func Render(_ string) string {
-    return ufmt.Sprintf("Count: %d", count)
+	return ufmt.Sprintf("Count: %d", count)
+	std.Emit("TestEmit", "Increment", count)
 }
+
+// How to: Deploy using Gno Playground
