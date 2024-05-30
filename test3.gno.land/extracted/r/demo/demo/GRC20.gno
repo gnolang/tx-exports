@@ -1,4 +1,4 @@
-package usdc
+package frenchie
 
 import (
 	"std"
@@ -10,13 +10,13 @@ import (
 )
 
 var (
-	usdc  *grc20.AdminToken
-	admin std.Address = "g17k3jmr2xdwhu6xzcqh5uwu56644ccptrmhy5d0"
+	frenchie  *grc20.AdminToken
+	admin std.Address = "g1m6cdxuuesrgdu2krq9m5xrrvhx74f56a0w2y3t"
 )
 
 func init() {
-	usdc = grc20.NewAdminToken("UpSideDownCapo", "USDC", 6)
-	USDC.Mint(admin, 1000000000) // @administrator
+	frenchie = grc20.NewAdminToken("frenchieToken", "frenchie", 6)
+	frenchie.Mint(admin, 1000000000) // @administrator
 }
 
 // method proxies as public functions.
@@ -25,11 +25,11 @@ func init() {
 // getters.
 
 func TotalSupply() uint64 {
-	return usdc.TotalSupply()
+	return frenchie.TotalSupply()
 }
 
 func BalanceOf(owner users.AddressOrName) uint64 {
-	balance, err := usdc.BalanceOf(owner.Resolve())
+	balance, err := frenchie.BalanceOf(owner.Resolve())
 	if err != nil {
 		panic(err)
 	}
@@ -37,7 +37,7 @@ func BalanceOf(owner users.AddressOrName) uint64 {
 }
 
 func Allowance(owner, spender users.AddressOrName) uint64 {
-	allowance, err := usdc.Allowance(owner.Resolve(), spender.Resolve())
+	allowance, err := frenchie.Allowance(owner.Resolve(), spender.Resolve())
 	if err != nil {
 		panic(err)
 	}
@@ -48,17 +48,17 @@ func Allowance(owner, spender users.AddressOrName) uint64 {
 
 func Transfer(to users.AddressOrName, amount uint64) {
 	caller := std.GetOrigCaller()
-	usdc.Transfer(caller, to.Resolve(), amount)
+	frenchie.Transfer(caller, to.Resolve(), amount)
 }
 
 func Approve(spender users.AddressOrName, amount uint64) {
 	caller := std.GetOrigCaller()
-	usdc.Approve(caller, spender.Resolve(), amount)
+	frenchie.Approve(caller, spender.Resolve(), amount)
 }
 
 func TransferFrom(from, to users.AddressOrName, amount uint64) {
 	caller := std.GetOrigCaller()
-	usdc.TransferFrom(caller, from.Resolve(), to.Resolve(), amount)
+	frenchie.TransferFrom(caller, from.Resolve(), to.Resolve(), amount)
 }
 
 // administration.
@@ -66,13 +66,13 @@ func TransferFrom(from, to users.AddressOrName, amount uint64) {
 func Mint(address users.AddressOrName, amount uint64) {
 	caller := std.GetOrigCaller()
 	assertIsAdmin(caller)
-	usdc.Mint(address.Resolve(), amount)
+	frenchie.Mint(address.Resolve(), amount)
 }
 
 func Burn(address users.AddressOrName, amount uint64) {
 	caller := std.GetOrigCaller()
 	assertIsAdmin(caller)
-	usdc.Burn(address.Resolve(), amount)
+	frenchie.Burn(address.Resolve(), amount)
 }
 
 // render.
@@ -84,10 +84,10 @@ func Render(path string) string {
 
 	switch {
 	case path == "":
-		return usdc.RenderHome()
+		return frenchie.RenderHome()
 	case c == 2 && parts[0] == "balance":
 		owner := users.AddressOrName(parts[1])
-		balance, _ := usdc.BalanceOf(owner.Resolve())
+		balance, _ := frenchie.BalanceOf(owner.Resolve())
 		return ufmt.Sprintf("%d\n", balance)
 	default:
 		return "404\n"
