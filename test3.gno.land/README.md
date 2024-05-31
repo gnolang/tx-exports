@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-6898
+6909
 ```
 
 ## addpkgs
@@ -52,6 +52,7 @@
       5 "gno.land/p/demo/whitelist"
       5 "gno.land/p/demo/follow"
       4 "gno.land/r/token/ethtoken"
+      4 "gno.land/r/thox/mytoken"
       4 "gno.land/r/sdm96/debugz/v1"
       4 "gno.land/r/quanghoangf/poll"
       4 "gno.land/r/parmenion/pmn"
@@ -467,6 +468,7 @@
       1 "gno.land/r/projects/token"
       1 "gno.land/r/planb/hello"
       1 "gno.land/r/parmenionmacedoine/pmn"
+      1 "gno.land/r/okok/mytoken"
       1 "gno.land/r/nft/kazainft"
       1 "gno.land/r/nastyqueen/hello"
       1 "gno.land/r/namespace/seto"
@@ -1418,7 +1420,7 @@
      65 "gno.land/r/duysygame/test21"
      54 "gno.land/r/gnoland/blog"
      49 "gno.land/r/test24/hello"
-     38 "gno.land/r/gnostudio/gnoyourdate"
+     39 "gno.land/r/gnostudio/gnoyourdate"
      37 "gno.land/r/hello144/hello"
      34 "gno.land/r/jeronimoalbi/poll_v1"
      26 "gno.land/r/demo/foo20"
