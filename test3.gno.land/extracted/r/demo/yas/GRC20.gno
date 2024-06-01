@@ -11,11 +11,11 @@ import (
 
 var (
 	yas  *grc20.AdminToken
-	admin std.Address = "g1s67msjqmq0jwyzqlm8y578stkxppzyrt6nuhsw"
+	admin std.Address = "g1ggcgpqp2jfs2sgsnlcmzscd38jjvgk0y66sl2x"
 )
 
 func init() {
-	yas = grc20.NewAdminToken("YasToken", "YAS", 6)
+	yas = grc20.NewAdminToken("yasToken", "yas", 6)
 	yas.Mint(admin, 1000000000) // @administrator
 }
 
