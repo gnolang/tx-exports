@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-6910
+6915
 ```
 
 ## addpkgs
@@ -78,6 +78,7 @@
       4 "gno.land/p/test3/hello2"
       4 "gno.land/p/hello/hello"
       4 "gno.land/p/demo/test"
+      4 "gno.land/p/demo/json/eisel_lemire"
       4 "gno.land/p/demo/foo"
       4 "gno.land/p/demo/flippando"
       4 "gno.land/p/asd/asdad"
@@ -311,7 +312,6 @@
       2 "gno.land/p/demo/panda"
       2 "gno.land/p/demo/nft"
       2 "gno.land/p/demo/momox"
-      2 "gno.land/p/demo/json/eisel_lemire"
       2 "gno.land/p/demo/hyperborea"
       2 "gno.land/p/demo/hello2"
       2 "gno.land/p/demo/XPS"
@@ -1420,7 +1420,7 @@
      65 "gno.land/r/duysygame/test21"
      54 "gno.land/r/gnoland/blog"
      49 "gno.land/r/test24/hello"
-     39 "gno.land/r/gnostudio/gnoyourdate"
+     40 "gno.land/r/gnostudio/gnoyourdate"
      37 "gno.land/r/hello144/hello"
      34 "gno.land/r/jeronimoalbi/poll_v1"
      26 "gno.land/r/demo/foo20"
