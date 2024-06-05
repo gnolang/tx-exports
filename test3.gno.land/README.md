@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-6915
+6919
 ```
 
 ## addpkgs
@@ -11,9 +11,9 @@
      13 "gno.land/p/duysygame/test2"
      12 "gno.land/r/x1unix/feedback/v2"
      12 "gno.land/p/demo/hello"
+     11 "gno.land/r/demo/hello"
      11 "gno.land/r/clockwork/tictactoe"
      10 "gno.land/r/leon/whitelistfactory1"
-     10 "gno.land/r/demo/hello"
       9 "gno.land/r/demo2/greeting"
       9 "gno.land/r/demo/jefft0_test1_boards"
       9 "gno.land/p/test/hello"
@@ -230,6 +230,7 @@
       2 "gno.land/r/demo/pukika"
       2 "gno.land/r/demo/nft"
       2 "gno.land/r/demo/nested/path/example"
+      2 "gno.land/r/demo/linhpn"
       2 "gno.land/r/demo/keyboardvvorrier"
       2 "gno.land/r/demo/james"
       2 "gno.land/r/demo/honey"
