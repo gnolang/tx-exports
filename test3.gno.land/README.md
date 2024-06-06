@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-6919
+6922
 ```
 
 ## addpkgs
@@ -335,6 +335,8 @@
       1 "gno.land/r/zhrand/hello_test"
       1 "gno.land/r/zhrand/hello"
       1 "gno.land/r/youtubers/youtube"
+      1 "gno.land/r/yax/testing"
+      1 "gno.land/r/yax/hello"
       1 "gno.land/r/xyz/greeting"
       1 "gno.land/r/xjss/hello"
       1 "gno.land/r/xcv/foo"
@@ -363,6 +365,7 @@
       1 "gno.land/r/testperson/person"
       1 "gno.land/r/testooo/hello"
       1 "gno.land/r/testnamespace/mood"
+      1 "gno.land/r/testing/hello"
       1 "gno.land/r/testest2/poll_v1"
       1 "gno.land/r/testest/poll_v1"
       1 "gno.land/r/testees/hello_world"
