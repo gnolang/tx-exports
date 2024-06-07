@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-6922
+6943
 ```
 
 ## addpkgs
@@ -1423,8 +1423,8 @@
      82 "gno.land/r/demo/boards"
      65 "gno.land/r/duysygame/test21"
      54 "gno.land/r/gnoland/blog"
+     53 "gno.land/r/gnostudio/gnoyourdate"
      49 "gno.land/r/test24/hello"
-     40 "gno.land/r/gnostudio/gnoyourdate"
      37 "gno.land/r/hello144/hello"
      34 "gno.land/r/jeronimoalbi/poll_v1"
      26 "gno.land/r/demo/foo20"
@@ -1463,6 +1463,7 @@
       5 "gno.land/r/x1unix/gnofeedback/v1"
       5 "gno.land/r/michelle/mood"
       5 "gno.land/r/foo"
+      5 "gno.land/r/demo/faucet"
       5 "gno.land/r/bar"
       5 "gno.land/p/demo/realmpackagetest"
       4 "gno.land/r/x1unix/sf/v3"
@@ -1481,7 +1482,6 @@
       4 "gno.land/r/duysygame/test17"
       4 "gno.land/r/demo3/greeting"
       4 "gno.land/r/demo2/dpxtr"
-      4 "gno.land/r/demo/faucet"
       3 "ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ"
       3 "gno.land/r/x1unix/feedback/v8"
       3 "gno.land/r/x1unix/feedback/v10"
