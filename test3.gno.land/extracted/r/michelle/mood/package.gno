@@ -3,7 +3,7 @@ package mood
 var mymood = ""
 
 func Render(path string) string {
-	return "My mood is good " + mymood
+	return "My mood is " + mymood
 }
 func ChangeMyMood(mynewmood string) string {
 	mymood = mynewmood

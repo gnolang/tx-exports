@@ -1,4 +1,4 @@
-package PERL
+package pup
 
 import (
 	"std"
@@ -10,13 +10,13 @@ import (
 )
 
 var (
-	PERL  *grc20.AdminToken
-	admin std.Address = "g14gde7f5qnku3pdur5te5r78rq4cues86ftxml7"
+	pup  *grc20.AdminToken
+	admin std.Address = "g1j8jwsce3vcry6s8qmmkxuwuhzww0j8396n3rgm"
 )
 
 func init() {
-	PERL = grc20.NewAdminToken("PERLToken", "PERL", 6)
-	PERL.Mint(admin, 1000000000) // @administrator
+	pup = grc20.NewAdminToken("pupToken", "pup", 6)
+	pup.Mint(admin, 1000000000) // @administrator
 }
 
 // method proxies as public functions.
@@ -25,11 +25,11 @@ func init() {
 // getters.
 
 func TotalSupply() uint64 {
-	return foo.TotalSupply()
+	return pup.TotalSupply()
 }
 
 func BalanceOf(owner users.AddressOrName) uint64 {
-	balance, err := PERL.BalanceOf(owner.Resolve())
+	balance, err := pup.BalanceOf(owner.Resolve())
 	if err != nil {
 		panic(err)
 	}
@@ -37,7 +37,7 @@ func BalanceOf(owner users.AddressOrName) uint64 {
 }
 
 func Allowance(owner, spender users.AddressOrName) uint64 {
-	allowance, err := PERL.Allowance(owner.Resolve(), spender.Resolve())
+	allowance, err := pup.Allowance(owner.Resolve(), spender.Resolve())
 	if err != nil {
 		panic(err)
 	}
@@ -48,17 +48,17 @@ func Allowance(owner, spender users.AddressOrName) uint64 {
 
 func Transfer(to users.AddressOrName, amount uint64) {
 	caller := std.GetOrigCaller()
-	PERL.Transfer(caller, to.Resolve(), amount)
+	pup.Transfer(caller, to.Resolve(), amount)
 }
 
 func Approve(spender users.AddressOrName, amount uint64) {
 	caller := std.GetOrigCaller()
-	PERL.Approve(caller, spender.Resolve(), amount)
+	pup.Approve(caller, spender.Resolve(), amount)
 }
 
 func TransferFrom(from, to users.AddressOrName, amount uint64) {
 	caller := std.GetOrigCaller()
-	PERL.TransferFrom(caller, from.Resolve(), to.Resolve(), amount)
+	pup.TransferFrom(caller, from.Resolve(), to.Resolve(), amount)
 }
 
 // administration.
@@ -66,13 +66,13 @@ func TransferFrom(from, to users.AddressOrName, amount uint64) {
 func Mint(address users.AddressOrName, amount uint64) {
 	caller := std.GetOrigCaller()
 	assertIsAdmin(caller)
-	PERL.Mint(address.Resolve(), amount)
+	pup.Mint(address.Resolve(), amount)
 }
 
 func Burn(address users.AddressOrName, amount uint64) {
 	caller := std.GetOrigCaller()
 	assertIsAdmin(caller)
-	PERL.Burn(address.Resolve(), amount)
+	pup.Burn(address.Resolve(), amount)
 }
 
 // render.
@@ -84,10 +84,10 @@ func Render(path string) string {
 
 	switch {
 	case path == "":
-		return PERL.RenderHome()
+		return pup.RenderHome()
 	case c == 2 && parts[0] == "balance":
 		owner := users.AddressOrName(parts[1])
-		balance, _ := PERL.BalanceOf(owner.Resolve())
+		balance, _ := pup.BalanceOf(owner.Resolve())
 		return ufmt.Sprintf("%d\n", balance)
 	default:
 		return "404\n"
