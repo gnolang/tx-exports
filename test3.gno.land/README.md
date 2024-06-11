@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-6947
+6961
 ```
 
 ## addpkgs
@@ -227,9 +227,11 @@
       2 "gno.land/r/demo/testing"
       2 "gno.land/r/demo/soju"
       2 "gno.land/r/demo/ripl"
+      2 "gno.land/r/demo/rezatestgrc20"
       2 "gno.land/r/demo/pukika"
       2 "gno.land/r/demo/nft"
       2 "gno.land/r/demo/nested/path/example"
+      2 "gno.land/r/demo/mytokenreza"
       2 "gno.land/r/demo/linhpn"
       2 "gno.land/r/demo/keyboardvvorrier"
       2 "gno.land/r/demo/james"
@@ -1422,8 +1424,8 @@
      83 "gno.land/r/feedback/simplefeedback"
      82 "gno.land/r/demo/boards"
      65 "gno.land/r/duysygame/test21"
+     54 "gno.land/r/gnostudio/gnoyourdate"
      54 "gno.land/r/gnoland/blog"
-     53 "gno.land/r/gnostudio/gnoyourdate"
      49 "gno.land/r/test24/hello"
      37 "gno.land/r/hello144/hello"
      34 "gno.land/r/jeronimoalbi/poll_v1"
