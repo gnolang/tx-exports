@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-6962
+7222
 ```
 
 ## addpkgs
@@ -97,6 +97,8 @@
       3 "gno.land/r/michelle/mood"
       3 "gno.land/r/lololabs/llb"
       3 "gno.land/r/leon/pollr"
+      3 "gno.land/r/kaichao/hello2"
+      3 "gno.land/r/kaichao/hello"
       3 "gno.land/r/hello15/hello"
       3 "gno.land/r/feedback/realmfeedbacktest"
       3 "gno.land/r/feedback/feedbackdenystest3"
@@ -363,6 +365,7 @@
       1 "gno.land/r/tnam0x/test"
       1 "gno.land/r/thomilx/hello"
       1 "gno.land/r/testx/hello"
+      1 "gno.land/r/testtesttest/test"
       1 "gno.land/r/tests/tictactoe"
       1 "gno.land/r/testperson/person"
       1 "gno.land/r/testooo/hello"
@@ -566,6 +569,7 @@
       1 "gno.land/r/gstest/schematest"
       1 "gno.land/r/grc721token/myNFTtoken"
       1 "gno.land/r/grc20token/grc20token"
+      1 "gno.land/r/gophercon/mood"
       1 "gno.land/r/goodbye/goodbyetest"
       1 "gno.land/r/gnostudio/testhello"
       1 "gno.land/r/gnostudio/hello"
@@ -1414,11 +1418,11 @@
 
 ## top realm calls
 ```
-   1212 "gno.land/r/demo/minter"
+   1450 "gno.land/r/demo/minter"
     123 "gno.land/r/demo/users"
     115 "gno.land/r/test10/poll"
     111 "gno.land/r/gnoland/faucet"
-    103 "gno.land/r/demo/tong"
+    104 "gno.land/r/demo/tong"
     100 "gno.land/r/boom/boom"
      87 "gno.land/r/duysygame/test22"
      83 "gno.land/r/feedback/simplefeedback"
@@ -1462,10 +1466,10 @@
       6 "gno.land/r/test20/hello"
       6 "gno.land/r/test11/poll"
       6 "gno.land/r/ilker2/hello"
+      6 "gno.land/r/demo/faucet"
       5 "gno.land/r/x1unix/gnofeedback/v1"
       5 "gno.land/r/michelle/mood"
       5 "gno.land/r/foo"
-      5 "gno.land/r/demo/faucet"
       5 "gno.land/r/bar"
       5 "gno.land/p/demo/realmpackagetest"
       4 "gno.land/r/x1unix/sf/v3"
@@ -1554,6 +1558,7 @@
       1 "gno.land/r/jeronimoalbi/mood_v0"
       1 "gno.land/r/jeronimoalbi/mood"
       1 "gno.land/r/hello33/hello"
+      1 "gno.land/r/gophercon/mood"
       1 "gno.land/r/gnostudio/hello"
       1 "gno.land/r/feedback/feedbackdenystest3"
       1 "gno.land/r/feedback/feedbackdenystest1"
