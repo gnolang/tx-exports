@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-7222
+7884
 ```
 
 ## addpkgs
@@ -1418,7 +1418,7 @@
 
 ## top realm calls
 ```
-   1450 "gno.land/r/demo/minter"
+   1877 "gno.land/r/demo/minter"
     123 "gno.land/r/demo/users"
     115 "gno.land/r/test10/poll"
     111 "gno.land/r/gnoland/faucet"
@@ -1428,14 +1428,14 @@
      83 "gno.land/r/feedback/simplefeedback"
      82 "gno.land/r/demo/boards"
      65 "gno.land/r/duysygame/test21"
-     54 "gno.land/r/gnostudio/gnoyourdate"
+     59 "gno.land/r/gnostudio/gnoyourdate"
      54 "gno.land/r/gnoland/blog"
      49 "gno.land/r/test24/hello"
      37 "gno.land/r/hello144/hello"
      34 "gno.land/r/jeronimoalbi/poll_v1"
      26 "gno.land/r/demo/foo20"
+     22 "gno.land/r/gnostudio/feedback_v1"
      21 "gno.land/r/duysygame/test19"
-     20 "gno.land/r/gnostudio/feedback_v1"
      20 "gno.land/r/duysyland/erc20"
      19 "gno.land/r/sdm/somedudefeedbacktest_8"
      19 "gno.land/r/position"
