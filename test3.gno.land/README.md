@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-7884
+8322
 ```
 
 ## addpkgs
@@ -97,6 +97,7 @@
       3 "gno.land/r/michelle/mood"
       3 "gno.land/r/lololabs/llb"
       3 "gno.land/r/leon/pollr"
+      3 "gno.land/r/lennyvong/poll"
       3 "gno.land/r/kaichao/hello2"
       3 "gno.land/r/kaichao/hello"
       3 "gno.land/r/hello15/hello"
@@ -515,6 +516,7 @@
       1 "gno.land/r/leon/mytoken"
       1 "gno.land/r/leon/counter"
       1 "gno.land/r/leon/addrtostring"
+      1 "gno.land/r/lennyvong/counter"
       1 "gno.land/r/lali/greeting2"
       1 "gno.land/r/kush/hello"
       1 "gno.land/r/ksergio/hello"
@@ -570,6 +572,7 @@
       1 "gno.land/r/grc721token/myNFTtoken"
       1 "gno.land/r/grc20token/grc20token"
       1 "gno.land/r/gophercon/mood"
+      1 "gno.land/r/gopher/mymood"
       1 "gno.land/r/goodbye/goodbyetest"
       1 "gno.land/r/gnostudio/testhello"
       1 "gno.land/r/gnostudio/hello"
@@ -1559,6 +1562,7 @@
       1 "gno.land/r/jeronimoalbi/mood"
       1 "gno.land/r/hello33/hello"
       1 "gno.land/r/gophercon/mood"
+      1 "gno.land/r/gopher/mymood"
       1 "gno.land/r/gnostudio/hello"
       1 "gno.land/r/feedback/feedbackdenystest3"
       1 "gno.land/r/feedback/feedbackdenystest1"
