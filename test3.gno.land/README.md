@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-8322
+8674
 ```
 
 ## addpkgs
@@ -633,6 +633,7 @@
       1 "gno.land/r/demohive/hive"
       1 "gno.land/r/demofromme/d123"
       1 "gno.land/r/demo56/hive"
+      1 "gno.land/r/demo5/newtest"
       1 "gno.land/r/demo5/atom1"
       1 "gno.land/r/demo5/ahnge2000"
       1 "gno.land/r/demo45/hello"
