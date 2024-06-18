@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-8850
+8854
 ```
 
 ## addpkgs
@@ -437,6 +437,7 @@
       1 "gno.land/r/test/hellonewtest"
       1 "gno.land/r/test/demoTest"
       1 "gno.land/r/tes/test"
+      1 "gno.land/r/t/hello"
       1 "gno.land/r/stuyk/userinvokes"
       1 "gno.land/r/starknode/cringe"
       1 "gno.land/r/silversurf/hello"
@@ -1442,7 +1443,7 @@
      83 "gno.land/r/feedback/simplefeedback"
      82 "gno.land/r/demo/boards"
      65 "gno.land/r/duysygame/test21"
-     59 "gno.land/r/gnostudio/gnoyourdate"
+     60 "gno.land/r/gnostudio/gnoyourdate"
      54 "gno.land/r/gnoland/blog"
      49 "gno.land/r/test24/hello"
      37 "gno.land/r/hello144/hello"
