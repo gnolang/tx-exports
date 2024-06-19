@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-8854
+8859
 ```
 
 ## addpkgs
@@ -1119,6 +1119,7 @@
       1 "gno.land/r/bakerik/hello"
       1 "gno.land/r/b069/rsky"
       1 "gno.land/r/asdsad/asdasd/mytoken"
+      1 "gno.land/r/asdf/hellojaeho"
       1 "gno.land/r/asdasd/asdads"
       1 "gno.land/r/asdad/hello"
       1 "gno.land/r/asd/asd"
