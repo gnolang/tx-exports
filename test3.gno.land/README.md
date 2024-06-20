@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-8859
+8868
 ```
 
 ## addpkgs
@@ -154,6 +154,7 @@
       2 "gno.land/r/x1unix/feedback/v10"
       2 "gno.land/r/whatevertest/whatever"
       2 "gno.land/r/wgnot"
+      2 "gno.land/r/tryagain/mood"
       2 "gno.land/r/tokenpl/tokenpl"
       2 "gno.land/r/tokenPop/tokenPop"
       2 "gno.land/r/token/omen"
@@ -179,6 +180,7 @@
       2 "gno.land/r/planb/helloworld"
       2 "gno.land/r/pengu/whitelistfactory"
       2 "gno.land/r/pengu/whitelist"
+      2 "gno.land/r/michelle22/mood"
       2 "gno.land/r/michelle/mymoodstatus"
       2 "gno.land/r/michelle/mymoodboard"
       2 "gno.land/r/michelle/mymood"
@@ -361,6 +363,8 @@
       1 "gno.land/r/x1unix/feedback/v4"
       1 "gno.land/r/whitelist/DIGIX666"
       1 "gno.land/r/vadymspace/hello"
+      1 "gno.land/r/tryagain/mood2"
+      1 "gno.land/r/tryagain/mood1"
       1 "gno.land/r/try/gloomajin_001"
       1 "gno.land/r/truongkai/truong"
       1 "gno.land/r/totoslip/hello"
@@ -497,6 +501,8 @@
       1 "gno.land/r/myNFTtoken/myNFTtoken"
       1 "gno.land/r/mpj/mood"
       1 "gno.land/r/mpj/greeting"
+      1 "gno.land/r/michellemood/mood"
+      1 "gno.land/r/michelle_22/mood"
       1 "gno.land/r/michelle34/testpoll"
       1 "gno.land/r/michelle22/moodv2"
       1 "gno.land/r/michelle/testpoll"
@@ -1565,6 +1571,7 @@
       1 "gno.land/r/stuyk/userinvokes3"
       1 "gno.land/r/rawr/counter"
       1 "gno.land/r/mpj/greeting"
+      1 "gno.land/r/michelle22/mood"
       1 "gno.land/r/michelle/mood_v1"
       1 "gno.land/r/marbella/huecoco"
       1 "gno.land/r/lk/lk"
