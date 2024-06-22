@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-8874
+8880
 ```
 
 ## addpkgs
@@ -23,11 +23,11 @@
       8 "gno.land/p/duysygame/gamedemo"
       7 "gno.land/r/test1/tictacgno"
       7 "gno.land/r/test/test"
+      7 "gno.land/r/test/hello"
       7 "gno.land/r/demo/GemCoin"
       7 "gno.land/p/test/test"
       7 "gno.land/p/demo5/premier"
       7 "gno.land/p/GRXToken/GRX"
-      6 "gno.land/r/test/hello"
       6 "gno.land/r/grc20token/mytoken"
       6 "gno.land/r/demo/kazainft"
       6 "gno.land/r/bluehoneybadger/person"
@@ -470,6 +470,7 @@
       1 "gno.land/r/sdm/feedback/v2"
       1 "gno.land/r/sdm/feedback/v1"
       1 "gno.land/r/sdm/echo"
+      1 "gno.land/r/sanbor/hello"
       1 "gno.land/r/sad/greeting"
       1 "gno.land/r/ruslank/dragon"
       1 "gno.land/r/rsky/b069"
@@ -573,6 +574,7 @@
       1 "gno.land/r/hello12/v1"
       1 "gno.land/r/hello11156/hello11156"
       1 "gno.land/r/hello/hellotest"
+      1 "gno.land/r/hello/demo1"
       1 "gno.land/r/hello"
       1 "gno.land/r/hehe"
       1 "gno.land/r/heeello/h"
