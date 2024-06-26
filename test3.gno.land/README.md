@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-8887
+8904
 ```
 
 ## addpkgs
@@ -84,6 +84,7 @@
       4 "gno.land/p/asd/asdad"
       3 "gno.land/r/youtubers/cryptopunkstar"
       3 "gno.land/r/x1unix/feedback/v3"
+      3 "gno.land/r/ttt123/hello"
       3 "gno.land/r/test12/poll_v1"
       3 "gno.land/r/test1/hello"
       3 "gno.land/r/test/test1"
@@ -339,6 +340,7 @@
       2 "gno.land/p/5/5"
       2 "gno.land/p/1/2"
       1 "gno.land/r1/a"
+      1 "gno.land/r/zjubfd/hello"
       1 "gno.land/r/zhrand/juicy"
       1 "gno.land/r/zhrand/hello_test"
       1 "gno.land/r/zhrand/hello"
@@ -1143,6 +1145,7 @@
       1 "gno.land/r/alexis/counter"
       1 "gno.land/r/alanrsoares/svgen4"
       1 "gno.land/r/alanrsoares/svgen3"
+      1 "gno.land/r/alanrsoares/pad"
       1 "gno.land/r/alanrsoares/hello_counter_v0_0_1"
       1 "gno.land/r/alanrsoares/hello"
       1 "gno.land/r/Genzo/Genzo"
@@ -1417,6 +1420,7 @@
       1 "gno.land/p/anunnakis/sealing"
       1 "gno.land/p/anunnakis/coming"
       1 "gno.land/p/alikarim/hello"
+      1 "gno.land/p/alanrsoares/pad_v1_0_0"
       1 "gno.land/p/ads/adad"
       1 "gno.land/p/adriana/hello"
       1 "gno.land/p/adads/hello1"
@@ -1501,6 +1505,7 @@
       5 "gno.land/p/demo/realmpackagetest"
       4 "gno.land/r/x1unix/sf/v3"
       4 "gno.land/r/x1unix/feedback/v11"
+      4 "gno.land/r/ttt123/hello"
       4 "gno.land/r/test98/hello"
       4 "gno.land/r/test5/tictacgno"
       4 "gno.land/r/test4/poll_v1"
