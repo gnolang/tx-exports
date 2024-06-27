@@ -1,13 +1,9 @@
-package hello
+package main
 
-func Hello() string {
-	return "Hello() called"
-}
+import (
+	"fmt"
+)
 
-// func Render() string {
-// 	return "Render() called"
-// }
-
-func Render(path string) string {
-	return "Render(path string) called with\n# " + path
+func main() {
+	fmt.Println("Hello, world!")
 }

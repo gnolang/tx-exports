@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-8904
+8921
 ```
 
 ## addpkgs
@@ -480,6 +480,7 @@
       1 "gno.land/r/rozaser/hello"
       1 "gno.land/r/romka_h/hello"
       1 "gno.land/r/roger/counter"
+      1 "gno.land/r/rj111/hellojaeho1"
       1 "gno.land/r/ritesh/ritesh"
       1 "gno.land/r/rifatmax/eeee"
       1 "gno.land/r/rawr/counter"
@@ -926,6 +927,8 @@
       1 "gno.land/r/demo/hhh"
       1 "gno.land/r/demo/hgh"
       1 "gno.land/r/demo/hfd"
+      1 "gno.land/r/demo/hello_test_04"
+      1 "gno.land/r/demo/hello_test_03"
       1 "gno.land/r/demo/hello_j_4"
       1 "gno.land/r/demo/hello_j_3"
       1 "gno.land/r/demo/hello_j_2"
@@ -1148,6 +1151,7 @@
       1 "gno.land/r/alanrsoares/pad"
       1 "gno.land/r/alanrsoares/hello_counter_v0_0_1"
       1 "gno.land/r/alanrsoares/hello"
+      1 "gno.land/r/a/goodbye1"
       1 "gno.land/r/Genzo/Genzo"
       1 "gno.land/r/Demo/bad"
       1 "gno.land/r/Chaddi/Chaddi_test"
