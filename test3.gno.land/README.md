@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-8921
+8927
 ```
 
 ## addpkgs
@@ -242,6 +242,7 @@
       2 "gno.land/r/demo/keyboardvvorrier"
       2 "gno.land/r/demo/james"
       2 "gno.land/r/demo/honey"
+      2 "gno.land/r/demo/hellowa"
       2 "gno.land/r/demo/hellognopher"
       2 "gno.land/r/demo/hello3"
       2 "gno.land/r/demo/harambe"
@@ -1139,6 +1140,7 @@
       1 "gno.land/r/asdad/hello"
       1 "gno.land/r/asd/asd"
       1 "gno.land/r/asasdasd/asasd/blog"
+      1 "gno.land/r/as/helloky"
       1 "gno.land/r/anunnakis/rising"
       1 "gno.land/r/antho_gno/hello"
       1 "gno.land/r/alikarim/hello"
@@ -1531,6 +1533,7 @@
       3 "gno.land/r/mpj/mood"
       3 "gno.land/r/malek/whitelistfactory"
       3 "gno.land/r/hello35/hello"
+      3 "gno.land/r/gophercon/mood"
       3 "gno.land/r/feedback/newfeedback"
       3 "gno.land/r/duysygame/test9"
       3 "gno.land/r/devx/hello"
@@ -1595,7 +1598,6 @@
       1 "gno.land/r/jeronimoalbi/mood_v0"
       1 "gno.land/r/jeronimoalbi/mood"
       1 "gno.land/r/hello33/hello"
-      1 "gno.land/r/gophercon/mood"
       1 "gno.land/r/gopher/mymood"
       1 "gno.land/r/gnostudio/hello"
       1 "gno.land/r/feedback/feedbackdenystest3"
