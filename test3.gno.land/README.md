@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-8927
+8935
 ```
 
 ## addpkgs
@@ -181,6 +181,7 @@
       2 "gno.land/r/planb/helloworld"
       2 "gno.land/r/pengu/whitelistfactory"
       2 "gno.land/r/pengu/whitelist"
+      2 "gno.land/r/michelle22/moodtest"
       2 "gno.land/r/michelle22/mood"
       2 "gno.land/r/michelle/mymoodstatus"
       2 "gno.land/r/michelle/mymoodboard"
@@ -561,6 +562,7 @@
       1 "gno.land/r/ilker/counter"
       1 "gno.land/r/huhuhuhuhuh/huhuhuhuhuh"
       1 "gno.land/r/hi2/hello"
+      1 "gno.land/r/helx/hello"
       1 "gno.land/r/hellow2/hello"
       1 "gno.land/r/hellototo/hello"
       1 "gno.land/r/hellotestfmt/hellotestfmt"
@@ -580,6 +582,7 @@
       1 "gno.land/r/hello/hellotest"
       1 "gno.land/r/hello/demo1"
       1 "gno.land/r/hello"
+      1 "gno.land/r/hel/hello"
       1 "gno.land/r/hehe"
       1 "gno.land/r/heeello/h"
       1 "gno.land/r/hallo/hallodemo"
@@ -1227,6 +1230,7 @@
       1 "gno.land/p/ritesh/rit"
       1 "gno.land/p/ritesh/magic1"
       1 "gno.land/p/rifatmax/ee"
+      1 "gno.land/p/reyuipp/hello"
       1 "gno.land/p/quickfind/1"
       1 "gno.land/p/quanghoangf/poll"
       1 "gno.land/p/projects/foo"
@@ -1262,6 +1266,7 @@
       1 "gno.land/p/jemoeder/miauw"
       1 "gno.land/p/irreverentsimplicity/flippandoserver"
       1 "gno.land/p/ilker/hello/hello"
+      1 "gno.land/p/helxuil/bonsoir"
       1 "gno.land/p/hello1/demo/hello"
       1 "gno.land/p/hello/hello122/hello"
       1 "gno.land/p/hello/hello/hello"
@@ -1588,6 +1593,7 @@
       1 "gno.land/r/stuyk/userinvokes3"
       1 "gno.land/r/rawr/counter"
       1 "gno.land/r/mpj/greeting"
+      1 "gno.land/r/michelle22/moodtest"
       1 "gno.land/r/michelle22/mood"
       1 "gno.land/r/michelle/mood_v1"
       1 "gno.land/r/marbella/huecoco"
