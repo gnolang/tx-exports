@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-8935
+8941
 ```
 
 ## addpkgs
@@ -1549,6 +1549,7 @@
       2 "gno.land/r/x1unix/sf/v4"
       2 "gno.land/r/x1unix/sf/v1"
       2 "gno.land/r/x1unix/schematest_6"
+      2 "gno.land/r/varmeta/vmt721"
       2 "gno.land/r/vadymspace/hello"
       2 "gno.land/r/test7/poll_v1"
       2 "gno.land/r/test2/tictacgno"
