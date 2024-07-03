@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-8941
+8967
 ```
 
 ## addpkgs
@@ -21,6 +21,7 @@
       8 "gno.land/r/hello/hello"
       8 "gno.land/p/duysyland/duysytoken"
       8 "gno.land/p/duysygame/gamedemo"
+      7 "gno.land/r/wyhaines/gnocial4"
       7 "gno.land/r/test1/tictacgno"
       7 "gno.land/r/test/test"
       7 "gno.land/r/test/hello"
@@ -51,6 +52,7 @@
       5 "gno.land/p/demo2/hello"
       5 "gno.land/p/demo/whitelist"
       5 "gno.land/p/demo/follow"
+      4 "gno.land/r/wyhaines/gnocial"
       4 "gno.land/r/token/ethtoken"
       4 "gno.land/r/thox/mytoken"
       4 "gno.land/r/sdm96/debugz/v1"
@@ -153,6 +155,7 @@
       2 "gno.land/r/x1unix/feedback/v5"
       2 "gno.land/r/x1unix/feedback/v11"
       2 "gno.land/r/x1unix/feedback/v10"
+      2 "gno.land/r/wyhaines/gnocial2"
       2 "gno.land/r/whatevertest/whatever"
       2 "gno.land/r/wgnot"
       2 "gno.land/r/tryagain/mood"
@@ -365,6 +368,7 @@
       1 "gno.land/r/x1unix/feedback/v7"
       1 "gno.land/r/x1unix/feedback/v6"
       1 "gno.land/r/x1unix/feedback/v4"
+      1 "gno.land/r/wyhaines/gnocial3"
       1 "gno.land/r/whitelist/DIGIX666"
       1 "gno.land/r/vadymspace/hello"
       1 "gno.land/r/tryagain/mood2"
@@ -511,6 +515,7 @@
       1 "gno.land/r/michellemood/mood"
       1 "gno.land/r/michelle_22/mood"
       1 "gno.land/r/michelle34/testpoll"
+      1 "gno.land/r/michelle22/valopertest"
       1 "gno.land/r/michelle22/moodv2"
       1 "gno.land/r/michelle/testpoll"
       1 "gno.land/r/michelle/mymoodtest"
@@ -602,6 +607,7 @@
       1 "gno.land/r/gnostudio/hello"
       1 "gno.land/r/gnostudio/gnoyourdate"
       1 "gno.land/r/gnostudio/feedback_v1"
+      1 "gno.land/r/gnosocial/gnocial"
       1 "gno.land/r/gnomerna/hello"
       1 "gno.land/r/gnoland/16531"
       1 "gno.land/r/gno/hello"
@@ -666,8 +672,10 @@
       1 "gno.land/r/demo5/ahnge2000"
       1 "gno.land/r/demo45/hello"
       1 "gno.land/r/demo44/hello"
+      1 "gno.land/r/demo4/hello"
       1 "gno.land/r/demo4/hallo"
       1 "gno.land/r/demo4/greeting"
+      1 "gno.land/r/demo3/hello"
       1 "gno.land/r/demo3/counter"
       1 "gno.land/r/demo2/triskelbzh"
       1 "gno.land/r/demo2/mouss"
@@ -1585,6 +1593,10 @@
       1 "gno.land/r/x1unix/sf/v2"
       1 "gno.land/r/x1unix/feedback/v9"
       1 "gno.land/r/x1unix/feedback/v5"
+      1 "gno.land/r/wyhaines/gnocial4"
+      1 "gno.land/r/wyhaines/gnocial3"
+      1 "gno.land/r/wyhaines/gnocial2"
+      1 "gno.land/r/wyhaines/gnocial"
       1 "gno.land/r/testnamespace/mood"
       1 "gno.land/r/test99/hello"
       1 "gno.land/r/test3/poll_v1"
