@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-8967
+8997
 ```
 
 ## addpkgs
@@ -86,6 +86,7 @@
       4 "gno.land/p/asd/asdad"
       3 "gno.land/r/youtubers/cryptopunkstar"
       3 "gno.land/r/x1unix/feedback/v3"
+      3 "gno.land/r/wyhaines/gnocial10"
       3 "gno.land/r/ttt123/hello"
       3 "gno.land/r/test12/poll_v1"
       3 "gno.land/r/test1/hello"
@@ -155,6 +156,7 @@
       2 "gno.land/r/x1unix/feedback/v5"
       2 "gno.land/r/x1unix/feedback/v11"
       2 "gno.land/r/x1unix/feedback/v10"
+      2 "gno.land/r/wyhaines/gnocial5"
       2 "gno.land/r/wyhaines/gnocial2"
       2 "gno.land/r/whatevertest/whatever"
       2 "gno.land/r/wgnot"
@@ -368,7 +370,12 @@
       1 "gno.land/r/x1unix/feedback/v7"
       1 "gno.land/r/x1unix/feedback/v6"
       1 "gno.land/r/x1unix/feedback/v4"
+      1 "gno.land/r/wyhaines/gnocial8"
+      1 "gno.land/r/wyhaines/gnocial7"
+      1 "gno.land/r/wyhaines/gnocial6"
       1 "gno.land/r/wyhaines/gnocial3"
+      1 "gno.land/r/wyhaines/gnocial12"
+      1 "gno.land/r/wyhaines/gnocial11"
       1 "gno.land/r/whitelist/DIGIX666"
       1 "gno.land/r/vadymspace/hello"
       1 "gno.land/r/tryagain/mood2"
@@ -1475,7 +1482,7 @@
     105 "gno.land/r/demo/tong"
     100 "gno.land/r/boom/boom"
      87 "gno.land/r/duysygame/test22"
-     83 "gno.land/r/feedback/simplefeedback"
+     84 "gno.land/r/feedback/simplefeedback"
      82 "gno.land/r/demo/boards"
      65 "gno.land/r/duysygame/test21"
      60 "gno.land/r/gnostudio/gnoyourdate"
@@ -1524,6 +1531,7 @@
       5 "gno.land/p/demo/realmpackagetest"
       4 "gno.land/r/x1unix/sf/v3"
       4 "gno.land/r/x1unix/feedback/v11"
+      4 "gno.land/r/wyhaines/gnocial12"
       4 "gno.land/r/ttt123/hello"
       4 "gno.land/r/test98/hello"
       4 "gno.land/r/test5/tictacgno"
@@ -1557,6 +1565,9 @@
       2 "gno.land/r/x1unix/sf/v4"
       2 "gno.land/r/x1unix/sf/v1"
       2 "gno.land/r/x1unix/schematest_6"
+      2 "gno.land/r/wyhaines/gnocial8"
+      2 "gno.land/r/wyhaines/gnocial4"
+      2 "gno.land/r/wyhaines/gnocial10"
       2 "gno.land/r/varmeta/vmt721"
       2 "gno.land/r/vadymspace/hello"
       2 "gno.land/r/test7/poll_v1"
@@ -1593,7 +1604,9 @@
       1 "gno.land/r/x1unix/sf/v2"
       1 "gno.land/r/x1unix/feedback/v9"
       1 "gno.land/r/x1unix/feedback/v5"
-      1 "gno.land/r/wyhaines/gnocial4"
+      1 "gno.land/r/wyhaines/gnocial7"
+      1 "gno.land/r/wyhaines/gnocial6"
+      1 "gno.land/r/wyhaines/gnocial5"
       1 "gno.land/r/wyhaines/gnocial3"
       1 "gno.land/r/wyhaines/gnocial2"
       1 "gno.land/r/wyhaines/gnocial"
