@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-8997
+9007
 ```
 
 ## addpkgs
@@ -389,6 +389,7 @@
       1 "gno.land/r/testx/hello"
       1 "gno.land/r/testtesttest/test"
       1 "gno.land/r/tests/tictactoe"
+      1 "gno.land/r/testrelease/testrelease05"
       1 "gno.land/r/testperson/person"
       1 "gno.land/r/testooo/hello"
       1 "gno.land/r/testnet/testnet"
