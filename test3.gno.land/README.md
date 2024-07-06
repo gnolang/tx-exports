@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-9007
+9067
 ```
 
 ## addpkgs
@@ -25,6 +25,7 @@
       7 "gno.land/r/test1/tictacgno"
       7 "gno.land/r/test/test"
       7 "gno.land/r/test/hello"
+      7 "gno.land/r/dragicevicb/raffleentry"
       7 "gno.land/r/demo/GemCoin"
       7 "gno.land/p/test/test"
       7 "gno.land/p/demo5/premier"
@@ -156,6 +157,7 @@
       2 "gno.land/r/x1unix/feedback/v5"
       2 "gno.land/r/x1unix/feedback/v11"
       2 "gno.land/r/x1unix/feedback/v10"
+      2 "gno.land/r/wyhaines/gnosocial"
       2 "gno.land/r/wyhaines/gnocial5"
       2 "gno.land/r/wyhaines/gnocial2"
       2 "gno.land/r/whatevertest/whatever"
@@ -374,6 +376,11 @@
       1 "gno.land/r/wyhaines/gnocial7"
       1 "gno.land/r/wyhaines/gnocial6"
       1 "gno.land/r/wyhaines/gnocial3"
+      1 "gno.land/r/wyhaines/gnocial16"
+      1 "gno.land/r/wyhaines/gnocial15"
+      1 "gno.land/r/wyhaines/gnocial14"
+      1 "gno.land/r/wyhaines/gnocial13_1"
+      1 "gno.land/r/wyhaines/gnocial13"
       1 "gno.land/r/wyhaines/gnocial12"
       1 "gno.land/r/wyhaines/gnocial11"
       1 "gno.land/r/whitelist/DIGIX666"
@@ -553,6 +560,7 @@
       1 "gno.land/r/kush/hello"
       1 "gno.land/r/ksergio/hello"
       1 "gno.land/r/kryzzz/hello"
+      1 "gno.land/r/kirk_haines/gnosocial"
       1 "gno.land/r/kestar/oblos"
       1 "gno.land/r/kestar/DZPOWER"
       1 "gno.land/r/kennethy/hello"
@@ -1532,6 +1540,7 @@
       5 "gno.land/p/demo/realmpackagetest"
       4 "gno.land/r/x1unix/sf/v3"
       4 "gno.land/r/x1unix/feedback/v11"
+      4 "gno.land/r/wyhaines/gnocial14"
       4 "gno.land/r/wyhaines/gnocial12"
       4 "gno.land/r/ttt123/hello"
       4 "gno.land/r/test98/hello"
@@ -1551,6 +1560,8 @@
       3 "ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ"
       3 "gno.land/r/x1unix/feedback/v8"
       3 "gno.land/r/x1unix/feedback/v10"
+      3 "gno.land/r/wyhaines/gnosocial"
+      3 "gno.land/r/wyhaines/gnocial15"
       3 "gno.land/r/test/poll3"
       3 "gno.land/r/mpj/mood"
       3 "gno.land/r/malek/whitelistfactory"
@@ -1568,6 +1579,7 @@
       2 "gno.land/r/x1unix/schematest_6"
       2 "gno.land/r/wyhaines/gnocial8"
       2 "gno.land/r/wyhaines/gnocial4"
+      2 "gno.land/r/wyhaines/gnocial16"
       2 "gno.land/r/wyhaines/gnocial10"
       2 "gno.land/r/varmeta/vmt721"
       2 "gno.land/r/vadymspace/hello"
@@ -1581,6 +1593,7 @@
       2 "gno.land/r/sdm/echo"
       2 "gno.land/r/quanghoangf/hello"
       2 "gno.land/r/kouteki/mood"
+      2 "gno.land/r/kirk_haines/gnosocial"
       2 "gno.land/r/kennethy/hello"
       2 "gno.land/r/ilker/counter"
       2 "gno.land/r/hellotest/poll"
