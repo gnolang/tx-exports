@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-9067
+9073
 ```
 
 ## addpkgs
@@ -59,6 +59,7 @@
       4 "gno.land/r/sdm96/debugz/v1"
       4 "gno.land/r/quanghoangf/poll"
       4 "gno.land/r/parmenion/pmn"
+      4 "gno.land/r/michelle22/raffleentry"
       4 "gno.land/r/leon/poll"
       4 "gno.land/r/lali/mood"
       4 "gno.land/r/kestar/obkos"
@@ -188,6 +189,7 @@
       2 "gno.land/r/planb/helloworld"
       2 "gno.land/r/pengu/whitelistfactory"
       2 "gno.land/r/pengu/whitelist"
+      2 "gno.land/r/michelle22/raffle"
       2 "gno.land/r/michelle22/moodtest"
       2 "gno.land/r/michelle22/mood"
       2 "gno.land/r/michelle/mymoodstatus"
