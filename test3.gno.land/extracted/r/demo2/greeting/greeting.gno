@@ -1,13 +1,13 @@
-package greeting
+package hello
 
 var (
-  greeting string
+	greeting string
 )
 
 func SetGreeting(msg string) {
-  greeting = msg
+	greeting = msg
 }
 
 func GetGreeting() string {
-  return greeting
+	return greeting
 }
