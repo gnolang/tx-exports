@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-9074
+9108
 ```
 
 ## addpkgs
@@ -242,6 +242,7 @@
       2 "gno.land/r/demo/tolu"
       2 "gno.land/r/demo/testing"
       2 "gno.land/r/demo/soju"
+      2 "gno.land/r/demo/scarab"
       2 "gno.land/r/demo/ripl"
       2 "gno.land/r/demo/rezatestgrc20"
       2 "gno.land/r/demo/pukika"
@@ -473,9 +474,11 @@
       1 "gno.land/r/silversurf/hello"
       1 "gno.land/r/seancaseo/mood2"
       1 "gno.land/r/seancaseo/mood"
+      1 "gno.land/r/sdm96/zzz"
       1 "gno.land/r/sdm96/testpkgs/v9/hello"
       1 "gno.land/r/sdm96/testpkgs/v11/hello"
       1 "gno.land/r/sdm96/testpkgs/v10/hello"
+      1 "gno.land/r/sdm96/test1111111"
       1 "gno.land/r/sdm96/simplefeedback/v1/simplefeedback"
       1 "gno.land/r/sdm96/feedback/v1"
       1 "gno.land/r/sdm96/debugz"
@@ -534,10 +537,12 @@
       1 "gno.land/r/michelle34/testpoll"
       1 "gno.land/r/michelle22/valopertest"
       1 "gno.land/r/michelle22/moodv2"
+      1 "gno.land/r/michelle22/main"
       1 "gno.land/r/michelle/testpoll"
       1 "gno.land/r/michelle/mymoodtest"
       1 "gno.land/r/michelle/moodtest"
       1 "gno.land/r/michelle/moodboard"
+      1 "gno.land/r/michelle/main"
       1 "gno.land/r/michelle/learngno"
       1 "gno.land/r/michelle/howdoIfeel"
       1 "gno.land/r/marbella/huecoco"
@@ -833,6 +838,7 @@
       1 "gno.land/r/demo/sepli2"
       1 "gno.land/r/demo/sepli"
       1 "gno.land/r/demo/seoul"
+      1 "gno.land/r/demo/scar"
       1 "gno.land/r/demo/sato"
       1 "gno.land/r/demo/samewere"
       1 "gno.land/r/demo/sam"
@@ -1486,7 +1492,7 @@
 
 ## top realm calls
 ```
-   1877 "gno.land/r/demo/minter"
+   1878 "gno.land/r/demo/minter"
     123 "gno.land/r/demo/users"
     115 "gno.land/r/test10/poll"
     111 "gno.land/r/gnoland/faucet"

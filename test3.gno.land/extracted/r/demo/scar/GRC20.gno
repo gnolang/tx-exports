@@ -1,4 +1,4 @@
-package harambe
+package scar
 
 import (
 	"std"
@@ -10,13 +10,13 @@ import (
 )
 
 var (
-	harambe  *grc20.AdminToken
-	admin std.Address = "g1h6n749m920lvaef2qrpsa2vmssr4sq60ykqks3"
+	scar  *grc20.AdminToken
+	admin std.Address = "g1z5225q6e7qjtmexjmakkn86r66lw94r0gajyn9"
 )
 
 func init() {
-	harambe = grc20.NewAdminToken("harambeToken", "harambe", 6)
-	harambe.Mint(admin, 1000000000) // @administrator
+	scar = grc20.NewAdminToken("Scar", "SCAR", 6)
+	scar.Mint(admin, 1000000000) // @administrator
 }
 
 // method proxies as public functions.
@@ -25,11 +25,11 @@ func init() {
 // getters.
 
 func TotalSupply() uint64 {
-	return harambe.TotalSupply()
+	return scar.TotalSupply()
 }
 
 func BalanceOf(owner users.AddressOrName) uint64 {
-	balance, err := harambe.BalanceOf(owner.Resolve())
+	balance, err := scar.BalanceOf(owner.Resolve())
 	if err != nil {
 		panic(err)
 	}
@@ -37,7 +37,7 @@ func BalanceOf(owner users.AddressOrName) uint64 {
 }
 
 func Allowance(owner, spender users.AddressOrName) uint64 {
-	allowance, err := harambe.Allowance(owner.Resolve(), spender.Resolve())
+	allowance, err := scar.Allowance(owner.Resolve(), spender.Resolve())
 	if err != nil {
 		panic(err)
 	}
@@ -48,17 +48,17 @@ func Allowance(owner, spender users.AddressOrName) uint64 {
 
 func Transfer(to users.AddressOrName, amount uint64) {
 	caller := std.GetOrigCaller()
-	harambe.Transfer(caller, to.Resolve(), amount)
+	scar.Transfer(caller, to.Resolve(), amount)
 }
 
 func Approve(spender users.AddressOrName, amount uint64) {
 	caller := std.GetOrigCaller()
-	harambe.Approve(caller, spender.Resolve(), amount)
+	scar.Approve(caller, spender.Resolve(), amount)
 }
 
 func TransferFrom(from, to users.AddressOrName, amount uint64) {
 	caller := std.GetOrigCaller()
-	harambe.TransferFrom(caller, from.Resolve(), to.Resolve(), amount)
+	scar.TransferFrom(caller, from.Resolve(), to.Resolve(), amount)
 }
 
 // administration.
@@ -66,13 +66,13 @@ func TransferFrom(from, to users.AddressOrName, amount uint64) {
 func Mint(address users.AddressOrName, amount uint64) {
 	caller := std.GetOrigCaller()
 	assertIsAdmin(caller)
-	harambe.Mint(address.Resolve(), amount)
+	scar.Mint(address.Resolve(), amount)
 }
 
 func Burn(address users.AddressOrName, amount uint64) {
 	caller := std.GetOrigCaller()
 	assertIsAdmin(caller)
-	harambe.Burn(address.Resolve(), amount)
+	scar.Burn(address.Resolve(), amount)
 }
 
 // render.
@@ -84,10 +84,10 @@ func Render(path string) string {
 
 	switch {
 	case path == "":
-		return harambe.RenderHome()
+		return scar.RenderHome()
 	case c == 2 && parts[0] == "balance":
 		owner := users.AddressOrName(parts[1])
-		balance, _ := harambe.BalanceOf(owner.Resolve())
+		balance, _ := scar.BalanceOf(owner.Resolve())
 		return ufmt.Sprintf("%d\n", balance)
 	default:
 		return "404\n"
