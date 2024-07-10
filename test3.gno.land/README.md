@@ -2,12 +2,13 @@
 
 ## TXs
 ```
-9108
+9186
 ```
 
 ## addpkgs
 ```
      15 "gno.land/p/stuyk/userinvokes"
+     14 "gno.land/r/gc24/raffle"
      13 "gno.land/p/duysygame/test2"
      12 "gno.land/r/x1unix/feedback/v2"
      12 "gno.land/p/demo/hello"
@@ -163,11 +164,13 @@
       2 "gno.land/r/wyhaines/gnocial2"
       2 "gno.land/r/whatevertest/whatever"
       2 "gno.land/r/wgnot"
+      2 "gno.land/r/vershun/raffle"
       2 "gno.land/r/tryagain/mood"
       2 "gno.land/r/tokenpl/tokenpl"
       2 "gno.land/r/tokenPop/tokenPop"
       2 "gno.land/r/token/omen"
       2 "gno.land/r/test7/poll_v1"
+      2 "gno.land/r/test666/raffle"
       2 "gno.land/r/test6/poll_v1"
       2 "gno.land/r/test42/hello42"
       2 "gno.land/r/test22/hello"
@@ -215,6 +218,8 @@
       2 "gno.land/r/heeello/namename"
       2 "gno.land/r/goodbyetest/goodbyetest"
       2 "gno.land/r/gnoland/blog"
+      2 "gno.land/r/gc24/soypat/raffle"
+      2 "gno.land/r/gc24/hello"
       2 "gno.land/r/feedback/simplefeedback"
       2 "gno.land/r/feedback/newfeedback"
       2 "gno.land/r/enkianknight/returning"
@@ -538,6 +543,7 @@
       1 "gno.land/r/michelle22/valopertest"
       1 "gno.land/r/michelle22/moodv2"
       1 "gno.land/r/michelle22/main"
+      1 "gno.land/r/michelle22/gnosocial"
       1 "gno.land/r/michelle/testpoll"
       1 "gno.land/r/michelle/mymoodtest"
       1 "gno.land/r/michelle/moodtest"
@@ -644,6 +650,7 @@
       1 "gno.land/r/feedback/feedbackdenystest2"
       1 "gno.land/r/feedback/feedbackdenystest1"
       1 "gno.land/r/feedback/feedbackdenystest"
+      1 "gno.land/r/ez/raffle"
       1 "gno.land/r/enkianknight/rising"
       1 "gno.land/r/emma/emma_test"
       1 "gno.land/r/eike/greeting"
