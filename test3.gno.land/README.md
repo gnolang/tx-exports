@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-9594
+9616
 ```
 
 ## addpkgs
@@ -109,6 +109,7 @@
       3 "gno.land/r/michelle22/testpoll"
       3 "gno.land/r/michelle22/mood1"
       3 "gno.land/r/michelle/mood"
+      3 "gno.land/r/michelle/hello"
       3 "gno.land/r/lolz2/raffle"
       3 "gno.land/r/lololabs/llb"
       3 "gno.land/r/leon/pollr"
@@ -560,6 +561,7 @@
       1 "gno.land/r/michelle22/valopertest"
       1 "gno.land/r/michelle22/moodv2"
       1 "gno.land/r/michelle22/main"
+      1 "gno.land/r/michelle22/hello"
       1 "gno.land/r/michelle22/gnosocial"
       1 "gno.land/r/michelle/testpoll"
       1 "gno.land/r/michelle/mymoodtest"
@@ -1542,10 +1544,10 @@
      37 "gno.land/r/hello144/hello"
      34 "gno.land/r/jeronimoalbi/poll_v1"
      26 "gno.land/r/demo/foo20"
+     23 "gno.land/r/sdm/somedudefeedbacktest_8"
      22 "gno.land/r/gnostudio/feedback_v1"
      21 "gno.land/r/duysygame/test19"
      20 "gno.land/r/duysyland/erc20"
-     19 "gno.land/r/sdm/somedudefeedbacktest_8"
      19 "gno.land/r/position"
      19 "gno.land/r/demo/foo"
      16 "gno.land/r/demo/gnoph"

@@ -11,7 +11,7 @@ import (
 
 var (
 	apple  *grc20.AdminToken
-	admin std.Address = "g1sycj68ur0n7xytglx0me3f207ktudm80aqpysm"
+	admin std.Address = "g1hqzeju0p0eup9rgxa0pxvyc0y7wnzjrdvppsy5"
 )
 
 func init() {

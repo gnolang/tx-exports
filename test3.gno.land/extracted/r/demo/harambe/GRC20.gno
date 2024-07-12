@@ -11,7 +11,7 @@ import (
 
 var (
 	harambe  *grc20.AdminToken
-	admin std.Address = "g1h6n749m920lvaef2qrpsa2vmssr4sq60ykqks3"
+	admin std.Address = "g1lk45335udge6nefk733e852rmexrc94m52tdt9"
 )
 
 func init() {
