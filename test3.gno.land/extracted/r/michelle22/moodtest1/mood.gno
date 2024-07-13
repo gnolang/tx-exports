@@ -1,4 +1,4 @@
-main mood
+main moodtest1
 
 
 var myMood = "building my first tutorial"

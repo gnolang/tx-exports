@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-9616
+9637
 ```
 
 ## addpkgs
@@ -67,6 +67,7 @@
       4 "gno.land/r/quanghoangf/poll"
       4 "gno.land/r/parmenion/pmn"
       4 "gno.land/r/michelle22/raffleentry"
+      4 "gno.land/r/michelle/mood"
       4 "gno.land/r/leon/poll"
       4 "gno.land/r/lali/mood"
       4 "gno.land/r/kestar/obkos"
@@ -108,7 +109,7 @@
       3 "gno.land/r/nft/bapenft"
       3 "gno.land/r/michelle22/testpoll"
       3 "gno.land/r/michelle22/mood1"
-      3 "gno.land/r/michelle/mood"
+      3 "gno.land/r/michelle22/mood"
       3 "gno.land/r/michelle/hello"
       3 "gno.land/r/lolz2/raffle"
       3 "gno.land/r/lololabs/llb"
@@ -206,8 +207,8 @@
       2 "gno.land/r/pengu/whitelistfactory"
       2 "gno.land/r/pengu/whitelist"
       2 "gno.land/r/michelle22/raffle"
+      2 "gno.land/r/michelle22/moodtest1"
       2 "gno.land/r/michelle22/moodtest"
-      2 "gno.land/r/michelle22/mood"
       2 "gno.land/r/michelle/mymoodstatus"
       2 "gno.land/r/michelle/mymoodboard"
       2 "gno.land/r/michelle/mymood"
@@ -712,6 +713,7 @@
       1 "gno.land/r/devoder/devoder"
       1 "gno.land/r/dev/counter"
       1 "gno.land/r/deploy/test"
+      1 "gno.land/r/demosocialdemo/gnosocial"
       1 "gno.land/r/demos/greeting"
       1 "gno.land/r/demohive/hive"
       1 "gno.land/r/demofromme/d123"
@@ -1705,6 +1707,7 @@
       1 "gno.land/r/duysygame/test11"
       1 "gno.land/r/drutdesign/hello"
       1 "gno.land/r/draftdesign2/hello"
+      1 "gno.land/r/demosocialdemo/gnosocial"
       1 "gno.land/r/demo2/mouss"
       1 "gno.land/r/demo2/greeting"
       1 "gno.land/r/demo12/hello"
