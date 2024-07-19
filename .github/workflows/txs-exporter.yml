@@ -24,6 +24,7 @@ jobs:
         testnet:
           - test2.gno.land
           - test3.gno.land
+          - test4.gno.land
 
     steps:
       - uses: actions/checkout@v4
