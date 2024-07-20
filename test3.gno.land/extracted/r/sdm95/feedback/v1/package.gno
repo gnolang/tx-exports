@@ -15,8 +15,8 @@ type Feedback struct {
 	User      std.Address
 	Content   string
 	Response  string
-	CreatedAt time.Time
-	RespondAt time.Time
+	CreatedAt time.Date
+	RespondAt time.Date
 }
 
 type addrSet map[std.Address]struct{}

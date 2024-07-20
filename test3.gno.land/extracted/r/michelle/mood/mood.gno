@@ -1,15 +1,12 @@
-main mood
+package mood
 
-
-var myMood = "building my first tutorial"
-
+var myMood = "loving Belgrade"
 
 func Render(path string) string {
-    return "My mood is " + myMood
+	return "My mood is " + myMood
 }
 
-func ChangeMyMood(myNewMood string) string {
-    myMood = myNewMood
-    return "Successfully changed the mood"
+func ChangeMyMood(newMood string) string {
+	myMood = newMood
+	return "Mood successfully changed"
 }
-
