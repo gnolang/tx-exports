@@ -1,11 +1,12 @@
+EXTRACTOR_DIR ?= extractor
 
 fetch:
 	@echo "Backup from: $(FROM_BLOCK) to $(TO_BLOCK)"
-	go run github.com/gnolang/tx-archive/cmd backup \
+	go run -C "../$(EXTRACTOR_DIR)" github.com/gnolang/tx-archive/cmd backup \
 		--remote $(REMOTE) \
 		--from-block $(FROM_BLOCK) \
 		--to-block   $(TO_BLOCK) \
-		--output-path backup_$(shell printf '%07d' $(FROM_BLOCK))-$(shell printf '%07d' $(TO_BLOCK)).jsonl
+		--output-path "$(shell pwd)/backup_$(shell printf '%07d' $(FROM_BLOCK))-$(shell printf '%07d' $(TO_BLOCK)).jsonl"
 
     # Update metadata
 	@cat metadata.json | jq -a '.latest_block_height = $(TO_BLOCK)' > /tmp/aa.json
@@ -29,13 +30,13 @@ stats:
 
 	echo "## addpkgs" >> README.md
 	echo '```' >> README.md
-	cat backup_*.jsonl | jq '.tx.msg[].package.Path | select( . != null )' | sort | uniq -c | sort -nr >> README.md
+	cat backup_*.jsonl | jq '.tx.msg[].package.Path | select( . != null )' | sort | uniq -c | sort --stable -nr >> README.md
 	echo '```' >> README.md
 	echo >> README.md
 
 	echo "## top realm calls" >> README.md
 	echo '```' >> README.md
-	cat backup_*.jsonl | jq '.tx.msg[].pkg_path | select( . != null )' | sort | uniq -c | sort -nr >> README.md
+	cat backup_*.jsonl | jq '.tx.msg[].pkg_path | select( . != null )' | sort | uniq -c | sort --stable -nr >> README.md
 	echo '```' >> README.md
 	echo >> README.md
 
@@ -47,7 +48,9 @@ stats:
 
 
 extractor:
-	../bin/gnotx-extractor -source-path .
+	go run -C "../$(EXTRACTOR_DIR)" . \
+		-source-path "$(shell pwd)" \
+		-output-dir "$(shell pwd)/extracted"
 
 loop:
 	while true; do \

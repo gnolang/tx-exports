@@ -1,0 +1,55 @@
+package gnome
+
+import (
+	"std"
+	"time"
+)
+
+type (
+	// VoteChoiceRecord contains the number of counted votes for a single voting choice.
+	VoteChoiceRecord struct {
+		Choice VoteChoice
+		Count  uint
+	}
+
+	// ProposalStrategy defines the interface for the different proposal types.
+	ProposalStrategy interface {
+		// Name returns the name of the strategy.
+		Name() string
+
+		// Quorum returns the minimum required percentage of DAO member votes
+		// required for a proposal to pass.
+		Quorum() float64
+
+		// VotingPeriod returns the period that a proposal should allow voting.
+		VotingPeriod() time.Duration
+
+		// VoteChoices returns the valid voting choices for the strategy.
+		VoteChoices() []VoteChoice
+
+		// Tally counts the votes and returns the winner voting choice.
+		Tally(*DAO, VotingRecord) VoteChoice
+	}
+)
+
+// VoteChecker defines an interface for proposal vote validation.
+// Proposal strategies that require checking votes when they are submitted should implement it.
+type VoteChecker interface {
+	// CheckVote checks that a vote is valid for the strategy.
+	CheckVote(member std.Address, choice VoteChoice, reason string) error
+}
+
+// Executer defines an interface for executable proposals.
+// Proposals strategies that implement the interface can modify the DAO state when proposal passes.
+type Executer interface {
+	// Execute executes the proposal.
+	// TODO: Execute should return some feedback on success
+	Execute(*DAO) error
+}
+
+// Validator defines an interface for proposal validation.
+// Proposal strategies that implement the interface can validate that a proposal is valid for the current DAO state.
+type Validator interface {
+	// Validate validates if a proposal is valid for the current DAO state.
+	Validate(*DAO) error
+}

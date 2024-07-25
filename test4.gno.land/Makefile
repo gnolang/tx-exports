@@ -1,4 +1,5 @@
-REMOTE = "https://rpc.test4.gno.land:443"
+EXTRACTOR_DIR = extractor-0.1.1
+REMOTE = "https://rpc.test4.gnodevx.network"
 SHORTNAME = test4
 LOOP_DURATION = 50000
 

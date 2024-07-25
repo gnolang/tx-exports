@@ -1,0 +1,1 @@
+./build/gnokey maketx call KEYNAME --pkgpath "gno.land/r/demo/boards" --func "CreateBoard" --args "BOARDNAME" --gas-fee "1000000ugnot" --gas-wanted "2000000" --broadcast true --chainid test3 --remote test3.gno.land:36657

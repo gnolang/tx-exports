@@ -1,0 +1,5 @@
+module gno.land/r/clockwork/tictactoe
+
+require (
+	"gno.land/p/demo/avl" v0.0.0-latest
+)

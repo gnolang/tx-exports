@@ -2,11 +2,14 @@
 
 This tool is a simple parser to extract source code (packages & realms) from logs created by the [tx-archive](https://github.com/gnolang/tx-archive) tool for Gno chains.
 
+**Note:** as of test4, this extractor is no longer working as it parses
+`MsgAddPackage` incorrectly. `extractor-0.1.1` should be used instead.
+
 ## Running the extractor
 
 The extractor takes in three arguments:
 - the filetype of the archive files,
-- output directory for the extracted packages, 
+- output directory for the extracted packages,
 - the root directory where the archive files are located.
 
 ```

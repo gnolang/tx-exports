@@ -1,0 +1,3 @@
+package asdsds
+
+func yo() {}

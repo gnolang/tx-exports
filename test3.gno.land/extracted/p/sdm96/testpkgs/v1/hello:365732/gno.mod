@@ -1,0 +1,1 @@
+module "gno.land/p/sdm96/testpkgs/v1/hello"
