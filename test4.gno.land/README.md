@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-3
+14
 ```
 
 ## addpkgs
@@ -11,7 +11,8 @@
 
 ## top realm calls
 ```
-      2 "gno.land/r/demo/users"
+      5 "gno.land/r/demo/users"
+      3 "gno.land/r/gov/dao"
 ```
 
 ## top faucet requesters
