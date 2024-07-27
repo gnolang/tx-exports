@@ -3,7 +3,9 @@ REMOTE = "https://rpc.test4.gnodevx.network"
 SHORTNAME = test4
 LOOP_DURATION = 50000
 
-MAX_INTERVAL = 10000
+# at an average of 3 secs per block (from gnoscan), test4 produces 28_800 blocks per day
+# 100k allows us to be able to catch up
+MAX_INTERVAL = 100000
 
 FROM_BLOCK = $(shell cat metadata.json | jq -r '.latest_block_height')
 LATEST_BLOCK_HEIGHT = $(shell curl -s $(REMOTE)/status | jq -r '.result.sync_info.latest_block_height')
