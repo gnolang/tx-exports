@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-15620
+15752
 ```
 
 ## addpkgs
@@ -11,24 +11,25 @@
 
 ## top realm calls
 ```
-    744 "gno.land/r/demo/wugnot"
-    484 "gno.land/r/gnoswap/gns"
-    327 "gno.land/r/gnoswap/position"
-    277 "gno.land/r/onbloc/usdc"
-    276 "gno.land/r/gnoswap/gnft"
-    225 "gno.land/r/gnoswap/router"
-    170 "gno.land/r/gnoswap/staker"
+    780 "gno.land/r/demo/wugnot"
+    492 "gno.land/r/gnoswap/gns"
+    336 "gno.land/r/gnoswap/position"
+    290 "gno.land/r/onbloc/usdc"
+    287 "gno.land/r/gnoswap/gnft"
+    231 "gno.land/r/gnoswap/router"
+    179 "gno.land/r/gnoswap/staker"
      91 "gno.land/r/gov/dao"
-     83 "gno.land/r/gnoswap/pool"
+     88 "gno.land/r/gnoswap/pool"
      77 "gno.land/r/g17ernafy6ctpcz6uepfsq2js8x2vz0wladh5yc3/zentasktic_core"
      57 "gno.land/r/demo/users"
      51 "gno.land/r/onbloc/bar"
      50 "gno.land/r/onbloc/baz"
-     44 "gno.land/r/onbloc/foo"
+     45 "gno.land/r/onbloc/foo"
      28 "gno.land/r/teritori/social_feeds"
      22 "gno.land/r/onbloc/qux"
      11 "gno.land/r/g1w6886hdj2tet0seyw6kn8fl92sx06prgd9w9j8/vmt"
      10 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/disperse"
+      7 "gno.land/r/g1ngywvql2ql7t8uzl63w60eqcejkwg4rm4lxdw9/candy20"
       6 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/disperse2"
       6 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/forms2"
       6 "gno.land/r/villaquiranm/grc20_launchpad"
