@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-16316
+16483
 ```
 
 ## addpkgs
@@ -11,30 +11,30 @@
 
 ## top realm calls
 ```
-   1381 "gno.land/r/demo/wugnot"
-    772 "gno.land/r/gnoswap/gns"
-    514 "gno.land/r/gnoswap/position"
-    435 "gno.land/r/gnoswap/router"
-    403 "gno.land/r/gnoswap/gnft"
-    378 "gno.land/r/onbloc/usdc"
-    261 "gno.land/r/gnoswap/staker"
-    105 "gno.land/r/onbloc/bar"
-    103 "gno.land/r/gnoswap/pool"
-     95 "gno.land/r/onbloc/baz"
+   1599 "gno.land/r/demo/wugnot"
+    853 "gno.land/r/gnoswap/gns"
+    566 "gno.land/r/gnoswap/position"
+    504 "gno.land/r/gnoswap/router"
+    456 "gno.land/r/gnoswap/gnft"
+    388 "gno.land/r/onbloc/usdc"
+    271 "gno.land/r/gnoswap/staker"
+    140 "gno.land/r/onbloc/bar"
+    112 "gno.land/r/onbloc/baz"
+    107 "gno.land/r/gnoswap/pool"
      91 "gno.land/r/gov/dao"
      77 "gno.land/r/g17ernafy6ctpcz6uepfsq2js8x2vz0wladh5yc3/zentasktic_core"
-     64 "gno.land/r/onbloc/foo"
+     66 "gno.land/r/onbloc/foo"
      58 "gno.land/r/demo/users"
-     52 "gno.land/r/g1ngywvql2ql7t8uzl63w60eqcejkwg4rm4lxdw9/candy20"
+     56 "gno.land/r/g1ngywvql2ql7t8uzl63w60eqcejkwg4rm4lxdw9/candy20"
      30 "gno.land/r/teritori/social_feeds"
      25 "gno.land/r/onbloc/qux"
      11 "gno.land/r/g1w6886hdj2tet0seyw6kn8fl92sx06prgd9w9j8/vmt"
      10 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/disperse"
       6 "gno.land/r/demo/boards"
+      6 "gno.land/r/demo/flippando"
       6 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/disperse2"
       6 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/forms2"
       6 "gno.land/r/villaquiranm/grc20_launchpad"
-      5 "gno.land/r/demo/flippando"
       5 "gno.land/r/molaryy/openocean"
       4 "gno.land/r/demo/user"
       4 "gno.land/r/manfred/home"
