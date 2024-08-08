@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-17266
+17503
 ```
 
 ## addpkgs
@@ -11,23 +11,30 @@
 
 ## top realm calls
 ```
-   2387 "gno.land/r/demo/wugnot"
-   1135 "gno.land/r/gnoswap/gns"
-    754 "gno.land/r/gnoswap/router"
-    750 "gno.land/r/gnoswap/position"
-    649 "gno.land/r/gnoswap/gnft"
-    425 "gno.land/r/onbloc/usdc"
-    319 "gno.land/r/gnoswap/staker"
-    221 "gno.land/r/onbloc/bar"
-    210 "gno.land/r/onbloc/baz"
-    107 "gno.land/r/gnoswap/pool"
+   2522 "gno.land/r/demo/wugnot"
+   1142 "gno.land/r/gnoswap/gns"
+    764 "gno.land/r/gnoswap/router"
+    755 "gno.land/r/gnoswap/position"
+    654 "gno.land/r/gnoswap/gnft"
+    456 "gno.land/r/onbloc/usdc"
+    320 "gno.land/r/gnoswap/staker"
+    231 "gno.land/r/onbloc/bar"
+    219 "gno.land/r/onbloc/baz"
+    129 "gno.land/r/onbloc/foo"
+    112 "gno.land/r/gnoswap/pool"
      91 "gno.land/r/gov/dao"
-     88 "gno.land/r/onbloc/foo"
      78 "gno.land/r/g17ernafy6ctpcz6uepfsq2js8x2vz0wladh5yc3/zentasktic_core"
+     77 "gno.land/r/gnoswap/v2/gns"
+     63 "gno.land/r/demo/users"
      63 "gno.land/r/g1ngywvql2ql7t8uzl63w60eqcejkwg4rm4lxdw9/candy20"
-     62 "gno.land/r/demo/users"
+     56 "gno.land/r/gnoswap/v2/position"
+     56 "gno.land/r/gnoswap/v2/staker"
+     52 "gno.land/r/gnoswap/v2/gnft"
      42 "gno.land/r/teritori/social_feeds"
-     26 "gno.land/r/onbloc/qux"
+     37 "gno.land/r/gnoswap/v2/router"
+     29 "gno.land/r/onbloc/qux"
+     23 "gno.land/r/onbloc/obl"
+     22 "gno.land/r/gnoswap/v2/pool"
      15 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/openocean"
      11 "gno.land/r/g1w6886hdj2tet0seyw6kn8fl92sx06prgd9w9j8/vmt"
      10 "gno.land/r/demo/foo20"
@@ -39,10 +46,12 @@
       6 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/forms2"
       6 "gno.land/r/villaquiranm/grc20_launchpad"
       4 "gno.land/r/demo/user"
+      4 "gno.land/r/g15mzjefvj9pt2ctv30l9ju03rewmfv9hken9wfm/v1/bridge"
       4 "gno.land/r/manfred/home"
-      4 "gno.land/r/onbloc/obl"
       4 "gno.land/r/onbloc/pepe"
       4 "gno.land/r/taskow/tasks"
+      4 "gno.land/r/teritori/profile"
+      3 "gno.land/r/g15mzjefvj9pt2ctv30l9ju03rewmfv9hken9wfm/v2/bridge"
       3 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/forms"
       2 "gno.land/r/demo/userbook"
       2 "gno.land/r/g125em6arxsnj49vx35f0n0z34putv5ty3376fg5/checkerr"
