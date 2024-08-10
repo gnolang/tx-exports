@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-17579
+17665
 ```
 
 ## addpkgs
@@ -11,37 +11,38 @@
 
 ## top realm calls
 ```
-   2601 "gno.land/r/demo/wugnot"
+   2686 "gno.land/r/demo/wugnot"
    1142 "gno.land/r/gnoswap/gns"
     764 "gno.land/r/gnoswap/router"
     755 "gno.land/r/gnoswap/position"
     654 "gno.land/r/gnoswap/gnft"
-    463 "gno.land/r/onbloc/usdc"
+    479 "gno.land/r/onbloc/usdc"
     320 "gno.land/r/gnoswap/staker"
-    233 "gno.land/r/onbloc/bar"
-    221 "gno.land/r/onbloc/baz"
-    132 "gno.land/r/onbloc/foo"
-    126 "gno.land/r/gnoswap/v2/gns"
+    237 "gno.land/r/onbloc/bar"
+    225 "gno.land/r/onbloc/baz"
+    165 "gno.land/r/gnoswap/v2/gns"
+    152 "gno.land/r/onbloc/foo"
     112 "gno.land/r/gnoswap/pool"
+    108 "gno.land/r/gnoswap/v2/position"
+     92 "gno.land/r/gnoswap/v2/gnft"
+     92 "gno.land/r/gnoswap/v2/router"
      91 "gno.land/r/gov/dao"
-     90 "gno.land/r/gnoswap/v2/position"
-     79 "gno.land/r/gnoswap/v2/gnft"
      78 "gno.land/r/g17ernafy6ctpcz6uepfsq2js8x2vz0wladh5yc3/zentasktic_core"
+     76 "gno.land/r/gnoswap/v2/staker"
+     71 "gno.land/r/demo/users"
      70 "gno.land/r/g1ngywvql2ql7t8uzl63w60eqcejkwg4rm4lxdw9/candy20"
-     68 "gno.land/r/demo/users"
-     68 "gno.land/r/gnoswap/v2/staker"
-     52 "gno.land/r/gnoswap/v2/router"
      49 "gno.land/r/teritori/social_feeds"
+     36 "gno.land/r/onbloc/obl"
      34 "gno.land/r/gnoswap/v2/pool"
      29 "gno.land/r/onbloc/qux"
-     26 "gno.land/r/onbloc/obl"
-     15 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/openocean"
+     20 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/openocean"
      11 "gno.land/r/g1w6886hdj2tet0seyw6kn8fl92sx06prgd9w9j8/vmt"
      10 "gno.land/r/demo/flippando"
      10 "gno.land/r/demo/foo20"
      10 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/disperse"
       8 "gno.land/r/g15mzjefvj9pt2ctv30l9ju03rewmfv9hken9wfm/v2/bridge"
       8 "gno.land/r/molaryy/openocean"
+      8 "gno.land/r/varmeta/registrar"
       6 "gno.land/r/demo/boards"
       6 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/disperse2"
       6 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/forms2"
@@ -60,7 +61,6 @@
       2 "gno.land/r/g1e5hud66rs7ye4zgeqmqvwfhurs2mnf408hdqcl/feedback_v1"
       2 "gno.land/r/g1s3gd740mld8chsjw5g0nmmzfd9g520w9e7m5t6/sandwich"
       2 "gno.land/r/sys/users"
-      2 "gno.land/r/varmeta/registrar"
       2 "gno.land/r/villaquiranm/lunc"
       2 "gno.land/r/villaquiranm/tofu"
       1 "gno.land/r/demo/deep/very/deep"
