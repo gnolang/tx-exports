@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-18200
+18255
 ```
 
 ## addpkgs
@@ -11,30 +11,30 @@
 
 ## top realm calls
 ```
-   3093 "gno.land/r/demo/wugnot"
+   3162 "gno.land/r/demo/wugnot"
    1142 "gno.land/r/gnoswap/gns"
     764 "gno.land/r/gnoswap/router"
     755 "gno.land/r/gnoswap/position"
     654 "gno.land/r/gnoswap/gnft"
-    506 "gno.land/r/onbloc/usdc"
-    384 "gno.land/r/gnoswap/v2/gns"
-    335 "gno.land/r/onbloc/foo"
+    509 "gno.land/r/onbloc/usdc"
+    427 "gno.land/r/gnoswap/v2/gns"
+    352 "gno.land/r/onbloc/foo"
     320 "gno.land/r/gnoswap/staker"
-    293 "gno.land/r/gnoswap/v2/router"
-    271 "gno.land/r/onbloc/bar"
-    233 "gno.land/r/onbloc/baz"
-    215 "gno.land/r/gnoswap/v2/position"
-    162 "gno.land/r/gnoswap/v2/gnft"
-    148 "gno.land/r/gnoswap/v2/staker"
+    320 "gno.land/r/gnoswap/v2/router"
+    275 "gno.land/r/onbloc/bar"
+    240 "gno.land/r/gnoswap/v2/position"
+    234 "gno.land/r/onbloc/baz"
+    170 "gno.land/r/gnoswap/v2/gnft"
+    161 "gno.land/r/gnoswap/v2/staker"
     112 "gno.land/r/gnoswap/pool"
     100 "gno.land/r/flippando/flippando"
      91 "gno.land/r/gov/dao"
      85 "gno.land/r/g17ernafy6ctpcz6uepfsq2js8x2vz0wladh5yc3/zentasktic_core"
      73 "gno.land/r/demo/users"
      70 "gno.land/r/g1ngywvql2ql7t8uzl63w60eqcejkwg4rm4lxdw9/candy20"
-     58 "gno.land/r/onbloc/obl"
+     65 "gno.land/r/onbloc/obl"
      53 "gno.land/r/teritori/social_feeds"
-     35 "gno.land/r/gnoswap/v2/pool"
+     36 "gno.land/r/gnoswap/v2/pool"
      29 "gno.land/r/onbloc/qux"
      20 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/openocean"
      18 "gno.land/r/teritori/projects_manager"
@@ -56,8 +56,8 @@
       4 "gno.land/r/manfred/home"
       4 "gno.land/r/onbloc/pepe"
       4 "gno.land/r/taskow/tasks"
+      3 "gno.land/r/demo/userbook"
       3 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/forms"
-      2 "gno.land/r/demo/userbook"
       2 "gno.land/r/g125em6arxsnj49vx35f0n0z34putv5ty3376fg5/checkerr"
       2 "gno.land/r/g13f63ua8uhmuf9mgc0x8zfz04yrsaqh7j78vcgq/monkey"
       2 "gno.land/r/g1e5hud66rs7ye4zgeqmqvwfhurs2mnf408hdqcl/feedback_v1"
@@ -66,6 +66,7 @@
       2 "gno.land/r/villaquiranm/lunc"
       2 "gno.land/r/villaquiranm/tofu"
       1 "gno.land/r/demo/deep/very/deep"
+      1 "gno.land/r/demo/domain/vmt"
       1 "gno.land/r/demo/gnoswap/consts"
       1 "gno.land/r/g18amm3fc00t43dcxsys6udug0czyvqt9e7p23rd/shifumi"
       1 "gno.land/r/g1dnllrdzwfhxv3evyk09y48mgn5phfjvtyrlzm7/simplefeedback"
