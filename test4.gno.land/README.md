@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-18255
+18280
 ```
 
 ## addpkgs
@@ -11,29 +11,29 @@
 
 ## top realm calls
 ```
-   3162 "gno.land/r/demo/wugnot"
+   3185 "gno.land/r/demo/wugnot"
    1142 "gno.land/r/gnoswap/gns"
     764 "gno.land/r/gnoswap/router"
     755 "gno.land/r/gnoswap/position"
     654 "gno.land/r/gnoswap/gnft"
     509 "gno.land/r/onbloc/usdc"
-    427 "gno.land/r/gnoswap/v2/gns"
-    352 "gno.land/r/onbloc/foo"
+    442 "gno.land/r/gnoswap/v2/gns"
+    357 "gno.land/r/onbloc/foo"
+    331 "gno.land/r/gnoswap/v2/router"
     320 "gno.land/r/gnoswap/staker"
-    320 "gno.land/r/gnoswap/v2/router"
-    275 "gno.land/r/onbloc/bar"
-    240 "gno.land/r/gnoswap/v2/position"
-    234 "gno.land/r/onbloc/baz"
-    170 "gno.land/r/gnoswap/v2/gnft"
-    161 "gno.land/r/gnoswap/v2/staker"
+    276 "gno.land/r/onbloc/bar"
+    247 "gno.land/r/gnoswap/v2/position"
+    235 "gno.land/r/onbloc/baz"
+    172 "gno.land/r/gnoswap/v2/gnft"
+    164 "gno.land/r/gnoswap/v2/staker"
     112 "gno.land/r/gnoswap/pool"
     100 "gno.land/r/flippando/flippando"
      91 "gno.land/r/gov/dao"
      85 "gno.land/r/g17ernafy6ctpcz6uepfsq2js8x2vz0wladh5yc3/zentasktic_core"
      73 "gno.land/r/demo/users"
      70 "gno.land/r/g1ngywvql2ql7t8uzl63w60eqcejkwg4rm4lxdw9/candy20"
-     65 "gno.land/r/onbloc/obl"
-     53 "gno.land/r/teritori/social_feeds"
+     68 "gno.land/r/onbloc/obl"
+     55 "gno.land/r/teritori/social_feeds"
      36 "gno.land/r/gnoswap/v2/pool"
      29 "gno.land/r/onbloc/qux"
      20 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/openocean"
@@ -71,6 +71,7 @@
       1 "gno.land/r/g18amm3fc00t43dcxsys6udug0czyvqt9e7p23rd/shifumi"
       1 "gno.land/r/g1dnllrdzwfhxv3evyk09y48mgn5phfjvtyrlzm7/simplefeedback"
       1 "gno.land/r/g1e5hud66rs7ye4zgeqmqvwfhurs2mnf408hdqcl/gnoyourdate_v1"
+      1 "gno.land/r/g1jg8mtutu9khhfwc4nxmuhcpftf0pajdhfvsqf5/hello"
       1 "gno.land/r/g1lt2vydewk5ncuaw9hhkt7av6na86tcrudgnpv8/counter"
       1 "gno.land/r/g1pgcgqvm5ta3rfw7t67yp9faj94ynmxn5ygx2cd/gnome"
       1 "gno.land/r/gnoswap/consts"
