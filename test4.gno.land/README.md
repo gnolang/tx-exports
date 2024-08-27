@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-18555
+18639
 ```
 
 ## addpkgs
@@ -11,34 +11,35 @@
 
 ## top realm calls
 ```
-   3470 "gno.land/r/demo/wugnot"
+   3557 "gno.land/r/demo/wugnot"
    1142 "gno.land/r/gnoswap/gns"
     764 "gno.land/r/gnoswap/router"
     755 "gno.land/r/gnoswap/position"
     654 "gno.land/r/gnoswap/gnft"
-    541 "gno.land/r/gnoswap/v2/gns"
-    534 "gno.land/r/onbloc/usdc"
-    417 "gno.land/r/onbloc/foo"
-    408 "gno.land/r/gnoswap/v2/router"
-    333 "gno.land/r/gnoswap/v2/position"
+    587 "gno.land/r/gnoswap/v2/gns"
+    545 "gno.land/r/onbloc/usdc"
+    436 "gno.land/r/gnoswap/v2/router"
+    423 "gno.land/r/onbloc/foo"
+    360 "gno.land/r/gnoswap/v2/position"
     320 "gno.land/r/gnoswap/staker"
-    279 "gno.land/r/onbloc/bar"
+    281 "gno.land/r/onbloc/bar"
+    250 "gno.land/r/gnoswap/v2/gnft"
+    242 "gno.land/r/gnoswap/v2/staker"
     235 "gno.land/r/onbloc/baz"
-    230 "gno.land/r/gnoswap/v2/gnft"
-    226 "gno.land/r/gnoswap/v2/staker"
     157 "gno.land/r/flippando/flippando"
     112 "gno.land/r/gnoswap/pool"
+     94 "gno.land/r/onbloc/obl"
      91 "gno.land/r/gov/dao"
-     85 "gno.land/r/g17ernafy6ctpcz6uepfsq2js8x2vz0wladh5yc3/zentasktic_core"
-     84 "gno.land/r/onbloc/obl"
-     74 "gno.land/r/demo/users"
+     90 "gno.land/r/g17ernafy6ctpcz6uepfsq2js8x2vz0wladh5yc3/zentasktic_core"
+     75 "gno.land/r/demo/users"
      70 "gno.land/r/g1ngywvql2ql7t8uzl63w60eqcejkwg4rm4lxdw9/candy20"
-     56 "gno.land/r/teritori/social_feeds"
-     36 "gno.land/r/gnoswap/v2/pool"
+     59 "gno.land/r/teritori/social_feeds"
+     42 "gno.land/r/gnoswap/v2/pool"
      29 "gno.land/r/onbloc/qux"
      20 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/openocean"
      18 "gno.land/r/teritori/projects_manager"
      11 "gno.land/r/demo/flippando"
+     11 "gno.land/r/g1ngywvql2ql7t8uzl63w60eqcejkwg4rm4lxdw9/minus"
      11 "gno.land/r/g1w6886hdj2tet0seyw6kn8fl92sx06prgd9w9j8/vmt"
      11 "gno.land/r/teritori/profile"
      10 "gno.land/r/demo/foo20"
@@ -46,11 +47,10 @@
       9 "gno.land/r/g15mzjefvj9pt2ctv30l9ju03rewmfv9hken9wfm/v2/bridge"
       8 "gno.land/r/molaryy/openocean"
       8 "gno.land/r/varmeta/registrar"
-      6 "gno.land/r/demo/boards"
+      7 "gno.land/r/demo/boards"
       6 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/disperse2"
       6 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/forms2"
       6 "gno.land/r/villaquiranm/grc20_launchpad"
-      5 "gno.land/r/g1ngywvql2ql7t8uzl63w60eqcejkwg4rm4lxdw9/minus"
       4 "gno.land/r/demo/user"
       4 "gno.land/r/g15mzjefvj9pt2ctv30l9ju03rewmfv9hken9wfm/v1/bridge"
       4 "gno.land/r/manfred/home"
