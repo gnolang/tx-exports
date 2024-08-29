@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-18714
+18793
 ```
 
 ## addpkgs
@@ -11,27 +11,27 @@
 
 ## top realm calls
 ```
-   3604 "gno.land/r/demo/wugnot"
+   3669 "gno.land/r/demo/wugnot"
    1142 "gno.land/r/gnoswap/gns"
     764 "gno.land/r/gnoswap/router"
     755 "gno.land/r/gnoswap/position"
     654 "gno.land/r/gnoswap/gnft"
-    607 "gno.land/r/gnoswap/v2/gns"
-    547 "gno.land/r/onbloc/usdc"
-    456 "gno.land/r/gnoswap/v2/router"
-    434 "gno.land/r/onbloc/foo"
-    368 "gno.land/r/gnoswap/v2/position"
+    636 "gno.land/r/gnoswap/v2/gns"
+    557 "gno.land/r/onbloc/usdc"
+    487 "gno.land/r/gnoswap/v2/router"
+    445 "gno.land/r/onbloc/foo"
+    381 "gno.land/r/gnoswap/v2/position"
     320 "gno.land/r/gnoswap/staker"
-    287 "gno.land/r/onbloc/bar"
-    263 "gno.land/r/gnoswap/v2/gnft"
-    256 "gno.land/r/gnoswap/v2/staker"
+    288 "gno.land/r/onbloc/bar"
+    271 "gno.land/r/gnoswap/v2/gnft"
+    265 "gno.land/r/gnoswap/v2/staker"
     235 "gno.land/r/onbloc/baz"
-    157 "gno.land/r/flippando/flippando"
+    180 "gno.land/r/flippando/flippando"
     112 "gno.land/r/gnoswap/pool"
-     96 "gno.land/r/onbloc/obl"
+    103 "gno.land/r/onbloc/obl"
      92 "gno.land/r/g17ernafy6ctpcz6uepfsq2js8x2vz0wladh5yc3/zentasktic_core"
      91 "gno.land/r/gov/dao"
-     75 "gno.land/r/demo/users"
+     77 "gno.land/r/demo/users"
      70 "gno.land/r/g1ngywvql2ql7t8uzl63w60eqcejkwg4rm4lxdw9/candy20"
      62 "gno.land/r/teritori/social_feeds"
      42 "gno.land/r/gnoswap/v2/pool"
@@ -45,9 +45,9 @@
      10 "gno.land/r/demo/foo20"
      10 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/disperse"
       9 "gno.land/r/g15mzjefvj9pt2ctv30l9ju03rewmfv9hken9wfm/v2/bridge"
+      8 "gno.land/r/demo/boards"
       8 "gno.land/r/molaryy/openocean"
       8 "gno.land/r/varmeta/registrar"
-      7 "gno.land/r/demo/boards"
       6 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/disperse2"
       6 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/forms2"
       6 "gno.land/r/villaquiranm/grc20_launchpad"
