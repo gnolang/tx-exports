@@ -3,7 +3,8 @@
 This repo serves the purpose of archiving data from testnets.
 
 Currently, it contains the following:
-- Raw transaction data from 
+- Raw transaction data from
+  - `test4.gno.land`
   - `test3.gno.land`
   - `test2.gno.land`
   - `test1.gno.land`
