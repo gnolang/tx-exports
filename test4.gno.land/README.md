@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-18893
+18934
 ```
 
 ## addpkgs
@@ -11,23 +11,23 @@
 
 ## top realm calls
 ```
-   3782 "gno.land/r/demo/wugnot"
+   3822 "gno.land/r/demo/wugnot"
    1142 "gno.land/r/gnoswap/gns"
     764 "gno.land/r/gnoswap/router"
     755 "gno.land/r/gnoswap/position"
-    688 "gno.land/r/gnoswap/v2/gns"
+    711 "gno.land/r/gnoswap/v2/gns"
     654 "gno.land/r/gnoswap/gnft"
-    569 "gno.land/r/onbloc/usdc"
-    518 "gno.land/r/gnoswap/v2/router"
-    462 "gno.land/r/onbloc/foo"
-    424 "gno.land/r/gnoswap/v2/position"
+    570 "gno.land/r/onbloc/usdc"
+    534 "gno.land/r/gnoswap/v2/router"
+    469 "gno.land/r/onbloc/foo"
+    436 "gno.land/r/gnoswap/v2/position"
     320 "gno.land/r/gnoswap/staker"
-    306 "gno.land/r/gnoswap/v2/staker"
-    298 "gno.land/r/onbloc/bar"
-    294 "gno.land/r/gnoswap/v2/gnft"
-    238 "gno.land/r/onbloc/baz"
+    309 "gno.land/r/gnoswap/v2/staker"
+    306 "gno.land/r/onbloc/bar"
+    301 "gno.land/r/gnoswap/v2/gnft"
+    239 "gno.land/r/onbloc/baz"
     180 "gno.land/r/flippando/flippando"
-    118 "gno.land/r/onbloc/obl"
+    121 "gno.land/r/onbloc/obl"
     112 "gno.land/r/gnoswap/pool"
      92 "gno.land/r/g17ernafy6ctpcz6uepfsq2js8x2vz0wladh5yc3/zentasktic_core"
      92 "gno.land/r/gov/dao"
@@ -62,6 +62,7 @@
       2 "gno.land/r/g125em6arxsnj49vx35f0n0z34putv5ty3376fg5/checkerr"
       2 "gno.land/r/g13f63ua8uhmuf9mgc0x8zfz04yrsaqh7j78vcgq/monkey"
       2 "gno.land/r/g1e5hud66rs7ye4zgeqmqvwfhurs2mnf408hdqcl/feedback_v1"
+      2 "gno.land/r/g1jg8mtutu9khhfwc4nxmuhcpftf0pajdhfvsqf5/hello"
       2 "gno.land/r/g1s3gd740mld8chsjw5g0nmmzfd9g520w9e7m5t6/sandwich"
       2 "gno.land/r/sys/users"
       2 "gno.land/r/villaquiranm/lunc"
@@ -72,7 +73,6 @@
       1 "gno.land/r/g18amm3fc00t43dcxsys6udug0czyvqt9e7p23rd/shifumi"
       1 "gno.land/r/g1dnllrdzwfhxv3evyk09y48mgn5phfjvtyrlzm7/simplefeedback"
       1 "gno.land/r/g1e5hud66rs7ye4zgeqmqvwfhurs2mnf408hdqcl/gnoyourdate_v1"
-      1 "gno.land/r/g1jg8mtutu9khhfwc4nxmuhcpftf0pajdhfvsqf5/hello"
       1 "gno.land/r/g1lt2vydewk5ncuaw9hhkt7av6na86tcrudgnpv8/counter"
       1 "gno.land/r/g1pgcgqvm5ta3rfw7t67yp9faj94ynmxn5ygx2cd/gnome"
       1 "gno.land/r/gnoswap/consts"
