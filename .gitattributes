@@ -1,1 +1,2 @@
 *.gz diff=gzip
+*.gno linguist-language=Go
