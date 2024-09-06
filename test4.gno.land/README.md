@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-19020
+19034
 ```
 
 ## addpkgs
@@ -11,19 +11,19 @@
 
 ## top realm calls
 ```
-   3892 "gno.land/r/demo/wugnot"
+   3898 "gno.land/r/demo/wugnot"
    1142 "gno.land/r/gnoswap/gns"
     764 "gno.land/r/gnoswap/router"
     755 "gno.land/r/gnoswap/position"
-    743 "gno.land/r/gnoswap/v2/gns"
+    746 "gno.land/r/gnoswap/v2/gns"
     654 "gno.land/r/gnoswap/gnft"
     577 "gno.land/r/onbloc/usdc"
-    554 "gno.land/r/gnoswap/v2/router"
+    556 "gno.land/r/gnoswap/v2/router"
     483 "gno.land/r/onbloc/foo"
-    452 "gno.land/r/gnoswap/v2/position"
+    453 "gno.land/r/gnoswap/v2/position"
     326 "gno.land/r/gnoswap/v2/staker"
     320 "gno.land/r/gnoswap/staker"
-    309 "gno.land/r/gnoswap/v2/gnft"
+    310 "gno.land/r/gnoswap/v2/gnft"
     308 "gno.land/r/onbloc/bar"
     241 "gno.land/r/onbloc/baz"
     201 "gno.land/r/flippando/flippando"
@@ -36,7 +36,7 @@
      62 "gno.land/r/teritori/social_feeds"
      42 "gno.land/r/gnoswap/v2/pool"
      29 "gno.land/r/onbloc/qux"
-     20 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/openocean"
+     21 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/openocean"
      18 "gno.land/r/teritori/projects_manager"
      11 "gno.land/r/demo/flippando"
      11 "gno.land/r/g1ngywvql2ql7t8uzl63w60eqcejkwg4rm4lxdw9/minus"
