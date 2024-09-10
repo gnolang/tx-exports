@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-19095
+19187
 ```
 
 ## addpkgs
@@ -11,18 +11,18 @@
 
 ## top realm calls
 ```
-   3963 "gno.land/r/demo/wugnot"
+   3967 "gno.land/r/demo/wugnot"
    1142 "gno.land/r/gnoswap/gns"
-    768 "gno.land/r/gnoswap/v2/gns"
+    770 "gno.land/r/gnoswap/v2/gns"
     764 "gno.land/r/gnoswap/router"
     755 "gno.land/r/gnoswap/position"
     654 "gno.land/r/gnoswap/gnft"
-    581 "gno.land/r/gnoswap/v2/router"
+    582 "gno.land/r/gnoswap/v2/router"
     580 "gno.land/r/onbloc/usdc"
     504 "gno.land/r/onbloc/foo"
-    474 "gno.land/r/gnoswap/v2/position"
+    475 "gno.land/r/gnoswap/v2/position"
     342 "gno.land/r/gnoswap/v2/staker"
-    328 "gno.land/r/gnoswap/v2/gnft"
+    329 "gno.land/r/gnoswap/v2/gnft"
     320 "gno.land/r/gnoswap/staker"
     312 "gno.land/r/onbloc/bar"
     241 "gno.land/r/onbloc/baz"
@@ -45,27 +45,32 @@
      10 "gno.land/r/demo/foo20"
      10 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/disperse"
       9 "gno.land/r/g15mzjefvj9pt2ctv30l9ju03rewmfv9hken9wfm/v2/bridge"
+      9 "gno.land/r/g1w6886hdj2tet0seyw6kn8fl92sx06prgd9w9j8/games/diceroller"
       8 "gno.land/r/demo/boards"
       8 "gno.land/r/molaryy/openocean"
       8 "gno.land/r/varmeta/registrar"
       6 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/disperse2"
       6 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/forms2"
+      6 "gno.land/r/g1w6886hdj2tet0seyw6kn8fl92sx06prgd9w9j8/games/v2/diceroller"
       6 "gno.land/r/villaquiranm/grc20_launchpad"
+      5 "gno.land/r/varmeta/demo1/domain/registrar"
+      4 "gno.land/r/demo/domain/registrar"
       4 "gno.land/r/demo/user"
       4 "gno.land/r/g15mzjefvj9pt2ctv30l9ju03rewmfv9hken9wfm/v1/bridge"
       4 "gno.land/r/manfred/home"
       4 "gno.land/r/onbloc/pepe"
+      4 "gno.land/r/sys/users"
       4 "gno.land/r/taskow/tasks"
+      4 "gno.land/r/varmeta/demo/v1/domain/registrar"
       3 "gno.land/r/demo/userbook"
       3 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/forms"
+      3 "gno.land/r/g1w6886hdj2tet0seyw6kn8fl92sx06prgd9w9j8/games/v1/diceroller"
       3 "gno.land/r/gnoswap/v2/community_pool"
-      2 "gno.land/r/demo/domain/registrar"
       2 "gno.land/r/g125em6arxsnj49vx35f0n0z34putv5ty3376fg5/checkerr"
       2 "gno.land/r/g13f63ua8uhmuf9mgc0x8zfz04yrsaqh7j78vcgq/monkey"
       2 "gno.land/r/g1e5hud66rs7ye4zgeqmqvwfhurs2mnf408hdqcl/feedback_v1"
       2 "gno.land/r/g1jg8mtutu9khhfwc4nxmuhcpftf0pajdhfvsqf5/hello"
       2 "gno.land/r/g1s3gd740mld8chsjw5g0nmmzfd9g520w9e7m5t6/sandwich"
-      2 "gno.land/r/sys/users"
       2 "gno.land/r/villaquiranm/lunc"
       2 "gno.land/r/villaquiranm/tofu"
       1 "gno.land/r/demo/deep/very/deep"
@@ -79,6 +84,7 @@
       1 "gno.land/r/gnoswap/consts"
       1 "gno.land/r/gnoswap/v2/emission"
       1 "gno.land/r/mikecito/grc20_launchpad"
+      1 "gno.land/r/varmeta/demo/v1/domain/resolver"
 ```
 
 ## top faucet requesters
