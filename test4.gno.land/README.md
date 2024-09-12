@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-19271
+19277
 ```
 
 ## addpkgs
@@ -28,12 +28,12 @@
     243 "gno.land/r/onbloc/baz"
     201 "gno.land/r/flippando/flippando"
     132 "gno.land/r/onbloc/obl"
+    112 "gno.land/r/g17ernafy6ctpcz6uepfsq2js8x2vz0wladh5yc3/zentasktic_core"
     112 "gno.land/r/gnoswap/pool"
-    111 "gno.land/r/g17ernafy6ctpcz6uepfsq2js8x2vz0wladh5yc3/zentasktic_core"
      92 "gno.land/r/gov/dao"
      78 "gno.land/r/demo/users"
      70 "gno.land/r/g1ngywvql2ql7t8uzl63w60eqcejkwg4rm4lxdw9/candy20"
-     62 "gno.land/r/teritori/social_feeds"
+     63 "gno.land/r/teritori/social_feeds"
      42 "gno.land/r/gnoswap/v2/pool"
      30 "gno.land/r/onbloc/qux"
      21 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/openocean"
@@ -44,10 +44,10 @@
      11 "gno.land/r/g1ngywvql2ql7t8uzl63w60eqcejkwg4rm4lxdw9/minus"
      11 "gno.land/r/g1w6886hdj2tet0seyw6kn8fl92sx06prgd9w9j8/vmt"
      11 "gno.land/r/teritori/profile"
+     11 "gno.land/r/varmeta/demo/v1/domain/registrar"
      10 "gno.land/r/demo/foo20"
      10 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/disperse"
       9 "gno.land/r/g15mzjefvj9pt2ctv30l9ju03rewmfv9hken9wfm/v2/bridge"
-      9 "gno.land/r/varmeta/demo/v1/domain/registrar"
       8 "gno.land/r/demo/boards"
       8 "gno.land/r/molaryy/openocean"
       8 "gno.land/r/varmeta/registrar"
