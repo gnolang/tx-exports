@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-19277
+19305
 ```
 
 ## addpkgs
@@ -11,13 +11,13 @@
 
 ## top realm calls
 ```
-   3998 "gno.land/r/demo/wugnot"
+   4002 "gno.land/r/demo/wugnot"
    1142 "gno.land/r/gnoswap/gns"
-    775 "gno.land/r/gnoswap/v2/gns"
+    777 "gno.land/r/gnoswap/v2/gns"
     764 "gno.land/r/gnoswap/router"
     755 "gno.land/r/gnoswap/position"
     654 "gno.land/r/gnoswap/gnft"
-    592 "gno.land/r/gnoswap/v2/router"
+    594 "gno.land/r/gnoswap/v2/router"
     582 "gno.land/r/onbloc/usdc"
     512 "gno.land/r/onbloc/foo"
     481 "gno.land/r/gnoswap/v2/position"
@@ -31,15 +31,15 @@
     112 "gno.land/r/g17ernafy6ctpcz6uepfsq2js8x2vz0wladh5yc3/zentasktic_core"
     112 "gno.land/r/gnoswap/pool"
      92 "gno.land/r/gov/dao"
-     78 "gno.land/r/demo/users"
+     79 "gno.land/r/demo/users"
      70 "gno.land/r/g1ngywvql2ql7t8uzl63w60eqcejkwg4rm4lxdw9/candy20"
-     63 "gno.land/r/teritori/social_feeds"
+     67 "gno.land/r/teritori/social_feeds"
      42 "gno.land/r/gnoswap/v2/pool"
      30 "gno.land/r/onbloc/qux"
+     26 "gno.land/r/g1w6886hdj2tet0seyw6kn8fl92sx06prgd9w9j8/game/v3/diceroller"
      21 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/openocean"
      20 "gno.land/r/g1w6886hdj2tet0seyw6kn8fl92sx06prgd9w9j8/games/diceroller"
      18 "gno.land/r/teritori/projects_manager"
-     14 "gno.land/r/g1w6886hdj2tet0seyw6kn8fl92sx06prgd9w9j8/game/v3/diceroller"
      11 "gno.land/r/demo/flippando"
      11 "gno.land/r/g1ngywvql2ql7t8uzl63w60eqcejkwg4rm4lxdw9/minus"
      11 "gno.land/r/g1w6886hdj2tet0seyw6kn8fl92sx06prgd9w9j8/vmt"
