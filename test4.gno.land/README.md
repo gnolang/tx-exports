@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-19401
+19412
 ```
 
 ## addpkgs
@@ -11,17 +11,17 @@
 
 ## top realm calls
 ```
-   4106 "gno.land/r/demo/wugnot"
+   4121 "gno.land/r/demo/wugnot"
    1142 "gno.land/r/gnoswap/gns"
-    802 "gno.land/r/gnoswap/v2/gns"
+    809 "gno.land/r/gnoswap/v2/gns"
     764 "gno.land/r/gnoswap/router"
     755 "gno.land/r/gnoswap/position"
     654 "gno.land/r/gnoswap/gnft"
-    634 "gno.land/r/gnoswap/v2/router"
-    600 "gno.land/r/onbloc/usdc"
+    638 "gno.land/r/gnoswap/v2/router"
+    603 "gno.land/r/onbloc/usdc"
     545 "gno.land/r/onbloc/foo"
-    515 "gno.land/r/gnoswap/v2/position"
-    375 "gno.land/r/gnoswap/v2/staker"
+    520 "gno.land/r/gnoswap/v2/position"
+    378 "gno.land/r/gnoswap/v2/staker"
     359 "gno.land/r/gnoswap/v2/gnft"
     335 "gno.land/r/onbloc/bar"
     320 "gno.land/r/gnoswap/staker"
@@ -32,8 +32,8 @@
     112 "gno.land/r/gnoswap/pool"
      92 "gno.land/r/gov/dao"
      79 "gno.land/r/demo/users"
+     71 "gno.land/r/teritori/social_feeds"
      70 "gno.land/r/g1ngywvql2ql7t8uzl63w60eqcejkwg4rm4lxdw9/candy20"
-     69 "gno.land/r/teritori/social_feeds"
      42 "gno.land/r/gnoswap/v2/pool"
      30 "gno.land/r/onbloc/qux"
      26 "gno.land/r/g1w6886hdj2tet0seyw6kn8fl92sx06prgd9w9j8/game/v3/diceroller"
