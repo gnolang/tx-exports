@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-19418
+19419
 ```
 
 ## addpkgs
@@ -51,8 +51,8 @@
       8 "gno.land/r/demo/boards"
       8 "gno.land/r/molaryy/openocean"
       8 "gno.land/r/varmeta/registrar"
+      7 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/forms2"
       6 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/disperse2"
-      6 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/forms2"
       6 "gno.land/r/g1w6886hdj2tet0seyw6kn8fl92sx06prgd9w9j8/game/diceroller"
       6 "gno.land/r/g1w6886hdj2tet0seyw6kn8fl92sx06prgd9w9j8/game/v1/diceroller"
       6 "gno.land/r/g1w6886hdj2tet0seyw6kn8fl92sx06prgd9w9j8/game/v2/diceroller"
