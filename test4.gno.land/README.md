@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-19529
+19534
 ```
 
 ## addpkgs
@@ -11,12 +11,12 @@
 
 ## top realm calls
 ```
-   4193 "gno.land/r/demo/wugnot"
+   4197 "gno.land/r/demo/wugnot"
    1142 "gno.land/r/gnoswap/gns"
     828 "gno.land/r/gnoswap/v2/gns"
     764 "gno.land/r/gnoswap/router"
     755 "gno.land/r/gnoswap/position"
-    660 "gno.land/r/gnoswap/v2/router"
+    663 "gno.land/r/gnoswap/v2/router"
     654 "gno.land/r/gnoswap/gnft"
     605 "gno.land/r/onbloc/usdc"
     569 "gno.land/r/onbloc/foo"
@@ -25,7 +25,7 @@
     365 "gno.land/r/gnoswap/v2/gnft"
     339 "gno.land/r/onbloc/bar"
     320 "gno.land/r/gnoswap/staker"
-    251 "gno.land/r/onbloc/baz"
+    256 "gno.land/r/onbloc/baz"
     201 "gno.land/r/flippando/flippando"
     144 "gno.land/r/onbloc/obl"
     113 "gno.land/r/g17ernafy6ctpcz6uepfsq2js8x2vz0wladh5yc3/zentasktic_core"
