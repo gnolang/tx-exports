@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-19534
+19572
 ```
 
 ## addpkgs
@@ -11,12 +11,12 @@
 
 ## top realm calls
 ```
-   4197 "gno.land/r/demo/wugnot"
+   4201 "gno.land/r/demo/wugnot"
    1142 "gno.land/r/gnoswap/gns"
-    828 "gno.land/r/gnoswap/v2/gns"
+    830 "gno.land/r/gnoswap/v2/gns"
     764 "gno.land/r/gnoswap/router"
     755 "gno.land/r/gnoswap/position"
-    663 "gno.land/r/gnoswap/v2/router"
+    665 "gno.land/r/gnoswap/v2/router"
     654 "gno.land/r/gnoswap/gnft"
     605 "gno.land/r/onbloc/usdc"
     569 "gno.land/r/onbloc/foo"
@@ -49,6 +49,7 @@
      10 "gno.land/r/demo/foo20"
      10 "gno.land/r/g15mzjefvj9pt2ctv30l9ju03rewmfv9hken9wfm/v2/bridge"
      10 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/disperse"
+     10 "gno.land/r/varmeta/demo/v33/domain/registrar"
       8 "gno.land/r/demo/boards"
       8 "gno.land/r/g1e5hud66rs7ye4zgeqmqvwfhurs2mnf408hdqcl/feedback_v1"
       8 "gno.land/r/molaryy/openocean"
@@ -93,6 +94,7 @@
       1 "gno.land/r/gnoswap/consts"
       1 "gno.land/r/gnoswap/v2/emission"
       1 "gno.land/r/mikecito/grc20_launchpad"
+      1 "gno.land/r/varmeta/demo/v32/domain/registrar"
 ```
 
 ## top faucet requesters
