@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-19632
+19649
 ```
 
 ## addpkgs
@@ -11,12 +11,12 @@
 
 ## top realm calls
 ```
-   4216 "gno.land/r/demo/wugnot"
+   4218 "gno.land/r/demo/wugnot"
    1142 "gno.land/r/gnoswap/gns"
-    833 "gno.land/r/gnoswap/v2/gns"
+    834 "gno.land/r/gnoswap/v2/gns"
     764 "gno.land/r/gnoswap/router"
     755 "gno.land/r/gnoswap/position"
-    670 "gno.land/r/gnoswap/v2/router"
+    671 "gno.land/r/gnoswap/v2/router"
     654 "gno.land/r/gnoswap/gnft"
     608 "gno.land/r/onbloc/usdc"
     569 "gno.land/r/onbloc/foo"
@@ -40,7 +40,7 @@
      21 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/openocean"
      20 "gno.land/r/g1w6886hdj2tet0seyw6kn8fl92sx06prgd9w9j8/games/diceroller"
      18 "gno.land/r/teritori/projects_manager"
-     17 "gno.land/r/varmeta/demo/v1/domain/registrar"
+     18 "gno.land/r/varmeta/demo/v1/domain/registrar"
      15 "gno.land/r/varmeta/demo/v3/domain/registrar"
      11 "gno.land/r/demo/flippando"
      11 "gno.land/r/g1ngywvql2ql7t8uzl63w60eqcejkwg4rm4lxdw9/minus"
@@ -62,6 +62,7 @@
       6 "gno.land/r/g1w6886hdj2tet0seyw6kn8fl92sx06prgd9w9j8/game/v1/diceroller"
       6 "gno.land/r/g1w6886hdj2tet0seyw6kn8fl92sx06prgd9w9j8/game/v2/diceroller"
       6 "gno.land/r/g1w6886hdj2tet0seyw6kn8fl92sx06prgd9w9j8/games/v2/diceroller"
+      6 "gno.land/r/varmeta/demo/v38/domain/registrar"
       6 "gno.land/r/villaquiranm/grc20_launchpad"
       5 "gno.land/r/demo/art/millipede"
       5 "gno.land/r/varmeta/demo1/domain/registrar"
@@ -72,11 +73,11 @@
       4 "gno.land/r/onbloc/pepe"
       4 "gno.land/r/sys/users"
       4 "gno.land/r/taskow/tasks"
+      4 "gno.land/r/varmeta/demo/v39/domain/registrar"
       3 "gno.land/r/demo/userbook"
       3 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/forms"
       3 "gno.land/r/g1w6886hdj2tet0seyw6kn8fl92sx06prgd9w9j8/games/v1/diceroller"
       3 "gno.land/r/gnoswap/v2/community_pool"
-      3 "gno.land/r/varmeta/demo/v38/domain/registrar"
       2 "gno.land/r/g125em6arxsnj49vx35f0n0z34putv5ty3376fg5/checkerr"
       2 "gno.land/r/g13f63ua8uhmuf9mgc0x8zfz04yrsaqh7j78vcgq/monkey"
       2 "gno.land/r/g1jg8mtutu9khhfwc4nxmuhcpftf0pajdhfvsqf5/hello"
