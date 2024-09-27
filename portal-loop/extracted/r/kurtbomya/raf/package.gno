@@ -1,10 +1,10 @@
-package raffle
+package raf
 
 import "gno.land/r/gc24/raffle"
 
 func init() {
-	// raffleCode := "derBSscbMY"
 	ghUsername := "kurtbomya"
 	raffle.RegisterUsername(ghUsername)
+	// raffleCode := "derBSscbMY"
 	// raffle.RegisterCode(raffleCode)
 }

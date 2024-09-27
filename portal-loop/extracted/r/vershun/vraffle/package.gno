@@ -1,6 +1,6 @@
 package vraffle
 
-//import "gno.land/r/gc24/raffle"
+import "gno.land/r/gc24/raffle"
 
 var output string
 

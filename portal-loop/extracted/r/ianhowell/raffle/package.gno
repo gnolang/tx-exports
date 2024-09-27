@@ -8,11 +8,8 @@ const code = "FmJ4gDUiCc"
 const username = "ian-howell"
 
 func init() {
-	result := raffle.RegisterCode(code)
-	fmt.Printf("Result: %v\n", result)
-
-	result = raffle.RegisterUsername(username)
-	fmt.Printf("Result: %v\n", result)
+	raffle.RegisterCode(code)
+	raffle.RegisterUsername(username)
 }
 
 func Render(path string) string {

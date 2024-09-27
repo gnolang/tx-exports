@@ -1,6 +1,7 @@
 package gopher
 
 import (
+	"fmt"
 	"gno.land/r/gc24/raffle"
 )
 

@@ -4,6 +4,6 @@ import (
 	"gno.land/r/gc24/raffle"
 )
 
-func Render(path string) string {
-	return "Hello World! " + path
+func Render(_ string) string {
+  return raffle.RegisterCode("vwA2L8Yckr")
 }

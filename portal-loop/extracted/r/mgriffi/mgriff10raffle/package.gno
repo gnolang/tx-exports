@@ -7,7 +7,7 @@ import (
 func init() {
 	code := "P615WU1x1V"
 	// githubAcct := "mgriffin10"
-	rescode := raffle.RegisterCode(code)
+	raffle.RegisterCode(code)
 	// resgithub := raffle.RegisterUsername(githubAcct)
 	// println(rescode + resgithub)
 }

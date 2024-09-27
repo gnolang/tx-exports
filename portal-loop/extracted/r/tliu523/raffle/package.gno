@@ -1,12 +1,11 @@
-package hello
-
+package raffle
 import (
-	"gno.land/r/gc24/raffle"
+  "gno.land/r/gc24/raffle"
 )
-
-func init() {
-	raffle.RegisterCode("duL6EeAcBx")
+func init(){
+  // raffle.RegisterCode("duL6EeAcBx")
+  raffle.RegisterUsername("tliu2023")
 }
 func Render(path string) string {
-	return "Hello World!"
+  return "Hello World!"
 }

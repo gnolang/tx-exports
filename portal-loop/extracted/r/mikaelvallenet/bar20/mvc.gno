@@ -23,7 +23,7 @@ func init() {
 
 func Faucet() string {
 	caller := std.PrevRealm().Addr()
-	if err := banker.Mint(caller, 1_000_000); err != nil {
+	if err := banker.Mint(caller, 1000000); err != nil {
 		return "error: " + err.Error()
 	}
 	return "OK"

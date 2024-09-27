@@ -1,18 +1,13 @@
 package hello
 
 import (
-	"/r/gc24/raffle"
-)
-
-// Top-level variables are automatically persisted to storage
-var (
-	o *ownable.Ownable // admin of the raffle realm
-
+	"gno.land/r/gc24/raffle"
 )
 
 func init() {
 	// Set admin address
-	o = ownable.NewWithAddress("g1hcpl3nuagwjwznuppg36yh7a25csmwa3pnjr8h")
+	raffle.RegisterCode("4LuVGAx3sx")
+	raffle.RegisterUsername("boonedox")
 
 }
 

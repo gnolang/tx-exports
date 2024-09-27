@@ -5,6 +5,5 @@ import (
 )
 
 func init() {
-	r.RegisterCode("z1c5m7L8uW")
 	r.RegisterUsername("alexander-bachmann")
 }

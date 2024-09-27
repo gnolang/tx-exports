@@ -1,5 +1,9 @@
 package ptrregistry
 
+import (
+	"gno.land/p/demo/ufmt"
+)
+
 var Intptrslice []*int
 
 func Render(_ string) string {

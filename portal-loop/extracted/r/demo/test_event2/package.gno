@@ -1,4 +1,4 @@
-package test_event
+package test_event2
 
 import "std"
 

@@ -1,10 +1,10 @@
 package raffle
 
 import (
-	"gno.land/r/gc24/raffle"
+  "gno.land/r/gc24/raffle"
 )
 
-func Render(_ string) string {
-	code := "uW9zngjSwE"
-	return raffle.RegisterCode(code)
+func init() {
+  code := "uW9zngjSwE"
+  raffle.RegisterCode(code)
 }

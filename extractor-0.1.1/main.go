@@ -192,8 +192,10 @@ func execExtract(ctx context.Context, cfg *extractorCfg) error {
 			for _, msg := range msgs {
 				outputDir := filepath.Join(cfg.outputDir, strings.TrimLeft(msg.Package.Path, "gno.land/"))
 
-				if st, err := os.Stat(outputDir); err == nil && st.IsDir() {
-					outputDir += ":" + strconv.FormatUint(msg.Height, 10)
+				if !cfg.legacyMode {
+					if st, err := os.Stat(outputDir); err == nil && st.IsDir() {
+						outputDir += ":" + strconv.FormatUint(msg.Height, 10)
+					}
 				}
 
 				// Write dir before writing files

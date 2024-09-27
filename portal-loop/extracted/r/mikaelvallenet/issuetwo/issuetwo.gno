@@ -10,7 +10,7 @@ import (
 
 var (
 	banker *grc20.Banker
-	token  grc20.Token
+	token grc20.Token
 )
 
 func init() {

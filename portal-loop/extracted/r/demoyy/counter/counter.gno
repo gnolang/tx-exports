@@ -1,19 +1,19 @@
 package counter
 
 import (
-	"gno.land/p/demo/ufmt"
+    "gno.land/p/demo/ufmt"
 )
 
 var count int
 
 func Increment() {
-	count++
+    count++
 }
 
 func Decrement() {
-	count--
+    count--
 }
 
 func Render(_ string) string {
-	return ufmt.Sprintf("Count: %d", count)
+    return ufmt.Sprintf("Count: %d", count)
 }

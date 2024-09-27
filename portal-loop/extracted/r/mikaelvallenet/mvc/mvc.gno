@@ -10,11 +10,11 @@ import (
 
 var (
 	banker *grc20.Banker
-	token  grc20.Token
+	token grc20.Token
 )
 
 func init() {
-	banker = grc20.NewBanker("MVCoin", "MVC", 0)
+	banker = grc20.NewBanker("MikaelVallenetCoin", "MVC", 0)
 	token = banker.Token()
 }
 

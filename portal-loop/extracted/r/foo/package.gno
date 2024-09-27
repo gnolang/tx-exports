@@ -1,101 +1,39 @@
-package louis
+package foo
 
-import (
-	"std"
-	"strings"
-
-	"gno.land/p/demo/grc/grc20"
-	"gno.land/p/demo/ufmt"
-	"gno.land/r/demo/users"
-)
+import "gno.land/p/demo/ufmt"
 
 var (
-	louis  *grc20.AdminToken
-	admin std.Address = "g1c8cl6t8cw42uuw63geyg7qnx7z09m52u5t0ky9"
+	MainFoo *Foo
+	foos    []*Foo
 )
 
+type Foo struct {
+	bar string
+	baz int
+}
+
 func init() {
-	louis = grc20.NewAdminToken("louisToken", "louis", 6)
-	louis.Mint(admin, 1000000000) // @administrator
+	MainFoo = &Foo{bar: "mainBar", baz: 0}
 }
 
-// method proxies as public functions.
-//
-
-// getters.
-
-func TotalSupply() uint64 {
-	return louis.TotalSupply()
+func (f *Foo) String() string {
+	return ufmt.Sprintf("Foo - (bar: %s) - (baz: %d)\n\n", f.bar, f.baz)
 }
 
-func BalanceOf(owner users.AddressOrName) uint64 {
-	balance, err := louis.BalanceOf(owner.Resolve())
-	if err != nil {
-		panic(err)
+func NewFoo(bar string, baz int) *Foo {
+	return &Foo{bar: bar, baz: baz}
+}
+
+func AddFoos(multipleFoos []*Foo) {
+	foos = append(foos, multipleFoos...)
+}
+
+func Render(_ string) string {
+	var output string
+
+	for _, f := range foos {
+		output += f.String()
 	}
-	return balance
-}
 
-func Allowance(owner, spender users.AddressOrName) uint64 {
-	allowance, err := louis.Allowance(owner.Resolve(), spender.Resolve())
-	if err != nil {
-		panic(err)
-	}
-	return allowance
-}
-
-// setters.
-
-func Transfer(to users.AddressOrName, amount uint64) {
-	caller := std.GetOrigCaller()
-	louis.Transfer(caller, to.Resolve(), amount)
-}
-
-func Approve(spender users.AddressOrName, amount uint64) {
-	caller := std.GetOrigCaller()
-	louis.Approve(caller, spender.Resolve(), amount)
-}
-
-func TransferFrom(from, to users.AddressOrName, amount uint64) {
-	caller := std.GetOrigCaller()
-	louis.TransferFrom(caller, from.Resolve(), to.Resolve(), amount)
-}
-
-// administration.
-
-func Mint(address users.AddressOrName, amount uint64) {
-	caller := std.GetOrigCaller()
-	assertIsAdmin(caller)
-	louis.Mint(address.Resolve(), amount)
-}
-
-func Burn(address users.AddressOrName, amount uint64) {
-	caller := std.GetOrigCaller()
-	assertIsAdmin(caller)
-	louis.Burn(address.Resolve(), amount)
-}
-
-// render.
-//
-
-func Render(path string) string {
-	parts := strings.Split(path, "/")
-	c := len(parts)
-
-	switch {
-	case path == "":
-		return louis.RenderHome()
-	case c == 2 && parts[0] == "balance":
-		owner := users.AddressOrName(parts[1])
-		balance, _ := louis.BalanceOf(owner.Resolve())
-		return ufmt.Sprintf("%d\n", balance)
-	default:
-		return "404\n"
-	}
-}
-
-func assertIsAdmin(address std.Address) {
-	if address != admin {
-		panic("restricted access")
-	}
+	return output
 }

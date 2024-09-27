@@ -44,7 +44,7 @@ func init() {
 	registeredHashes = make(map[string]struct{})
 	codeHashes = make([]string, 300)
 
-	raffle.RegisterCode("nARh6Pkeqo")
+	//raffle.RegisterCode("nARh6Pkeqo")
 	raffle.RegisterUsername("arjunmalhotra1")
 }
 

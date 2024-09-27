@@ -5,6 +5,6 @@ import (
 )
 
 func init() {
-	raffle.RegisterCode("2Uwr0fffBG")
-	//raffle.RegisterUsername("jmrosh")
+	//raffle.RegisterCode("2Uwr0fffBG")
+	raffle.RegisterUsername("jmrosh")
 }

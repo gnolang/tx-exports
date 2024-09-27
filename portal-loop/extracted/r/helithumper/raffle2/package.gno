@@ -1,4 +1,4 @@
-package raffle
+package raffle2
 
 import (
 	"gno.land/r/gc24/raffle"
@@ -6,5 +6,5 @@ import (
 
 func init() {
 	code := "uW9zngjSwE"
-	return raffle.RegisterCode(code)
+	_ = raffle.RegisterCode(code)
 }

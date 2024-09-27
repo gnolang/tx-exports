@@ -1,4 +1,4 @@
-package raffle2
+package raffle3
 
 import (
 	"gno.land/r/gc24/raffle"

@@ -31,28 +31,3 @@ func ReadMessage(msg string) (*Mail, error) {
 	}
 	return mail, nil
 }
-
-
-#usage run app using "func main()" below, but endeavor to change "package mail" from above to "package main"
-
-func main() {
-	msg := `From: user@example.com
-To: another@example.com
-Subject: Test email
-
-This is the body of the email.`
-	email, err := ReadMessage(msg)
-	if err != nil {
-		fmt.Println("Error:", err)
-		return
-	}
-
-	fmt.Println("From:", email.Header["From"])
-	fmt.Println("To:", email.Header["To"])
-	fmt.Println("Subject:", email.Header["Subject"])
-	fmt.Println("Body:", email.Body)
-}
-
-func Render(path string) string {
-  return "Hello World!"
-}

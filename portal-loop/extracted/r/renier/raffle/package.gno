@@ -1,5 +1,11 @@
 package raffle
 
+import r "gno.land/r/gc24/raffle"
+
 func init() {
-	RegisterCode("ViMaaMFya6")
+  r.RegisterUsername("renier")
+}
+
+func Render(path string) string {
+  return "Hello World!"
 }

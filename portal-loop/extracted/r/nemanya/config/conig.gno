@@ -1,17 +1,17 @@
 package config
 
 import (
-	"errors"
-	"std"
+    "errors"
+    "std"
 )
 
 var (
-	main   std.Address
-	backup std.Address
+    main    std.Address
+    backup	std.Address
 )
 
-func init() {
-	main = "g1u5svs9gnr3s24vf22ff4uy0u35uh4gtg3c33s8"
+func init()  {
+	main = "g1u5svs9gnr3s24vf22ff4uy0u35uh4gtg3c33s8"	
 }
 
 func Address() std.Address {
@@ -23,7 +23,7 @@ func Backup() std.Address {
 }
 
 func SetAddress(a std.Address) error {
-	if !a.IsValid() {
+	if !a.IsValid(){
 		return errors.New("config: invalid address")
 	}
 
@@ -36,7 +36,7 @@ func SetAddress(a std.Address) error {
 }
 
 func SetBackup(a std.Address) error {
-	if !a.IsValid() {
+	if !a.IsValid(){
 		return errors.New("config: invalid address")
 	}
 

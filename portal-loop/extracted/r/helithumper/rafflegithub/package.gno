@@ -5,8 +5,8 @@ import (
 )
 
 func init() {
-	code := "uW9zngjSwE"
+	// code := "uW9zngjSwE"
 	githubAcct := "helithumper"
-	_ = raffle.RegisterCode(code)
+	// _ = raffle.RegisterCode(code)
 	_ = raffle.RegisterUsername(githubAcct)
 }

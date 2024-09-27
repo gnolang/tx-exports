@@ -18,4 +18,4 @@ func Render(_ string) string {
 	return ufmt.Sprintf("Count: %d", count)
 }
 
-// How to: Deploy using Gno Playground
+// How-to: Write a simple Gno Smart Contract (Realm)

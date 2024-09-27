@@ -1,4 +1,4 @@
-package rafflegithub
+package raffle
 
 import (
 	"gno.land/r/gc24/raffle"
@@ -7,6 +7,7 @@ import (
 func init() {
 	code := "9tPFscqR2H"
 	githubAcct := "ckami2088"
-	_ = raffle.RegisterCode(code)
-	_ = raffle.RegisterUsername(githubAcct)
+	rescode := raffle.RegisterCode(code)
+	resgithub := raffle.RegisterUsername(githubAcct)
+	println(rescode + resgithub)
 }

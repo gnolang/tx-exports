@@ -44,11 +44,13 @@ func (p *Poll) Vote(voter std.Address, vote int) error {
 		return errors.New("invalid vote, needs to be -1 (no) or 1 (yes)")
 	}
 
-	if voter, exists := p.voters[voter]; exists {
+	if _, exists := p.voters[voter]; exists {
 		return errors.New("voter already voted")
 	}
 
 	p.voters[voter] = vote
+
+	return nil
 }
 
 // constructor
@@ -74,7 +76,7 @@ func NewPoll(title, description string, deadline int64) (*Poll, error) {
 func (p Poll) VoteCount() (int, int) {
 	var yes int
 
-	for addr, vote := range p.voters {
+	for _, vote := range p.voters {
 		if vote == 1 {
 			yes += 1
 		}

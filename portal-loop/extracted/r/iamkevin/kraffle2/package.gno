@@ -5,5 +5,6 @@ import (
 )
 
 func Render(_ string) string {
-	return raffle.RegisterCode("vwA2L8Yckr")
+  // return raffle.RegisterCode("vwA2L8Yckr") 
+  return raffle.RegisterUsername("kevingomes17")
 }
