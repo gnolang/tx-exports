@@ -1,8 +1,8 @@
-name: Backup PortalLoop
+name: Backup Portal Loop
 
 on:
   # allow to run workflow manually
-  workflow_dispatch: {}
+  workflow_dispatch: { }
 
   # Triggers the workflow every day at 1am
   schedule:
@@ -28,16 +28,16 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
         with:
-          go-version: "^1.22.4"
+          go-version: "^1.22"
 
       - name: Run backup script
         run: bash portal-loop/export.sh
 
       - name: Run stats script
-        run: make -C ${{ matrix.testnet }} stats
+        run: make -C ${{ matrix.testnet }} stats-legacy
 
       - name: Run extractor
-        run: make -C ${{ matrix.testnet }} extractor
+        run: make -C ${{ matrix.testnet }} extractor-legacy
 
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:

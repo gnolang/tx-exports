@@ -46,11 +46,46 @@ stats:
 	echo '```' >> README.md
 	echo >> README.md
 
+stats-legacy:
+	echo "# $(REMOTE)" > README.md
+	echo >> README.md
+
+	echo "## TXs" >> README.md
+	echo '```' >> README.md
+	cat backup_*.jsonl | wc -l >> README.md
+	echo '```' >> README.md
+	echo >> README.md
+
+	echo "## addpkgs" >> README.md
+	echo '```' >> README.md
+	cat backup_*.jsonl | jq '.msg[].package.Path | select( . != null )' | sort | uniq -c | sort --stable -nr >> README.md
+	echo '```' >> README.md
+	echo >> README.md
+
+	echo "## top realm calls" >> README.md
+	echo '```' >> README.md
+	cat backup_*.jsonl | jq '.msg[].pkg_path | select( . != null )' | sort | uniq -c | sort --stable -nr >> README.md
+	echo '```' >> README.md
+	echo >> README.md
+
+	echo "## top faucet requesters" >> README.md
+	echo '```' >> README.md
+	cat backup_*.jsonl | jq -r '.msg[] | select(.["@type"]=="/bank.MsgSend") | select(.["from_address"]=="g127jydsh6cms3lrtdenydxsckh23a8d6emqcvfa") | .to_address + " " + .amount' | sed 's/ugnot$$//' | awk 'NR == 1 {next} {a[$$1] += $$2} {b[$$1] += 1} END {for (i in a) {if (a[i] >= 500000000){printf "%-15s\t%s\t%s\n", i, b[i], a[i]}}}' | sort -rnk2 >> README.md
+	echo '```' >> README.md
+	echo >> README.md
+
 
 extractor:
 	go run -C "../$(EXTRACTOR_DIR)" . \
 		-source-path "$(shell pwd)" \
 		-output-dir "$(shell pwd)/extracted"
+
+extractor-legacy:
+	go run -C "../$(EXTRACTOR_DIR)" . \
+		-source-path "$(shell pwd)" \
+		-output-dir "$(shell pwd)/extracted" \
+		--legacy-mode
+
 
 loop:
 	while true; do \
