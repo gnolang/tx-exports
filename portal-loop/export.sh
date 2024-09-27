@@ -35,6 +35,8 @@ if [[ -z "$latest_backup_file" ]]; then
   # just save file
   echo "Saving first time"
   cp $backup_name ../$POTENTIAL_BACKUP_NAME
+  rm -rf $TMP_DIR
+  
   exit 0
 else
   echo "Latest backup file: $latest_backup_file"
