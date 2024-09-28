@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-19691
+19758
 ```
 
 ## addpkgs
@@ -11,18 +11,18 @@
 
 ## top realm calls
 ```
-   4218 "gno.land/r/demo/wugnot"
+   4226 "gno.land/r/demo/wugnot"
    1142 "gno.land/r/gnoswap/gns"
-    834 "gno.land/r/gnoswap/v2/gns"
+    837 "gno.land/r/gnoswap/v2/gns"
     764 "gno.land/r/gnoswap/router"
     755 "gno.land/r/gnoswap/position"
-    671 "gno.land/r/gnoswap/v2/router"
+    674 "gno.land/r/gnoswap/v2/router"
     654 "gno.land/r/gnoswap/gnft"
-    608 "gno.land/r/onbloc/usdc"
+    609 "gno.land/r/onbloc/usdc"
     569 "gno.land/r/onbloc/foo"
-    549 "gno.land/r/gnoswap/v2/position"
+    550 "gno.land/r/gnoswap/v2/position"
     390 "gno.land/r/gnoswap/v2/staker"
-    367 "gno.land/r/gnoswap/v2/gnft"
+    368 "gno.land/r/gnoswap/v2/gnft"
     341 "gno.land/r/onbloc/bar"
     320 "gno.land/r/gnoswap/staker"
     256 "gno.land/r/onbloc/baz"
@@ -32,17 +32,19 @@
     112 "gno.land/r/gnoswap/pool"
      92 "gno.land/r/gov/dao"
      86 "gno.land/r/demo/users"
-     81 "gno.land/r/teritori/social_feeds"
+     85 "gno.land/r/teritori/social_feeds"
      70 "gno.land/r/g1ngywvql2ql7t8uzl63w60eqcejkwg4rm4lxdw9/candy20"
      42 "gno.land/r/gnoswap/v2/pool"
      30 "gno.land/r/onbloc/qux"
      26 "gno.land/r/g1w6886hdj2tet0seyw6kn8fl92sx06prgd9w9j8/game/v3/diceroller"
+     25 "gno.land/r/varmeta/demo/v403/domain/registrar"
      21 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/openocean"
      20 "gno.land/r/g1w6886hdj2tet0seyw6kn8fl92sx06prgd9w9j8/games/diceroller"
      19 "gno.land/r/teritori/profile"
      18 "gno.land/r/teritori/projects_manager"
      18 "gno.land/r/varmeta/demo/v1/domain/registrar"
      15 "gno.land/r/varmeta/demo/v3/domain/registrar"
+     12 "gno.land/r/varmeta/demo/v405/domain/registrar"
      11 "gno.land/r/demo/flippando"
      11 "gno.land/r/g1ngywvql2ql7t8uzl63w60eqcejkwg4rm4lxdw9/minus"
      11 "gno.land/r/g1w6886hdj2tet0seyw6kn8fl92sx06prgd9w9j8/vmt"
@@ -65,9 +67,9 @@
       6 "gno.land/r/g1w6886hdj2tet0seyw6kn8fl92sx06prgd9w9j8/game/v2/diceroller"
       6 "gno.land/r/g1w6886hdj2tet0seyw6kn8fl92sx06prgd9w9j8/games/v2/diceroller"
       6 "gno.land/r/varmeta/demo/v38/domain/registrar"
+      6 "gno.land/r/varmeta/demo/v402/domain/registrar"
       6 "gno.land/r/villaquiranm/grc20_launchpad"
       5 "gno.land/r/demo/art/millipede"
-      5 "gno.land/r/varmeta/demo/v402/domain/registrar"
       5 "gno.land/r/varmeta/demo1/domain/registrar"
       4 "gno.land/r/demo/domain/registrar"
       4 "gno.land/r/demo/user"
@@ -103,6 +105,7 @@
       1 "gno.land/r/gnoswap/v2/emission"
       1 "gno.land/r/mikecito/grc20_launchpad"
       1 "gno.land/r/varmeta/demo/v32/domain/registrar"
+      1 "gno.land/r/varmeta/demo/v406/domain/registrar"
 ```
 
 ## top faucet requesters
