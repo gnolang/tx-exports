@@ -47,10 +47,11 @@ if [[ -z "$LATEST_BACKUP_FILE" ]]; then
   exit 0
 fi
 
+LATEST_BACKUP_SORTED=latest_backup_sort.jsonl
+DIFF_TXS=diff.jsonl
+
 # There is an existing backup already, check it
 echo "Latest backup file: $LATEST_BACKUP_FILE"
-
-LATEST_BACKUP_SORTED=latest_backup_sort.jsonl
 
 # Sort the latest backup file
 sort "$LATEST_BACKUP_FILE" > "$LATEST_BACKUP_SORTED"
@@ -61,7 +62,6 @@ sort "$BACKUP_NAME" > temp_"$BACKUP_NAME"
 # Clean up the temporary backup file
 rm "$BACKUP_NAME"
 
-DIFF_TXS=diff.jsonl
 
 # Use comm to find lines only in file2 (additions) and write to output file
 comm -13 ./"$LATEST_BACKUP_SORTED" temp_"$BACKUP_NAME" > "$DIFF_TXS"
@@ -71,9 +71,7 @@ if [[ -z $(grep '[^[:space:]]' "$DIFF_TXS") ]]; then
   echo "No differences found."
 else
   echo "Differences found."
-
   cp "$DIFF_TXS" ../"$BACKUP_NAME"
-
   echo "Differences saved to $BACKUP_NAME"
 fi
 
