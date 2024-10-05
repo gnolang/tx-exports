@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-19908
+19913
 ```
 
 ## addpkgs
@@ -54,7 +54,7 @@
      10 "gno.land/r/varmeta/demo/v33/domain/registrar"
      10 "gno.land/r/varmeta/demo/v36/domain/registrar"
      10 "gno.land/r/varmeta/demo/v39/domain/registrar"
-      8 "gno.land/r/demo/boards"
+      9 "gno.land/r/demo/boards"
       8 "gno.land/r/g1e5hud66rs7ye4zgeqmqvwfhurs2mnf408hdqcl/feedback_v1"
       8 "gno.land/r/molaryy/openocean"
       8 "gno.land/r/varmeta/demo/v2/domain/registrar"
