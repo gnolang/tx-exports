@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-19913
+19916
 ```
 
 ## addpkgs
@@ -11,12 +11,12 @@
 
 ## top realm calls
 ```
-   4329 "gno.land/r/demo/wugnot"
+   4333 "gno.land/r/demo/wugnot"
    1142 "gno.land/r/gnoswap/gns"
-    883 "gno.land/r/gnoswap/v2/gns"
+    888 "gno.land/r/gnoswap/v2/gns"
     764 "gno.land/r/gnoswap/router"
     755 "gno.land/r/gnoswap/position"
-    707 "gno.land/r/gnoswap/v2/router"
+    710 "gno.land/r/gnoswap/v2/router"
     654 "gno.land/r/gnoswap/gnft"
     616 "gno.land/r/onbloc/usdc"
     589 "gno.land/r/onbloc/foo"
