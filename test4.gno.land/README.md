@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-19929
+19973
 ```
 
 ## addpkgs
@@ -11,23 +11,23 @@
 
 ## top realm calls
 ```
-   4341 "gno.land/r/demo/wugnot"
+   4383 "gno.land/r/demo/wugnot"
    1142 "gno.land/r/gnoswap/gns"
-    894 "gno.land/r/gnoswap/v2/gns"
+    908 "gno.land/r/gnoswap/v2/gns"
     764 "gno.land/r/gnoswap/router"
     755 "gno.land/r/gnoswap/position"
-    715 "gno.land/r/gnoswap/v2/router"
+    726 "gno.land/r/gnoswap/v2/router"
     654 "gno.land/r/gnoswap/gnft"
-    616 "gno.land/r/onbloc/usdc"
-    593 "gno.land/r/onbloc/foo"
-    589 "gno.land/r/gnoswap/v2/position"
-    409 "gno.land/r/gnoswap/v2/staker"
-    392 "gno.land/r/gnoswap/v2/gnft"
-    347 "gno.land/r/onbloc/bar"
+    621 "gno.land/r/onbloc/usdc"
+    605 "gno.land/r/gnoswap/v2/position"
+    604 "gno.land/r/onbloc/foo"
+    428 "gno.land/r/gnoswap/v2/staker"
+    409 "gno.land/r/gnoswap/v2/gnft"
+    350 "gno.land/r/onbloc/bar"
     320 "gno.land/r/gnoswap/staker"
     258 "gno.land/r/onbloc/baz"
     201 "gno.land/r/flippando/flippando"
-    153 "gno.land/r/onbloc/obl"
+    159 "gno.land/r/onbloc/obl"
     113 "gno.land/r/g17ernafy6ctpcz6uepfsq2js8x2vz0wladh5yc3/zentasktic_core"
     112 "gno.land/r/gnoswap/pool"
      95 "gno.land/r/demo/users"
@@ -35,7 +35,7 @@
      86 "gno.land/r/teritori/social_feeds"
      70 "gno.land/r/g1ngywvql2ql7t8uzl63w60eqcejkwg4rm4lxdw9/candy20"
      53 "gno.land/r/teritori/profile"
-     42 "gno.land/r/gnoswap/v2/pool"
+     43 "gno.land/r/gnoswap/v2/pool"
      30 "gno.land/r/onbloc/qux"
      30 "gno.land/r/varmeta/demo/v405/domain/registrar"
      26 "gno.land/r/g1w6886hdj2tet0seyw6kn8fl92sx06prgd9w9j8/game/v3/diceroller"
@@ -61,6 +61,7 @@
       8 "gno.land/r/varmeta/demo/v401/domain/registrar"
       8 "gno.land/r/varmeta/registrar"
       7 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/forms2"
+      7 "gno.land/r/villaquiranm/ghverify"
       6 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/disperse2"
       6 "gno.land/r/g1w6886hdj2tet0seyw6kn8fl92sx06prgd9w9j8/game/diceroller"
       6 "gno.land/r/g1w6886hdj2tet0seyw6kn8fl92sx06prgd9w9j8/game/v1/diceroller"
