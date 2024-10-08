@@ -6,10 +6,16 @@ set -xe
 TMP_DIR=temp-gno # Temporary directory for the working data
 GENESIS=genesis.json
 WGET_OUTPUT=wget-genesis.json
-BACKUP_PREFIX=backup_
-BACKUP_NAME=backup_portal_loop.jsonl
+BACKUP_NAME_TXS=backup_portal_loop_txs.jsonl
+BACKUP_NAME_BALANCES=backup_portal_loop_balances.jsonl
 # Latest backup is commited in the repo
-LATEST_BACKUP_FILE=../"$BACKUP_NAME"
+LATEST_BACKUP_FILE_TXS=../"$BACKUP_NAME_TXS"
+
+# Make the generated backup files the reference ones stored into the repositor
+copyBackupFiles () {
+  cp "$BACKUP_NAME_TXS" "$LATEST_BACKUP_FILE_TXS"
+  cp "$BACKUP_NAME_BALANCES" ../"$BACKUP_NAME_BALANCES"
+}
 
 # Create the temporary working dir
 mkdir $TMP_DIR
@@ -28,18 +34,20 @@ make build.gnoland
 cd ../.. # move back to the portal-loop directory
 
 # Extract the genesis transactions
-./gno/gno.land/build/gnoland genesis txs export -genesis-path $GENESIS "$BACKUP_NAME"
+./gno/gno.land/build/gnoland genesis txs export -genesis-path $GENESIS "$BACKUP_NAME_TXS"
+# Extract the genesis transactions
+./gno/gno.land/build/gnoland genesis balances export -genesis-path $GENESIS "$BACKUP_NAME_BALANCES"
 
 # Clean up the downloaded genesis.json and the wget response
 rm $GENESIS $WGET_OUTPUT
 
 # Check if there is an existing backup
-if [[ ! -f "$LATEST_BACKUP_FILE" ]]; then
+if [[ ! -f "$LATEST_BACKUP_FILE_TXS" ]]; then
   # Save the initial backup
-  echo "Saving initial backup to $BACKUP_NAME"
+  echo "Saving initial backup to $BACKUP_NAME_TXS"
 
-  # Make the backup file official
-  cp "$BACKUP_NAME" "$LATEST_BACKUP_FILE"
+  # Make the backup files official
+  copyBackupFiles
 else # Backup file exists!
   LATEST_BACKUP_SORTED=latest_backup_sort.jsonl
   DIFF_TXS=diff.jsonl
@@ -48,22 +56,22 @@ else # Backup file exists!
   echo "Backup file already present in the repository"
 
   # Sort the latest backup file
-  sort "$LATEST_BACKUP_FILE" > "$LATEST_BACKUP_SORTED"
+  sort "$LATEST_BACKUP_FILE_TXS" > "$LATEST_BACKUP_SORTED"
   
   # Sort the latest genesis tx sheet
-  sort "$BACKUP_NAME" > temp_"$BACKUP_NAME"
+  sort "$BACKUP_NAME_TXS" > temp_"$BACKUP_NAME_TXS"
 
   # Use comm to find lines only in file2 (additions) and write to output file
-  comm -13 ./"$LATEST_BACKUP_SORTED" temp_"$BACKUP_NAME" > "$DIFF_TXS"
+  comm -13 ./"$LATEST_BACKUP_SORTED" temp_"$BACKUP_NAME_TXS" > "$DIFF_TXS"
 
   # Notify if differences were found
   if [[ -z $(grep '[^[:space:]]' "$DIFF_TXS") ]]; then
     echo "No differences found. Exiting with no further activities."
   else
-    echo "Differences found. Replacing backup file"
-    # Make the backup file official
-    cp "$BACKUP_NAME" "$LATEST_BACKUP_FILE"
-    echo "Stored a new backup file"
+    echo "Differences found. Replacing backup files"
+    # Make the backup files official
+    copyBackupFiles
+    echo "Stored new backup files for balances and txs"
   fi
 fi
 
