@@ -61,7 +61,8 @@ else # Backup file exists!
   # Sort the latest genesis tx sheet
   sort "$BACKUP_NAME_TXS" > temp_"$BACKUP_NAME_TXS"
 
-  # Use comm to find lines only in file2 (additions) and write to output file
+  # Compare existing and incoming txs backup files both sorted
+  # Use comm to find lines only in the incoming txs backup and write to an output file
   comm -13 ./"$LATEST_BACKUP_SORTED" temp_"$BACKUP_NAME_TXS" > "$DIFF_TXS"
 
   # Notify if differences were found
