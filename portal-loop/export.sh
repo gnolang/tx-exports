@@ -11,7 +11,7 @@ BACKUP_NAME_BALANCES=backup_portal_loop_balances.jsonl
 # Latest backup is commited in the repo
 LATEST_BACKUP_FILE_TXS=../"$BACKUP_NAME_TXS"
 
-# Make the generated backup files the reference ones stored into the repositor
+# Make the generated backup files the reference ones stored into the repository
 copyBackupFiles () {
   cp "$BACKUP_NAME_TXS" "$LATEST_BACKUP_FILE_TXS"
   cp "$BACKUP_NAME_BALANCES" ../"$BACKUP_NAME_BALANCES"
@@ -35,7 +35,7 @@ cd ../.. # move back to the portal-loop directory
 
 # Extract the genesis transactions
 ./gno/gno.land/build/gnoland genesis txs export -genesis-path $GENESIS "$BACKUP_NAME_TXS"
-# Extract the genesis transactions
+# Extract the genesis balances
 ./gno/gno.land/build/gnoland genesis balances export -genesis-path $GENESIS "$BACKUP_NAME_BALANCES"
 
 # Clean up the downloaded genesis.json and the wget response
