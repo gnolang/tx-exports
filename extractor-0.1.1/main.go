@@ -16,6 +16,7 @@ import (
 
 	"github.com/gnolang/gno/gno.land/pkg/sdk/vm"
 	"github.com/gnolang/gno/tm2/pkg/amino"
+	"github.com/gnolang/gno/tm2/pkg/std"
 	"github.com/gnolang/tx-archive/types"
 	"github.com/peterbourgon/ff/v3/ffcli"
 )
@@ -37,6 +38,8 @@ type extractorCfg struct {
 	fileType   string
 	sourcePath string
 	outputDir  string
+
+	legacyMode bool
 }
 
 func main() {
@@ -88,6 +91,13 @@ func (c *extractorCfg) registerFlags(fs *flag.FlagSet) {
 		"./extracted",
 		"the output directory for the extracted Gno source code",
 	)
+
+	fs.BoolVar(
+		&c.legacyMode,
+		"legacy-mode",
+		false,
+		"flag indicating if the legacy tx sheet mode should be used",
+	)
 }
 
 // execExtract runs the extract service for Gno source code
@@ -129,40 +139,83 @@ func execExtract(ctx context.Context, cfg *extractorCfg) error {
 		return errNoSourceFilesFound
 	}
 
+	var (
+		unwrapFn = func(data types.TxData) []std.Msg {
+			return data.Tx.Msgs
+		}
+
+		heightFn = func(data types.TxData) uint64 {
+			return data.BlockNum
+		}
+
+		unwrapLegacyFn = func(tx std.Tx) []std.Msg {
+			return tx.Msgs
+		}
+
+		heightLegacyFn = func(_ std.Tx) uint64 {
+			return 0
+		}
+	)
+
 	for _, sourceFile := range sourceFiles {
-		sourceFile := sourceFile
+		select {
+		case <-ctx.Done():
+			return ctx.Err()
+		default:
+			sourceFile := sourceFile
 
-		// Extract messages
-		msgs, processErr := extractAddMessages(sourceFile)
-		if processErr != nil {
-			return processErr
+			// Extract messages
+			var (
+				msgs       []AddPackage
+				processErr error
+			)
+
+			if !cfg.legacyMode {
+				msgs, processErr = extractAddMessages(
+					sourceFile,
+					unwrapFn,
+					heightFn,
+				)
+			} else {
+				msgs, processErr = extractAddMessages(
+					sourceFile,
+					unwrapLegacyFn,
+					heightLegacyFn,
+				)
+			}
+
+			if processErr != nil {
+				return processErr
+			}
+
+			// Process messages
+			for _, msg := range msgs {
+				outputDir := filepath.Join(cfg.outputDir, strings.TrimLeft(msg.Package.Path, "gno.land/"))
+
+				if !cfg.legacyMode {
+					if st, err := os.Stat(outputDir); err == nil && st.IsDir() {
+						outputDir += ":" + strconv.FormatUint(msg.Height, 10)
+					}
+				}
+
+				// Write dir before writing files
+				if dirWriteErr := os.MkdirAll(outputDir, os.ModePerm); dirWriteErr != nil {
+					return fmt.Errorf("unable to write dir, %w", dirWriteErr)
+				}
+
+				// Write the package source code
+				if writeErr := writePackageFiles(msg, outputDir); writeErr != nil {
+					return writeErr
+				}
+
+				// Write the package metadata
+				if writeErr := writePackageMetadata(metadataFromMsg(msg), outputDir); writeErr != nil {
+					return writeErr
+				}
+			}
 		}
-
-		// Process messages
-		for _, msg := range msgs {
-			outputDir := filepath.Join(cfg.outputDir, strings.TrimLeft(msg.Package.Path, "gno.land/"))
-
-			if st, err := os.Stat(outputDir); err == nil && st.IsDir() {
-				outputDir += ":" + strconv.FormatUint(msg.Height, 10)
-			}
-
-			// Write dir before writing files
-			if dirWriteErr := os.MkdirAll(outputDir, os.ModePerm); dirWriteErr != nil {
-				return fmt.Errorf("unable to write dir, %w", dirWriteErr)
-			}
-
-			// Write the package source code
-			if writeErr := writePackageFiles(msg, outputDir); writeErr != nil {
-				return writeErr
-			}
-
-			// Write the package metadata
-			if writeErr := writePackageMetadata(metadataFromMsg(msg), outputDir); writeErr != nil {
-				return writeErr
-			}
-		}
-
 	}
+
 	return nil
 }
 
@@ -204,7 +257,12 @@ type AddPackage struct {
 	Height uint64
 }
 
-func extractAddMessages(filePath string) ([]AddPackage, error) {
+// extractAddMessages extracts the AddPackage messages
+func extractAddMessages[T std.Tx | types.TxData](
+	filePath string,
+	unwrapFn func(T) []std.Msg,
+	heightFn func(T) uint64,
+) ([]AddPackage, error) {
 	file, err := os.Open(filePath)
 	if err != nil {
 		return nil, fmt.Errorf("unable to open file, %w", err)
@@ -226,7 +284,8 @@ func extractAddMessages(filePath string) ([]AddPackage, error) {
 	tempBuf := make([]byte, 0)
 
 	for {
-		var txData types.TxData
+		var txData T
+
 		line, isPrefix, err := reader.ReadLine()
 
 		// Exit if no more lines in file
@@ -262,7 +321,7 @@ func extractAddMessages(filePath string) ([]AddPackage, error) {
 			tempBuf = nil
 		}
 
-		for _, msg := range txData.Tx.Msgs {
+		for _, msg := range unwrapFn(txData) {
 			// Only MsgAddPkg should be parsed
 			if msg.Type() != "add_package" {
 				continue
@@ -279,7 +338,7 @@ func extractAddMessages(filePath string) ([]AddPackage, error) {
 
 			msgArr = append(msgArr, AddPackage{
 				MsgAddPackage: msgAddPkg,
-				Height:        txData.BlockNum,
+				Height:        heightFn(txData),
 			})
 		}
 	}
