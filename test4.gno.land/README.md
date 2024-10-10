@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-20025
+20081
 ```
 
 ## addpkgs
@@ -35,16 +35,17 @@
      86 "gno.land/r/teritori/social_feeds"
      70 "gno.land/r/g1ngywvql2ql7t8uzl63w60eqcejkwg4rm4lxdw9/candy20"
      53 "gno.land/r/teritori/profile"
-     43 "gno.land/r/gnoswap/v2/pool"
+     44 "gno.land/r/gnoswap/v2/pool"
+     36 "gno.land/r/ecodevx/dao/pre1"
      30 "gno.land/r/onbloc/qux"
      30 "gno.land/r/varmeta/demo/v405/domain/registrar"
      26 "gno.land/r/g1w6886hdj2tet0seyw6kn8fl92sx06prgd9w9j8/game/v3/diceroller"
      25 "gno.land/r/varmeta/demo/v403/domain/registrar"
-     22 "gno.land/r/ecodevx/dao/pre1"
      21 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/openocean"
      20 "gno.land/r/g1w6886hdj2tet0seyw6kn8fl92sx06prgd9w9j8/games/diceroller"
      18 "gno.land/r/teritori/projects_manager"
      18 "gno.land/r/varmeta/demo/v1/domain/registrar"
+     17 "gno.land/r/varmeta/demo/v5/domain/registrar"
      15 "gno.land/r/varmeta/demo/v3/domain/registrar"
      11 "gno.land/r/demo/flippando"
      11 "gno.land/r/g1ngywvql2ql7t8uzl63w60eqcejkwg4rm4lxdw9/minus"
@@ -76,17 +77,20 @@
       5 "gno.land/r/varmeta/demo1/domain/registrar"
       4 "gno.land/r/demo/domain/registrar"
       4 "gno.land/r/demo/user"
+      4 "gno.land/r/ecodevx/space/pre1"
       4 "gno.land/r/g15mzjefvj9pt2ctv30l9ju03rewmfv9hken9wfm/v1/bridge"
       4 "gno.land/r/manfred/home"
       4 "gno.land/r/onbloc/pepe"
       4 "gno.land/r/sys/users"
       4 "gno.land/r/taskow/tasks"
+      3 "gno.land/r/demo/games/shifumi"
       3 "gno.land/r/demo/userbook"
-      3 "gno.land/r/ecodevx/space/pre1"
       3 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/forms"
       3 "gno.land/r/g1w6886hdj2tet0seyw6kn8fl92sx06prgd9w9j8/games/v1/diceroller"
       3 "gno.land/r/gnoswap/v2/community_pool"
       3 "gno.land/r/varmeta/demo/v406/domain/registrar"
+      3 "gno.land/r/varmeta/test/gettime"
+      2 "gno.land/r/ecodevx/tutorials/pre1"
       2 "gno.land/r/g125em6arxsnj49vx35f0n0z34putv5ty3376fg5/checkerr"
       2 "gno.land/r/g13f63ua8uhmuf9mgc0x8zfz04yrsaqh7j78vcgq/monkey"
       2 "gno.land/r/g1jg8mtutu9khhfwc4nxmuhcpftf0pajdhfvsqf5/hello"
