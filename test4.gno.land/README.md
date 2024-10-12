@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-20116
+20125
 ```
 
 ## addpkgs
@@ -11,17 +11,17 @@
 
 ## top realm calls
 ```
-   4433 "gno.land/r/demo/wugnot"
+   4456 "gno.land/r/demo/wugnot"
    1142 "gno.land/r/gnoswap/gns"
-    936 "gno.land/r/gnoswap/v2/gns"
+    943 "gno.land/r/gnoswap/v2/gns"
     764 "gno.land/r/gnoswap/router"
     755 "gno.land/r/gnoswap/position"
-    733 "gno.land/r/gnoswap/v2/router"
+    735 "gno.land/r/gnoswap/v2/router"
     654 "gno.land/r/gnoswap/gnft"
-    636 "gno.land/r/gnoswap/v2/position"
+    646 "gno.land/r/gnoswap/v2/position"
     636 "gno.land/r/onbloc/usdc"
-    610 "gno.land/r/onbloc/foo"
-    449 "gno.land/r/gnoswap/v2/staker"
+    616 "gno.land/r/onbloc/foo"
+    459 "gno.land/r/gnoswap/v2/staker"
     409 "gno.land/r/gnoswap/v2/gnft"
     352 "gno.land/r/onbloc/bar"
     320 "gno.land/r/gnoswap/staker"
@@ -36,7 +36,7 @@
      70 "gno.land/r/g1ngywvql2ql7t8uzl63w60eqcejkwg4rm4lxdw9/candy20"
      53 "gno.land/r/teritori/profile"
      44 "gno.land/r/gnoswap/v2/pool"
-     41 "gno.land/r/ecodevx/dao/pre1"
+     42 "gno.land/r/ecodevx/dao/pre1"
      31 "gno.land/r/onbloc/qux"
      30 "gno.land/r/varmeta/demo/v405/domain/registrar"
      26 "gno.land/r/g1w6886hdj2tet0seyw6kn8fl92sx06prgd9w9j8/game/v3/diceroller"
@@ -66,6 +66,7 @@
       8 "gno.land/r/varmeta/registrar"
       7 "gno.land/r/ecodevx/space/pre1"
       7 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/forms2"
+      6 "gno.land/r/ecodevx/tutorials/pre1"
       6 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/disperse2"
       6 "gno.land/r/g1w6886hdj2tet0seyw6kn8fl92sx06prgd9w9j8/game/diceroller"
       6 "gno.land/r/g1w6886hdj2tet0seyw6kn8fl92sx06prgd9w9j8/game/v1/diceroller"
@@ -75,7 +76,6 @@
       6 "gno.land/r/varmeta/demo/v402/domain/registrar"
       6 "gno.land/r/villaquiranm/grc20_launchpad"
       5 "gno.land/r/demo/art/millipede"
-      5 "gno.land/r/ecodevx/tutorials/pre1"
       5 "gno.land/r/varmeta/demo1/domain/registrar"
       4 "gno.land/r/demo/domain/registrar"
       4 "gno.land/r/demo/user"
