@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-20183
+20201
 ```
 
 ## addpkgs
@@ -63,6 +63,7 @@
       8 "gno.land/r/molaryy/openocean"
       8 "gno.land/r/varmeta/demo/v2/domain/registrar"
       8 "gno.land/r/varmeta/demo/v401/domain/registrar"
+      8 "gno.land/r/varmeta/demo/v7/domain/registrar"
       8 "gno.land/r/varmeta/registrar"
       7 "gno.land/r/ecodevx/space/pre1"
       7 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/forms2"
@@ -85,6 +86,7 @@
       4 "gno.land/r/onbloc/pepe"
       4 "gno.land/r/sys/users"
       4 "gno.land/r/taskow/tasks"
+      4 "gno.land/r/varmeta/demo/v7 /domain/registrar"
       3 "gno.land/r/demo/games/shifumi"
       3 "gno.land/r/demo/userbook"
       3 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/forms"
