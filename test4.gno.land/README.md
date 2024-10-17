@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-20201
+20225
 ```
 
 ## addpkgs
@@ -11,12 +11,12 @@
 
 ## top realm calls
 ```
-   4523 "gno.land/r/demo/wugnot"
+   4527 "gno.land/r/demo/wugnot"
    1142 "gno.land/r/gnoswap/gns"
-    983 "gno.land/r/gnoswap/v2/gns"
+    995 "gno.land/r/gnoswap/v2/gns"
     764 "gno.land/r/gnoswap/router"
     755 "gno.land/r/gnoswap/position"
-    753 "gno.land/r/gnoswap/v2/router"
+    755 "gno.land/r/gnoswap/v2/router"
     674 "gno.land/r/gnoswap/v2/position"
     654 "gno.land/r/gnoswap/gnft"
     637 "gno.land/r/onbloc/usdc"
@@ -50,7 +50,9 @@
      11 "gno.land/r/demo/flippando"
      11 "gno.land/r/g1ngywvql2ql7t8uzl63w60eqcejkwg4rm4lxdw9/minus"
      11 "gno.land/r/g1w6886hdj2tet0seyw6kn8fl92sx06prgd9w9j8/vmt"
+     11 "gno.land/r/varmeta/demo/v7/domain/registrar"
      10 "gno.land/r/demo/foo20"
+     10 "gno.land/r/ecodevx/tutorials/pre1"
      10 "gno.land/r/g15mzjefvj9pt2ctv30l9ju03rewmfv9hken9wfm/v2/bridge"
      10 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/disperse"
      10 "gno.land/r/varmeta/demo/v33/domain/registrar"
@@ -63,11 +65,9 @@
       8 "gno.land/r/molaryy/openocean"
       8 "gno.land/r/varmeta/demo/v2/domain/registrar"
       8 "gno.land/r/varmeta/demo/v401/domain/registrar"
-      8 "gno.land/r/varmeta/demo/v7/domain/registrar"
       8 "gno.land/r/varmeta/registrar"
       7 "gno.land/r/ecodevx/space/pre1"
       7 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/forms2"
-      6 "gno.land/r/ecodevx/tutorials/pre1"
       6 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/disperse2"
       6 "gno.land/r/g1w6886hdj2tet0seyw6kn8fl92sx06prgd9w9j8/game/diceroller"
       6 "gno.land/r/g1w6886hdj2tet0seyw6kn8fl92sx06prgd9w9j8/game/v1/diceroller"
