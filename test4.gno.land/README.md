@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-20225
+20247
 ```
 
 ## addpkgs
@@ -11,23 +11,23 @@
 
 ## top realm calls
 ```
-   4527 "gno.land/r/demo/wugnot"
+   4541 "gno.land/r/demo/wugnot"
    1142 "gno.land/r/gnoswap/gns"
-    995 "gno.land/r/gnoswap/v2/gns"
+    999 "gno.land/r/gnoswap/v2/gns"
     764 "gno.land/r/gnoswap/router"
+    764 "gno.land/r/gnoswap/v2/router"
     755 "gno.land/r/gnoswap/position"
-    755 "gno.land/r/gnoswap/v2/router"
-    674 "gno.land/r/gnoswap/v2/position"
+    682 "gno.land/r/gnoswap/v2/position"
     654 "gno.land/r/gnoswap/gnft"
-    637 "gno.land/r/onbloc/usdc"
-    628 "gno.land/r/onbloc/foo"
-    490 "gno.land/r/gnoswap/v2/staker"
-    438 "gno.land/r/gnoswap/v2/gnft"
+    654 "gno.land/r/onbloc/usdc"
+    635 "gno.land/r/onbloc/foo"
+    495 "gno.land/r/gnoswap/v2/staker"
+    445 "gno.land/r/gnoswap/v2/gnft"
     355 "gno.land/r/onbloc/bar"
     320 "gno.land/r/gnoswap/staker"
-    262 "gno.land/r/onbloc/baz"
+    265 "gno.land/r/onbloc/baz"
     201 "gno.land/r/flippando/flippando"
-    165 "gno.land/r/onbloc/obl"
+    166 "gno.land/r/onbloc/obl"
     113 "gno.land/r/g17ernafy6ctpcz6uepfsq2js8x2vz0wladh5yc3/zentasktic_core"
     112 "gno.land/r/gnoswap/pool"
      97 "gno.land/r/demo/users"
