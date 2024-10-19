@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-20247
+20253
 ```
 
 ## addpkgs
@@ -11,11 +11,11 @@
 
 ## top realm calls
 ```
-   4541 "gno.land/r/demo/wugnot"
+   4543 "gno.land/r/demo/wugnot"
    1142 "gno.land/r/gnoswap/gns"
-    999 "gno.land/r/gnoswap/v2/gns"
+   1000 "gno.land/r/gnoswap/v2/gns"
+    765 "gno.land/r/gnoswap/v2/router"
     764 "gno.land/r/gnoswap/router"
-    764 "gno.land/r/gnoswap/v2/router"
     755 "gno.land/r/gnoswap/position"
     682 "gno.land/r/gnoswap/v2/position"
     654 "gno.land/r/gnoswap/gnft"
@@ -119,6 +119,7 @@
       1 "gno.land/r/iamtest1/selfcall2"
       1 "gno.land/r/iamtest1/selfcall3"
       1 "gno.land/r/mikecito/grc20_launchpad"
+      1 "gno.land/r/sys/validators"
       1 "gno.land/r/varmeta/demo/v32/domain/registrar"
 ```
 
