@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-20279
+20301
 ```
 
 ## addpkgs
@@ -26,7 +26,7 @@
     355 "gno.land/r/onbloc/bar"
     320 "gno.land/r/gnoswap/staker"
     266 "gno.land/r/onbloc/baz"
-    201 "gno.land/r/flippando/flippando"
+    220 "gno.land/r/flippando/flippando"
     170 "gno.land/r/onbloc/obl"
     113 "gno.land/r/g17ernafy6ctpcz6uepfsq2js8x2vz0wladh5yc3/zentasktic_core"
     112 "gno.land/r/gnoswap/pool"
