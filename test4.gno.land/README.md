@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-20365
+20367
 ```
 
 ## addpkgs
@@ -47,10 +47,10 @@
      18 "gno.land/r/teritori/projects_manager"
      18 "gno.land/r/varmeta/demo/v1/domain/registrar"
      15 "gno.land/r/varmeta/demo/v3/domain/registrar"
+     13 "gno.land/r/varmeta/demo/v7/domain/registrar"
      11 "gno.land/r/demo/flippando"
      11 "gno.land/r/g1ngywvql2ql7t8uzl63w60eqcejkwg4rm4lxdw9/minus"
      11 "gno.land/r/g1w6886hdj2tet0seyw6kn8fl92sx06prgd9w9j8/vmt"
-     11 "gno.land/r/varmeta/demo/v7/domain/registrar"
      10 "gno.land/r/demo/foo20"
      10 "gno.land/r/ecodevx/tutorials/pre1"
      10 "gno.land/r/g15mzjefvj9pt2ctv30l9ju03rewmfv9hken9wfm/v2/bridge"
