@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-20411
+20425
 ```
 
 ## addpkgs
@@ -11,21 +11,21 @@
 
 ## top realm calls
 ```
-   4679 "gno.land/r/demo/wugnot"
+   4704 "gno.land/r/demo/wugnot"
    1142 "gno.land/r/gnoswap/gns"
-   1045 "gno.land/r/gnoswap/v2/gns"
-    802 "gno.land/r/gnoswap/v2/router"
+   1056 "gno.land/r/gnoswap/v2/gns"
+    808 "gno.land/r/gnoswap/v2/router"
     764 "gno.land/r/gnoswap/router"
     755 "gno.land/r/gnoswap/position"
-    743 "gno.land/r/gnoswap/v2/position"
-    679 "gno.land/r/onbloc/foo"
+    749 "gno.land/r/gnoswap/v2/position"
+    683 "gno.land/r/onbloc/foo"
     661 "gno.land/r/onbloc/usdc"
     654 "gno.land/r/gnoswap/gnft"
-    526 "gno.land/r/gnoswap/v2/staker"
-    474 "gno.land/r/gnoswap/v2/gnft"
+    533 "gno.land/r/gnoswap/v2/staker"
+    476 "gno.land/r/gnoswap/v2/gnft"
     362 "gno.land/r/onbloc/bar"
     320 "gno.land/r/gnoswap/staker"
-    272 "gno.land/r/onbloc/baz"
+    273 "gno.land/r/onbloc/baz"
     260 "gno.land/r/flippando/flippando"
     172 "gno.land/r/onbloc/obl"
     113 "gno.land/r/g17ernafy6ctpcz6uepfsq2js8x2vz0wladh5yc3/zentasktic_core"
@@ -97,6 +97,7 @@
       2 "gno.land/r/g125em6arxsnj49vx35f0n0z34putv5ty3376fg5/checkerr"
       2 "gno.land/r/g13f63ua8uhmuf9mgc0x8zfz04yrsaqh7j78vcgq/monkey"
       2 "gno.land/r/g1dnllrdzwfhxv3evyk09y48mgn5phfjvtyrlzm7/simplefeedback"
+      2 "gno.land/r/g1g69npft5fav254rvuay7xlmlvt7ddfucgvx8xf/test"
       2 "gno.land/r/g1jg8mtutu9khhfwc4nxmuhcpftf0pajdhfvsqf5/hello"
       2 "gno.land/r/g1s3gd740mld8chsjw5g0nmmzfd9g520w9e7m5t6/sandwich"
       2 "gno.land/r/varmeta/demo/v1/domain/resolver"
