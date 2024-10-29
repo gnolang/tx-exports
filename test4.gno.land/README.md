@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-20425
+20736
 ```
 
 ## addpkgs
@@ -26,7 +26,7 @@
     362 "gno.land/r/onbloc/bar"
     320 "gno.land/r/gnoswap/staker"
     273 "gno.land/r/onbloc/baz"
-    260 "gno.land/r/flippando/flippando"
+    262 "gno.land/r/flippando/flippando"
     172 "gno.land/r/onbloc/obl"
     113 "gno.land/r/g17ernafy6ctpcz6uepfsq2js8x2vz0wladh5yc3/zentasktic_core"
     112 "gno.land/r/gnoswap/pool"
@@ -39,7 +39,7 @@
      44 "gno.land/r/gnoswap/v2/pool"
      31 "gno.land/r/onbloc/qux"
      30 "gno.land/r/varmeta/demo/v405/domain/registrar"
-     26 "gno.land/r/g1w6886hdj2tet0seyw6kn8fl92sx06prgd9w9j8/game/v3/diceroller"
+     28 "gno.land/r/g1w6886hdj2tet0seyw6kn8fl92sx06prgd9w9j8/game/v3/diceroller"
      25 "gno.land/r/varmeta/demo/v403/domain/registrar"
      21 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/openocean"
      20 "gno.land/r/g1w6886hdj2tet0seyw6kn8fl92sx06prgd9w9j8/games/diceroller"
