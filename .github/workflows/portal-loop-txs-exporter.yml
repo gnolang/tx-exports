@@ -38,8 +38,10 @@ jobs:
       - name: Run stats script
         run: make -C ${{ matrix.testnet }} stats-legacy
 
-      - name: Run extractor
-        run: make -C ${{ matrix.testnet }} extractor-legacy
+      # Currently unavailable, as described in:
+      # https://github.com/gnolang/tx-exports/issues/26
+      #      - name: Run extractor
+      #        run: make -C ${{ matrix.testnet }} extractor-legacy
 
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
