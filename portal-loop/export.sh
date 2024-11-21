@@ -62,7 +62,7 @@ cd ../../.. # move back to the portal-loop directory
 # Clean up the downloaded genesis.json and the wget response
 rm $GENESIS $WGET_OUTPUT
 
-# Check if there is an existing backu``
+# Check if there is an existing backup
 if ! ls "$BACKUP_CHUNK_TEMPLATE"* 1> /dev/null 2>&1; then
   # Save the initial backup
   echo "Saving initial backup to $BACKUP_CHUNK_TEMPLATE*"
