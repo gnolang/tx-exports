@@ -39,7 +39,7 @@ copyBackupFiles () {
 }
 
 # Create the temporary working dir
-mkdir $TMP_DIR
+rm -rf $TMP_DIR && mkdir $TMP_DIR
 cd $TMP_DIR || exit 1
 
 # Grab the latest genesis.json
@@ -50,14 +50,14 @@ jq ".result.genesis" $WGET_OUTPUT > $GENESIS
 
 # Install the gnoland binary
 git clone https://github.com/gnolang/gno.git
-cd gno/gno.land || exit 1
-make build.gnoland
-cd ../.. # move back to the portal-loop directory
+cd gno/contribs/gnogenesis || exit 1
+make build
+cd ../../.. # move back to the portal-loop directory
 
 # Extract the genesis transactions
-./gno/gno.land/build/gnoland genesis txs export -genesis-path $GENESIS "$BACKUP_NAME_TXS"
+./gno/contribs/gnogenesis/build/gnogenesis txs export -genesis-path $GENESIS "$BACKUP_NAME_TXS"
 # Extract the genesis balances
-./gno/gno.land/build/gnoland genesis balances export -genesis-path $GENESIS "$BACKUP_NAME_BALANCES"
+./gno/contribs/gnogenesis/build/gnogenesis balances export -genesis-path $GENESIS "$BACKUP_NAME_BALANCES"
 
 # Clean up the downloaded genesis.json and the wget response
 rm $GENESIS $WGET_OUTPUT
