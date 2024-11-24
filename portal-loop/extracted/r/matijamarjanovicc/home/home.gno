@@ -42,8 +42,8 @@ In addition to my academic pursuits, I enjoy traveling and staying active throug
 	currentColor = `rgb(120, 120, 120)`
 	voteUrl = "https://gno.studio/connect/view/gno.land/r/matijamarjanovic/home?network=portal-loop"
 
-	contractAdd = std.Address("g1u7y667z64x2h7vc6fmpcprgey4ck233jaww9zq")
-	userAdd = std.Address("g1u7y667z64x2h7vc6fmpcprgey4ck233jaww9zq")
+	contractAdd = std.Address("g1manfred47kzduec920z88wfr64ylksmdcedlf5")
+	userAdd = std.Address("g1manfred47kzduec920z88wfr64ylksmdcedlf5")
 	amount = 0
 }
 

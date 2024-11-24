@@ -9,16 +9,37 @@ WGET_OUTPUT=wget-genesis.json
 BACKUP_NAME_TXS=backup_portal_loop_txs.jsonl
 BACKUP_NAME_BALANCES=backup_portal_loop_balances.jsonl
 # Latest backup is commited in the repo
-LATEST_BACKUP_FILE_TXS=../"$BACKUP_NAME_TXS"
+LATEST_BACKUP_FILE_TXS=latest_backup_portal_loop_txs 
+# template for chunks of stored backups
+BACKUP_CHUNK_TEMPLATE=../backup_portal_loop_txs
 
 # Make the generated backup files the reference ones stored into the repository
 copyBackupFiles () {
-  cp "$BACKUP_NAME_TXS" "$LATEST_BACKUP_FILE_TXS"
+  MAX_INTERVAL=1000
+  FROM_LINE=1
+  TO_LINE=$MAX_INTERVAL
+  TOT_LINES=$(wc -l < "$BACKUP_NAME_TXS" | bc)
+
+  # clean directory
+  rm -f "$BACKUP_CHUNK_TEMPLATE"*
+  while [ $(($TO_LINE % $MAX_INTERVAL)) -eq 0 ]
+  do
+    # gather files in interval
+    sed -n "${FROM_LINE},${TO_LINE}p" "$BACKUP_NAME_TXS" > "$BACKUP_CHUNK_TEMPLATE"_$FROM_LINE-$TO_LINE.jsonl
+    # increment intervals
+    FROM_LINE=$(( $FROM_LINE + $MAX_INTERVAL ))
+    TO_LINE=$(( $TO_LINE + $MAX_INTERVAL ))
+    # correct in case of last file interval
+    TO_LINE=$(( $TO_LINE < $TOT_LINES ? $TO_LINE : $TOT_LINES ))
+  done
+  # copy last chunk
+  sed -n "${FROM_LINE},${TO_LINE}p" "$BACKUP_NAME_TXS" > "$BACKUP_CHUNK_TEMPLATE"_$FROM_LINE-$TO_LINE.jsonl
+  # backup balances
   cp "$BACKUP_NAME_BALANCES" ../"$BACKUP_NAME_BALANCES"
 }
 
 # Create the temporary working dir
-mkdir $TMP_DIR
+rm -rf $TMP_DIR && mkdir $TMP_DIR
 cd $TMP_DIR || exit 1
 
 # Grab the latest genesis.json
@@ -29,41 +50,42 @@ jq ".result.genesis" $WGET_OUTPUT > $GENESIS
 
 # Install the gnoland binary
 git clone https://github.com/gnolang/gno.git
-cd gno/gno.land || exit 1
-make build.gnoland
-cd ../.. # move back to the portal-loop directory
+cd gno/contribs/gnogenesis || exit 1
+make build
+cd ../../.. # move back to the portal-loop directory
 
 # Extract the genesis transactions
-./gno/gno.land/build/gnoland genesis txs export -genesis-path $GENESIS "$BACKUP_NAME_TXS"
+./gno/contribs/gnogenesis/build/gnogenesis txs export -genesis-path $GENESIS "$BACKUP_NAME_TXS"
 # Extract the genesis balances
-./gno/gno.land/build/gnoland genesis balances export -genesis-path $GENESIS "$BACKUP_NAME_BALANCES"
+./gno/contribs/gnogenesis/build/gnogenesis balances export -genesis-path $GENESIS "$BACKUP_NAME_BALANCES"
 
 # Clean up the downloaded genesis.json and the wget response
 rm $GENESIS $WGET_OUTPUT
 
 # Check if there is an existing backup
-if [[ ! -f "$LATEST_BACKUP_FILE_TXS" ]]; then
+if ! ls "$BACKUP_CHUNK_TEMPLATE"* 1> /dev/null 2>&1; then
   # Save the initial backup
-  echo "Saving initial backup to $BACKUP_NAME_TXS"
+  echo "Saving initial backup to $BACKUP_CHUNK_TEMPLATE*"
 
   # Make the backup files official
   copyBackupFiles
-else # Backup file exists!
-  LATEST_BACKUP_SORTED=latest_backup_sort.jsonl
+else # Backup files exist!
+  # merge backup files into a unique file
+  cat $(ls "$BACKUP_CHUNK_TEMPLATE"* | sort) > $LATEST_BACKUP_FILE_TXS
   DIFF_TXS=diff.jsonl
 
   # There is an existing backup already, check it
-  echo "Backup file already present in the repository"
+  echo "Backup files already present in the repository. Merging and comparing with incoming file"
 
   # Sort the latest backup file
-  sort "$LATEST_BACKUP_FILE_TXS" > "$LATEST_BACKUP_SORTED"
+  sort "$LATEST_BACKUP_FILE_TXS" > temp_"$LATEST_BACKUP_FILE_TXS"
   
   # Sort the latest genesis tx sheet
   sort "$BACKUP_NAME_TXS" > temp_"$BACKUP_NAME_TXS"
 
   # Compare existing and incoming txs backup files both sorted
   # Use comm to find lines only in the incoming txs backup and write to an output file
-  comm -13 ./"$LATEST_BACKUP_SORTED" temp_"$BACKUP_NAME_TXS" > "$DIFF_TXS"
+  comm -13 temp_"$LATEST_BACKUP_FILE_TXS" temp_"$BACKUP_NAME_TXS" > "$DIFF_TXS"
 
   # Notify if differences were found
   if [[ -z $(grep '[^[:space:]]' "$DIFF_TXS") ]]; then

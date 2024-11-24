@@ -31,3 +31,4 @@ func ReadMessage(msg string) (*Mail, error) {
 	}
 	return mail, nil
 }
+
