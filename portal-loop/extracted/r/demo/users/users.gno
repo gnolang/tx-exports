@@ -11,11 +11,11 @@ import (
 	"gno.land/p/demo/users"
 )
 
-//----------------------------------------
+// ----------------------------------------
 // State
 
 var (
-	admin std.Address = "g1u7y667z64x2h7vc6fmpcprgey4ck233jaww9zq" // @moul
+	admin std.Address = "g1manfred47kzduec920z88wfr64ylksmdcedlf5" // @moul
 
 	restricted avl.Tree                  // Name -> true - restricted name
 	name2User  avl.Tree                  // Name -> *users.User
@@ -26,7 +26,7 @@ var (
 	maxFeeMult int64    = 10             // maximum multiples of minFee accepted.
 )
 
-//----------------------------------------
+// ----------------------------------------
 // Top-level functions
 
 func Register(inviter std.Address, name string, profile string) {
@@ -228,7 +228,7 @@ func SetMaxFeeMultiple(newMaxFeeMult int64) {
 	maxFeeMult = newMaxFeeMult
 }
 
-//----------------------------------------
+// ----------------------------------------
 // Exposed public functions
 
 func GetUserByName(name string) *users.User {
@@ -292,13 +292,13 @@ func AdminAddRestrictedName(name string) {
 	restricted.Set(name, true)
 }
 
-//----------------------------------------
+// ----------------------------------------
 // Constants
 
 // NOTE: name length must be clearly distinguishable from a bech32 address.
 var reName = regexp.MustCompile(`^[a-z]+[_a-z0-9]{5,16}$`)
 
-//----------------------------------------
+// ----------------------------------------
 // Render main page
 
 func Render(path string) string {
