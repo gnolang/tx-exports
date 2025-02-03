@@ -10,6 +10,7 @@ on:
 
 jobs:
   backup:
+    if: false # Temporarily disabled, while we're restructuring the portal-loop dir
     name: "backup ${{ matrix.testnet }}"
     runs-on: ubuntu-latest
     timeout-minutes: 360 # very high; but it can take a while.
