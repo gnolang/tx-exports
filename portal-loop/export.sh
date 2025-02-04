@@ -154,6 +154,14 @@ update_backup_chunks() {
 
 # --- MAIN LOGIC --- #
 
+# Wipe the existing backups.
+# The reason for this is because the PL uses --lazy init
+# which generates fresh keys for genesis txs, causing a discrepancy
+# in already backed up files (there is always a diff, because of sig diffs).
+# When technology evolves and we stop using a trash implementation of the Portal Loop,
+# this should be dropped
+rm backup_portal_loop_txs_*.jsonl
+
 # Create the local temporary directory.
 rm -rf "$TMP_DIR"
 mkdir "$TMP_DIR"
