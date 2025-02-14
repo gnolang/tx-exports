@@ -37,8 +37,9 @@ jobs:
       - name: Run stats script
         run: make -C ${{ matrix.testnet }} stats
 
-      - name: Run extractor
-        run: make -C ${{ matrix.testnet }} extractor
+      # Disabled since the extractor is broken. Waiting on @leohn to fix
+      # - name: Run extractor
+      #   run: make -C ${{ matrix.testnet }} extractor
 
       - name: Run git pull
         run: git pull
