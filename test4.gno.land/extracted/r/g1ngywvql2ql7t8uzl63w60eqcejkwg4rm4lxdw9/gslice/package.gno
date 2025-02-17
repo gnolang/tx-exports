@@ -20,7 +20,7 @@ var (
 
 func init() {
     admin = ownable.NewWithAddress("g1newadminaddress") // Replace with the actual admin address
-    banker = grc20.NewBanker("gslice", "gslice", 4) // "gslice" is the name and symbol in lowercase
+    banker = grc20.NewBanker("Gslice", "GSLICE", 4) // "Gslice" is the name and "GSLICE" is the symbol
     banker.Mint(admin.Owner(), 1000000000*10000) // Initial minting (1 billion tokens)
     token = banker.Token()
 }

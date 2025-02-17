@@ -1,7 +1,6 @@
 EXTRACTOR_DIR = extractor-0.1.1
 REMOTE = "https://rpc.test4.gnodevx.network"
 SHORTNAME = test4
-LOOP_DURATION = 50000
 
 # at an average of 3 secs per block (from gnoscan), test4 produces 28_800 blocks per day
 # 100k allows us to be able to catch up
