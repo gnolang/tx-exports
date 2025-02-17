@@ -2,11 +2,11 @@ name: Backup testnets
 
 on:
   # allow to run workflow manually
-  workflow_dispatch: {}
+  workflow_dispatch: { }
 
-  # Triggers the workflow every day at 1am
+  # Triggers the workflow every 2hrs
   schedule:
-    - cron: "0 1 * * *"
+    - cron: "0 */2 * * *"
 
 jobs:
   backup:
@@ -23,7 +23,6 @@ jobs:
       matrix:
         testnet:
           - test4.gno.land
-          - test5.gno.land
 
     steps:
       - uses: actions/checkout@v4
