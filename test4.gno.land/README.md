@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-23147
+23226
 ```
 
 ## addpkgs
@@ -14,7 +14,7 @@
    4751 "gno.land/r/demo/wugnot"
    1143 "gno.land/r/gnoswap/gns"
    1082 "gno.land/r/gnoswap/v2/gns"
-    830 "gno.land/r/gnoswap/v2/router"
+    835 "gno.land/r/gnoswap/v2/router"
     764 "gno.land/r/gnoswap/router"
     760 "gno.land/r/gnoswap/v2/position"
     755 "gno.land/r/gnoswap/position"
@@ -23,20 +23,20 @@
     654 "gno.land/r/gnoswap/gnft"
     543 "gno.land/r/gnoswap/v2/staker"
     490 "gno.land/r/gnoswap/v2/gnft"
-    451 "gno.land/r/flippando/flippando"
+    452 "gno.land/r/flippando/flippando"
     369 "gno.land/r/onbloc/bar"
     320 "gno.land/r/gnoswap/staker"
     286 "gno.land/r/onbloc/baz"
     182 "gno.land/r/onbloc/obl"
     154 "gno.land/r/gov/dao/v2"
+    115 "gno.land/r/demo/users"
     113 "gno.land/r/g17ernafy6ctpcz6uepfsq2js8x2vz0wladh5yc3/zentasktic_core"
     112 "gno.land/r/gnoswap/pool"
-    108 "gno.land/r/demo/users"
+     96 "gno.land/r/teritori/social_feeds"
      93 "gno.land/r/gov/dao"
-     88 "gno.land/r/teritori/social_feeds"
      72 "gno.land/r/teritori/profile"
      70 "gno.land/r/g1ngywvql2ql7t8uzl63w60eqcejkwg4rm4lxdw9/candy20"
-     46 "gno.land/r/ecodevx/dao/pre1"
+     49 "gno.land/r/ecodevx/dao/pre1"
      44 "gno.land/r/gnoswap/v2/pool"
      44 "gno.land/r/keyboard_worrier/popo_nft"
      32 "gno.land/r/onbloc/qux"
@@ -89,6 +89,7 @@
       4 "gno.land/r/demo/domain/registrar"
       4 "gno.land/r/demo/user"
       4 "gno.land/r/g15mzjefvj9pt2ctv30l9ju03rewmfv9hken9wfm/v1/bridge"
+      4 "gno.land/r/g1snqxvclhr7cw3rdcvzqm7z026hfnrx69c6ujdh/eco_test"
       4 "gno.land/r/manfred/home"
       4 "gno.land/r/onbloc/pepe"
       4 "gno.land/r/sys/users"
