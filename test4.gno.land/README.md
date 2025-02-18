@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-23030
+23070
 ```
 
 ## addpkgs
@@ -18,7 +18,7 @@
     764 "gno.land/r/gnoswap/router"
     760 "gno.land/r/gnoswap/v2/position"
     755 "gno.land/r/gnoswap/position"
-    695 "gno.land/r/onbloc/foo"
+    696 "gno.land/r/onbloc/foo"
     671 "gno.land/r/onbloc/usdc"
     654 "gno.land/r/gnoswap/gnft"
     543 "gno.land/r/gnoswap/v2/staker"
@@ -28,14 +28,14 @@
     320 "gno.land/r/gnoswap/staker"
     286 "gno.land/r/onbloc/baz"
     182 "gno.land/r/onbloc/obl"
-    118 "gno.land/r/gov/dao/v2"
+    141 "gno.land/r/gov/dao/v2"
     113 "gno.land/r/g17ernafy6ctpcz6uepfsq2js8x2vz0wladh5yc3/zentasktic_core"
     112 "gno.land/r/gnoswap/pool"
-    104 "gno.land/r/demo/users"
+    108 "gno.land/r/demo/users"
      93 "gno.land/r/gov/dao"
      88 "gno.land/r/teritori/social_feeds"
+     72 "gno.land/r/teritori/profile"
      70 "gno.land/r/g1ngywvql2ql7t8uzl63w60eqcejkwg4rm4lxdw9/candy20"
-     57 "gno.land/r/teritori/profile"
      46 "gno.land/r/ecodevx/dao/pre1"
      44 "gno.land/r/gnoswap/v2/pool"
      36 "gno.land/r/keyboard_worrier/popo_nft"
