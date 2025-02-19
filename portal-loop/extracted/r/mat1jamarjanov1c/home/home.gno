@@ -81,7 +81,7 @@ func calculateRGB(red, green, blue int64) (int, int, int) {
 
 func VoteRed() {
 
-	ugnotAmount := std.GetOrigSend().AmountOf("ugnot")
+	ugnotAmount := std.OriginSend().AmountOf("ugnot")
 
 	redVotes = redVotes + ugnotAmount/750
 	red, green, blue := calculateRGB(redVotes, greenVotes, blueVotes)
@@ -89,7 +89,7 @@ func VoteRed() {
 }
 
 func VoteGreen() {
-	ugnotAmount := std.GetOrigSend().AmountOf("ugnot")
+	ugnotAmount := std.OriginSend().AmountOf("ugnot")
 
 	greenVotes = greenVotes + ugnotAmount/750
 	red, green, blue := calculateRGB(redVotes, greenVotes, blueVotes)
@@ -97,7 +97,7 @@ func VoteGreen() {
 }
 
 func VoteBlue() {
-	ugnotAmount := std.GetOrigSend().AmountOf("ugnot")
+	ugnotAmount := std.OriginSend().AmountOf("ugnot")
 
 	blueVotes = blueVotes + ugnotAmount/750
 	red, green, blue := calculateRGB(redVotes, greenVotes, blueVotes)

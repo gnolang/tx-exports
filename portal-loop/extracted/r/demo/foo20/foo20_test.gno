@@ -39,7 +39,7 @@ func TestReadOnlyPublicMethods(t *testing.T) {
 	}
 
 	// bob uses the faucet.
-	std.TestSetOrigCaller(users.Resolve(bob))
+	std.TestSetOriginCaller(users.Resolve(bob))
 	Faucet()
 
 	// check balances #2.
@@ -71,7 +71,7 @@ func TestErrConditions(t *testing.T) {
 		fn   func()
 	}
 
-	std.TestSetOrigCaller(users.Resolve(admin))
+	std.TestSetOriginCaller(users.Resolve(admin))
 	{
 		tests := []test{
 			{"Transfer(admin, 1)", "cannot send transfer to self", func() { Transfer(admin, 1) }},

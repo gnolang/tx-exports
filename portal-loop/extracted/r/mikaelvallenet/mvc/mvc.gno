@@ -10,7 +10,7 @@ import (
 
 var (
 	banker *grc20.Banker
-	token grc20.Token
+	token  grc20.Token
 )
 
 func init() {
@@ -19,7 +19,7 @@ func init() {
 }
 
 func Faucet() string {
-	txSender := std.GetOrigCaller()
+	txSender := std.OriginCaller()
 	if err := banker.Mint(txSender, 5); err != nil {
 		return err.Error()
 	}

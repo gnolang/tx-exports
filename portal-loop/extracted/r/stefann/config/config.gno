@@ -37,7 +37,7 @@ func SetAddress(a std.Address) error {
 }
 
 func checkAuthorized() error {
-	caller := std.GetOrigCaller()
+	caller := std.OriginCaller()
 	if caller != main && caller != backup {
 		return errors.New("config: unauthorized")
 	}
@@ -46,7 +46,7 @@ func checkAuthorized() error {
 }
 
 func AssertAuthorized() {
-	caller := std.GetOrigCaller()
+	caller := std.OriginCaller()
 	if caller != main && caller != backup {
 		panic("config: unauthorized")
 	}

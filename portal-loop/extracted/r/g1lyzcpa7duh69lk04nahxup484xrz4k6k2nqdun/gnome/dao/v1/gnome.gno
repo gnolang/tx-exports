@@ -86,7 +86,7 @@ func SubmitProposal(title, description string, s gnome.ProposalStrategy, daoPath
 	dao := mustGetDAO(daoPath)
 	assertDAOIsNotDismissed(dao)
 
-	caller := std.GetOrigCaller()
+	caller := std.OriginCaller()
 	assertCanCreateProposal(caller, dao)
 
 	id := genProposalID()
@@ -145,7 +145,7 @@ func SubmitGeneralProposal(
 	dao := mustGetDAO(daoPath)
 	assertDAOIsNotDismissed(dao)
 
-	caller := std.GetOrigCaller()
+	caller := std.OriginCaller()
 	assertCanCreateProposal(caller, dao)
 
 	p, err := gnome.NewProposal(genProposalID(), newGeneralStrategy(), caller, dao, proposalTitle, opts...)
@@ -204,7 +204,7 @@ func SubmitSubDAOCreationProposal(
 		panic("sub DAO name is already taken by another DAO")
 	}
 
-	caller := std.GetOrigCaller()
+	caller := std.OriginCaller()
 	assertCanCreateProposal(caller, dao)
 
 	members := gnome.MustParseStringToMembers(subDAOMembers)
@@ -256,7 +256,7 @@ func SubmitSubDAODismissalProposal(proposalTitle, daoPath, subDAOName string) ui
 	subDAO := mustGetDAO(subDAOPath)
 	assertDAOIsNotDismissed(subDAO)
 
-	caller := std.GetOrigCaller()
+	caller := std.OriginCaller()
 	strategy := newSubDAODismissalStrategy(subDAO, proposals)
 	p, err := gnome.NewProposal(
 		genProposalID(),
@@ -314,7 +314,7 @@ func SubmitDAOMembersModificationProposal(
 	dao := mustGetDAO(daoPath)
 	assertDAOIsNotDismissed(dao)
 
-	caller := std.GetOrigCaller()
+	caller := std.OriginCaller()
 	assertCanCreateProposal(caller, dao)
 
 	membersToAdd := gnome.MustParseStringToMembers(newMembers)
@@ -372,7 +372,7 @@ func SubmitBudgetProposal(
 	dao := mustGetDAO(daoPath)
 	assertDAOIsNotDismissed(dao)
 
-	caller := std.GetOrigCaller()
+	caller := std.OriginCaller()
 	assertCanCreateProposal(caller, dao)
 
 	strategy := newBudgetStrategy(gnomeDAO, budget)
@@ -483,7 +483,7 @@ func Vote(proposalID uint64, vote bool, reason, daoPath string) string {
 	}
 
 	// Submit vote
-	caller := std.GetOrigCaller() // TODO: Check that caller is member of the DAO
+	caller := std.OriginCaller() // TODO: Check that caller is member of the DAO
 	err := p.Vote(caller, gnome.VoteChoice(choice), reason)
 	if err != nil {
 		panic(err)
@@ -583,7 +583,7 @@ func assertCanCreateProposal(proposer std.Address, dao *gnome.DAO) {
 }
 
 func assertCallerCanWithdraw(p *gnome.Proposal) {
-	if p.Proposer() != std.GetOrigCaller() {
+	if p.Proposer() != std.OriginCaller() {
 		panic("proposals can only be withdrawed by the proposer")
 	}
 

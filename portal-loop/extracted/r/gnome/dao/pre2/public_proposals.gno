@@ -23,7 +23,7 @@ func SubmitCustomProposal(title, description string, s gnome.ProposalStrategy, d
 	dao := mustGetDAO(daoPath)
 	assertDAOIsNotDismissed(dao)
 
-	caller := std.GetOrigCaller()
+	caller := std.OriginCaller()
 	assertCanCreateProposal(caller, dao)
 
 	id := genProposalID()
@@ -89,7 +89,7 @@ func SubmitGeneralProposal(
 	dao := mustGetDAO(daoPath)
 	assertDAOIsNotDismissed(dao)
 
-	caller := std.GetOrigCaller()
+	caller := std.OriginCaller()
 	assertCanCreateProposal(caller, dao)
 
 	p, err := gnome.NewProposal(genProposalID(), newGeneralStrategy(), caller, dao, proposalTitle, opts...)
@@ -147,7 +147,7 @@ func SubmitSubDAOCreationProposal(
 		panic("sub DAO name is already taken by another DAO")
 	}
 
-	caller := std.GetOrigCaller()
+	caller := std.OriginCaller()
 	assertCanCreateProposal(caller, dao)
 
 	members := gnome.MustParseStringToMembers(subDAOMembers)
@@ -196,7 +196,7 @@ func SubmitSubDAODismissalProposal(proposalTitle, daoPath, subDAOName string) ui
 	subDAO := mustGetDAO(subDAOPath)
 	assertDAOIsNotDismissed(subDAO)
 
-	caller := std.GetOrigCaller()
+	caller := std.OriginCaller()
 	strategy := newSubDAODismissalStrategy(subDAO, proposals)
 	p, err := gnome.NewProposal(
 		genProposalID(),
@@ -253,7 +253,7 @@ func SubmitDAOMembersModificationProposal(
 	dao := mustGetDAO(daoPath)
 	assertDAOIsNotDismissed(dao)
 
-	caller := std.GetOrigCaller()
+	caller := std.OriginCaller()
 	assertCanCreateProposal(caller, dao)
 
 	strategy := newDAOMembersModificationStrategy(
@@ -308,7 +308,7 @@ func SubmitBudgetProposal(
 	dao := mustGetDAO(daoPath)
 	assertDAOIsNotDismissed(dao)
 
-	caller := std.GetOrigCaller()
+	caller := std.OriginCaller()
 	assertCanCreateProposal(caller, dao)
 
 	strategy := newBudgetStrategy(gnomeDAO, budget)
@@ -359,7 +359,7 @@ func SubmitDAOLockingProposal(
 ) uint64 {
 	assertDAOIsNotLocked()
 
-	caller := std.GetOrigCaller()
+	caller := std.OriginCaller()
 	assertIsCouncilOrMainDAOMember(caller)
 
 	dao := mustGetDAO(daoPath)
@@ -433,7 +433,7 @@ func SubmitParamsUpdateProposal(
 	dao := mustGetDAO(daoPath)
 	assertDAOIsNotDismissed(dao)
 
-	caller := std.GetOrigCaller()
+	caller := std.OriginCaller()
 	assertCanCreateProposal(caller, dao)
 
 	strategy := paramsUpdateStrategy{

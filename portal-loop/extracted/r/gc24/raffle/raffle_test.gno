@@ -62,7 +62,7 @@ func TestUploadCodes(t *testing.T) {
 
 	hashes := strings.Split(validTestHashes, ",")
 
-	std.TestSetOrigCaller(admin)
+	std.TestSetOriginCaller(admin)
 	std.TestSetRealm(adminRealm)
 
 	defer func() {
@@ -81,12 +81,12 @@ func TestUploadCodes(t *testing.T) {
 }
 
 func TestRegisterCode(t *testing.T) {
-	std.TestSetOrigCaller(admin)
+	std.TestSetOriginCaller(admin)
 	std.TestSetRealm(adminRealm)
 	UploadCodeHashes(validTestHashes)
 
 	t.Run("EmptyCode", func(t *testing.T) {
-		std.TestSetOrigCaller(alice)
+		std.TestSetOriginCaller(alice)
 		std.TestSetRealm(aliceUserRealm)
 
 		defer func() {
@@ -99,7 +99,7 @@ func TestRegisterCode(t *testing.T) {
 	})
 
 	t.Run("NonTenCharCode", func(t *testing.T) {
-		std.TestSetOrigCaller(alice)
+		std.TestSetOriginCaller(alice)
 		std.TestSetRealm(aliceUserRealm)
 
 		defer func() {
@@ -112,7 +112,7 @@ func TestRegisterCode(t *testing.T) {
 	})
 
 	t.Run("RegisterCodeWithUserRealm", func(t *testing.T) {
-		std.TestSetOrigCaller(alice)
+		std.TestSetOriginCaller(alice)
 		std.TestSetRealm(aliceUserRealm)
 
 		defer func() {
@@ -125,7 +125,7 @@ func TestRegisterCode(t *testing.T) {
 	})
 
 	t.Run("CodeNotOnList", func(t *testing.T) {
-		std.TestSetOrigCaller(alice)
+		std.TestSetOriginCaller(alice)
 		std.TestSetRealm(aliceCodeRealm)
 
 		defer func() {
@@ -138,7 +138,7 @@ func TestRegisterCode(t *testing.T) {
 	})
 
 	t.Run("ValidRegister", func(t *testing.T) {
-		std.TestSetOrigCaller(alice)
+		std.TestSetOriginCaller(alice)
 		std.TestSetRealm(aliceCodeRealm)
 
 		res := RegisterCode(validTestCodes[0])
@@ -151,7 +151,7 @@ func TestRegisterCode(t *testing.T) {
 	})
 
 	t.Run("DoubleRegisterSameValidCode", func(t *testing.T) {
-		std.TestSetOrigCaller(alice)
+		std.TestSetOriginCaller(alice)
 		std.TestSetRealm(aliceCodeRealm)
 
 		defer func() {
@@ -164,7 +164,7 @@ func TestRegisterCode(t *testing.T) {
 	})
 
 	t.Run("DoubleRegisterDiffValidCode", func(t *testing.T) {
-		std.TestSetOrigCaller(alice)
+		std.TestSetOriginCaller(alice)
 		std.TestSetRealm(aliceCodeRealm)
 
 		defer func() {
@@ -180,7 +180,7 @@ func TestRegisterCode(t *testing.T) {
 
 func TestRegisterUsername(t *testing.T) {
 	t.Run("NoEntryUsername", func(t *testing.T) {
-		std.TestSetOrigCaller(bob)
+		std.TestSetOriginCaller(bob)
 		std.TestSetRealm(bobCodeRealm)
 
 		defer func() {
@@ -193,7 +193,7 @@ func TestRegisterUsername(t *testing.T) {
 	})
 
 	t.Run("ValidEntryRegister", func(t *testing.T) {
-		std.TestSetOrigCaller(alice)
+		std.TestSetOriginCaller(alice)
 		std.TestSetRealm(aliceUserRealm)
 
 		res := RegisterUsername("alice-username")
@@ -203,7 +203,7 @@ func TestRegisterUsername(t *testing.T) {
 	})
 
 	t.Run("ValidEntryRegister", func(t *testing.T) {
-		std.TestSetOrigCaller(alice)
+		std.TestSetOriginCaller(alice)
 		std.TestSetRealm(aliceUserRealm)
 
 		defer func() {
@@ -222,13 +222,13 @@ func TestPickWinner(t *testing.T) {
 	for i := 1; i < len(validTestCodes); i++ {
 		addr := testutils.TestAddress(strconv.Itoa(i))
 		addrRealm := std.NewCodeRealm(ufmt.Sprintf("gno.land/r/demo/user%d", i))
-		std.TestSetOrigCaller(addr)
+		std.TestSetOriginCaller(addr)
 		std.TestSetRealm(addrRealm)
 		RegisterCode(validTestCodes[i])
 		RegisterUsername(ufmt.Sprintf("user%d", i))
 	}
 
-	std.TestSetOrigCaller(admin)
+	std.TestSetOriginCaller(admin)
 	std.TestSetRealm(adminRealm)
 
 	UploadRandomness(123123, 508930)

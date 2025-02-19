@@ -18,7 +18,7 @@ var (
 )
 
 func TestAddEvent(t *testing.T) {
-	std.TestSetOrigCaller(su)
+	std.TestSetOriginCaller(su)
 	std.TestSetRealm(suRealm)
 
 	e1Start := parsedTimeNow.Add(time.Hour * 24 * 5)
@@ -61,7 +61,7 @@ func TestAddEvent(t *testing.T) {
 }
 
 func TestAddEventErrors(t *testing.T) {
-	std.TestSetOrigCaller(su)
+	std.TestSetOriginCaller(su)
 	std.TestSetRealm(suRealm)
 
 	_, err := AddEvent("", "sample desc", "gno.land", "gnome land", "2009-02-13T23:31:31Z", "2009-02-13T23:33:31Z")

@@ -36,7 +36,7 @@ func AMint() grc721.TokenID {
 	}
 
 	// then transfer
-	orig := std.GetOrigCaller()
+	orig := std.OriginCaller()
 	err = gnft.TransferFrom(std.CurrentRealm().Addr(), orig, tid)
 	if err != nil {
 		panic(err.Error())

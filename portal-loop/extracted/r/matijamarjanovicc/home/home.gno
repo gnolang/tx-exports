@@ -85,7 +85,7 @@ func calculateRGB(red, green, blue int64) (int, int, int) {
 
 func VoteRed() {
 
-	ugnotAmount := std.GetOrigSend().AmountOf("ugnot")
+	ugnotAmount := std.OriginSend().AmountOf("ugnot")
 
 	redVotes = redVotes + ugnotAmount/750
 	red, green, blue := calculateRGB(redVotes, greenVotes, blueVotes)
@@ -93,7 +93,7 @@ func VoteRed() {
 }
 
 func VoteGreen() {
-	ugnotAmount := std.GetOrigSend().AmountOf("ugnot")
+	ugnotAmount := std.OriginSend().AmountOf("ugnot")
 
 	greenVotes = greenVotes + ugnotAmount/750
 	red, green, blue := calculateRGB(redVotes, greenVotes, blueVotes)
@@ -101,7 +101,7 @@ func VoteGreen() {
 }
 
 func VoteBlue() {
-	ugnotAmount := std.GetOrigSend().AmountOf("ugnot")
+	ugnotAmount := std.OriginSend().AmountOf("ugnot")
 
 	blueVotes = blueVotes + ugnotAmount/750
 	red, green, blue := calculateRGB(redVotes, greenVotes, blueVotes)
@@ -112,7 +112,7 @@ func VoteBlue() {
 func CollectBalance() {
 	AssertAuthorized()
 
-	banker := std.GetBanker(std.BankerTypeOrigSend)
+	banker := std.GetBanker(std.BankerTypeOriginSend)
 	ownerAddr := Address()
 
 	banker.SendCoins(std.GetOrigPkgAddr(), ownerAddr, banker.GetCoins(std.GetOrigPkgAddr()))

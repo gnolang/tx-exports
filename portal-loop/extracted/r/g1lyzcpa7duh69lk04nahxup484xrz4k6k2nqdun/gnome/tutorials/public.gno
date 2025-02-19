@@ -176,7 +176,7 @@ func Publish(slug, content string) {
 	blog.AssertContentSha256Hash(content, p.ContentHash)
 
 	// Add caller to the list of publishers
-	caller := std.GetOrigCaller()
+	caller := std.OriginCaller()
 	if !p.Publishers.HasAddress(caller) {
 		p.Publishers = append(p.Publishers, caller)
 	}

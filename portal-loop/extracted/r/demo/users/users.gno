@@ -33,16 +33,16 @@ func Register(inviter std.Address, name string, profile string) {
 	// assert CallTx call.
 	std.AssertOriginCall()
 	// assert invited or paid.
-	caller := std.GetCallerAt(2)
-	if caller != std.GetOrigCaller() {
-		panic("should not happen") // because std.AssertOrigCall().
+	caller := std.CallerAt(2)
+	if caller != std.OriginCaller() {
+		panic("should not happen") // because std.AssertOriginCall().
 	}
 
-	sentCoins := std.GetOrigSend()
+	sentCoins := std.OriginSend()
 	minCoin := std.NewCoin("ugnot", minFee)
 
 	if inviter == "" {
-		// banker := std.GetBanker(std.BankerTypeOrigSend)
+		// banker := std.GetBanker(std.BankerTypeOriginSend)
 		if len(sentCoins) == 1 && sentCoins[0].IsGTE(minCoin) {
 			if sentCoins[0].Amount > minFee*maxFeeMult {
 				panic("payment must not be greater than " + strconv.Itoa(int(minFee*maxFeeMult)))
@@ -117,9 +117,9 @@ func Invite(invitee string) {
 	// assert CallTx call.
 	std.AssertOriginCall()
 	// get caller/inviter.
-	caller := std.GetCallerAt(2)
-	if caller != std.GetOrigCaller() {
-		panic("should not happen") // because std.AssertOrigCall().
+	caller := std.CallerAt(2)
+	if caller != std.OriginCaller() {
+		panic("should not happen") // because std.AssertOriginCall().
 	}
 	lines := strings.Split(invitee, "\n")
 	if caller == admin {
@@ -156,9 +156,9 @@ func GrantInvites(invites string) {
 	// assert CallTx call.
 	std.AssertOriginCall()
 	// assert admin.
-	caller := std.GetCallerAt(2)
-	if caller != std.GetOrigCaller() {
-		panic("should not happen") // because std.AssertOrigCall().
+	caller := std.CallerAt(2)
+	if caller != std.OriginCaller() {
+		panic("should not happen") // because std.AssertOriginCall().
 	}
 	if caller != admin {
 		panic("unauthorized")
@@ -207,7 +207,7 @@ func SetMinFee(newMinFee int64) {
 	// assert CallTx call.
 	std.AssertOriginCall()
 	// assert admin caller.
-	caller := std.GetCallerAt(2)
+	caller := std.CallerAt(2)
 	if caller != admin {
 		panic("unauthorized")
 	}
@@ -220,7 +220,7 @@ func SetMaxFeeMultiple(newMaxFeeMult int64) {
 	// assert CallTx call.
 	std.AssertOriginCall()
 	// assert admin caller.
-	caller := std.GetCallerAt(2)
+	caller := std.CallerAt(2)
 	if caller != admin {
 		panic("unauthorized")
 	}
@@ -277,7 +277,7 @@ func AdminAddRestrictedName(name string) {
 	// assert CallTx call.
 	std.AssertOriginCall()
 	// get caller
-	caller := std.GetOrigCaller()
+	caller := std.OriginCaller()
 	// assert admin
 	if caller != admin {
 		panic("unauthorized")

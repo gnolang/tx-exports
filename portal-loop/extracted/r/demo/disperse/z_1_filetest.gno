@@ -13,7 +13,7 @@ func main() {
 	mainaddr := std.DerivePkgAddr("main")
 
 	std.TestSetOrigPkgAddr(disperseAddr)
-	std.TestSetOrigCaller(mainaddr)
+	std.TestSetOriginCaller(mainaddr)
 
 	banker := std.GetBanker(std.BankerTypeRealmSend)
 

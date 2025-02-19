@@ -22,7 +22,7 @@ const (
 
 func Deposit() {
 	caller := std.PrevRealm().Addr()
-	sent := std.GetOrigSend()
+	sent := std.OriginSend()
 	amount := sent.AmountOf("ugnot")
 
 	require(uint64(amount) >= ugnotMinDeposit, ufmt.Sprintf("Deposit below minimum: %d/%d ugnot.", amount, ugnotMinDeposit))

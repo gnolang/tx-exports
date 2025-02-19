@@ -14,7 +14,7 @@ func TestRender(t *testing.T) {
 	for i := 0; i < 20; i++ {
 		addrName := ufmt.Sprintf("test%d", i)
 		caller := testutils.TestAddress(addrName)
-		std.TestSetOrigCaller(caller)
+		std.TestSetOriginCaller(caller)
 		SignUp()
 	}
 

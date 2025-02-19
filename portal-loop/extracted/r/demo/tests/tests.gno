@@ -21,10 +21,10 @@ func CurrentRealmPath() string {
 	return std.CurrentRealm().PkgPath()
 }
 
-var initOrigCaller = std.GetOrigCaller()
+var initOriginCaller = std.OriginCaller()
 
-func InitOrigCaller() std.Address {
-	return initOrigCaller
+func InitOriginCaller() std.Address {
+	return initOriginCaller
 }
 
 func CallAssertOriginCall() {
@@ -43,7 +43,7 @@ func CallSubtestsIsOriginCall() bool {
 	return rsubtests.CallIsOriginCall()
 }
 
-//----------------------------------------
+// ----------------------------------------
 // Test structure to ensure cross-realm modification is prevented.
 
 type TestRealmObject struct {
@@ -58,7 +58,7 @@ func (t *TestRealmObject) Modify() {
 	t.Field += "_modified"
 }
 
-//----------------------------------------
+// ----------------------------------------
 // Test helpers to test a particular realm bug.
 
 type TestNode struct {
