@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-23354
+23379
 ```
 
 ## addpkgs
@@ -29,12 +29,12 @@
     286 "gno.land/r/onbloc/baz"
     182 "gno.land/r/onbloc/obl"
     180 "gno.land/r/gov/dao/v2"
-    116 "gno.land/r/demo/users"
+    126 "gno.land/r/demo/users"
     113 "gno.land/r/g17ernafy6ctpcz6uepfsq2js8x2vz0wladh5yc3/zentasktic_core"
     112 "gno.land/r/gnoswap/pool"
      99 "gno.land/r/teritori/social_feeds"
      93 "gno.land/r/gov/dao"
-     85 "gno.land/r/ecodevx/dao/pre1"
+     89 "gno.land/r/ecodevx/dao/pre1"
      72 "gno.land/r/teritori/profile"
      70 "gno.land/r/g1ngywvql2ql7t8uzl63w60eqcejkwg4rm4lxdw9/candy20"
      44 "gno.land/r/gnoswap/v2/pool"
@@ -44,9 +44,9 @@
      28 "gno.land/r/g1w6886hdj2tet0seyw6kn8fl92sx06prgd9w9j8/game/v3/diceroller"
      25 "gno.land/r/varmeta/demo/v403/domain/registrar"
      21 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/openocean"
+     20 "gno.land/r/ecodevx/tutorials/pre1"
      20 "gno.land/r/g1w6886hdj2tet0seyw6kn8fl92sx06prgd9w9j8/games/diceroller"
      19 "gno.land/r/varmeta/demo/v5/domain/registrar"
-     18 "gno.land/r/ecodevx/tutorials/pre1"
      18 "gno.land/r/teritori/projects_manager"
      18 "gno.land/r/varmeta/demo/v1/domain/registrar"
      15 "gno.land/r/varmeta/demo/v3/domain/registrar"
