@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-23379
+23385
 ```
 
 ## addpkgs
@@ -66,7 +66,7 @@
      10 "gno.land/r/varmeta/demo/v39/domain/registrar"
      10 "gno.land/r/villaquiranm/ghverify"
       9 "gno.land/r/demo/boards"
-      8 "gno.land/r/g1e5hud66rs7ye4zgeqmqvwfhurs2mnf408hdqcl/feedback_v1"
+      9 "gno.land/r/g1e5hud66rs7ye4zgeqmqvwfhurs2mnf408hdqcl/feedback_v1"
       8 "gno.land/r/g1ej0qca5ptsw9kfr64ey8jvfy9eacga6mpj2z0y/ih1"
       8 "gno.land/r/molaryy/openocean"
       8 "gno.land/r/varmeta/demo/v2/domain/registrar"
