@@ -50,7 +50,7 @@ func SubmitDAOLockingProposal(
 ) uint64 {
 	assertDAOIsNotLocked()
 
-	caller := std.GetOrigCaller()
+	caller := std.OriginCaller()
 	assertIsCouncilOrMainDAOMember(caller)
 
 	dao := mustGetDAO(daoPath)

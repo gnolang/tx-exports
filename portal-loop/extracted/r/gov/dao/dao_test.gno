@@ -31,18 +31,18 @@ func TestPackage(t *testing.T) {
 		return nil
 	})
 
-	std.TestSetOrigCaller(u1)
+	std.TestSetOriginCaller(u1)
 	pid := Propose("dummy proposal", ex)
 
 	// try to vote not being a member
-	std.TestSetOrigCaller(nu1)
+	std.TestSetOriginCaller(nu1)
 
 	urequire.PanicsWithMessage(t, msgCallerNotAMember, func() {
 		VoteOnProposal(pid, "YES")
 	})
 
 	// try to vote several times
-	std.TestSetOrigCaller(u1)
+	std.TestSetOriginCaller(u1)
 	urequire.NotPanics(t, func() {
 		VoteOnProposal(pid, "YES")
 	})
@@ -65,7 +65,7 @@ Author: g1w5c47h6lta047h6lta047h6lta047h6ly5kscr
 
 	urequire.Equal(t, expected, out)
 
-	std.TestSetOrigCaller(u2)
+	std.TestSetOriginCaller(u2)
 	urequire.PanicsWithMessage(t, msgWrongVotingValue, func() {
 		VoteOnProposal(pid, "INCORRECT")
 	})
@@ -88,7 +88,7 @@ Author: g1w5c47h6lta047h6lta047h6lta047h6ly5kscr
 
 	urequire.Equal(t, expected, out)
 
-	std.TestSetOrigCaller(u3)
+	std.TestSetOriginCaller(u3)
 	urequire.NotPanics(t, func() {
 		VoteOnProposal(pid, "YES")
 	})
@@ -127,7 +127,7 @@ Author: g1w5c47h6lta047h6lta047h6lta047h6ly5kscr
 
 	urequire.Equal(t, expected, out)
 
-	std.TestSetOrigCaller(u4)
+	std.TestSetOriginCaller(u4)
 	urequire.NotPanics(t, func() {
 		VoteOnProposal(pid, "YES")
 	})
@@ -168,7 +168,7 @@ Author: g1w5c47h6lta047h6lta047h6lta047h6ly5kscr
 	// Add a new member and try to vote an already executed proposal
 	u5 := testutils.TestAddress("u5")
 	members = append(members, u5)
-	std.TestSetOrigCaller(u5)
+	std.TestSetOriginCaller(u5)
 	urequire.PanicsWithMessage(t, msgPropExecuted, func() {
 		ExecuteProposal(pid)
 	})

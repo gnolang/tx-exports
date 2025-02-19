@@ -17,7 +17,7 @@ var (
 )
 
 func init() {
-	// adminAddr = std.GetOrigCaller() // FIXME: find a way to use this from the main's genesis.
+	// adminAddr = std.OriginCaller() // FIXME: find a way to use this from the main's genesis.
 	adminAddr = "g1manfred47kzduec920z88wfr64ylksmdcedlf5"
 }
 
@@ -49,7 +49,7 @@ func DaoAddPost(ctx context.Context, slug, title, body, publicationDate, authors
 
 func ModAddPost(slug, title, body, publicationDate, authors, tags string) {
 	assertIsModerator()
-	caller := std.GetOrigCaller()
+	caller := std.OriginCaller()
 	addPost(caller, slug, title, body, publicationDate, authors, tags)
 }
 
@@ -116,14 +116,14 @@ func isCommenter(addr std.Address) bool {
 }
 
 func assertIsAdmin() {
-	caller := std.GetOrigCaller()
+	caller := std.OriginCaller()
 	if !isAdmin(caller) {
 		panic("access restricted.")
 	}
 }
 
 func assertIsModerator() {
-	caller := std.GetOrigCaller()
+	caller := std.OriginCaller()
 	if isAdmin(caller) || isModerator(caller) {
 		return
 	}
@@ -131,7 +131,7 @@ func assertIsModerator() {
 }
 
 func assertIsCommenter() {
-	caller := std.GetOrigCaller()
+	caller := std.OriginCaller()
 	if isAdmin(caller) || isModerator(caller) || isCommenter(caller) {
 		return
 	}

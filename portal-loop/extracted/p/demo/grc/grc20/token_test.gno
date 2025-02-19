@@ -24,7 +24,7 @@ func TestUserApprove(t *testing.T) {
 	tok := bank.Token()
 
 	// Set owner as the original caller
-	std.TestSetOrigCaller(owner)
+	std.TestSetOriginCaller(owner)
 	// Mint 100000000 tokens for owner
 	urequire.NoError(t, bank.Mint(owner, 100000000))
 
@@ -32,7 +32,7 @@ func TestUserApprove(t *testing.T) {
 	urequire.NoError(t, tok.Approve(spender, 5000000))
 
 	// Set spender as the original caller
-	std.TestSetOrigCaller(spender)
+	std.TestSetOriginCaller(spender)
 	// Try to transfer 10000000 tokens from owner to dest, should fail because it exceeds allowance
 	urequire.Error(t,
 		tok.TransferFrom(owner, dest, 10000000),

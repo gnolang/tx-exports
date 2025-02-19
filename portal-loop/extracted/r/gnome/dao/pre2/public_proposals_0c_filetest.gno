@@ -9,7 +9,7 @@ import (
 const member = std.Address("g1lyzcpa7duh69lk04nahxup484xrz4k6k2nqdun")
 
 func init() {
-	std.TestSetOrigCaller(member)
+	std.TestSetOriginCaller(member)
 }
 
 func main() {

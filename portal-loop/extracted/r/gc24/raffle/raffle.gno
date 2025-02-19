@@ -47,8 +47,8 @@ func RegisterCode(code string) string {
 		panic("invalid code: " + code)
 	}
 
-	caller := std.PrevRealm()     // save realm used to call
-	origin := std.GetOrigCaller() // save deployer of realm
+	caller := std.PrevRealm()    // save realm used to call
+	origin := std.OriginCaller() // save deployer of realm
 
 	// Deny non-code entries
 	if caller.IsUser() {
@@ -119,7 +119,7 @@ func RegisterUsername(username string) string {
 		panic("invalid username: " + username)
 	}
 
-	origin := std.GetOrigCaller()
+	origin := std.OriginCaller()
 
 	for _, entry := range partialEntries {
 		if entry.txorigin == origin { // this will check if you're using the same address as when registering the raffle code ;)

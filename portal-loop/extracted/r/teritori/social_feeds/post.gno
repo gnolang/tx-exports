@@ -89,10 +89,10 @@ func (post *Post) Delete() {
 }
 
 func (post *Post) Tip(from std.Address, to std.Address) {
-	receivedCoins := std.GetOrigSend()
+	receivedCoins := std.OriginSend()
 	amount := receivedCoins[0].Amount
 
-	banker := std.GetBanker(std.BankerTypeOrigSend)
+	banker := std.GetBanker(std.BankerTypeOriginSend)
 	// banker := std.GetBanker(std.BankerTypeRealmSend)
 	coinsToSend := std.Coins{std.Coin{Denom: "ugnot", Amount: amount}}
 	pkgaddr := std.GetOrigPkgAddr()

@@ -10,7 +10,7 @@ import (
 )
 
 var (
-	louis  *grc20.AdminToken
+	louis *grc20.AdminToken
 	admin std.Address = "g1c8cl6t8cw42uuw63geyg7qnx7z09m52u5t0ky9"
 )
 
@@ -47,30 +47,30 @@ func Allowance(owner, spender users.AddressOrName) uint64 {
 // setters.
 
 func Transfer(to users.AddressOrName, amount uint64) {
-	caller := std.GetOrigCaller()
+	caller := std.OriginCaller()
 	louis.Transfer(caller, to.Resolve(), amount)
 }
 
 func Approve(spender users.AddressOrName, amount uint64) {
-	caller := std.GetOrigCaller()
+	caller := std.OriginCaller()
 	louis.Approve(caller, spender.Resolve(), amount)
 }
 
 func TransferFrom(from, to users.AddressOrName, amount uint64) {
-	caller := std.GetOrigCaller()
+	caller := std.OriginCaller()
 	louis.TransferFrom(caller, from.Resolve(), to.Resolve(), amount)
 }
 
 // administration.
 
 func Mint(address users.AddressOrName, amount uint64) {
-	caller := std.GetOrigCaller()
+	caller := std.OriginCaller()
 	assertIsAdmin(caller)
 	louis.Mint(address.Resolve(), amount)
 }
 
 func Burn(address users.AddressOrName, amount uint64) {
-	caller := std.GetOrigCaller()
+	caller := std.OriginCaller()
 	assertIsAdmin(caller)
 	louis.Burn(address.Resolve(), amount)
 }

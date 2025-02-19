@@ -130,7 +130,7 @@ func Vote(proposalID uint64, vote bool, reason, daoPath string) string {
 	}
 
 	// Submit vote
-	caller := std.GetOrigCaller() // TODO: Check that caller is member of the DAO
+	caller := std.OriginCaller() // TODO: Check that caller is member of the DAO
 	err := p.Vote(caller, gnome.VoteChoice(choice), reason)
 	if err != nil {
 		panic(err)
@@ -202,7 +202,7 @@ func mustGetProposal(id uint64) *gnome.Proposal {
 }
 
 func assertCallerCanWithdraw(p *gnome.Proposal) {
-	if p.Proposer() != std.GetOrigCaller() {
+	if p.Proposer() != std.OriginCaller() {
 		panic("proposals can only be withdrawed by the proposer")
 	}
 

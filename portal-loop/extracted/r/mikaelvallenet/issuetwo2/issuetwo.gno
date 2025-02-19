@@ -19,7 +19,7 @@ func init() {
 }
 
 func Faucet() string {
-	txSender := std.GetOrigCaller()
+	txSender := std.OriginCaller()
 	if err := banker.Mint(txSender, 5); err != nil {
 		return err.Error()
 	}

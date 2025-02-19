@@ -23,7 +23,7 @@ var (
 func AddMessage(message string) {
 	std.AssertOriginCall()
 
-	caller := std.GetOrigCaller().String()
+	caller := std.OriginCaller().String()
 
 	if _, ok := users.Get(caller); ok {
 		panic("caller have alreay register a message")

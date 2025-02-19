@@ -73,7 +73,7 @@ func toPostIDsStr(posts []*Post) string {
 
 func testGetPosts(t *testing.T) {
 	user := std.Address("user")
-	std.TestSetOrigCaller(user)
+	std.TestSetOriginCaller(user)
 
 	feedID := CreateFeed("teritori10")
 	feed := mustGetFeed(feedID)
@@ -319,7 +319,7 @@ func testTipPost(t *testing.T) {
 	creator := testutils.TestAddress("creator")
 	std.TestIssueCoins(creator, std.Coins{{"ugnot", 100_000_000}})
 
-	// NOTE: Dont know why the address should be this to be able to call banker (= std.GetCallerAt(1))
+	// NOTE: Dont know why the address should be this to be able to call banker (= std.CallerAt(1))
 	tipper := testutils.TestAddress("tipper")
 	std.TestIssueCoins(tipper, std.Coins{{"ugnot", 50_000_000}})
 
@@ -335,7 +335,7 @@ func testTipPost(t *testing.T) {
 	}
 
 	// Creator creates feed, post
-	std.TestSetOrigCaller(creator)
+	std.TestSetOriginCaller(creator)
 
 	feedID3 := CreateFeed("teritori3")
 	feed3 := mustGetFeed(feedID3)
@@ -344,8 +344,8 @@ func testTipPost(t *testing.T) {
 	post1 := feed3.MustGetPost(postID1)
 
 	// Tiper tips the ppst
-	std.TestSetOrigCaller(tipper)
-	std.TestSetOrigSend(std.Coins{{"ugnot", 1_000_000}}, nil)
+	std.TestSetOriginCaller(tipper)
+	std.TestSetOriginSend(std.Coins{{"ugnot", 1_000_000}}, nil)
 	TipPost(feed3.id, post1.id)
 
 	// Coin must be increased for creator
@@ -359,7 +359,7 @@ func testTipPost(t *testing.T) {
 	}
 
 	// Add more tip should update this total
-	std.TestSetOrigSend(std.Coins{{"ugnot", 2_000_000}}, nil)
+	std.TestSetOriginSend(std.Coins{{"ugnot", 2_000_000}}, nil)
 	TipPost(feed3.id, post1.id)
 
 	if post1.tipAmount != 3_000_000 {
@@ -377,12 +377,12 @@ func testFlagPost(t *testing.T) {
 	pid := CreatePost(feed9.id, rootPostID, cat1, "metadata1")
 
 	// Flag post
-	std.TestSetOrigCaller(flagger)
+	std.TestSetOriginCaller(flagger)
 	FlagPost(feed9.id, pid)
 
 	// Another user flags
 	another := testutils.TestAddress("another")
-	std.TestSetOrigCaller(another)
+	std.TestSetOriginCaller(another)
 	FlagPost(feed9.id, pid)
 
 	flaggedPostsStr := GetFlaggedPosts(feed9.id, 0, 10)
@@ -397,7 +397,7 @@ func testFilterUser(t *testing.T) {
 	user2 := testutils.TestAddress("user2")
 
 	// User1 create 2 posts
-	std.TestSetOrigCaller(user1)
+	std.TestSetOriginCaller(user1)
 
 	feedID4 := CreateFeed("teritori4")
 	feed4 := mustGetFeed(feedID4)
@@ -406,7 +406,7 @@ func testFilterUser(t *testing.T) {
 	CreatePost(feed4.id, rootPostID, cat1, `{"metadata2": "value"}`)
 
 	// User2 create 1 post
-	std.TestSetOrigCaller(user2)
+	std.TestSetOriginCaller(user2)
 	CreatePost(feed4.id, rootPostID, cat1, `{"metadata": "value"}`)
 
 	if count := countPostsByUser(feed4.id, user1.String()); count != 2 {
@@ -424,7 +424,7 @@ func testFilterUser(t *testing.T) {
 
 func testHidePostForMe(t *testing.T) {
 	user := std.Address("user")
-	std.TestSetOrigCaller(user)
+	std.TestSetOriginCaller(user)
 
 	feedID8 := CreateFeed("teritor8")
 	feed8 := mustGetFeed(feedID8)
@@ -445,14 +445,14 @@ func testHidePostForMe(t *testing.T) {
 
 	// Query from another user should return full list
 	another := std.Address("another")
-	std.TestSetOrigCaller(another)
+	std.TestSetOriginCaller(another)
 
 	if count := countPosts(feed8.id, filter_all, 10); count != 2 {
 		t.Fatalf("expected posts count from another: 2, got %q.", count)
 	}
 
 	// UnHide a post for me
-	std.TestSetOrigCaller(user)
+	std.TestSetOriginCaller(user)
 	UnHidePostForMe(feed8.id, postIDToHide)
 
 	if count := countPosts(feed8.id, filter_all, 10); count != 2 {

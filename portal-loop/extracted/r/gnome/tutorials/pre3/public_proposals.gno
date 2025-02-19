@@ -176,7 +176,7 @@ func SubmitDeletionProposal(proposalTitle, proposalDescription, tutorialSlug str
 //
 // The optional realm path authorizes a realm to import the state data once the realm is locked.
 func SubmitLockingProposal(proposalTitle, proposalDescription, realmPath string) uint64 {
-	assertHasAdminRole(std.GetOrigCaller())
+	assertHasAdminRole(std.OriginCaller())
 
 	if realmPath != "" && !strings.HasPrefix(realmPath, "gno.land/r/") {
 		panic(`realm path must start with "gno.land/r/"`)
