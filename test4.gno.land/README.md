@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-23326
+23354
 ```
 
 ## addpkgs
@@ -28,7 +28,7 @@
     320 "gno.land/r/gnoswap/staker"
     286 "gno.land/r/onbloc/baz"
     182 "gno.land/r/onbloc/obl"
-    158 "gno.land/r/gov/dao/v2"
+    180 "gno.land/r/gov/dao/v2"
     116 "gno.land/r/demo/users"
     113 "gno.land/r/g17ernafy6ctpcz6uepfsq2js8x2vz0wladh5yc3/zentasktic_core"
     112 "gno.land/r/gnoswap/pool"
@@ -88,6 +88,7 @@
       5 "gno.land/r/varmeta/demo1/domain/registrar"
       4 "gno.land/r/demo/domain/registrar"
       4 "gno.land/r/demo/user"
+      4 "gno.land/r/demo/userbook"
       4 "gno.land/r/g15mzjefvj9pt2ctv30l9ju03rewmfv9hken9wfm/v1/bridge"
       4 "gno.land/r/g1snqxvclhr7cw3rdcvzqm7z026hfnrx69c6ujdh/eco_test"
       4 "gno.land/r/manfred/home"
@@ -96,7 +97,6 @@
       4 "gno.land/r/taskow/tasks"
       4 "gno.land/r/varmeta/demo/v7 /domain/registrar"
       3 "gno.land/r/demo/games/shifumi"
-      3 "gno.land/r/demo/userbook"
       3 "gno.land/r/g1t9r79z4v4572m6aj2eydj2vs26qjmug8nes4mu/gno_nft_test"
       3 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/forms"
       3 "gno.land/r/g1w6886hdj2tet0seyw6kn8fl92sx06prgd9w9j8/games/v1/diceroller"
