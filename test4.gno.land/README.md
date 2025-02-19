@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-23226
+23296
 ```
 
 ## addpkgs
@@ -32,11 +32,11 @@
     115 "gno.land/r/demo/users"
     113 "gno.land/r/g17ernafy6ctpcz6uepfsq2js8x2vz0wladh5yc3/zentasktic_core"
     112 "gno.land/r/gnoswap/pool"
-     96 "gno.land/r/teritori/social_feeds"
+     99 "gno.land/r/teritori/social_feeds"
      93 "gno.land/r/gov/dao"
+     83 "gno.land/r/ecodevx/dao/pre1"
      72 "gno.land/r/teritori/profile"
      70 "gno.land/r/g1ngywvql2ql7t8uzl63w60eqcejkwg4rm4lxdw9/candy20"
-     49 "gno.land/r/ecodevx/dao/pre1"
      44 "gno.land/r/gnoswap/v2/pool"
      44 "gno.land/r/keyboard_worrier/popo_nft"
      32 "gno.land/r/onbloc/qux"
@@ -48,6 +48,7 @@
      19 "gno.land/r/varmeta/demo/v5/domain/registrar"
      18 "gno.land/r/teritori/projects_manager"
      18 "gno.land/r/varmeta/demo/v1/domain/registrar"
+     15 "gno.land/r/ecodevx/tutorials/pre1"
      15 "gno.land/r/varmeta/demo/v3/domain/registrar"
      14 "gno.land/r/demo/foo20"
      13 "gno.land/r/varmeta/demo/v7/domain/registrar"
@@ -55,7 +56,7 @@
      11 "gno.land/r/g1ngywvql2ql7t8uzl63w60eqcejkwg4rm4lxdw9/minus"
      11 "gno.land/r/g1w6886hdj2tet0seyw6kn8fl92sx06prgd9w9j8/vmt"
      11 "gno.land/r/keyboard_worrier/pepe_nft"
-     10 "gno.land/r/ecodevx/tutorials/pre1"
+     10 "gno.land/r/ecodevx/space/pre1"
      10 "gno.land/r/g15mzjefvj9pt2ctv30l9ju03rewmfv9hken9wfm/v2/bridge"
      10 "gno.land/r/g1e6gxg5tvc55mwsn7t7dymmlasratv7mkv0rap2/daoweb"
      10 "gno.land/r/g1uuchdac3z7u4m3j3dj6xeph00078u4x5aca5jh/nft_test"
@@ -71,7 +72,6 @@
       8 "gno.land/r/varmeta/demo/v2/domain/registrar"
       8 "gno.land/r/varmeta/demo/v401/domain/registrar"
       8 "gno.land/r/varmeta/registrar"
-      7 "gno.land/r/ecodevx/space/pre1"
       7 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/forms2"
       6 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/disperse2"
       6 "gno.land/r/g1w6886hdj2tet0seyw6kn8fl92sx06prgd9w9j8/game/diceroller"
@@ -100,6 +100,7 @@
       3 "gno.land/r/g1t9r79z4v4572m6aj2eydj2vs26qjmug8nes4mu/gno_nft_test"
       3 "gno.land/r/g1w62226g8hykfmtuasvz80rdf0jl6phgxsphh5v/testing/forms"
       3 "gno.land/r/g1w6886hdj2tet0seyw6kn8fl92sx06prgd9w9j8/games/v1/diceroller"
+      3 "gno.land/r/g1whzkakk4hzjkvy60d5pwfk484xu67ar2cl62h2/grafitti_20241118_01"
       3 "gno.land/r/gnoswap/v2/community_pool"
       3 "gno.land/r/varmeta/demo/v406/domain/registrar"
       3 "gno.land/r/varmeta/test/gettime"
@@ -108,7 +109,9 @@
       2 "gno.land/r/g1dnllrdzwfhxv3evyk09y48mgn5phfjvtyrlzm7/simplefeedback"
       2 "gno.land/r/g1g69npft5fav254rvuay7xlmlvt7ddfucgvx8xf/test"
       2 "gno.land/r/g1jg8mtutu9khhfwc4nxmuhcpftf0pajdhfvsqf5/hello"
+      2 "gno.land/r/g1jg8mtutu9khhfwc4nxmuhcpftf0pajdhfvsqf5/testx"
       2 "gno.land/r/g1s3gd740mld8chsjw5g0nmmzfd9g520w9e7m5t6/sandwich"
+      2 "gno.land/r/g1whzkakk4hzjkvy60d5pwfk484xu67ar2cl62h2/grafitti_20241118_02"
       2 "gno.land/r/varmeta/demo/v1/domain/resolver"
       2 "gno.land/r/varmeta/demo/v37/domain/registrar"
       2 "gno.land/r/varmeta/demo/v4/domain/registrar"
@@ -126,6 +129,7 @@
       1 "gno.land/r/g1pgcgqvm5ta3rfw7t67yp9faj94ynmxn5ygx2cd/gnome"
       1 "gno.land/r/g1t9r79z4v4572m6aj2eydj2vs26qjmug8nes4mu/nft_foo"
       1 "gno.land/r/g1t9r79z4v4572m6aj2eydj2vs26qjmug8nes4mu/obl"
+      1 "gno.land/r/g1whzkakk4hzjkvy60d5pwfk484xu67ar2cl62h2/grafitti_demo"
       1 "gno.land/r/gnoswap/consts"
       1 "gno.land/r/gnoswap/v2/emission"
       1 "gno.land/r/iamtest1/selfcall"
