@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-23487
+23493
 ```
 
 ## addpkgs
@@ -129,6 +129,7 @@
       1 "gno.land/r/g1pgcgqvm5ta3rfw7t67yp9faj94ynmxn5ygx2cd/gnome"
       1 "gno.land/r/g1t9r79z4v4572m6aj2eydj2vs26qjmug8nes4mu/nft_foo"
       1 "gno.land/r/g1t9r79z4v4572m6aj2eydj2vs26qjmug8nes4mu/obl"
+      1 "gno.land/r/g1whzkakk4hzjkvy60d5pwfk484xu67ar2cl62h2/doorbell_202501082320"
       1 "gno.land/r/g1whzkakk4hzjkvy60d5pwfk484xu67ar2cl62h2/grafitti_demo"
       1 "gno.land/r/gnoswap/consts"
       1 "gno.land/r/gnoswap/v2/emission"
