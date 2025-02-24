@@ -22,13 +22,13 @@ jobs:
       max-parallel: 1
       matrix:
         testnet:
-          - test4.gno.land
+          - test5.gno.land
 
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
         with:
-          go-version: "^1.22.4"
+          go-version: "1.23.x"
 
       - name: Run backup script
         run: make -C ${{ matrix.testnet }} fetch
