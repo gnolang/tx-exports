@@ -1,4 +1,4 @@
-# https://rpc.gno.land
+# https://rpc.staging.gno.land
 
 ## TXs
 ```

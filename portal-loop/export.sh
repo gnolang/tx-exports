@@ -168,7 +168,7 @@ mkdir "$TMP_DIR"
 cd "$TMP_DIR" || exit 1
 
 # Download the latest genesis.json from the Portal Loop RPC
-wget -O "$WGET_OUTPUT" https://rpc.gno.land/genesis
+wget -O "$WGET_OUTPUT" https://rpc.staging.gno.land/genesis
 
 # Extract the genesis portion from the wget response
 jq ".result.genesis" "$WGET_OUTPUT" > "$GENESIS"
