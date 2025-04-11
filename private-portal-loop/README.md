@@ -1,8 +1,8 @@
-# https://rpc.staging.gno.land
+# https://rpc.private.staging.gno.land
 
 ## TXs
 ```
-17884
+17797
 ```
 
 ## addpkgs
