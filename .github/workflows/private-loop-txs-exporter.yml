@@ -1,0 +1,48 @@
+name: Backup Private Portal Loop
+
+on:
+  # allow to run workflow manually
+  workflow_dispatch: { }
+
+  # Triggers the workflow every day at 2am
+  schedule:
+    - cron: "0 2 * * *"
+
+jobs:
+  backup:
+    name: "backup ${{ matrix.testnet }}"
+    runs-on: ubuntu-latest
+    timeout-minutes: 360 # very high; but it can take a while.
+
+    permissions:
+      contents: write
+
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        testnet:
+          - private-portal-loop
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.22.x"
+
+      - name: Run backup script
+        run: |
+          cd private-portal-loop
+          bash export.sh
+
+      - name: Run stats script
+        run: make -C ${{ matrix.testnet }} stats-legacy
+
+      # Currently unavailable, as described in:
+      # https://github.com/gnolang/tx-exports/issues/26
+      #      - name: Run extractor
+      #        run: make -C ${{ matrix.testnet }} extractor-legacy
+
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: update ${{ matrix.testnet }} backup"
