@@ -5,10 +5,10 @@ set -x
 TMP_DIR="temp-gno"
 GENESIS="genesis.json"
 WGET_OUTPUT="wget-genesis.json"
-BACKUP_NAME_TXS="backup_portal_loop_txs.jsonl"
-BACKUP_NAME_BALANCES="backup_portal_loop_balances.jsonl"
-LATEST_BACKUP_FILE_TXS="latest_backup_portal_loop_txs"
-BACKUP_CHUNK_PREFIX="../backup_portal_loop_txs"
+BACKUP_NAME_TXS="backup_staging_txs.jsonl"
+BACKUP_NAME_BALANCES="backup_staging_balances.jsonl"
+LATEST_BACKUP_FILE_TXS="latest_backup_staging_txs"
+BACKUP_CHUNK_PREFIX="../backup_staging_txs"
 CHUNK_SIZE=1000
 
 # chunk_file splits a file into chunks of CHUNK_SIZE lines
@@ -160,7 +160,7 @@ update_backup_chunks() {
 # in already backed up files (there is always a diff, because of sig diffs).
 # When technology evolves and we stop using a trash implementation of the Portal Loop,
 # this should be dropped
-rm backup_portal_loop_txs_*.jsonl
+rm -f backup_staging_txs_*.jsonl
 
 # Create the local temporary directory.
 rm -rf "$TMP_DIR"
@@ -177,7 +177,7 @@ jq ".result.genesis" "$WGET_OUTPUT" > "$GENESIS"
 git clone https://github.com/gnolang/gno.git
 cd gno/contribs/gnogenesis || exit 1
 make build
-cd ../../..  # Return to the root (portal-loop) directory
+cd ../../..  # Return to the root (staging.gno.land) directory
 
 # Export genesis transactions and balances
 ./gno/contribs/gnogenesis/build/gnogenesis txs export -genesis-path "$GENESIS" "$BACKUP_NAME_TXS"

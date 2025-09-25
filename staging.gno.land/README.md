@@ -1,8 +1,8 @@
-# staging.gno.land:36657
+# https://rpc.gno.land
 
 ## TXs
 ```
-25
+20977
 ```
 
 ## addpkgs

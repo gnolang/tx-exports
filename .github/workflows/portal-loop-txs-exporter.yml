@@ -1,4 +1,4 @@
-name: Backup Portal Loop
+name: Backup Staging (formerly Portal Loop)
 
 on:
   # allow to run workflow manually
@@ -22,7 +22,7 @@ jobs:
       max-parallel: 1
       matrix:
         testnet:
-          - portal-loop
+          - staging.gno.land
 
     steps:
       - uses: actions/checkout@v4
@@ -32,7 +32,7 @@ jobs:
 
       - name: Run backup script
         run: |
-          cd portal-loop
+          cd staging.gno.land
           bash export.sh
 
       - name: Run stats script
