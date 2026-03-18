@@ -154,13 +154,14 @@ update_backup_chunks() {
 
 # --- MAIN LOGIC --- #
 
-# Wipe the existing backups.
-# The reason for this is because the PL uses --lazy init
-# which generates fresh keys for genesis txs, causing a discrepancy
-# in already backed up files (there is always a diff, because of sig diffs).
-# When technology evolves and we stop using a trash implementation of the Portal Loop,
-# this should be dropped
-rm -f backup_staging_txs_*.jsonl
+# Count existing backed-up transactions (by line count, NOT content comparison).
+# The Portal Loop uses --lazy init which regenerates keys each restart,
+# so creator addresses change every export. We cannot compare content —
+# we can only use line counts to determine new transactions.
+EXISTING_TX_COUNT=0
+if backup_files_exist; then
+    EXISTING_TX_COUNT=$(cat $(ls "${BACKUP_CHUNK_PREFIX}"_* | sort -V) | wc -l | tr -d '[:space:]')
+fi
 
 # Create the local temporary directory.
 rm -rf "$TMP_DIR"
@@ -186,28 +187,25 @@ cd ../../..  # Return to the root (staging.gno.land) directory
 # Clean up the downloaded genesis files.
 rm "$GENESIS" "$WGET_OUTPUT"
 
-# If there are no backup chunk files yet, split the current export into chunks.
-if ! backup_files_exist; then
-    echo "No backup sheets found. Creating initial backup sheets"
-    rm -f "${BACKUP_CHUNK_PREFIX}"_*
+# Always update balances (small file, may change).
+cp "$BACKUP_NAME_BALANCES" "../$BACKUP_NAME_BALANCES"
+
+NEW_TX_COUNT=$(wc -l < "$BACKUP_NAME_TXS" | tr -d '[:space:]')
+
+if [ "$EXISTING_TX_COUNT" -eq 0 ]; then
+    # No existing backups — create initial chunks from the full export.
+    echo "No backup sheets found. Creating initial backup sheets."
     chunk_file "$BACKUP_NAME_TXS" "$BACKUP_CHUNK_PREFIX" "$CHUNK_SIZE"
-    # Also copy the balances file one level up.
-    cp "$BACKUP_NAME_BALANCES" "../$BACKUP_NAME_BALANCES"
-else
-    echo "Backup sheets already exist. Merging and updating with new transactions"
-    merge_backup_files
-
+elif [ "$NEW_TX_COUNT" -gt "$EXISTING_TX_COUNT" ]; then
+    # Extract only the NEW transactions (lines beyond what we already have).
     DIFF_TXS="diff.jsonl"
+    tail -n +$(( EXISTING_TX_COUNT + 1 )) "$BACKUP_NAME_TXS" > "$DIFF_TXS"
 
-    # Find transactions present in the new export that aren't in the backups
-    comm -13 "${LATEST_BACKUP_FILE_TXS}" "${BACKUP_NAME_TXS}" > "$DIFF_TXS"
-
-    if [[ ! -s "$DIFF_TXS" ]]; then
-        echo "No differences found. Exiting."
-    else
-        echo "Differences found. Updating backup files."
-        update_backup_chunks "$DIFF_TXS"
-    fi
+    DIFF_COUNT=$(wc -l < "$DIFF_TXS" | tr -d '[:space:]')
+    echo "Found $DIFF_COUNT new transactions. Updating backup files."
+    update_backup_chunks "$DIFF_TXS"
+else
+    echo "No new transactions found ($NEW_TX_COUNT total, $EXISTING_TX_COUNT already backed up). Exiting."
 fi
 
 # Move back to the parent directory and clean up
