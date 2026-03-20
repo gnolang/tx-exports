@@ -158,9 +158,11 @@ update_backup_chunks() {
 # The Portal Loop uses --lazy init which regenerates keys each restart,
 # so creator addresses change every export. We cannot compare content —
 # we can only use line counts to determine new transactions.
+# NOTE: BACKUP_CHUNK_PREFIX is "../backup_staging_txs" (relative to temp-gno/).
+# Before cd-ing into temp-gno/, we must use the direct path.
 EXISTING_TX_COUNT=0
-if backup_files_exist; then
-    EXISTING_TX_COUNT=$(cat $(ls "${BACKUP_CHUNK_PREFIX}"_* | sort -V) | wc -l | tr -d '[:space:]')
+if ls backup_staging_txs_*.jsonl > /dev/null 2>&1; then
+    EXISTING_TX_COUNT=$(cat $(ls backup_staging_txs_*.jsonl | sort -V) | wc -l | tr -d '[:space:]')
 fi
 
 # Create the local temporary directory.
