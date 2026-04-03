@@ -4,9 +4,9 @@ on:
   # allow to run workflow manually
   workflow_dispatch: { }
 
-  # Triggers the workflow every hour
+  # Triggers the workflow every 4 hours
   schedule:
-    - cron: "0 * * * *"
+    - cron: "0 */4 * * *"
 
 jobs:
   backup:
