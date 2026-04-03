@@ -186,9 +186,6 @@ cd ../../..  # Return to the root (staging.gno.land) directory
 ./gno/contribs/gnogenesis/build/gnogenesis txs export -genesis-path "$GENESIS" "$BACKUP_NAME_TXS"
 ./gno/contribs/gnogenesis/build/gnogenesis balances export -genesis-path "$GENESIS" "$BACKUP_NAME_BALANCES"
 
-# Clean up the downloaded genesis files.
-rm "$GENESIS" "$WGET_OUTPUT"
-
 # Strip the ephemeral genesis deployer account from the balances export.
 # On each Portal Loop restart, gnoland --lazy generates a fresh validator key
 # and sets its balance to len(genesisTxs)*2_100_000 ugnot so it can pay for
@@ -201,6 +198,9 @@ if [ -n "$DEPLOYER_ADDR" ] && [ "$DEPLOYER_ADDR" != "null" ]; then
     grep -v "^${DEPLOYER_ADDR}=" "$BACKUP_NAME_BALANCES" > "${BACKUP_NAME_BALANCES}.tmp"
     mv "${BACKUP_NAME_BALANCES}.tmp" "$BACKUP_NAME_BALANCES"
 fi
+
+# Clean up the downloaded genesis files.
+rm "$GENESIS" "$WGET_OUTPUT"
 
 # Always update balances (small file, may change).
 cp "$BACKUP_NAME_BALANCES" "../$BACKUP_NAME_BALANCES"
