@@ -1,0 +1,4 @@
+module = "gno.land/r/g1q8txq2r5rxwkzu00l64j8d596tjc5p2t0uwf4e/helloworld"
+gno = "0.9"
+
+[dependencies]

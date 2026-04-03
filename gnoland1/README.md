@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-577
+2633
 ```
 
 ## addpkgs
@@ -12,11 +12,13 @@
 ## top realm calls
 ```
     297 "gno.land/r/gnoland/blog"
-      9 "gno.land/r/gnoland/boards2/v1"
-      9 "gno.land/r/sys/cla"
-      8 "gno.land/r/gnops/valopers"
+     12 "gno.land/r/sys/cla"
+     10 "gno.land/r/gnoland/boards2/v1"
+      9 "gno.land/r/gnops/valopers"
+      5 "gno.land/r/gnoland/wugnot"
       2 "gno.land/r/g19p3yzr3cuhzqa02j0ce6kzvyjqfzwemw3vam0x/gnomaze"
-      1 "gno.land/r/gnoland/wugnot"
+      1 "gno.land/r/g1q8txq2r5rxwkzu00l64j8d596tjc5p2t0uwf4e/counter"
+      1 "gno.land/r/g1q8txq2r5rxwkzu00l64j8d596tjc5p2t0uwf4e/helloworld"
 ```
 
 ## top faucet requesters
