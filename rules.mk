@@ -1,8 +1,8 @@
-EXTRACTOR_DIR ?= extractor
+EXTRACTOR_DIR ?= extractor-0.1.1
 
 fetch:
 	@echo "Backup from: $(FROM_BLOCK) to $(TO_BLOCK)"
-	go run github.com/gnolang/tx-archive/cmd@v0.4.2 backup \
+	go run github.com/gnolang/tx-archive/cmd@v0.5.1 backup \
 		--remote $(REMOTE) \
 		--from-block $(FROM_BLOCK) \
 		--to-block   $(TO_BLOCK) \
@@ -79,13 +79,6 @@ extractor:
 	go run -C "../$(EXTRACTOR_DIR)" . \
 		-source-path "$(shell pwd)" \
 		-output-dir "$(shell pwd)/extracted"
-
-extractor-legacy:
-	go run -C "../$(EXTRACTOR_DIR)" . \
-		-source-path "$(shell pwd)" \
-		-output-dir "$(shell pwd)/extracted" \
-		--legacy-mode
-
 
 loop:
 	while true; do \

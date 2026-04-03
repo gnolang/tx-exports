@@ -22,7 +22,8 @@ jobs:
       max-parallel: 1
       matrix:
         testnet:
-          - test5.gno.land
+          - test11.gno.land
+          - gnoland1
 
     steps:
       - uses: actions/checkout@v4
@@ -35,10 +36,6 @@ jobs:
 
       - name: Run stats script
         run: make -C ${{ matrix.testnet }} stats
-
-      # Disabled since the extractor is broken. Waiting on @leohn to fix
-      # - name: Run extractor
-      #   run: make -C ${{ matrix.testnet }} extractor
 
       - name: Run git pull
         run: git pull

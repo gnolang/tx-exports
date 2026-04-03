@@ -1,15 +1,25 @@
 # tx exports
 
-This repo serves the purpose of archiving data from testnets.
+This repository archives raw blockchain transaction data from Gno.land chains.
 
-Currently, it contains the following:
-- Raw transaction data from
-  - `test4.gno.land`
-  - `test3.gno.land`
-  - `test2.gno.land`
-  - `test1.gno.land`
-  - `staging.gno.land`
-- Gno code extracted from raw transactions in the respective `extracted` folders
-- A Go program used to extract Gno code from raw transactions; located in `extractor/`
+## Active chains (backed up continuously)
 
-This repo has a Github Action that fetches transaction data and runs the extractor once every 24 hours.
+| Chain | Directory | Frequency |
+|-------|-----------|-----------|
+| [test11.gno.land](https://test11.gno.land) | `test11.gno.land/` | every 4 hours |
+| [gnoland1 (betanet)](https://betanet.gno.land) | `gnoland1/` | every 4 hours |
+| [staging.gno.land](https://staging.gno.land) | `staging.gno.land/` | every hour |
+
+## Historical chains (archived, no longer updated)
+
+- `test5.gno.land/` — test5.gno.land
+- `test4.gno.land/` — test4.gno.land
+- `test3.gno.land/` — test3.gno.land
+- `test2.gno.land/` — test2.gno.land
+- `test1.gno.land/` — test1.gno.land
+
+## Tools
+
+- **`rules.mk`** — shared Makefile rules used by all chain directories (`fetch`, `stats`, `loop`)
+- Backup is powered by [tx-archive](https://github.com/gnolang/tx-archive) v0.5.1
+- `staging.gno.land/export.sh` — custom export script using `gnogenesis` (Portal Loop has no standard RPC tx export)
