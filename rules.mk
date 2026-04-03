@@ -2,7 +2,7 @@ EXTRACTOR_DIR ?= extractor-0.1.1
 
 fetch:
 	@echo "Backup from: $(FROM_BLOCK) to $(TO_BLOCK)"
-	go run github.com/gnolang/tx-archive/cmd@v0.5.1 backup \
+	go run github.com/gnolang/tx-archive/cmd@v0.5.1 backup -verbose \
 		--remote $(REMOTE) \
 		--from-block $(FROM_BLOCK) \
 		--to-block   $(TO_BLOCK) \
