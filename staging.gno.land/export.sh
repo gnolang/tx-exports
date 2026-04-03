@@ -189,6 +189,19 @@ cd ../../..  # Return to the root (staging.gno.land) directory
 # Clean up the downloaded genesis files.
 rm "$GENESIS" "$WGET_OUTPUT"
 
+# Strip the ephemeral genesis deployer account from the balances export.
+# On each Portal Loop restart, gnoland --lazy generates a fresh validator key
+# and sets its balance to len(genesisTxs)*2_100_000 ugnot so it can pay for
+# replaying all genesis transactions. That address changes every restart and
+# is an implementation detail — not a real user account. We identify it as the
+# creator of the first MsgAddPackage in the genesis (examples are always loaded
+# first, all signed by the deployer/txSender key).
+DEPLOYER_ADDR=$(jq -r '[.app_state.txs[].tx.msg[] | select(.["@type"] == "/vm.m_addpkg")] | first | .creator' "$GENESIS")
+if [ -n "$DEPLOYER_ADDR" ] && [ "$DEPLOYER_ADDR" != "null" ]; then
+    grep -v "^${DEPLOYER_ADDR}=" "$BACKUP_NAME_BALANCES" > "${BACKUP_NAME_BALANCES}.tmp"
+    mv "${BACKUP_NAME_BALANCES}.tmp" "$BACKUP_NAME_BALANCES"
+fi
+
 # Always update balances (small file, may change).
 cp "$BACKUP_NAME_BALANCES" "../$BACKUP_NAME_BALANCES"
 
