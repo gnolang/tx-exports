@@ -11,6 +11,6 @@ type Metadata struct {
 func metadataFromMsg(msg AddPackage) Metadata {
 	return Metadata{
 		Creator: msg.Creator.String(),
-		Deposit: msg.Deposit.String(),
+		Deposit: msg.Send.String(),
 	}
 }

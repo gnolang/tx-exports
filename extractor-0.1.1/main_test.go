@@ -6,12 +6,12 @@ import (
 	crand "crypto/rand"
 	"encoding/base64"
 	"encoding/json"
+	"github.com/gnolang/gno/gno.land/pkg/gnoland"
 	"github.com/gnolang/gno/gno.land/pkg/sdk/vm"
 	"github.com/gnolang/gno/tm2/pkg/amino"
 	"github.com/gnolang/gno/tm2/pkg/crypto"
 	"github.com/gnolang/gno/tm2/pkg/sdk/bank"
 	"github.com/gnolang/gno/tm2/pkg/std"
-	"github.com/gnolang/tx-archive/types"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"math/rand"
@@ -129,7 +129,7 @@ func TestValidFlow_Dir(t *testing.T) {
 		require.NoError(t, err)
 
 		// Compare metadata
-		expectedMetadata, err := json.Marshal(metadataFromMsg(msg))
+		expectedMetadata, err := json.Marshal(metadataFromMsg(AddPackage{MsgAddPackage: msg}))
 		assert.Equal(t, expectedMetadata, retrievedMetadata)
 
 		// Close metadata file
@@ -197,7 +197,7 @@ func TestValidFlow_File(t *testing.T) {
 		require.NoError(t, err)
 
 		// Compare metadata
-		expectedMetadata, err := json.Marshal(metadataFromMsg(msg))
+		expectedMetadata, err := json.Marshal(metadataFromMsg(AddPackage{MsgAddPackage: msg}))
 		assert.Equal(t, expectedMetadata, retrievedMetadata)
 
 		// Close metadata file
@@ -280,11 +280,16 @@ func TestExtractAddMessages(t *testing.T) {
 	mockMsgs, mockMsgsAddPackage := generateMockMsgs(t)
 	sourceFiles := generateSourceFiles(t, tempDir, mockMsgs, 20)
 
+	unwrapFn := func(data gnoland.TxWithMetadata) []std.Msg { return data.Tx.Msgs }
+	heightFn := func(_ gnoland.TxWithMetadata) uint64 { return 0 }
+
 	var results []vm.MsgAddPackage
 	for _, sf := range sourceFiles {
-		res, err := extractAddMessages(sf)
+		res, err := extractAddMessages(sf, unwrapFn, heightFn)
 		require.NoError(t, err)
-		results = append(results, res...)
+		for _, r := range res {
+			results = append(results, r.MsgAddPackage)
+		}
 	}
 
 	sort.Slice(results, func(i, j int) bool {
@@ -308,7 +313,7 @@ func TestWritePackageMetadata(t *testing.T) {
 	t.Cleanup(removeDir(t, tempDir))
 
 	for _, msg := range mockMsgsAddPackage {
-		md := metadataFromMsg(msg)
+		md := metadataFromMsg(AddPackage{MsgAddPackage: msg})
 
 		// Get output dir
 		outputDir := filepath.Join(tempDir, strings.TrimLeft(msg.Package.Path, "gno.land/"))
@@ -356,7 +361,7 @@ func TestWritePackageFiles(t *testing.T) {
 		require.NoError(t, err)
 
 		// Write the metadata
-		err = writePackageFiles(msg, outputDir)
+		err = writePackageFiles(AddPackage{MsgAddPackage: msg}, outputDir)
 		require.NoError(t, err)
 
 		// Read & compare file
@@ -374,14 +379,14 @@ func generateSourceFiles(t *testing.T, dir string, mockMsgs []std.Msg, numSource
 
 	var (
 		txPerSourceFile = 5
-		mockTx          = make([]types.TxData, txPerSourceFile*numSourceFiles)
+		mockTx          = make([]gnoland.TxWithMetadata, txPerSourceFile*numSourceFiles)
 		testFiles       = make([]string, numSourceFiles)
 		msgPerTx        = len(mockMsgs) / len(mockTx)
 	)
 
 	// Generate transactions to wrap messages
 	for i := range mockTx {
-		mockTx[i] = types.TxData{
+		mockTx[i] = gnoland.TxWithMetadata{
 			Tx: std.Tx{
 				Msgs: mockMsgs[:msgPerTx],
 			},
@@ -481,7 +486,7 @@ func generateMockMsgs(t *testing.T) ([]std.Msg, []vm.MsgAddPackage) {
 					Path:  path,
 					Files: files,
 				},
-				Deposit: deposit,
+				Send: deposit,
 			}
 			addPkgRet = append(addPkgRet, msg.(vm.MsgAddPackage))
 			break
@@ -532,7 +537,7 @@ func randString(t *testing.T, length int) string {
 	return base64.StdEncoding.EncodeToString(buf)
 }
 
-func writeTxToFile(t *testing.T, tx types.TxData, file *os.File) error {
+func writeTxToFile(t *testing.T, tx gnoland.TxWithMetadata, file *os.File) error {
 	t.Helper()
 
 	data, err := amino.MarshalJSON(tx)

@@ -14,10 +14,10 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/gnolang/gno/gno.land/pkg/gnoland"
 	"github.com/gnolang/gno/gno.land/pkg/sdk/vm"
 	"github.com/gnolang/gno/tm2/pkg/amino"
 	"github.com/gnolang/gno/tm2/pkg/std"
-	"github.com/gnolang/tx-archive/types"
 	"github.com/peterbourgon/ff/v3/ffcli"
 )
 
@@ -140,12 +140,12 @@ func execExtract(ctx context.Context, cfg *extractorCfg) error {
 	}
 
 	var (
-		unwrapFn = func(data types.TxData) []std.Msg {
+		unwrapFn = func(data gnoland.TxWithMetadata) []std.Msg {
 			return data.Tx.Msgs
 		}
 
-		heightFn = func(data types.TxData) uint64 {
-			return data.BlockNum
+		heightFn = func(_ gnoland.TxWithMetadata) uint64 {
+			return 0
 		}
 
 		unwrapLegacyFn = func(tx std.Tx) []std.Msg {
@@ -258,7 +258,7 @@ type AddPackage struct {
 }
 
 // extractAddMessages extracts the AddPackage messages
-func extractAddMessages[T std.Tx | types.TxData](
+func extractAddMessages[T std.Tx | gnoland.TxWithMetadata](
 	filePath string,
 	unwrapFn func(T) []std.Msg,
 	heightFn func(T) uint64,
