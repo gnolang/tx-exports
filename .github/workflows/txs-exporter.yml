@@ -42,6 +42,9 @@ jobs:
       - name: Run backup script
         run: make -C ${{ matrix.testnet }} fetch
 
+      - name: Run extractor
+        run: make -C ${{ matrix.testnet }} extractor
+
       - name: Run stats script
         run: make -C ${{ matrix.testnet }} stats
 
