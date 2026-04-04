@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-2167
+2201
 ```
 
 ## addpkgs
@@ -11,19 +11,19 @@
 
 ## top realm calls
 ```
+    193 "gno.land/r/gov/dao"
     187 "gno.land/r/gnops/valopers"
-    181 "gno.land/r/gov/dao"
-    103 "gno.land/r/gnoswap/position"
-     55 "gno.land/r/gnoswap/gns"
-     40 "gno.land/r/gnoswap/staker"
-     40 "gno.land/r/gnoswap/test_token/baz"
-     40 "gno.land/r/gnoswap/test_token/qux"
+    115 "gno.land/r/gnoswap/position"
+     63 "gno.land/r/gnoswap/gns"
+     54 "gno.land/r/gnoswap/staker"
+     48 "gno.land/r/gnoswap/test_token/baz"
+     48 "gno.land/r/gnoswap/test_token/qux"
+     41 "gno.land/r/gnoswap/test_token/usdc"
+     40 "gno.land/r/gnoswap/router"
      38 "gno.land/r/gnoswap/test_token/bar"
-     38 "gno.land/r/gnoswap/test_token/usdc"
      37 "gno.land/r/demo/profile"
-     35 "gno.land/r/gnoswap/router"
      34 "gno.land/r/gnoland/users/v1"
-     32 "gno.land/r/gnoswap/test_token/foo"
+     33 "gno.land/r/gnoswap/test_token/foo"
      29 "gno.land/r/demo/defi/grc20factory"
      29 "gno.land/r/gnoswap/test_token/obl"
      26 "gno.land/r/gnoswap/pool"
