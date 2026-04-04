@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-2262
+2278
 ```
 
 ## addpkgs
@@ -12,7 +12,7 @@
 ## top realm calls
 ```
     202 "gno.land/r/gov/dao"
-    196 "gno.land/r/gnops/valopers"
+    197 "gno.land/r/gnops/valopers"
     116 "gno.land/r/gnoswap/position"
      66 "gno.land/r/gnoswap/gns"
      55 "gno.land/r/gnoswap/staker"
@@ -37,6 +37,7 @@
       2 "gno.land/r/demo/counter"
       2 "gno.land/r/g18am8lt2xfwkjc2s4qp0rs0vjxgzcmr67aak8u6/m1k4bank"
       2 "gno.land/r/g1rayfgklwl0aspz488wvrcrvt7t2quy6q06lgk2/mydao"
+      1 "gno.land/r/g1778y2yphxs2wpuaflsy5y9qwcd4gttn4g5yjx5/buildersv5"
       1 "gno.land/r/gnoland/wugnot"
       1 "gno.land/r/meeeshell222/gnomies"
 ```
