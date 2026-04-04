@@ -1,0 +1,3 @@
+module = "gno.land/r/vik000/test33"
+gno = "0.9"
+private = true
