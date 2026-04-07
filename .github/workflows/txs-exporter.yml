@@ -4,9 +4,9 @@ on:
   # allow to run workflow manually
   workflow_dispatch: { }
 
-  # Triggers the workflow every 4hrs
+  # Triggers the workflow once per day at 6PM UTC
   schedule:
-    - cron: "0 */4 * * *"
+    - cron: "0 18 * * *"
 
 jobs:
   backup:
@@ -41,6 +41,9 @@ jobs:
 
       - name: Run backup script
         run: make -C ${{ matrix.testnet }} fetch
+
+      - name: Join small backup files
+        run: make -C ${{ matrix.testnet }} join
 
       - name: Run extractor
         run: make -C ${{ matrix.testnet }} extractor

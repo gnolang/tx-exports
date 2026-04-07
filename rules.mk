@@ -75,6 +75,29 @@ stats-legacy:
 	echo >> README.md
 
 
+join:
+	@echo "Joining small backup files..."
+	@prev_file=""; \
+	for f in $$(ls backup_*.jsonl 2>/dev/null | sort); do \
+		size=$$(stat -c%s "$$f"); \
+		if [ -n "$$prev_file" ]; then \
+			prev_size=$$(stat -c%s "$$prev_file"); \
+			if [ $$((prev_size + size)) -lt 102400 ]; then \
+				start=$$(echo "$$prev_file" | sed 's/backup_\([0-9]*\)-.*/\1/'); \
+				end=$$(echo "$$f" | sed 's/backup_[0-9]*-\([0-9]*\)\..*/\1/'); \
+				new_file="backup_$${start}-$${end}.jsonl"; \
+				cat "$$prev_file" "$$f" > "$${new_file}.tmp"; \
+				rm "$$prev_file" "$$f"; \
+				mv "$${new_file}.tmp" "$$new_file"; \
+				prev_file="$$new_file"; \
+				echo "  Joined -> $$new_file ($$(stat -c%s "$$new_file") bytes)"; \
+				continue; \
+			fi; \
+		fi; \
+		prev_file="$$f"; \
+	done
+	@echo "Done."
+
 extractor:
 	go run -C "../$(EXTRACTOR_DIR)" . \
 		-source-path "$(shell pwd)" \
