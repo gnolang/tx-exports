@@ -21,5 +21,5 @@ This repository archives raw blockchain transaction data from Gno.land chains.
 ## Tools
 
 - **`rules.mk`** — shared Makefile rules used by all chain directories (`fetch`, `stats`, `loop`)
-- Backup is powered by [tx-archive](https://github.com/gnolang/tx-archive) v0.5.1
+- Backup is powered by [tx-archive](https://github.com/gnolang/gno/tree/master/contribs/tx-archive) (lives in the `gnolang/gno` monorepo)
 - `staging.gno.land/export.sh` — custom export script using `gnogenesis` (Portal Loop has no standard RPC tx export)
