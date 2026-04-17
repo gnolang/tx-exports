@@ -25,8 +25,8 @@ make loop         # Continuous loop: fetch → stats → commit → push (for CI
 ### Running the backup tool directly
 
 ```sh
-# Powered by tx-archive v0.5.1
-go run github.com/gnolang/tx-archive/cmd@v0.5.1 backup \
+# Powered by tx-archive (lives in gnolang/gno at contribs/tx-archive)
+go run github.com/gnolang/gno/contribs/tx-archive/cmd@master backup \
   --remote <RPC_URL> --from-block <N> --to-block <M> --output-path backup_N-M.jsonl
 ```
 

@@ -1,8 +1,28 @@
 EXTRACTOR_DIR ?= extractor-0.1.1
 
-fetch:
+# tx-archive lives in the gnolang/gno monorepo under contribs/tx-archive.
+# contribs/*/go.mod files use `replace github.com/gnolang/gno => ../..` so
+# `go run <path>@version` does not work remotely — we must build from a
+# local checkout.
+GNO_REPO     ?= $(HOME)/.cache/tx-exports/gno
+GNO_REF      ?= master
+TXARCHIVE    ?= $(GNO_REPO)/contribs/tx-archive
+
+$(TXARCHIVE)/cmd/main.go:
+	@mkdir -p $(dir $(GNO_REPO))
+	@if [ ! -d $(GNO_REPO) ]; then \
+		git clone --depth=1 --branch $(GNO_REF) https://github.com/gnolang/gno.git $(GNO_REPO); \
+	else \
+		git -C $(GNO_REPO) fetch --depth=1 origin $(GNO_REF) && \
+		git -C $(GNO_REPO) checkout FETCH_HEAD; \
+	fi
+
+.PHONY: tx-archive-ensure
+tx-archive-ensure: $(TXARCHIVE)/cmd/main.go ## clone/update the gno repo so tx-archive is runnable
+
+fetch: tx-archive-ensure
 	@echo "Backup from: $(FROM_BLOCK) to $(TO_BLOCK)"
-	go run github.com/gnolang/tx-archive/cmd@v0.5.1 backup -verbose \
+	cd $(TXARCHIVE) && go run ./cmd backup -verbose \
 		--remote $(REMOTE) \
 		--from-block $(FROM_BLOCK) \
 		--to-block   $(TO_BLOCK) \
