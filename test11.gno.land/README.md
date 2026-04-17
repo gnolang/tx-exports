@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-2287
+2292
 ```
 
 ## addpkgs
@@ -33,8 +33,8 @@
       5 "gno.land/r/g18am8lt2xfwkjc2s4qp0rs0vjxgzcmr67aak8u6/mydao"
       4 "gno.land/r/g187sfsghc9tqayr5rgdmpy2tetnq9ttluxuk79h/surf_club_dao"
       4 "gno.land/r/gnops/valopers/proposal"
+      3 "gno.land/r/demo/counter"
       3 "gno.land/r/gnoland/valopers"
-      2 "gno.land/r/demo/counter"
       2 "gno.land/r/g18am8lt2xfwkjc2s4qp0rs0vjxgzcmr67aak8u6/m1k4bank"
       2 "gno.land/r/g1rayfgklwl0aspz488wvrcrvt7t2quy6q06lgk2/mydao"
       1 "gno.land/r/g1778y2yphxs2wpuaflsy5y9qwcd4gttn4g5yjx5/buildersv5"
