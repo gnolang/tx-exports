@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-2292
+2294
 ```
 
 ## addpkgs
@@ -12,7 +12,7 @@
 ## top realm calls
 ```
     202 "gno.land/r/gov/dao"
-    198 "gno.land/r/gnops/valopers"
+    199 "gno.land/r/gnops/valopers"
     116 "gno.land/r/gnoswap/position"
      66 "gno.land/r/gnoswap/gns"
      55 "gno.land/r/gnoswap/staker"
