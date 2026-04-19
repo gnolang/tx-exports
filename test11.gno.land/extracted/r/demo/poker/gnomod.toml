@@ -1,0 +1,5 @@
+module = "gno.land/r/demo/poker"
+gno = "0.9"
+
+[requires]
+"gno.land/p/demo/poker" = ""

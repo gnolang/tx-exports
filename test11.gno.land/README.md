@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-2294
+2319
 ```
 
 ## addpkgs
@@ -28,8 +28,10 @@
      29 "gno.land/r/demo/defi/grc20factory"
      26 "gno.land/r/gnoswap/pool"
      13 "gno.land/r/gnoswap/gnft"
+     11 "gno.land/r/demo/poker3"
       6 "gno.land/r/gnoland/boards2/v1"
       6 "gno.land/r/gnoswap/gov/staker"
+      5 "gno.land/r/demo/poker"
       5 "gno.land/r/g18am8lt2xfwkjc2s4qp0rs0vjxgzcmr67aak8u6/mydao"
       4 "gno.land/r/g187sfsghc9tqayr5rgdmpy2tetnq9ttluxuk79h/surf_club_dao"
       4 "gno.land/r/gnops/valopers/proposal"
