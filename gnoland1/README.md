@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-2638
+2639
 ```
 
 ## addpkgs
@@ -19,6 +19,7 @@
       2 "gno.land/r/g19p3yzr3cuhzqa02j0ce6kzvyjqfzwemw3vam0x/gnomaze"
       1 "gno.land/r/g1q8txq2r5rxwkzu00l64j8d596tjc5p2t0uwf4e/counter"
       1 "gno.land/r/g1q8txq2r5rxwkzu00l64j8d596tjc5p2t0uwf4e/helloworld"
+      1 "gno.land/r/sys/users"
 ```
 
 ## top faucet requesters
