@@ -1,0 +1,93 @@
+package v1
+
+import (
+	prbac "gno.land/p/gnoswap/rbac"
+	u256 "gno.land/p/gnoswap/uint256"
+	ufmt "gno.land/p/nt/ufmt/v0"
+
+	"gno.land/r/gnoswap/access"
+	"gno.land/r/gnoswap/common"
+	"gno.land/r/gnoswap/halt"
+)
+
+// SwapCallback implements the pool's SwapCallback interface.
+// This is called by the pool after it has sent output tokens to the recipient.
+// The router must transfer the required input tokens to the pool.
+//
+// This callback pattern enables:
+// 1. Flash swaps (receive tokens before paying)
+// 2. Just-in-time token transfers
+// 3. Complex multi-hop swaps without intermediate transfers
+//
+// Parameters:
+//   - token0Path, token1Path: Pool token paths
+//   - amount0Delta, amount1Delta: Token deltas (positive = owe, negative = received)
+//   - payer: Address that will pay for the swap
+//
+// Access:
+//   - Only callable by Router v1 address (self-callback from pool)
+//
+// Returns:
+//   - error: nil on success, error if transfer fails
+//
+// Delta convention (Uniswap V3):
+//   - Positive delta: tokens the pool must receive (input token)
+//   - Negative delta: tokens the pool has sent (output token)
+func (r *routerV1) SwapCallback(
+	_ int,
+	rlm realm,
+	token0Path, token1Path string,
+	amount0Delta, amount1Delta int64,
+	payer address,
+) error {
+	if !rlm.IsCurrent() {
+		return errSpoofedRealm
+	}
+
+	halt.AssertIsNotHaltedRouter()
+
+	caller := rlm.Previous().Address()
+	assertIsRouterImplementation(caller)
+
+	var tokenToPay string
+	var amountToPay int64
+
+	// amount0Delta > 0 means pool wants token0
+	// amount1Delta > 0 means pool wants token1
+	if amount0Delta > 0 {
+		amountToPay = amount0Delta
+		tokenToPay = token0Path
+	} else if amount1Delta > 0 {
+		amountToPay = amount1Delta
+		tokenToPay = token1Path
+	} else {
+		return nil
+	}
+
+	// Transfer tokens from router to pool
+	// The router should already have the tokens from the user
+	r.transferToPool(0, rlm, tokenToPay, u256.NewUintFromInt64(amountToPay), payer)
+
+	return nil
+}
+
+// transferToPool transfers tokens from router to pool
+func (r *routerV1) transferToPool(_ int, rlm realm, token string, amount *u256.Uint, payer address) {
+	balance := common.BalanceOf(token, payer)
+
+	if u256.NewUintFromInt64(balance).Lt(amount) {
+		panic(makeErrorWithDetails(
+			errInsufficientBalance,
+			ufmt.Sprintf("token=%s, required=%d, available=%d, payer=%s", token, amount.Int64(), balance, payer.String()),
+		))
+	}
+
+	poolAddr := access.MustGetAddress(prbac.ROLE_POOL.String())
+	routerAddr := access.MustGetAddress(prbac.ROLE_ROUTER.String())
+
+	if payer == routerAddr {
+		common.SafeGRC20Transfer(cross(rlm), token, poolAddr, amount.Int64())
+	} else {
+		common.SafeGRC20TransferFrom(cross(rlm), token, payer, poolAddr, amount.Int64())
+	}
+}

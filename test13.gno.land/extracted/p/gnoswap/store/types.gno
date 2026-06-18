@@ -1,0 +1,67 @@
+package store
+
+import (
+	bptree "gno.land/p/nt/bptree/v0"
+)
+
+type Permission uint8
+
+const (
+	_ Permission = iota
+	Write
+)
+
+// KVStore interface for domain-specific storage
+// Each domain creates its own instance of KVStore
+type KVStore interface {
+	// GetDomainAddress returns the domain address
+	GetDomainAddress() address
+
+	// GetAllKeys returns all keys in this store
+	GetAllKeys() ([]string, error)
+
+	// Has checks if a key exists
+	Has(key string) bool
+
+	// Get retrieves a value by key
+	Get(key string) (any, error)
+
+	// GetInt64 retrieves a int64 value by key
+	GetInt64(key string) (int64, error)
+
+	// GetUint64 retrieves a uint64 value by key
+	GetUint64(key string) (uint64, error)
+
+	// GetBool retrieves a bool value by key
+	GetBool(key string) (bool, error)
+
+	// GetString retrieves a string value by key
+	GetString(key string) (string, error)
+
+	// GetAddress retrieves an address value by key
+	GetAddress(key string) (address, error)
+
+	// GetBPTree retrieves a B+ tree value by key
+	GetBPTree(key string) (*bptree.BPTree, error)
+
+	// Set stores a value with the given key
+	Set(_ int, rlm realm, key string, value any) error
+
+	// Delete removes a key
+	Delete(_ int, rlm realm, key string) error
+
+	// IsWriteAuthorized checks if the caller has write permission
+	IsWriteAuthorized(caller address) bool
+
+	// GetAuthorizedCallers returns all authorized callers and their permissions
+	GetAuthorizedCallers() (map[address]Permission, error)
+
+	// AddAuthorizedCaller adds a new authorized caller
+	AddAuthorizedCaller(_ int, rlm realm, caller address, permission Permission) error
+
+	// UpdateAuthorizedCaller updates an existing caller's permission
+	UpdateAuthorizedCaller(_ int, rlm realm, caller address, permission Permission) error
+
+	// RemoveAuthorizedCaller removes an authorized caller
+	RemoveAuthorizedCaller(_ int, rlm realm, caller address) error
+}

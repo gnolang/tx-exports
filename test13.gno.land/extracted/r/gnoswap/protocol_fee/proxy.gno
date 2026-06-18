@@ -1,0 +1,86 @@
+package protocol_fee
+
+// DistributeProtocolFee distributes accumulated protocol fees to DevOps and GovStaker.
+func DistributeProtocolFee(cur realm) {
+	getImplementation().DistributeProtocolFee(0, cur)
+}
+
+// SetDevOpsPct sets the percentage of protocol fees allocated to DevOps.
+//
+// Parameters:
+//   - pct: percentage (0-100)
+func SetDevOpsPct(cur realm, pct int64) {
+	getImplementation().SetDevOpsPct(0, cur, pct)
+}
+
+// SetGovStakerPct sets the percentage of protocol fees allocated to GovStaker.
+//
+// Parameters:
+//   - pct: percentage (0-100)
+func SetGovStakerPct(cur realm, pct int64) {
+	getImplementation().SetGovStakerPct(0, cur, pct)
+}
+
+// AddToProtocolFee adds tokens to the protocol fee pool.
+//
+// Parameters:
+//   - tokenPath: path of the token
+//   - amount: amount to add
+func AddToProtocolFee(cur realm, tokenPath string, amount int64) error {
+	return getImplementation().AddToProtocolFee(0, cur, tokenPath, amount)
+}
+
+// GetDevOpsPct returns the DevOps fee percentage.
+func GetDevOpsPct() int64 {
+	return getImplementation().GetDevOpsPct()
+}
+
+// GetGovStakerPct returns the GovStaker fee percentage.
+func GetGovStakerPct() int64 {
+	return getImplementation().GetGovStakerPct()
+}
+
+// GetReservedTokens returns token paths reserved for distribution.
+func GetReservedTokens() []string {
+	return cloneStringSlice(getImplementation().GetReservedTokens())
+}
+
+// GetAccuTransfersToGovStaker returns accumulated transfers to GovStaker.
+func GetAccuTransfersToGovStaker() map[string]int64 {
+	return cloneStringInt64Map(getImplementation().GetAccuTransfersToGovStaker())
+}
+
+// GetAccuTransfersToDevOps returns accumulated transfers to DevOps.
+func GetAccuTransfersToDevOps() map[string]int64 {
+	return cloneStringInt64Map(getImplementation().GetAccuTransfersToDevOps())
+}
+
+// GetAccuTransferToGovStakerByTokenPath returns accumulated GovStaker transfer for a token.
+func GetAccuTransferToGovStakerByTokenPath(tokenPath string) int64 {
+	return getImplementation().GetAccuTransferToGovStakerByTokenPath(tokenPath)
+}
+
+// GetAccuTransferToDevOpsByTokenPath returns accumulated DevOps transfer for a token.
+func GetAccuTransferToDevOpsByTokenPath(tokenPath string) int64 {
+	return getImplementation().GetAccuTransferToDevOpsByTokenPath(tokenPath)
+}
+
+// GetActualDistributedToGovStaker returns actual transfers completed to GovStaker.
+func GetActualDistributedToGovStaker() map[string]int64 {
+	return cloneStringInt64Map(getImplementation().GetActualDistributedToGovStaker())
+}
+
+// GetActualDistributedToDevOps returns actual transfers completed to DevOps.
+func GetActualDistributedToDevOps() map[string]int64 {
+	return cloneStringInt64Map(getImplementation().GetActualDistributedToDevOps())
+}
+
+// GetActualDistributedToGovStakerByTokenPath returns actual GovStaker transfer for a token.
+func GetActualDistributedToGovStakerByTokenPath(tokenPath string) int64 {
+	return getImplementation().GetActualDistributedToGovStakerByTokenPath(tokenPath)
+}
+
+// GetActualDistributedToDevOpsByTokenPath returns actual DevOps transfer for a token.
+func GetActualDistributedToDevOpsByTokenPath(tokenPath string) int64 {
+	return getImplementation().GetActualDistributedToDevOpsByTokenPath(tokenPath)
+}

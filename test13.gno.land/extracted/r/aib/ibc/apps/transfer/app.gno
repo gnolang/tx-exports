@@ -1,0 +1,398 @@
+package transfer
+
+import (
+	"bytes"
+	"chain"
+	"chain/runtime/unsafe"
+	"errors"
+	"strconv"
+	"strings"
+
+	"gno.land/p/aib/ibc/app"
+	"gno.land/p/aib/ibc/types"
+	"gno.land/p/nt/ufmt/v0"
+	"gno.land/r/aib/ibc/core"
+	"gno.land/r/demo/defi/grc20reg"
+)
+
+type App struct{}
+
+const (
+	// NOTE we must use the same portID as the ibc-go transfer IBC app
+	PortID = "transfer"
+	// V1 defines first version of the IBC transfer module
+	V1               = "ics20-1"
+	EncodingProtobuf = "application/x-protobuf"
+
+	denomPrefix          = "ibc"
+	escrowAddressVersion = V1
+)
+
+func init(cur realm) {
+	// Register the app in the IBC router.
+	core.RegisterApp(cross(cur), PortID, &App{})
+}
+
+var _ app.IBCApp = &App{}
+
+// Implements app.IBCApp
+func (a *App) OnSendPacket(
+	cur realm,
+	sourceClient string,
+	destinationClient string,
+	sequence uint64,
+	payload types.Payload,
+) error {
+	// TODO add parameter to disable the app
+	// TODO add parameter to block sender addr
+
+	// Enforce that the source and destination portIDs are the same and equal to
+	// the transfer portID.
+	// Enforce that the source and destination clientIDs are also in the clientID
+	// format that transfer expects: {clientid}-{sequence}.
+	// This is necessary for IBC v2 since the portIDs (and thus the
+	// application-application connection) is not prenegotiated by the channel
+	// handshake.
+	// This restriction can be removed in a future where the trace hop on receive
+	// commits to **both** the source and destination portIDs rather than just
+	// the destination port.
+	if payload.SourcePort != PortID || payload.DestinationPort != PortID {
+		return ufmt.Errorf("payload port ID is invalid: expected %s, got sourcePort: %s destPort: %s", PortID, payload.SourcePort, payload.DestinationPort)
+	}
+	if !types.IsValidClientID(sourceClient) || !types.IsValidClientID(destinationClient) {
+		return ufmt.Errorf("client IDs must be in valid format: {string}-{number}")
+	}
+	if payload.Version != V1 {
+		return ufmt.Errorf("invalid ICS20 version: expected %s, got %s", V1, payload.Version)
+	}
+	if payload.Encoding != EncodingProtobuf {
+		return ufmt.Errorf("invalid encoding: expected %s, got %s", EncodingProtobuf, payload.Encoding)
+	}
+
+	data, token, err := unmarshalPayload(payload.Value)
+	if err != nil {
+		return err
+	}
+
+	// Mirror transfer.transfer(): the packet Sender is the EOA that signed
+	// the tx. unsafe.OriginCaller is tx-level identity (no cur equivalent).
+	signer := unsafe.OriginCaller().String()
+	if data.Sender != signer {
+		return ufmt.Errorf("invalid FungibleTokenPacketData: sender %s is different from signer %s", data.Sender, signer)
+	}
+
+	// Enforce that the base denom does not contain any slashes
+	// Since IBC v2 packets will no longer have channel identifiers, we cannot
+	// rely on the channel format to easily divide the trace from the base
+	// denomination in ICS20 v1 packets.
+	// The simplest way to prevent any potential issues from arising is to simply
+	// disallow any slashes in the base denomination.
+	// This prevents such denominations from being sent with IBCV v2 packets,
+	// however we can still support them in IBC v1 packets.
+	// If we enforce that IBC v2 packets are sent with ICS20 v2 and above
+	// versions that separate the trace from the base denomination in the packet
+	// data, then we can remove this restriction.
+	// Non-IBC GRC20 tokens use aliases (slashes replaced with colons)
+	// so they pass this check naturally.
+	if strings.Contains(token.Denom.Base, "/") {
+		return ufmt.Errorf("base denomination %s cannot contain slashes for IBC v2 packet", token.Denom.Base)
+	}
+
+	coin, err := token.ToCoin()
+	if err != nil {
+		return ufmt.Errorf("token to coin error: %v", err)
+	}
+	if token.Denom.HasPrefix(payload.SourcePort, sourceClient) {
+		// Burn the voucher tokens from sender
+		inst := getVoucher(coin.Denom)
+		if inst == nil {
+			return ufmt.Errorf("voucher token not found for denom %s", coin.Denom)
+		}
+		if err := inst.ledger.Burn(address(data.Sender), coin.Amount); err != nil {
+			return ufmt.Errorf("burn voucher %s error: %v", coin.String(), err)
+		}
+	} else if isGRC20Alias(token.Denom.Base) {
+		// Non-IBC GRC20 token: escrow via TransferFrom.
+		// The caller must have approved the transfer app realm address.
+		denomKey := resolveGRC20Alias(token.Denom.Base)
+		grc20Token := grc20reg.Get(denomKey)
+		if grc20Token == nil {
+			return ufmt.Errorf("GRC20 token %s not found in grc20reg", denomKey)
+		}
+		teller := grc20Token.RealmTeller(0, cur)
+		if err := teller.TransferFrom(0, cur, address(data.Sender), cur.Address(), coin.Amount); err != nil {
+			return ufmt.Errorf("escrow GRC20 %s error: %v", denomKey, err)
+		}
+		addEscrowForDenom(coin)
+	} else {
+		// Native token: OnSendPacket cannot safely read banker.OriginSend()
+		// here because PreviousRealm() is the core realm (not the EOA), so
+		// the escrow envelope is verified upstream by Transfer() and handed
+		// off via pendingNativeEscrow. A direct caller of core.SendPacket
+		// for a native packet will find the slot nil and be rejected.
+		// Transfer's defer is responsible for clearing the slot.
+		if pendingNativeEscrow == nil {
+			return ufmt.Errorf("native packet must be initiated through transfer.Transfer")
+		}
+		expected := *pendingNativeEscrow
+		if coin.Denom != expected.Denom || coin.Amount != expected.Amount {
+			return ufmt.Errorf(
+				"escrowed coin %s is not equal to fungible packet data token %s",
+				expected, coin,
+			)
+		}
+		// Escrow the coin on realm balance
+		addEscrowForDenom(coin)
+	}
+
+	// Emit events
+	chain.Emit(EventTypeTransfer,
+		AttributeKeySender, data.Sender,
+		AttributeKeyReceiver, data.Receiver,
+		AttributeKeyDenom, token.Denom.Path(),
+		AttributeKeyAmount, token.Amount,
+		AttributeKeyMemo, data.Memo,
+	)
+	return nil
+}
+
+// Implements app.IBCApp
+func (a *App) OnRecvPacket(
+	cur realm,
+	sourceClient string,
+	destinationClient string,
+	sequence uint64,
+	payload types.Payload,
+) types.RecvPacketResult {
+	// TODO add parameter to disable the app
+	// TODO add parameter to block receiver addr
+
+	// Enforce that the source and destination portIDs are the same and equal to
+	// the transfer portID.
+	// Enforce that the source and destination clientIDs are also in the clientID
+	// format that transfer expects: {clientid}-{sequence}.
+	// This is necessary for IBC v2 since the portIDs (and thus the
+	// application-application connection) is not prenegotiated by the channel
+	// handshake.
+	// This restriction can be removed in a future where the trace hop on receive
+	// commits to **both** the source and destination portIDs rather than just
+	// the destination port.
+	if payload.SourcePort != PortID || payload.DestinationPort != PortID {
+		return types.RecvPacketResult{Status: types.PacketStatus_Failure}
+	}
+	if !types.IsValidClientID(sourceClient) || !types.IsValidClientID(destinationClient) {
+		return types.RecvPacketResult{Status: types.PacketStatus_Failure}
+	}
+	if payload.Version != V1 {
+		return types.RecvPacketResult{Status: types.PacketStatus_Failure}
+	}
+	if payload.Encoding != EncodingProtobuf {
+		return types.RecvPacketResult{Status: types.PacketStatus_Failure}
+	}
+
+	var (
+		data       FungibleTokenPacketData
+		token      Token
+		ackErr     error
+		ack        = types.NewResultAppAcknowledgement([]byte{byte(1)})
+		recvResult = types.RecvPacketResult{
+			Status:          types.PacketStatus_Success,
+			Acknowledgement: ack.MarshalJSON(),
+		}
+	)
+	// we are explicitly wrapping this emit event call in an anonymous function
+	// so that the packet data is evaluated after it has been assigned a value.
+	defer func() {
+		attrs := []string{
+			AttributeKeySender, data.Sender,
+			AttributeKeyReceiver, data.Receiver,
+			AttributeKeyDenom, token.Denom.Path(),
+			AttributeKeyAmount, token.Amount,
+			AttributeKeyMemo, data.Memo,
+			AttributeKeyAckSuccess, strconv.FormatBool(ack.Success()),
+		}
+		if ackErr != nil {
+			attrs = append(attrs,
+				[]string{AttributeKeyAckError, ackErr.Error()}...,
+			)
+		}
+		chain.Emit(EventTypePacket, attrs...)
+	}()
+
+	data, token, ackErr = unmarshalPayload(payload.Value)
+	if ackErr != nil {
+		ack = types.NewErrorAppAcknowledgement(ackErr)
+		return types.RecvPacketResult{Status: types.PacketStatus_Failure}
+	}
+	// This is the prefix that would have been prefixed to the denomination
+	// on sender chain IF and only if the token originally came from the
+	// receiving chain.
+	//
+	// NOTE: We use SourcePort and SourceClient here, because the counterparty
+	// chain would have prefixed with DestPort and DestClient when originally
+	// receiving this token.
+	if token.Denom.HasPrefix(payload.SourcePort, sourceClient) {
+		// sender chain is not the source, unescrow tokens
+
+		// remove prefix added by sender chain
+		token.Denom.Trace = token.Denom.Trace[1:]
+		var transferAmount int64
+		transferAmount, ackErr = token.AmountInt64()
+		if ackErr != nil {
+			ack = types.NewErrorAppAcknowledgement(ackErr)
+			return types.RecvPacketResult{Status: types.PacketStatus_Failure}
+		}
+
+		coin := chain.NewCoin(token.Denom.IBCDenom(), transferAmount)
+
+		if isGRC20Alias(coin.Denom) {
+			ackErr = unescrowGRC20(0, cur, data.Receiver, coin)
+		} else {
+			ackErr = unescrowNative(0, cur, data.Receiver, coin)
+		}
+		if ackErr != nil {
+			ack = types.NewErrorAppAcknowledgement(ackErr)
+			return types.RecvPacketResult{Status: types.PacketStatus_Failure}
+		}
+
+	} else {
+		// sender chain is the source, mint vouchers
+
+		// since SendPacket did not prefix the denomination, we must add the
+		// destination port and client to the trace
+		trace := []Hop{NewHop(payload.DestinationPort, destinationClient)}
+		token.Denom.Trace = append(trace, token.Denom.Trace...)
+
+		voucherDenom := token.Denom.IBCDenom()
+		if !hasDenom(voucherDenom) {
+			setDenom(token.Denom)
+		}
+
+		chain.Emit(EventTypeDenom,
+			AttributeKeyDenomHash, token.Denom.HashHex(),
+			AttributeKeyDenom, string(token.Denom.MarshalJSON()),
+		)
+
+		// Mint voucher tokens to the receiver
+		var amount int64
+		amount, ackErr = token.AmountInt64()
+		if ackErr != nil {
+			ack = types.NewErrorAppAcknowledgement(ackErr)
+			return types.RecvPacketResult{Status: types.PacketStatus_Failure}
+		}
+		inst := getOrCreateVoucher(0, cur, token.Denom.Base, voucherDenom)
+		if err := inst.ledger.Mint(address(data.Receiver), amount); err != nil {
+			ackErr = ufmt.Errorf("mint voucher error: %v", err)
+			ack = types.NewErrorAppAcknowledgement(ackErr)
+			return types.RecvPacketResult{Status: types.PacketStatus_Failure}
+		}
+	}
+
+	return recvResult
+}
+
+// OnAcknowledgementPacket responds to the success or failure of a packet
+// acknowledgment written on the receiving chain.
+//
+// If the acknowledgement was a success then nothing occurs. Otherwise,
+// if the acknowledgement failed, then the sender is refunded their tokens.
+// Implements app.IBCApp
+func (a *App) OnAcknowledgementPacket(
+	cur realm,
+	sourceClient string,
+	destinationClient string,
+	sequence uint64,
+	acknowledgement []byte,
+	payload types.Payload,
+) error {
+	var ack types.AppAcknowledgement
+	// Construct an error acknowledgement if the acknowledgement bytes are the
+	// sentinel error acknowledgement so we can use the shared transfer logic
+	if bytes.Equal(acknowledgement, types.UniversalErrorAcknowledgement()) {
+		// the specific error does not matter
+		ack = types.NewErrorAppAcknowledgement(errors.New("receive packet failed"))
+	} else {
+		if err := ack.UnmarshalJSON(acknowledgement); err != nil {
+			return ufmt.Errorf("cannot unmarshal ICS-20 transfer packet acknowledgement: %v", err)
+		}
+		if !ack.Success() {
+			return ufmt.Errorf("cannot pass in a custom error acknowledgement with IBC v2")
+		}
+	}
+
+	data, token, err := unmarshalPayload(payload.Value)
+	if err != nil {
+		return err
+	}
+
+	if ack.Success() {
+		// the acknowledgement succeeded on the receiving chain so nothing
+		// needs to be executed and no error needs to be returned
+	} else {
+		// refund sender in case of ack error
+		if err := refundPacketToken(0, cur, payload.SourcePort, sourceClient, data.Sender, token); err != nil {
+			return err
+		}
+	}
+
+	// Emit events
+	chain.Emit(EventTypePacket,
+		AttributeKeySender, data.Sender,
+		AttributeKeyReceiver, data.Receiver,
+		AttributeKeyDenom, token.Denom.Path(),
+		AttributeKeyAmount, token.Amount,
+		AttributeKeyMemo, data.Memo,
+		AttributeKeyAck, string(acknowledgement),
+	)
+	if ack.Success() {
+		chain.Emit(EventTypePacket,
+			AttributeKeyAckSuccess, string(ack.Response.Result),
+		)
+	} else {
+		chain.Emit(EventTypePacket,
+			AttributeKeyAckError, ack.Response.Error,
+		)
+	}
+	return nil
+}
+
+// OnTimeoutPacket processes a transfer packet timeout by refunding the tokens
+// to the sender
+// Implements app.IBCApp
+func (a *App) OnTimeoutPacket(
+	cur realm,
+	sourceClient string,
+	destinationClient string,
+	sequence uint64,
+	payload types.Payload,
+) error {
+
+	data, token, err := unmarshalPayload(payload.Value)
+	if err != nil {
+		return err
+	}
+	if err := refundPacketToken(0, cur, payload.SourcePort, sourceClient, data.Sender, token); err != nil {
+		return err
+	}
+	// Emit events
+	chain.Emit(EventTypeTimeout,
+		AttributeKeyReceiver, data.Sender,
+		AttributeKeyDenom, token.Denom.Path(),
+		AttributeKeyAmount, token.Amount,
+		AttributeKeyMemo, data.Memo,
+	)
+	return nil
+}
+
+func unmarshalPayload(bz []byte) (FungibleTokenPacketData, Token, error) {
+	var data FungibleTokenPacketData
+	if err := data.ProtoUnmarshal(bz); err != nil {
+		return data, Token{}, ufmt.Errorf("decoding FungibleTokenPacketData: %v", err)
+	}
+	if err := data.ValidateBasic(); err != nil {
+		return data, Token{}, ufmt.Errorf("invalid FungibleTokenPacketData: %v", err)
+	}
+	denom := ExtractDenomFromPath(data.Denom)
+	token := Token{Denom: denom, Amount: data.Amount}
+	return data, token, nil
+}

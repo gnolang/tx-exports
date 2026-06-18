@@ -23,6 +23,7 @@ jobs:
       matrix:
         testnet:
           - test11.gno.land
+          - test13.gno.land
           - gnoland1
 
     steps:
