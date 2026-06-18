@@ -1,0 +1,1119 @@
+package v1
+
+import (
+	"strings"
+
+	prbac "gno.land/p/gnoswap/rbac"
+	ufmt "gno.land/p/nt/ufmt/v0"
+
+	cp "gno.land/r/gnoswap/community_pool"
+	en "gno.land/r/gnoswap/emission"
+	"gno.land/r/gnoswap/rbac"
+
+	"gno.land/r/gnoswap/gov/governance"
+	gs "gno.land/r/gnoswap/gov/staker"
+	lp "gno.land/r/gnoswap/launchpad"
+	pl "gno.land/r/gnoswap/pool"
+	pos "gno.land/r/gnoswap/position"
+	pf "gno.land/r/gnoswap/protocol_fee"
+	rr "gno.land/r/gnoswap/router"
+	sr "gno.land/r/gnoswap/staker"
+
+	"gno.land/r/gnoswap/halt"
+)
+
+// globalParameterRegistry is initialized once and reused for all validation and execution.
+// This provides consistent validation at proposal creation time and execution time.
+var globalParameterRegistry *ParameterRegistry
+
+func init() {
+	globalParameterRegistry = CreateParameterHandlers()
+}
+
+// Package paths
+const (
+	GNS_PATH            = "gno.land/r/gnoswap/gns"
+	HALT_PATH           = "gno.land/r/gnoswap/halt"
+	RBAC_PATH           = "gno.land/r/gnoswap/rbac"
+	ACCESS_PATH         = "gno.land/r/gnoswap/access"
+	EMISSION_PATH       = "gno.land/r/gnoswap/emission"
+	COMMON_PATH         = "gno.land/r/gnoswap/common"
+	POOL_PATH           = "gno.land/r/gnoswap/pool"
+	POSITION_PATH       = "gno.land/r/gnoswap/position"
+	ROUTER_PATH         = "gno.land/r/gnoswap/router"
+	STAKER_PATH         = "gno.land/r/gnoswap/staker"
+	LAUNCHPAD_PATH      = "gno.land/r/gnoswap/launchpad"
+	PROTOCOL_FEE_PATH   = "gno.land/r/gnoswap/protocol_fee"
+	COMMUNITY_POOL_PATH = "gno.land/r/gnoswap/community_pool"
+	GOV_GOVERNANCE_PATH = "gno.land/r/gnoswap/gov/governance"
+	GOV_STAKER_PATH     = "gno.land/r/gnoswap/gov/staker"
+)
+
+// ParameterHandler interface defines the contract for parameter execution handlers.
+// Each handler is responsible for executing specific parameter changes in the system.
+type ParameterHandler interface {
+	// Execute processes the parameters and applies the changes to the system.
+	// The `_ int, cur realm` discriminator pair forwards the governance proxy's
+	// realm value into the handler so any cross-realm calls inside the closure
+	// run under the proxy's identity (the only address with caller-allowlist
+	// permission against the targeted /r/ realms).
+	Execute(_ int, rlm realm, params []string) error
+}
+
+// ParameterHandlerOptions contains the configuration and execution logic for a parameter handler.
+// This struct encapsulates all information needed to identify and execute a parameter change.
+//
+// NOTE: handlerFunc uses `rlm realm` (rather than `cur realm`) as the realm
+// parameter name. The v2 preprocessor reserves the `cur` name for the first
+// realm-type parameter of top-level crossing function declarations and
+// `t.Run` closures only; using it as the realm-parameter name on a
+// multi-parameter struct-field function value trips a parser check
+// ("only the first realm type argument of a crossing function may have name
+// `cur`"). Naming it `rlm` keeps the lowering identical without the syntax
+// constraint.
+type ParameterHandlerOptions struct {
+	pkgPath         string                            // Package path of the target contract
+	function        string                            // Function name to be called
+	paramCount      int                               // Expected number of parameters
+	handlerFunc     func(_ int, rlm realm, _ []string) error // Function that executes the parameter change
+	paramValidators []paramValidator                  // Optional per-parameter validators for proposal-time checks
+}
+
+// paramValidator validates a single parameter value and returns an error on failure.
+type paramValidator func(string) error
+
+// NewParameterHandlerOptions creates a new parameter handler with the specified configuration.
+//
+// Parameters:
+//   - pkgPath: package path of the target contract
+//   - function: function name to be called
+//   - paramCount: expected number of parameters
+//   - handlerFunc: function that executes the parameter change
+//   - paramValidators: optional validators for each parameter (must match paramCount if provided)
+//
+// Returns:
+//   - ParameterHandler: configured parameter handler interface
+func NewParameterHandlerOptions(
+	pkgPath,
+	function string,
+	paramCount int,
+	handlerFunc func(_ int, rlm realm, _ []string) error,
+	paramValidators ...paramValidator,
+) ParameterHandler {
+	if len(paramValidators) > 0 && len(paramValidators) != paramCount {
+		panic(ufmt.Sprintf(
+			"invalid validator count for %s:%s: expected %d, got %d",
+			pkgPath, function, paramCount, len(paramValidators),
+		))
+	}
+
+	return &ParameterHandlerOptions{
+		pkgPath:         pkgPath,
+		function:        function,
+		paramCount:      paramCount,
+		handlerFunc:     handlerFunc,
+		paramValidators: paramValidators,
+	}
+}
+
+// HandlerKey generates a unique key for this handler based on package path and function name.
+//
+// Returns:
+//   - string: unique identifier for the handler
+func (h *ParameterHandlerOptions) HandlerKey() string {
+	return makeHandlerKey(h.pkgPath, h.function)
+}
+
+// Execute validates parameter count and executes the handler function.
+// This method ensures the correct number of parameters are provided before execution.
+//
+// Parameters:
+//   - cur: governance proxy realm threaded in by the caller; forwarded to the
+//     wrapped closure so its cross-realm calls run under the proxy.
+//   - params: slice of string parameters to pass to the handler
+//
+// Returns:
+//   - error: execution error if parameter count mismatch or handler execution fails
+func (h *ParameterHandlerOptions) Execute(_ int, rlm realm, params []string) error {
+	// Validate parameter count matches expected count
+	if len(params) != h.paramCount {
+		return ufmt.Errorf("expected %d parameters, got %d", h.paramCount, len(params))
+	}
+	return h.handlerFunc(0, rlm, params)
+}
+
+// ValidateParams runs parameter count and per-parameter validation without executing the handler.
+func (h *ParameterHandlerOptions) ValidateParams(params []string) error {
+	if len(params) != h.paramCount {
+		return ufmt.Errorf(
+			"expected %d parameters for %s, got %d",
+			h.paramCount, h.HandlerKey(), len(params),
+		)
+	}
+
+	if len(h.paramValidators) == 0 {
+		return nil
+	}
+
+	if len(h.paramValidators) != h.paramCount {
+		return ufmt.Errorf(
+			"validator count mismatch for %s: expected %d validator(s), got %d",
+			h.HandlerKey(), h.paramCount, len(h.paramValidators),
+		)
+	}
+
+	for i, validator := range h.paramValidators {
+		if validator == nil {
+			continue
+		}
+
+		if err := validator(params[i]); err != nil {
+			return ufmt.Errorf("param[%d]: %v", i, err)
+		}
+	}
+
+	return nil
+}
+
+// ParameterRegistry manages the collection of parameter handlers for governance execution.
+// This registry allows proposals to execute parameter changes across different system contracts.
+type ParameterRegistry struct {
+	handlers map[string]ParameterHandlerOptions // Map storing handler configurations keyed by package:function
+}
+
+// register adds a new parameter handler to the registry.
+// Each handler is identified by a unique combination of package path and function name.
+//
+// Parameters:
+//   - handler: parameter handler configuration to register
+func (r *ParameterRegistry) Register(handler ParameterHandlerOptions) {
+	r.handlers[handler.HandlerKey()] = handler
+}
+
+// handler retrieves a parameter handler by package path and function name.
+// This method is used during proposal execution to find the appropriate handler.
+//
+// Parameters:
+//   - pkgPath: package path of the target contract
+//   - function: function name to be called
+//
+// Returns:
+//   - ParameterHandler: the matching parameter handler
+//   - error: error if handler not found or casting fails
+func (r *ParameterRegistry) Handler(key string) (ParameterHandler, error) {
+	// Retrieve handler from registry
+	handler, exists := r.handlers[key]
+	if !exists {
+		return nil, ufmt.Errorf("handler not found for %s", key)
+	}
+
+	return &handler, nil
+}
+
+// NewParameterRegistry creates a new empty parameter registry.
+//
+// Returns:
+//   - *ParameterRegistry: new registry instance
+func NewParameterRegistry() *ParameterRegistry {
+	return &ParameterRegistry{handlers: make(map[string]ParameterHandlerOptions)}
+}
+
+// makeHandlerKey creates a unique identifier for a handler based on package path and function.
+//
+// Parameters:
+//   - pkgPath: package path of the target contract
+//   - function: function name to be called
+//
+// Returns:
+//   - string: unique key in format "pkgPath:function"
+func makeHandlerKey(pkgPath, function string) string {
+	return pkgPath + ":" + function
+}
+
+// createParameterHandlers initializes and configures all supported parameter handlers.
+// This function defines all the parameter changes that can be executed through governance proposals.
+// It covers configuration changes for various system components including pools, staking, fees, etc.
+//
+// Returns:
+//   - *ParameterRegistry: fully configured registry with all supported handlers
+func CreateParameterHandlers() *ParameterRegistry {
+	registry := NewParameterRegistry()
+
+	// Define all handler configurations for different system components.
+	//
+	// Each closure receives `(_ int, rlm realm, params []string)` and threads
+	// `rlm` into the targeted /r/ realm call. The closure is invoked from
+	// ParameterHandlerOptions.Execute which forwards the governance proxy's
+	// realm value, so cross-realm calls land on the targeted realm with the
+	// governance proxy as the immediate caller.
+	handlers := []*ParameterHandlerOptions{
+		// Community pool token transfers
+		{
+			pkgPath:    COMMUNITY_POOL_PATH,
+			function:   "TransferToken",
+			paramCount: 3,
+			paramValidators: []paramValidator{
+				stringValidator,            // pkgPath
+				addressValidator,           // to
+				numberValidator(kindInt64), // amount
+			},
+			handlerFunc: func(_ int, rlm realm, params []string) error {
+				// Transfer tokens from community pool to specified address
+				cp.TransferToken(
+					cross(rlm),
+					params[0],          // pkgPath
+					address(params[1]), // to
+					parseNumber(params[2], kindInt64).(int64), // amount
+				)
+
+				return nil
+			},
+		},
+		// Emission distribution configuration
+		{
+			pkgPath:    EMISSION_PATH,
+			function:   "SetDistributionStartTime",
+			paramCount: 1,
+			paramValidators: []paramValidator{
+				numberValidator(kindInt64), // start time
+			},
+			handlerFunc: func(_ int, rlm realm, params []string) error {
+				// Set distribution start time
+				en.SetDistributionStartTime(cross(rlm), parseInt64(params[0]))
+
+				return nil
+			},
+		},
+		{
+			pkgPath:    EMISSION_PATH,
+			function:   "ChangeDistributionPct",
+			paramCount: 4,
+			paramValidators: []paramValidator{
+				numberValidator(kindInt64), // liquidityStakerPct
+				numberValidator(kindInt64), // devOpsPct
+				numberValidator(kindInt64), // communityPoolPct
+				numberValidator(kindInt64), // govStakerPct
+			},
+			handlerFunc: func(_ int, rlm realm, params []string) error {
+				liquidityStakerPct := parseNumber(params[0], kindInt64).(int64)
+				devOpsPct := parseNumber(params[1], kindInt64).(int64)
+				communityPoolPct := parseNumber(params[2], kindInt64).(int64)
+				govStakerPct := parseNumber(params[3], kindInt64).(int64)
+
+				en.ChangeDistributionPct(
+					cross(rlm),
+					liquidityStakerPct,
+					devOpsPct,
+					communityPoolPct,
+					govStakerPct,
+				)
+
+				return nil
+			},
+		},
+		// Governance configuration changes
+		{
+			pkgPath:    GOV_GOVERNANCE_PATH,
+			function:   "Reconfigure",
+			paramCount: 7,
+			paramValidators: []paramValidator{
+				numberValidator(kindInt64), // votingStartDelay
+				numberValidator(kindInt64), // votingPeriod
+				numberValidator(kindInt64), // votingWeightSmoothingDuration
+				numberValidator(kindInt64), // quorum
+				numberValidator(kindInt64), // proposalCreationThreshold
+				numberValidator(kindInt64), // executionDelay
+				numberValidator(kindInt64), // executionWindow
+			},
+			handlerFunc: func(_ int, rlm realm, params []string) error {
+				// Parse governance configuration parameters
+				votingStartDelay := parseInt64(params[0])
+				votingPeriod := parseInt64(params[1])
+				votingWeightSmoothingDuration := parseInt64(params[2])
+				quorum := parseInt64(params[3])
+				proposalCreationThreshold := parseInt64(params[4])
+				executionDelay := parseInt64(params[5])
+				executionWindow := parseInt64(params[6])
+
+				// Reconfigure governance parameters through governance process
+				governance.Reconfigure(
+					cross(rlm),
+					votingStartDelay,
+					votingPeriod,
+					votingWeightSmoothingDuration,
+					quorum,
+					proposalCreationThreshold,
+					executionDelay,
+					executionWindow,
+				)
+
+				return nil
+			},
+		},
+
+		// Pool protocol fee configuration
+		{
+			pkgPath:    POOL_PATH,
+			function:   "CollectProtocol",
+			paramCount: 6,
+			paramValidators: []paramValidator{
+				stringValidator,  // token0Path
+				stringValidator,  // token1Path
+				uint64Validator,  // fee
+				addressValidator, // recipient
+				nonNegativeInt64Validator("amount0Requested"),
+				nonNegativeInt64Validator("amount1Requested"),
+			},
+			handlerFunc: func(_ int, rlm realm, params []string) error {
+				pl.CollectProtocol(
+					cross(rlm),
+					params[0],                      // token0Path
+					params[1],                      // token1Path
+					uint32(parseUint64(params[2])), // fee
+					address(params[3]),             // recipient
+					params[4],                      // amount0Requested
+					params[5],                      // amount1Requested
+				)
+
+				return nil
+			},
+		},
+		{
+			pkgPath:    POOL_PATH,
+			function:   "SetFeeProtocol",
+			paramCount: 2,
+			paramValidators: []paramValidator{
+				uint8RangeValidator("feeProtocol0"),
+				uint8RangeValidator("feeProtocol1"),
+			},
+			handlerFunc: func(_ int, rlm realm, params []string) error {
+				// Parse and validate fee protocol values
+				feeProtocol0 := parseInt64(params[0])
+				feeProtocol1 := parseInt64(params[1])
+
+				// Validate fee protocol values are within uint8 range
+				if feeProtocol0 > 255 {
+					panic(ufmt.Sprintf("feeProtocol0 out of range: %d", feeProtocol0))
+				}
+
+				if feeProtocol1 > 255 {
+					panic(ufmt.Sprintf("feeProtocol1 out of range: %d", feeProtocol1))
+				}
+
+				// Set protocol fee percentages
+				pl.SetFeeProtocol(
+					cross(rlm),
+					uint8(feeProtocol0), // feeProtocol0
+					uint8(feeProtocol1), // feeProtocol1
+				)
+
+				return nil
+			},
+		},
+		// Pool creation fee
+		{
+			pkgPath:    POOL_PATH,
+			function:   "SetPoolCreationFee",
+			paramCount: 1,
+			paramValidators: []paramValidator{
+				numberValidator(kindInt64), // fee
+			},
+			handlerFunc: func(_ int, rlm realm, params []string) error {
+				// Set fee required to create new pools
+				pl.SetPoolCreationFee(cross(rlm), parseInt64(params[0])) // fee
+				return nil
+			},
+		},
+		// Pool withdrawal fee
+		{
+			pkgPath:    POOL_PATH,
+			function:   "SetWithdrawalFee",
+			paramCount: 1,
+			paramValidators: []paramValidator{
+				uint64Validator, // fee
+			},
+			handlerFunc: func(_ int, rlm realm, params []string) error {
+				// Set fee for withdrawing from pools
+				pl.SetWithdrawalFee(cross(rlm), parseUint64(params[0])) // fee
+				return nil
+			},
+		},
+
+		// Protocol fee distribution
+		{
+			pkgPath:    PROTOCOL_FEE_PATH,
+			function:   "SetDevOpsPct",
+			paramCount: 1,
+			paramValidators: []paramValidator{
+				numberValidator(kindInt64), // pct
+			},
+			handlerFunc: func(_ int, rlm realm, params []string) error {
+				// Set percentage of protocol fees going to development operations
+				pf.SetDevOpsPct(cross(rlm), parseInt64(params[0])) // pct
+				return nil
+			},
+		},
+
+		// Router swap fee
+		{
+			pkgPath:    ROUTER_PATH,
+			function:   "SetSwapFee",
+			paramCount: 1,
+			paramValidators: []paramValidator{
+				uint64Validator, // fee
+			},
+			handlerFunc: func(_ int, rlm realm, params []string) error {
+				// Set fee charged for token swaps
+				rr.SetSwapFee(cross(rlm), parseUint64(params[0])) // fee
+				return nil
+			},
+		},
+
+		// Staker configuration handlers
+		{
+			pkgPath:    STAKER_PATH,
+			function:   "SetDepositGnsAmount",
+			paramCount: 1,
+			paramValidators: []paramValidator{
+				numberValidator(kindInt64), // amount
+			},
+			handlerFunc: func(_ int, rlm realm, params []string) error {
+				// Set minimum GNS amount required for staking deposits
+				sr.SetDepositGnsAmount(cross(rlm), parseInt64(params[0])) // amount
+				return nil
+			},
+		},
+		{
+			pkgPath:    STAKER_PATH,
+			function:   "SetMinimumRewardAmount",
+			paramCount: 1,
+			paramValidators: []paramValidator{
+				numberValidator(kindInt64), // amount
+			},
+			handlerFunc: func(_ int, rlm realm, params []string) error {
+				// Set minimum GNS amount required for staking deposits
+				sr.SetMinimumRewardAmount(cross(rlm), parseInt64(params[0])) // amount
+				return nil
+			},
+		},
+		{
+			pkgPath:    STAKER_PATH,
+			function:   "SetTokenMinimumRewardAmount",
+			paramCount: 1,
+			paramValidators: []paramValidator{
+				stringValidator, // tokenPath:amount
+			},
+			handlerFunc: func(_ int, rlm realm, params []string) error {
+				// Set minimum GNS amount required for staking deposits
+				// params[0] is a string in the format "tokenPath:amount"
+				sr.SetTokenMinimumRewardAmount(cross(rlm), params[0]) // amount
+				return nil
+			},
+		},
+		{
+			pkgPath:    STAKER_PATH,
+			function:   "SetPoolTier",
+			paramCount: 2,
+			paramValidators: []paramValidator{
+				stringValidator, // pool
+				uint64Validator, // tier
+			},
+			handlerFunc: func(_ int, rlm realm, params []string) error {
+				// Assign tier level to a specific pool
+				sr.SetPoolTier(
+					cross(rlm),
+					params[0],              // pool
+					parseUint64(params[1]), // tier
+				)
+				return nil
+			},
+		},
+		{
+			pkgPath:    STAKER_PATH,
+			function:   "ChangePoolTier",
+			paramCount: 2,
+			paramValidators: []paramValidator{
+				stringValidator, // pool
+				uint64Validator, // tier
+			},
+			handlerFunc: func(_ int, rlm realm, params []string) error {
+				// Change existing pool's tier level
+				sr.ChangePoolTier(
+					cross(rlm),
+					params[0],              // pool
+					parseUint64(params[1]), // tier
+				)
+				return nil
+			},
+		},
+		{
+			pkgPath:    STAKER_PATH,
+			function:   "RemovePoolTier",
+			paramCount: 1,
+			paramValidators: []paramValidator{
+				stringValidator, // pool
+			},
+			handlerFunc: func(_ int, rlm realm, params []string) error {
+				// Remove tier assignment from a pool
+				sr.RemovePoolTier(cross(rlm), params[0]) // pool
+				return nil
+			},
+		},
+		{
+			pkgPath:    STAKER_PATH,
+			function:   "SetUnStakingFee",
+			paramCount: 1,
+			paramValidators: []paramValidator{
+				numberValidator(kindUint64), // fee
+			},
+			handlerFunc: func(_ int, rlm realm, params []string) error {
+				// Set fee charged for unstaking operations
+				fee := parseUint64(params[0])
+				sr.SetUnStakingFee(cross(rlm), fee)
+				return nil
+			},
+		},
+		{
+			pkgPath:    STAKER_PATH,
+			function:   "SetWarmUp",
+			paramCount: 2,
+			paramValidators: []paramValidator{
+				numberValidator(kindInt64), // percent
+				numberValidator(kindInt64), // block
+			},
+			handlerFunc: func(_ int, rlm realm, params []string) error {
+				// Set warm-up period configuration for staking
+				percent := parseInt64(params[0])
+				block := parseNumber(params[1], kindInt64).(int64)
+				sr.SetWarmUp(cross(rlm), percent, block)
+
+				return nil
+			},
+		},
+
+		// System halt controls
+		{
+			pkgPath:    HALT_PATH,
+			function:   "SetHaltLevel",
+			paramCount: 1,
+			paramValidators: []paramValidator{
+				stringValidator, // halt level string
+			},
+			handlerFunc: func(_ int, rlm realm, params []string) error {
+				// Set system-wide halt status
+				halt.SetHaltLevel(cross(rlm), halt.HaltLevel(params[0])) // true = halt, false = no halt
+
+				return nil
+			},
+		},
+		{
+			pkgPath:    HALT_PATH,
+			function:   "SetOperationStatus",
+			paramCount: 2,
+			paramValidators: []paramValidator{
+				stringValidator, // opType
+				boolValidator,   // allowed
+			},
+			handlerFunc: func(_ int, rlm realm, params []string) error {
+				// Enable or disable specific operation types
+				opType := halt.OpType(params[0])
+				allowed := parseBool(params[1])
+
+				halt.SetOperationStatus(cross(rlm), opType, allowed)
+
+				return nil
+			},
+		},
+
+		// RBAC configuration
+		{
+			pkgPath:    RBAC_PATH,
+			function:   "RegisterRole",
+			paramCount: 2,
+			paramValidators: []paramValidator{
+				roleNameValidator,
+				addressValidator, // roleAddress
+			},
+			handlerFunc: func(_ int, rlm realm, params []string) error {
+				roleName := params[0]
+				roleAddress := address(params[1])
+
+				// Register a new role
+				rbac.RegisterRole(cross(rlm), roleName, roleAddress)
+
+				return nil
+			},
+		},
+		{
+			pkgPath:    RBAC_PATH,
+			function:   "UpdateRoleAddress",
+			paramCount: 2,
+			paramValidators: []paramValidator{
+				updatableRoleNameValidator,
+				addressValidator, // roleAddress
+			},
+			handlerFunc: func(_ int, rlm realm, params []string) error {
+				roleName := params[0]
+				roleAddress := address(params[1])
+
+				// Update role address
+				rbac.UpdateRoleAddress(cross(rlm), roleName, roleAddress)
+
+				return nil
+			},
+		},
+		{
+			pkgPath:    RBAC_PATH,
+			function:   "RemoveRole",
+			paramCount: 1,
+			paramValidators: []paramValidator{
+				removableRoleNameValidator,
+			},
+			handlerFunc: func(_ int, rlm realm, params []string) error {
+				roleName := params[0]
+
+				// Remove role
+				rbac.RemoveRole(cross(rlm), roleName)
+
+				return nil
+			},
+		},
+
+		// Protocol fee - SetGovStakerPct
+		{
+			pkgPath:    PROTOCOL_FEE_PATH,
+			function:   "SetGovStakerPct",
+			paramCount: 1,
+			paramValidators: []paramValidator{
+				numberValidator(kindInt64), // pct
+			},
+			handlerFunc: func(_ int, rlm realm, params []string) error {
+				// Set percentage of protocol fees going to governance stakers
+				pf.SetGovStakerPct(cross(rlm), parseInt64(params[0])) // pct
+				return nil
+			},
+		},
+
+		// Staker - Token list management
+		{
+			pkgPath:    STAKER_PATH,
+			function:   "AddToken",
+			paramCount: 1,
+			paramValidators: []paramValidator{
+				stringValidator, // tokenPath
+			},
+			handlerFunc: func(_ int, rlm realm, params []string) error {
+				// Add token to allowed token list for external incentives
+				sr.AddToken(cross(rlm), params[0]) // tokenPath
+				return nil
+			},
+		},
+		{
+			pkgPath:    STAKER_PATH,
+			function:   "RemoveToken",
+			paramCount: 1,
+			paramValidators: []paramValidator{
+				stringValidator, // tokenPath
+			},
+			handlerFunc: func(_ int, rlm realm, params []string) error {
+				// Remove token from allowed token list
+				sr.RemoveToken(cross(rlm), params[0]) // tokenPath
+				return nil
+			},
+		},
+
+		// Launchpad - Project management
+		{
+			pkgPath:    LAUNCHPAD_PATH,
+			function:   "CreateProject",
+			paramCount: 10,
+			paramValidators: []paramValidator{
+				stringValidator,            // name
+				stringValidator,            // tokenPath
+				addressValidator,           // recipient
+				numberValidator(kindInt64), // depositAmount
+				stringValidator,            // conditionTokens
+				stringValidator,            // conditionAmounts
+				numberValidator(kindInt64), // tier30Ratio
+				numberValidator(kindInt64), // tier90Ratio
+				numberValidator(kindInt64), // tier180Ratio
+				numberValidator(kindInt64), // startTime
+			},
+			handlerFunc: func(_ int, rlm realm, params []string) error {
+				// Create a new launchpad project
+				lp.CreateProject(
+					cross(rlm),
+					params[0],          // name
+					params[1],          // tokenPath
+					address(params[2]), // recipient
+					parseNumber(params[3], kindInt64).(int64), // depositAmount
+					params[4], // conditionTokens
+					params[5], // conditionAmounts
+					parseNumber(params[6], kindInt64).(int64), // tier30Ratio
+					parseNumber(params[7], kindInt64).(int64), // tier90Ratio
+					parseNumber(params[8], kindInt64).(int64), // tier180Ratio
+					parseNumber(params[9], kindInt64).(int64), // startTime
+				)
+				return nil
+			},
+		},
+		// Upgrade handlers for various domains
+		{
+			pkgPath:    POOL_PATH,
+			function:   "UpgradeImpl",
+			paramCount: 1,
+			paramValidators: []paramValidator{
+				stringValidator, // packagePath
+			},
+			handlerFunc: func(_ int, rlm realm, params []string) error {
+				// Upgrade pool implementation
+				pl.UpgradeImpl(cross(rlm), params[0]) // packagePath
+				return nil
+			},
+		},
+		{
+			pkgPath:    POSITION_PATH,
+			function:   "UpgradeImpl",
+			paramCount: 1,
+			paramValidators: []paramValidator{
+				stringValidator, // packagePath
+			},
+			handlerFunc: func(_ int, rlm realm, params []string) error {
+				// Upgrade position implementation
+				pos.UpgradeImpl(cross(rlm), params[0]) // packagePath
+				return nil
+			},
+		},
+		{
+			pkgPath:    STAKER_PATH,
+			function:   "UpgradeImpl",
+			paramCount: 1,
+			paramValidators: []paramValidator{
+				stringValidator, // packagePath
+			},
+			handlerFunc: func(_ int, rlm realm, params []string) error {
+				// Upgrade staker implementation
+				sr.UpgradeImpl(cross(rlm), params[0]) // packagePath
+				return nil
+			},
+		},
+		{
+			pkgPath:    LAUNCHPAD_PATH,
+			function:   "UpgradeImpl",
+			paramCount: 1,
+			paramValidators: []paramValidator{
+				stringValidator, // packagePath
+			},
+			handlerFunc: func(_ int, rlm realm, params []string) error {
+				// Upgrade launchpad implementation
+				lp.UpgradeImpl(cross(rlm), params[0]) // packagePath
+				return nil
+			},
+		},
+		{
+			pkgPath:    GOV_GOVERNANCE_PATH,
+			function:   "UpgradeImpl",
+			paramCount: 1,
+			paramValidators: []paramValidator{
+				stringValidator, // targetPackagePath
+			},
+			handlerFunc: func(_ int, rlm realm, params []string) error {
+				// Upgrade governance implementation
+				governance.UpgradeImpl(cross(rlm), params[0]) // packagePath
+				return nil
+			},
+		},
+		{
+			pkgPath:    GOV_STAKER_PATH,
+			function:   "UpgradeImpl",
+			paramCount: 1,
+			paramValidators: []paramValidator{
+				stringValidator, // packagePath
+			},
+			handlerFunc: func(_ int, rlm realm, params []string) error {
+				// Upgrade gov staker implementation
+				gs.UpgradeImpl(cross(rlm), params[0]) // packagePath
+				return nil
+			},
+		},
+		{
+			pkgPath:    ROUTER_PATH,
+			function:   "UpgradeImpl",
+			paramCount: 1,
+			paramValidators: []paramValidator{
+				stringValidator, // packagePath
+			},
+			handlerFunc: func(_ int, rlm realm, params []string) error {
+				// Upgrade router implementation
+				rr.UpgradeImpl(cross(rlm), params[0]) // packagePath
+				return nil
+			},
+		},
+		{
+			pkgPath:    PROTOCOL_FEE_PATH,
+			function:   "UpgradeImpl",
+			paramCount: 1,
+			paramValidators: []paramValidator{
+				stringValidator, // packagePath
+			},
+			handlerFunc: func(_ int, rlm realm, params []string) error {
+				// Upgrade protocol fee implementation
+				pf.UpgradeImpl(cross(rlm), params[0]) // packagePath
+				return nil
+			},
+		},
+	}
+
+	// Register all configured handlers in the registry
+	registerHandlers(registry, handlers)
+
+	return registry
+}
+
+// registerHandlers batch registers all configured handlers into the registry.
+// This helper function processes the handler configuration array and adds each handler to the registry.
+//
+// Parameters:
+//   - registry: the parameter registry to add handlers to
+//   - handlerOptions: slice of handler configurations to register
+func registerHandlers(registry *ParameterRegistry, handlerOptions []*ParameterHandlerOptions) {
+	for _, handlerOption := range handlerOptions {
+		registry.Register(*handlerOption)
+	}
+}
+
+// runValidator executes a validator function and converts panics to errors.
+func runValidator(fn func()) (err error) {
+	defer func() {
+		if r := recover(); r != nil {
+			if e, ok := r.(error); ok {
+				err = e
+				return
+			}
+			err = ufmt.Errorf("%v", r)
+		}
+	}()
+
+	fn()
+	return nil
+}
+
+// Basic reusable validators for proposal-time type checking.
+var (
+	stringValidator = func(s string) error {
+		return nil
+	}
+	boolValidator = func(s string) error {
+		return runValidator(func() {
+			parseBool(s)
+		})
+	}
+	uint64Validator = func(s string) error {
+		return runValidator(func() {
+			parseUint64(s)
+		})
+	}
+	addressValidator = func(s string) error {
+		return runValidator(func() {
+			addr := address(s)
+			if !addr.IsValid() {
+				panic(ufmt.Sprintf("invalid address: %s", addr))
+			}
+		})
+	}
+)
+
+func numberValidator(kind numberKind) paramValidator {
+	return func(s string) error {
+		return runValidator(func() {
+			parseNumber(s, kind)
+		})
+	}
+}
+
+func uint8RangeValidator(name string) paramValidator {
+	return func(s string) error {
+		return runValidator(func() {
+			value := parseInt64(s)
+			if value < 0 || value > 255 {
+				panic(ufmt.Sprintf("%s out of range: %d", name, value))
+			}
+		})
+	}
+}
+
+func roleNameValidator(s string) error {
+	return runValidator(func() {
+		roleName := strings.TrimSpace(s)
+		if roleName == "" {
+			panic(ufmt.Sprintf("role name is empty: %q", s))
+		}
+	})
+}
+
+func updatableRoleNameValidator(s string) error {
+	return runValidator(func() {
+		roleName := strings.TrimSpace(s)
+		if err := roleNameValidator(roleName); err != nil {
+			panic(err)
+		}
+
+		if roleName == prbac.ROLE_ADMIN.String() {
+			panic(ufmt.Sprintf("admin role cannot be updated: %s", roleName))
+		}
+	})
+}
+
+func removableRoleNameValidator(s string) error {
+	return runValidator(func() {
+		roleName := strings.TrimSpace(s)
+		if err := roleNameValidator(roleName); err != nil {
+			panic(err)
+		}
+
+		if prbac.IsSystemRole(roleName) {
+			panic(ufmt.Sprintf("system role cannot be removed: %s", roleName))
+		}
+	})
+}
+
+func nonNegativeInt64Validator(name string) paramValidator {
+	return func(s string) error {
+		return runValidator(func() {
+			value := parseInt64(s)
+			if value < 0 {
+				panic(ufmt.Sprintf("%s must be non-negative: %d", name, value))
+			}
+		})
+	}
+}
+
+func splitExecutionsRaw(executions string) []string {
+	if executions == "" {
+		return []string{}
+	}
+
+	return strings.Split(executions, messageSeparator)
+}
+
+func parseExecutionMessage(msg string) (pkgPath string, function string, params []string, partCount int) {
+	parts := strings.Split(msg, parameterSeparator)
+	partCount = len(parts)
+	if partCount != 3 {
+		return "", "", nil, partCount
+	}
+
+	pkgPath = parts[0]
+	function = parts[1]
+	if parts[2] == "" {
+		return pkgPath, function, []string{}, partCount
+	}
+
+	return pkgPath, function, strings.Split(parts[2], ","), partCount
+}
+
+// validateExecutions validates that all executions in a parameter change proposal
+// correspond to registered handlers in the global parameter registry.
+// This function performs comprehensive validation including:
+// - Basic format validation (count, structure)
+// - Handler existence verification in the registry
+// - Parameter count validation against handler expectations
+//
+// Parameters:
+//   - numToExecute: number of parameter changes to execute
+//   - msgs: pre-split slice of execution messages, where each message
+//     is formatted as <pkgPath>*EXE*<function>*EXE*<params>
+//
+// Returns:
+//   - error: validation error if any execution is invalid
+func validateExecutions(numToExecute int64, msgs []string) error {
+	// Validate execution count is positive
+	if numToExecute <= 0 {
+		return makeErrorWithDetails(
+			errInvalidInput,
+			"numToExecute is less than or equal to 0",
+		)
+	}
+
+	// Check if executions are empty
+	if len(msgs) == 0 {
+		return makeErrorWithDetails(
+			errInvalidInput,
+			"executions is empty",
+		)
+	}
+
+	// Validate execution count doesn't exceed maximum
+	if numToExecute > maxNumberOfExecution {
+		return makeErrorWithDetails(
+			errInvalidInput,
+			ufmt.Sprintf("numToExecute is greater than %d", maxNumberOfExecution),
+		)
+	}
+
+	msgCount := len(msgs)
+	// Validate execution count matches message count
+	if msgCount != int(numToExecute) {
+		return makeErrorWithDetails(
+			errInvalidInput,
+			ufmt.Sprintf("executions count (%d) does not match numToExecute (%d)", len(msgs), numToExecute),
+		)
+	}
+
+	// Parse and validate each execution message
+	for i, execution := range msgs {
+		pkgPath, function, params, partCount := parseExecutionMessage(execution)
+		if partCount != 3 {
+			// Provide more helpful error message based on what's wrong
+			detail := ufmt.Sprintf("execution[%d]: expected 3 parts (pkgPath, function, params), got %d", i, partCount)
+			return makeErrorWithDetails(
+				errInvalidMessageFormat,
+				detail,
+			)
+		}
+
+		// Validate package path and function are not empty
+		if pkgPath == "" {
+			return makeErrorWithDetails(
+				errInvalidInput,
+				ufmt.Sprintf("execution[%d]: package path is empty", i),
+			)
+		}
+
+		if function == "" {
+			return makeErrorWithDetails(
+				errInvalidInput,
+				ufmt.Sprintf("execution[%d]: function name is empty", i),
+			)
+		}
+
+		// Check if handler exists in registry
+		key := makeHandlerKey(pkgPath, function)
+		handler, err := globalParameterRegistry.Handler(key)
+		if err != nil {
+			return makeErrorWithDetails(
+				errInvalidExecution,
+				ufmt.Sprintf("execution[%d]: %s (key: %s)", i, err.Error(), key),
+			)
+		}
+
+		// Get expected parameter count from handler
+		handlerOpts, ok := handler.(*ParameterHandlerOptions)
+		if !ok {
+			return makeErrorWithDetails(
+				errInvalidExecution,
+				ufmt.Sprintf("execution[%d]: failed to get handler options", i),
+			)
+		}
+
+		// Validate parameter types/format ahead of proposal creation
+		if err := handlerOpts.ValidateParams(params); err != nil {
+			return makeErrorWithDetails(
+				errInvalidInput,
+				ufmt.Sprintf("execution[%d]: %v", i, err),
+			)
+		}
+	}
+
+	return nil
+}

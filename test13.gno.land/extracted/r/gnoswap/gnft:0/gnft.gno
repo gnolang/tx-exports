@@ -1,0 +1,266 @@
+package gnft
+
+import (
+	"chain"
+
+	"gno.land/p/gnoswap/deps/grc721"
+	ufmt "gno.land/p/nt/ufmt/v0"
+	"gno.land/r/gnoswap/access"
+
+	prabc "gno.land/p/gnoswap/rbac"
+	_ "gno.land/r/gnoswap/rbac"
+)
+
+var nft *grc721.BasicNFT
+
+func init(cur realm) {
+	nft = grc721.NewBasicNFT(0, cur, "GNOSWAP NFT", "GNFT")
+}
+
+// Name returns the NFT collection name.
+func Name() string {
+	return nft.Name()
+}
+
+// Symbol returns the NFT symbol.
+func Symbol() string {
+	return nft.Symbol()
+}
+
+// TotalSupply returns the total number of NFTs minted.
+func TotalSupply() int64 {
+	return nft.TokenCount()
+}
+
+// TokenURI returns the metadata URI for the specified token ID.
+// If stored value is in parameter format (x1,y1,x2,y2,color1,color2),
+// it converts to full base64-encoded SVG image URI on read.
+func TokenURI(tid grc721.TokenID) (string, error) {
+	stored, err := nft.TokenURI(tid)
+	if err != nil {
+		return "", err
+	}
+
+	params, err := parseImageParams(stored)
+	if err == nil {
+		return params.generateImageURI(), nil
+	}
+
+	return stored, nil
+}
+
+// BalanceOf returns the number of NFTs owned by the specified address.
+func BalanceOf(owner address) (int64, error) {
+	assertIsValidAddress(owner)
+	return nft.BalanceOf(owner)
+}
+
+// OwnerOf returns the owner address for the specified token ID.
+func OwnerOf(tid grc721.TokenID) (address, error) {
+	return nft.OwnerOf(tid)
+}
+
+// MustOwnerOf returns the owner address for the specified token ID.
+// It panics if the token ID is invalid.
+func MustOwnerOf(tid grc721.TokenID) address {
+	ownerAddr, err := nft.OwnerOf(tid)
+	checkErr(err)
+	return ownerAddr
+}
+
+// SetTokenURI sets the metadata URI for the specified token.
+//
+// Parameters:
+//   - tid: token ID
+//   - tURI: token URI
+//
+// Only callable by position contract.
+func SetTokenURI(cur realm, tid grc721.TokenID, tURI grc721.TokenURI) (bool, error) {
+	caller := cur.Previous().Address()
+	access.AssertIsPosition(caller)
+
+	assertIsValidTokenURI(tid)
+
+	checkErr(setTokenURI(0, cur, tid, tURI))
+
+	return true, nil
+}
+
+// SafeTransferFrom transfers token ownership with receiver validation.
+//
+// Parameters:
+//   - from: current owner address
+//   - to: recipient address
+//   - tid: token ID to transfer
+//
+// Returns error if transfer fails.
+//
+// Permission model:
+//   - Tokens held by the staker contract (i.e. currently staked) can only be
+//     moved by the staker itself; the underlying staked LP position is
+//     non-transferable.
+//   - Otherwise, ownership and approval are enforced by the GRC721 layer
+//     (owner / approved-for-token / approved-for-all).
+func SafeTransferFrom(cur realm, from, to address, tid grc721.TokenID) error {
+	assertFromIsValidAddress(from)
+	assertToIsValidAddress(to)
+	caller := cur.Previous().Address()
+	assertIsAllowedTransfer(caller, tid)
+
+	err := nft.SafeTransferFrom(caller, from, to, tid)
+	checkTransferErr(err, caller, from, to, tid)
+	return nil
+}
+
+// TransferFrom transfers a token from one address to another.
+//
+// Parameters:
+//   - from: current owner address
+//   - to: recipient address
+//   - tid: token ID
+//
+// Returns error if transfer fails.
+//
+// Permission model:
+//   - Tokens held by the staker contract (i.e. currently staked) can only be
+//     moved by the staker itself; the underlying staked LP position is
+//     non-transferable.
+//   - Otherwise, ownership and approval are enforced by the GRC721 layer
+//     (owner / approved-for-token / approved-for-all).
+func TransferFrom(cur realm, from, to address, tid grc721.TokenID) error {
+	assertFromIsValidAddress(from)
+	assertToIsValidAddress(to)
+	caller := cur.Previous().Address()
+	assertIsAllowedTransfer(caller, tid)
+
+	err := nft.TransferFrom(caller, from, to, tid)
+	checkTransferErr(err, caller, from, to, tid)
+	return nil
+}
+
+// Approve grants permission to transfer a specific token ID to another address.
+//
+// Parameters:
+//   - approved: address to approve
+//   - tid: token ID to approve for transfer
+//
+// Returns error if approval fails.
+func Approve(cur realm, approved address, tid grc721.TokenID) error {
+	assertIsValidAddress(approved)
+
+	caller := cur.Previous().Address()
+	err := nft.Approve(caller, approved, tid)
+	checkApproveErr(err, caller, approved, tid)
+	return nil
+}
+
+// SetApprovalForAll enables/disables operator approval for all tokens.
+//
+// Parameters:
+//   - operator: address to set approval for
+//   - approved: true to approve, false to revoke
+//
+// Returns error if operation fails.
+func SetApprovalForAll(cur realm, operator address, approved bool) error {
+	assertIsValidAddress(operator)
+
+	checkErr(nft.SetApprovalForAll(cur.Previous().Address(), operator, approved))
+	return nil
+}
+
+// GetApproved returns approved address for token ID.
+//
+// Parameters:
+//   - tid: token ID to check
+//
+// Returns approved address and error if token doesn't exist.
+func GetApproved(tid grc721.TokenID) (address, error) {
+	return nft.GetApproved(tid)
+}
+
+// IsApprovedForAll checks if operator can manage all owner's tokens.
+//
+// Parameters:
+//   - owner: token owner address
+//   - operator: operator address to check
+//
+// Returns true if operator is approved for all owner's tokens.
+func IsApprovedForAll(owner, operator address) bool {
+	return nft.IsApprovedForAll(owner, operator)
+}
+
+// Mint creates new NFT and transfers to address.
+//
+// Parameters:
+//   - to: recipient address
+//   - tid: token ID
+//
+// Returns minted token ID.
+// Only callable by position contract.
+func Mint(cur realm, to address, tid grc721.TokenID) grc721.TokenID {
+	caller := cur.Previous().Address()
+	access.AssertIsPosition(caller)
+
+	positionAddr := access.MustGetAddress(prabc.ROLE_POSITION.String())
+	checkErr(nft.Mint(positionAddr, tid))
+
+	// Store only the gradient parameters instead of full base64 SVG to reduce storage costs.
+	// Parameters are converted to full SVG on read via TokenURI().
+	imageParams := genImageParamsString(generateRandInstance())
+	checkErr(setTokenURI(0, cur, tid, grc721.TokenURI(imageParams)))
+
+	checkErr(nft.TransferFrom(positionAddr, positionAddr, to, tid))
+
+	return tid
+}
+
+// Exists checks if token ID exists.
+func Exists(tid grc721.TokenID) bool {
+	_, err := nft.OwnerOf(tid)
+	return err == nil
+}
+
+// Burn removes a specific token ID.
+//
+// Parameters:
+//   - tid: token ID to burn
+//
+// Only callable by position.
+func Burn(cur realm, tid grc721.TokenID) {
+	caller := cur.Previous().Address()
+	access.AssertIsPosition(caller)
+
+	checkErr(nft.Burn(tid))
+}
+
+// Render returns the HTML representation of the NFT.
+func Render(path string) string {
+	if path == "" {
+		return nft.RenderHome()
+	}
+	return "404\n"
+}
+
+// setTokenURI sets the metadata URI for a specific token ID.
+func setTokenURI(_ int, rlm realm, tid grc721.TokenID, tURI grc721.TokenURI) error {
+	if !rlm.IsCurrent() {
+		return errSpoofedRealm
+	}
+
+	previousRealm := rlm.Previous()
+	previousAddr := previousRealm.Address()
+
+	_, err := nft.SetTokenURI(previousAddr, tid, tURI)
+	if err != nil {
+		return makeErrorWithDetails(err, ufmt.Sprintf("token id (%s)", tid))
+	}
+
+	chain.Emit(
+		"SetTokenURI",
+		"prevAddr", previousAddr.String(),
+		"prevRealm", previousRealm.PkgPath(),
+		"tokenId", string(tid),
+	)
+
+	return nil
+}

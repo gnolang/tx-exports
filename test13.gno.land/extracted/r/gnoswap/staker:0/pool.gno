@@ -1,0 +1,889 @@
+package staker
+
+import (
+	"errors"
+	"strconv"
+	"time"
+
+	i256 "gno.land/p/gnoswap/int256"
+	u256 "gno.land/p/gnoswap/uint256"
+	bptree "gno.land/p/nt/bptree/v0"
+	ufmt "gno.land/p/nt/ufmt/v0"
+)
+
+const AllTierCount = 4 // 0, 1, 2, 3
+
+// q128 is 2^128, used to scale rewardPerSecond so that sub-integer rates
+// (e.g. 10_000_000 / 3600 = 2777.77...) do not lose precision over the
+// lifetime of an incentive. Mirrors the q128 constant used by the v1 reward
+// calculator; kept package-local here because staker depends on neither.
+var q128 = u256.MustFromDecimal("340282366920938463463374607431768211456")
+
+// Pool is a struct for storing an incentivized pool information
+// Each pool stores Incentives and Ticks associated with it.
+//
+// Fields:
+// - poolPath: The path of the pool.
+//
+//   - currentStakedLiquidity:
+//     The current total staked liquidity of the in-range positions for the pool.
+//     Updated when tick cross happens or stake/unstake happens.
+//     Used to calculate the global reward ratio accumulation or
+//     decide whether to enter/exit unclaimable period.
+//
+//   - lastUnclaimableTime:
+//     The time at which the unclaimable period started.
+//     Set to 0 when the pool is not in an unclaimable period.
+//
+//   - unclaimableAcc:
+//     The accumulated undisributed unclaimable reward.
+//     Reset to 0 when processUnclaimableReward is called and sent to community pool.
+//
+//   - rewardCache:
+//     The cached per-second reward emitted for this pool.
+//     Stores new entry only when the reward is changed.
+//     PoolTier.cacheReward() updates this.
+//
+// - incentives: The external incentives associated with the pool.
+//
+// - ticks: The Ticks associated with the pool.
+//
+//   - globalRewardRatioAccumulation:
+//     Global ratio of Time / TotalStake accumulation(since the pool creation)
+//     Stores new entry only when tick cross or stake/unstake happens.
+//     It is used to calculate the reward for a staked position at certain time.
+//
+//   - historicalTick:
+//     The historical tick for the pool at a given time.
+//     It does not reflect the exact tick at the timestamp,
+//     but it provides correct ordering for the staked position's ticks.
+//     Therefore, you should not compare it for equality, only for ordering.
+//     Set when tick cross happens or a new position is created.
+type Pool struct {
+	poolPath string
+
+	stakedLiquidity *UintTree // uint64 timestamp -> *u256.Uint(Q128)
+
+	lastUnclaimableTime int64
+	unclaimableAcc      int64
+
+	rewardCache *UintTree // uint64 timestamp -> int64 gnsReward
+
+	incentives *Incentives
+
+	ticks Ticks // int32 tickId -> Tick tick
+
+	globalRewardRatioAccumulation *UintTree // uint64 timestamp -> *u256.Uint(Q128) rewardRatioAccumulation
+
+	historicalTick *UintTree // uint64 timestamp -> int32 tickId
+}
+
+// Pool Getter/Setter methods
+
+// PoolPath returns the pool path
+func (p *Pool) PoolPath() string {
+	return p.poolPath
+}
+
+// SetPoolPath sets the pool path
+func (p *Pool) SetPoolPath(poolPath string) {
+	p.poolPath = poolPath
+}
+
+// StakedLiquidity returns the staked liquidity tree
+func (p *Pool) StakedLiquidity() *UintTree {
+	return p.stakedLiquidity
+}
+
+// SetStakedLiquidity sets the staked liquidity tree
+func (p *Pool) SetStakedLiquidity(stakedLiquidity *UintTree) {
+	p.stakedLiquidity = stakedLiquidity
+}
+
+func (p *Pool) SetStakedLiquidityAt(currentTime int64, delta *u256.Uint) {
+	p.StakedLiquidity().Set(currentTime, u256.Zero().Set(delta))
+}
+
+// LastUnclaimableTime returns the last unclaimable time
+func (p *Pool) LastUnclaimableTime() int64 {
+	return p.lastUnclaimableTime
+}
+
+// SetLastUnclaimableTime sets the last unclaimable time
+func (p *Pool) SetLastUnclaimableTime(lastUnclaimableTime int64) {
+	p.lastUnclaimableTime = lastUnclaimableTime
+}
+
+// UnclaimableAcc returns the unclaimable accumulation
+func (p *Pool) UnclaimableAcc() int64 {
+	return p.unclaimableAcc
+}
+
+// SetUnclaimableAcc sets the unclaimable accumulation
+func (p *Pool) SetUnclaimableAcc(unclaimableAcc int64) {
+	p.unclaimableAcc = unclaimableAcc
+}
+
+// RewardCache returns the reward cache tree
+func (p *Pool) RewardCache() *UintTree {
+	return p.rewardCache
+}
+
+// SetRewardCache sets the reward cache tree
+func (p *Pool) SetRewardCache(rewardCache *UintTree) {
+	p.rewardCache = rewardCache
+}
+
+func (p *Pool) SetRewardCacheAt(currentTime int64, reward int64) {
+	p.RewardCache().Set(currentTime, reward)
+}
+
+// Incentives returns the incentives
+func (p *Pool) Incentives() *Incentives {
+	return p.incentives
+}
+
+// SetIncentives sets the incentives
+func (p *Pool) SetIncentives(incentives *Incentives) {
+	p.incentives = incentives
+}
+
+// Ticks returns the ticks
+func (p *Pool) Ticks() *Ticks {
+	return &p.ticks
+}
+
+// SetTicks sets the ticks
+func (p *Pool) SetTicks(ticks Ticks) {
+	p.ticks = ticks
+}
+
+// GlobalRewardRatioAccumulation returns the global reward ratio accumulation tree
+func (p *Pool) GlobalRewardRatioAccumulation() *UintTree {
+	return p.globalRewardRatioAccumulation
+}
+
+// SetGlobalRewardRatioAccumulation sets the global reward ratio accumulation tree
+func (p *Pool) SetGlobalRewardRatioAccumulation(globalRewardRatioAccumulation *UintTree) {
+	p.globalRewardRatioAccumulation = globalRewardRatioAccumulation
+}
+
+func (p *Pool) SetGlobalRewardRatioAccumulationAt(currentTime int64, acc string) {
+	p.GlobalRewardRatioAccumulation().Set(currentTime, acc)
+}
+
+// HistoricalTick returns the historical tick tree
+func (p *Pool) HistoricalTick() *UintTree {
+	return p.historicalTick
+}
+
+// SetHistoricalTick sets the historical tick tree
+func (p *Pool) SetHistoricalTick(historicalTick *UintTree) {
+	p.historicalTick = historicalTick
+}
+
+func (p *Pool) SetHistoricalTickAt(currentTime int64, tick int32) {
+	p.HistoricalTick().Set(currentTime, tick)
+}
+
+// Clone returns a deep copy of the pool.
+func (p *Pool) Clone() *Pool {
+	if p == nil {
+		return nil
+	}
+
+	return &Pool{
+		poolPath:                      p.poolPath,
+		stakedLiquidity:               nil,
+		lastUnclaimableTime:           p.lastUnclaimableTime,
+		unclaimableAcc:                p.unclaimableAcc,
+		rewardCache:                   nil,
+		incentives:                    nil,
+		ticks:                         NewTicks(),
+		globalRewardRatioAccumulation: nil,
+		historicalTick:                nil,
+	}
+}
+
+// NewPool creates a new pool with the given poolPath and currentHeight.
+func NewPool(poolPath string, currentTime int64) *Pool {
+	pool := &Pool{
+		poolPath:        poolPath,
+		stakedLiquidity: NewUintTreeN(64),
+		// lastUnclaimableTime is initialized to 0, which means "tracking not started yet".
+		// When the pool receives a tier assignment (or external incentive), `cacheReward` will be called,
+		// which will automatically call `startUnclaimablePeriod` if the pool has zero liquidity.
+		// This ensures proper unclaimable period tracking from the moment rewards start emitting.
+		lastUnclaimableTime:           0,
+		unclaimableAcc:                0,
+		rewardCache:                   NewUintTreeN(64),
+		incentives:                    NewIncentives(poolPath),
+		ticks:                         NewTicks(),
+		globalRewardRatioAccumulation: NewUintTreeN(64),
+		historicalTick:                NewUintTreeN(64),
+	}
+
+	pool.SetGlobalRewardRatioAccumulationAt(currentTime, "0")
+
+	// Initialize rewardCache to 0 to ensure `cacheReward` will trigger on first tier assignment
+	pool.SetRewardCacheAt(currentTime, int64(0))
+	pool.SetStakedLiquidityAt(currentTime, u256.Zero())
+
+	return pool
+}
+
+// Incentives represents a collection of external incentives for a specific pool.
+//
+// Fields:
+//
+//   - incentives: BPTree storing ExternalIncentive objects indexed by incentiveId
+//     The incentiveId serves as the key to efficiently lookup incentive details
+//
+//   - targetPoolPath: String identifier for the pool this incentive collection belongs to
+//     Used to associate incentives with their corresponding liquidity pool
+//
+//   - unclaimablePeriods: Tree storing periods when rewards cannot be claimed
+//     Maps start timestamp (key) to end timestamp (value)
+//     An end timestamp of 0 indicates an ongoing unclaimable period
+//     Used to track intervals when staking rewards are not claimable
+type Incentives struct {
+	incentives *bptree.BPTree // (incentiveId) => ExternalIncentive
+
+	targetPoolPath string // The target pool path for this incentive collection
+
+	unclaimablePeriods *UintTree // blockTimestamp -> any
+}
+
+// Incentives Getter/Setter methods
+
+// Incentives returns the incentives tree
+func (i *Incentives) IncentiveTrees() *bptree.BPTree {
+	return i.incentives
+}
+
+// SetIncentives sets the incentives tree
+func (i *Incentives) SetIncentives(incentives *bptree.BPTree) {
+	i.incentives = incentives
+}
+
+// TargetPoolPath returns the target pool path
+func (i *Incentives) TargetPoolPath() string {
+	return i.targetPoolPath
+}
+
+// SetTargetPoolPath sets the target pool path
+func (i *Incentives) SetTargetPoolPath(targetPoolPath string) {
+	i.targetPoolPath = targetPoolPath
+}
+
+// UnclaimablePeriods returns the unclaimable periods tree
+func (i *Incentives) UnclaimablePeriods() *UintTree {
+	return i.unclaimablePeriods
+}
+
+// SetUnclaimablePeriods sets the unclaimable periods tree
+func (i *Incentives) SetUnclaimablePeriods(unclaimablePeriods *UintTree) {
+	i.unclaimablePeriods = unclaimablePeriods
+}
+
+// Incentive returns an incentive by ID
+func (i *Incentives) Incentive(incentiveId string) (*ExternalIncentive, bool) {
+	value, exists := i.incentives.Get(incentiveId)
+	if !exists {
+		return nil, false
+	}
+	incentive, ok := value.(*ExternalIncentive)
+	return incentive, ok
+}
+
+// SetIncentive sets an incentive by ID
+func (i *Incentives) SetIncentive(incentiveId string, incentive *ExternalIncentive) {
+	i.incentives.Set(incentiveId, incentive)
+}
+
+func (i *Incentives) SetUnclaimablePeriod(startTimestamp int64, endTimestamp int64) {
+	i.unclaimablePeriods.Set(startTimestamp, endTimestamp)
+}
+
+func (i *Incentives) RemoveUnclaimablePeriod(startTimestamp int64) {
+	i.unclaimablePeriods.Remove(startTimestamp)
+}
+
+// IterateIncentives iterates over all incentives
+func (i *Incentives) IterateIncentives(fn func(incentiveId string, incentive *ExternalIncentive) bool) {
+	i.incentives.Iterate("", "", func(key string, value interface{}) bool {
+		if incentive, ok := value.(*ExternalIncentive); ok {
+			return fn(key, incentive)
+		}
+		return false
+	})
+}
+
+func NewIncentives(targetPoolPath string) *Incentives {
+	result := &Incentives{
+		targetPoolPath:     targetPoolPath,
+		unclaimablePeriods: NewUintTreeN(64),
+		incentives:         bptree.NewBPTreeN(16),
+	}
+
+	// initial unclaimable period starts, as there cannot be any staked positions yet.
+	currentTimestamp := time.Now().Unix()
+	result.SetUnclaimablePeriod(currentTimestamp, int64(0))
+	return result
+}
+
+type ExternalIncentive struct {
+	incentiveId              string     // incentive id
+	startTimestamp           int64      // start time for external reward
+	endTimestamp             int64      // end time for external reward
+	createdHeight            int64      // block height when the incentive was created
+	createdTimestamp         int64      // timestamp when the incentive was created
+	depositGnsAmount         int64      // deposited gns amount
+	targetPoolPath           string     // external reward target pool path
+	rewardToken              string     // external reward token path
+	totalRewardAmount        int64      // total reward amount
+	rewardAmount             int64      // to be distributed reward amount
+	rewardPerSecondX128      *u256.Uint // reward per second, scaled by 2^128 to preserve sub-second precision
+	distributedRewardAmount  int64      // distributed reward amount, when un-staked and refunded
+	accumulatedPenaltyAmount int64      // accumulated warmup penalty from CollectReward
+	creator                  address    // creator address
+
+	refunded bool // whether incentive has been refunded (includes GNS deposit and unclaimed rewards)
+}
+
+// ExternalIncentive Getter/Setter methods
+
+// IncentiveId returns the incentive ID
+func (e *ExternalIncentive) IncentiveId() string {
+	return e.incentiveId
+}
+
+// SetIncentiveId sets the incentive ID
+func (e *ExternalIncentive) SetIncentiveId(incentiveId string) {
+	e.incentiveId = incentiveId
+}
+
+// StartTimestamp returns the start timestamp
+func (e *ExternalIncentive) StartTimestamp() int64 {
+	return e.startTimestamp
+}
+
+// SetStartTimestamp sets the start timestamp
+func (e *ExternalIncentive) SetStartTimestamp(startTimestamp int64) {
+	e.startTimestamp = startTimestamp
+}
+
+// EndTimestamp returns the end timestamp
+func (e *ExternalIncentive) EndTimestamp() int64 {
+	return e.endTimestamp
+}
+
+// SetEndTimestamp sets the end timestamp
+func (e *ExternalIncentive) SetEndTimestamp(endTimestamp int64) {
+	e.endTimestamp = endTimestamp
+}
+
+// CreatedHeight returns the created height
+func (e *ExternalIncentive) CreatedHeight() int64 {
+	return e.createdHeight
+}
+
+// SetCreatedHeight sets the created height
+func (e *ExternalIncentive) SetCreatedHeight(createdHeight int64) {
+	e.createdHeight = createdHeight
+}
+
+// CreatedTimestamp returns the created timestamp
+func (e *ExternalIncentive) CreatedTimestamp() int64 {
+	return e.createdTimestamp
+}
+
+// SetCreatedTimestamp sets the created timestamp
+func (e *ExternalIncentive) SetCreatedTimestamp(createdTimestamp int64) {
+	e.createdTimestamp = createdTimestamp
+}
+
+// DepositGnsAmount returns the deposit GNS amount
+func (e *ExternalIncentive) DepositGnsAmount() int64 {
+	return e.depositGnsAmount
+}
+
+// SetDepositGnsAmount sets the deposit GNS amount
+func (e *ExternalIncentive) SetDepositGnsAmount(depositGnsAmount int64) {
+	e.depositGnsAmount = depositGnsAmount
+}
+
+// TargetPoolPath returns the target pool path
+func (e *ExternalIncentive) TargetPoolPath() string {
+	return e.targetPoolPath
+}
+
+// SetTargetPoolPath sets the target pool path
+func (e *ExternalIncentive) SetTargetPoolPath(targetPoolPath string) {
+	e.targetPoolPath = targetPoolPath
+}
+
+// RewardToken returns the reward token
+func (e *ExternalIncentive) RewardToken() string {
+	return e.rewardToken
+}
+
+// SetRewardToken sets the reward token
+func (e *ExternalIncentive) SetRewardToken(rewardToken string) {
+	e.rewardToken = rewardToken
+}
+
+// TotalRewardAmount returns the total reward amount
+func (e *ExternalIncentive) TotalRewardAmount() int64 {
+	return e.totalRewardAmount
+}
+
+// SetTotalRewardAmount sets the total reward amount
+func (e *ExternalIncentive) SetTotalRewardAmount(totalRewardAmount int64) {
+	e.totalRewardAmount = totalRewardAmount
+}
+
+// RewardAmount returns the reward amount
+func (e *ExternalIncentive) RewardAmount() int64 {
+	return e.rewardAmount
+}
+
+// SetRewardAmount sets the reward amount
+func (e *ExternalIncentive) SetRewardAmount(rewardAmount int64) {
+	e.rewardAmount = rewardAmount
+}
+
+// RewardPerSecondX128 returns the Q128-scaled reward per second.
+// The underlying value is (rewardAmount << 128) / duration.
+func (e *ExternalIncentive) RewardPerSecondX128() *u256.Uint {
+	return e.rewardPerSecondX128
+}
+
+// SetRewardPerSecondX128 sets the Q128-scaled reward per second.
+func (e *ExternalIncentive) SetRewardPerSecondX128(rewardPerSecondX128 *u256.Uint) {
+	e.rewardPerSecondX128 = u256.Zero().Set(rewardPerSecondX128)
+}
+
+// DistributedRewardAmount returns the distributed reward amount
+func (e *ExternalIncentive) DistributedRewardAmount() int64 {
+	return e.distributedRewardAmount
+}
+
+// SetDistributedRewardAmount sets the distributed reward amount
+func (e *ExternalIncentive) SetDistributedRewardAmount(distributedRewardAmount int64) {
+	e.distributedRewardAmount = distributedRewardAmount
+}
+
+// AccumulatedPenaltyAmount returns the accumulated warmup penalty amount
+func (e *ExternalIncentive) AccumulatedPenaltyAmount() int64 {
+	return e.accumulatedPenaltyAmount
+}
+
+// SetAccumulatedPenaltyAmount sets the accumulated warmup penalty amount
+func (e *ExternalIncentive) SetAccumulatedPenaltyAmount(accumulatedPenaltyAmount int64) {
+	e.accumulatedPenaltyAmount = accumulatedPenaltyAmount
+}
+
+// Creator returns the creator address
+func (e *ExternalIncentive) Creator() address {
+	return e.creator
+}
+
+// SetCreator sets the creator address
+func (e *ExternalIncentive) SetCreator(creator address) {
+	e.creator = creator
+}
+
+// Refunded returns the refunded status
+func (e *ExternalIncentive) Refunded() bool {
+	return e.refunded
+}
+
+// SetRefunded sets the refunded status
+func (e *ExternalIncentive) SetRefunded(refunded bool) {
+	e.refunded = refunded
+}
+
+func (e *ExternalIncentive) Clone() *ExternalIncentive {
+	rewardPerSecondX128 := u256.Zero()
+
+	if e.rewardPerSecondX128 != nil {
+		rewardPerSecondX128 = e.rewardPerSecondX128.Clone()
+	}
+
+	return &ExternalIncentive{
+		incentiveId:              e.incentiveId,
+		startTimestamp:           e.startTimestamp,
+		endTimestamp:             e.endTimestamp,
+		createdHeight:            e.createdHeight,
+		createdTimestamp:         e.createdTimestamp,
+		depositGnsAmount:         e.depositGnsAmount,
+		targetPoolPath:           e.targetPoolPath,
+		rewardToken:              e.rewardToken,
+		totalRewardAmount:        e.totalRewardAmount,
+		rewardAmount:             e.rewardAmount,
+		rewardPerSecondX128:      rewardPerSecondX128,
+		creator:                  e.creator,
+		refunded:                 e.refunded,
+		distributedRewardAmount:  e.distributedRewardAmount,
+		accumulatedPenaltyAmount: e.accumulatedPenaltyAmount,
+	}
+}
+
+// NewExternalIncentive creates a new external incentive
+func NewExternalIncentive(
+	incentiveId string,
+	targetPoolPath string,
+	rewardToken string,
+	rewardAmount int64,
+	startTimestamp int64, // timestamp is in unix time(seconds)
+	endTimestamp int64,
+	creator address,
+	depositGnsAmount int64,
+	createdHeight int64,
+	currentTime int64, // current time in unix time(seconds)
+) *ExternalIncentive {
+	incentiveDuration := endTimestamp - startTimestamp
+
+	// Compute reward per second scaled by 2^128 to preserve sub-second precision.
+	// rewardPerSecondX128 = (rewardAmount << 128) / incentiveDuration.
+	// Consumers must divide by 2^128 when materializing back to a plain integer.
+	rewardPerSecondX128 := u256.MulDiv(
+		u256.NewUintFromInt64(rewardAmount),
+		q128,
+		u256.NewUintFromInt64(incentiveDuration),
+	)
+
+	return &ExternalIncentive{
+		incentiveId:              incentiveId,
+		targetPoolPath:           targetPoolPath,
+		rewardToken:              rewardToken,
+		totalRewardAmount:        rewardAmount,
+		rewardAmount:             rewardAmount,
+		startTimestamp:           startTimestamp,
+		endTimestamp:             endTimestamp,
+		rewardPerSecondX128:      rewardPerSecondX128,
+		distributedRewardAmount:  0,
+		accumulatedPenaltyAmount: 0,
+		creator:                  creator,
+		createdHeight:            createdHeight,
+		createdTimestamp:         currentTime,
+		depositGnsAmount:         depositGnsAmount,
+		refunded:                 false,
+	}
+}
+
+// Tick mapping for each pool
+type Ticks struct {
+	tree *bptree.BPTree // int32 tickId -> tick
+}
+
+// Ticks Getter/Setter methods
+
+// Tree returns the ticks tree
+func (t *Ticks) Tree() *bptree.BPTree {
+	return t.tree
+}
+
+// SetTree sets the ticks tree
+func (t *Ticks) SetTree(tree *bptree.BPTree) {
+	t.tree = tree
+}
+
+func (t *Ticks) Get(tickId int32) *Tick {
+	v, ok := t.tree.Get(EncodeInt(tickId))
+	if !ok {
+		tick := &Tick{
+			id:                   tickId,
+			stakedLiquidityGross: u256.Zero(),
+			stakedLiquidityDelta: i256.Zero(),
+			outsideAccumulation:  NewUintTreeN(64),
+		}
+		t.tree.Set(EncodeInt(tickId), tick)
+		return tick
+	}
+
+	tick, ok := v.(*Tick)
+	if !ok {
+		panic("failed to cast value to *Tick")
+	}
+	return tick
+}
+
+func (self *Ticks) Has(tickId int32) bool {
+	return self.tree.Has(EncodeInt(tickId))
+}
+
+// SetTick sets a tick by ID
+func (t *Ticks) SetTick(tickId int32, tick *Tick) {
+	if tick.stakedLiquidityGross.IsZero() {
+		t.tree.Remove(EncodeInt(tickId))
+		return
+	}
+
+	t.tree.Set(EncodeInt(tickId), tick)
+}
+
+// IterateTicks iterates over all ticks
+func (t *Ticks) IterateTicks(fn func(tickId int32, tick *Tick) bool) {
+	t.tree.Iterate("", "", func(key string, value interface{}) bool {
+		tick, ok := value.(*Tick)
+		if !ok {
+			return false
+		}
+
+		// Convert string key back to int32
+		tickId, err := strconv.Atoi(key)
+		if err != nil {
+			return false // skip invalid keys
+		}
+
+		return fn(int32(tickId), tick)
+	})
+}
+
+// Clone returns a deep copy of ticks.
+func (t Ticks) Clone() Ticks {
+	cloned := bptree.NewBPTreeN(16)
+	t.tree.Iterate("", "", func(key string, value any) bool {
+		tick, ok := value.(*Tick)
+		if !ok {
+			panic("failed to cast value to *Tick")
+		}
+		cloned.Set(key, tick.Clone())
+		return false
+	})
+	return Ticks{tree: cloned}
+}
+
+func NewTicks() Ticks {
+	return Ticks{
+		tree: bptree.NewBPTreeN(16),
+	}
+}
+
+// Tick represents the state of a specific tick in a pool.
+//
+// Fields:
+// - id (int32): The ID of the tick.
+// - stakedLiquidityGross (*u256.Uint): Total gross staked liquidity at this tick.
+// - stakedLiquidityDelta (*i256.Int): Net change in staked liquidity at this tick.
+// - outsideAccumulation (*UintTree): RewardRatioAccumulation outside the tick.
+type Tick struct {
+	id int32
+
+	// conceptually equal with Pool.liquidityGross but only for the staked positions
+	stakedLiquidityGross *u256.Uint
+
+	// conceptually equal with Pool.liquidityNet but only for the staked positions
+	stakedLiquidityDelta *i256.Int
+
+	// currentOutsideAccumulation is the accumulation of the time / TotalStake outside the tick.
+	// It is calculated by subtracting the current tick's currentOutsideAccumulation from the global reward ratio accumulation.
+	outsideAccumulation *UintTree // timestamp -> *u256.Uint
+}
+
+// Tick Getter/Setter methods
+
+// Id returns the tick ID
+func (t *Tick) Id() int32 {
+	return t.id
+}
+
+// SetId sets the tick ID
+func (t *Tick) SetId(id int32) {
+	t.id = id
+}
+
+// StakedLiquidityGross returns the staked liquidity gross
+func (t *Tick) StakedLiquidityGross() *u256.Uint {
+	return t.stakedLiquidityGross
+}
+
+// SetStakedLiquidityGross sets the staked liquidity gross
+func (t *Tick) SetStakedLiquidityGross(stakedLiquidityGross *u256.Uint) {
+	t.stakedLiquidityGross = u256.Zero().Set(stakedLiquidityGross)
+}
+
+// StakedLiquidityDelta returns the staked liquidity delta
+func (t *Tick) StakedLiquidityDelta() *i256.Int {
+	return t.stakedLiquidityDelta
+}
+
+// SetStakedLiquidityDelta sets the staked liquidity delta
+func (t *Tick) SetStakedLiquidityDelta(stakedLiquidityDelta *i256.Int) {
+	t.stakedLiquidityDelta = i256.Zero().Set(stakedLiquidityDelta)
+}
+
+// OutsideAccumulation returns the outside accumulation tree
+func (t *Tick) OutsideAccumulation() *UintTree {
+	return t.outsideAccumulation
+}
+
+// SetOutsideAccumulation sets the outside accumulation tree
+func (t *Tick) SetOutsideAccumulation(outsideAccumulation *UintTree) {
+	t.outsideAccumulation = outsideAccumulation
+}
+
+// SetOutsideAccumulationAt sets the outside accumulation at the timestamp.
+func (t *Tick) SetOutsideAccumulationAt(timestamp int64, acc *u256.Uint) {
+	t.outsideAccumulation.Set(timestamp, u256.Zero().Set(acc))
+}
+
+// Clone returns a deep copy of the tick.
+func (t *Tick) Clone() *Tick {
+	if t == nil {
+		return nil
+	}
+
+	return &Tick{
+		id:                   t.id,
+		stakedLiquidityGross: t.stakedLiquidityGross.Clone(),
+		stakedLiquidityDelta: t.stakedLiquidityDelta.Clone(),
+		outsideAccumulation:  t.outsideAccumulation.Clone(),
+	}
+}
+
+func NewTick(tickId int32) *Tick {
+	return &Tick{
+		id:                   tickId,
+		stakedLiquidityGross: u256.Zero(),
+		stakedLiquidityDelta: i256.Zero(),
+		outsideAccumulation:  NewUintTreeN(64),
+	}
+}
+
+// 100%, 0%, 0% if no tier2 and tier3
+// 80%, 0%, 20% if no tier2
+// 70%, 30%, 0% if no tier3
+// 50%, 30%, 20% if has tier2 and tier3
+type TierRatio struct {
+	Tier1 uint64
+	Tier2 uint64
+	Tier3 uint64
+}
+
+func NewTierRatio(tier1, tier2, tier3 uint64) TierRatio {
+	return TierRatio{
+		Tier1: tier1,
+		Tier2: tier2,
+		Tier3: tier3,
+	}
+}
+
+// Get returns the ratio(scaled up by 100) for the given tier.
+func (ratio *TierRatio) Get(tier uint64) (uint64, error) {
+	switch tier {
+	case 1:
+		return ratio.Tier1, nil
+	case 2:
+		return ratio.Tier2, nil
+	case 3:
+		return ratio.Tier3, nil
+	default:
+		return 0, errors.New(ufmt.Sprintf("unsupported tier(%d)", tier))
+	}
+}
+
+// SwapBatchProcessor processes tick crosses in batch for a swap
+// This processor accumulates all tick crosses that occur during a single swap
+// and processes them together at the end, reducing redundant calculations
+// and state updates that would occur with individual tick processing
+type SwapBatchProcessor struct {
+	poolPath  string           // The pool path identifier for this swap
+	pool      *Pool            // Reference to the pool being swapped in
+	crosses   []*SwapTickCross // Accumulated tick crosses during the swap
+	timestamp int64            // Timestamp when the swap started
+	isActive  bool             // Flag to prevent accumulation after swap ends
+}
+
+func (s *SwapBatchProcessor) PoolPath() string {
+	return s.poolPath
+}
+
+func (s *SwapBatchProcessor) SetPoolPath(poolPath string) {
+	s.poolPath = poolPath
+}
+
+func (s *SwapBatchProcessor) Pool() *Pool {
+	return s.pool
+}
+
+func (s *SwapBatchProcessor) SetPool(pool *Pool) {
+	s.pool = pool
+}
+
+func (s *SwapBatchProcessor) Crosses() []*SwapTickCross {
+	return s.crosses
+}
+
+func (s *SwapBatchProcessor) SetCrosses(crosses []*SwapTickCross) {
+	s.crosses = crosses
+}
+
+func (s *SwapBatchProcessor) Timestamp() int64 {
+	return s.timestamp
+}
+
+func (s *SwapBatchProcessor) SetTimestamp(timestamp int64) {
+	s.timestamp = timestamp
+}
+
+func (s *SwapBatchProcessor) IsActive() bool {
+	return s.isActive
+}
+
+func (s *SwapBatchProcessor) SetIsActive(isActive bool) {
+	s.isActive = isActive
+}
+
+func (s *SwapBatchProcessor) LastCross() *SwapTickCross {
+	if len(s.crosses) == 0 {
+		return nil
+	}
+
+	return s.crosses[len(s.crosses)-1]
+}
+
+func (s *SwapBatchProcessor) AddCross(tickCross *SwapTickCross) {
+	s.crosses = append(s.crosses, tickCross)
+}
+
+func NewSwapBatchProcessor(poolPath string, pool *Pool, timestamp int64) *SwapBatchProcessor {
+	return &SwapBatchProcessor{
+		poolPath:  poolPath,
+		pool:      pool,
+		crosses:   make([]*SwapTickCross, 0),
+		timestamp: timestamp,
+		isActive:  true,
+	}
+}
+
+// SwapTickCross stores information about a tick cross during a swap
+// This struct is used to accumulate tick cross events during a single swap transaction
+// for batch processing to optimize gas usage and computational efficiency
+type SwapTickCross struct {
+	tickID     int32     // The tick index that was crossed
+	zeroForOne bool      // Direction of the swap (true: token0->token1, false: token1->token0)
+	delta      *i256.Int // Pre-calculated liquidity delta for this tick cross
+}
+
+func (s *SwapTickCross) TickID() int32 {
+	return s.tickID
+}
+
+func (s *SwapTickCross) ZeroForOne() bool {
+	return s.zeroForOne
+}
+
+func (s *SwapTickCross) Delta() *i256.Int {
+	return s.delta
+}
+
+func NewSwapTickCross(tickID int32, zeroForOne bool, delta *i256.Int) *SwapTickCross {
+	return &SwapTickCross{
+		tickID:     tickID,
+		zeroForOne: zeroForOne,
+		delta:      delta,
+	}
+}
