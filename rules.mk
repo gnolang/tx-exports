@@ -1,4 +1,4 @@
-EXTRACTOR_DIR ?= extractor-0.1.1
+EXTRACTOR_DIR ?= extractor
 
 # tx-archive lives in the gnolang/gno monorepo under contribs/tx-archive.
 # contribs/*/go.mod files use `replace github.com/gnolang/gno => ../..` so

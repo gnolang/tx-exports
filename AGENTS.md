@@ -34,7 +34,7 @@ go run github.com/gnolang/gno/contribs/tx-archive/cmd@master backup \
 
 ```sh
 # From repo root
-go run ./extractor-0.1.1 --input-dir test11.gno.land --output-dir test11.gno.land/extracted
+go run ./extractor --input-dir test11.gno.land --output-dir test11.gno.land/extracted
 ```
 
 ## Architecture

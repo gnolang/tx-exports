@@ -18,22 +18,22 @@ jobs:
           go-version: "1.25.x"
           cache: true
           cache-dependency-path: |
-            extractor-0.1.1/go.sum
+            extractor/go.sum
 
       - name: go mod tidy check (extractor)
-        working-directory: extractor-0.1.1
+        working-directory: extractor
         run: |
           go mod tidy
           git diff --exit-code -- go.mod go.sum
 
       - name: build extractor
-        working-directory: extractor-0.1.1
+        working-directory: extractor
         run: |
           go build ./...
           go build -tags deps ./...
 
       - name: extractor help runs
-        working-directory: extractor-0.1.1
+        working-directory: extractor
         run: go run . -h 2>&1 | tee /tmp/help.out
       - name: extractor help looks sane
         run: grep -q -- '-output-dir' /tmp/help.out

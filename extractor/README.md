@@ -2,9 +2,10 @@
 
 This tool is a simple parser to extract source code (packages & realms) from logs created by the [tx-archive](https://github.com/gnolang/gno/tree/master/contribs/tx-archive) tool for Gno chains.
 
-**Note:** this directory is `extractor-0.1.1` as it targets the [`v0.1.1`](https://github.com/gnolang/gno/releases/tag/v0.1.1)
-release of gnolang/gno; aka the one used to deploy test4. This ensures
-compatibility with its data types.
+**Note:** this tool parses transaction data using the gno data types from the
+version of [gnolang/gno](https://github.com/gnolang/gno) pinned in
+[`go.mod`](./go.mod); it is compatible with whatever that version supports.
+Bump that dependency to stay compatible with newer chain data.
 
 ## Running the extractor
 

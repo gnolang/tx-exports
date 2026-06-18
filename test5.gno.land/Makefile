@@ -1,4 +1,4 @@
-EXTRACTOR_DIR = extractor-0.1.1
+EXTRACTOR_DIR = extractor
 REMOTE = "https://rpc.test5.gno.land"
 SHORTNAME = test5
 
