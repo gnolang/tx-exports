@@ -1,6 +1,10 @@
 REMOTE = "https://rpc.test13.testnets.gno.land"
 SHORTNAME = test13
 
+# Fetch over WebSocket: the HTTP RPC endpoint WAF-blocks (403) high-volume batch
+# fetches, which strands the daily backup. A single WS connection avoids it.
+USE_WS = 1
+
 # at an average of 3 secs per block, test13 produces ~28_800 blocks per day
 # 100k allows us to catch up if the exporter falls behind
 MAX_INTERVAL = 100000

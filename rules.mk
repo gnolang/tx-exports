@@ -8,6 +8,11 @@ GNO_REPO     ?= $(HOME)/.cache/tx-exports/gno
 GNO_REF      ?= master
 TXARCHIVE    ?= $(GNO_REPO)/contribs/tx-archive
 
+.PHONY: all
+all:
+	@echo 'use make fetch or make fetch-all to download blocks'
+	$(MAKE) join stats extractor
+
 $(TXARCHIVE)/cmd/main.go:
 	@mkdir -p $(dir $(GNO_REPO))
 	@if [ ! -d $(GNO_REPO) ]; then \
@@ -20,10 +25,25 @@ $(TXARCHIVE)/cmd/main.go:
 .PHONY: tx-archive-ensure
 tx-archive-ensure: $(TXARCHIVE)/cmd/main.go ## clone/update the gno repo so tx-archive is runnable
 
+# Backup transport selection.
+# Set USE_WS=1 in a chain Makefile to fetch over a WebSocket connection
+# (wss://<host>/websocket) instead of HTTP(S). A single long-lived WS connection
+# avoids the per-request rate limiting / WAF blocks that some RPC endpoints apply
+# to high-volume HTTP batch fetches, at the cost of slower fetches (tx results are
+# not batched over WS). REMOTE stays HTTP(S) so the latest-block curl still works.
+ifeq ($(USE_WS),1)
+WS_FLAG       = -ws
+BACKUP_REMOTE = $(shell echo $(REMOTE) | tr -d '"' | sed -e 's#^http://#ws://#' -e 's#^https://#wss://#')/websocket
+else
+WS_FLAG       =
+BACKUP_REMOTE = $(REMOTE)
+endif
+
+.PHONY: fetch
 fetch: tx-archive-ensure
 	@echo "Backup from: $(FROM_BLOCK) to $(TO_BLOCK)"
-	cd $(TXARCHIVE) && go run ./cmd backup -verbose \
-		--remote $(REMOTE) \
+	cd $(TXARCHIVE) && go run ./cmd backup -verbose $(WS_FLAG) \
+		--remote $(BACKUP_REMOTE) \
 		--from-block $(FROM_BLOCK) \
 		--to-block   $(TO_BLOCK) \
 		--output-path "$(shell pwd)/backup_$(shell printf '%07d' $(FROM_BLOCK))-$(shell printf '%07d' $(TO_BLOCK)).jsonl"
@@ -32,12 +52,13 @@ fetch: tx-archive-ensure
 	@cat metadata.json | jq -a '.latest_block_height = $(TO_BLOCK)' > /tmp/aa.json
 	@mv /tmp/aa.json metadata.json
 
-
+.PHONY: fetch-all
 fetch-all:
 	@for i in `seq $(FROM_BLOCK) $(MAX_INTERVAL) $(LATEST_BLOCK_HEIGHT)`; do \
 		make -C . fetch FROM_BLOCK="$$i"; \
 	done
 
+.PHONY: stats
 stats:
 	echo "# $(REMOTE)" > README.md
 	echo >> README.md
@@ -95,6 +116,7 @@ stats-legacy:
 	echo >> README.md
 
 
+.PHONY: join
 join:
 	@echo "Joining small backup files..."
 	@prev_file=""; \
@@ -118,11 +140,13 @@ join:
 	done
 	@echo "Done."
 
+.PHONY: extractor
 extractor:
 	go run -C "../$(EXTRACTOR_DIR)" . \
 		-source-path "$(shell pwd)" \
 		-output-dir "$(shell pwd)/extracted"
 
+.PHONY: loop
 loop:
 	while true; do \
 		( \
