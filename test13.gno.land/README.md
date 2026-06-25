@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-84069
+100499
 ```
 
 ## addpkgs
@@ -11,33 +11,33 @@
 
 ## top realm calls
 ```
-  49677 "gno.land/r/gnoswap/router"
-  24023 "gno.land/r/gnoland/wugnot"
-  23918 "gno.land/r/gnoswap/gns"
-  17521 "gno.land/r/gnoswap/test_token/test_usdc"
-  16694 "gno.land/r/gnoswap/test_token/test_atone"
-  14994 "gno.land/r/gnoswap/test_token/test_usdt"
-  14833 "gno.land/r/gnoswap/test_token/test_sol"
-  14761 "gno.land/r/gnoswap/test_token/test_atom"
-  14481 "gno.land/r/gnoswap/test_token/test_dai"
-  14281 "gno.land/r/gnoswap/test_token/test_trx"
-  14196 "gno.land/r/gnoswap/test_token/test_photon"
-  14043 "gno.land/r/gnoswap/test_token/test_eth"
-  13604 "gno.land/r/gnoswap/test_token/test_btc"
-   6154 "gno.land/r/gnoswap/staker"
-   5472 "gno.land/r/gnoswap/position"
-    993 "gno.land/r/gnoswap/gnft"
-    698 "gno.land/r/gnoswap/gov/staker"
-    425 "gno.land/r/gnoswap/launchpad"
-    105 "gno.land/r/gnops/valopers"
-     83 "gno.land/r/gnoswap/pool"
-     57 "gno.land/r/gnoswap/gov/governance"
-     53 "gno.land/r/sys/cla"
+  63711 "gno.land/r/gnoswap/router"
+  40179 "gno.land/r/gnoland/wugnot"
+  26660 "gno.land/r/gnoswap/gns"
+  19881 "gno.land/r/gnoswap/test_token/test_usdc"
+  17257 "gno.land/r/gnoswap/test_token/test_usdt"
+  17183 "gno.land/r/gnoswap/test_token/test_sol"
+  17129 "gno.land/r/gnoswap/test_token/test_atone"
+  16936 "gno.land/r/gnoswap/test_token/test_atom"
+  16663 "gno.land/r/gnoswap/test_token/test_dai"
+  16196 "gno.land/r/gnoswap/test_token/test_trx"
+  16015 "gno.land/r/gnoswap/test_token/test_photon"
+  15804 "gno.land/r/gnoswap/test_token/test_eth"
+  14084 "gno.land/r/gnoswap/test_token/test_btc"
+   6806 "gno.land/r/gnoswap/staker"
+   6007 "gno.land/r/gnoswap/position"
+   1069 "gno.land/r/gnoswap/gnft"
+    762 "gno.land/r/gnoswap/gov/staker"
+    490 "gno.land/r/gnoswap/launchpad"
+    144 "gno.land/r/gnops/valopers"
+     85 "gno.land/r/gnoswap/pool"
+     75 "gno.land/r/gnoswap/gov/governance"
+     54 "gno.land/r/sys/cla"
      20 "gno.land/r/g18wk4a80cr7dqa25vfka2yug5n3pd50udled6y3/gnogle_nft2"
      19 "gno.land/r/g18wk4a80cr7dqa25vfka2yug5n3pd50udled6y3/nftmarketv3"
+     16 "gno.land/r/demo/profile"
      13 "gno.land/r/aib/ibc/apps/transfer"
      10 "gno.land/r/g18wk4a80cr7dqa25vfka2yug5n3pd50udled6y3/nftmarketv2"
-      9 "gno.land/r/demo/profile"
       9 "gno.land/r/g18wk4a80cr7dqa25vfka2yug5n3pd50udled6y3/gnogle_nftmarket"
       8 "gno.land/r/sys/namereg/v1"
       7 "gno.land/r/g18wk4a80cr7dqa25vfka2yug5n3pd50udled6y3/gnogle_market2"
