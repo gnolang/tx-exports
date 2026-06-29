@@ -7,7 +7,7 @@ USE_WS = 1
 
 # at an average of 3 secs per block, test13 produces ~28_800 blocks per day
 # 100k allows us to catch up if the exporter falls behind
-MAX_INTERVAL = 100000
+MAX_INTERVAL = 10000
 
 FROM_BLOCK = $(shell cat metadata.json | jq -r '.latest_block_height + 1')
 LATEST_BLOCK_HEIGHT = $(shell curl -s $(REMOTE)/status | jq -r '.result.sync_info.latest_block_height')

@@ -4,9 +4,9 @@ on:
   # allow to run workflow manually
   workflow_dispatch: { }
 
-  # Triggers the workflow once per day at 6PM UTC
+  # Triggers the workflow six times per day
   schedule:
-    - cron: "0 18 * * *"
+    - cron: "0 */4 * * *"
 
 jobs:
   backup:
@@ -22,7 +22,6 @@ jobs:
       max-parallel: 1
       matrix:
         testnet:
-          - test11.gno.land
           - test13.gno.land
           - gnoland1
 
@@ -41,16 +40,7 @@ jobs:
           key: ${{ runner.os }}-go-1.25-txarchive-v0.5.1
 
       - name: Run backup script
-        run: make -C ${{ matrix.testnet }} fetch
-
-      - name: Join small backup files
-        run: make -C ${{ matrix.testnet }} join
-
-      - name: Run extractor
-        run: make -C ${{ matrix.testnet }} extractor
-
-      - name: Run stats script
-        run: make -C ${{ matrix.testnet }} stats
+        run: make -C ${{ matrix.testnet }} fetch join extractor stats
 
       - name: Run git pull
         run: git pull --no-tags origin main
