@@ -1,0 +1,3 @@
+module = "gno.land/p/akkadia/v0/validate"
+
+gno = "0.9"
