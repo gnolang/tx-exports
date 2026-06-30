@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-440736
+490217
 ```
 
 ## addpkgs
@@ -11,24 +11,24 @@
 
 ## top realm calls
 ```
- 344731 "gno.land/r/gnoswap/router"
- 265722 "gno.land/r/gnoland/wugnot"
- 160781 "gno.land/r/gnoswap/gns"
-  77815 "gno.land/r/gnoswap/test_token/test_dai"
-  76720 "gno.land/r/gnoswap/test_token/test_usdc"
-  69978 "gno.land/r/gnoswap/test_token/test_trx"
-  68260 "gno.land/r/gnoswap/test_token/test_sol"
-  66808 "gno.land/r/gnoswap/test_token/test_usdt"
-  64184 "gno.land/r/gnoswap/test_token/test_atom"
-  59199 "gno.land/r/gnoswap/test_token/test_atone"
-  52906 "gno.land/r/gnoswap/test_token/test_eth"
-  51793 "gno.land/r/gnoswap/test_token/test_photon"
-  50277 "gno.land/r/gnoswap/test_token/test_btc"
-  26202 "gno.land/r/gnoswap/position"
-  23115 "gno.land/r/gnoswap/staker"
-  13882 "gno.land/r/gnoswap/gnft"
-   1203 "gno.land/r/gnoswap/gov/staker"
-    907 "gno.land/r/gnoswap/launchpad"
+ 389522 "gno.land/r/gnoswap/router"
+ 276626 "gno.land/r/gnoland/wugnot"
+ 184508 "gno.land/r/gnoswap/gns"
+  88046 "gno.land/r/gnoswap/test_token/test_usdc"
+  87063 "gno.land/r/gnoswap/test_token/test_dai"
+  77798 "gno.land/r/gnoswap/test_token/test_trx"
+  75472 "gno.land/r/gnoswap/test_token/test_sol"
+  74208 "gno.land/r/gnoswap/test_token/test_usdt"
+  70696 "gno.land/r/gnoswap/test_token/test_atom"
+  65425 "gno.land/r/gnoswap/test_token/test_atone"
+  57356 "gno.land/r/gnoswap/test_token/test_eth"
+  56111 "gno.land/r/gnoswap/test_token/test_photon"
+  55173 "gno.land/r/gnoswap/test_token/test_btc"
+  28303 "gno.land/r/gnoswap/position"
+  24553 "gno.land/r/gnoswap/staker"
+  14983 "gno.land/r/gnoswap/gnft"
+   1206 "gno.land/r/gnoswap/gov/staker"
+    918 "gno.land/r/gnoswap/launchpad"
     289 "gno.land/r/gnoswap/gov/governance"
     235 "gno.land/r/akkadia/v0/block"
     234 "gno.land/r/akkadia/v0/blueprint"
@@ -38,7 +38,7 @@
     166 "gno.land/r/akkadia/v0/chunk"
      87 "gno.land/r/gnoswap/pool"
      56 "gno.land/r/sys/cla"
-     50 "gno.land/r/akkadia/v0/personal_world"
+     51 "gno.land/r/akkadia/v0/personal_world"
      39 "gno.land/r/g1nqnrt3aldzhu6zzeg75yw97wvavqy7wr77g56q/deploy-test/v0/v0/personal_world"
      20 "gno.land/r/g18wk4a80cr7dqa25vfka2yug5n3pd50udled6y3/gnogle_nft2"
      19 "gno.land/r/g18wk4a80cr7dqa25vfka2yug5n3pd50udled6y3/nftmarketv3"
