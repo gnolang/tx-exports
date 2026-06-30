@@ -5,7 +5,7 @@ import (
 	"encoding/binary"
 	"chain/runtime"
 
-	"gno.land/p/samcrew/_deps/onbloc/uint256"
+	"gno.land/p/samcrew/deps/onbloc/uint256"
 )
 
 var EMPTY_PAYLOAD_HASH = [32]byte{}

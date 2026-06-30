@@ -3,7 +3,7 @@ package lziface
 import (
 	"encoding/binary"
 
-	"gno.land/p/samcrew/_deps/onbloc/uint256"
+	"gno.land/p/samcrew/deps/onbloc/uint256"
 )
 
 const OFT_SEND_TO_OFFSET = 32
