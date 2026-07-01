@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-557509
+576658
 ```
 
 ## addpkgs
@@ -11,30 +11,30 @@
 
 ## top realm calls
 ```
- 442853 "gno.land/r/gnoswap/router"
- 302050 "gno.land/r/gnoland/wugnot"
- 221428 "gno.land/r/gnoswap/gns"
- 107055 "gno.land/r/gnoswap/test_token/test_usdc"
-  96394 "gno.land/r/gnoswap/test_token/test_dai"
-  85808 "gno.land/r/gnoswap/test_token/test_trx"
-  82401 "gno.land/r/gnoswap/test_token/test_sol"
-  80820 "gno.land/r/gnoswap/test_token/test_usdt"
-  77217 "gno.land/r/gnoswap/test_token/test_atom"
-  71917 "gno.land/r/gnoswap/test_token/test_atone"
-  61837 "gno.land/r/gnoswap/test_token/test_eth"
-  60231 "gno.land/r/gnoswap/test_token/test_photon"
-  60074 "gno.land/r/gnoswap/test_token/test_btc"
-  32722 "gno.land/r/gnoswap/position"
-  28188 "gno.land/r/gnoswap/staker"
-  17839 "gno.land/r/gnoswap/gnft"
+ 461368 "gno.land/r/gnoswap/router"
+ 316711 "gno.land/r/gnoland/wugnot"
+ 238337 "gno.land/r/gnoswap/gns"
+ 121207 "gno.land/r/gnoswap/test_token/test_usdc"
+  97395 "gno.land/r/gnoswap/test_token/test_dai"
+  86659 "gno.land/r/gnoswap/test_token/test_trx"
+  83226 "gno.land/r/gnoswap/test_token/test_sol"
+  81545 "gno.land/r/gnoswap/test_token/test_usdt"
+  77976 "gno.land/r/gnoswap/test_token/test_atom"
+  73028 "gno.land/r/gnoswap/test_token/test_atone"
+  62312 "gno.land/r/gnoswap/test_token/test_eth"
+  60686 "gno.land/r/gnoswap/test_token/test_photon"
+  60569 "gno.land/r/gnoswap/test_token/test_btc"
+  33280 "gno.land/r/gnoswap/position"
+  28693 "gno.land/r/gnoswap/staker"
+  18282 "gno.land/r/gnoswap/gnft"
    1359 "gno.land/r/gnoswap/gov/staker"
     997 "gno.land/r/gnoswap/launchpad"
     367 "gno.land/r/akkadia/v0/blueprint"
     306 "gno.land/r/gnoswap/gov/governance"
     237 "gno.land/r/akkadia/v0/block"
     231 "gno.land/r/g1nqnrt3aldzhu6zzeg75yw97wvavqy7wr77g56q/deploy-test/v0/v0/block"
+    231 "gno.land/r/gnops/valopers"
     230 "gno.land/r/g1nqnrt3aldzhu6zzeg75yw97wvavqy7wr77g56q/deploy-test/v2/block"
-    229 "gno.land/r/gnops/valopers"
     187 "gno.land/r/akkadia/v0/personal_world"
     167 "gno.land/r/akkadia/v0/chunk"
      87 "gno.land/r/gnoswap/pool"
