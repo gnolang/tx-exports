@@ -1,0 +1,3 @@
+module = "gno.land/r/nym-vikbez000/nightsky"
+gno = "0.9"
+private = true
