@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-877425
+888445
 ```
 
 ## addpkgs
@@ -11,28 +11,28 @@
 
 ## top realm calls
 ```
- 711705 "gno.land/r/gnoswap/router"
- 434913 "gno.land/r/gnoland/wugnot"
- 405442 "gno.land/r/gnoswap/gns"
- 200122 "gno.land/r/gnoswap/test_token/test_usdc"
- 145537 "gno.land/r/gnoswap/test_token/test_dai"
- 128185 "gno.land/r/gnoswap/test_token/test_trx"
- 120264 "gno.land/r/gnoswap/test_token/test_sol"
- 117891 "gno.land/r/gnoswap/test_token/test_usdt"
- 111594 "gno.land/r/gnoswap/test_token/test_atom"
- 104018 "gno.land/r/gnoswap/test_token/test_atone"
-  85936 "gno.land/r/gnoswap/test_token/test_eth"
-  85907 "gno.land/r/gnoswap/test_token/test_btc"
-  82533 "gno.land/r/gnoswap/test_token/test_photon"
-  59983 "gno.land/r/gnoswap/position"
-  49890 "gno.land/r/gnoswap/staker"
-  34603 "gno.land/r/gnoswap/gnft"
+ 719612 "gno.land/r/gnoswap/router"
+ 439442 "gno.land/r/gnoland/wugnot"
+ 411210 "gno.land/r/gnoswap/gns"
+ 202156 "gno.land/r/gnoswap/test_token/test_usdc"
+ 147229 "gno.land/r/gnoswap/test_token/test_dai"
+ 129607 "gno.land/r/gnoswap/test_token/test_trx"
+ 121576 "gno.land/r/gnoswap/test_token/test_sol"
+ 119091 "gno.land/r/gnoswap/test_token/test_usdt"
+ 112766 "gno.land/r/gnoswap/test_token/test_atom"
+ 105066 "gno.land/r/gnoswap/test_token/test_atone"
+  86803 "gno.land/r/gnoswap/test_token/test_btc"
+  86744 "gno.land/r/gnoswap/test_token/test_eth"
+  83277 "gno.land/r/gnoswap/test_token/test_photon"
+  61449 "gno.land/r/gnoswap/position"
+  51249 "gno.land/r/gnoswap/staker"
+  35635 "gno.land/r/gnoswap/gnft"
    6634 "gno.land/r/akkadia/v0/personal_world"
-   2288 "gno.land/r/akkadia/v0/blueprint"
+   3083 "gno.land/r/akkadia/v0/blueprint"
    1538 "gno.land/r/gnoswap/gov/staker"
    1215 "gno.land/r/gnoswap/launchpad"
     559 "gno.land/r/akkadia/v0/chunk"
-    467 "gno.land/r/gnoswap/gov/governance"
+    468 "gno.land/r/gnoswap/gov/governance"
     456 "gno.land/r/akkadia/v0/block"
     264 "gno.land/r/gnops/valopers"
     231 "gno.land/r/g1nqnrt3aldzhu6zzeg75yw97wvavqy7wr77g56q/deploy-test/v0/v0/block"
