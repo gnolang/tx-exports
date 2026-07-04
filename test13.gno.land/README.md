@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-866562
+877425
 ```
 
 ## addpkgs
@@ -11,28 +11,28 @@
 
 ## top realm calls
 ```
- 704087 "gno.land/r/gnoswap/router"
- 430547 "gno.land/r/gnoland/wugnot"
- 399734 "gno.land/r/gnoswap/gns"
- 198298 "gno.land/r/gnoswap/test_token/test_usdc"
- 143973 "gno.land/r/gnoswap/test_token/test_dai"
- 126739 "gno.land/r/gnoswap/test_token/test_trx"
- 119052 "gno.land/r/gnoswap/test_token/test_sol"
- 116675 "gno.land/r/gnoswap/test_token/test_usdt"
- 110450 "gno.land/r/gnoswap/test_token/test_atom"
- 103008 "gno.land/r/gnoswap/test_token/test_atone"
-  85130 "gno.land/r/gnoswap/test_token/test_eth"
-  85117 "gno.land/r/gnoswap/test_token/test_btc"
-  81767 "gno.land/r/gnoswap/test_token/test_photon"
-  58566 "gno.land/r/gnoswap/position"
-  48570 "gno.land/r/gnoswap/staker"
-  33578 "gno.land/r/gnoswap/gnft"
-   6420 "gno.land/r/akkadia/v0/personal_world"
-   1536 "gno.land/r/akkadia/v0/blueprint"
-   1535 "gno.land/r/gnoswap/gov/staker"
-   1209 "gno.land/r/gnoswap/launchpad"
+ 711705 "gno.land/r/gnoswap/router"
+ 434913 "gno.land/r/gnoland/wugnot"
+ 405442 "gno.land/r/gnoswap/gns"
+ 200122 "gno.land/r/gnoswap/test_token/test_usdc"
+ 145537 "gno.land/r/gnoswap/test_token/test_dai"
+ 128185 "gno.land/r/gnoswap/test_token/test_trx"
+ 120264 "gno.land/r/gnoswap/test_token/test_sol"
+ 117891 "gno.land/r/gnoswap/test_token/test_usdt"
+ 111594 "gno.land/r/gnoswap/test_token/test_atom"
+ 104018 "gno.land/r/gnoswap/test_token/test_atone"
+  85936 "gno.land/r/gnoswap/test_token/test_eth"
+  85907 "gno.land/r/gnoswap/test_token/test_btc"
+  82533 "gno.land/r/gnoswap/test_token/test_photon"
+  59983 "gno.land/r/gnoswap/position"
+  49890 "gno.land/r/gnoswap/staker"
+  34603 "gno.land/r/gnoswap/gnft"
+   6634 "gno.land/r/akkadia/v0/personal_world"
+   2288 "gno.land/r/akkadia/v0/blueprint"
+   1538 "gno.land/r/gnoswap/gov/staker"
+   1215 "gno.land/r/gnoswap/launchpad"
     559 "gno.land/r/akkadia/v0/chunk"
-    466 "gno.land/r/gnoswap/gov/governance"
+    467 "gno.land/r/gnoswap/gov/governance"
     456 "gno.land/r/akkadia/v0/block"
     264 "gno.land/r/gnops/valopers"
     231 "gno.land/r/g1nqnrt3aldzhu6zzeg75yw97wvavqy7wr77g56q/deploy-test/v0/v0/block"
