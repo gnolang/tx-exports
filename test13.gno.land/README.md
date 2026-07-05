@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-940535
+950503
 ```
 
 ## addpkgs
@@ -11,28 +11,28 @@
 
 ## top realm calls
 ```
- 757732 "gno.land/r/gnoswap/router"
- 460213 "gno.land/r/gnoland/wugnot"
- 438746 "gno.land/r/gnoswap/gns"
- 211740 "gno.land/r/gnoswap/test_token/test_usdc"
- 154958 "gno.land/r/gnoswap/test_token/test_dai"
- 136791 "gno.land/r/gnoswap/test_token/test_trx"
- 127880 "gno.land/r/gnoswap/test_token/test_sol"
- 125156 "gno.land/r/gnoswap/test_token/test_usdt"
- 118222 "gno.land/r/gnoswap/test_token/test_atom"
- 110038 "gno.land/r/gnoswap/test_token/test_atone"
-  90979 "gno.land/r/gnoswap/test_token/test_btc"
-  90696 "gno.land/r/gnoswap/test_token/test_eth"
-  87063 "gno.land/r/gnoswap/test_token/test_photon"
-  68366 "gno.land/r/gnoswap/position"
-  57664 "gno.land/r/gnoswap/staker"
-  40400 "gno.land/r/gnoswap/gnft"
-   9836 "gno.land/r/akkadia/v0/personal_world"
+ 765341 "gno.land/r/gnoswap/router"
+ 464395 "gno.land/r/gnoland/wugnot"
+ 444441 "gno.land/r/gnoswap/gns"
+ 213789 "gno.land/r/gnoswap/test_token/test_usdc"
+ 156585 "gno.land/r/gnoswap/test_token/test_dai"
+ 138120 "gno.land/r/gnoswap/test_token/test_trx"
+ 129085 "gno.land/r/gnoswap/test_token/test_sol"
+ 126297 "gno.land/r/gnoswap/test_token/test_usdt"
+ 119335 "gno.land/r/gnoswap/test_token/test_atom"
+ 111137 "gno.land/r/gnoswap/test_token/test_atone"
+  91744 "gno.land/r/gnoswap/test_token/test_btc"
+  91399 "gno.land/r/gnoswap/test_token/test_eth"
+  87806 "gno.land/r/gnoswap/test_token/test_photon"
+  69724 "gno.land/r/gnoswap/position"
+  58842 "gno.land/r/gnoswap/staker"
+  41294 "gno.land/r/gnoswap/gnft"
+  10073 "gno.land/r/akkadia/v0/personal_world"
    3353 "gno.land/r/akkadia/v0/blueprint"
-   1568 "gno.land/r/gnoswap/gov/staker"
+   1570 "gno.land/r/gnoswap/gov/staker"
    1243 "gno.land/r/gnoswap/launchpad"
     559 "gno.land/r/akkadia/v0/chunk"
-    470 "gno.land/r/gnoswap/gov/governance"
+    475 "gno.land/r/gnoswap/gov/governance"
     468 "gno.land/r/akkadia/v0/block"
     265 "gno.land/r/gnops/valopers"
     231 "gno.land/r/g1nqnrt3aldzhu6zzeg75yw97wvavqy7wr77g56q/deploy-test/v0/v0/block"
