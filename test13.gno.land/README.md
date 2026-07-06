@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-995989
+1005044
 ```
 
 ## addpkgs
@@ -11,33 +11,33 @@
 
 ## top realm calls
 ```
- 797938 "gno.land/r/gnoswap/router"
- 481962 "gno.land/r/gnoland/wugnot"
- 467727 "gno.land/r/gnoswap/gns"
- 222903 "gno.land/r/gnoswap/test_token/test_usdc"
- 163247 "gno.land/r/gnoswap/test_token/test_dai"
- 143746 "gno.land/r/gnoswap/test_token/test_trx"
- 134055 "gno.land/r/gnoswap/test_token/test_sol"
- 131193 "gno.land/r/gnoswap/test_token/test_usdt"
- 123933 "gno.land/r/gnoswap/test_token/test_atom"
- 115493 "gno.land/r/gnoswap/test_token/test_atone"
-  95346 "gno.land/r/gnoswap/test_token/test_btc"
-  94701 "gno.land/r/gnoswap/test_token/test_eth"
-  91002 "gno.land/r/gnoswap/test_token/test_photon"
-  75168 "gno.land/r/gnoswap/position"
-  63910 "gno.land/r/gnoswap/staker"
-  45010 "gno.land/r/gnoswap/gnft"
-  19738 "gno.land/r/akkadia/v0/personal_world"
-   3647 "gno.land/r/akkadia/v0/blueprint"
-   1593 "gno.land/r/gnoswap/gov/staker"
-   1282 "gno.land/r/gnoswap/launchpad"
+ 804559 "gno.land/r/gnoswap/router"
+ 485585 "gno.land/r/gnoland/wugnot"
+ 472419 "gno.land/r/gnoswap/gns"
+ 224775 "gno.land/r/gnoswap/test_token/test_usdc"
+ 164604 "gno.land/r/gnoswap/test_token/test_dai"
+ 144959 "gno.land/r/gnoswap/test_token/test_trx"
+ 135134 "gno.land/r/gnoswap/test_token/test_sol"
+ 132253 "gno.land/r/gnoswap/test_token/test_usdt"
+ 124864 "gno.land/r/gnoswap/test_token/test_atom"
+ 116312 "gno.land/r/gnoswap/test_token/test_atone"
+  96051 "gno.land/r/gnoswap/test_token/test_btc"
+  95322 "gno.land/r/gnoswap/test_token/test_eth"
+  91625 "gno.land/r/gnoswap/test_token/test_photon"
+  76274 "gno.land/r/gnoswap/position"
+  64948 "gno.land/r/gnoswap/staker"
+  45777 "gno.land/r/gnoswap/gnft"
+  20372 "gno.land/r/akkadia/v0/personal_world"
+   3649 "gno.land/r/akkadia/v0/blueprint"
+   1595 "gno.land/r/gnoswap/gov/staker"
+   1284 "gno.land/r/gnoswap/launchpad"
     559 "gno.land/r/akkadia/v0/chunk"
-    489 "gno.land/r/akkadia/v0/block"
-    478 "gno.land/r/gnoswap/gov/governance"
-    265 "gno.land/r/gnops/valopers"
+    492 "gno.land/r/akkadia/v0/block"
+    481 "gno.land/r/gnoswap/gov/governance"
+    266 "gno.land/r/gnops/valopers"
     231 "gno.land/r/g1nqnrt3aldzhu6zzeg75yw97wvavqy7wr77g56q/deploy-test/v0/v0/block"
     230 "gno.land/r/g1nqnrt3aldzhu6zzeg75yw97wvavqy7wr77g56q/deploy-test/v2/block"
-    138 "gno.land/r/akkadia/v0/user"
+    139 "gno.land/r/akkadia/v0/user"
      88 "gno.land/r/gnoswap/pool"
      59 "gno.land/r/sys/cla"
      39 "gno.land/r/g1nqnrt3aldzhu6zzeg75yw97wvavqy7wr77g56q/deploy-test/v0/v0/personal_world"
@@ -74,6 +74,7 @@
       3 "gno.land/r/nym-samcrew123/audit/testblog1780753499"
       3 "gno.land/r/nym-samcrew123/audit/testblog1780756068"
       3 "gno.land/r/nym-samcrew123/audit/testblog1780756805"
+      3 "gno.land/r/samcrew/memba_feed_v1"
       2 "gno.land/r/aib/ibc/apps/testing/grc20test"
       2 "gno.land/r/g1nqnrt3aldzhu6zzeg75yw97wvavqy7wr77g56q/deploy-test/v0/v0/blueprint"
       2 "gno.land/r/g1nqnrt3aldzhu6zzeg75yw97wvavqy7wr77g56q/deploy-test/v1/user"
@@ -120,7 +121,6 @@
       1 "gno.land/r/nym-samcrew123/audit/testprofilecaller1780753515"
       1 "gno.land/r/nym-samcrew123/audit/testprofilecaller1780756082"
       1 "gno.land/r/nym-samcrew123/audit/testprofilecaller1780756819"
-      1 "gno.land/r/samcrew/memba_feed_v1"
 ```
 
 ## top faucet requesters
