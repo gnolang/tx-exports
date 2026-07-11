@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-1216918
+1222535
 ```
 
 ## addpkgs
@@ -11,27 +11,27 @@
 
 ## top realm calls
 ```
- 968227 "gno.land/r/gnoswap/router"
- 588743 "gno.land/r/gnoswap/gns"
- 572121 "gno.land/r/gnoland/wugnot"
- 276905 "gno.land/r/gnoswap/test_token/test_usdc"
- 195769 "gno.land/r/gnoswap/test_token/test_dai"
- 172076 "gno.land/r/gnoswap/test_token/test_trx"
- 159432 "gno.land/r/gnoswap/test_token/test_sol"
- 155519 "gno.land/r/gnoswap/test_token/test_usdt"
- 146642 "gno.land/r/gnoswap/test_token/test_atom"
- 136603 "gno.land/r/gnoswap/test_token/test_atone"
- 112013 "gno.land/r/gnoswap/test_token/test_btc"
- 110660 "gno.land/r/gnoswap/test_token/test_eth"
- 106040 "gno.land/r/gnoswap/test_token/test_photon"
- 100389 "gno.land/r/gnoswap/position"
-  87257 "gno.land/r/gnoswap/staker"
-  61255 "gno.land/r/gnoswap/gnft"
-  29324 "gno.land/r/akkadia/v0/personal_world"
+ 972613 "gno.land/r/gnoswap/router"
+ 591752 "gno.land/r/gnoswap/gns"
+ 574511 "gno.land/r/gnoland/wugnot"
+ 278170 "gno.land/r/gnoswap/test_token/test_usdc"
+ 196718 "gno.land/r/gnoswap/test_token/test_dai"
+ 172817 "gno.land/r/gnoswap/test_token/test_trx"
+ 160127 "gno.land/r/gnoswap/test_token/test_sol"
+ 156122 "gno.land/r/gnoswap/test_token/test_usdt"
+ 147219 "gno.land/r/gnoswap/test_token/test_atom"
+ 137126 "gno.land/r/gnoswap/test_token/test_atone"
+ 112482 "gno.land/r/gnoswap/test_token/test_btc"
+ 111083 "gno.land/r/gnoswap/test_token/test_eth"
+ 106459 "gno.land/r/gnoswap/test_token/test_photon"
+ 101021 "gno.land/r/gnoswap/position"
+  87848 "gno.land/r/gnoswap/staker"
+  61660 "gno.land/r/gnoswap/gnft"
+  29351 "gno.land/r/akkadia/v0/personal_world"
    4565 "gno.land/r/akkadia/v0/blueprint"
-   1750 "gno.land/r/gnoswap/gov/staker"
-   1430 "gno.land/r/gnoswap/launchpad"
-    687 "gno.land/r/akkadia/v0/block"
+   1770 "gno.land/r/gnoswap/gov/staker"
+   1458 "gno.land/r/gnoswap/launchpad"
+    690 "gno.land/r/akkadia/v0/block"
     579 "gno.land/r/akkadia/v0/chunk"
     529 "gno.land/r/gnoswap/gov/governance"
     345 "gno.land/r/gnops/valopers"
@@ -52,6 +52,7 @@
      14 "gno.land/r/g1nqnrt3aldzhu6zzeg75yw97wvavqy7wr77g56q/deploy-test/v2/chunk"
      14 "gno.land/r/nym-vikbez000/telescope"
      14 "gno.land/r/samcrew/memba_collections"
+     13 "gno.land/r/samcrew/memba_appstore_v3"
      13 "gno.land/r/samcrew/memba_reviews_v1"
      12 "gno.land/r/g1nqnrt3aldzhu6zzeg75yw97wvavqy7wr77g56q/deploy-test/v2/admin"
      10 "gno.land/r/g18wk4a80cr7dqa25vfka2yug5n3pd50udled6y3/nftmarketv2"
@@ -80,7 +81,6 @@
       3 "gno.land/r/nym-samcrew123/audit/testblog1780756068"
       3 "gno.land/r/nym-samcrew123/audit/testblog1780756805"
       3 "gno.land/r/nym-samcrew123/audit/testblog1783537818"
-      3 "gno.land/r/samcrew/memba_appstore_v3"
       3 "gno.land/r/samcrew/memba_dao_candidature_v2"
       3 "gno.land/r/samcrew/memba_feed_v1"
       2 "gno.land/r/aib/ibc/apps/testing/grc20test"
