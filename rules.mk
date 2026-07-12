@@ -39,10 +39,15 @@ WS_FLAG       =
 BACKUP_REMOTE = $(REMOTE)
 endif
 
+# --batch 100: the RPC nodes enforce a 10s WebSocket write deadline (tm2
+# defaultWSWriteWait). Assembling a batch response for tx-archive's default
+# 1000 blocks takes longer than that in tx-dense ranges, and the server
+# drops the connection mid-fetch.
 .PHONY: fetch
 fetch: tx-archive-ensure
 	@echo "Backup from: $(FROM_BLOCK) to $(TO_BLOCK)"
 	cd $(TXARCHIVE) && go run ./cmd backup -verbose $(WS_FLAG) \
+		--batch 100 \
 		--remote $(BACKUP_REMOTE) \
 		--from-block $(FROM_BLOCK) \
 		--to-block   $(TO_BLOCK) \
