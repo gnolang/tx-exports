@@ -6,8 +6,8 @@ This file provides guidance to autonomous AI agents when working with code in th
 
 This repository archives raw blockchain transaction data exported from Gno.land chains:
 
-- **Active**: topaz.gno.land (test14), test13.gno.land, gnoland1 (betanet), staging.gno.land
-- **Historical**: test1–test5, test11 (archived, no longer updated)
+- **Active**: topaz.gno.land (test14), gnoland1 (betanet), staging.gno.land
+- **Historical**: test1–test5, test11, test13 (archived, no longer updated)
 
 ## Common Commands
 
@@ -78,7 +78,7 @@ Uses `export.sh` instead of tx-archive. It calls `gnogenesis txs export` and `gn
 
 ### CI
 
-- `.github/workflows/txs-exporter.yml` — runs every 4 hours for topaz.gno.land, test13.gno.land, and gnoland1
+- `.github/workflows/txs-exporter.yml` — runs every 4 hours for topaz.gno.land and gnoland1
 - `.github/workflows/staging-txs-exporter.yml` — runs hourly for staging.gno.land
 
 Both workflows auto-commit updated backup files using `git-auto-commit-action`.

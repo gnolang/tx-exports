@@ -23,7 +23,6 @@ jobs:
       matrix:
         testnet:
           - topaz.gno.land
-          - test13.gno.land
           - gnoland1
 
     steps:
