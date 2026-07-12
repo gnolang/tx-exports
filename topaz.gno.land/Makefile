@@ -11,8 +11,11 @@ USE_WS = 1
 # exporter falls behind
 MAX_INTERVAL = 10000
 
-FROM_BLOCK = $(shell cat metadata.json | jq -r '.latest_block_height + 1')
-LATEST_BLOCK_HEIGHT = $(shell curl -s $(REMOTE)/status | jq -r '.result.sync_info.latest_block_height')
+# ':=' so each height is read exactly once per make run: every reference
+# (--to-block, output filename, metadata update) must see the same value,
+# otherwise consecutive runs drift and leave gaps or overlaps in the export.
+FROM_BLOCK := $(shell cat metadata.json | jq -r '.latest_block_height + 1')
+LATEST_BLOCK_HEIGHT := $(shell curl -s $(REMOTE)/status | jq -r '.result.sync_info.latest_block_height')
 TO_BLOCK = $(LATEST_BLOCK_HEIGHT)
 
 ifeq ($(shell echo "$(TO_BLOCK) - $(FROM_BLOCK) >= $(MAX_INTERVAL)" | bc ), 1)
