@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-1393047
+1397394
 ```
 
 ## addpkgs
@@ -11,30 +11,30 @@
 
 ## top realm calls
 ```
-1103236 "gno.land/r/gnoswap/router"
- 680573 "gno.land/r/gnoswap/gns"
- 645625 "gno.land/r/gnoland/wugnot"
- 321627 "gno.land/r/gnoswap/test_token/test_usdc"
- 221201 "gno.land/r/gnoswap/test_token/test_dai"
- 193705 "gno.land/r/gnoswap/test_token/test_trx"
- 179381 "gno.land/r/gnoswap/test_token/test_sol"
- 174740 "gno.land/r/gnoswap/test_token/test_usdt"
- 164029 "gno.land/r/gnoswap/test_token/test_atom"
- 153007 "gno.land/r/gnoswap/test_token/test_atone"
- 125468 "gno.land/r/gnoswap/test_token/test_btc"
- 123117 "gno.land/r/gnoswap/test_token/test_eth"
- 118552 "gno.land/r/gnoswap/position"
- 118036 "gno.land/r/gnoswap/test_token/test_photon"
- 103950 "gno.land/r/gnoswap/staker"
-  72210 "gno.land/r/gnoswap/gnft"
-  35692 "gno.land/r/akkadia/v0/personal_world"
-   5137 "gno.land/r/akkadia/v0/blueprint"
-   1937 "gno.land/r/gnoswap/gov/staker"
+1106700 "gno.land/r/gnoswap/router"
+ 682851 "gno.land/r/gnoswap/gns"
+ 647432 "gno.land/r/gnoland/wugnot"
+ 322872 "gno.land/r/gnoswap/test_token/test_usdc"
+ 221859 "gno.land/r/gnoswap/test_token/test_dai"
+ 194299 "gno.land/r/gnoswap/test_token/test_trx"
+ 179875 "gno.land/r/gnoswap/test_token/test_sol"
+ 175202 "gno.land/r/gnoswap/test_token/test_usdt"
+ 164479 "gno.land/r/gnoswap/test_token/test_atom"
+ 153405 "gno.land/r/gnoswap/test_token/test_atone"
+ 125812 "gno.land/r/gnoswap/test_token/test_btc"
+ 123413 "gno.land/r/gnoswap/test_token/test_eth"
+ 118961 "gno.land/r/gnoswap/position"
+ 118324 "gno.land/r/gnoswap/test_token/test_photon"
+ 104309 "gno.land/r/gnoswap/staker"
+  72453 "gno.land/r/gnoswap/gnft"
+  35829 "gno.land/r/akkadia/v0/personal_world"
+   5142 "gno.land/r/akkadia/v0/blueprint"
+   1939 "gno.land/r/gnoswap/gov/staker"
    1688 "gno.land/r/gnoswap/launchpad"
-   1086 "gno.land/r/gnoswap/common"
-    832 "gno.land/r/akkadia/v0/block"
+   1092 "gno.land/r/gnoswap/common"
+    833 "gno.land/r/akkadia/v0/block"
     587 "gno.land/r/akkadia/v0/chunk"
-    544 "gno.land/r/gnoswap/gov/governance"
+    546 "gno.land/r/gnoswap/gov/governance"
     364 "gno.land/r/gnops/valopers"
     231 "gno.land/r/g1nqnrt3aldzhu6zzeg75yw97wvavqy7wr77g56q/deploy-test/v0/v0/block"
     230 "gno.land/r/g1nqnrt3aldzhu6zzeg75yw97wvavqy7wr77g56q/deploy-test/v2/block"
