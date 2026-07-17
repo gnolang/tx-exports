@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-1419839
+1426309
 ```
 
 ## addpkgs
@@ -11,28 +11,28 @@
 
 ## top realm calls
 ```
-1123628 "gno.land/r/gnoswap/router"
- 693923 "gno.land/r/gnoswap/gns"
- 655994 "gno.land/r/gnoland/wugnot"
- 328563 "gno.land/r/gnoswap/test_token/test_usdc"
- 224937 "gno.land/r/gnoswap/test_token/test_dai"
- 196977 "gno.land/r/gnoswap/test_token/test_trx"
- 182345 "gno.land/r/gnoswap/test_token/test_sol"
- 177556 "gno.land/r/gnoswap/test_token/test_usdt"
- 166655 "gno.land/r/gnoswap/test_token/test_atom"
- 155351 "gno.land/r/gnoswap/test_token/test_atone"
- 127346 "gno.land/r/gnoswap/test_token/test_btc"
- 124959 "gno.land/r/gnoswap/test_token/test_eth"
- 121057 "gno.land/r/gnoswap/position"
- 120208 "gno.land/r/gnoswap/test_token/test_photon"
- 106223 "gno.land/r/gnoswap/staker"
-  73577 "gno.land/r/gnoswap/gnft"
-  37789 "gno.land/r/akkadia/v0/personal_world"
-   5212 "gno.land/r/akkadia/v0/blueprint"
+1128805 "gno.land/r/gnoswap/router"
+ 697289 "gno.land/r/gnoswap/gns"
+ 658640 "gno.land/r/gnoland/wugnot"
+ 330345 "gno.land/r/gnoswap/test_token/test_usdc"
+ 226023 "gno.land/r/gnoswap/test_token/test_dai"
+ 197759 "gno.land/r/gnoswap/test_token/test_trx"
+ 183029 "gno.land/r/gnoswap/test_token/test_sol"
+ 178272 "gno.land/r/gnoswap/test_token/test_usdt"
+ 167269 "gno.land/r/gnoswap/test_token/test_atom"
+ 155965 "gno.land/r/gnoswap/test_token/test_atone"
+ 127832 "gno.land/r/gnoswap/test_token/test_btc"
+ 125389 "gno.land/r/gnoswap/test_token/test_eth"
+ 121673 "gno.land/r/gnoswap/position"
+ 120798 "gno.land/r/gnoswap/test_token/test_photon"
+ 106794 "gno.land/r/gnoswap/staker"
+  73937 "gno.land/r/gnoswap/gnft"
+  38026 "gno.land/r/akkadia/v0/personal_world"
+   5217 "gno.land/r/akkadia/v0/blueprint"
    1963 "gno.land/r/gnoswap/gov/staker"
    1729 "gno.land/r/gnoswap/launchpad"
-   1236 "gno.land/r/gnoswap/common"
-    835 "gno.land/r/akkadia/v0/block"
+   1244 "gno.land/r/gnoswap/common"
+    837 "gno.land/r/akkadia/v0/block"
     587 "gno.land/r/akkadia/v0/chunk"
     547 "gno.land/r/gnoswap/gov/governance"
     375 "gno.land/r/gnops/valopers"
