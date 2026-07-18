@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-1454559
+1460812
 ```
 
 ## addpkgs
@@ -11,27 +11,27 @@
 
 ## top realm calls
 ```
-1150409 "gno.land/r/gnoswap/router"
- 711528 "gno.land/r/gnoswap/gns"
- 669345 "gno.land/r/gnoland/wugnot"
- 337621 "gno.land/r/gnoswap/test_token/test_usdc"
- 229930 "gno.land/r/gnoswap/test_token/test_dai"
- 201300 "gno.land/r/gnoswap/test_token/test_trx"
- 186200 "gno.land/r/gnoswap/test_token/test_sol"
- 181255 "gno.land/r/gnoswap/test_token/test_usdt"
- 169990 "gno.land/r/gnoswap/test_token/test_atom"
- 158480 "gno.land/r/gnoswap/test_token/test_atone"
- 129945 "gno.land/r/gnoswap/test_token/test_btc"
- 127434 "gno.land/r/gnoswap/test_token/test_eth"
- 124182 "gno.land/r/gnoswap/position"
- 122723 "gno.land/r/gnoswap/test_token/test_photon"
- 109129 "gno.land/r/gnoswap/staker"
-  75433 "gno.land/r/gnoswap/gnft"
-  40085 "gno.land/r/akkadia/v0/personal_world"
-   5305 "gno.land/r/akkadia/v0/blueprint"
+1155385 "gno.land/r/gnoswap/router"
+ 714726 "gno.land/r/gnoswap/gns"
+ 671765 "gno.land/r/gnoland/wugnot"
+ 339353 "gno.land/r/gnoswap/test_token/test_usdc"
+ 230894 "gno.land/r/gnoswap/test_token/test_dai"
+ 202122 "gno.land/r/gnoswap/test_token/test_trx"
+ 186886 "gno.land/r/gnoswap/test_token/test_sol"
+ 181925 "gno.land/r/gnoswap/test_token/test_usdt"
+ 170694 "gno.land/r/gnoswap/test_token/test_atom"
+ 159068 "gno.land/r/gnoswap/test_token/test_atone"
+ 130373 "gno.land/r/gnoswap/test_token/test_btc"
+ 127900 "gno.land/r/gnoswap/test_token/test_eth"
+ 124806 "gno.land/r/gnoswap/position"
+ 123127 "gno.land/r/gnoswap/test_token/test_photon"
+ 109723 "gno.land/r/gnoswap/staker"
+  75768 "gno.land/r/gnoswap/gnft"
+  40344 "gno.land/r/akkadia/v0/personal_world"
+   5309 "gno.land/r/akkadia/v0/blueprint"
    1992 "gno.land/r/gnoswap/gov/staker"
    1756 "gno.land/r/gnoswap/launchpad"
-   1418 "gno.land/r/gnoswap/common"
+   1440 "gno.land/r/gnoswap/common"
     841 "gno.land/r/akkadia/v0/block"
     587 "gno.land/r/akkadia/v0/chunk"
     581 "gno.land/r/gnoswap/gov/governance"
@@ -72,6 +72,7 @@
       7 "gno.land/r/g1cz86tl8vnh9956cpuu43ksjy7kmur745wdjxsc/dexprobe"
       6 "gno.land/r/samcrew/memba_feed_v1"
       5 "gno.land/r/g16m0r7rm7fv5hx0ekr7gvx8g4fr7eu08nzhk6gt/multisigv2"
+      5 "gno.land/r/g16m0r7rm7fv5hx0ekr7gvx8g4fr7eu08nzhk6gt/multisigv3"
       5 "gno.land/r/g16p08xxtyt320hjju7769lzguxlvzszwpg8duwl/registry/v1"
       5 "gno.land/r/g1jsl3x46uhk75lvws0f3mjnc49g84m2hu4rpuyt/gpaccess"
       5 "gno.land/r/g1nqnrt3aldzhu6zzeg75yw97wvavqy7wr77g56q/deploy-test/v0/v0/user"
