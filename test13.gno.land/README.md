@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-1481028
+1485011
 ```
 
 ## addpkgs
@@ -11,28 +11,28 @@
 
 ## top realm calls
 ```
-1171453 "gno.land/r/gnoswap/router"
- 725027 "gno.land/r/gnoswap/gns"
- 679739 "gno.land/r/gnoland/wugnot"
- 344856 "gno.land/r/gnoswap/test_token/test_usdc"
- 233855 "gno.land/r/gnoswap/test_token/test_dai"
- 204743 "gno.land/r/gnoswap/test_token/test_trx"
- 189247 "gno.land/r/gnoswap/test_token/test_sol"
- 184154 "gno.land/r/gnoswap/test_token/test_usdt"
- 172778 "gno.land/r/gnoswap/test_token/test_atom"
- 160981 "gno.land/r/gnoswap/test_token/test_atone"
- 131832 "gno.land/r/gnoswap/test_token/test_btc"
- 129473 "gno.land/r/gnoswap/test_token/test_eth"
- 126649 "gno.land/r/gnoswap/position"
- 124522 "gno.land/r/gnoswap/test_token/test_photon"
- 111440 "gno.land/r/gnoswap/staker"
-  76842 "gno.land/r/gnoswap/gnft"
+1174808 "gno.land/r/gnoswap/router"
+ 727192 "gno.land/r/gnoswap/gns"
+ 681358 "gno.land/r/gnoland/wugnot"
+ 346066 "gno.land/r/gnoswap/test_token/test_usdc"
+ 234522 "gno.land/r/gnoswap/test_token/test_dai"
+ 205248 "gno.land/r/gnoswap/test_token/test_trx"
+ 189708 "gno.land/r/gnoswap/test_token/test_sol"
+ 184585 "gno.land/r/gnoswap/test_token/test_usdt"
+ 173203 "gno.land/r/gnoswap/test_token/test_atom"
+ 161330 "gno.land/r/gnoswap/test_token/test_atone"
+ 132151 "gno.land/r/gnoswap/test_token/test_btc"
+ 129796 "gno.land/r/gnoswap/test_token/test_eth"
+ 127012 "gno.land/r/gnoswap/position"
+ 124803 "gno.land/r/gnoswap/test_token/test_photon"
+ 111775 "gno.land/r/gnoswap/staker"
+  77026 "gno.land/r/gnoswap/gnft"
   41243 "gno.land/r/akkadia/v0/personal_world"
    5326 "gno.land/r/akkadia/v0/blueprint"
-   2025 "gno.land/r/gnoswap/gov/staker"
+   2027 "gno.land/r/gnoswap/gov/staker"
    1777 "gno.land/r/gnoswap/launchpad"
-   1636 "gno.land/r/gnoswap/common"
-    843 "gno.land/r/akkadia/v0/block"
+   1652 "gno.land/r/gnoswap/common"
+    845 "gno.land/r/akkadia/v0/block"
     587 "gno.land/r/akkadia/v0/chunk"
     583 "gno.land/r/gnoswap/gov/governance"
     377 "gno.land/r/gnops/valopers"
