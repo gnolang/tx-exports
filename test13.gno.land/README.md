@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-1485011
+1489409
 ```
 
 ## addpkgs
@@ -11,30 +11,30 @@
 
 ## top realm calls
 ```
-1174808 "gno.land/r/gnoswap/router"
- 727192 "gno.land/r/gnoswap/gns"
- 681358 "gno.land/r/gnoland/wugnot"
- 346066 "gno.land/r/gnoswap/test_token/test_usdc"
- 234522 "gno.land/r/gnoswap/test_token/test_dai"
- 205248 "gno.land/r/gnoswap/test_token/test_trx"
- 189708 "gno.land/r/gnoswap/test_token/test_sol"
- 184585 "gno.land/r/gnoswap/test_token/test_usdt"
- 173203 "gno.land/r/gnoswap/test_token/test_atom"
- 161330 "gno.land/r/gnoswap/test_token/test_atone"
- 132151 "gno.land/r/gnoswap/test_token/test_btc"
- 129796 "gno.land/r/gnoswap/test_token/test_eth"
- 127012 "gno.land/r/gnoswap/position"
- 124803 "gno.land/r/gnoswap/test_token/test_photon"
- 111775 "gno.land/r/gnoswap/staker"
-  77026 "gno.land/r/gnoswap/gnft"
+1178437 "gno.land/r/gnoswap/router"
+ 729577 "gno.land/r/gnoswap/gns"
+ 683194 "gno.land/r/gnoland/wugnot"
+ 347329 "gno.land/r/gnoswap/test_token/test_usdc"
+ 235223 "gno.land/r/gnoswap/test_token/test_dai"
+ 205829 "gno.land/r/gnoswap/test_token/test_trx"
+ 190219 "gno.land/r/gnoswap/test_token/test_sol"
+ 185090 "gno.land/r/gnoswap/test_token/test_usdt"
+ 173628 "gno.land/r/gnoswap/test_token/test_atom"
+ 161781 "gno.land/r/gnoswap/test_token/test_atone"
+ 132498 "gno.land/r/gnoswap/test_token/test_btc"
+ 130115 "gno.land/r/gnoswap/test_token/test_eth"
+ 127441 "gno.land/r/gnoswap/position"
+ 125086 "gno.land/r/gnoswap/test_token/test_photon"
+ 112190 "gno.land/r/gnoswap/staker"
+  77282 "gno.land/r/gnoswap/gnft"
   41243 "gno.land/r/akkadia/v0/personal_world"
    5326 "gno.land/r/akkadia/v0/blueprint"
-   2027 "gno.land/r/gnoswap/gov/staker"
+   2029 "gno.land/r/gnoswap/gov/staker"
    1777 "gno.land/r/gnoswap/launchpad"
-   1652 "gno.land/r/gnoswap/common"
+   1708 "gno.land/r/gnoswap/common"
     845 "gno.land/r/akkadia/v0/block"
+    588 "gno.land/r/gnoswap/gov/governance"
     587 "gno.land/r/akkadia/v0/chunk"
-    583 "gno.land/r/gnoswap/gov/governance"
     377 "gno.land/r/gnops/valopers"
     231 "gno.land/r/g1nqnrt3aldzhu6zzeg75yw97wvavqy7wr77g56q/deploy-test/v0/v0/block"
     230 "gno.land/r/g1nqnrt3aldzhu6zzeg75yw97wvavqy7wr77g56q/deploy-test/v2/block"
