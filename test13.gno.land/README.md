@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-1503287
+1508102
 ```
 
 ## addpkgs
@@ -11,22 +11,22 @@
 
 ## top realm calls
 ```
-1190026 "gno.land/r/gnoswap/router"
- 736909 "gno.land/r/gnoswap/gns"
- 688762 "gno.land/r/gnoland/wugnot"
- 351269 "gno.land/r/gnoswap/test_token/test_usdc"
- 237489 "gno.land/r/gnoswap/test_token/test_dai"
- 207579 "gno.land/r/gnoswap/test_token/test_trx"
- 191907 "gno.land/r/gnoswap/test_token/test_sol"
- 186652 "gno.land/r/gnoswap/test_token/test_usdt"
- 175176 "gno.land/r/gnoswap/test_token/test_atom"
- 163219 "gno.land/r/gnoswap/test_token/test_atone"
- 133634 "gno.land/r/gnoswap/test_token/test_btc"
- 131177 "gno.land/r/gnoswap/test_token/test_eth"
- 128725 "gno.land/r/gnoswap/position"
- 126110 "gno.land/r/gnoswap/test_token/test_photon"
- 113381 "gno.land/r/gnoswap/staker"
-  77990 "gno.land/r/gnoswap/gnft"
+1194053 "gno.land/r/gnoswap/router"
+ 739467 "gno.land/r/gnoswap/gns"
+ 690745 "gno.land/r/gnoland/wugnot"
+ 352635 "gno.land/r/gnoswap/test_token/test_usdc"
+ 238291 "gno.land/r/gnoswap/test_token/test_dai"
+ 208209 "gno.land/r/gnoswap/test_token/test_trx"
+ 192399 "gno.land/r/gnoswap/test_token/test_sol"
+ 187200 "gno.land/r/gnoswap/test_token/test_usdt"
+ 175708 "gno.land/r/gnoswap/test_token/test_atom"
+ 163745 "gno.land/r/gnoswap/test_token/test_atone"
+ 134038 "gno.land/r/gnoswap/test_token/test_btc"
+ 131567 "gno.land/r/gnoswap/test_token/test_eth"
+ 129150 "gno.land/r/gnoswap/position"
+ 126506 "gno.land/r/gnoswap/test_token/test_photon"
+ 113771 "gno.land/r/gnoswap/staker"
+  78250 "gno.land/r/gnoswap/gnft"
   41247 "gno.land/r/akkadia/v0/personal_world"
    5328 "gno.land/r/akkadia/v0/blueprint"
    2056 "gno.land/r/gnoswap/gov/staker"
@@ -38,7 +38,7 @@
     377 "gno.land/r/gnops/valopers"
     231 "gno.land/r/g1nqnrt3aldzhu6zzeg75yw97wvavqy7wr77g56q/deploy-test/v0/v0/block"
     230 "gno.land/r/g1nqnrt3aldzhu6zzeg75yw97wvavqy7wr77g56q/deploy-test/v2/block"
-    201 "gno.land/r/akkadia/v0/user"
+    202 "gno.land/r/akkadia/v0/user"
      96 "gno.land/r/gnoswap/pool"
      79 "gno.land/r/sys/cla"
      40 "gno.land/r/demo/profile"
