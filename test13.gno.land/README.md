@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-1508102
+1512310
 ```
 
 ## addpkgs
@@ -11,28 +11,28 @@
 
 ## top realm calls
 ```
-1194053 "gno.land/r/gnoswap/router"
- 739467 "gno.land/r/gnoswap/gns"
- 690745 "gno.land/r/gnoland/wugnot"
- 352635 "gno.land/r/gnoswap/test_token/test_usdc"
- 238291 "gno.land/r/gnoswap/test_token/test_dai"
- 208209 "gno.land/r/gnoswap/test_token/test_trx"
- 192399 "gno.land/r/gnoswap/test_token/test_sol"
- 187200 "gno.land/r/gnoswap/test_token/test_usdt"
- 175708 "gno.land/r/gnoswap/test_token/test_atom"
- 163745 "gno.land/r/gnoswap/test_token/test_atone"
- 134038 "gno.land/r/gnoswap/test_token/test_btc"
- 131567 "gno.land/r/gnoswap/test_token/test_eth"
- 129150 "gno.land/r/gnoswap/position"
- 126506 "gno.land/r/gnoswap/test_token/test_photon"
- 113771 "gno.land/r/gnoswap/staker"
-  78250 "gno.land/r/gnoswap/gnft"
-  41247 "gno.land/r/akkadia/v0/personal_world"
+1197639 "gno.land/r/gnoswap/router"
+ 741633 "gno.land/r/gnoswap/gns"
+ 692359 "gno.land/r/gnoland/wugnot"
+ 353924 "gno.land/r/gnoswap/test_token/test_usdc"
+ 238995 "gno.land/r/gnoswap/test_token/test_dai"
+ 208827 "gno.land/r/gnoswap/test_token/test_trx"
+ 192897 "gno.land/r/gnoswap/test_token/test_sol"
+ 187702 "gno.land/r/gnoswap/test_token/test_usdt"
+ 176138 "gno.land/r/gnoswap/test_token/test_atom"
+ 164183 "gno.land/r/gnoswap/test_token/test_atone"
+ 134348 "gno.land/r/gnoswap/test_token/test_btc"
+ 131925 "gno.land/r/gnoswap/test_token/test_eth"
+ 129475 "gno.land/r/gnoswap/position"
+ 126778 "gno.land/r/gnoswap/test_token/test_photon"
+ 114069 "gno.land/r/gnoswap/staker"
+  78432 "gno.land/r/gnoswap/gnft"
+  41248 "gno.land/r/akkadia/v0/personal_world"
    5328 "gno.land/r/akkadia/v0/blueprint"
-   2056 "gno.land/r/gnoswap/gov/staker"
-   1818 "gno.land/r/gnoswap/common"
+   2058 "gno.land/r/gnoswap/gov/staker"
+   1836 "gno.land/r/gnoswap/common"
    1799 "gno.land/r/gnoswap/launchpad"
-    847 "gno.land/r/akkadia/v0/block"
+    849 "gno.land/r/akkadia/v0/block"
     593 "gno.land/r/gnoswap/gov/governance"
     587 "gno.land/r/akkadia/v0/chunk"
     377 "gno.land/r/gnops/valopers"
