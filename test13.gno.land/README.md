@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-1532791
+1537672
 ```
 
 ## addpkgs
@@ -11,28 +11,28 @@
 
 ## top realm calls
 ```
-1205995 "gno.land/r/gnoswap/router"
- 745803 "gno.land/r/gnoswap/gns"
- 695452 "gno.land/r/gnoland/wugnot"
- 356147 "gno.land/r/gnoswap/test_token/test_usdc"
- 240186 "gno.land/r/gnoswap/test_token/test_dai"
- 209824 "gno.land/r/gnoswap/test_token/test_trx"
- 193872 "gno.land/r/gnoswap/test_token/test_sol"
- 188577 "gno.land/r/gnoswap/test_token/test_usdt"
- 176923 "gno.land/r/gnoswap/test_token/test_atom"
- 165050 "gno.land/r/gnoswap/test_token/test_atone"
- 137549 "gno.land/r/gnoswap/position"
- 134995 "gno.land/r/gnoswap/test_token/test_btc"
- 132598 "gno.land/r/gnoswap/test_token/test_eth"
- 127393 "gno.land/r/gnoswap/test_token/test_photon"
- 115527 "gno.land/r/gnoswap/staker"
-  78797 "gno.land/r/gnoswap/gnft"
-  44678 "gno.land/r/akkadia/v0/personal_world"
+1209332 "gno.land/r/gnoswap/router"
+ 747936 "gno.land/r/gnoswap/gns"
+ 697111 "gno.land/r/gnoland/wugnot"
+ 357318 "gno.land/r/gnoswap/test_token/test_usdc"
+ 240783 "gno.land/r/gnoswap/test_token/test_dai"
+ 210329 "gno.land/r/gnoswap/test_token/test_trx"
+ 194329 "gno.land/r/gnoswap/test_token/test_sol"
+ 189033 "gno.land/r/gnoswap/test_token/test_usdt"
+ 177398 "gno.land/r/gnoswap/test_token/test_atom"
+ 165449 "gno.land/r/gnoswap/test_token/test_atone"
+ 137945 "gno.land/r/gnoswap/position"
+ 135372 "gno.land/r/gnoswap/test_token/test_btc"
+ 132883 "gno.land/r/gnoswap/test_token/test_eth"
+ 127688 "gno.land/r/gnoswap/test_token/test_photon"
+ 115891 "gno.land/r/gnoswap/staker"
+  79021 "gno.land/r/gnoswap/gnft"
+  45494 "gno.land/r/akkadia/v0/personal_world"
    5428 "gno.land/r/akkadia/v0/blueprint"
-   3762 "gno.land/r/gnoswap/gov/staker"
-   1916 "gno.land/r/gnoswap/common"
+   3764 "gno.land/r/gnoswap/gov/staker"
+   1970 "gno.land/r/gnoswap/common"
    1823 "gno.land/r/gnoswap/launchpad"
-    855 "gno.land/r/akkadia/v0/block"
+    860 "gno.land/r/akkadia/v0/block"
     607 "gno.land/r/gnoswap/gov/governance"
     587 "gno.land/r/akkadia/v0/chunk"
     377 "gno.land/r/gnops/valopers"
@@ -43,7 +43,7 @@
      79 "gno.land/r/sys/cla"
      40 "gno.land/r/demo/profile"
      39 "gno.land/r/g1nqnrt3aldzhu6zzeg75yw97wvavqy7wr77g56q/deploy-test/v0/v0/personal_world"
-     22 "gno.land/r/samcrew/memba_quest_attestation_v1"
+     27 "gno.land/r/samcrew/memba_quest_attestation_v1"
      20 "gno.land/r/g18wk4a80cr7dqa25vfka2yug5n3pd50udled6y3/gnogle_nft2"
      19 "gno.land/r/g18wk4a80cr7dqa25vfka2yug5n3pd50udled6y3/nftmarketv3"
      19 "gno.land/r/nym-vikbez000/telescope"
