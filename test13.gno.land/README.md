@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-1551387
+1556537
 ```
 
 ## addpkgs
@@ -11,28 +11,28 @@
 
 ## top realm calls
 ```
-1220187 "gno.land/r/gnoswap/router"
- 754710 "gno.land/r/gnoswap/gns"
- 702284 "gno.land/r/gnoland/wugnot"
- 361043 "gno.land/r/gnoswap/test_token/test_usdc"
- 242863 "gno.land/r/gnoswap/test_token/test_dai"
- 212155 "gno.land/r/gnoswap/test_token/test_trx"
- 195895 "gno.land/r/gnoswap/test_token/test_sol"
- 190569 "gno.land/r/gnoswap/test_token/test_usdt"
- 178682 "gno.land/r/gnoswap/test_token/test_atom"
- 166771 "gno.land/r/gnoswap/test_token/test_atone"
- 139188 "gno.land/r/gnoswap/position"
- 136414 "gno.land/r/gnoswap/test_token/test_btc"
- 133885 "gno.land/r/gnoswap/test_token/test_eth"
- 128668 "gno.land/r/gnoswap/test_token/test_photon"
- 117051 "gno.land/r/gnoswap/staker"
-  79665 "gno.land/r/gnoswap/gnft"
-  46205 "gno.land/r/akkadia/v0/personal_world"
+1224117 "gno.land/r/gnoswap/router"
+ 757130 "gno.land/r/gnoswap/gns"
+ 704100 "gno.land/r/gnoland/wugnot"
+ 362455 "gno.land/r/gnoswap/test_token/test_usdc"
+ 243581 "gno.land/r/gnoswap/test_token/test_dai"
+ 212779 "gno.land/r/gnoswap/test_token/test_trx"
+ 196467 "gno.land/r/gnoswap/test_token/test_sol"
+ 191093 "gno.land/r/gnoswap/test_token/test_usdt"
+ 179154 "gno.land/r/gnoswap/test_token/test_atom"
+ 167251 "gno.land/r/gnoswap/test_token/test_atone"
+ 139565 "gno.land/r/gnoswap/position"
+ 136850 "gno.land/r/gnoswap/test_token/test_btc"
+ 134269 "gno.land/r/gnoswap/test_token/test_eth"
+ 128960 "gno.land/r/gnoswap/test_token/test_photon"
+ 117402 "gno.land/r/gnoswap/staker"
+  79877 "gno.land/r/gnoswap/gnft"
+  46753 "gno.land/r/akkadia/v0/personal_world"
    5428 "gno.land/r/akkadia/v0/blueprint"
    3773 "gno.land/r/gnoswap/gov/staker"
-   2046 "gno.land/r/gnoswap/common"
+   2048 "gno.land/r/gnoswap/common"
    1823 "gno.land/r/gnoswap/launchpad"
-    864 "gno.land/r/akkadia/v0/block"
+    865 "gno.land/r/akkadia/v0/block"
     608 "gno.land/r/gnoswap/gov/governance"
     587 "gno.land/r/akkadia/v0/chunk"
     377 "gno.land/r/gnops/valopers"
