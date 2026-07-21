@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-1547024
+1551387
 ```
 
 ## addpkgs
@@ -11,28 +11,28 @@
 
 ## top realm calls
 ```
-1216520 "gno.land/r/gnoswap/router"
- 752500 "gno.land/r/gnoswap/gns"
- 700556 "gno.land/r/gnoland/wugnot"
- 359760 "gno.land/r/gnoswap/test_token/test_usdc"
- 242097 "gno.land/r/gnoswap/test_token/test_dai"
- 211549 "gno.land/r/gnoswap/test_token/test_trx"
- 195353 "gno.land/r/gnoswap/test_token/test_sol"
- 190125 "gno.land/r/gnoswap/test_token/test_usdt"
- 178196 "gno.land/r/gnoswap/test_token/test_atom"
- 166313 "gno.land/r/gnoswap/test_token/test_atone"
- 138816 "gno.land/r/gnoswap/position"
- 136108 "gno.land/r/gnoswap/test_token/test_btc"
- 133549 "gno.land/r/gnoswap/test_token/test_eth"
- 128312 "gno.land/r/gnoswap/test_token/test_photon"
- 116706 "gno.land/r/gnoswap/staker"
-  79465 "gno.land/r/gnoswap/gnft"
-  46183 "gno.land/r/akkadia/v0/personal_world"
+1220187 "gno.land/r/gnoswap/router"
+ 754710 "gno.land/r/gnoswap/gns"
+ 702284 "gno.land/r/gnoland/wugnot"
+ 361043 "gno.land/r/gnoswap/test_token/test_usdc"
+ 242863 "gno.land/r/gnoswap/test_token/test_dai"
+ 212155 "gno.land/r/gnoswap/test_token/test_trx"
+ 195895 "gno.land/r/gnoswap/test_token/test_sol"
+ 190569 "gno.land/r/gnoswap/test_token/test_usdt"
+ 178682 "gno.land/r/gnoswap/test_token/test_atom"
+ 166771 "gno.land/r/gnoswap/test_token/test_atone"
+ 139188 "gno.land/r/gnoswap/position"
+ 136414 "gno.land/r/gnoswap/test_token/test_btc"
+ 133885 "gno.land/r/gnoswap/test_token/test_eth"
+ 128668 "gno.land/r/gnoswap/test_token/test_photon"
+ 117051 "gno.land/r/gnoswap/staker"
+  79665 "gno.land/r/gnoswap/gnft"
+  46205 "gno.land/r/akkadia/v0/personal_world"
    5428 "gno.land/r/akkadia/v0/blueprint"
-   3771 "gno.land/r/gnoswap/gov/staker"
+   3773 "gno.land/r/gnoswap/gov/staker"
    2046 "gno.land/r/gnoswap/common"
    1823 "gno.land/r/gnoswap/launchpad"
-    862 "gno.land/r/akkadia/v0/block"
+    864 "gno.land/r/akkadia/v0/block"
     608 "gno.land/r/gnoswap/gov/governance"
     587 "gno.land/r/akkadia/v0/chunk"
     377 "gno.land/r/gnops/valopers"
