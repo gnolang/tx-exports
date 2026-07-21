@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-1560620
+1568037
 ```
 
 ## addpkgs
@@ -11,26 +11,26 @@
 
 ## top realm calls
 ```
-1227298 "gno.land/r/gnoswap/router"
- 759052 "gno.land/r/gnoswap/gns"
- 705595 "gno.land/r/gnoland/wugnot"
- 363594 "gno.land/r/gnoswap/test_token/test_usdc"
- 244153 "gno.land/r/gnoswap/test_token/test_dai"
- 213265 "gno.land/r/gnoswap/test_token/test_trx"
- 196923 "gno.land/r/gnoswap/test_token/test_sol"
- 191581 "gno.land/r/gnoswap/test_token/test_usdt"
- 179600 "gno.land/r/gnoswap/test_token/test_atom"
- 167619 "gno.land/r/gnoswap/test_token/test_atone"
- 139883 "gno.land/r/gnoswap/position"
- 137146 "gno.land/r/gnoswap/test_token/test_btc"
- 134587 "gno.land/r/gnoswap/test_token/test_eth"
- 129234 "gno.land/r/gnoswap/test_token/test_photon"
- 117697 "gno.land/r/gnoswap/staker"
-  80054 "gno.land/r/gnoswap/gnft"
+1233498 "gno.land/r/gnoswap/router"
+ 762824 "gno.land/r/gnoswap/gns"
+ 708514 "gno.land/r/gnoland/wugnot"
+ 365679 "gno.land/r/gnoswap/test_token/test_usdc"
+ 245409 "gno.land/r/gnoswap/test_token/test_dai"
+ 214309 "gno.land/r/gnoswap/test_token/test_trx"
+ 197833 "gno.land/r/gnoswap/test_token/test_sol"
+ 192415 "gno.land/r/gnoswap/test_token/test_usdt"
+ 180450 "gno.land/r/gnoswap/test_token/test_atom"
+ 168349 "gno.land/r/gnoswap/test_token/test_atone"
+ 140568 "gno.land/r/gnoswap/position"
+ 137740 "gno.land/r/gnoswap/test_token/test_btc"
+ 135177 "gno.land/r/gnoswap/test_token/test_eth"
+ 129764 "gno.land/r/gnoswap/test_token/test_photon"
+ 118334 "gno.land/r/gnoswap/staker"
+  80417 "gno.land/r/gnoswap/gnft"
   47026 "gno.land/r/akkadia/v0/personal_world"
    5428 "gno.land/r/akkadia/v0/blueprint"
-   3796 "gno.land/r/gnoswap/gov/staker"
-   2048 "gno.land/r/gnoswap/common"
+   3802 "gno.land/r/gnoswap/gov/staker"
+   2090 "gno.land/r/gnoswap/common"
    1844 "gno.land/r/gnoswap/launchpad"
     865 "gno.land/r/akkadia/v0/block"
     608 "gno.land/r/gnoswap/gov/governance"
@@ -40,7 +40,7 @@
     230 "gno.land/r/g1nqnrt3aldzhu6zzeg75yw97wvavqy7wr77g56q/deploy-test/v2/block"
     204 "gno.land/r/akkadia/v0/user"
      96 "gno.land/r/gnoswap/pool"
-     82 "gno.land/r/sys/cla"
+     84 "gno.land/r/sys/cla"
      40 "gno.land/r/demo/profile"
      39 "gno.land/r/g1nqnrt3aldzhu6zzeg75yw97wvavqy7wr77g56q/deploy-test/v0/v0/personal_world"
      32 "gno.land/r/samcrew/memba_quest_attestation_v1"
@@ -83,11 +83,13 @@
       4 "gno.land/r/g16p08xxtyt320hjju7769lzguxlvzszwpg8duwl/registry"
       4 "gno.land/r/g18wk4a80cr7dqa25vfka2yug5n3pd50udled6y3/gnogle_market"
       4 "gno.land/r/g18wk4a80cr7dqa25vfka2yug5n3pd50udled6y3/nftmarket"
+      4 "gno.land/r/g1cr3tzpszx8s2c3gkuyu3q5ytpynsaxfw3c4kg6/counter"
       4 "gno.land/r/g1cz86tl8vnh9956cpuu43ksjy7kmur745wdjxsc/orderbook"
       4 "gno.land/r/g1nqnrt3aldzhu6zzeg75yw97wvavqy7wr77g56q/deploy-test/v0/v0/acr"
       4 "gno.land/r/samcrew/memba_appstore_v2"
       4 "gno.land/r/samcrew/memba_nft_market_v3_2"
       3 "gno.land/r/g1swj2s6crz6pxrdyzt6au6ekre4cxnjdal4kldf/rps"
+      3 "gno.land/r/g1va7l9wkc0dt63efs2qya25jkq9ftkxvvvtp9sv/tictactoe"
       3 "gno.land/r/gnops/valopers/proposal"
       3 "gno.land/r/nym-samcrew123/audit/testblog1780751539"
       3 "gno.land/r/nym-samcrew123/audit/testblog1780751956"
