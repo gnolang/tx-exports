@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-138
+142
 ```
 
 ## addpkgs
@@ -21,6 +21,7 @@
       3 "gno.land/r/g1manfred47kzduec920z88wfr64ylksmdcedlf5/agents/receipt"
       2 "gno.land/r/g1e3jafj9utnprwqlq0ekxwfk4lvxr6qqer52900/tictactoe"
       1 "gno.land/r/g1g2uc4j0yl70qdzg6zkt5rx77rfspuj05dt8l3e/polls"
+      1 "gno.land/r/g1x3702r5pyv3v36eauc4k055l9wxvxah6dwd29t/tictactoe"
       1 "gno.land/r/gnoland/blog"
       1 "gno.land/r/sys/namereg/v1"
       1 "gno.land/r/sys/users"
