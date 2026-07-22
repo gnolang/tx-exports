@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-1579737
+1583079
 ```
 
 ## addpkgs
@@ -11,27 +11,27 @@
 
 ## top realm calls
 ```
-1243155 "gno.land/r/gnoswap/router"
- 769059 "gno.land/r/gnoswap/gns"
- 713315 "gno.land/r/gnoland/wugnot"
- 368949 "gno.land/r/gnoswap/test_token/test_usdc"
- 247160 "gno.land/r/gnoswap/test_token/test_dai"
- 215950 "gno.land/r/gnoswap/test_token/test_trx"
- 199184 "gno.land/r/gnoswap/test_token/test_sol"
- 193790 "gno.land/r/gnoswap/test_token/test_usdt"
- 181777 "gno.land/r/gnoswap/test_token/test_atom"
- 169442 "gno.land/r/gnoswap/test_token/test_atone"
- 141735 "gno.land/r/gnoswap/position"
- 138679 "gno.land/r/gnoswap/test_token/test_btc"
- 136108 "gno.land/r/gnoswap/test_token/test_eth"
- 130625 "gno.land/r/gnoswap/test_token/test_photon"
- 119421 "gno.land/r/gnoswap/staker"
-  81053 "gno.land/r/gnoswap/gnft"
+1245908 "gno.land/r/gnoswap/router"
+ 770731 "gno.land/r/gnoswap/gns"
+ 714627 "gno.land/r/gnoland/wugnot"
+ 369974 "gno.land/r/gnoswap/test_token/test_usdc"
+ 247656 "gno.land/r/gnoswap/test_token/test_dai"
+ 216404 "gno.land/r/gnoswap/test_token/test_trx"
+ 199564 "gno.land/r/gnoswap/test_token/test_sol"
+ 194188 "gno.land/r/gnoswap/test_token/test_usdt"
+ 182157 "gno.land/r/gnoswap/test_token/test_atom"
+ 169750 "gno.land/r/gnoswap/test_token/test_atone"
+ 142049 "gno.land/r/gnoswap/position"
+ 138985 "gno.land/r/gnoswap/test_token/test_btc"
+ 136344 "gno.land/r/gnoswap/test_token/test_eth"
+ 130851 "gno.land/r/gnoswap/test_token/test_photon"
+ 119709 "gno.land/r/gnoswap/staker"
+  81211 "gno.land/r/gnoswap/gnft"
   47026 "gno.land/r/akkadia/v0/personal_world"
    5428 "gno.land/r/akkadia/v0/blueprint"
-   3812 "gno.land/r/gnoswap/gov/staker"
+   3835 "gno.land/r/gnoswap/gov/staker"
    2102 "gno.land/r/gnoswap/common"
-   1844 "gno.land/r/gnoswap/launchpad"
+   1865 "gno.land/r/gnoswap/launchpad"
     865 "gno.land/r/akkadia/v0/block"
     608 "gno.land/r/gnoswap/gov/governance"
     587 "gno.land/r/akkadia/v0/chunk"
@@ -40,7 +40,7 @@
     230 "gno.land/r/g1nqnrt3aldzhu6zzeg75yw97wvavqy7wr77g56q/deploy-test/v2/block"
     204 "gno.land/r/akkadia/v0/user"
      96 "gno.land/r/gnoswap/pool"
-     84 "gno.land/r/sys/cla"
+     85 "gno.land/r/sys/cla"
      40 "gno.land/r/demo/profile"
      39 "gno.land/r/g1nqnrt3aldzhu6zzeg75yw97wvavqy7wr77g56q/deploy-test/v0/v0/personal_world"
      32 "gno.land/r/samcrew/memba_quest_attestation_v1"
