@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-374
+386
 ```
 
 ## addpkgs
@@ -11,7 +11,7 @@
 
 ## top realm calls
 ```
-    100 "gno.land/r/gnops/valopers"
+    106 "gno.land/r/gnops/valopers"
       6 "gno.land/r/sys/namereg/v1"
       5 "gno.land/r/g1gsarxwyhnxfuug3lsys58rcpg7myrgmw3wuc2u/boards2/v1"
       5 "gno.land/r/g1manfred47kzduec920z88wfr64ylksmdcedlf5/agents/maintainer"
