@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-884
+899
 ```
 
 ## addpkgs
@@ -12,7 +12,7 @@
 ## top realm calls
 ```
     210 "gno.land/r/gnoswap/common"
-    123 "gno.land/r/gnops/valopers"
+    127 "gno.land/r/gnops/valopers"
      61 "gno.land/r/gnoswap/position"
      47 "gno.land/r/gnoswap/staker"
      37 "gno.land/r/gnoswap/pool"
@@ -22,9 +22,9 @@
      18 "gno.land/r/gnoswap/router"
       9 "gno.land/r/onbloc/ibc/union/access"
       7 "gno.land/r/sys/namereg/v1"
+      5 "gno.land/r/demo/profile"
       5 "gno.land/r/g1gsarxwyhnxfuug3lsys58rcpg7myrgmw3wuc2u/boards2/v1"
       5 "gno.land/r/g1manfred47kzduec920z88wfr64ylksmdcedlf5/agents/maintainer"
-      4 "gno.land/r/demo/profile"
       4 "gno.land/r/g1manfred47kzduec920z88wfr64ylksmdcedlf5/agents/gnomem"
       4 "gno.land/r/g1manfred47kzduec920z88wfr64ylksmdcedlf5/agents/passport"
       4 "gno.land/r/gnoswap/gov/staker"
