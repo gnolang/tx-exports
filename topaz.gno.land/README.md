@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-1240
+2626
 ```
 
 ## addpkgs
@@ -11,16 +11,20 @@
 
 ## top realm calls
 ```
-    728 "gno.land/r/gnoswap/common"
-    221 "gno.land/r/gnoswap/router"
+    777 "gno.land/r/gnoswap/common"
+    714 "gno.land/r/gnoswap/router"
+    401 "gno.land/r/gnoswap/gov/staker"
+    301 "gno.land/r/gnoswap/position"
+    263 "gno.land/r/gnoswap/staker"
+    138 "gno.land/r/gnoswap/gnft"
     137 "gno.land/r/gnops/valopers"
-    130 "gno.land/r/gnoswap/position"
-    102 "gno.land/r/gnoswap/staker"
-     84 "gno.land/r/gnoland/wugnot"
-     68 "gno.land/r/gnoswap/gnft"
-     43 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
+    100 "gno.land/r/gnoland/wugnot"
+     53 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
      41 "gno.land/r/gnoswap/pool"
-      9 "gno.land/r/gnoswap/gov/staker"
+     25 "gno.land/r/gnoswap/gns"
+     20 "gno.land/r/gnoswap/test_token/test_usdc"
+     16 "gno.land/r/gnoswap/test_token/test_sol"
+     12 "gno.land/r/gnoswap/test_token/test_atom"
       9 "gno.land/r/onbloc/ibc/union/access"
       7 "gno.land/r/sys/namereg/v1"
       5 "gno.land/r/demo/profile"
@@ -31,15 +35,11 @@
       4 "gno.land/r/test1/tba"
       3 "gno.land/r/g1manfred47kzduec920z88wfr64ylksmdcedlf5/agents/capwallet"
       3 "gno.land/r/g1manfred47kzduec920z88wfr64ylksmdcedlf5/agents/receipt"
-      3 "gno.land/r/gnoswap/gns"
       2 "gno.land/r/g1e3jafj9utnprwqlq0ekxwfk4lvxr6qqer52900/tictactoe"
       2 "gno.land/r/g1x3702r5pyv3v36eauc4k055l9wxvxah6dwd29t/tictactoe"
-      2 "gno.land/r/gnoswap/test_token/test_atom"
       2 "gno.land/r/gnoswap/test_token/test_btc"
       2 "gno.land/r/gnoswap/test_token/test_dai"
-      2 "gno.land/r/gnoswap/test_token/test_sol"
       2 "gno.land/r/gnoswap/test_token/test_trx"
-      2 "gno.land/r/gnoswap/test_token/test_usdc"
       1 "gno.land/r/g1g2uc4j0yl70qdzg6zkt5rx77rfspuj05dt8l3e/polls"
       1 "gno.land/r/gnoland/blog"
       1 "gno.land/r/gnoswap/emission"
