@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-2710
+2734
 ```
 
 ## addpkgs
@@ -11,17 +11,17 @@
 
 ## top realm calls
 ```
-    933 "gno.land/r/gnoswap/common"
-    820 "gno.land/r/gnoswap/router"
-    401 "gno.land/r/gnoswap/gov/staker"
+    950 "gno.land/r/gnoswap/common"
+    826 "gno.land/r/gnoswap/router"
+    403 "gno.land/r/gnoswap/gov/staker"
     312 "gno.land/r/gnoswap/position"
-    269 "gno.land/r/gnoswap/staker"
-    140 "gno.land/r/gnoswap/gnft"
-    137 "gno.land/r/gnops/valopers"
-    114 "gno.land/r/gnoland/wugnot"
-     53 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
+    270 "gno.land/r/gnoswap/staker"
+    141 "gno.land/r/gnoswap/gnft"
+    138 "gno.land/r/gnops/valopers"
+    118 "gno.land/r/gnoland/wugnot"
+     54 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
      41 "gno.land/r/gnoswap/pool"
-     26 "gno.land/r/gnoswap/gns"
+     28 "gno.land/r/gnoswap/gns"
      20 "gno.land/r/gnoswap/test_token/test_usdc"
      16 "gno.land/r/gnoswap/test_token/test_sol"
      12 "gno.land/r/gnoswap/test_token/test_atom"
@@ -44,6 +44,7 @@
       1 "gno.land/r/gnoland/blog"
       1 "gno.land/r/gnoswap/emission"
       1 "gno.land/r/gnoswap/gov/governance"
+      1 "gno.land/r/onbloc/utils/grc20helper"
       1 "gno.land/r/sys/users"
 ```
 
