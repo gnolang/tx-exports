@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-2860
+2869
 ```
 
 ## addpkgs
@@ -17,7 +17,7 @@
     317 "gno.land/r/gnoswap/position"
     278 "gno.land/r/gnoswap/staker"
     145 "gno.land/r/gnoswap/gnft"
-    139 "gno.land/r/gnops/valopers"
+    140 "gno.land/r/gnops/valopers"
     133 "gno.land/r/gnoland/wugnot"
      58 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
      41 "gno.land/r/gnoswap/pool"
