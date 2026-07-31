@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-2891
+2906
 ```
 
 ## addpkgs
@@ -11,9 +11,9 @@
 
 ## top realm calls
 ```
-   1098 "gno.land/r/gnoswap/common"
-    923 "gno.land/r/gnoswap/router"
-    410 "gno.land/r/gnoswap/gov/staker"
+   1138 "gno.land/r/gnoswap/common"
+    963 "gno.land/r/gnoswap/router"
+    411 "gno.land/r/gnoswap/gov/staker"
     322 "gno.land/r/gnoswap/position"
     282 "gno.land/r/gnoswap/staker"
     146 "gno.land/r/gnoswap/gnft"
@@ -42,6 +42,7 @@
       2 "gno.land/r/g1y909z4www82503pcu5rvyzph3eal2w6dhg3gjc/myrealm"
       2 "gno.land/r/gnoswap/test_token/test_btc"
       2 "gno.land/r/gnoswap/test_token/test_dai"
+      1 "gno.land/r/g16m0r7rm7fv5hx0ekr7gvx8g4fr7eu08nzhk6gt/streampay"
       1 "gno.land/r/g1g2uc4j0yl70qdzg6zkt5rx77rfspuj05dt8l3e/polls"
       1 "gno.land/r/g1t0rglz5jdrl4jwqcvx9ukjvcj8j3jgjdlpj6w3/biggingerbutton"
       1 "gno.land/r/gnoland/blog"
