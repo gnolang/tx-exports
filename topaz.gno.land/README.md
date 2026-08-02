@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-3137
+3158
 ```
 
 ## addpkgs
@@ -11,14 +11,14 @@
 
 ## top realm calls
 ```
-   1338 "gno.land/r/gnoswap/common"
-   1086 "gno.land/r/gnoswap/router"
+   1362 "gno.land/r/gnoswap/common"
+   1092 "gno.land/r/gnoswap/router"
     418 "gno.land/r/gnoswap/gov/staker"
-    339 "gno.land/r/gnoswap/position"
+    342 "gno.land/r/gnoswap/position"
     303 "gno.land/r/gnoswap/staker"
-    167 "gno.land/r/gnoland/wugnot"
+    177 "gno.land/r/gnoland/wugnot"
     151 "gno.land/r/gnoswap/gnft"
-    140 "gno.land/r/gnops/valopers"
+    141 "gno.land/r/gnops/valopers"
      58 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
      41 "gno.land/r/gnoswap/pool"
      28 "gno.land/r/gnoswap/gns"
@@ -33,12 +33,13 @@
       5 "gno.land/r/g1manfred47kzduec920z88wfr64ylksmdcedlf5/agents/maintainer"
       4 "gno.land/r/g1manfred47kzduec920z88wfr64ylksmdcedlf5/agents/gnomem"
       4 "gno.land/r/g1manfred47kzduec920z88wfr64ylksmdcedlf5/agents/passport"
+      4 "gno.land/r/g1t7msz59h0nyel6j0zr00js05svpx7xat7dyyrv/biggingerbutton"
       4 "gno.land/r/test1/tba"
       3 "gno.land/r/g1manfred47kzduec920z88wfr64ylksmdcedlf5/agents/capwallet"
       3 "gno.land/r/g1manfred47kzduec920z88wfr64ylksmdcedlf5/agents/receipt"
-      3 "gno.land/r/g1t7msz59h0nyel6j0zr00js05svpx7xat7dyyrv/biggingerbutton"
       3 "gno.land/r/gnoswap/test_token/test_trx"
       2 "gno.land/r/g1e3jafj9utnprwqlq0ekxwfk4lvxr6qqer52900/tictactoe"
+      2 "gno.land/r/g1tstg4l99ga0zup3s5xs0zm4vl3u8p7ma9m56ma/gingernft"
       2 "gno.land/r/g1x3702r5pyv3v36eauc4k055l9wxvxah6dwd29t/tictactoe"
       2 "gno.land/r/g1y909z4www82503pcu5rvyzph3eal2w6dhg3gjc/myrealm"
       2 "gno.land/r/gnoswap/test_token/test_btc"
