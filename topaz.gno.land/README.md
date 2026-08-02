@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-3098
+3125
 ```
 
 ## addpkgs
@@ -11,13 +11,13 @@
 
 ## top realm calls
 ```
-   1304 "gno.land/r/gnoswap/common"
-   1077 "gno.land/r/gnoswap/router"
+   1330 "gno.land/r/gnoswap/common"
+   1082 "gno.land/r/gnoswap/router"
     418 "gno.land/r/gnoswap/gov/staker"
-    329 "gno.land/r/gnoswap/position"
-    294 "gno.land/r/gnoswap/staker"
-    160 "gno.land/r/gnoland/wugnot"
-    148 "gno.land/r/gnoswap/gnft"
+    338 "gno.land/r/gnoswap/position"
+    303 "gno.land/r/gnoswap/staker"
+    166 "gno.land/r/gnoland/wugnot"
+    151 "gno.land/r/gnoswap/gnft"
     140 "gno.land/r/gnops/valopers"
      58 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
      41 "gno.land/r/gnoswap/pool"
@@ -46,6 +46,7 @@
       1 "gno.land/r/g16m0r7rm7fv5hx0ekr7gvx8g4fr7eu08nzhk6gt/bountyboard"
       1 "gno.land/r/g16m0r7rm7fv5hx0ekr7gvx8g4fr7eu08nzhk6gt/streampay"
       1 "gno.land/r/g1g2uc4j0yl70qdzg6zkt5rx77rfspuj05dt8l3e/polls"
+      1 "gno.land/r/g1hudwmwn99hwqldtqjz9m6w7q7qef57a2ffp4hg/gingernft"
       1 "gno.land/r/g1t0rglz5jdrl4jwqcvx9ukjvcj8j3jgjdlpj6w3/biggingerbutton"
       1 "gno.land/r/gnoland/blog"
       1 "gno.land/r/gnoswap/emission"
