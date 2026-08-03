@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-3189
+3234
 ```
 
 ## addpkgs
@@ -11,16 +11,16 @@
 
 ## top realm calls
 ```
-   1416 "gno.land/r/gnoswap/common"
-   1137 "gno.land/r/gnoswap/router"
-    420 "gno.land/r/gnoswap/gov/staker"
-    344 "gno.land/r/gnoswap/position"
-    309 "gno.land/r/gnoswap/staker"
-    181 "gno.land/r/gnoland/wugnot"
-    153 "gno.land/r/gnoswap/gnft"
+   1505 "gno.land/r/gnoswap/common"
+   1173 "gno.land/r/gnoswap/router"
+    421 "gno.land/r/gnoswap/gov/staker"
+    358 "gno.land/r/gnoswap/position"
+    311 "gno.land/r/gnoswap/staker"
+    185 "gno.land/r/gnoland/wugnot"
+    154 "gno.land/r/gnoswap/gnft"
     141 "gno.land/r/gnops/valopers"
      58 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
-     41 "gno.land/r/gnoswap/pool"
+     43 "gno.land/r/gnoswap/pool"
      28 "gno.land/r/gnoswap/gns"
      20 "gno.land/r/gnoswap/test_token/test_usdc"
      16 "gno.land/r/gnoswap/test_token/test_sol"
@@ -37,13 +37,13 @@
       4 "gno.land/r/test1/tba"
       3 "gno.land/r/g1manfred47kzduec920z88wfr64ylksmdcedlf5/agents/capwallet"
       3 "gno.land/r/g1manfred47kzduec920z88wfr64ylksmdcedlf5/agents/receipt"
+      3 "gno.land/r/gnoswap/test_token/test_dai"
       3 "gno.land/r/gnoswap/test_token/test_trx"
       2 "gno.land/r/g1e3jafj9utnprwqlq0ekxwfk4lvxr6qqer52900/tictactoe"
       2 "gno.land/r/g1tstg4l99ga0zup3s5xs0zm4vl3u8p7ma9m56ma/gingernft"
       2 "gno.land/r/g1x3702r5pyv3v36eauc4k055l9wxvxah6dwd29t/tictactoe"
       2 "gno.land/r/g1y909z4www82503pcu5rvyzph3eal2w6dhg3gjc/myrealm"
       2 "gno.land/r/gnoswap/test_token/test_btc"
-      2 "gno.land/r/gnoswap/test_token/test_dai"
       1 "gno.land/r/g16m0r7rm7fv5hx0ekr7gvx8g4fr7eu08nzhk6gt/bountyboard"
       1 "gno.land/r/g16m0r7rm7fv5hx0ekr7gvx8g4fr7eu08nzhk6gt/streampay"
       1 "gno.land/r/g1g2uc4j0yl70qdzg6zkt5rx77rfspuj05dt8l3e/polls"
