@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-3294
+3318
 ```
 
 ## addpkgs
@@ -11,23 +11,23 @@
 
 ## top realm calls
 ```
-   1607 "gno.land/r/gnoswap/common"
-   1225 "gno.land/r/gnoswap/router"
-    424 "gno.land/r/gnoswap/gov/staker"
+   1609 "gno.land/r/gnoswap/common"
+   1226 "gno.land/r/gnoswap/router"
+    426 "gno.land/r/gnoswap/gov/staker"
     373 "gno.land/r/gnoswap/position"
     339 "gno.land/r/gnoswap/staker"
-    197 "gno.land/r/gnoland/wugnot"
+    199 "gno.land/r/gnoland/wugnot"
     159 "gno.land/r/gnoswap/gnft"
-    141 "gno.land/r/gnops/valopers"
+    144 "gno.land/r/gnops/valopers"
      58 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
      43 "gno.land/r/gnoswap/pool"
      28 "gno.land/r/gnoswap/gns"
      20 "gno.land/r/gnoswap/test_token/test_usdc"
      16 "gno.land/r/gnoswap/test_token/test_sol"
      12 "gno.land/r/gnoswap/test_token/test_atom"
+     11 "gno.land/r/onbloc/utils/grc20helper"
       9 "gno.land/r/onbloc/ibc/union/access"
       8 "gno.land/r/sys/namereg/v1"
-      6 "gno.land/r/onbloc/utils/grc20helper"
       5 "gno.land/r/demo/profile"
       5 "gno.land/r/g1gsarxwyhnxfuug3lsys58rcpg7myrgmw3wuc2u/boards2/v1"
       5 "gno.land/r/g1manfred47kzduec920z88wfr64ylksmdcedlf5/agents/maintainer"
@@ -39,6 +39,7 @@
       3 "gno.land/r/g1manfred47kzduec920z88wfr64ylksmdcedlf5/agents/receipt"
       3 "gno.land/r/gnoswap/test_token/test_dai"
       3 "gno.land/r/gnoswap/test_token/test_trx"
+      2 "gno.land/r/g172tf235svs0hkckys8kshnam6ncz7pscx9x59f/demo/demo_v00001/main"
       2 "gno.land/r/g1e3jafj9utnprwqlq0ekxwfk4lvxr6qqer52900/tictactoe"
       2 "gno.land/r/g1tstg4l99ga0zup3s5xs0zm4vl3u8p7ma9m56ma/gingernft"
       2 "gno.land/r/g1x3702r5pyv3v36eauc4k055l9wxvxah6dwd29t/tictactoe"
@@ -46,6 +47,7 @@
       2 "gno.land/r/gnoswap/test_token/test_btc"
       1 "gno.land/r/g16m0r7rm7fv5hx0ekr7gvx8g4fr7eu08nzhk6gt/bountyboard"
       1 "gno.land/r/g16m0r7rm7fv5hx0ekr7gvx8g4fr7eu08nzhk6gt/streampay"
+      1 "gno.land/r/g172tf235svs0hkckys8kshnam6ncz7pscx9x59f/demo/demo_v00001/ledger"
       1 "gno.land/r/g1g2uc4j0yl70qdzg6zkt5rx77rfspuj05dt8l3e/polls"
       1 "gno.land/r/g1hudwmwn99hwqldtqjz9m6w7q7qef57a2ffp4hg/gingernft"
       1 "gno.land/r/g1t0rglz5jdrl4jwqcvx9ukjvcj8j3jgjdlpj6w3/biggingerbutton"
