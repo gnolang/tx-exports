@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-3318
+3328
 ```
 
 ## addpkgs
@@ -28,6 +28,7 @@
      11 "gno.land/r/onbloc/utils/grc20helper"
       9 "gno.land/r/onbloc/ibc/union/access"
       8 "gno.land/r/sys/namereg/v1"
+      7 "gno.land/r/g172tf235svs0hkckys8kshnam6ncz7pscx9x59f/demo/demo_v00001/main"
       5 "gno.land/r/demo/profile"
       5 "gno.land/r/g1gsarxwyhnxfuug3lsys58rcpg7myrgmw3wuc2u/boards2/v1"
       5 "gno.land/r/g1manfred47kzduec920z88wfr64ylksmdcedlf5/agents/maintainer"
@@ -39,7 +40,6 @@
       3 "gno.land/r/g1manfred47kzduec920z88wfr64ylksmdcedlf5/agents/receipt"
       3 "gno.land/r/gnoswap/test_token/test_dai"
       3 "gno.land/r/gnoswap/test_token/test_trx"
-      2 "gno.land/r/g172tf235svs0hkckys8kshnam6ncz7pscx9x59f/demo/demo_v00001/main"
       2 "gno.land/r/g1e3jafj9utnprwqlq0ekxwfk4lvxr6qqer52900/tictactoe"
       2 "gno.land/r/g1tstg4l99ga0zup3s5xs0zm4vl3u8p7ma9m56ma/gingernft"
       2 "gno.land/r/g1x3702r5pyv3v36eauc4k055l9wxvxah6dwd29t/tictactoe"
