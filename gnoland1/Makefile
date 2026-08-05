@@ -1,6 +1,9 @@
 REMOTE = "https://rpc.betanet.testnets.gno.land"
 SHORTNAME = gnoland1
 
+# the gno build this chain runs; see GNO_REF in ../rules.mk
+GNO_REF = chain/gnoland1.1
+
 # at an average of 3 secs per block, gnoland1 produces ~28_800 blocks per day
 # 100k allows us to catch up if the exporter falls behind
 MAX_INTERVAL = 100000

@@ -4,8 +4,17 @@ EXTRACTOR_DIR ?= extractor
 # contribs/*/go.mod files use `replace github.com/gnolang/gno => ../..` so
 # `go run <path>@version` does not work remotely — we must build from a
 # local checkout.
-GNO_REPO     ?= $(HOME)/.cache/tx-exports/gno
+#
+# GNO_REF must match the build the target chain runs, so each chain Makefile
+# pins its node's `chain/*` tag. tx-archive amino-decodes the node's block
+# results with the gno types from this ref, and amino rejects unknown JSON
+# fields: on `master` the fetch dies with `unknown JSON field "errors" for type
+# vm.TypeCheckError` against gnoland1, whose build still carries that field
+# (dropped from master in #5893).
 GNO_REF      ?= master
+# Ref is part of the path so bumping GNO_REF re-clones instead of silently
+# reusing a checkout of the previous ref.
+GNO_REPO     ?= $(HOME)/.cache/tx-exports/gno-$(subst /,-,$(GNO_REF))
 TXARCHIVE    ?= $(GNO_REPO)/contribs/tx-archive
 
 .PHONY: all

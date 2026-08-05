@@ -37,7 +37,9 @@ jobs:
           path: |
             ~/go/pkg/mod
             ~/.cache/go-build
-          key: ${{ runner.os }}-go-1.25-txarchive-v0.5.1
+          # per-testnet: each chain builds tx-archive from its own pinned
+          # GNO_REF, so they cannot share a build cache
+          key: ${{ runner.os }}-go-1.25-txarchive-${{ matrix.testnet }}
 
       - name: Run backup script
         run: make -C ${{ matrix.testnet }} fetch join extractor stats
