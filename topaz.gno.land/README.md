@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-3438
+3440
 ```
 
 ## addpkgs
@@ -33,10 +33,10 @@
       5 "gno.land/r/demo/profile"
       5 "gno.land/r/g1gsarxwyhnxfuug3lsys58rcpg7myrgmw3wuc2u/boards2/v1"
       5 "gno.land/r/g1manfred47kzduec920z88wfr64ylksmdcedlf5/agents/maintainer"
+      5 "gno.land/r/g1x4zvyxlwauaanupr43fjm4l3kltk5h6lzgpvwn/gnochat"
       4 "gno.land/r/g1manfred47kzduec920z88wfr64ylksmdcedlf5/agents/gnomem"
       4 "gno.land/r/g1manfred47kzduec920z88wfr64ylksmdcedlf5/agents/passport"
       4 "gno.land/r/g1t7msz59h0nyel6j0zr00js05svpx7xat7dyyrv/biggingerbutton"
-      4 "gno.land/r/g1x4zvyxlwauaanupr43fjm4l3kltk5h6lzgpvwn/gnochat"
       4 "gno.land/r/test1/tba"
       3 "gno.land/r/g1manfred47kzduec920z88wfr64ylksmdcedlf5/agents/capwallet"
       3 "gno.land/r/g1manfred47kzduec920z88wfr64ylksmdcedlf5/agents/receipt"
