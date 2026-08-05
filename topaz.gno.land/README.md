@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-3434
+3438
 ```
 
 ## addpkgs
@@ -47,6 +47,7 @@
       2 "gno.land/r/g1x3702r5pyv3v36eauc4k055l9wxvxah6dwd29t/tictactoe"
       2 "gno.land/r/g1y909z4www82503pcu5rvyzph3eal2w6dhg3gjc/myrealm"
       2 "gno.land/r/gnoswap/test_token/test_btc"
+      2 "gno.land/r/sys/users"
       1 "gno.land/r/g16m0r7rm7fv5hx0ekr7gvx8g4fr7eu08nzhk6gt/bountyboard"
       1 "gno.land/r/g16m0r7rm7fv5hx0ekr7gvx8g4fr7eu08nzhk6gt/streampay"
       1 "gno.land/r/g172tf235svs0hkckys8kshnam6ncz7pscx9x59f/demo/demo_v00001/ledger"
@@ -56,7 +57,6 @@
       1 "gno.land/r/gnoland/blog"
       1 "gno.land/r/gnoswap/emission"
       1 "gno.land/r/gnoswap/gov/governance"
-      1 "gno.land/r/sys/users"
 ```
 
 ## top faucet requesters
