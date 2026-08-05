@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-3440
+3444
 ```
 
 ## addpkgs
@@ -54,6 +54,7 @@
       1 "gno.land/r/g1g2uc4j0yl70qdzg6zkt5rx77rfspuj05dt8l3e/polls"
       1 "gno.land/r/g1hudwmwn99hwqldtqjz9m6w7q7qef57a2ffp4hg/gingernft"
       1 "gno.land/r/g1t0rglz5jdrl4jwqcvx9ukjvcj8j3jgjdlpj6w3/biggingerbutton"
+      1 "gno.land/r/g1w7kytlgsgstspzlpy4fdtd9uqf0ga2dzud4wzv/nftminter"
       1 "gno.land/r/gnoland/blog"
       1 "gno.land/r/gnoswap/emission"
       1 "gno.land/r/gnoswap/gov/governance"
