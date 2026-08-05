@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-3341
+3355
 ```
 
 ## addpkgs
@@ -11,9 +11,9 @@
 
 ## top realm calls
 ```
-   1617 "gno.land/r/gnoswap/common"
-   1228 "gno.land/r/gnoswap/router"
-    426 "gno.land/r/gnoswap/gov/staker"
+   1649 "gno.land/r/gnoswap/common"
+   1260 "gno.land/r/gnoswap/router"
+    427 "gno.land/r/gnoswap/gov/staker"
     375 "gno.land/r/gnoswap/position"
     340 "gno.land/r/gnoswap/staker"
     201 "gno.land/r/gnoland/wugnot"
