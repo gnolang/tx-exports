@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-3497
+3533
 ```
 
 ## addpkgs
@@ -11,17 +11,18 @@
 
 ## top realm calls
 ```
-   1782 "gno.land/r/gnoswap/common"
-   1354 "gno.land/r/gnoswap/router"
-    432 "gno.land/r/gnoswap/gov/staker"
-    390 "gno.land/r/gnoswap/position"
-    354 "gno.land/r/gnoswap/staker"
-    219 "gno.land/r/gnoland/wugnot"
-    162 "gno.land/r/gnoswap/gnft"
+   1808 "gno.land/r/gnoswap/common"
+   1363 "gno.land/r/gnoswap/router"
+    435 "gno.land/r/gnoswap/gov/staker"
+    391 "gno.land/r/gnoswap/position"
+    360 "gno.land/r/gnoswap/staker"
+    227 "gno.land/r/gnoland/wugnot"
+    163 "gno.land/r/gnoswap/gnft"
     145 "gno.land/r/gnops/valopers"
      58 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
      43 "gno.land/r/gnoswap/pool"
      30 "gno.land/r/gnoswap/gns"
+     20 "gno.land/r/demo/profile"
      20 "gno.land/r/gnoswap/test_token/test_usdc"
      16 "gno.land/r/gnoswap/test_token/test_sol"
      14 "gno.land/r/onbloc/utils/grc20helper"
@@ -30,7 +31,6 @@
       8 "gno.land/r/sys/namereg/v1"
       7 "gno.land/r/g172tf235svs0hkckys8kshnam6ncz7pscx9x59f/demo/demo_v00001/main"
       7 "gno.land/r/g198mxzjqsfflcckfgm9yu5d586z88vt67t9tard/nftminter"
-      5 "gno.land/r/demo/profile"
       5 "gno.land/r/g1gsarxwyhnxfuug3lsys58rcpg7myrgmw3wuc2u/boards2/v1"
       5 "gno.land/r/g1j2adx6ngvawtmkhq7eexsk9uq4u9zsrealpye2/tokenfactory"
       5 "gno.land/r/g1manfred47kzduec920z88wfr64ylksmdcedlf5/agents/maintainer"
