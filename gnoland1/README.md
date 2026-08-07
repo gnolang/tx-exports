@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-2703
+2704
 ```
 
 ## addpkgs
@@ -14,7 +14,7 @@
     300 "gno.land/r/gnoland/blog"
      90 "gno.land/r/g1n500fmqx8m6tgts85kmn43htegkv0eewkdm4lg/gingernft2"
      16 "gno.land/r/sys/cla"
-     12 "gno.land/r/gnoland/boards2/v1"
+     13 "gno.land/r/gnoland/boards2/v1"
      10 "gno.land/r/gnops/valopers"
       8 "gno.land/r/g1w93f099t4pp9jamyghp88p60fvkg39dxz2qzrc/tardigrades"
       7 "gno.land/r/gnoland/wugnot"
