@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-3692
+3762
 ```
 
 ## addpkgs
@@ -11,12 +11,12 @@
 
 ## top realm calls
 ```
-   2020 "gno.land/r/gnoswap/common"
-   1515 "gno.land/r/gnoswap/router"
-    446 "gno.land/r/gnoswap/gov/staker"
-    394 "gno.land/r/gnoswap/position"
-    372 "gno.land/r/gnoswap/staker"
-    253 "gno.land/r/gnoland/wugnot"
+   2062 "gno.land/r/gnoswap/common"
+   1536 "gno.land/r/gnoswap/router"
+    447 "gno.land/r/gnoswap/gov/staker"
+    399 "gno.land/r/gnoswap/position"
+    377 "gno.land/r/gnoswap/staker"
+    262 "gno.land/r/gnoland/wugnot"
     164 "gno.land/r/gnoswap/gnft"
     145 "gno.land/r/gnops/valopers"
      58 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
@@ -24,9 +24,9 @@
      30 "gno.land/r/gnoswap/gns"
      20 "gno.land/r/demo/profile"
      20 "gno.land/r/gnoswap/test_token/test_usdc"
+     19 "gno.land/r/g1x4zvyxlwauaanupr43fjm4l3kltk5h6lzgpvwn/gnochat"
      16 "gno.land/r/gnoswap/test_token/test_sol"
      15 "gno.land/r/onbloc/utils/grc20helper"
-     12 "gno.land/r/g1x4zvyxlwauaanupr43fjm4l3kltk5h6lzgpvwn/gnochat"
      12 "gno.land/r/gnoswap/test_token/test_atom"
       9 "gno.land/r/onbloc/ibc/union/access"
       9 "gno.land/r/sys/namereg/v1"
