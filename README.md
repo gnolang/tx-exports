@@ -4,11 +4,12 @@ This repository archives raw blockchain transaction data from Gno.land chains.
 
 ## Active chains (backed up continuously)
 
-| Chain                                             | Directory           | Frequency     |
-| ------------------------------------------------- | ------------------- | ------------- |
-| [topaz.gno.land (test14)](https://topaz.gno.land) | `topaz.gno.land/`   | every 4 hours |
-| [gnoland1 (betanet)](https://betanet.gno.land)    | `gnoland1/`         | every 4 hours |
-| [staging.gno.land](https://staging.gno.land)      | `staging.gno.land/` | every hour    |
+| Chain                                                   | Directory            | Frequency     |
+| ------------------------------------------------------- | -------------------- | ------------- |
+| [sapphire.gno.land (test15)](https://sapphire.gno.land) | `sapphire.gno.land/` | every 4 hours |
+| [topaz.gno.land (test14)](https://topaz.gno.land)       | `topaz.gno.land/`    | every 4 hours |
+| [gnoland1 (betanet)](https://betanet.gno.land)          | `gnoland1/`          | every 4 hours |
+| [staging.gno.land](https://staging.gno.land)            | `staging.gno.land/`  | every hour    |
 
 ## Historical chains (archived, no longer updated)
 

@@ -22,6 +22,7 @@ jobs:
       max-parallel: 1
       matrix:
         testnet:
+          - sapphire.gno.land
           - topaz.gno.land
           - gnoland1
 
