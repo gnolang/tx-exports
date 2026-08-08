@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-3810
+3842
 ```
 
 ## addpkgs
@@ -11,14 +11,14 @@
 
 ## top realm calls
 ```
-   2128 "gno.land/r/gnoswap/common"
-   1565 "gno.land/r/gnoswap/router"
-    450 "gno.land/r/gnoswap/gov/staker"
-    406 "gno.land/r/gnoswap/position"
-    384 "gno.land/r/gnoswap/staker"
-    277 "gno.land/r/gnoland/wugnot"
+   2162 "gno.land/r/gnoswap/common"
+   1580 "gno.land/r/gnoswap/router"
+    451 "gno.land/r/gnoswap/gov/staker"
+    421 "gno.land/r/gnoswap/position"
+    402 "gno.land/r/gnoswap/staker"
+    284 "gno.land/r/gnoland/wugnot"
     165 "gno.land/r/gnoswap/gnft"
-    145 "gno.land/r/gnops/valopers"
+    146 "gno.land/r/gnops/valopers"
      58 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
      43 "gno.land/r/gnoswap/pool"
      30 "gno.land/r/gnoswap/gns"
@@ -28,8 +28,8 @@
      16 "gno.land/r/gnoswap/test_token/test_sol"
      15 "gno.land/r/onbloc/utils/grc20helper"
      12 "gno.land/r/gnoswap/test_token/test_atom"
+     10 "gno.land/r/sys/namereg/v1"
       9 "gno.land/r/onbloc/ibc/union/access"
-      9 "gno.land/r/sys/namereg/v1"
       7 "gno.land/r/g172tf235svs0hkckys8kshnam6ncz7pscx9x59f/demo/demo_v00001/main"
       7 "gno.land/r/g198mxzjqsfflcckfgm9yu5d586z88vt67t9tard/nftminter"
       5 "gno.land/r/g1gsarxwyhnxfuug3lsys58rcpg7myrgmw3wuc2u/boards2/v1"
@@ -48,6 +48,7 @@
       2 "gno.land/r/g1tstg4l99ga0zup3s5xs0zm4vl3u8p7ma9m56ma/gingernft"
       2 "gno.land/r/g1x3702r5pyv3v36eauc4k055l9wxvxah6dwd29t/tictactoe"
       2 "gno.land/r/g1y909z4www82503pcu5rvyzph3eal2w6dhg3gjc/myrealm"
+      2 "gno.land/r/gnoswap/gov/governance"
       2 "gno.land/r/gnoswap/test_token/test_btc"
       2 "gno.land/r/sys/users"
       1 "gno.land/r/g16m0r7rm7fv5hx0ekr7gvx8g4fr7eu08nzhk6gt/bountyboard"
@@ -59,7 +60,6 @@
       1 "gno.land/r/g1w7kytlgsgstspzlpy4fdtd9uqf0ga2dzud4wzv/nftminter"
       1 "gno.land/r/gnoland/blog"
       1 "gno.land/r/gnoswap/emission"
-      1 "gno.land/r/gnoswap/gov/governance"
 ```
 
 ## top faucet requesters
