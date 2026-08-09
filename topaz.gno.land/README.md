@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-3874
+3919
 ```
 
 ## addpkgs
@@ -11,12 +11,12 @@
 
 ## top realm calls
 ```
-   2180 "gno.land/r/gnoswap/common"
-   1586 "gno.land/r/gnoswap/router"
-    452 "gno.land/r/gnoswap/gov/staker"
+   2248 "gno.land/r/gnoswap/common"
+   1620 "gno.land/r/gnoswap/router"
+    453 "gno.land/r/gnoswap/gov/staker"
     422 "gno.land/r/gnoswap/position"
-    408 "gno.land/r/gnoswap/staker"
-    291 "gno.land/r/gnoland/wugnot"
+    413 "gno.land/r/gnoswap/staker"
+    301 "gno.land/r/gnoland/wugnot"
     167 "gno.land/r/gnoswap/gnft"
     146 "gno.land/r/gnops/valopers"
      58 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
@@ -42,13 +42,13 @@
       3 "gno.land/r/g1avv0u2d45d8lf8ywqxt8t867npwp4zvdxw2fl2/token"
       3 "gno.land/r/g1manfred47kzduec920z88wfr64ylksmdcedlf5/agents/capwallet"
       3 "gno.land/r/g1manfred47kzduec920z88wfr64ylksmdcedlf5/agents/receipt"
+      3 "gno.land/r/gnoswap/gov/governance"
       3 "gno.land/r/gnoswap/test_token/test_dai"
       3 "gno.land/r/gnoswap/test_token/test_trx"
       2 "gno.land/r/g1e3jafj9utnprwqlq0ekxwfk4lvxr6qqer52900/tictactoe"
       2 "gno.land/r/g1tstg4l99ga0zup3s5xs0zm4vl3u8p7ma9m56ma/gingernft"
       2 "gno.land/r/g1x3702r5pyv3v36eauc4k055l9wxvxah6dwd29t/tictactoe"
       2 "gno.land/r/g1y909z4www82503pcu5rvyzph3eal2w6dhg3gjc/myrealm"
-      2 "gno.land/r/gnoswap/gov/governance"
       2 "gno.land/r/gnoswap/test_token/test_btc"
       2 "gno.land/r/sys/users"
       1 "gno.land/r/g16m0r7rm7fv5hx0ekr7gvx8g4fr7eu08nzhk6gt/bountyboard"
