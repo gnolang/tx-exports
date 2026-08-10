@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-4059
+4075
 ```
 
 ## addpkgs
@@ -11,12 +11,12 @@
 
 ## top realm calls
 ```
-   2388 "gno.land/r/gnoswap/common"
-   1701 "gno.land/r/gnoswap/router"
-    459 "gno.land/r/gnoswap/gov/staker"
+   2394 "gno.land/r/gnoswap/common"
+   1704 "gno.land/r/gnoswap/router"
+    460 "gno.land/r/gnoswap/gov/staker"
     458 "gno.land/r/gnoswap/position"
-    450 "gno.land/r/gnoswap/staker"
-    316 "gno.land/r/gnoland/wugnot"
+    455 "gno.land/r/gnoswap/staker"
+    318 "gno.land/r/gnoland/wugnot"
     170 "gno.land/r/gnoswap/gnft"
     146 "gno.land/r/gnops/valopers"
      58 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
@@ -35,6 +35,7 @@
       5 "gno.land/r/g1gsarxwyhnxfuug3lsys58rcpg7myrgmw3wuc2u/boards2/v1"
       5 "gno.land/r/g1j2adx6ngvawtmkhq7eexsk9uq4u9zsrealpye2/tokenfactory"
       5 "gno.land/r/g1manfred47kzduec920z88wfr64ylksmdcedlf5/agents/maintainer"
+      5 "gno.land/r/g1x4zvyxlwauaanupr43fjm4l3kltk5h6lzgpvwn/gnotask"
       4 "gno.land/r/g1gn6t0q9wenwhdda47rkrpfd63kcxjvyp7eqwku/pixelfeetest3"
       4 "gno.land/r/g1j2adx6ngvawtmkhq7eexsk9uq4u9zsrealpye2/pixelbadgetest1"
       4 "gno.land/r/g1manfred47kzduec920z88wfr64ylksmdcedlf5/agents/gnomem"
@@ -48,7 +49,6 @@
       3 "gno.land/r/g1j2adx6ngvawtmkhq7eexsk9uq4u9zsrealpye2/pixeltargettest1"
       3 "gno.land/r/g1manfred47kzduec920z88wfr64ylksmdcedlf5/agents/capwallet"
       3 "gno.land/r/g1manfred47kzduec920z88wfr64ylksmdcedlf5/agents/receipt"
-      3 "gno.land/r/g1x4zvyxlwauaanupr43fjm4l3kltk5h6lzgpvwn/gnotask"
       3 "gno.land/r/gnoswap/test_token/test_dai"
       3 "gno.land/r/gnoswap/test_token/test_trx"
       2 "gno.land/r/g1avv0u2d45d8lf8ywqxt8t867npwp4zvdxw2fl2/pixelcommtest3"
