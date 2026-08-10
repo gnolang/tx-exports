@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-4046
+4059
 ```
 
 ## addpkgs
@@ -11,12 +11,12 @@
 
 ## top realm calls
 ```
-   2384 "gno.land/r/gnoswap/common"
+   2388 "gno.land/r/gnoswap/common"
    1701 "gno.land/r/gnoswap/router"
     459 "gno.land/r/gnoswap/gov/staker"
-    447 "gno.land/r/gnoswap/position"
-    444 "gno.land/r/gnoswap/staker"
-    314 "gno.land/r/gnoland/wugnot"
+    458 "gno.land/r/gnoswap/position"
+    450 "gno.land/r/gnoswap/staker"
+    316 "gno.land/r/gnoland/wugnot"
     170 "gno.land/r/gnoswap/gnft"
     146 "gno.land/r/gnops/valopers"
      58 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
@@ -48,6 +48,7 @@
       3 "gno.land/r/g1j2adx6ngvawtmkhq7eexsk9uq4u9zsrealpye2/pixeltargettest1"
       3 "gno.land/r/g1manfred47kzduec920z88wfr64ylksmdcedlf5/agents/capwallet"
       3 "gno.land/r/g1manfred47kzduec920z88wfr64ylksmdcedlf5/agents/receipt"
+      3 "gno.land/r/g1x4zvyxlwauaanupr43fjm4l3kltk5h6lzgpvwn/gnotask"
       3 "gno.land/r/gnoswap/test_token/test_dai"
       3 "gno.land/r/gnoswap/test_token/test_trx"
       2 "gno.land/r/g1avv0u2d45d8lf8ywqxt8t867npwp4zvdxw2fl2/pixelcommtest3"
