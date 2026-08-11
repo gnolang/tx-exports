@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-4111
+4113
 ```
 
 ## addpkgs
@@ -30,9 +30,9 @@
      12 "gno.land/r/gnoswap/test_token/test_atom"
      10 "gno.land/r/sys/namereg/v1"
       9 "gno.land/r/onbloc/ibc/union/access"
+      8 "gno.land/r/g1x4zvyxlwauaanupr43fjm4l3kltk5h6lzgpvwn/gnotask"
       7 "gno.land/r/g172tf235svs0hkckys8kshnam6ncz7pscx9x59f/demo/demo_v00001/main"
       7 "gno.land/r/g198mxzjqsfflcckfgm9yu5d586z88vt67t9tard/nftminter"
-      7 "gno.land/r/g1x4zvyxlwauaanupr43fjm4l3kltk5h6lzgpvwn/gnotask"
       5 "gno.land/r/g1gsarxwyhnxfuug3lsys58rcpg7myrgmw3wuc2u/boards2/v1"
       5 "gno.land/r/g1j2adx6ngvawtmkhq7eexsk9uq4u9zsrealpye2/tokenfactory"
       5 "gno.land/r/g1manfred47kzduec920z88wfr64ylksmdcedlf5/agents/maintainer"
