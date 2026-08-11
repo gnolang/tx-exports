@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-1629
+1660
 ```
 
 ## addpkgs
@@ -11,7 +11,7 @@
 
 ## top realm calls
 ```
-    756 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixels"
+    784 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixels"
     651 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixelsandbox"
      22 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv7"
      20 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv4"
