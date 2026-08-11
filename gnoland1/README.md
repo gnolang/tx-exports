@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-2791
+2793
 ```
 
 ## addpkgs
@@ -11,7 +11,7 @@
 
 ## top realm calls
 ```
-    300 "gno.land/r/gnoland/blog"
+    302 "gno.land/r/gnoland/blog"
     213 "gno.land/r/g1n500fmqx8m6tgts85kmn43htegkv0eewkdm4lg/gingernft2"
      16 "gno.land/r/sys/cla"
      13 "gno.land/r/gnoland/boards2/v1"
