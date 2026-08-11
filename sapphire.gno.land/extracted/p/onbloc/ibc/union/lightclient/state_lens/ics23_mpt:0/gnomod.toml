@@ -1,0 +1,2 @@
+module = "gno.land/p/onbloc/ibc/union/lightclient/state_lens/ics23_mpt"
+gno = "0.9"
