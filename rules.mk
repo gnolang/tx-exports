@@ -4,8 +4,17 @@ EXTRACTOR_DIR ?= extractor
 # contribs/*/go.mod files use `replace github.com/gnolang/gno => ../..` so
 # `go run <path>@version` does not work remotely — we must build from a
 # local checkout.
-GNO_REPO     ?= $(HOME)/.cache/tx-exports/gno
+#
+# GNO_REF must match the build the target chain runs, so each chain Makefile
+# pins its node's `chain/*` tag. tx-archive amino-decodes the node's block
+# results with the gno types from this ref, and amino rejects unknown JSON
+# fields: on `master` the fetch dies with `unknown JSON field "errors" for type
+# vm.TypeCheckError` against gnoland1, whose build still carries that field
+# (dropped from master in #5893).
 GNO_REF      ?= master
+# Ref is part of the path so bumping GNO_REF re-clones instead of silently
+# reusing a checkout of the previous ref.
+GNO_REPO     ?= $(HOME)/.cache/tx-exports/gno-$(subst /,-,$(GNO_REF))
 TXARCHIVE    ?= $(GNO_REPO)/contribs/tx-archive
 
 .PHONY: all
@@ -39,10 +48,15 @@ WS_FLAG       =
 BACKUP_REMOTE = $(REMOTE)
 endif
 
+# --batch 100: the RPC nodes enforce a 10s WebSocket write deadline (tm2
+# defaultWSWriteWait). Assembling a batch response for tx-archive's default
+# 1000 blocks takes longer than that in tx-dense ranges, and the server
+# drops the connection mid-fetch.
 .PHONY: fetch
 fetch: tx-archive-ensure
 	@echo "Backup from: $(FROM_BLOCK) to $(TO_BLOCK)"
 	cd $(TXARCHIVE) && go run ./cmd backup -verbose $(WS_FLAG) \
+		--batch 100 \
 		--remote $(BACKUP_REMOTE) \
 		--from-block $(FROM_BLOCK) \
 		--to-block   $(TO_BLOCK) \
@@ -116,15 +130,19 @@ stats-legacy:
 	echo >> README.md
 
 
+# Only files with contiguous block ranges may be merged: a coverage gap
+# between two files must stay visible in the file names.
 .PHONY: join
 join:
 	@echo "Joining small backup files..."
 	@prev_file=""; \
 	for f in $$(ls backup_*.jsonl 2>/dev/null | sort); do \
 		size=$$(stat -c%s "$$f"); \
+		f_start=$$(echo "$$f" | sed 's/backup_0*\([0-9][0-9]*\)-.*/\1/'); \
 		if [ -n "$$prev_file" ]; then \
 			prev_size=$$(stat -c%s "$$prev_file"); \
-			if [ $$((prev_size + size)) -lt 102400 ]; then \
+			prev_end=$$(echo "$$prev_file" | sed 's/backup_[0-9]*-0*\([0-9][0-9]*\)\..*/\1/'); \
+			if [ $$((prev_size + size)) -lt 102400 ] && [ "$$f_start" -eq $$((prev_end + 1)) ]; then \
 				start=$$(echo "$$prev_file" | sed 's/backup_\([0-9]*\)-.*/\1/'); \
 				end=$$(echo "$$f" | sed 's/backup_[0-9]*-\([0-9]*\)\..*/\1/'); \
 				new_file="backup_$${start}-$${end}.jsonl"; \

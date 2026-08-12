@@ -1,0 +1,6 @@
+module = "gno.land/p/onbloc/verifier/evm/storage"
+gno = "0.9"
+
+[require]
+"gno.land/p/core/encoding/rlp" = "v0.0.0"
+"gno.land/p/core/ethereum/mpt" = "v0.0.0"
