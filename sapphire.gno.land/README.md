@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-28539
+28875
 ```
 
 ## addpkgs
@@ -11,26 +11,26 @@
 
 ## top realm calls
 ```
-  25127 "gno.land/r/gnoswap/common"
-  15771 "gno.land/r/gnoswap/router"
-   5060 "gno.land/r/gnoland/wugnot"
-   3569 "gno.land/r/gnoswap/test_token/test_usdc"
-   2954 "gno.land/r/gnoswap/test_token/test_btc"
-   2952 "gno.land/r/gnoswap/test_token/test_atom"
-   2951 "gno.land/r/gnoswap/test_token/test_dai"
-   2948 "gno.land/r/gnoswap/test_token/test_sol"
-   2948 "gno.land/r/gnoswap/test_token/test_trx"
-   1962 "gno.land/r/gnoswap/position"
-   1658 "gno.land/r/gnoswap/staker"
+  25477 "gno.land/r/gnoswap/common"
+  16005 "gno.land/r/gnoswap/router"
+   5157 "gno.land/r/gnoland/wugnot"
+   3645 "gno.land/r/gnoswap/test_token/test_usdc"
+   2958 "gno.land/r/gnoswap/test_token/test_btc"
+   2956 "gno.land/r/gnoswap/test_token/test_atom"
+   2955 "gno.land/r/gnoswap/test_token/test_dai"
+   2952 "gno.land/r/gnoswap/test_token/test_sol"
+   2952 "gno.land/r/gnoswap/test_token/test_trx"
+   2077 "gno.land/r/gnoswap/position"
+   1796 "gno.land/r/gnoswap/staker"
    1225 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixels"
     651 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixelsandbox"
-    479 "gno.land/r/gnoswap/gnft"
-    286 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
+    491 "gno.land/r/gnoswap/gnft"
+    289 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
     158 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g6"
     150 "gno.land/r/demo/defi/grc20reg"
     149 "gno.land/r/gnops/valopers"
-    105 "gno.land/r/gnoswap/gov/staker"
-     54 "gno.land/r/gnoswap/gns"
+    107 "gno.land/r/gnoswap/gov/staker"
+     55 "gno.land/r/gnoswap/gns"
      53 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv9"
      35 "gno.land/r/gnoswap/pool"
      34 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv7"
@@ -70,6 +70,7 @@
       2 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv2"
       2 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv6"
       2 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/points"
+      1 "gno.land/r/aib/ibc/apps/transfer"
       1 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv21"
       1 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv5"
       1 "gno.land/r/g1rvzx735nu32qt85wxl06y8gekztfdmpuxy67ux/ambassadorweek"
