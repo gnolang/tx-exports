@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-79445
+87485
 ```
 
 ## addpkgs
@@ -11,24 +11,24 @@
 
 ## top realm calls
 ```
-  70548 "gno.land/r/gnoswap/common"
-  38519 "gno.land/r/gnoswap/router"
-  11501 "gno.land/r/gnoswap/test_token/test_usdc"
-  10900 "gno.land/r/gnoland/wugnot"
-   9908 "gno.land/r/gnoswap/test_token/test_atom"
-   9861 "gno.land/r/gnoswap/test_token/test_sol"
-   9837 "gno.land/r/gnoswap/test_token/test_btc"
-   9826 "gno.land/r/gnoswap/test_token/test_trx"
-   9708 "gno.land/r/gnoswap/test_token/test_dai"
-   4342 "gno.land/r/gnoswap/staker"
-   4187 "gno.land/r/gnoswap/position"
-   2543 "gno.land/r/demo/defi/grc20reg"
+  74732 "gno.land/r/gnoswap/common"
+  41218 "gno.land/r/gnoswap/router"
+  13831 "gno.land/r/gnoswap/test_token/test_usdc"
+  11041 "gno.land/r/gnoswap/test_token/test_atom"
+  11001 "gno.land/r/gnoland/wugnot"
+  10977 "gno.land/r/gnoswap/test_token/test_sol"
+  10949 "gno.land/r/gnoswap/test_token/test_btc"
+  10947 "gno.land/r/gnoswap/test_token/test_trx"
+  10801 "gno.land/r/gnoswap/test_token/test_dai"
+   4576 "gno.land/r/gnoswap/staker"
+   4412 "gno.land/r/gnoswap/position"
+   3435 "gno.land/r/demo/defi/grc20reg"
    1239 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixels"
-    893 "gno.land/r/gnoswap/gnft"
+    922 "gno.land/r/gnoswap/gnft"
+    758 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
     651 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixelsandbox"
-    584 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
-    365 "gno.land/r/gnoswap/launchpad"
-    233 "gno.land/r/gnoswap/gov/staker"
+    381 "gno.land/r/gnoswap/launchpad"
+    245 "gno.land/r/gnoswap/gov/staker"
     158 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g6"
     151 "gno.land/r/gnops/valopers"
      61 "gno.land/r/gnoswap/gns"
@@ -86,6 +86,7 @@
       2 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv2"
       2 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv6"
       2 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/points"
+      2 "gno.land/r/samcrew/deps/demo/profile"
       1 "gno.land/r/g1jkkpd3jyzzn8zz0jd8tmzewxxq9ysn67nhc35z/erradapter"
       1 "gno.land/r/g1jkkpd3jyzzn8zz0jd8tmzewxxq9ysn67nhc35z/erradapterv2"
       1 "gno.land/r/g1jkkpd3jyzzn8zz0jd8tmzewxxq9ysn67nhc35z/erradapterv3"
