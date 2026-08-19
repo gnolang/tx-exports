@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-165999
+170737
 ```
 
 ## addpkgs
@@ -11,27 +11,27 @@
 
 ## top realm calls
 ```
-  88186 "gno.land/r/gnoswap/common"
-  51293 "gno.land/r/gnoswap/router"
-  37352 "gno.land/r/gnoswap/test_token/test_usdc"
-  27028 "gno.land/r/gnoswap/test_token/test_btc"
-  26968 "gno.land/r/gnoswap/test_token/test_atom"
-  26957 "gno.land/r/gnoswap/test_token/test_sol"
-  26940 "gno.land/r/gnoswap/test_token/test_trx"
-  26632 "gno.land/r/gnoswap/test_token/test_dai"
-  11747 "gno.land/r/gnoland/wugnot"
-  10181 "gno.land/r/demo/defi/grc20reg"
-   6915 "gno.land/r/gnoswap/staker"
-   6561 "gno.land/r/gnoswap/position"
-   1328 "gno.land/r/gnoswap/launchpad"
+  88268 "gno.land/r/gnoswap/common"
+  51319 "gno.land/r/gnoswap/router"
+  38347 "gno.land/r/gnoswap/test_token/test_usdc"
+  28003 "gno.land/r/gnoswap/test_token/test_btc"
+  27916 "gno.land/r/gnoswap/test_token/test_sol"
+  27912 "gno.land/r/gnoswap/test_token/test_atom"
+  27900 "gno.land/r/gnoswap/test_token/test_trx"
+  27581 "gno.land/r/gnoswap/test_token/test_dai"
+  11766 "gno.land/r/gnoland/wugnot"
+  10759 "gno.land/r/demo/defi/grc20reg"
+   6962 "gno.land/r/gnoswap/staker"
+   6607 "gno.land/r/gnoswap/position"
+   1425 "gno.land/r/gnoswap/launchpad"
    1259 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixels"
-   1144 "gno.land/r/gnoswap/gnft"
+   1152 "gno.land/r/gnoswap/gnft"
    1075 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
     651 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixelsandbox"
-    394 "gno.land/r/gnoswap/gov/staker"
+    395 "gno.land/r/gnoswap/gov/staker"
     158 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g6"
     152 "gno.land/r/gnops/valopers"
-     68 "gno.land/r/gnoswap/gns"
+     69 "gno.land/r/gnoswap/gns"
      53 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv9"
      48 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g8"
      44 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g9"
@@ -82,6 +82,7 @@
       3 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g2"
       3 "gno.land/r/g1jkkpd3jyzzn8zz0jd8tmzewxxq9ysn67nhc35z/errcollection"
       3 "gno.land/r/g1jkkpd3jyzzn8zz0jd8tmzewxxq9ysn67nhc35z/errcollectionv3"
+      3 "gno.land/r/g1lyuc4zhnmd7dkdvt02fmzq9q0drqmgtn2t00ls/messages"
       3 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/profile"
       3 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gvs/gsfarm"
       3 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gvs/gsfarmv3"
