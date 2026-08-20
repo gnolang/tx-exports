@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-207452
+210904
 ```
 
 ## addpkgs
@@ -11,26 +11,26 @@
 
 ## top realm calls
 ```
-  90544 "gno.land/r/gnoswap/common"
-  52195 "gno.land/r/gnoswap/router"
-  47937 "gno.land/r/gnoswap/test_token/test_usdc"
-  37477 "gno.land/r/gnoswap/test_token/test_btc"
-  37331 "gno.land/r/gnoswap/test_token/test_trx"
-  37306 "gno.land/r/gnoswap/test_token/test_sol"
-  37291 "gno.land/r/gnoswap/test_token/test_atom"
-  36981 "gno.land/r/gnoswap/test_token/test_dai"
-  13343 "gno.land/r/demo/defi/grc20reg"
-  12030 "gno.land/r/gnoland/wugnot"
-   7646 "gno.land/r/gnoswap/staker"
-   7319 "gno.land/r/gnoswap/position"
-   2323 "gno.land/r/gnoswap/launchpad"
+  90694 "gno.land/r/gnoswap/common"
+  52247 "gno.land/r/gnoswap/router"
+  49166 "gno.land/r/gnoswap/test_token/test_usdc"
+  38706 "gno.land/r/gnoswap/test_token/test_btc"
+  38560 "gno.land/r/gnoswap/test_token/test_trx"
+  38535 "gno.land/r/gnoswap/test_token/test_sol"
+  38520 "gno.land/r/gnoswap/test_token/test_atom"
+  38210 "gno.land/r/gnoswap/test_token/test_dai"
+  13832 "gno.land/r/demo/defi/grc20reg"
+  12046 "gno.land/r/gnoland/wugnot"
+   7720 "gno.land/r/gnoswap/staker"
+   7401 "gno.land/r/gnoswap/position"
+   2468 "gno.land/r/gnoswap/launchpad"
    1260 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixels"
-   1230 "gno.land/r/gnoswap/gnft"
-   1082 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
+   1236 "gno.land/r/gnoswap/gnft"
+   1083 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
     651 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixelsandbox"
-    455 "gno.land/r/gnoswap/gov/staker"
+    456 "gno.land/r/gnoswap/gov/staker"
     158 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g6"
-    155 "gno.land/r/gnops/valopers"
+    156 "gno.land/r/gnops/valopers"
      70 "gno.land/r/gnoswap/gns"
      53 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv9"
      48 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g8"
@@ -81,6 +81,7 @@
       5 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gvs/vault"
       5 "gno.land/r/nym-vikbez000/telescope"
       4 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gvs/lineage"
+      4 "gno.land/r/gnoswap/rbac"
       3 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g2"
       3 "gno.land/r/g1jkkpd3jyzzn8zz0jd8tmzewxxq9ysn67nhc35z/errcollection"
       3 "gno.land/r/g1jkkpd3jyzzn8zz0jd8tmzewxxq9ysn67nhc35z/errcollectionv3"
