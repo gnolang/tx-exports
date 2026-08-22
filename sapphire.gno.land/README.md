@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-256804
+260180
 ```
 
 ## addpkgs
@@ -11,31 +11,31 @@
 
 ## top realm calls
 ```
-  98158 "gno.land/r/gnoswap/common"
-  61685 "gno.land/r/gnoswap/test_token/test_usdc"
-  60325 "gno.land/r/gnoswap/router"
-  48316 "gno.land/r/gnoswap/test_token/test_btc"
-  48223 "gno.land/r/gnoswap/test_token/test_sol"
-  48166 "gno.land/r/gnoswap/test_token/test_trx"
-  48129 "gno.land/r/gnoswap/test_token/test_atom"
-  47816 "gno.land/r/gnoswap/test_token/test_dai"
-  17231 "gno.land/r/demo/defi/grc20reg"
-  13229 "gno.land/r/gnoland/wugnot"
-   9477 "gno.land/r/gnoswap/staker"
-   9414 "gno.land/r/gnoswap/position"
-   4855 "gno.land/r/gnoswap/launchpad"
+  99162 "gno.land/r/gnoswap/common"
+  63306 "gno.land/r/gnoswap/test_token/test_usdc"
+  61206 "gno.land/r/gnoswap/router"
+  49147 "gno.land/r/gnoswap/test_token/test_btc"
+  49054 "gno.land/r/gnoswap/test_token/test_sol"
+  48997 "gno.land/r/gnoswap/test_token/test_trx"
+  48960 "gno.land/r/gnoswap/test_token/test_atom"
+  48647 "gno.land/r/gnoswap/test_token/test_dai"
+  17545 "gno.land/r/demo/defi/grc20reg"
+  13267 "gno.land/r/gnoland/wugnot"
+   9558 "gno.land/r/gnoswap/staker"
+   9511 "gno.land/r/gnoswap/position"
+   5089 "gno.land/r/gnoswap/launchpad"
    2744 "gno.land/r/gnoswap/gns"
-   1484 "gno.land/r/gnoswap/gnft"
+   1500 "gno.land/r/gnoswap/gnft"
    1263 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixels"
-   1163 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
-    671 "gno.land/r/gnoswap/gov/staker"
+   1235 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
+    684 "gno.land/r/gnoswap/gov/staker"
     651 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixelsandbox"
     162 "gno.land/r/gnops/valopers"
     158 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g6"
      53 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv9"
      50 "gno.land/r/nym-gemsnft000/g17"
+     49 "gno.land/r/g1xr6tgxnpled50h74eafmvxway7z0ytr5rsmeme/nslogic"
      48 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g8"
-     46 "gno.land/r/g1xr6tgxnpled50h74eafmvxway7z0ytr5rsmeme/nslogic"
      44 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g9"
      42 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g12"
      42 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g7"
@@ -105,6 +105,8 @@
       2 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/points"
       2 "gno.land/r/g1xr6tgxnpled50h74eafmvxway7z0ytr5rsmeme/nsdata"
       2 "gno.land/r/samcrew/deps/demo/profile"
+      1 "gno.land/r/g1gn6t0q9wenwhdda47rkrpfd63kcxjvyp7eqwku/storagea"
+      1 "gno.land/r/g1gn6t0q9wenwhdda47rkrpfd63kcxjvyp7eqwku/storageb"
       1 "gno.land/r/g1jkkpd3jyzzn8zz0jd8tmzewxxq9ysn67nhc35z/erradapter"
       1 "gno.land/r/g1jkkpd3jyzzn8zz0jd8tmzewxxq9ysn67nhc35z/erradapterv2"
       1 "gno.land/r/g1jkkpd3jyzzn8zz0jd8tmzewxxq9ysn67nhc35z/erradapterv3"
