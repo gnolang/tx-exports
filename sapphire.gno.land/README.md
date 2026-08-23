@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-265121
+272460
 ```
 
 ## addpkgs
@@ -11,32 +11,32 @@
 
 ## top realm calls
 ```
-  99722 "gno.land/r/gnoswap/common"
-  66280 "gno.land/r/gnoswap/test_token/test_usdc"
-  62040 "gno.land/r/gnoswap/router"
-  50861 "gno.land/r/gnoswap/test_token/test_btc"
-  50767 "gno.land/r/gnoswap/test_token/test_sol"
-  50711 "gno.land/r/gnoswap/test_token/test_trx"
-  50674 "gno.land/r/gnoswap/test_token/test_atom"
-  50360 "gno.land/r/gnoswap/test_token/test_dai"
-  17842 "gno.land/r/demo/defi/grc20reg"
-  13356 "gno.land/r/gnoland/wugnot"
-   9725 "gno.land/r/gnoswap/staker"
-   9663 "gno.land/r/gnoswap/position"
-   5342 "gno.land/r/gnoswap/launchpad"
-   2744 "gno.land/r/gnoswap/gns"
-   1540 "gno.land/r/gnoswap/gnft"
+ 100038 "gno.land/r/gnoswap/common"
+  69053 "gno.land/r/gnoswap/test_token/test_usdc"
+  62832 "gno.land/r/gnoswap/router"
+  52315 "gno.land/r/gnoswap/test_token/test_btc"
+  52221 "gno.land/r/gnoswap/test_token/test_sol"
+  52165 "gno.land/r/gnoswap/test_token/test_trx"
+  52128 "gno.land/r/gnoswap/test_token/test_atom"
+  51814 "gno.land/r/gnoswap/test_token/test_dai"
+  18220 "gno.land/r/demo/defi/grc20reg"
+  13369 "gno.land/r/gnoland/wugnot"
+   9814 "gno.land/r/gnoswap/staker"
+   9745 "gno.land/r/gnoswap/position"
+   5734 "gno.land/r/gnoswap/launchpad"
+   2745 "gno.land/r/gnoswap/gns"
+   1547 "gno.land/r/gnoswap/gnft"
    1263 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixels"
    1235 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
-    695 "gno.land/r/gnoswap/gov/staker"
+    707 "gno.land/r/gnoswap/gov/staker"
     651 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixelsandbox"
     162 "gno.land/r/gnops/valopers"
     158 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g6"
+    117 "gno.land/r/g1xr6tgxnpled50h74eafmvxway7z0ytr5rsmeme/nslogic/v2"
      70 "gno.land/r/g1xr6tgxnpled50h74eafmvxway7z0ytr5rsmeme/nslogic"
      53 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv9"
      50 "gno.land/r/nym-gemsnft000/g17"
      48 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g8"
-     48 "gno.land/r/g1xr6tgxnpled50h74eafmvxway7z0ytr5rsmeme/nslogic/v2"
      44 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g9"
      42 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g12"
      42 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g7"
