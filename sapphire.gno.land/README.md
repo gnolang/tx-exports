@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-272460
+275631
 ```
 
 ## addpkgs
@@ -11,24 +11,24 @@
 
 ## top realm calls
 ```
- 100038 "gno.land/r/gnoswap/common"
-  69053 "gno.land/r/gnoswap/test_token/test_usdc"
-  62832 "gno.land/r/gnoswap/router"
-  52315 "gno.land/r/gnoswap/test_token/test_btc"
-  52221 "gno.land/r/gnoswap/test_token/test_sol"
-  52165 "gno.land/r/gnoswap/test_token/test_trx"
-  52128 "gno.land/r/gnoswap/test_token/test_atom"
-  51814 "gno.land/r/gnoswap/test_token/test_dai"
-  18220 "gno.land/r/demo/defi/grc20reg"
-  13369 "gno.land/r/gnoland/wugnot"
-   9814 "gno.land/r/gnoswap/staker"
-   9745 "gno.land/r/gnoswap/position"
-   5734 "gno.land/r/gnoswap/launchpad"
+ 100226 "gno.land/r/gnoswap/common"
+  71193 "gno.land/r/gnoswap/test_token/test_usdc"
+  63506 "gno.land/r/gnoswap/router"
+  53203 "gno.land/r/gnoswap/test_token/test_btc"
+  53109 "gno.land/r/gnoswap/test_token/test_sol"
+  53053 "gno.land/r/gnoswap/test_token/test_trx"
+  53016 "gno.land/r/gnoswap/test_token/test_atom"
+  52702 "gno.land/r/gnoswap/test_token/test_dai"
+  18491 "gno.land/r/demo/defi/grc20reg"
+  13406 "gno.land/r/gnoland/wugnot"
+   9900 "gno.land/r/gnoswap/staker"
+   9822 "gno.land/r/gnoswap/position"
+   5989 "gno.land/r/gnoswap/launchpad"
    2745 "gno.land/r/gnoswap/gns"
-   1547 "gno.land/r/gnoswap/gnft"
+   1567 "gno.land/r/gnoswap/gnft"
    1263 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixels"
    1235 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
-    707 "gno.land/r/gnoswap/gov/staker"
+    712 "gno.land/r/gnoswap/gov/staker"
     651 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixelsandbox"
     162 "gno.land/r/gnops/valopers"
     158 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g6"
@@ -46,7 +46,7 @@
      32 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g10"
      30 "gno.land/r/gnoswap/gov/governance"
      27 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/hubv2"
-     24 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/pointsv2"
+     25 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/pointsv2"
      23 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv4"
      22 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g11"
      21 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv13"
@@ -58,6 +58,7 @@
      16 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g15"
      13 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g3"
      12 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv19"
+     12 "gno.land/r/g1xr6tgxnpled50h74eafmvxway7z0ytr5rsmeme/nsdata/v2"
      12 "gno.land/r/sys/namereg/v1"
      10 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g5"
       9 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/meta"
@@ -71,6 +72,7 @@
       7 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv18"
       7 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gvs/gsfarmv2"
       7 "gno.land/r/g1u97n45s4s6q7vn5clr8339pv4up455hnqn4aff/roulette"
+      7 "gno.land/r/g1xr6tgxnpled50h74eafmvxway7z0ytr5rsmeme/nslogic/v3"
       6 "gno.land/r/aib/ibc/apps/transfer"
       6 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g14"
       6 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g4"
@@ -105,7 +107,6 @@
       2 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv6"
       2 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/points"
       2 "gno.land/r/g1xr6tgxnpled50h74eafmvxway7z0ytr5rsmeme/nsdata"
-      2 "gno.land/r/g1xr6tgxnpled50h74eafmvxway7z0ytr5rsmeme/nsdata/v2"
       2 "gno.land/r/samcrew/deps/demo/profile"
       1 "gno.land/r/g1gn6t0q9wenwhdda47rkrpfd63kcxjvyp7eqwku/storagea"
       1 "gno.land/r/g1gn6t0q9wenwhdda47rkrpfd63kcxjvyp7eqwku/storageb"
@@ -124,6 +125,7 @@
       1 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv5"
       1 "gno.land/r/g1rvzx735nu32qt85wxl06y8gekztfdmpuxy67ux/ambassadorweek"
       1 "gno.land/r/g1v6v9nfv9nt2685s6s5tkvf02fak9x0007527tj/tally"
+      1 "gno.land/r/g1xr6tgxnpled50h74eafmvxway7z0ytr5rsmeme/nslogic/v4"
       1 "gno.land/r/gnoswap/emission"
       1 "gno.land/r/samcrew/memba_feed_v1"
       1 "gno.land/r/sys/users"
