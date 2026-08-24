@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-294591
+298691
 ```
 
 ## addpkgs
@@ -11,31 +11,31 @@
 
 ## top realm calls
 ```
- 103599 "gno.land/r/gnoswap/common"
-  78232 "gno.land/r/gnoswap/test_token/test_usdc"
-  67872 "gno.land/r/gnoswap/router"
-  56756 "gno.land/r/gnoswap/test_token/test_btc"
-  56665 "gno.land/r/gnoswap/test_token/test_sol"
-  56605 "gno.land/r/gnoswap/test_token/test_trx"
-  56570 "gno.land/r/gnoswap/test_token/test_atom"
-  56254 "gno.land/r/gnoswap/test_token/test_dai"
-  19439 "gno.land/r/demo/defi/grc20reg"
-  13705 "gno.land/r/gnoland/wugnot"
-  10687 "gno.land/r/gnoswap/staker"
-  10573 "gno.land/r/gnoswap/position"
-   6762 "gno.land/r/gnoswap/launchpad"
-   4349 "gno.land/r/gnoswap/gns"
-   1679 "gno.land/r/gnoswap/gnft"
+ 103809 "gno.land/r/gnoswap/common"
+  79616 "gno.land/r/gnoswap/test_token/test_usdc"
+  68625 "gno.land/r/gnoswap/router"
+  57594 "gno.land/r/gnoswap/test_token/test_btc"
+  57503 "gno.land/r/gnoswap/test_token/test_sol"
+  57443 "gno.land/r/gnoswap/test_token/test_trx"
+  57408 "gno.land/r/gnoswap/test_token/test_atom"
+  57092 "gno.land/r/gnoswap/test_token/test_dai"
+  19810 "gno.land/r/demo/defi/grc20reg"
+  13736 "gno.land/r/gnoland/wugnot"
+  10826 "gno.land/r/gnoswap/staker"
+  10697 "gno.land/r/gnoswap/position"
+   6768 "gno.land/r/gnoswap/launchpad"
+   4906 "gno.land/r/gnoswap/gns"
+   1696 "gno.land/r/gnoswap/gnft"
+   1270 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
    1263 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixels"
-   1263 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
-    799 "gno.land/r/gnoswap/gov/staker"
+    804 "gno.land/r/gnoswap/gov/staker"
     651 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixelsandbox"
     162 "gno.land/r/gnops/valopers"
     158 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g6"
     117 "gno.land/r/g1xr6tgxnpled50h74eafmvxway7z0ytr5rsmeme/nslogic/v2"
      70 "gno.land/r/g1xr6tgxnpled50h74eafmvxway7z0ytr5rsmeme/nslogic"
+     56 "gno.land/r/nym-gemsnft000/g17"
      53 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv9"
-     53 "gno.land/r/nym-gemsnft000/g17"
      48 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g8"
      44 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g9"
      43 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv22"
