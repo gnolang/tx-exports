@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-304225
+307299
 ```
 
 ## addpkgs
@@ -11,24 +11,24 @@
 
 ## top realm calls
 ```
- 104972 "gno.land/r/gnoswap/common"
-  81506 "gno.land/r/gnoswap/test_token/test_usdc"
-  69248 "gno.land/r/gnoswap/router"
-  59245 "gno.land/r/gnoswap/test_token/test_btc"
-  59154 "gno.land/r/gnoswap/test_token/test_sol"
-  59094 "gno.land/r/gnoswap/test_token/test_trx"
-  59059 "gno.land/r/gnoswap/test_token/test_atom"
-  58743 "gno.land/r/gnoswap/test_token/test_dai"
-  20267 "gno.land/r/demo/defi/grc20reg"
-  13859 "gno.land/r/gnoland/wugnot"
-  11201 "gno.land/r/gnoswap/staker"
-  11101 "gno.land/r/gnoswap/position"
-   6948 "gno.land/r/gnoswap/launchpad"
+ 106302 "gno.land/r/gnoswap/common"
+  82240 "gno.land/r/gnoswap/test_token/test_usdc"
+  69785 "gno.land/r/gnoswap/router"
+  59947 "gno.land/r/gnoswap/test_token/test_btc"
+  59856 "gno.land/r/gnoswap/test_token/test_sol"
+  59796 "gno.land/r/gnoswap/test_token/test_trx"
+  59761 "gno.land/r/gnoswap/test_token/test_atom"
+  59445 "gno.land/r/gnoswap/test_token/test_dai"
+  20436 "gno.land/r/demo/defi/grc20reg"
+  14017 "gno.land/r/gnoland/wugnot"
+  11508 "gno.land/r/gnoswap/staker"
+  11424 "gno.land/r/gnoswap/position"
+   7010 "gno.land/r/gnoswap/launchpad"
    4961 "gno.land/r/gnoswap/gns"
-   1763 "gno.land/r/gnoswap/gnft"
-   1288 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
+   1818 "gno.land/r/gnoswap/gnft"
+   1397 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
    1263 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixels"
-    847 "gno.land/r/gnoswap/gov/staker"
+    875 "gno.land/r/gnoswap/gov/staker"
     651 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixelsandbox"
     162 "gno.land/r/gnops/valopers"
     158 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g6"
@@ -96,6 +96,7 @@
       4 "gno.land/r/gnoswap/rbac"
       4 "gno.land/r/onbloc/ibc/union/access"
       3 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g2"
+      3 "gno.land/r/g1hx4z2kwrnzd9up3g0gd4hspc6v78e4r90jkke3/nft"
       3 "gno.land/r/g1jkkpd3jyzzn8zz0jd8tmzewxxq9ysn67nhc35z/errcollection"
       3 "gno.land/r/g1jkkpd3jyzzn8zz0jd8tmzewxxq9ysn67nhc35z/errcollectionv3"
       3 "gno.land/r/g1lyuc4zhnmd7dkdvt02fmzq9q0drqmgtn2t00ls/messages"
