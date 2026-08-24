@@ -6,6 +6,7 @@ This repository archives raw blockchain transaction data from Gno.land chains.
 
 | Chain                                                   | Directory            | Frequency     |
 | ------------------------------------------------------- | -------------------- | ------------- |
+| [pearl.gno.land (test16)](https://pearl.gno.land)       | `pearl.gno.land/`    | every 4 hours |
 | [sapphire.gno.land (test15)](https://sapphire.gno.land) | `sapphire.gno.land/` | every 4 hours |
 | [gnoland1 (betanet)](https://betanet.gno.land)          | `gnoland1/`          | every 4 hours |
 | [staging.gno.land](https://staging.gno.land)            | `staging.gno.land/`  | every hour    |

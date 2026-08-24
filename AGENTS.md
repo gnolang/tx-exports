@@ -6,7 +6,7 @@ This file provides guidance to autonomous AI agents when working with code in th
 
 This repository archives raw blockchain transaction data exported from Gno.land chains:
 
-- **Active**: sapphire.gno.land (test15), gnoland1 (betanet), staging.gno.land
+- **Active**: pearl.gno.land (test16), sapphire.gno.land (test15), gnoland1 (betanet), staging.gno.land
 - **Historical**: test1–test5, test11, test13, topaz (test14) (archived, no longer updated)
 
 ## Common Commands
@@ -51,7 +51,7 @@ Each chain directory is self-contained:
 
 ### Transaction data format
 
-**Current format** (sapphire, topaz, test13, test11, gnoland1, test5, test2, test1):
+**Current format** (pearl, sapphire, topaz, test13, test11, gnoland1, test5, test2, test1):
 
 ```json
 {"tx": {"msg": [...], "fee": {...}, "signatures": [...], "memo": ""}, "metadata": {"timestamp": "..."}}
@@ -78,7 +78,7 @@ Uses `export.sh` instead of tx-archive. It calls `gnogenesis txs export` and `gn
 
 ### CI
 
-- `.github/workflows/txs-exporter.yml` — runs every 4 hours for sapphire.gno.land and gnoland1
+- `.github/workflows/txs-exporter.yml` — runs every 4 hours for pearl.gno.land, sapphire.gno.land, and gnoland1
 - `.github/workflows/staging-txs-exporter.yml` — runs hourly for staging.gno.land
 
 Both workflows auto-commit updated backup files using `git-auto-commit-action`.
