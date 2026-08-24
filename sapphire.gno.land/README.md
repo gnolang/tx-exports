@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-307299
+310261
 ```
 
 ## addpkgs
@@ -11,24 +11,24 @@
 
 ## top realm calls
 ```
- 106302 "gno.land/r/gnoswap/common"
-  82240 "gno.land/r/gnoswap/test_token/test_usdc"
-  69785 "gno.land/r/gnoswap/router"
-  59947 "gno.land/r/gnoswap/test_token/test_btc"
-  59856 "gno.land/r/gnoswap/test_token/test_sol"
-  59796 "gno.land/r/gnoswap/test_token/test_trx"
-  59761 "gno.land/r/gnoswap/test_token/test_atom"
-  59445 "gno.land/r/gnoswap/test_token/test_dai"
-  20436 "gno.land/r/demo/defi/grc20reg"
-  14017 "gno.land/r/gnoland/wugnot"
-  11508 "gno.land/r/gnoswap/staker"
-  11424 "gno.land/r/gnoswap/position"
-   7010 "gno.land/r/gnoswap/launchpad"
-   4961 "gno.land/r/gnoswap/gns"
-   1818 "gno.land/r/gnoswap/gnft"
-   1397 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
+ 107014 "gno.land/r/gnoswap/common"
+  84199 "gno.land/r/gnoswap/test_token/test_usdc"
+  70862 "gno.land/r/gnoswap/router"
+  60590 "gno.land/r/gnoswap/test_token/test_btc"
+  60500 "gno.land/r/gnoswap/test_token/test_sol"
+  60440 "gno.land/r/gnoswap/test_token/test_trx"
+  60405 "gno.land/r/gnoswap/test_token/test_atom"
+  60089 "gno.land/r/gnoswap/test_token/test_dai"
+  20546 "gno.land/r/demo/defi/grc20reg"
+  14079 "gno.land/r/gnoland/wugnot"
+  11820 "gno.land/r/gnoswap/staker"
+  11651 "gno.land/r/gnoswap/position"
+   7048 "gno.land/r/gnoswap/launchpad"
+   4976 "gno.land/r/gnoswap/gns"
+   1860 "gno.land/r/gnoswap/gnft"
+   1445 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
    1263 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixels"
-    875 "gno.land/r/gnoswap/gov/staker"
+    890 "gno.land/r/gnoswap/gov/staker"
     651 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixelsandbox"
     162 "gno.land/r/gnops/valopers"
     158 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g6"
@@ -90,13 +90,13 @@
       5 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gvs/vault"
       5 "gno.land/r/nym-vikbez000/telescope"
       4 "gno.land/r/g1gn6t0q9wenwhdda47rkrpfd63kcxjvyp7eqwku/ugnotforward"
+      4 "gno.land/r/g1hx4z2kwrnzd9up3g0gd4hspc6v78e4r90jkke3/nft"
       4 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gvs/lineage"
       4 "gno.land/r/g1xr6tgxnpled50h74eafmvxway7z0ytr5rsmeme/nslogic/v7"
       4 "gno.land/r/g1xr6tgxnpled50h74eafmvxway7z0ytr5rsmeme/nsmarket/v2"
       4 "gno.land/r/gnoswap/rbac"
       4 "gno.land/r/onbloc/ibc/union/access"
       3 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g2"
-      3 "gno.land/r/g1hx4z2kwrnzd9up3g0gd4hspc6v78e4r90jkke3/nft"
       3 "gno.land/r/g1jkkpd3jyzzn8zz0jd8tmzewxxq9ysn67nhc35z/errcollection"
       3 "gno.land/r/g1jkkpd3jyzzn8zz0jd8tmzewxxq9ysn67nhc35z/errcollectionv3"
       3 "gno.land/r/g1lyuc4zhnmd7dkdvt02fmzq9q0drqmgtn2t00ls/messages"
