@@ -1,6 +1,9 @@
 REMOTE = "https://rpc.sapphire.testnets.gno.land"
 SHORTNAME = sapphire
 
+# the gno build this chain runs; see GNO_REF in ../rules.mk
+GNO_REF = chain/sapphire
+
 # Fetch over WebSocket: testnets.gno.land HTTP RPC endpoints WAF-block (403)
 # high-volume batch fetches, which strands the backup. A single WS connection
 # avoids it.
