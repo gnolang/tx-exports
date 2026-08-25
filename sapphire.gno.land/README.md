@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-316193
+318581
 ```
 
 ## addpkgs
@@ -11,24 +11,24 @@
 
 ## top realm calls
 ```
- 108037 "gno.land/r/gnoswap/common"
-  88294 "gno.land/r/gnoswap/test_token/test_usdc"
-  72528 "gno.land/r/gnoswap/router"
-  62188 "gno.land/r/gnoswap/test_token/test_btc"
-  62098 "gno.land/r/gnoswap/test_token/test_sol"
-  62038 "gno.land/r/gnoswap/test_token/test_trx"
-  62003 "gno.land/r/gnoswap/test_token/test_atom"
-  61687 "gno.land/r/gnoswap/test_token/test_dai"
-  20829 "gno.land/r/demo/defi/grc20reg"
-  14188 "gno.land/r/gnoland/wugnot"
-  12451 "gno.land/r/gnoswap/staker"
-  12024 "gno.land/r/gnoswap/position"
-   7104 "gno.land/r/gnoswap/launchpad"
+ 108461 "gno.land/r/gnoswap/common"
+  88992 "gno.land/r/gnoswap/test_token/test_usdc"
+  72799 "gno.land/r/gnoswap/router"
+  62869 "gno.land/r/gnoswap/test_token/test_btc"
+  62779 "gno.land/r/gnoswap/test_token/test_sol"
+  62719 "gno.land/r/gnoswap/test_token/test_trx"
+  62684 "gno.land/r/gnoswap/test_token/test_atom"
+  62368 "gno.land/r/gnoswap/test_token/test_dai"
+  20946 "gno.land/r/demo/defi/grc20reg"
+  14251 "gno.land/r/gnoland/wugnot"
+  12903 "gno.land/r/gnoswap/staker"
+  12207 "gno.land/r/gnoswap/position"
+   7118 "gno.land/r/gnoswap/launchpad"
    4990 "gno.land/r/gnoswap/gns"
-   1928 "gno.land/r/gnoswap/gnft"
-   1450 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
+   1959 "gno.land/r/gnoswap/gnft"
+   1493 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
    1263 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixels"
-    917 "gno.land/r/gnoswap/gov/staker"
+    930 "gno.land/r/gnoswap/gov/staker"
     651 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixelsandbox"
     162 "gno.land/r/gnops/valopers"
     158 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g6"
@@ -44,10 +44,10 @@
      39 "gno.land/r/g1xr6tgxnpled50h74eafmvxway7z0ytr5rsmeme/nslogic/v8"
      39 "gno.land/r/gnoswap/pool"
      34 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv7"
+     33 "gno.land/r/gnoswap/gov/governance"
      32 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g10"
-     32 "gno.land/r/gnoswap/gov/governance"
+     28 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/pointsv2"
      27 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/hubv2"
-     27 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/pointsv2"
      24 "gno.land/r/g1xr6tgxnpled50h74eafmvxway7z0ytr5rsmeme/nsdata/v2"
      23 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv4"
      22 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g11"
@@ -82,6 +82,8 @@
       6 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g14"
       6 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g4"
       6 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv10"
+      6 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gvs/gsfarmv6"
+      6 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gvs/lineage"
       6 "gno.land/r/gnoswap/referral"
       5 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g16"
       5 "gno.land/r/g17l06jwgez8aun250609y6ej4048e6d78zfle3s/nsdata"
@@ -94,7 +96,6 @@
       5 "gno.land/r/g1xr6tgxnpled50h74eafmvxway7z0ytr5rsmeme/nslogic/v7"
       5 "gno.land/r/nym-vikbez000/telescope"
       4 "gno.land/r/g1gn6t0q9wenwhdda47rkrpfd63kcxjvyp7eqwku/ugnotforward"
-      4 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gvs/lineage"
       4 "gno.land/r/gnoswap/rbac"
       4 "gno.land/r/onbloc/ibc/union/access"
       3 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g2"
@@ -137,6 +138,7 @@
       1 "gno.land/r/g1jkkpd3jyzzn8zz0jd8tmzewxxq9ysn67nhc35z/throwawaytestadapter"
       1 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv21"
       1 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv5"
+      1 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gvs/gsfarmv5"
       1 "gno.land/r/g1rvzx735nu32qt85wxl06y8gekztfdmpuxy67ux/ambassadorweek"
       1 "gno.land/r/g1v6v9nfv9nt2685s6s5tkvf02fak9x0007527tj/tally"
       1 "gno.land/r/gnoswap/emission"
