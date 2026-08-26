@@ -1,0 +1,42 @@
+package pool
+
+import (
+	"gno.land/p/gnoswap/utils"
+
+	pl "gno.land/r/gnoswap/pool"
+)
+
+type tickEventInfo struct {
+	tickID   int32
+	tickInfo pl.TickInfo
+}
+
+// Collect tick info for event
+// format key is:
+// - t: tick
+// - lg: liquidity gross
+// - ln: liquidity net
+// - fg0: fee growth outside 0
+// - fg1: fee growth outside 1
+// - tco: tick cumulative outside
+// - spl: seconds per liquidity outside x128
+// - so: seconds outside
+// - i: initialized
+func (t *tickEventInfo) ToString() string {
+	return "{\"t\":" + utils.FormatInt(t.tickID) +
+		",\"lg\":\"" + t.tickInfo.LiquidityGross() + "\"" +
+		",\"ln\":\"" + t.tickInfo.LiquidityNet() + "\"" +
+		",\"fg0\":\"" + t.tickInfo.FeeGrowthOutside0X128() + "\"" +
+		",\"fg1\":\"" + t.tickInfo.FeeGrowthOutside1X128() + "\"" +
+		",\"tco\":\"" + utils.FormatInt(t.tickInfo.TickCumulativeOutside()) + "\"" +
+		",\"spl\":\"" + t.tickInfo.SecondsPerLiquidityOutsideX128() + "\"" +
+		",\"so\":\"" + utils.FormatUint(t.tickInfo.SecondsOutside()) + "\"" +
+		",\"i\":\"" + utils.FormatBool(t.tickInfo.Initialized()) + "\"}"
+}
+
+func NewTickEventInfo(tickID int32, tickInfo pl.TickInfo) *tickEventInfo {
+	return &tickEventInfo{
+		tickID:   tickID,
+		tickInfo: tickInfo,
+	}
+}

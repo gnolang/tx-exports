@@ -1,0 +1,139 @@
+package position
+
+import (
+	"errors"
+
+	"gno.land/p/gnoswap/store"
+	"gno.land/p/gnoswap/utils"
+	bptree "gno.land/p/nt/bptree/v0"
+	ufmt "gno.land/p/nt/ufmt/v0"
+)
+
+type StoreKey string
+
+func (s StoreKey) String() string {
+	return string(s)
+}
+
+const (
+	StoreKeyPositions      StoreKey = "positions"      // Positions
+	StoreKeyPositionNextID StoreKey = "positionNextID" // Position next ID
+)
+
+type positionStore struct {
+	kvStore store.KVStore
+}
+
+func (s *positionStore) HasPositionsStoreKey() bool {
+	return s.kvStore.Has(StoreKeyPositions.String())
+}
+
+func (s *positionStore) GetPositions() *bptree.BPTree {
+	result, err := s.kvStore.Get(StoreKeyPositions.String())
+	if err != nil {
+		panic(err)
+	}
+
+	positions, ok := result.(*bptree.BPTree)
+	if !ok {
+		panic(ufmt.Sprintf("failed to cast result to *bptree.BPTree: %T", result))
+	}
+
+	return positions
+}
+
+func (s *positionStore) SetPositions(_ int, rlm realm, positions *bptree.BPTree) error {
+	if !rlm.IsCurrent() {
+		return errors.New(ErrSpoofedRealm)
+	}
+
+	return s.kvStore.Set(0, rlm, StoreKeyPositions.String(), positions)
+}
+
+func (s *positionStore) HasPositionNextIDStoreKey() bool {
+	return s.kvStore.Has(StoreKeyPositionNextID.String())
+}
+
+func (s *positionStore) GetPositionNextID() uint64 {
+	result, err := s.kvStore.Get(StoreKeyPositionNextID.String())
+	if err != nil {
+		panic(err)
+	}
+
+	nextID, ok := result.(uint64)
+	if !ok {
+		panic(ufmt.Sprintf("failed to cast result to uint64: %T", result))
+	}
+
+	return nextID
+}
+
+func (s *positionStore) SetPositionNextID(_ int, rlm realm, nextID uint64) error {
+	if !rlm.IsCurrent() {
+		return errors.New(ErrSpoofedRealm)
+	}
+
+	return s.kvStore.Set(0, rlm, StoreKeyPositionNextID.String(), nextID)
+}
+
+func (s *positionStore) HasPosition(positionId uint64) bool {
+	positions := s.GetPositions()
+
+	return positions.Has(utils.Uint64ToString(positionId))
+}
+
+func (s *positionStore) GetPosition(positionId uint64) (Position, bool) {
+	positions := s.GetPositions()
+
+	result := positions.Get(utils.Uint64ToString(positionId))
+	if result == nil {
+		return Position{}, false
+	}
+
+	position, ok := result.(Position)
+	if !ok {
+		panic(ufmt.Sprintf("failed to cast result to Position: %T", result))
+	}
+
+	return position, true
+}
+
+func (s *positionStore) SetPosition(_ int, rlm realm, positionId uint64, position Position) error {
+	if !rlm.IsCurrent() {
+		return errors.New(ErrSpoofedRealm)
+	}
+
+	if !s.HasPositionsStoreKey() {
+		return errors.New("positions store key not found")
+	}
+
+	positions := s.GetPositions()
+
+	positions.Set(utils.Uint64ToString(positionId), position)
+
+	return s.kvStore.Set(0, rlm, StoreKeyPositions.String(), positions)
+}
+
+func (s *positionStore) RemovePosition(_ int, rlm realm, positionId uint64) error {
+	if !rlm.IsCurrent() {
+		return errors.New(ErrSpoofedRealm)
+	}
+
+	if !s.HasPositionsStoreKey() {
+		return errors.New("positions store key not found")
+	}
+
+	positions := s.GetPositions()
+
+	positions.Remove(utils.Uint64ToString(positionId))
+
+	return s.kvStore.Set(0, rlm, StoreKeyPositions.String(), positions)
+}
+
+// NewPositionStore creates a new protocol fee store instance with the provided KV store.
+// This function is used by the upgrade system to create storage instances for each implementation.
+func NewPositionStore(kvStore store.KVStore) IPositionStore {
+	return &positionStore{
+		kvStore: kvStore,
+	}
+}
