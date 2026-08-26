@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-4035
+8248
 ```
 
 ## addpkgs
@@ -11,33 +11,33 @@
 
 ## top realm calls
 ```
-   1846 "gno.land/r/gnoswap/common"
+   4737 "gno.land/r/gnoswap/common"
+   1922 "gno.land/r/gnoswap/router"
+   1248 "gno.land/r/gnoswap/test_token/test_usdc"
+   1133 "gno.land/r/gnoswap/test_token/test_atom"
+   1133 "gno.land/r/gnoswap/test_token/test_btc"
+   1133 "gno.land/r/gnoswap/test_token/test_sol"
+   1133 "gno.land/r/gnoswap/test_token/test_trx"
+   1132 "gno.land/r/gnoswap/test_token/test_dai"
     841 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixels"
     651 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixelsandbox"
-    614 "gno.land/r/gnoswap/test_token/test_usdc"
-    599 "gno.land/r/gnoswap/test_token/test_atom"
-    599 "gno.land/r/gnoswap/test_token/test_btc"
-    599 "gno.land/r/gnoswap/test_token/test_dai"
-    599 "gno.land/r/gnoswap/test_token/test_sol"
-    599 "gno.land/r/gnoswap/test_token/test_trx"
-    582 "gno.land/r/gnoswap/router"
-    287 "gno.land/r/gnoland/wugnot"
-    257 "gno.land/r/gnoswap/position"
-    215 "gno.land/r/gnoswap/staker"
-    119 "gno.land/r/gnoswap/gnft"
-     92 "gno.land/r/gnops/valopers"
+    598 "gno.land/r/gnoland/wugnot"
+    561 "gno.land/r/gnoswap/staker"
+    556 "gno.land/r/gnoswap/position"
+    237 "gno.land/r/gnoswap/gnft"
+    114 "gno.land/r/gnops/valopers"
+     58 "gno.land/r/demo/defi/grc20reg"
+     39 "gno.land/r/gnoswap/gov/staker"
+     36 "gno.land/r/gnoswap/gns"
+     35 "gno.land/r/gnoswap/pool"
      34 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv7"
-     34 "gno.land/r/gnoswap/pool"
-     30 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv9"
-     28 "gno.land/r/demo/defi/grc20reg"
+     34 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv9"
      23 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv4"
      17 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/hubv2"
      17 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv3"
-     15 "gno.land/r/gnoswap/gns"
-     10 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
+     11 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
       8 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/hub"
       8 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/pointsv2"
-      7 "gno.land/r/gnoswap/gov/staker"
       6 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv10"
       5 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/pad"
       5 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv11"
