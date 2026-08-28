@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-378477
+381456
 ```
 
 ## addpkgs
@@ -11,24 +11,24 @@
 
 ## top realm calls
 ```
- 135719 "gno.land/r/gnoswap/common"
- 112071 "gno.land/r/gnoswap/test_token/test_usdc"
-  89789 "gno.land/r/gnoswap/router"
-  79449 "gno.land/r/gnoswap/test_token/test_btc"
-  79370 "gno.land/r/gnoswap/test_token/test_sol"
-  79329 "gno.land/r/gnoswap/test_token/test_trx"
-  79287 "gno.land/r/gnoswap/test_token/test_atom"
-  78962 "gno.land/r/gnoswap/test_token/test_dai"
-  22837 "gno.land/r/demo/defi/grc20reg"
-  18047 "gno.land/r/gnoswap/staker"
-  15919 "gno.land/r/gnoswap/position"
-  15536 "gno.land/r/gnoland/wugnot"
-   8233 "gno.land/r/gnoswap/launchpad"
-   5441 "gno.land/r/gnoswap/gns"
-   2459 "gno.land/r/gnoswap/gnft"
-   2089 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
+ 136117 "gno.land/r/gnoswap/common"
+ 113430 "gno.land/r/gnoswap/test_token/test_usdc"
+  89963 "gno.land/r/gnoswap/router"
+  80807 "gno.land/r/gnoswap/test_token/test_btc"
+  80728 "gno.land/r/gnoswap/test_token/test_sol"
+  80687 "gno.land/r/gnoswap/test_token/test_trx"
+  80645 "gno.land/r/gnoswap/test_token/test_atom"
+  80320 "gno.land/r/gnoswap/test_token/test_dai"
+  22861 "gno.land/r/demo/defi/grc20reg"
+  18207 "gno.land/r/gnoswap/staker"
+  16022 "gno.land/r/gnoswap/position"
+  15580 "gno.land/r/gnoland/wugnot"
+   8252 "gno.land/r/gnoswap/launchpad"
+   5443 "gno.land/r/gnoswap/gns"
+   2475 "gno.land/r/gnoswap/gnft"
+   2091 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
    1263 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixels"
-   1205 "gno.land/r/gnoswap/gov/staker"
+   1212 "gno.land/r/gnoswap/gov/staker"
     651 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixelsandbox"
     162 "gno.land/r/gnops/valopers"
     158 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g6"
@@ -44,8 +44,8 @@
      42 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g12"
      42 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g7"
      40 "gno.land/r/gnoswap/pool"
+     35 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/pointsv2"
      34 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv7"
-     34 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/pointsv2"
      34 "gno.land/r/gnoswap/gov/governance"
      32 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g10"
      27 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/hubv2"
