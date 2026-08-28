@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-396840
+405847
 ```
 
 ## addpkgs
@@ -11,24 +11,24 @@
 
 ## top realm calls
 ```
- 143965 "gno.land/r/gnoswap/common"
- 119322 "gno.land/r/gnoswap/test_token/test_usdc"
-  97765 "gno.land/r/gnoswap/router"
-  83590 "gno.land/r/gnoswap/test_token/test_trx"
-  83568 "gno.land/r/gnoswap/test_token/test_btc"
-  83494 "gno.land/r/gnoswap/test_token/test_sol"
-  83449 "gno.land/r/gnoswap/test_token/test_atom"
-  83082 "gno.land/r/gnoswap/test_token/test_dai"
-  22867 "gno.land/r/demo/defi/grc20reg"
-  18699 "gno.land/r/gnoswap/staker"
-  16481 "gno.land/r/gnoswap/position"
-  15726 "gno.land/r/gnoland/wugnot"
-   9068 "gno.land/r/gnoswap/launchpad"
-   6050 "gno.land/r/gnoswap/gns"
-   2531 "gno.land/r/gnoswap/gnft"
+ 148025 "gno.land/r/gnoswap/common"
+ 122724 "gno.land/r/gnoswap/test_token/test_usdc"
+ 101838 "gno.land/r/gnoswap/router"
+  84976 "gno.land/r/gnoswap/test_token/test_trx"
+  84953 "gno.land/r/gnoswap/test_token/test_btc"
+  84892 "gno.land/r/gnoswap/test_token/test_atom"
+  84879 "gno.land/r/gnoswap/test_token/test_sol"
+  84467 "gno.land/r/gnoswap/test_token/test_dai"
+  22873 "gno.land/r/demo/defi/grc20reg"
+  19127 "gno.land/r/gnoswap/staker"
+  16951 "gno.land/r/gnoswap/position"
+  15857 "gno.land/r/gnoland/wugnot"
+   9107 "gno.land/r/gnoswap/launchpad"
+   6828 "gno.land/r/gnoswap/gns"
+   2634 "gno.land/r/gnoswap/gnft"
    2112 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
+   1290 "gno.land/r/gnoswap/gov/staker"
    1263 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixels"
-   1258 "gno.land/r/gnoswap/gov/staker"
     651 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixelsandbox"
     162 "gno.land/r/gnops/valopers"
     158 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g6"
@@ -39,9 +39,9 @@
      53 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv9"
      48 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g8"
      47 "gno.land/r/g1xr6tgxnpled50h74eafmvxway7z0ytr5rsmeme/nslogic/v8"
+     46 "gno.land/r/gnoswap/gov/governance"
      44 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g9"
      44 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv22"
-     44 "gno.land/r/gnoswap/gov/governance"
      42 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g12"
      42 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g7"
      41 "gno.land/r/gnoswap/pool"
