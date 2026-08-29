@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-435418
+439446
 ```
 
 ## addpkgs
@@ -11,29 +11,29 @@
 
 ## top realm calls
 ```
- 154428 "gno.land/r/gnoswap/common"
- 133357 "gno.land/r/gnoswap/test_token/test_usdc"
- 114002 "gno.land/r/gnoswap/router"
-  90439 "gno.land/r/gnoswap/test_token/test_trx"
-  90404 "gno.land/r/gnoswap/test_token/test_btc"
-  90357 "gno.land/r/gnoswap/test_token/test_sol"
-  90354 "gno.land/r/gnoswap/test_token/test_atom"
-  89920 "gno.land/r/gnoswap/test_token/test_dai"
-  22884 "gno.land/r/demo/defi/grc20reg"
-  22357 "gno.land/r/gnoswap/staker"
-  19747 "gno.land/r/gnoswap/position"
-  17592 "gno.land/r/gnoland/wugnot"
-   9485 "gno.land/r/gnoswap/launchpad"
-   8446 "gno.land/r/gnoswap/gns"
-   3110 "gno.land/r/gnoswap/gnft"
-   2163 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
-   1488 "gno.land/r/gnoswap/gov/staker"
+ 156346 "gno.land/r/gnoswap/common"
+ 134625 "gno.land/r/gnoswap/test_token/test_usdc"
+ 116644 "gno.land/r/gnoswap/router"
+  90612 "gno.land/r/gnoswap/test_token/test_atom"
+  90584 "gno.land/r/gnoswap/test_token/test_trx"
+  90546 "gno.land/r/gnoswap/test_token/test_btc"
+  90506 "gno.land/r/gnoswap/test_token/test_sol"
+  90065 "gno.land/r/gnoswap/test_token/test_dai"
+  22924 "gno.land/r/gnoswap/staker"
+  22886 "gno.land/r/demo/defi/grc20reg"
+  20316 "gno.land/r/gnoswap/position"
+  18056 "gno.land/r/gnoland/wugnot"
+   9517 "gno.land/r/gnoswap/launchpad"
+   8504 "gno.land/r/gnoswap/gns"
+   3258 "gno.land/r/gnoswap/gnft"
+   2176 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
+   1510 "gno.land/r/gnoswap/gov/staker"
    1263 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixels"
     651 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixelsandbox"
     162 "gno.land/r/gnops/valopers"
     158 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g6"
     117 "gno.land/r/g1xr6tgxnpled50h74eafmvxway7z0ytr5rsmeme/nslogic/v2"
-     98 "gno.land/r/gnoswap/gov/governance"
+    110 "gno.land/r/gnoswap/gov/governance"
      79 "gno.land/r/g1xr6tgxnpled50h74eafmvxway7z0ytr5rsmeme/nslogic/v9"
      70 "gno.land/r/g1xr6tgxnpled50h74eafmvxway7z0ytr5rsmeme/nslogic"
      61 "gno.land/r/nym-gemsnft000/g17"
