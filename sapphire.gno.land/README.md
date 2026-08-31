@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-525599
+531625
 ```
 
 ## addpkgs
@@ -11,32 +11,32 @@
 
 ## top realm calls
 ```
- 176246 "gno.land/r/gnoswap/common"
- 166308 "gno.land/r/gnoswap/router"
- 148099 "gno.land/r/gnoswap/test_token/test_usdc"
-  97721 "gno.land/r/gnoswap/test_token/test_sol"
-  96799 "gno.land/r/gnoswap/test_token/test_atom"
-  96181 "gno.land/r/gnoswap/test_token/test_trx"
-  95911 "gno.land/r/gnoswap/test_token/test_btc"
-  95614 "gno.land/r/gnoswap/test_token/test_dai"
-  70905 "gno.land/r/gnoland/wugnot"
-  38186 "gno.land/r/gnoswap/staker"
-  35574 "gno.land/r/gnoswap/position"
-  30259 "gno.land/r/gnoswap/gns"
-  22898 "gno.land/r/demo/defi/grc20reg"
+ 176554 "gno.land/r/gnoswap/common"
+ 170167 "gno.land/r/gnoswap/router"
+ 148859 "gno.land/r/gnoswap/test_token/test_usdc"
+  98049 "gno.land/r/gnoswap/test_token/test_sol"
+  96895 "gno.land/r/gnoswap/test_token/test_atom"
+  96247 "gno.land/r/gnoswap/test_token/test_trx"
+  95931 "gno.land/r/gnoswap/test_token/test_btc"
+  95664 "gno.land/r/gnoswap/test_token/test_dai"
+  77544 "gno.land/r/gnoland/wugnot"
+  39782 "gno.land/r/gnoswap/staker"
+  37224 "gno.land/r/gnoswap/position"
+  32659 "gno.land/r/gnoswap/gns"
+  22900 "gno.land/r/demo/defi/grc20reg"
   10072 "gno.land/r/gnoswap/launchpad"
-   9374 "gno.land/r/gnoswap/gnft"
+   9984 "gno.land/r/gnoswap/gnft"
    2490 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
-   1739 "gno.land/r/gnoswap/gov/staker"
+   1758 "gno.land/r/gnoswap/gov/staker"
    1263 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixels"
     651 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixelsandbox"
     162 "gno.land/r/gnops/valopers"
     158 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g6"
     127 "gno.land/r/gnoswap/gov/governance"
     117 "gno.land/r/g1xr6tgxnpled50h74eafmvxway7z0ytr5rsmeme/nslogic/v2"
+     98 "gno.land/r/demo/profile"
      79 "gno.land/r/g1xr6tgxnpled50h74eafmvxway7z0ytr5rsmeme/nslogic/v9"
      70 "gno.land/r/g1xr6tgxnpled50h74eafmvxway7z0ytr5rsmeme/nslogic"
-     68 "gno.land/r/demo/profile"
      61 "gno.land/r/nym-gemsnft000/g17"
      53 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv9"
      48 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g8"
@@ -109,6 +109,7 @@
       3 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gvs/gsfarmv3"
       3 "gno.land/r/g1xr6tgxnpled50h74eafmvxway7z0ytr5rsmeme/nsmarket/v3"
       3 "gno.land/r/g1xr6tgxnpled50h74eafmvxway7z0ytr5rsmeme/nsvote/v2"
+      3 "gno.land/r/samcrew/memba_feed_v1"
       2 "gno.land/r/g17l06jwgez8aun250609y6ej4048e6d78zfle3s/nslogic"
       2 "gno.land/r/g1gn6t0q9wenwhdda47rkrpfd63kcxjvyp7eqwku/burnrefundtest2"
       2 "gno.land/r/g1gn6t0q9wenwhdda47rkrpfd63kcxjvyp7eqwku/payout"
@@ -150,7 +151,6 @@
       1 "gno.land/r/g1v6v9nfv9nt2685s6s5tkvf02fak9x0007527tj/tally"
       1 "gno.land/r/gnoswap/emission"
       1 "gno.land/r/gnoswap/protocol_fee"
-      1 "gno.land/r/samcrew/memba_feed_v1"
       1 "gno.land/r/sys/users"
 ```
 
