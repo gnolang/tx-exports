@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-504604
+519041
 ```
 
 ## addpkgs
@@ -11,28 +11,28 @@
 
 ## top realm calls
 ```
- 168398 "gno.land/r/gnoswap/common"
- 152752 "gno.land/r/gnoswap/router"
- 145243 "gno.land/r/gnoswap/test_token/test_usdc"
-  96247 "gno.land/r/gnoswap/test_token/test_sol"
-  95725 "gno.land/r/gnoswap/test_token/test_atom"
-  95155 "gno.land/r/gnoswap/test_token/test_trx"
-  94951 "gno.land/r/gnoswap/test_token/test_btc"
-  94580 "gno.land/r/gnoswap/test_token/test_dai"
-  56651 "gno.land/r/gnoland/wugnot"
-  34324 "gno.land/r/gnoswap/staker"
-  31567 "gno.land/r/gnoswap/position"
-  24203 "gno.land/r/gnoswap/gns"
+ 173774 "gno.land/r/gnoswap/common"
+ 162154 "gno.land/r/gnoswap/router"
+ 147345 "gno.land/r/gnoswap/test_token/test_usdc"
+  97394 "gno.land/r/gnoswap/test_token/test_sol"
+  96650 "gno.land/r/gnoswap/test_token/test_atom"
+  96064 "gno.land/r/gnoswap/test_token/test_trx"
+  95818 "gno.land/r/gnoswap/test_token/test_btc"
+  95485 "gno.land/r/gnoswap/test_token/test_dai"
+  65164 "gno.land/r/gnoland/wugnot"
+  36873 "gno.land/r/gnoswap/staker"
+  34199 "gno.land/r/gnoswap/position"
+  28060 "gno.land/r/gnoswap/gns"
   22897 "gno.land/r/demo/defi/grc20reg"
-  10015 "gno.land/r/gnoswap/launchpad"
-   8062 "gno.land/r/gnoswap/gnft"
-   2488 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
-   1680 "gno.land/r/gnoswap/gov/staker"
+  10072 "gno.land/r/gnoswap/launchpad"
+   8868 "gno.land/r/gnoswap/gnft"
+   2490 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
+   1733 "gno.land/r/gnoswap/gov/staker"
    1263 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixels"
     651 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixelsandbox"
     162 "gno.land/r/gnops/valopers"
     158 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g6"
-    126 "gno.land/r/gnoswap/gov/governance"
+    127 "gno.land/r/gnoswap/gov/governance"
     117 "gno.land/r/g1xr6tgxnpled50h74eafmvxway7z0ytr5rsmeme/nslogic/v2"
      79 "gno.land/r/g1xr6tgxnpled50h74eafmvxway7z0ytr5rsmeme/nslogic/v9"
      70 "gno.land/r/g1xr6tgxnpled50h74eafmvxway7z0ytr5rsmeme/nslogic"
