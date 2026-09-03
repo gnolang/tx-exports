@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-30864
+31183
 ```
 
 ## addpkgs
@@ -30,6 +30,8 @@
     152 "gno.land/r/demo/defi/grc20reg"
     150 "gno.land/r/gnops/valopers"
     111 "gno.land/r/gnoswap/gov/staker"
+     59 "gno.land/r/gnoland/blog"
+     59 "gno.land/r/gnoland/boards2/v1"
      58 "gno.land/r/gnoswap/gns"
      53 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv9"
      35 "gno.land/r/gnoswap/pool"
@@ -40,6 +42,7 @@
      21 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv13"
      18 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv14"
      17 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv3"
+     17 "gno.land/r/g1u97n45s4s6q7vn5clr8339pv4up455hnqn4aff/roulette_v6"
      13 "gno.land/r/demo/profile"
      13 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g3"
      12 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv19"
