@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-33016
+33996
 ```
 
 ## addpkgs
@@ -13,7 +13,7 @@
 ```
   25913 "gno.land/r/gnoswap/common"
   16232 "gno.land/r/gnoswap/router"
-   5827 "gno.land/r/gnoland/wugnot"
+   6433 "gno.land/r/gnoland/wugnot"
    3999 "gno.land/r/gnoswap/test_token/test_usdc"
    3254 "gno.land/r/gnoswap/test_token/test_btc"
    3253 "gno.land/r/gnoswap/test_token/test_atom"
@@ -26,11 +26,11 @@
     651 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixelsandbox"
     525 "gno.land/r/gnoswap/gnft"
     300 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
+    222 "gno.land/r/gnoland/blog"
+    219 "gno.land/r/gnoland/boards2/v1"
     158 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g6"
     153 "gno.land/r/gnops/valopers"
     152 "gno.land/r/demo/defi/grc20reg"
-    149 "gno.land/r/gnoland/blog"
-    142 "gno.land/r/gnoland/boards2/v1"
     111 "gno.land/r/gnoswap/gov/staker"
      58 "gno.land/r/gnoswap/gns"
      53 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv9"
