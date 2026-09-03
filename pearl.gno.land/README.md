@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-31476
+31593
 ```
 
 ## addpkgs
@@ -28,7 +28,7 @@
     300 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
     158 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g6"
     152 "gno.land/r/demo/defi/grc20reg"
-    150 "gno.land/r/gnops/valopers"
+    151 "gno.land/r/gnops/valopers"
     111 "gno.land/r/gnoswap/gov/staker"
     106 "gno.land/r/gnoland/blog"
     100 "gno.land/r/gnoland/boards2/v1"
