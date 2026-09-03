@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-31183
+31476
 ```
 
 ## addpkgs
@@ -30,8 +30,8 @@
     152 "gno.land/r/demo/defi/grc20reg"
     150 "gno.land/r/gnops/valopers"
     111 "gno.land/r/gnoswap/gov/staker"
-     59 "gno.land/r/gnoland/blog"
-     59 "gno.land/r/gnoland/boards2/v1"
+    106 "gno.land/r/gnoland/blog"
+    100 "gno.land/r/gnoland/boards2/v1"
      58 "gno.land/r/gnoswap/gns"
      53 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv9"
      35 "gno.land/r/gnoswap/pool"
@@ -67,6 +67,7 @@
       3 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g2"
       3 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/profile"
       3 "gno.land/r/onbloc/ibc/union/access"
+      2 "gno.land/r/g19sh6ww9g6ukzhndg4d4zkx25l6nq782f9pfuap/gnowardrobe/v2"
       2 "gno.land/r/g1lyuc4zhnmd7dkdvt02fmzq9q0drqmgtn2t00ls/gnosauruseclipse"
       2 "gno.land/r/g1lyuc4zhnmd7dkdvt02fmzq9q0drqmgtn2t00ls/gnosauruseclipsev1"
       2 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/bond"
@@ -74,6 +75,7 @@
       2 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv6"
       2 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/points"
       1 "gno.land/r/aib/ibc/apps/transfer"
+      1 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g18"
       1 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv21"
       1 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv5"
       1 "gno.land/r/g1rvzx735nu32qt85wxl06y8gekztfdmpuxy67ux/ambassadorweek"
