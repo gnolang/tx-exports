@@ -49,9 +49,7 @@ func (lp *launchpadV1) CreateProject(
 	tier180Ratio int64,
 	startTime int64,
 ) string {
-	if !rlm.IsCurrent() {
-		panic(errors.New(errSpoofedRealm))
-	}
+	access.AssertIsRlmCurrent(0, rlm)
 
 	halt.AssertIsNotHaltedLaunchpad()
 
@@ -100,7 +98,7 @@ func (lp *launchpadV1) CreateProject(
 
 	// Interactions: transfer tokens
 	common.SafeGRC20TransferFrom(
-		cross(rlm),
+		0, rlm,
 		tokenPath,
 		caller,
 		launchpadAddr,
@@ -246,9 +244,7 @@ func (lp *launchpadV1) createProject(_ int, rlm realm, params *createProjectPara
 // TransferLeftFromProjectByAdmin transfers the remaining rewards of a project to a specified recipient.
 // Only admin can call this function. Returns the amount of rewards transferred.
 func (lp *launchpadV1) TransferLeftFromProjectByAdmin(_ int, rlm realm, projectID string, recipient address) int64 {
-	if !rlm.IsCurrent() {
-		panic(errors.New(errSpoofedRealm))
-	}
+	access.AssertIsRlmCurrent(0, rlm)
 
 	halt.AssertIsNotHaltedLaunchpad()
 
@@ -323,11 +319,10 @@ func (lp *launchpadV1) transferLeftFromProject(_ int, rlm realm, project *launch
 	refundableAmountsByTier := make(map[int64]int64)
 
 	for duration, tier := range project.Tiers() {
-		// Calculate pending rewards for remaining depositors
-		currentDepositCount := getTierCurrentDepositCount(tier)
+		// Settlement uses tier aggregate accounting, never the unbounded
+		// per-deposit reward tree.
 		tierCollectableReward := int64(0)
-
-		if currentDepositCount > 0 {
+		if getTierCurrentDepositCount(tier) > 0 {
 			var err error
 			tierCollectableReward, err = lp.applyTierRewardGrowthWithRewards(tier, currentTime)
 			if err != nil {
@@ -378,29 +373,28 @@ func (lp *launchpadV1) transferLeftFromProject(_ int, rlm realm, project *launch
 		}
 		project.SetTiers(updatedTiers)
 
-		common.SafeGRC20Transfer(cross(rlm), project.TokenPath(), recipient, projectRefundableAmount)
+		common.SafeGRC20Transfer(0, rlm, project.TokenPath(), recipient, projectRefundableAmount)
 	}
 
 	return projectRefundableAmount, nil
 }
 
-// applyTierRewardGrowthWithRewards calculates the total collectable rewards
-// for all active deposits in a specific tier.
+// applyTierRewardGrowthWithRewards updates a tier index and returns a
+// conservative aggregate reservation for active claims. Rounding dust remains
+// in the project instead of risking an under-reserved depositor claim.
 func (lp *launchpadV1) applyTierRewardGrowthWithRewards(tier *launchpad.ProjectTier, currentTime int64) (int64, error) {
 	rewardManager, err := lp.getProjectTierRewardManager(tier.ID())
 	if err != nil {
 		return 0, err
 	}
 
-	// Update reward accumulation to current time before calculating collectable rewards.
-	err = updateRewardPerDepositX128(rewardManager, getTierCurrentDepositAmount(tier), currentTime)
-	if err != nil {
+	if err := updateRewardPerDepositX128(rewardManager, getTierCurrentDepositAmount(tier), currentTime); err != nil {
 		return 0, err
 	}
 
 	emitUpdateLaunchpadRewardAccumulation(tier.ID(), rewardManager, getTierCurrentDepositAmount(tier))
 
-	return calculateClaimableRewardsForActiveDeposits(rewardManager), nil
+	return calculateMaximumClaimableRewardsForActiveDeposits(rewardManager), nil
 }
 
 // validateTransferLeft validates the transfer of remaining tokens

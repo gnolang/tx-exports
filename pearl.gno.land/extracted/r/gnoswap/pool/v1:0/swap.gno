@@ -6,6 +6,7 @@ import (
 	"strconv"
 	"time"
 
+	bptree "gno.land/p/nt/bptree/v0"
 	ufmt "gno.land/p/nt/ufmt/v0"
 	"gno.land/r/gnoswap/access"
 	"gno.land/r/gnoswap/halt"
@@ -39,12 +40,9 @@ var (
 //
 // Only callable by staker contract.
 func (i *poolV1) SetTickCrossHook(_ int, rlm realm, hook func(cur realm, poolPath string, tickId int32, zeroForOne bool, timestamp int64)) {
-	if !rlm.IsCurrent() {
-		panic(errors.New(errSpoofedRealm))
-	}
+	access.AssertIsRlmCurrent(0, rlm)
 
 	i.assertPoolUnlocked()
-	halt.AssertIsNotHaltedPool()
 
 	caller := rlm.Previous().Address()
 	access.AssertIsStaker(caller)
@@ -65,12 +63,9 @@ func (i *poolV1) SetTickCrossHook(_ int, rlm realm, hook func(cur realm, poolPat
 //
 // Only callable by staker contract.
 func (i *poolV1) SetSwapStartHook(_ int, rlm realm, hook func(cur realm, poolPath string, timestamp int64)) {
-	if !rlm.IsCurrent() {
-		panic(errors.New(errSpoofedRealm))
-	}
+	access.AssertIsRlmCurrent(0, rlm)
 
 	i.assertPoolUnlocked()
-	halt.AssertIsNotHaltedPool()
 
 	caller := rlm.Previous().Address()
 	access.AssertIsStaker(caller)
@@ -91,12 +86,9 @@ func (i *poolV1) SetSwapStartHook(_ int, rlm realm, hook func(cur realm, poolPat
 //
 // Only callable by staker contract.
 func (i *poolV1) SetSwapEndHook(_ int, rlm realm, hook func(cur realm, poolPath string) error) {
-	if !rlm.IsCurrent() {
-		panic(errors.New(errSpoofedRealm))
-	}
+	access.AssertIsRlmCurrent(0, rlm)
 
 	i.assertPoolUnlocked()
-	halt.AssertIsNotHaltedPool()
 
 	caller := rlm.Previous().Address()
 	access.AssertIsStaker(caller)
@@ -166,9 +158,7 @@ func (i *poolV1) Swap(
 	sqrtPriceLimitX96 string,
 	swapCallback func(cur realm, amount0Delta, amount1Delta int64, _ *pl.CallbackMarker) error,
 ) (string, string) {
-	if !rlm.IsCurrent() {
-		panic(errors.New(errSpoofedRealm))
-	}
+	access.AssertIsRlmCurrent(0, rlm)
 
 	i.assertPoolUnlocked()
 	halt.AssertIsNotHaltedPool()
@@ -185,15 +175,11 @@ func (i *poolV1) Swap(
 	}
 
 	pool := i.mustGetPoolBy(token0Path, token1Path, fee)
+	observations := i.mustGetObservations(pool.PoolPath())
 
 	slot0Start := pool.Slot0()
 	i.lockPool(0, rlm)
 	defer i.unlockPool(0, rlm)
-
-	// no liquidity -> no swap, return zero amounts
-	if pool.Liquidity().IsZero() {
-		return "0", "0"
-	}
 
 	blockTimestamp := time.Now().Unix()
 
@@ -206,25 +192,12 @@ func (i *poolV1) Swap(
 		}
 	}
 
-	defer func() {
-		if i.store.HasSwapEndHook() {
-			swapEndHook := i.store.GetSwapEndHook()
-
-			if swapEndHook != nil {
-				err := swapEndHook(cross(rlm), pool.PoolPath())
-				if err != nil {
-					panic(err)
-				}
-			}
-		}
-	}()
-
 	sqrtPriceLimit := u256.MustFromDecimal(sqrtPriceLimitX96)
 	validatePriceLimits(slot0Start, zeroForOne, sqrtPriceLimit)
 
 	feeGrowthGlobalX128 := getFeeGrowthGlobal(pool, zeroForOne)
 	feeProtocol := getFeeProtocol(slot0Start, zeroForOne)
-	cache := newSwapCache(feeProtocol, pool.Liquidity().Clone(), blockTimestamp)
+	cache := newSwapCache(feeProtocol, pool.Liquidity().Clone(), blockTimestamp, slot0Start)
 	state := newSwapState(amounts, feeGrowthGlobalX128, cache.liquidityStart.Clone(), slot0Start)
 
 	comp := SwapComputation{
@@ -251,20 +224,42 @@ func (i *poolV1) Swap(
 		}
 	}
 
-	result, err := i.computeSwap(pool, comp, onTickCross)
+	result, err := i.computeSwap(pool, observations, comp, onTickCross)
 	if err != nil {
 		panic(err)
 	}
 
 	// Update oracle BEFORE applying swap result (using pre-swap state)
-	if result.NewTick != pool.Slot0Tick() {
-		err := writeObservationByPool(pool, cache.blockTimestamp, pool.Slot0Tick(), pool.Liquidity())
+	if result.NewTick != slot0Start.Tick() {
+		observationIndex, observationCardinality, err := writeObservation(
+			observations,
+			slot0Start.ObservationIndex(),
+			cache.blockTimestamp,
+			slot0Start.Tick(),
+			cache.liquidityStart,
+			slot0Start.ObservationCardinality(),
+			slot0Start.ObservationCardinalityNext(),
+		)
 		if err != nil {
 			panic(err)
 		}
+		slot0 := pool.Slot0()
+		slot0.SetObservationIndex(observationIndex)
+		slot0.SetObservationCardinality(observationCardinality)
+		pool.SetSlot0(slot0)
 	}
 
 	applySwapResult(pool, result)
+
+	if i.store.HasSwapEndHook() {
+		swapEndHook := i.store.GetSwapEndHook()
+		if swapEndHook != nil {
+			err := swapEndHook(cross(rlm), pool.PoolPath())
+			if err != nil {
+				panic(err)
+			}
+		}
+	}
 
 	// transfer swap result to recipient then receive input tokens from swap callback
 	if zeroForOne {
@@ -283,7 +278,8 @@ func (i *poolV1) Swap(
 		i.safeSwapCallback(0, rlm, pool, token1Path, result.Amount1, result.Amount0, zeroForOne, swapCallback)
 	}
 
-	lastObservation, err := lastObservation(pool.ObservationState())
+	slot0 := pool.Slot0()
+	lastObservation, err := observationAt(observations, slot0.ObservationIndex())
 	if err != nil {
 		panic(err)
 	}
@@ -323,8 +319,7 @@ func (i *poolV1) Swap(
 }
 
 // DrySwap simulates a swap without modifying pool state.
-// Returns amount0, amount1 and a success boolean.
-// Returns false if pool has no liquidity or computation fails.
+// Returns amount0, amount1 and an error.
 func (i *poolV1) DrySwap(
 	token0Path string,
 	token1Path string,
@@ -332,19 +327,27 @@ func (i *poolV1) DrySwap(
 	zeroForOne bool,
 	amountSpecified string,
 	sqrtPriceLimitX96 string,
-) (string, string, bool) {
+) (amount0, amount1 string, err error) {
+	defer func() {
+		if r := recover(); r != nil {
+			amount0 = "0"
+			amount1 = "0"
+			if recoveredErr, ok := r.(error); ok {
+				err = recoveredErr
+			} else {
+				err = ufmt.Errorf("%v", r)
+			}
+		}
+	}()
+
 	amounts := i256.MustFromDecimal(amountSpecified)
 	if amounts.IsZero() {
-		return "0", "0", false
+		return "0", "0", errors.New(errInvalidSwapAmount)
 	}
 
 	pool := i.mustGetPoolBy(token0Path, token1Path, fee)
-	poolSnapshot := pool.Clone()
-
-	// no liquidity -> simulation fails
-	if poolSnapshot.Liquidity().IsZero() {
-		return "0", "0", false
-	}
+	blockTimestamp := time.Now().Unix()
+	poolSnapshot, observationsSnapshot := newDrySwapSnapshot(pool, blockTimestamp)
 
 	slot0Start := poolSnapshot.Slot0()
 	sqrtPriceLimit := u256.MustFromDecimal(sqrtPriceLimitX96)
@@ -352,7 +355,7 @@ func (i *poolV1) DrySwap(
 
 	feeGrowthGlobalX128 := getFeeGrowthGlobal(poolSnapshot, zeroForOne)
 	feeProtocol := getFeeProtocol(slot0Start, zeroForOne)
-	cache := newSwapCache(feeProtocol, poolSnapshot.Liquidity().Clone(), time.Now().Unix())
+	cache := newSwapCache(feeProtocol, poolSnapshot.Liquidity().Clone(), blockTimestamp, slot0Start)
 	state := newSwapState(amounts, feeGrowthGlobalX128, cache.liquidityStart, slot0Start)
 
 	comp := SwapComputation{
@@ -364,22 +367,22 @@ func (i *poolV1) DrySwap(
 		Cache:             cache,
 	}
 
-	result, err := i.computeSwap(poolSnapshot, comp, nil)
+	result, err := i.computeSwap(poolSnapshot, observationsSnapshot, comp, nil)
 	if err != nil {
-		return "0", "0", false
+		return "0", "0", err
 	}
 
 	if zeroForOne {
 		if poolSnapshot.BalanceToken1() < gnsmath.SafeConvertToInt64(result.Amount1.Abs()) {
-			return "0", "0", false
+			return "0", "0", errors.New(errInsufficientPoolBalance)
 		}
 	} else {
 		if poolSnapshot.BalanceToken0() < gnsmath.SafeConvertToInt64(result.Amount0.Abs()) {
-			return "0", "0", false
+			return "0", "0", errors.New(errInsufficientPoolBalance)
 		}
 	}
 
-	return result.Amount0.ToString(), result.Amount1.ToString(), true
+	return result.Amount0.ToString(), result.Amount1.ToString(), nil
 }
 
 // tickCrossHookFn is invoked after an initialized tick is crossed. Swap uses it
@@ -398,13 +401,59 @@ type tickCrossHookFn func(pool *pl.Pool, tickId int32, zeroForOne bool, timestam
 // The optional `onTickCross` callback is invoked when an initialized tick is
 // crossed; Swap supplies a hook that performs a cross-realm call into the
 // configured tick-cross hook, while DrySwap passes nil.
-func (i *poolV1) computeSwap(pool *pl.Pool, comp SwapComputation, onTickCross tickCrossHookFn) (*SwapResult, error) {
+// newDrySwapSnapshot builds the pool DrySwap simulates against.
+//
+// The swap loop writes through the pool it is given -- tickCross rewrites each
+// tick it crosses -- so the simulation must not run against stored state.
+// Pool.Clone copies the pool's own fields and leaves its collections nil, so
+// assemble the two the loop reads: the tick tree (crossed and rewritten) and
+// the tick bitmaps (scanned for the next initialized tick). The oracle state is
+// a fresh one, because the simulation must not extend the stored observations.
+func newDrySwapSnapshot(pool *pl.Pool, blockTimestamp int64) (*pl.Pool, *pl.ObservationTree) {
+	snapshot := pool.Clone()
+	snapshot.SetTicks(copyPoolTicks(pool.Ticks()))
+	snapshot.SetTickBitmaps(copyPoolTickBitmaps(pool.TickBitmaps()))
+	slot0 := snapshot.Slot0()
+	slot0.SetObservationIndex(0)
+	slot0.SetObservationCardinality(1)
+	slot0.SetObservationCardinalityNext(1)
+	snapshot.SetSlot0(slot0)
+
+	return snapshot, pl.NewPoolObservationsTree(blockTimestamp)
+}
+
+// copyPoolTicks copies a tick tree slot by slot. TickInfo is a value type, so
+// the snapshot's writes replace its own slots and leave the source untouched.
+func copyPoolTicks(src *bptree.BPTree) *bptree.BPTree {
+	copied := pl.NewPoolTicksTree()
+	if src == nil {
+		return copied
+	}
+
+	src.Iterate("", "", func(key string, value any) bool {
+		copied.Set(key, value)
+		return false
+	})
+
+	return copied
+}
+
+func copyPoolTickBitmaps(src map[int16]string) map[int16]string {
+	copied := make(map[int16]string, len(src))
+	for wordPos, bitmap := range src {
+		copied[wordPos] = bitmap
+	}
+
+	return copied
+}
+
+func (i *poolV1) computeSwap(pool *pl.Pool, observations *pl.ObservationTree, comp SwapComputation, onTickCross tickCrossHookFn) (*SwapResult, error) {
 	state := comp.InitialState
 	var err error
 
 	// Compute swap steps until completion
 	for shouldContinueSwap(state, comp.SqrtPriceLimitX96) {
-		state, err = i.computeSwapStep(state, pool, comp.ZeroForOne, comp.SqrtPriceLimitX96, comp.ExactInput, comp.Cache, onTickCross)
+		state, err = i.computeSwapStep(state, pool, observations, comp.ZeroForOne, comp.SqrtPriceLimitX96, comp.ExactInput, comp.Cache, onTickCross)
 		if err != nil {
 			return nil, err
 		}
@@ -528,6 +577,7 @@ func shouldContinueSwap(state SwapState, sqrtPriceLimitX96 *u256.Uint) bool {
 func (i *poolV1) computeSwapStep(
 	state SwapState,
 	pool *pl.Pool,
+	observations *pl.ObservationTree,
 	zeroForOne bool,
 	sqrtPriceLimitX96 *u256.Uint,
 	exactInput bool,
@@ -569,7 +619,10 @@ func (i *poolV1) computeSwapStep(
 
 	// handling tick transitions
 	if newState.sqrtPriceX96.Eq(step.sqrtPriceNextX96) {
-		newState = i.tickTransition(step, zeroForOne, newState, pool, cache, onTickCross)
+		newState, err = i.tickTransition(step, zeroForOne, newState, pool, observations, cache, onTickCross)
+		if err != nil {
+			return state, err
+		}
 	} else if newState.sqrtPriceX96.Neq(step.sqrtPriceStartX96) {
 		newState.setTick(gnsmath.TickMathGetTickAtSqrtRatio(newState.sqrtPriceX96))
 	}
@@ -715,34 +768,29 @@ func updateAmounts(step StepComputations, state SwapState, exactInput bool) (Swa
 }
 
 // tickTransition handles the transition between price ticks during a swap
-func (i *poolV1) tickTransition(step StepComputations, zeroForOne bool, state SwapState, pool *pl.Pool, cache *SwapCache, onTickCross tickCrossHookFn) SwapState {
+func (i *poolV1) tickTransition(step StepComputations, zeroForOne bool, state SwapState, pool *pl.Pool, observations *pl.ObservationTree, cache *SwapCache, onTickCross tickCrossHookFn) (SwapState, error) {
 	// ensure existing state to keep immutability
 	newState := state
 
 	if step.initialized {
 		// Compute oracle values on first initialized tick cross
 		if !cache.computedLatestObservation {
-			observationState := pool.ObservationState()
-			if observationState != nil {
-				tickCumulative, secondsPerLiquidityStr, err := observeSingle(
-					observationState,
-					cache.blockTimestamp,
-					0,
-					state.tick,
-					observationState.Index(),
-					cache.liquidityStart,
-					observationState.Cardinality(),
-				)
-				if err == nil {
-					cache.tickCumulative = tickCumulative
-					cache.secondsPerLiquidityCumulativeX128 = u256.MustFromDecimal(secondsPerLiquidityStr)
-					cache.computedLatestObservation = true
-				}
+			tickCumulative, secondsPerLiquidityStr, err := observeSingle(
+				observations,
+				cache.blockTimestamp,
+				0,
+				cache.slot0Start.Tick(),
+				cache.slot0Start.ObservationIndex(),
+				cache.liquidityStart,
+				cache.slot0Start.ObservationCardinality(),
+			)
+			if err != nil {
+				return newState, err
 			}
-		}
 
-		if cache.secondsPerLiquidityCumulativeX128 == nil {
-			cache.secondsPerLiquidityCumulativeX128 = u256.Zero()
+			cache.tickCumulative = tickCumulative
+			cache.secondsPerLiquidityCumulativeX128 = u256.MustFromDecimal(secondsPerLiquidityStr)
+			cache.computedLatestObservation = true
 		}
 
 		fee0, fee1 := u256.Zero(), u256.Zero()
@@ -781,5 +829,5 @@ func (i *poolV1) tickTransition(step StepComputations, zeroForOne bool, state Sw
 		newState.tick = step.tickNext - 1
 	}
 
-	return newState
+	return newState, nil
 }
