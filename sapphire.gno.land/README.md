@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-566884
+567146
 ```
 
 ## addpkgs
@@ -11,18 +11,18 @@
 
 ## top realm calls
 ```
- 194154 "gno.land/r/gnoswap/router"
+ 194375 "gno.land/r/gnoswap/router"
  178909 "gno.land/r/gnoswap/common"
- 159421 "gno.land/r/gnoswap/test_token/test_usdc"
- 113159 "gno.land/r/gnoland/wugnot"
- 104407 "gno.land/r/gnoswap/test_token/test_sol"
-  97843 "gno.land/r/gnoswap/test_token/test_atom"
-  97153 "gno.land/r/gnoswap/test_token/test_trx"
-  96452 "gno.land/r/gnoswap/test_token/test_dai"
-  96363 "gno.land/r/gnoswap/test_token/test_btc"
-  53103 "gno.land/r/gnoswap/staker"
-  49833 "gno.land/r/gnoswap/position"
-  48475 "gno.land/r/gnoswap/gns"
+ 159549 "gno.land/r/gnoswap/test_token/test_usdc"
+ 113403 "gno.land/r/gnoland/wugnot"
+ 104499 "gno.land/r/gnoswap/test_token/test_sol"
+  97853 "gno.land/r/gnoswap/test_token/test_atom"
+  97157 "gno.land/r/gnoswap/test_token/test_trx"
+  96466 "gno.land/r/gnoswap/test_token/test_dai"
+  96365 "gno.land/r/gnoswap/test_token/test_btc"
+  53167 "gno.land/r/gnoswap/staker"
+  49897 "gno.land/r/gnoswap/position"
+  48595 "gno.land/r/gnoswap/gns"
   22901 "gno.land/r/demo/defi/grc20reg"
   11444 "gno.land/r/gnoswap/gnft"
   10242 "gno.land/r/gnoswap/launchpad"
