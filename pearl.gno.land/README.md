@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-44630
+45164
 ```
 
 ## addpkgs
@@ -13,20 +13,20 @@
 ```
   25913 "gno.land/r/gnoswap/common"
   16278 "gno.land/r/gnoswap/router"
-  13292 "gno.land/r/gnoland/wugnot"
+  13656 "gno.land/r/gnoland/wugnot"
    3999 "gno.land/r/gnoswap/test_token/test_usdc"
    3254 "gno.land/r/gnoswap/test_token/test_btc"
    3253 "gno.land/r/gnoswap/test_token/test_atom"
    3252 "gno.land/r/gnoswap/test_token/test_dai"
    3248 "gno.land/r/gnoswap/test_token/test_sol"
    3248 "gno.land/r/gnoswap/test_token/test_trx"
-   2272 "gno.land/r/gnoswap/position"
-   2071 "gno.land/r/gnoswap/staker"
+   2273 "gno.land/r/gnoswap/position"
+   2072 "gno.land/r/gnoswap/staker"
    1225 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixels"
     651 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixelsandbox"
     597 "gno.land/r/gnoland/blog"
     570 "gno.land/r/gnoland/boards2/v1"
-    567 "gno.land/r/gnoswap/gnft"
+    568 "gno.land/r/gnoswap/gnft"
     300 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
     158 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g6"
     154 "gno.land/r/gnops/valopers"
@@ -101,10 +101,12 @@
       2 "gno.land/r/g1xr6tgxnpled50h74eafmvxway7z0ytr5rsmeme/nsdata/v2"
       2 "gno.land/r/g1xr6tgxnpled50h74eafmvxway7z0ytr5rsmeme/nslogic/v4"
       2 "gno.land/r/gnoswap/emission"
+      2 "gno.land/r/sys/users"
       1 "gno.land/r/aib/ibc/apps/transfer"
       1 "gno.land/r/demo/foo"
       1 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g18"
       1 "gno.land/r/g1klfr7ktj3qxk6pwf8tpmj3dagsyq3p4caxsuxq/counter2"
+      1 "gno.land/r/g1l3fmz59rw8l6h29hslxt6gtna3th8s7m5vl88d/counter2"
       1 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv21"
       1 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv23"
       1 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv5"
@@ -112,7 +114,6 @@
       1 "gno.land/r/g1rvzx735nu32qt85wxl06y8gekztfdmpuxy67ux/ambassadorweek"
       1 "gno.land/r/g1v6v9nfv9nt2685s6s5tkvf02fak9x0007527tj/tally"
       1 "gno.land/r/gnoswap/gov/governance"
-      1 "gno.land/r/sys/users"
 ```
 
 ## top faucet requesters
