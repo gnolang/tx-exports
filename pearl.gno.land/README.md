@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-45988
+52998
 ```
 
 ## addpkgs
@@ -11,29 +11,29 @@
 
 ## top realm calls
 ```
+  27272 "gno.land/r/gnoswap/router"
   25913 "gno.land/r/gnoswap/common"
-  16278 "gno.land/r/gnoswap/router"
-  13995 "gno.land/r/gnoland/wugnot"
-   3999 "gno.land/r/gnoswap/test_token/test_usdc"
+  14316 "gno.land/r/gnoland/wugnot"
+   4019 "gno.land/r/gnoswap/test_token/test_usdc"
+   3268 "gno.land/r/gnoswap/test_token/test_trx"
    3254 "gno.land/r/gnoswap/test_token/test_btc"
    3253 "gno.land/r/gnoswap/test_token/test_atom"
    3252 "gno.land/r/gnoswap/test_token/test_dai"
    3248 "gno.land/r/gnoswap/test_token/test_sol"
-   3248 "gno.land/r/gnoswap/test_token/test_trx"
-   2273 "gno.land/r/gnoswap/position"
-   2072 "gno.land/r/gnoswap/staker"
+   2328 "gno.land/r/gnoswap/position"
+   2146 "gno.land/r/gnoswap/staker"
    1225 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixels"
     651 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixelsandbox"
+    622 "gno.land/r/gnoswap/gnft"
     597 "gno.land/r/gnoland/blog"
     571 "gno.land/r/gnoland/boards2/v1"
-    568 "gno.land/r/gnoswap/gnft"
     300 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
     158 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g6"
     154 "gno.land/r/gnops/valopers"
     152 "gno.land/r/demo/defi/grc20reg"
     137 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g19"
-    112 "gno.land/r/gnoswap/gov/staker"
-     84 "gno.land/r/gnoswap/gns"
+    113 "gno.land/r/gnoswap/gov/staker"
+    105 "gno.land/r/gnoswap/gns"
      54 "gno.land/r/g1xr6tgxnpled50h74eafmvxway7z0ytr5rsmeme/nslogic/v2"
      53 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv9"
      48 "gno.land/r/gnoswap/pool"
@@ -62,6 +62,7 @@
      12 "gno.land/r/g1n9dwyewlgj4a297u6sxan7eveqmqyhy49ur5pm/crazy_nft"
      12 "gno.land/r/g1wt79w2q0sfmpfrxc4990mlsg5ll09yva6fyc4p/nisse"
      11 "gno.land/r/g1mjc0v90uw5kzael8f80k8yje3tjgmn0ey0fzzv/crazy_voting"
+     11 "gno.land/r/nym-encapsulate001/test2"
      10 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g5"
       9 "gno.land/r/g16fz9m7km2rdmq2yqdapeg9a3tzzmjref4wzrd9/crazy_messenger"
       9 "gno.land/r/g1km8uxyhqsl439nayty3cppcgghszt8xru6ycft/crazy_wall"
@@ -101,6 +102,9 @@
       2 "gno.land/r/g1xr6tgxnpled50h74eafmvxway7z0ytr5rsmeme/nsdata/v2"
       2 "gno.land/r/g1xr6tgxnpled50h74eafmvxway7z0ytr5rsmeme/nslogic/v4"
       2 "gno.land/r/gnoswap/emission"
+      2 "gno.land/r/nym-encapsulate001/forms"
+      2 "gno.land/r/nym-encapsulate001/test"
+      2 "gno.land/r/nym-encapsulate001/test3"
       2 "gno.land/r/sys/users"
       1 "gno.land/r/aib/ibc/apps/transfer"
       1 "gno.land/r/demo/foo"

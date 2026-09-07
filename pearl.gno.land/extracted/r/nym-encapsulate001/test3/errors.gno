@@ -1,0 +1,32 @@
+package test3
+
+import "errors"
+
+var (
+	ErrFormNotFound     = errors.New("form not found")
+	ErrBadSlug          = errors.New("slug must be 3-48 lowercase letters, digits and single hyphens, e.g. valoper-questionnaire")
+	ErrSlugTaken        = errors.New("a form with this slug already exists")
+	ErrFormClosed       = errors.New("form is closed")
+	ErrFormOpen         = errors.New("form is already open")
+	ErrNotOwner         = errors.New("caller is not the form owner")
+	ErrNoFields         = errors.New("a form needs at least one field")
+	ErrTooManyFields    = errors.New("a form can have at most 8 fields")
+	ErrFieldSpecMismatch = errors.New("labels, kinds and required must describe the same number of fields")
+	ErrBadFieldKind     = errors.New("field kind must be one of text, textarea, number, select")
+	ErrSelectNoOptions  = errors.New("a select field needs at least one option")
+	ErrEmptyLabel       = errors.New("field label cannot be empty")
+	ErrPipeInField      = errors.New("field labels and options cannot contain |")
+	ErrEmptyTitle       = errors.New("form title cannot be empty")
+	ErrTitleTooLong     = errors.New("form title is too long")
+	ErrDescriptionTooLong = errors.New("form description is too long")
+	ErrBadDeadline      = errors.New("deadline must be a future chain height or 0")
+	ErrDeadlinePassed   = errors.New("form deadline has passed")
+	ErrAlreadyResponded = errors.New("this address has already responded to this form")
+	ErrNoResponse       = errors.New("no response from this address to withdraw")
+	ErrRequired         = errors.New("required field is empty")
+	ErrNotANumber       = errors.New("field expects a number")
+	ErrNotAnOption      = errors.New("value is not one of the select options")
+	ErrAnswerTooLong    = errors.New("answer exceeds the field's maximum length")
+	ErrTooManyAnswers   = errors.New("more answers than the form has fields")
+	ErrNotUserCall      = errors.New("this function must be called by a user account")
+)
