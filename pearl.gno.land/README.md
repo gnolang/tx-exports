@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-45164
+45988
 ```
 
 ## addpkgs
@@ -13,7 +13,7 @@
 ```
   25913 "gno.land/r/gnoswap/common"
   16278 "gno.land/r/gnoswap/router"
-  13656 "gno.land/r/gnoland/wugnot"
+  13995 "gno.land/r/gnoland/wugnot"
    3999 "gno.land/r/gnoswap/test_token/test_usdc"
    3254 "gno.land/r/gnoswap/test_token/test_btc"
    3253 "gno.land/r/gnoswap/test_token/test_atom"
@@ -25,7 +25,7 @@
    1225 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixels"
     651 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixelsandbox"
     597 "gno.land/r/gnoland/blog"
-    570 "gno.land/r/gnoland/boards2/v1"
+    571 "gno.land/r/gnoland/boards2/v1"
     568 "gno.land/r/gnoswap/gnft"
     300 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
     158 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g6"
@@ -54,11 +54,11 @@
      17 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv3"
      13 "gno.land/r/demo/profile"
      13 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g3"
+     13 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/pointsv2"
      13 "gno.land/r/g1n9dwyewlgj4a297u6sxan7eveqmqyhy49ur5pm/dex"
      12 "gno.land/r/g19sh6ww9g6ukzhndg4d4zkx25l6nq782f9pfuap/gnowardrobe/v2"
      12 "gno.land/r/g1fy50d2urffjyz8hncjtd5q6nx6sn785p3cuuqg/crazy_token"
      12 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv19"
-     12 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/pointsv2"
      12 "gno.land/r/g1n9dwyewlgj4a297u6sxan7eveqmqyhy49ur5pm/crazy_nft"
      12 "gno.land/r/g1wt79w2q0sfmpfrxc4990mlsg5ll09yva6fyc4p/nisse"
      11 "gno.land/r/g1mjc0v90uw5kzael8f80k8yje3tjgmn0ey0fzzv/crazy_voting"
@@ -69,9 +69,9 @@
       9 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv16"
       9 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv20"
       9 "gno.land/r/g1nyjym92xfwln6m5xvpyw89k9ut02m07c4ggqzz/crazy_timecapsule"
+      9 "gno.land/r/sys/namereg/v1"
       8 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/hub"
       8 "gno.land/r/g1x4zvyxlwauaanupr43fjm4l3kltk5h6lzgpvwn/gnotaskv04"
-      8 "gno.land/r/sys/namereg/v1"
       7 "gno.land/r/g1mjc0v90uw5kzael8f80k8yje3tjgmn0ey0fzzv/token_factory"
       7 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/meta"
       7 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv17"
