@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-64730
+65003
 ```
 
 ## addpkgs
@@ -13,7 +13,7 @@
 ```
   48320 "gno.land/r/gnoswap/router"
   25913 "gno.land/r/gnoswap/common"
-  14815 "gno.land/r/gnoland/wugnot"
+  14966 "gno.land/r/gnoland/wugnot"
    4020 "gno.land/r/gnoswap/test_token/test_usdc"
    3269 "gno.land/r/gnoswap/test_token/test_trx"
    3254 "gno.land/r/gnoswap/test_token/test_btc"
@@ -33,7 +33,7 @@
     155 "gno.land/r/gnops/valopers"
     152 "gno.land/r/demo/defi/grc20reg"
     137 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g19"
-    113 "gno.land/r/gnoswap/gov/staker"
+    114 "gno.land/r/gnoswap/gov/staker"
     106 "gno.land/r/gnoswap/gns"
      54 "gno.land/r/g1xr6tgxnpled50h74eafmvxway7z0ytr5rsmeme/nslogic/v2"
      53 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv9"
@@ -103,6 +103,7 @@
       2 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/zdex/v2"
       2 "gno.land/r/g1xr6tgxnpled50h74eafmvxway7z0ytr5rsmeme/nsdata/v2"
       2 "gno.land/r/gnoswap/emission"
+      2 "gno.land/r/gnoswap/gov/governance"
       2 "gno.land/r/nym-encapsulate001/forms"
       2 "gno.land/r/nym-encapsulate001/test"
       2 "gno.land/r/nym-encapsulate001/test3"
@@ -118,7 +119,6 @@
       1 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/zdex/token"
       1 "gno.land/r/g1rvzx735nu32qt85wxl06y8gekztfdmpuxy67ux/ambassadorweek"
       1 "gno.land/r/g1v6v9nfv9nt2685s6s5tkvf02fak9x0007527tj/tally"
-      1 "gno.land/r/gnoswap/gov/governance"
 ```
 
 ## top faucet requesters
