@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-65003
+66901
 ```
 
 ## addpkgs
@@ -11,24 +11,24 @@
 
 ## top realm calls
 ```
-  48320 "gno.land/r/gnoswap/router"
+  51230 "gno.land/r/gnoswap/router"
   25913 "gno.land/r/gnoswap/common"
-  14966 "gno.land/r/gnoland/wugnot"
+  15256 "gno.land/r/gnoland/wugnot"
    4020 "gno.land/r/gnoswap/test_token/test_usdc"
    3269 "gno.land/r/gnoswap/test_token/test_trx"
    3254 "gno.land/r/gnoswap/test_token/test_btc"
    3253 "gno.land/r/gnoswap/test_token/test_atom"
    3252 "gno.land/r/gnoswap/test_token/test_dai"
    3248 "gno.land/r/gnoswap/test_token/test_sol"
-   2329 "gno.land/r/gnoswap/position"
-   2186 "gno.land/r/gnoswap/staker"
+   2330 "gno.land/r/gnoswap/position"
+   2192 "gno.land/r/gnoswap/staker"
    1225 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixels"
     651 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixelsandbox"
-    623 "gno.land/r/gnoswap/gnft"
+    624 "gno.land/r/gnoswap/gnft"
     597 "gno.land/r/gnoland/blog"
     571 "gno.land/r/gnoland/boards2/v1"
     300 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
-    171 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g20"
+    177 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g20"
     158 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g6"
     155 "gno.land/r/gnops/valopers"
     152 "gno.land/r/demo/defi/grc20reg"
@@ -82,12 +82,12 @@
       7 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv17"
       7 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv18"
       7 "gno.land/r/g1xr6tgxnpled50h74eafmvxway7z0ytr5rsmeme/nslogic/v3"
+      7 "gno.land/r/gnoswap/launchpad"
       6 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g4"
       6 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv10"
       5 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/pad"
       5 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv11"
       5 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv12"
-      5 "gno.land/r/gnoswap/launchpad"
       5 "gno.land/r/nym-vikbez000/telescope"
       4 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gvs/gsfarmv8"
       3 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g2"
@@ -119,6 +119,7 @@
       1 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/zdex/token"
       1 "gno.land/r/g1rvzx735nu32qt85wxl06y8gekztfdmpuxy67ux/ambassadorweek"
       1 "gno.land/r/g1v6v9nfv9nt2685s6s5tkvf02fak9x0007527tj/tally"
+      1 "gno.land/r/g1wt79w2q0sfmpfrxc4990mlsg5ll09yva6fyc4p/nisse2"
 ```
 
 ## top faucet requesters
