@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-82352
+85192
 ```
 
 ## addpkgs
@@ -11,24 +11,24 @@
 
 ## top realm calls
 ```
-  77399 "gno.land/r/gnoswap/router"
+  82231 "gno.land/r/gnoswap/router"
   25913 "gno.land/r/gnoswap/common"
-  16907 "gno.land/r/gnoland/wugnot"
+  17202 "gno.land/r/gnoland/wugnot"
    4029 "gno.land/r/gnoswap/test_token/test_usdc"
    3278 "gno.land/r/gnoswap/test_token/test_trx"
    3254 "gno.land/r/gnoswap/test_token/test_btc"
    3253 "gno.land/r/gnoswap/test_token/test_atom"
    3252 "gno.land/r/gnoswap/test_token/test_dai"
    3248 "gno.land/r/gnoswap/test_token/test_sol"
-   2337 "gno.land/r/gnoswap/position"
-   2249 "gno.land/r/gnoswap/staker"
+   2340 "gno.land/r/gnoswap/position"
+   2261 "gno.land/r/gnoswap/staker"
    1225 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixels"
     651 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixelsandbox"
-    631 "gno.land/r/gnoswap/gnft"
+    633 "gno.land/r/gnoswap/gnft"
     597 "gno.land/r/gnoland/blog"
     571 "gno.land/r/gnoland/boards2/v1"
     300 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
-    184 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g20"
+    185 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g20"
     158 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g6"
     156 "gno.land/r/gnops/valopers"
     152 "gno.land/r/demo/defi/grc20reg"
