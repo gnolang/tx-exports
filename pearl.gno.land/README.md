@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-79472
+82352
 ```
 
 ## addpkgs
@@ -11,9 +11,9 @@
 
 ## top realm calls
 ```
-  72339 "gno.land/r/gnoswap/router"
+  77399 "gno.land/r/gnoswap/router"
   25913 "gno.land/r/gnoswap/common"
-  16667 "gno.land/r/gnoland/wugnot"
+  16907 "gno.land/r/gnoland/wugnot"
    4029 "gno.land/r/gnoswap/test_token/test_usdc"
    3278 "gno.land/r/gnoswap/test_token/test_trx"
    3254 "gno.land/r/gnoswap/test_token/test_btc"
@@ -21,7 +21,7 @@
    3252 "gno.land/r/gnoswap/test_token/test_dai"
    3248 "gno.land/r/gnoswap/test_token/test_sol"
    2337 "gno.land/r/gnoswap/position"
-   2239 "gno.land/r/gnoswap/staker"
+   2249 "gno.land/r/gnoswap/staker"
    1225 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixels"
     651 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixelsandbox"
     631 "gno.land/r/gnoswap/gnft"
@@ -39,7 +39,7 @@
      53 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv9"
      48 "gno.land/r/gnoswap/pool"
      34 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv7"
-     31 "gno.land/r/g1u97n45s4s6q7vn5clr8339pv4up455hnqn4aff/roulette_v6"
+     33 "gno.land/r/g1u97n45s4s6q7vn5clr8339pv4up455hnqn4aff/roulette_v6"
      28 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/hubv2"
      28 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv22"
      26 "gno.land/r/g1klfr7ktj3qxk6pwf8tpmj3dagsyq3p4caxsuxq/dao"
