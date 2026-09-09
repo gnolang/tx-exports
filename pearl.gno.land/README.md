@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-88103
+91887
 ```
 
 ## addpkgs
@@ -11,24 +11,24 @@
 
 ## top realm calls
 ```
-  87119 "gno.land/r/gnoswap/router"
+  91904 "gno.land/r/gnoswap/router"
   25913 "gno.land/r/gnoswap/common"
-  17546 "gno.land/r/gnoland/wugnot"
+  17829 "gno.land/r/gnoland/wugnot"
    4030 "gno.land/r/gnoswap/test_token/test_usdc"
    3279 "gno.land/r/gnoswap/test_token/test_trx"
    3254 "gno.land/r/gnoswap/test_token/test_btc"
    3253 "gno.land/r/gnoswap/test_token/test_atom"
    3252 "gno.land/r/gnoswap/test_token/test_dai"
    3248 "gno.land/r/gnoswap/test_token/test_sol"
-   2342 "gno.land/r/gnoswap/position"
-   2273 "gno.land/r/gnoswap/staker"
+   2345 "gno.land/r/gnoswap/position"
+   2287 "gno.land/r/gnoswap/staker"
    1225 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixels"
     651 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixelsandbox"
-    635 "gno.land/r/gnoswap/gnft"
+    638 "gno.land/r/gnoswap/gnft"
     597 "gno.land/r/gnoland/blog"
     571 "gno.land/r/gnoland/boards2/v1"
     300 "gno.land/r/onbloc/ibc/union/apps/ucs03_zkgm"
-    186 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g20"
+    187 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g20"
     158 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g6"
     156 "gno.land/r/gnops/valopers"
     152 "gno.land/r/demo/defi/grc20reg"
@@ -86,11 +86,12 @@
       7 "gno.land/r/gnoswap/launchpad"
       6 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g4"
       6 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv10"
+      5 "gno.land/r/g1hx4z2kwrnzd9up3g0gd4hspc6v78e4r90jkke3/nft2"
       5 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/pad"
       5 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv11"
       5 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv12"
       5 "gno.land/r/nym-vikbez000/telescope"
-      4 "gno.land/r/g1hx4z2kwrnzd9up3g0gd4hspc6v78e4r90jkke3/nft2"
+      4 "gno.land/r/g1hx4z2kwrnzd9up3g0gd4hspc6v78e4r90jkke3/nftoffers3"
       4 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gvs/gsfarmv8"
       3 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g2"
       3 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/bond"
