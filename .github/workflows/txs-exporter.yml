@@ -23,7 +23,6 @@ jobs:
       matrix:
         testnet:
           - pearl.gno.land
-          - sapphire.gno.land
           - gnoland1
 
     steps:
