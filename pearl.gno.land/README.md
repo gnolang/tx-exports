@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-94132
+94475
 ```
 
 ## addpkgs
@@ -13,14 +13,14 @@
 ```
   91904 "gno.land/r/gnoswap/router"
   25913 "gno.land/r/gnoswap/common"
-  18756 "gno.land/r/gnoland/wugnot"
+  19083 "gno.land/r/gnoland/wugnot"
    4030 "gno.land/r/gnoswap/test_token/test_usdc"
    3279 "gno.land/r/gnoswap/test_token/test_trx"
    3254 "gno.land/r/gnoswap/test_token/test_btc"
    3253 "gno.land/r/gnoswap/test_token/test_atom"
    3252 "gno.land/r/gnoswap/test_token/test_dai"
    3248 "gno.land/r/gnoswap/test_token/test_sol"
-   2348 "gno.land/r/gnoswap/position"
+   2349 "gno.land/r/gnoswap/position"
    2290 "gno.land/r/gnoswap/staker"
    1225 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixels"
     651 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixelsandbox"
