@@ -1,0 +1,8 @@
+# The module path is a PLACEHOLDER, matching the import path used in
+# nsdata. Gno package paths embed the deployer's address, so this line is
+# rewritten at deploy time against whichever wallet signs. It previously
+# carried a specific deployer's address, which was misleading: it read
+# like a fact about where this lives, when it was only a fact about one
+# past deployment.
+module = "gno.land/p/g1pmffzfv3326akjjs27mqp4zgumlnqne7urjm7x/grc721"
+gno = "0.9"

@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-96155
+96408
 ```
 
 ## addpkgs
@@ -11,17 +11,17 @@
 
 ## top realm calls
 ```
-  91938 "gno.land/r/gnoswap/router"
+  91941 "gno.land/r/gnoswap/router"
   25913 "gno.land/r/gnoswap/common"
-  20351 "gno.land/r/gnoland/wugnot"
+  20560 "gno.land/r/gnoland/wugnot"
    4030 "gno.land/r/gnoswap/test_token/test_usdc"
    3279 "gno.land/r/gnoswap/test_token/test_trx"
    3254 "gno.land/r/gnoswap/test_token/test_btc"
    3253 "gno.land/r/gnoswap/test_token/test_atom"
    3252 "gno.land/r/gnoswap/test_token/test_dai"
    3248 "gno.land/r/gnoswap/test_token/test_sol"
-   2410 "gno.land/r/gnoswap/position"
-   2352 "gno.land/r/gnoswap/staker"
+   2415 "gno.land/r/gnoswap/position"
+   2356 "gno.land/r/gnoswap/staker"
    1225 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixels"
     653 "gno.land/r/gnoswap/gnft"
     651 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixelsandbox"
@@ -35,8 +35,8 @@
     137 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g19"
     118 "gno.land/r/gnoswap/gov/staker"
     116 "gno.land/r/gnoswap/gns"
-     92 "gno.land/r/g1pmffzfv3326akjjs27mqp4zgumlnqne7urjm7x/nslogic/v2"
-     63 "gno.land/r/g1pmffzfv3326akjjs27mqp4zgumlnqne7urjm7x/nsnft/v1"
+     95 "gno.land/r/g1pmffzfv3326akjjs27mqp4zgumlnqne7urjm7x/nslogic/v2"
+     80 "gno.land/r/g1pmffzfv3326akjjs27mqp4zgumlnqne7urjm7x/nsnft/v1"
      61 "gno.land/r/g1pmffzfv3326akjjs27mqp4zgumlnqne7urjm7x/nsskin/v1"
      54 "gno.land/r/g1xr6tgxnpled50h74eafmvxway7z0ytr5rsmeme/nslogic/v2"
      53 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv9"
@@ -71,6 +71,7 @@
      12 "gno.land/r/g1hx4z2kwrnzd9up3g0gd4hspc6v78e4r90jkke3/nftoffers4"
      12 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv19"
      12 "gno.land/r/g1n9dwyewlgj4a297u6sxan7eveqmqyhy49ur5pm/crazy_nft"
+     12 "gno.land/r/g1pmffzfv3326akjjs27mqp4zgumlnqne7urjm7x/nsmarket/v2"
      12 "gno.land/r/g1wt79w2q0sfmpfrxc4990mlsg5ll09yva6fyc4p/nisse"
      11 "gno.land/r/g1mjc0v90uw5kzael8f80k8yje3tjgmn0ey0fzzv/crazy_voting"
      11 "gno.land/r/g1xr6tgxnpled50h74eafmvxway7z0ytr5rsmeme/nsdata/v1"
