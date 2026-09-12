@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-98375
+98715
 ```
 
 ## addpkgs
@@ -11,19 +11,19 @@
 
 ## top realm calls
 ```
-  92038 "gno.land/r/gnoswap/router"
+  92052 "gno.land/r/gnoswap/router"
   25913 "gno.land/r/gnoswap/common"
-  22276 "gno.land/r/gnoland/wugnot"
+  22555 "gno.land/r/gnoland/wugnot"
    4030 "gno.land/r/gnoswap/test_token/test_usdc"
    3279 "gno.land/r/gnoswap/test_token/test_trx"
    3254 "gno.land/r/gnoswap/test_token/test_btc"
    3253 "gno.land/r/gnoswap/test_token/test_atom"
    3252 "gno.land/r/gnoswap/test_token/test_dai"
    3248 "gno.land/r/gnoswap/test_token/test_sol"
-   2593 "gno.land/r/gnoswap/position"
-   2513 "gno.land/r/gnoswap/staker"
+   2619 "gno.land/r/gnoswap/position"
+   2542 "gno.land/r/gnoswap/staker"
    1225 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixels"
-    702 "gno.land/r/gnoswap/gnft"
+    709 "gno.land/r/gnoswap/gnft"
     651 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixelsandbox"
     597 "gno.land/r/gnoland/blog"
     571 "gno.land/r/gnoland/boards2/v1"
@@ -32,8 +32,8 @@
     158 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g6"
     156 "gno.land/r/gnops/valopers"
     152 "gno.land/r/demo/defi/grc20reg"
+    143 "gno.land/r/gnoswap/gov/staker"
     137 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g19"
-    129 "gno.land/r/gnoswap/gov/staker"
     117 "gno.land/r/gnoswap/gns"
      95 "gno.land/r/g1pmffzfv3326akjjs27mqp4zgumlnqne7urjm7x/nslogic/v2"
      80 "gno.land/r/g1pmffzfv3326akjjs27mqp4zgumlnqne7urjm7x/nsnft/v1"
@@ -53,6 +53,7 @@
      23 "gno.land/r/g1klfr7ktj3qxk6pwf8tpmj3dagsyq3p4caxsuxq/home"
      23 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv4"
      21 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv13"
+     21 "gno.land/r/gnoswap/launchpad"
      20 "gno.land/r/g1jz9d9hlcqhvvfq59vjnfa0a532nzhpxkxlqkvl/crazy_battle"
      20 "gno.land/r/g1klfr7ktj3qxk6pwf8tpmj3dagsyq3p4caxsuxq/crazy_counter"
      20 "gno.land/r/g1nafl3x2hmy0h28uspvpsrt9vqtq8duvzx2jsuq/crazy_king"
@@ -86,7 +87,6 @@
       9 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv20"
       9 "gno.land/r/g1nyjym92xfwln6m5xvpyw89k9ut02m07c4ggqzz/crazy_timecapsule"
       9 "gno.land/r/g1pmffzfv3326akjjs27mqp4zgumlnqne7urjm7x/nsmarket/v1"
-      9 "gno.land/r/gnoswap/launchpad"
       9 "gno.land/r/sys/namereg/v1"
       8 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/hub"
       8 "gno.land/r/g1x4zvyxlwauaanupr43fjm4l3kltk5h6lzgpvwn/gnotaskv04"
