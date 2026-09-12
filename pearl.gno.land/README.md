@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-98092
+98375
 ```
 
 ## addpkgs
@@ -11,9 +11,9 @@
 
 ## top realm calls
 ```
-  92037 "gno.land/r/gnoswap/router"
+  92038 "gno.land/r/gnoswap/router"
   25913 "gno.land/r/gnoswap/common"
-  22010 "gno.land/r/gnoland/wugnot"
+  22276 "gno.land/r/gnoland/wugnot"
    4030 "gno.land/r/gnoswap/test_token/test_usdc"
    3279 "gno.land/r/gnoswap/test_token/test_trx"
    3254 "gno.land/r/gnoswap/test_token/test_btc"
@@ -34,7 +34,7 @@
     152 "gno.land/r/demo/defi/grc20reg"
     137 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g19"
     129 "gno.land/r/gnoswap/gov/staker"
-    116 "gno.land/r/gnoswap/gns"
+    117 "gno.land/r/gnoswap/gns"
      95 "gno.land/r/g1pmffzfv3326akjjs27mqp4zgumlnqne7urjm7x/nslogic/v2"
      80 "gno.land/r/g1pmffzfv3326akjjs27mqp4zgumlnqne7urjm7x/nsnft/v1"
      61 "gno.land/r/g1pmffzfv3326akjjs27mqp4zgumlnqne7urjm7x/nsskin/v1"
@@ -109,6 +109,7 @@
       5 "gno.land/r/nym-vikbez000/telescope"
       4 "gno.land/r/g1hx4z2kwrnzd9up3g0gd4hspc6v78e4r90jkke3/nft5"
       4 "gno.land/r/g1hx4z2kwrnzd9up3g0gd4hspc6v78e4r90jkke3/nftoffers3"
+      4 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv23"
       4 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gvs/gsfarmv8"
       3 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g2"
       3 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/bond"
@@ -141,7 +142,6 @@
       1 "gno.land/r/g1klfr7ktj3qxk6pwf8tpmj3dagsyq3p4caxsuxq/counter2"
       1 "gno.land/r/g1l3fmz59rw8l6h29hslxt6gtna3th8s7m5vl88d/counter2"
       1 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv21"
-      1 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv23"
       1 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv5"
       1 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/zdex/token"
       1 "gno.land/r/g1rvzx735nu32qt85wxl06y8gekztfdmpuxy67ux/ambassadorweek"
