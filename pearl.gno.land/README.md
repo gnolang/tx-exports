@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-99825
+100137
 ```
 
 ## addpkgs
@@ -13,7 +13,7 @@
 ```
   92100 "gno.land/r/gnoswap/router"
   25913 "gno.land/r/gnoswap/common"
-  23351 "gno.land/r/gnoland/wugnot"
+  23645 "gno.land/r/gnoland/wugnot"
    4030 "gno.land/r/gnoswap/test_token/test_usdc"
    3279 "gno.land/r/gnoswap/test_token/test_trx"
    3254 "gno.land/r/gnoswap/test_token/test_btc"
@@ -42,8 +42,8 @@
      53 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv9"
      49 "gno.land/r/gnoswap/pool"
      46 "gno.land/r/g1xr6tgxnpled50h74eafmvxway7z0ytr5rsmeme/nslogic/v4"
+     43 "gno.land/r/g1hx4z2kwrnzd9up3g0gd4hspc6v78e4r90jkke3/nft56"
      41 "gno.land/r/g1pmffzfv3326akjjs27mqp4zgumlnqne7urjm7x/nslogic/v1"
-     40 "gno.land/r/g1hx4z2kwrnzd9up3g0gd4hspc6v78e4r90jkke3/nft56"
      36 "gno.land/r/g1u97n45s4s6q7vn5clr8339pv4up455hnqn4aff/roulette_v6"
      34 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv7"
      30 "gno.land/r/gnoswap/launchpad"
@@ -52,6 +52,7 @@
      28 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv22"
      27 "gno.land/r/g18ugne5ng6eylkca4mqeet9luj0xaykp84sh2cf/oracle/v2"
      26 "gno.land/r/g1klfr7ktj3qxk6pwf8tpmj3dagsyq3p4caxsuxq/dao"
+     24 "gno.land/r/g18ugne5ng6eylkca4mqeet9luj0xaykp84sh2cf/oracle/v3"
      24 "gno.land/r/g1m7me5y27gw8ye8sn8u9sq6000k0f5a3wldpdsa/crazy_lottery"
      23 "gno.land/r/g1klfr7ktj3qxk6pwf8tpmj3dagsyq3p4caxsuxq/home"
      23 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv4"
@@ -59,16 +60,15 @@
      20 "gno.land/r/g1jz9d9hlcqhvvfq59vjnfa0a532nzhpxkxlqkvl/crazy_battle"
      20 "gno.land/r/g1klfr7ktj3qxk6pwf8tpmj3dagsyq3p4caxsuxq/crazy_counter"
      20 "gno.land/r/g1nafl3x2hmy0h28uspvpsrt9vqtq8duvzx2jsuq/crazy_king"
-     18 "gno.land/r/g18ugne5ng6eylkca4mqeet9luj0xaykp84sh2cf/oracle/v3"
      18 "gno.land/r/g1fy50d2urffjyz8hncjtd5q6nx6sn785p3cuuqg/multisig"
      18 "gno.land/r/g1hx4z2kwrnzd9up3g0gd4hspc6v78e4r90jkke3/nft51"
      18 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv14"
      17 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv3"
      15 "gno.land/r/g1wt79w2q0sfmpfrxc4990mlsg5ll09yva6fyc4p/nisse2"
+     14 "gno.land/r/g1hx4z2kwrnzd9up3g0gd4hspc6v78e4r90jkke3/nftmarket56"
      14 "gno.land/r/g1xr6tgxnpled50h74eafmvxway7z0ytr5rsmeme/nsmarket/v3"
      13 "gno.land/r/demo/profile"
      13 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g3"
-     13 "gno.land/r/g1hx4z2kwrnzd9up3g0gd4hspc6v78e4r90jkke3/nftmarket56"
      13 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/pointsv2"
      13 "gno.land/r/g1n9dwyewlgj4a297u6sxan7eveqmqyhy49ur5pm/dex"
      12 "gno.land/r/g19sh6ww9g6ukzhndg4d4zkx25l6nq782f9pfuap/gnowardrobe/v2"
@@ -86,6 +86,7 @@
       9 "gno.land/r/g16fz9m7km2rdmq2yqdapeg9a3tzzmjref4wzrd9/crazy_messenger"
       9 "gno.land/r/g1hx4z2kwrnzd9up3g0gd4hspc6v78e4r90jkke3/nft54"
       9 "gno.land/r/g1hx4z2kwrnzd9up3g0gd4hspc6v78e4r90jkke3/nftmarket4"
+      9 "gno.land/r/g1hx4z2kwrnzd9up3g0gd4hspc6v78e4r90jkke3/nftoffers56"
       9 "gno.land/r/g1km8uxyhqsl439nayty3cppcgghszt8xru6ycft/crazy_wall"
       9 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv15"
       9 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv16"
@@ -94,7 +95,6 @@
       9 "gno.land/r/g1pmffzfv3326akjjs27mqp4zgumlnqne7urjm7x/nsmarket/v1"
       9 "gno.land/r/sys/namereg/v1"
       8 "gno.land/r/g1hx4z2kwrnzd9up3g0gd4hspc6v78e4r90jkke3/nft55"
-      8 "gno.land/r/g1hx4z2kwrnzd9up3g0gd4hspc6v78e4r90jkke3/nftoffers56"
       8 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/hub"
       8 "gno.land/r/g1x4zvyxlwauaanupr43fjm4l3kltk5h6lzgpvwn/gnotaskv04"
       7 "gno.land/r/g1hx4z2kwrnzd9up3g0gd4hspc6v78e4r90jkke3/nft2"
