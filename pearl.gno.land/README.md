@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-101538
+101660
 ```
 
 ## addpkgs
@@ -13,7 +13,7 @@
 ```
   92105 "gno.land/r/gnoswap/router"
   25913 "gno.land/r/gnoswap/common"
-  24857 "gno.land/r/gnoland/wugnot"
+  24979 "gno.land/r/gnoland/wugnot"
    4030 "gno.land/r/gnoswap/test_token/test_usdc"
    3279 "gno.land/r/gnoswap/test_token/test_trx"
    3254 "gno.land/r/gnoswap/test_token/test_btc"
