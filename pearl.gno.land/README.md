@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-102471
+102712
 ```
 
 ## addpkgs
@@ -12,8 +12,8 @@
 ## top realm calls
 ```
   92121 "gno.land/r/gnoswap/router"
+  25988 "gno.land/r/gnoland/wugnot"
   25913 "gno.land/r/gnoswap/common"
-  25748 "gno.land/r/gnoland/wugnot"
    4030 "gno.land/r/gnoswap/test_token/test_usdc"
    3279 "gno.land/r/gnoswap/test_token/test_trx"
    3254 "gno.land/r/gnoswap/test_token/test_btc"
