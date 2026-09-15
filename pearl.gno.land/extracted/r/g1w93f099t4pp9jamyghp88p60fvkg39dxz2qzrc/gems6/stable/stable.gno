@@ -1,0 +1,837 @@
+// Package stable is the permanent, never-redeployed half of the Gems
+// split-realm design -- the sixth iteration of this spike (gems ->
+// gems2 -> gems3 -> gems4 -> gems5 -> gems6), adding a permanent
+// campaign-claim log on top of gems5 (2026-09-15) -- see claimRecords'
+// own doc comment -- plus everything gems5 added on top of gems4
+// (2026-09-14):
+//
+//   - RoyaltyInfo (EIP-2981-shaped: RoyaltyInfo(tid, salePrice)
+//     (address, amount, error)) -- a plain advisory function, same as
+//     every royalty standard on every chain: it tells a COOPERATING
+//     marketplace what to pay on a secondary sale, but nothing can
+//     force a TransferFrom to carry a payment. royaltyRecipient
+//     defaults to collectionOwner as a placeholder and is meant to be
+//     pointed at a dedicated wallet via SetRoyaltyRecipient once one
+//     exists, specifically so royalty income stays visibly separate
+//     from mint proceeds.
+//   - Burn now strips the image (Image/ImageData) before archiving a
+//     burned token's metadata. The image is the single largest piece
+//     of a token's stored data (a multi-KB base64 SVG) -- keeping a
+//     full copy of it in burnedRecords would undo most of the
+//     storage-deposit refund burning is supposed to give back. Name/
+//     description/attributes/etc. are kept so the burned-tokens page
+//     still shows what a piece WAS, just not its picture.
+//
+// Everything else (ownership, transfers, ../campaign-based discount
+// pricing, trait-uniqueness history, gnoweb Render) is unchanged from
+// gems4 -- see that package's own history for the earlier design
+// notes.
+package stable
+
+import (
+	runtime "chain/runtime"
+	unsaferealm "chain/runtime/unsafe"
+	"encoding/base64"
+	"strconv"
+	"strings"
+
+	"gno.land/p/g1gn6t0q9wenwhdda47rkrpfd63kcxjvyp7eqwku/avl"
+	grc721 "gno.land/p/g1gn6t0q9wenwhdda47rkrpfd63kcxjvyp7eqwku/grc721v2"
+	campaign "gno.land/r/g1w93f099t4pp9jamyghp88p60fvkg39dxz2qzrc/gems6/campaign"
+	"gno.land/p/nt/ufmt/v0"
+)
+
+const (
+	CollectionName   = "Gems"
+	CollectionSymbol = "GEMS"
+
+	// realmRelPath is this realm's own gnoweb-relative path, baked in
+	// as a compile-time constant -- see the original single-realm
+	// design's own comment on why (chain/runtime/unsafe.CurrentRealm()
+	// resolves differently when called nested inside Render than when
+	// called directly). Must be updated by hand if this realm is ever
+	// redeployed to a new path.
+	realmRelPath = "/r/g1w93f099t4pp9jamyghp88p60fvkg39dxz2qzrc/gems6/stable"
+
+	homeRenderLimit    = 10
+	pageWindow         = 2
+	tokenPageImageSize = "420"
+)
+
+var (
+	nft *grc721.MetadataNFT
+
+	// collectionOwner is the only address allowed to change pricing,
+	// the whitelist, royalty settings, or which version realm is
+	// approved.
+	collectionOwner address = "g1w93f099t4pp9jamyghp88p60fvkg39dxz2qzrc"
+
+	// approvedVersion is the full pkgpath of the ONE realm currently
+	// allowed to call RecordMint.
+	approvedVersion string
+
+	mintPriceUgnot int64 = 1_000_000
+
+	// whitelistBps: PERMANENT per-wallet price overrides, for a
+	// handful of one-off grants (team, partners) that should never
+	// expire or get swept -- unlike ../campaign, which is meant to be
+	// pruned. Takes precedence over campaign when a wallet has both
+	// (see EffectivePrice/RecordMint).
+	whitelistBps avl.Tree
+
+	// royaltyBps/royaltyRecipient back RoyaltyInfo -- see this file's
+	// own doc comment. 500 = 5%, per request (2026-09-14).
+	royaltyBps        int64 = 500
+	royaltyRecipient  address = "g1w93f099t4pp9jamyghp88p60fvkg39dxz2qzrc"
+
+	// mintedIDs is an append-only record of every token minted here, in
+	// mint order.
+	mintedIDs []grc721.TokenID
+
+	// mintedTraitCombos is the PERMANENT (well -- see Burn) record of
+	// which exact trait combinations have been minted, moved here from
+	// the version realm so uniqueness history survives any future
+	// version redeploy. Reserved by RecordMint, released by Burn.
+	mintedTraitCombos avl.Tree // combo key -> true
+
+	// tokenComboKeys remembers which comboKey RecordMint reserved for
+	// each token, so Burn can release the EXACT same key -- comboKey is
+	// an opaque string built by whichever version realm minted the
+	// token (from its own raw trait indices, not anything stable can
+	// reconstruct from display metadata), so it has to be stored
+	// verbatim rather than recomputed.
+	tokenComboKeys avl.Tree // tid.String() -> comboKey string
+
+	// mintCountByWallet tracks mints per recipient, moved here for the
+	// same reason -- a version swap must not reset anyone's cap usage.
+	mintCountByWallet avl.Tree // address.String() -> int64
+
+	// mintingOpenMirror/maxMintsPerWalletMirror are DISPLAY-ONLY copies
+	// of settings the approved version realm actually enforces -- gno
+	// doesn't allow circular imports, so stable (which v1 imports)
+	// cannot import v1 back to read its live mintingOpen/
+	// maxMintsPerWallet directly. The version realm calls
+	// ReportMintingOpen/ReportMaxMintsPerWallet (version-gated, same
+	// pattern as RecordMint) whenever it changes them, purely so
+	// Render() here can show accurate values without a circular
+	// dependency.
+	mintingOpenMirror       = true
+	maxMintsPerWalletMirror int64 = 3
+
+	// burnedRecords/burnedIDs are a permanent record of every token
+	// this realm has ever burned -- image-stripped, see Burn's own
+	// doc comment.
+	burnedRecords avl.Tree // tid.String() -> burnRecord
+	burnedIDs     []grc721.TokenID
+
+	// claimRecords is a PERMANENT, append-only log of every ../campaign
+	// discount actually spent on a mint -- recorded here, not in
+	// campaign itself, specifically because campaign's own entries are
+	// deliberately prunable (deleted on full redemption, or swept by
+	// the owner to reclaim storage deposit once a promotion ends). This
+	// is the only place "who claimed a discount, how much, and when"
+	// survives that pruning -- an admin UI can pair it with campaign's
+	// live Count()/EntryAt() (what's still outstanding) to show the
+	// full picture: granted, claimed, and still-pending, each with a
+	// real block height.
+	claimRecords []claimRecord
+)
+
+// claimRecord is a permanent snapshot of one campaign discount being
+// spent -- written from RecordMint the instant campaign.ConsumeDiscount
+// reports a real discount was applied, never edited afterward.
+type claimRecord struct {
+	Wallet     address
+	Bps        int64
+	MintHeight int64
+	Tid        grc721.TokenID
+}
+
+// traitPreset mirrors the version realm's own traitPreset field-for-
+// field -- needed here only to reconstruct a burned token's display
+// metadata on demand, the same trick the original single-realm design
+// used to avoid storing a second copy of the rendered image.
+type traitPreset struct {
+	Chain    string
+	ShapeIdx int
+	ColorIdx int
+	Metal    string
+	Active   bool
+}
+
+// burnRecord is a permanent snapshot of one burned token. Metadata
+// here always has Image/ImageData stripped -- see Burn's own doc
+// comment.
+type burnRecord struct {
+	BurnedBy   address
+	BurnHeight int64
+	Metadata   grc721.Metadata
+}
+
+func init(cur realm) {
+	nft = grc721.NewNFTWithMetadata(0, cur, CollectionName, CollectionSymbol)
+}
+
+/* ------------------------------ standard reads ------------------------------ */
+
+func Name() string      { return CollectionName }
+func Symbol() string    { return CollectionSymbol }
+func TokenCount() int64 { return nft.TokenCount() }
+
+func OwnerOf(tid grc721.TokenID) (address, error)                { return nft.OwnerOf(tid) }
+func BalanceOf(owner address) (int64, error)                     { return nft.BalanceOf(owner) }
+func TokenMetadata(tid grc721.TokenID) (grc721.Metadata, error)   { return nft.TokenMetadata(tid) }
+func TokenURI(tid grc721.TokenID) (string, error)                 { return nft.TokenURI(tid) }
+func GetApproved(tid grc721.TokenID) (address, error)             { return nft.GetApproved(tid) }
+func IsApprovedForAll(owner, operator address) bool               { return nft.IsApprovedForAll(owner, operator) }
+
+func ApprovedVersion() string { return approvedVersion }
+func Owner() address          { return collectionOwner }
+func MintPrice() int64        { return mintPriceUgnot }
+
+func MintedIDs() []grc721.TokenID { return mintedIDs }
+func TotalBurned() int64          { return int64(len(burnedIDs)) }
+
+func MintingOpen() bool        { return mintingOpenMirror }
+func MaxMintsPerWallet() int64 { return maxMintsPerWalletMirror }
+
+func MintsByWallet(owner address) int64 {
+	n, _ := mintCountByWallet.Get(owner.String()).(int64)
+	return n
+}
+
+func IsTraitComboAvailable(comboKey string) bool {
+	return !mintedTraitCombos.Has(comboKey)
+}
+
+// WhitelistBps reports wallet's PERMANENT individual price override in
+// basis points, and whether it has one (ok == false means: check
+// ../campaign, or pay standard price).
+func WhitelistBps(wallet address) (bps int64, ok bool) {
+	if !whitelistBps.Has(wallet.String()) {
+		return 0, false
+	}
+	return whitelistBps.Get(wallet.String()).(int64), true
+}
+
+func WhitelistCount() int64 { return int64(whitelistBps.Size()) }
+
+func WhitelistEntry(index int) (wallet string, bps int64) {
+	w, v := whitelistBps.GetByIndex(index)
+	return w, v.(int64)
+}
+
+// EffectivePrice returns what caller actually owes for a mint right
+// now. Checks, in order: (1) the permanent individual whitelistBps
+// override, (2) an active ../campaign discount, (3) the standard
+// mintPriceUgnot. A plain cross-realm READ into campaign -- no cur
+// needed, and campaign.Peek doesn't consume anything, so calling this
+// repeatedly (e.g. to show a live price in a UI) is free of side
+// effects.
+func EffectivePrice(caller address) int64 {
+	if v, ok := whitelistBps.Get(caller.String()).(int64); ok {
+		return mintPriceUgnot * v / 10000
+	}
+	if bps, _, ok := campaign.Peek(caller); ok {
+		return mintPriceUgnot * bps / 10000
+	}
+	return mintPriceUgnot
+}
+
+// RoyaltyInfo reports what a marketplace SHOULD pay on a secondary
+// sale of tid at salePrice -- EIP-2981 shaped (same signature gno.land's
+// own official grc721/royalty extension uses), so any marketplace
+// built to that convention recognizes it. Purely advisory: nothing in
+// GRC721, EIP-2981, or any other NFT standard can force a transfer to
+// carry a payment -- this only tells a COOPERATING marketplace what to
+// send and to whom. Errors if tid doesn't exist.
+func RoyaltyInfo(tid grc721.TokenID, salePrice int64) (address, int64, error) {
+	if _, err := nft.OwnerOf(tid); err != nil {
+		return "", 0, err
+	}
+	return royaltyRecipient, salePrice * royaltyBps / 10000, nil
+}
+
+func RoyaltyBps() int64          { return royaltyBps }
+func RoyaltyRecipient() address  { return royaltyRecipient }
+
+/* -------------------------------- owner-gated -------------------------------- */
+
+func callerAddress() address {
+	return unsaferealm.PreviousRealm().Address()
+}
+
+func assertOwner() {
+	if callerAddress() != collectionOwner {
+		panic("unauthorized: caller is not the collection owner")
+	}
+}
+
+func SetApprovedVersion(cur realm, pkgpath string) {
+	assertOwner()
+	approvedVersion = pkgpath
+}
+
+func SetMintPrice(cur realm, ugnot int64) {
+	assertOwner()
+	if ugnot < 0 {
+		panic("price cannot be negative")
+	}
+	mintPriceUgnot = ugnot
+}
+
+func AddToWhitelist(cur realm, wallet address, bps int64) {
+	assertOwner()
+	if bps < 0 || bps > 10000 {
+		panic("bps must be between 0 and 10000")
+	}
+	whitelistBps.Set(wallet.String(), bps)
+}
+
+func AddToWhitelistBatch(cur realm, walletsCSV string, bps int64) {
+	assertOwner()
+	if bps < 0 || bps > 10000 {
+		panic("bps must be between 0 and 10000")
+	}
+	for _, w := range strings.Split(walletsCSV, ",") {
+		w = strings.TrimSpace(w)
+		if w == "" {
+			continue
+		}
+		whitelistBps.Set(w, bps)
+	}
+}
+
+func RemoveFromWhitelist(cur realm, wallet address) {
+	assertOwner()
+	whitelistBps.Remove(wallet.String())
+}
+
+// SetRoyaltyBps changes the flat secondary-sale royalty rate (basis
+// points, 0-10000).
+func SetRoyaltyBps(cur realm, bps int64) {
+	assertOwner()
+	if bps < 0 || bps > 10000 {
+		panic("bps must be between 0 and 10000")
+	}
+	royaltyBps = bps
+}
+
+// SetRoyaltyRecipient points royalty payouts at a new address -- meant
+// to be called once with a dedicated royalty wallet (kept separate
+// from mint proceeds so its balance is legible on its own), replacing
+// the collectionOwner placeholder default.
+func SetRoyaltyRecipient(cur realm, recipient address) {
+	assertOwner()
+	royaltyRecipient = recipient
+}
+
+/* ------------------------------- version-gated -------------------------------- */
+
+func assertCallerIsApprovedVersion(cur realm) {
+	caller := cur.Previous().PkgPath()
+	if approvedVersion == "" {
+		panic("no version realm has been approved yet")
+	}
+	if caller != approvedVersion {
+		panic("unauthorized: caller is not the approved version realm")
+	}
+}
+
+// RecordMint is the ONLY way a token gets minted. Only the approved
+// version realm may call it. Reserves comboKey atomically with the
+// mint (panics if already taken -- the version realm should have
+// pre-checked via IsTraitComboAvailable, but this is the real,
+// authoritative check), increments the recipient's mint count, and --
+// if payer (the wallet that actually signed and paid for this mint,
+// which may differ from to) doesn't have a permanent whitelistBps
+// override -- spends one use of their campaign discount, if they have
+// one. campaign.ConsumeDiscount safely no-ops (ok=false) when payer
+// has no active campaign entry, so this is safe to call unconditionally.
+func RecordMint(cur realm, to address, payer address, tid grc721.TokenID, metadata grc721.Metadata, comboKey string) grc721.TokenID {
+	assertCallerIsApprovedVersion(cur)
+	if mintedTraitCombos.Has(comboKey) {
+		panic("trait combination already minted")
+	}
+	checkErr(nft.Mint(to, tid))
+	checkErr(nft.SetTokenMetadata(to, tid, metadata))
+	mintedTraitCombos.Set(comboKey, true)
+	tokenComboKeys.Set(tid.String(), comboKey)
+	mintCountByWallet.Set(to.String(), MintsByWallet(to)+1)
+	mintedIDs = append(mintedIDs, tid)
+	if _, hasOverride := whitelistBps.Get(payer.String()).(int64); !hasOverride {
+		if bps, ok := campaign.ConsumeDiscount(cross(cur), payer); ok {
+			claimRecords = append(claimRecords, claimRecord{
+				Wallet:     payer,
+				Bps:        bps,
+				MintHeight: runtime.ChainHeight(),
+				Tid:        tid,
+			})
+		}
+	}
+	return tid
+}
+
+// ClaimCount reports how many campaign discounts have ever been spent
+// on a mint here -- see claimRecords' own doc comment.
+func ClaimCount() int64 { return int64(len(claimRecords)) }
+
+// ClaimAt returns one claim record by index (0-based, oldest first),
+// for paging through the full claim history in an admin UI.
+func ClaimAt(index int) (wallet address, bps int64, mintHeight int64, tid string) {
+	r := claimRecords[index]
+	return r.Wallet, r.Bps, r.MintHeight, r.Tid.String()
+}
+
+// ReportMintingOpen/ReportMaxMintsPerWallet let the approved version
+// realm mirror its own live settings here for display only -- see
+// mintingOpenMirror's own doc comment for why this exists instead of a
+// direct cross-realm read.
+func ReportMintingOpen(cur realm, open bool) {
+	assertCallerIsApprovedVersion(cur)
+	mintingOpenMirror = open
+}
+
+func ReportMaxMintsPerWallet(cur realm, max int64) {
+	assertCallerIsApprovedVersion(cur)
+	maxMintsPerWalletMirror = max
+}
+
+/* -------------------------- Token-owner actions --------------------------- */
+
+func Approve(cur realm, to address, tid grc721.TokenID) {
+	checkErr(nft.Approve(callerAddress(), to, tid))
+}
+
+func SetApprovalForAll(cur realm, operator address, approved bool) {
+	checkErr(nft.SetApprovalForAll(callerAddress(), operator, approved))
+}
+
+func TransferFrom(cur realm, from, to address, tid grc721.TokenID) {
+	checkErr(nft.TransferFrom(callerAddress(), from, to, tid))
+}
+
+func SafeTransferFrom(cur realm, from, to address, tid grc721.TokenID) {
+	checkErr(nft.SafeTransferFrom(callerAddress(), from, to, tid))
+}
+
+// Burn destroys a token. Caller must be its current owner. RELEASES the
+// token's trait combination back into mintedTraitCombos, looked up
+// from tokenComboKeys (the exact key RecordMint reserved, not a
+// reconstruction -- see that field's own comment on why it has to be
+// stored verbatim). Combined with nft.Burn itself freeing the token's
+// owner/metadata storage, this frees the maximum real bytes possible,
+// which maximizes the automatic storage-deposit refund gno's own
+// runtime sends back to whoever calls Burn. The archived record strips
+// Image/ImageData first -- see this file's own doc comment for why.
+func Burn(cur realm, tid grc721.TokenID) {
+	caller := callerAddress()
+	owner, err := nft.OwnerOf(tid)
+	checkErr(err)
+	if caller != owner {
+		panic(grc721.ErrCallerIsNotOwner)
+	}
+	metadata, err := nft.TokenMetadata(tid)
+	checkErr(err)
+
+	key := tid.String()
+	if comboKey, ok := tokenComboKeys.Get(key).(string); ok {
+		mintedTraitCombos.Remove(comboKey)
+		tokenComboKeys.Remove(key)
+	}
+
+	checkErr(nft.Burn(tid))
+
+	archived := metadata
+	archived.Image = ""
+	archived.ImageData = ""
+
+	burnedRecords.Set(key, burnRecord{
+		BurnedBy:   caller,
+		BurnHeight: runtime.ChainHeight(),
+		Metadata:   archived,
+	})
+	burnedIDs = append(burnedIDs, tid)
+}
+
+/* ------------------------------ gnoweb display ------------------------------ */
+
+func traitsToCSV(attrs []grc721.Trait) string {
+	pairs := make([]string, len(attrs))
+	for i, a := range attrs {
+		pairs[i] = a.TraitType + "=" + a.Value
+	}
+	return strings.Join(pairs, ";")
+}
+
+// TokenSummary returns tid, its current owner, and its metadata as one
+// pipe-delimited line, each value base64-encoded -- same shape the
+// original single-realm design used, for any off-chain UI that wants a
+// gallery view without decoding Gno's own struct value syntax.
+func TokenSummary(tid grc721.TokenID) (string, error) {
+	owner, err := nft.OwnerOf(tid)
+	if err != nil {
+		return "", err
+	}
+	metadata, err := nft.TokenMetadata(tid)
+	if err != nil {
+		return "", err
+	}
+	enc := base64.StdEncoding
+	fields := []string{
+		tid.String(),
+		owner.String(),
+		enc.EncodeToString([]byte(metadata.Name)),
+		enc.EncodeToString([]byte(metadata.Description)),
+		enc.EncodeToString([]byte(metadata.Image)),
+		enc.EncodeToString([]byte(metadata.ExternalURL)),
+		enc.EncodeToString([]byte(traitsToCSV(metadata.Attributes))),
+		enc.EncodeToString([]byte(metadata.BackgroundColor)),
+	}
+	return strings.Join(fields, "|"), nil
+}
+
+// CollectionSummary returns one TokenSummary line per token on the
+// given page (1-indexed, newest first, homeRenderLimit per page --
+// same page size Render's own listing uses), newline-separated.
+// Paginated because an unbounded version runs out of gas past a few
+// dozen tokens (confirmed live in the original single-realm design at
+// ~21 tokens) -- each summary re-embeds a full rendered image.
+func CollectionSummary(page int) string {
+	total := len(mintedIDs)
+	if page < 1 {
+		page = 1
+	}
+	startK := (page - 1) * homeRenderLimit
+	endK := startK + homeRenderLimit
+	if endK > total {
+		endK = total
+	}
+	var lines []string
+	for k := startK; k < endK; k++ {
+		tid := mintedIDs[total-1-k]
+		line, err := TokenSummary(tid)
+		if err != nil {
+			continue // burned since minting
+		}
+		lines = append(lines, line)
+	}
+	return strings.Join(lines, "\n")
+}
+
+const walletScanChunk = 100
+
+// WalletSummary is CollectionSummary filtered to owner, scanning at
+// most walletScanChunk of mintedIDs starting at startIdx. Returns the
+// matching lines plus nextIdx to resume from; nextIdx == TokenCount()
+// once nothing is left to check.
+func WalletSummary(owner address, startIdx int64) (summary string, nextIdx int64) {
+	total := len(mintedIDs)
+	start := int(startIdx)
+	if start < 0 {
+		start = 0
+	}
+	end := start + walletScanChunk
+	if end > total {
+		end = total
+	}
+	var lines []string
+	for k := start; k < end; k++ {
+		tid := mintedIDs[total-1-k]
+		tokenOwner, err := nft.OwnerOf(tid)
+		if err != nil || tokenOwner != owner {
+			continue
+		}
+		line, err := TokenSummary(tid)
+		if err != nil {
+			continue
+		}
+		lines = append(lines, line)
+	}
+	return strings.Join(lines, "\n"), int64(end)
+}
+
+// BurnedTokenSummary returns a permanent snapshot of one burned token,
+// same line shape as TokenSummary, with owner swapped for
+// burnedBy/burnHeight. Image is always empty (see Burn's own doc
+// comment).
+func BurnedTokenSummary(tid grc721.TokenID) (string, error) {
+	raw := burnedRecords.Get(tid.String())
+	rec, ok := raw.(burnRecord)
+	if !ok {
+		return "", grc721.ErrInvalidTokenId
+	}
+	enc := base64.StdEncoding
+	fields := []string{
+		tid.String(),
+		rec.BurnedBy.String(),
+		ufmt.Sprintf("%d", rec.BurnHeight),
+		enc.EncodeToString([]byte(rec.Metadata.Name)),
+		enc.EncodeToString([]byte(rec.Metadata.Description)),
+		enc.EncodeToString([]byte(rec.Metadata.Image)),
+		enc.EncodeToString([]byte(rec.Metadata.ExternalURL)),
+		enc.EncodeToString([]byte(traitsToCSV(rec.Metadata.Attributes))),
+		enc.EncodeToString([]byte(rec.Metadata.BackgroundColor)),
+	}
+	return strings.Join(fields, "|"), nil
+}
+
+// bigTokenImage scales up image's declared width/height for display on
+// its own token page -- the viewBox (and therefore every internal
+// coordinate) is untouched, so the browser just renders the same piece
+// bigger, nothing is re-rendered.
+func bigTokenImage(image string) string {
+	const prefix = "data:image/svg+xml;base64,"
+	if !strings.HasPrefix(image, prefix) {
+		return image
+	}
+	raw, err := base64.StdEncoding.DecodeString(image[len(prefix):])
+	if err != nil {
+		return image
+	}
+	svg := string(raw)
+	resized := strings.Replace(svg, `width="170.00" height="170.00"`, `width="`+tokenPageImageSize+`" height="`+tokenPageImageSize+`"`, 1)
+	if resized == svg {
+		resized = strings.Replace(svg, `width="170" height="170"`, `width="`+tokenPageImageSize+`" height="`+tokenPageImageSize+`"`, 1)
+	}
+	return prefix + base64.StdEncoding.EncodeToString([]byte(resized))
+}
+
+func renderMintedListPage(b *strings.Builder, page int) {
+	total := len(mintedIDs)
+	if total == 0 {
+		return
+	}
+	totalPages := (total + homeRenderLimit - 1) / homeRenderLimit
+	if page < 1 {
+		page = 1
+	}
+	if page > totalPages {
+		page = totalPages
+	}
+	startK := (page - 1) * homeRenderLimit
+	endK := startK + homeRenderLimit
+	if endK > total {
+		endK = total
+	}
+
+	b.WriteString("\n## Minted so far\n\n")
+	if totalPages > 1 {
+		b.WriteString(ufmt.Sprintf("_page %d of %d -- %d minted total_\n\n", page, totalPages, total))
+	}
+	b.WriteString("| Image | Index | Name | Owner |\n|---|---|---|---|\n")
+	for k := startK; k < endK; k++ {
+		tid := mintedIDs[total-1-k]
+		owner, err := nft.OwnerOf(tid)
+		if err != nil {
+			continue // burned
+		}
+		metadata, _ := nft.TokenMetadata(tid)
+		name := metadata.Name
+		if name == "" {
+			name = "Untitled"
+		}
+		link := realmRelPath + ":token/" + tid.String()
+		image := metadata.Image
+		if image == "" {
+			image = metadata.ImageData
+		}
+		imgCell := ""
+		if image != "" {
+			imgCell = ufmt.Sprintf("[![%s](%s)](%s)", name, image, link)
+		}
+		b.WriteString(ufmt.Sprintf("| %s | [#%s](%s) | %s | %s |\n", imgCell, tid.String(), link, name, owner))
+	}
+	b.WriteString("\n")
+
+	renderPageLinks(b, page, totalPages, "page")
+}
+
+func renderPageLinks(b *strings.Builder, page, totalPages int, linkBase string) {
+	if totalPages <= 1 {
+		return
+	}
+	b.WriteString("\n")
+	parts := []string{}
+	if page > 1 {
+		parts = append(parts, ufmt.Sprintf("[<< First](%s:%s/1)", realmRelPath, linkBase))
+		parts = append(parts, ufmt.Sprintf("[<- newer](%s:%s/%d)", realmRelPath, linkBase, page-1))
+	}
+	lastShown := 0
+	for p := 1; p <= totalPages; p++ {
+		if p != 1 && p != totalPages && (p < page-pageWindow || p > page+pageWindow) {
+			continue
+		}
+		if lastShown != 0 && p != lastShown+1 {
+			parts = append(parts, "...")
+		}
+		if p == page {
+			parts = append(parts, ufmt.Sprintf("**%d**", p))
+		} else {
+			parts = append(parts, ufmt.Sprintf("[%d](%s:%s/%d)", p, realmRelPath, linkBase, p))
+		}
+		lastShown = p
+	}
+	if page < totalPages {
+		parts = append(parts, ufmt.Sprintf("[older ->](%s:%s/%d)", realmRelPath, linkBase, page+1))
+		parts = append(parts, ufmt.Sprintf("[Last >>](%s:%s/%d)", realmRelPath, linkBase, totalPages))
+	}
+	b.WriteString(strings.Join(parts, " - "))
+	b.WriteString("\n")
+}
+
+func renderBurnedListPage(b *strings.Builder, page int) {
+	total := len(burnedIDs)
+	if total == 0 {
+		return
+	}
+	totalPages := (total + homeRenderLimit - 1) / homeRenderLimit
+	if page < 1 {
+		page = 1
+	}
+	if page > totalPages {
+		page = totalPages
+	}
+	startK := (page - 1) * homeRenderLimit
+	endK := startK + homeRenderLimit
+	if endK > total {
+		endK = total
+	}
+
+	b.WriteString("\n## Burned tokens\n\n")
+	if totalPages > 1 {
+		b.WriteString(ufmt.Sprintf("_page %d of %d -- %d burned total_\n\n", page, totalPages, total))
+	}
+	b.WriteString("| Index | Name | Burned By | Block |\n|---|---|---|---|\n")
+	for k := startK; k < endK; k++ {
+		tid := burnedIDs[total-1-k]
+		raw := burnedRecords.Get(tid.String())
+		rec, ok := raw.(burnRecord)
+		if !ok {
+			continue
+		}
+		name := rec.Metadata.Name
+		if name == "" {
+			name = "Untitled"
+		}
+		b.WriteString(ufmt.Sprintf("| #%s | %s | %s | %d |\n", tid.String(), name, rec.BurnedBy, rec.BurnHeight))
+	}
+	b.WriteString("\n")
+
+	renderPageLinks(b, page, totalPages, "burned/page")
+}
+
+func render404() string {
+	return ufmt.Sprintf("# 404\n\n[<- back to collection](%s)\n", realmRelPath)
+}
+
+func Render(path string) string {
+	if path == "" {
+		var b strings.Builder
+		b.WriteString(nft.RenderHome())
+		b.WriteString("\n## About\n\n")
+		b.WriteString("Each Gem's Chain trait names a real gno.land testnet -- one of the generations that carried the network forward on its way to Mainnet. Set in a ring with its own small antigravity field, every piece is a keepsake for everyone who helped build, test, and grow gno.land into what it's becoming.\n\n")
+		b.WriteString("This collection is also a demonstration: every gem is generative art, assembled fresh on each read and stored entirely on-chain -- no external links, nothing that can go missing.\n\n")
+		b.WriteString(ufmt.Sprintf("* **Owner**: %s\n", Owner()))
+		b.WriteString(ufmt.Sprintf("* **Assembled trait combinations minted**: %d\n", int64(mintedTraitCombos.Size())))
+		b.WriteString("* **Max supply**: unlimited\n")
+		if mintingOpenMirror {
+			b.WriteString("* **Minting**: open\n")
+		} else {
+			b.WriteString("* **Minting**: closed\n")
+		}
+		if mintPriceUgnot > 0 {
+			b.WriteString(ufmt.Sprintf("* **Mint price**: %d ugnot\n", mintPriceUgnot))
+		} else {
+			b.WriteString("* **Mint price**: free\n")
+		}
+		if maxMintsPerWalletMirror > 0 {
+			b.WriteString(ufmt.Sprintf("* **Max mints per wallet**: %d\n", maxMintsPerWalletMirror))
+		} else {
+			b.WriteString("* **Max mints per wallet**: unlimited\n")
+		}
+		if royaltyBps > 0 {
+			b.WriteString(ufmt.Sprintf("* **Secondary sale royalty**: %d.%02d%% (EIP-2981 RoyaltyInfo)\n", royaltyBps/100, royaltyBps%100))
+		}
+		if len(burnedIDs) > 0 {
+			b.WriteString(ufmt.Sprintf("* **Burned**: %d -- [view burned tokens ->](%s:burned)\n", len(burnedIDs), realmRelPath))
+		}
+
+		renderMintedListPage(&b, 1)
+		return b.String()
+	}
+
+	parts := strings.Split(path, "/")
+	if len(parts) == 2 && parts[0] == "page" {
+		page, err := strconv.Atoi(parts[1])
+		if err != nil || page < 1 {
+			return render404()
+		}
+		var b strings.Builder
+		b.WriteString(ufmt.Sprintf("# %s -- minted tokens\n\n[<- back to collection](%s)\n", nft.Name(), realmRelPath))
+		renderMintedListPage(&b, page)
+		return b.String()
+	}
+	if parts[0] == "burned" {
+		page := 1
+		if len(parts) == 3 && parts[1] == "page" {
+			p, err := strconv.Atoi(parts[2])
+			if err != nil || p < 1 {
+				return render404()
+			}
+			page = p
+		} else if len(parts) != 1 {
+			return render404()
+		}
+		var b strings.Builder
+		b.WriteString(ufmt.Sprintf("# %s -- burned tokens\n\n[<- back to collection](%s)\n", nft.Name(), realmRelPath))
+		renderBurnedListPage(&b, page)
+		return b.String()
+	}
+	if len(parts) == 2 && parts[0] == "token" {
+		tid := grc721.TokenID(parts[1])
+		owner, err := nft.OwnerOf(tid)
+		if err != nil {
+			return render404()
+		}
+		metadata, _ := nft.TokenMetadata(tid)
+		var b strings.Builder
+		b.WriteString(ufmt.Sprintf("# %s #%s\n\n[<- back to collection](%s)\n\n", nft.Name(), tid.String(), realmRelPath))
+		image := metadata.Image
+		if image == "" {
+			image = metadata.ImageData
+		}
+		name := metadata.Name
+		if name == "" {
+			name = "Untitled"
+		}
+		if image != "" {
+			b.WriteString(ufmt.Sprintf("![%s](%s)\n\n", name, bigTokenImage(image)))
+		}
+
+		b.WriteString("## Details\n\n")
+		b.WriteString(ufmt.Sprintf("* **Collection**: %s\n", nft.Name()))
+		b.WriteString(ufmt.Sprintf("* **Name**: %s\n", name))
+		b.WriteString(ufmt.Sprintf("* **Index**: #%s\n", tid.String()))
+		if metadata.Description != "" {
+			b.WriteString(ufmt.Sprintf("* **Description**: %s\n", metadata.Description))
+		}
+		b.WriteString(ufmt.Sprintf("* **Owner**: %s\n", owner))
+
+		if len(metadata.Attributes) > 0 {
+			b.WriteString("\n## Traits\n\n")
+			for _, attr := range metadata.Attributes {
+				b.WriteString(ufmt.Sprintf("* **%s**: %s\n", attr.TraitType, attr.Value))
+			}
+		}
+		return b.String()
+	}
+
+	return render404()
+}
+
+func checkErr(err error) {
+	if err != nil {
+		panic(err)
+	}
+}
