@@ -11,12 +11,12 @@ This repository archives raw blockchain transaction data from Gno.land chains.
 | [staging.gno.land](https://staging.gno.land)            | `staging.gno.land/`  | daily, 18:00 UTC |
 
 > **`gnoland1` is not `gnoland-1`.** Without the dash it is the retired betanet,
-> archived under `gnoland1/`. With the dash it is mainnet, archived under
+> archived under `betanet.gno.land/`. With the dash it is mainnet, archived under
 > `mainnet.gno.land/`. Two different chains — check which directory you are in.
 
 ## Historical chains (archived, no longer updated)
 
-- `gnoland1/` — betanet (chain id `gnoland1`), halted at block 3796411 on 2026-09-14
+- `betanet.gno.land/` — betanet (chain id `gnoland1`), halted at block 3796411 on 2026-09-14
 - `sapphire.gno.land/` — sapphire.gno.land (test15)
 - `topaz.gno.land/` — topaz.gno.land (test14)
 - `test13.gno.land/` — test13.gno.land
