@@ -22,9 +22,9 @@ jobs:
       max-parallel: 1
       matrix:
         testnet:
+          - mainnet.gno.land
           - pearl.gno.land
           - sapphire.gno.land
-          - gnoland1
 
     steps:
       - uses: actions/checkout@v4
