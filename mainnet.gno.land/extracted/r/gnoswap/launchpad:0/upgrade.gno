@@ -1,0 +1,75 @@
+package launchpad
+
+import (
+	"gno.land/r/gnoswap/access/v1"
+)
+
+// RegisterInitializer registers a new launchpad implementation version.
+// This function is called by each version (v1, v2, etc.) during initialization
+// to register their implementation with the proxy system.
+//
+// The initializer function creates a new instance of the implementation
+// using the provided launchpadStore interface.
+//
+// Security: Only contracts within the domain path can register initializers.
+// Each package path can only register once to prevent duplicate registrations.
+//
+// Parameters:
+//   - cur: current realm context; callers use cross(cur) when crossing into this realm.
+//   - initializer: callback that receives the implementation realm context and launchpad store, then returns the version's ILaunchpad implementation; its leading integer discriminator is invoked as 0.
+func RegisterInitializer(cur realm, initializer func(_ int, rlm realm, launchpadStore ILaunchpadStore) ILaunchpad) {
+	initializerFunc := func(_ int, rlm realm, domainStore any) any {
+		access.AssertIsRlmCurrent(0, rlm)
+
+		currentLaunchpadStore, ok := domainStore.(ILaunchpadStore)
+		if !ok {
+			panic("domainStore is not an ILaunchpadStore")
+		}
+
+		return initializer(0, rlm, currentLaunchpadStore)
+	}
+
+	err := versionManager.RegisterInitializer(0, cur, initializerFunc)
+	if err != nil {
+		panic(err)
+	}
+
+	err = updateImplementation()
+	if err != nil {
+		panic(err)
+	}
+}
+
+// UpgradeImpl switches the active launchpad implementation to a different version.
+// This function allows seamless upgrades from one version to another without
+// data migration or downtime.
+//
+// Security: Only admin or governance can perform upgrades.
+// The new implementation must have been previously registered via RegisterInitializer.
+//
+// Parameters:
+//   - cur: current realm context; callers use cross(cur) when crossing into this realm.
+//   - packagePath: registered package path of the launchpad implementation to activate.
+func UpgradeImpl(cur realm, packagePath string) {
+	// Ensure only admin or governance can perform upgrades
+	caller := cur.Previous().Address()
+	access.AssertIsAdminOrGovernance(caller)
+
+	err := versionManager.ChangeImplementation(0, cur, packagePath)
+	if err != nil {
+		panic(err)
+	}
+
+	err = updateImplementation()
+	if err != nil {
+		panic(err)
+	}
+}
+
+// GetImplementationPackagePath returns the package path of the currently active implementation.
+//
+// Returns:
+//   - packagePath: package path of the active implementation
+func GetImplementationPackagePath() string {
+	return versionManager.GetCurrentPackagePath()
+}
