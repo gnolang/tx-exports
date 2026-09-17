@@ -8,7 +8,6 @@ This repository archives raw blockchain transaction data from Gno.land chains.
 | ------------------------------------------------------- | -------------------- | ---------------- |
 | [gno.land (mainnet)](https://gno.land)                  | `mainnet.gno.land/`  | every 4 hours    |
 | [pearl.gno.land (test16)](https://pearl.gno.land)       | `pearl.gno.land/`    | every 4 hours    |
-| [sapphire.gno.land (test15)](https://sapphire.gno.land) | `sapphire.gno.land/` | every 4 hours    |
 | [staging.gno.land](https://staging.gno.land)            | `staging.gno.land/`  | daily, 18:00 UTC |
 
 > **`gnoland1` is not `gnoland-1`.** Without the dash it is the retired betanet,
@@ -18,6 +17,7 @@ This repository archives raw blockchain transaction data from Gno.land chains.
 ## Historical chains (archived, no longer updated)
 
 - `gnoland1/` — betanet (chain id `gnoland1`), halted at block 3796411 on 2026-09-14
+- `sapphire.gno.land/` — sapphire.gno.land (test15)
 - `topaz.gno.land/` — topaz.gno.land (test14)
 - `test13.gno.land/` — test13.gno.land
 - `test11.gno.land/` — test11.gno.land
