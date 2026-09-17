@@ -4,12 +4,17 @@ This repository archives raw blockchain transaction data from Gno.land chains.
 
 ## Active chains (backed up continuously)
 
-| Chain                                                   | Directory            | Frequency     |
-| ------------------------------------------------------- | -------------------- | ------------- |
-| [pearl.gno.land (test16)](https://pearl.gno.land)       | `pearl.gno.land/`    | every 4 hours |
-| [sapphire.gno.land (test15)](https://sapphire.gno.land) | `sapphire.gno.land/` | every 4 hours |
-| [gnoland1 (betanet)](https://betanet.gno.land)          | `gnoland1/`          | every 4 hours |
-| [staging.gno.land](https://staging.gno.land)            | `staging.gno.land/`  | every hour    |
+| Chain                                                   | Directory            | Frequency        |
+| ------------------------------------------------------- | -------------------- | ---------------- |
+| [gno.land (mainnet)](https://gno.land)                  | `mainnet.gno.land/`  | every 4 hours    |
+| [pearl.gno.land (test16)](https://pearl.gno.land)       | `pearl.gno.land/`    | every 4 hours    |
+| [sapphire.gno.land (test15)](https://sapphire.gno.land) | `sapphire.gno.land/` | every 4 hours    |
+| [gnoland1 (betanet)](https://betanet.gno.land)          | `gnoland1/`          | every 4 hours    |
+| [staging.gno.land](https://staging.gno.land)            | `staging.gno.land/`  | daily, 18:00 UTC |
+
+> **`gnoland1` is not `gnoland-1`.** Without the dash it is betanet, archived
+> under `gnoland1/`. With the dash it is mainnet, archived under
+> `mainnet.gno.land/`. Two different chains — check which directory you are in.
 
 ## Historical chains (archived, no longer updated)
 
@@ -21,6 +26,18 @@ This repository archives raw blockchain transaction data from Gno.land chains.
 - `test3.gno.land/` — test3.gno.land
 - `test2.gno.land/` — test2.gno.land
 - `test1.gno.land/` — test1.gno.land
+
+## Known gaps
+
+These networks were deployed but have never been exported here. They are shut
+down with no reachable RPC, so the data can now only come from a node data
+directory or an operator snapshot:
+
+`test6.gno.land`, `test7.gno.land`, `test8.gno.land`, `test9.gno.land`,
+`test10.gno.land`, `test12.gno.land`
+
+Their genesis and node configuration are preserved in the monorepo under
+[`misc/deployments/`](https://github.com/gnolang/gno/tree/master/misc/deployments).
 
 ## Tools
 

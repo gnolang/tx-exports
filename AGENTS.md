@@ -6,8 +6,12 @@ This file provides guidance to autonomous AI agents when working with code in th
 
 This repository archives raw blockchain transaction data exported from Gno.land chains:
 
-- **Active**: pearl.gno.land (test16), sapphire.gno.land (test15), gnoland1 (betanet), staging.gno.land
+- **Active**: mainnet.gno.land (`gnoland-1`), pearl.gno.land (test16), sapphire.gno.land (test15), gnoland1 (betanet), staging.gno.land
 - **Historical**: test1–test5, test11, test13, topaz (test14) (archived, no longer updated)
+- **Never exported**: test6–test10, test12 — deployed, shut down, no reachable RPC
+
+`gnoland1` (no dash, `gnoland1/`) is betanet. `gnoland-1` (with a dash,
+`mainnet.gno.land/`) is mainnet. They are different chains.
 
 ## Common Commands
 
@@ -51,7 +55,7 @@ Each chain directory is self-contained:
 
 ### Transaction data format
 
-**Current format** (pearl, sapphire, topaz, test13, test11, gnoland1, test5, test2, test1):
+**Current format** (mainnet, pearl, sapphire, topaz, test13, test11, gnoland1, test5, test2, test1):
 
 ```json
 {"tx": {"msg": [...], "fee": {...}, "signatures": [...], "memo": ""}, "metadata": {"timestamp": "..."}}
@@ -71,15 +75,34 @@ Both use Amino JSON encoding (Tendermint2 wire format).
 - `/vm.m_call` (`MsgCall`) — calls a function on an existing realm
 - `/vm.m_run` (`MsgRun`) — executes ephemeral code
 - `/bank.MsgSend` — token transfer
+- `/vm.m_enable_pkg` (`MsgEnablePackage`) — activates a parked package (mainnet only)
 
 ### staging.gno.land specifics
 
 Uses `export.sh` instead of tx-archive. It calls `gnogenesis txs export` and `gnogenesis balances export` against the Portal Loop RPC, chunks output into 1000-line JSONL segments, and downloads `genesis.json`. The CI workflow (`staging-txs-exporter.yml`) runs hourly.
 
+### mainnet.gno.land specifics
+
+Mainnet (`gnoland-1`) launched 2026-09-12 as a fresh chain, not a hardfork of
+betanet, so its export starts at block 1.
+
+Two ways it differs from the recent testnets:
+
+- **No `USE_WS=1`.** `rpc.gno.land` does not WAF-block high-volume HTTP batch
+  fetches the way the `*.testnets.gno.land` endpoints do, and HTTP is faster
+  (tx results are batched over HTTP, not over WS).
+- **`/vm.m_enable_pkg` messages.** Mainnet runs `code_submission_policy = "inert"`,
+  so an added package stays parked until an approver sends `MsgEnablePackage`.
+  Those messages are in the export, but the extractor's pinned gno dependency
+  predates the type and logs `unrecognized concrete type full name
+  vm.m_enable_pkg`, skipping the transaction. Non-fatal (the extractor still
+  exits 0, and `m_enable_pkg` carries no package source, so nothing is missing
+  from `extracted/`) but noisy — it needs a dependency bump in `extractor/go.mod`.
+
 ### CI
 
-- `.github/workflows/txs-exporter.yml` — runs every 4 hours for pearl.gno.land, sapphire.gno.land, and gnoland1
-- `.github/workflows/staging-txs-exporter.yml` — runs hourly for staging.gno.land
+- `.github/workflows/txs-exporter.yml` — runs every 4 hours for mainnet.gno.land, pearl.gno.land, sapphire.gno.land, and gnoland1
+- `.github/workflows/staging-txs-exporter.yml` — runs daily at 18:00 UTC for staging.gno.land
 
 Both workflows auto-commit updated backup files using `git-auto-commit-action`.
 
