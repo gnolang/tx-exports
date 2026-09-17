@@ -25,7 +25,6 @@ jobs:
           - mainnet.gno.land
           - pearl.gno.land
           - sapphire.gno.land
-          - gnoland1
 
     steps:
       - uses: actions/checkout@v4
