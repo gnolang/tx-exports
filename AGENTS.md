@@ -7,11 +7,15 @@ This file provides guidance to autonomous AI agents when working with code in th
 This repository archives raw blockchain transaction data exported from Gno.land chains:
 
 - **Active**: mainnet.gno.land (`gnoland-1`), pearl.gno.land (test16), staging.gno.land
-- **Historical**: test1–test5, test11, test13, topaz (test14), sapphire (test15), gnoland1 (betanet) (archived, no longer updated)
+- **Historical**: test1–test5, test11, test13, topaz (test14), sapphire (test15), betanet (archived, no longer updated)
 - **Never exported**: test6–test10, test12 — deployed, shut down, no reachable RPC
 
-`gnoland1` (no dash, `gnoland1/`) is the retired betanet. `gnoland-1` (with a
-dash, `mainnet.gno.land/`) is mainnet. They are different chains.
+`gnoland1` (no dash) is the retired betanet's chain id, archived under
+`betanet.gno.land/`. `gnoland-1` (with a dash) is mainnet, under
+`mainnet.gno.land/`. They are different chains.
+
+Directory names follow the chain's **hostname**, not its chain id — the one
+exception was `gnoland1/`, renamed to `betanet.gno.land/` for exactly that reason.
 
 ## Common Commands
 
@@ -55,7 +59,7 @@ Each chain directory is self-contained:
 
 ### Transaction data format
 
-**Current format** (mainnet, pearl, sapphire, topaz, test13, test11, gnoland1, test5, test2, test1):
+**Current format** (mainnet, pearl, sapphire, topaz, test13, test11, betanet, test5, test2, test1):
 
 ```json
 {"tx": {"msg": [...], "fee": {...}, "signatures": [...], "memo": ""}, "metadata": {"timestamp": "..."}}
