@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-123346
+123750
 ```
 
 ## addpkgs
@@ -11,19 +11,19 @@
 
 ## top realm calls
 ```
- 104315 "gno.land/r/gnoswap/router"
-  53734 "gno.land/r/gnoland/wugnot"
+ 104608 "gno.land/r/gnoswap/router"
+  54114 "gno.land/r/gnoland/wugnot"
   25913 "gno.land/r/gnoswap/common"
-  17939 "gno.land/r/gnoswap/gns"
-   8827 "gno.land/r/gnoswap/position"
-   8606 "gno.land/r/gnoswap/staker"
+  18403 "gno.land/r/gnoswap/gns"
+   8983 "gno.land/r/gnoswap/position"
+   8762 "gno.land/r/gnoswap/staker"
    4030 "gno.land/r/gnoswap/test_token/test_usdc"
    3279 "gno.land/r/gnoswap/test_token/test_trx"
    3254 "gno.land/r/gnoswap/test_token/test_btc"
    3253 "gno.land/r/gnoswap/test_token/test_atom"
    3252 "gno.land/r/gnoswap/test_token/test_dai"
    3248 "gno.land/r/gnoswap/test_token/test_sol"
-   2892 "gno.land/r/gnoswap/gnft"
+   2908 "gno.land/r/gnoswap/gnft"
    1225 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixels"
     651 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixelsandbox"
     597 "gno.land/r/gnoland/blog"
