@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-124819
+125202
 ```
 
 ## addpkgs
@@ -11,19 +11,19 @@
 
 ## top realm calls
 ```
- 105368 "gno.land/r/gnoswap/router"
-  55037 "gno.land/r/gnoland/wugnot"
+ 105660 "gno.land/r/gnoswap/router"
+  55412 "gno.land/r/gnoland/wugnot"
   25913 "gno.land/r/gnoswap/common"
-  19579 "gno.land/r/gnoswap/gns"
-   9433 "gno.land/r/gnoswap/position"
-   9211 "gno.land/r/gnoswap/staker"
+  20003 "gno.land/r/gnoswap/gns"
+   9580 "gno.land/r/gnoswap/position"
+   9357 "gno.land/r/gnoswap/staker"
    4030 "gno.land/r/gnoswap/test_token/test_usdc"
    3279 "gno.land/r/gnoswap/test_token/test_trx"
    3254 "gno.land/r/gnoswap/test_token/test_btc"
    3253 "gno.land/r/gnoswap/test_token/test_atom"
    3252 "gno.land/r/gnoswap/test_token/test_dai"
    3248 "gno.land/r/gnoswap/test_token/test_sol"
-   2929 "gno.land/r/gnoswap/gnft"
+   2932 "gno.land/r/gnoswap/gnft"
    1225 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixels"
     651 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixelsandbox"
     597 "gno.land/r/gnoland/blog"
@@ -145,6 +145,7 @@
       3 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g2"
       3 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/splitpoc/stable"
       3 "gno.land/r/g1hx4z2kwrnzd9up3g0gd4hspc6v78e4r90jkke3/nftprofiles4"
+      3 "gno.land/r/g1j4ehkkrqcr53a233wamtvqggt3skr86c6777xd/gnomads"
       3 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/bond"
       3 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/profile"
       3 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/zdex/incentives/v1"
@@ -186,7 +187,6 @@
       1 "gno.land/r/g1gn6t0q9wenwhdda47rkrpfd63kcxjvyp7eqwku/minttest"
       1 "gno.land/r/g1hx4z2kwrnzd9up3g0gd4hspc6v78e4r90jkke3/nftmarket2"
       1 "gno.land/r/g1hx4z2kwrnzd9up3g0gd4hspc6v78e4r90jkke3/nftprofiles2"
-      1 "gno.land/r/g1j4ehkkrqcr53a233wamtvqggt3skr86c6777xd/gnomads"
       1 "gno.land/r/g1klfr7ktj3qxk6pwf8tpmj3dagsyq3p4caxsuxq/counter2"
       1 "gno.land/r/g1l3fmz59rw8l6h29hslxt6gtna3th8s7m5vl88d/counter2"
       1 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv21"
