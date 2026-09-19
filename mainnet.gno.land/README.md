@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-5487
+5587
 ```
 
 ## addpkgs
@@ -11,14 +11,14 @@
 
 ## top realm calls
 ```
-   2411 "gno.land/r/gnoland/wugnot"
-   1114 "gno.land/r/gnoswap/gns"
-    675 "gno.land/r/gnoswap/staker"
-    594 "gno.land/r/gnoswap/position"
-    585 "gno.land/r/gnoswap/router"
-    263 "gno.land/r/gnoswap/gnft"
+   2440 "gno.land/r/gnoland/wugnot"
+   1128 "gno.land/r/gnoswap/gns"
+    686 "gno.land/r/gnoswap/staker"
+    606 "gno.land/r/gnoswap/position"
+    590 "gno.land/r/gnoswap/router"
+    267 "gno.land/r/gnoswap/gnft"
     235 "gno.land/r/g1ecsuj0q572jr0dhu29q9njtnmw03hyu7tyyvv6/kourt"
-    183 "gno.land/r/gnoswap/gov/staker"
+    188 "gno.land/r/gnoswap/gov/staker"
     165 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/kourtv3"
     134 "gno.land/r/gnoland/blog"
      21 "gno.land/r/gnops/valopers"
@@ -38,6 +38,7 @@
       2 "gno.land/r/gnoswap/pool"
       1 "gno.land/p/g17khqpukees4237dtn3astzapmp462vjhsz6st4/bitset"
       1 "gno.land/p/g17khqpukees4237dtn3astzapmp462vjhsz6st4/bloom"
+      1 "gno.land/p/g17khqpukees4237dtn3astzapmp462vjhsz6st4/datasource"
       1 "gno.land/p/g17khqpukees4237dtn3astzapmp462vjhsz6st4/datastore"
       1 "gno.land/p/g17khqpukees4237dtn3astzapmp462vjhsz6st4/expect"
       1 "gno.land/p/g17khqpukees4237dtn3astzapmp462vjhsz6st4/message"
