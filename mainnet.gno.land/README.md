@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-5256
+5487
 ```
 
 ## addpkgs
@@ -11,16 +11,16 @@
 
 ## top realm calls
 ```
-   2323 "gno.land/r/gnoland/wugnot"
-   1060 "gno.land/r/gnoswap/gns"
-    642 "gno.land/r/gnoswap/staker"
-    569 "gno.land/r/gnoswap/position"
-    557 "gno.land/r/gnoswap/router"
-    258 "gno.land/r/gnoswap/gnft"
+   2411 "gno.land/r/gnoland/wugnot"
+   1114 "gno.land/r/gnoswap/gns"
+    675 "gno.land/r/gnoswap/staker"
+    594 "gno.land/r/gnoswap/position"
+    585 "gno.land/r/gnoswap/router"
+    263 "gno.land/r/gnoswap/gnft"
     235 "gno.land/r/g1ecsuj0q572jr0dhu29q9njtnmw03hyu7tyyvv6/kourt"
-    168 "gno.land/r/gnoswap/gov/staker"
+    183 "gno.land/r/gnoswap/gov/staker"
+    165 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/kourtv3"
     134 "gno.land/r/gnoland/blog"
-    112 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/kourtv3"
      21 "gno.land/r/gnops/valopers"
      11 "gno.land/r/gov/dao"
       8 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/hubv2"
@@ -36,7 +36,13 @@
       2 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/pointsv2"
       2 "gno.land/r/gnoswap/emission"
       2 "gno.land/r/gnoswap/pool"
+      1 "gno.land/p/g17khqpukees4237dtn3astzapmp462vjhsz6st4/bitset"
+      1 "gno.land/p/g17khqpukees4237dtn3astzapmp462vjhsz6st4/bloom"
+      1 "gno.land/p/g17khqpukees4237dtn3astzapmp462vjhsz6st4/datastore"
       1 "gno.land/p/g17khqpukees4237dtn3astzapmp462vjhsz6st4/expect"
+      1 "gno.land/p/g17khqpukees4237dtn3astzapmp462vjhsz6st4/message"
+      1 "gno.land/p/g17khqpukees4237dtn3astzapmp462vjhsz6st4/murmur3"
+      1 "gno.land/p/g17khqpukees4237dtn3astzapmp462vjhsz6st4/trie"
       1 "gno.land/p/g1ecsuj0q572jr0dhu29q9njtnmw03hyu7tyyvv6/checkpoint/v0"
       1 "gno.land/p/g1ecsuj0q572jr0dhu29q9njtnmw03hyu7tyyvv6/curve/v0"
       1 "gno.land/p/g1ecsuj0q572jr0dhu29q9njtnmw03hyu7tyyvv6/governor/v0"
