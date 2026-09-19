@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-4743
+4983
 ```
 
 ## addpkgs
@@ -11,14 +11,14 @@
 
 ## top realm calls
 ```
-   2171 "gno.land/r/gnoland/wugnot"
-    988 "gno.land/r/gnoswap/gns"
-    559 "gno.land/r/gnoswap/staker"
-    522 "gno.land/r/gnoswap/router"
-    506 "gno.land/r/gnoswap/position"
-    238 "gno.land/r/gnoswap/gnft"
+   2226 "gno.land/r/gnoland/wugnot"
+   1020 "gno.land/r/gnoswap/gns"
+    591 "gno.land/r/gnoswap/staker"
+    535 "gno.land/r/gnoswap/position"
+    534 "gno.land/r/gnoswap/router"
+    247 "gno.land/r/gnoswap/gnft"
     235 "gno.land/r/g1ecsuj0q572jr0dhu29q9njtnmw03hyu7tyyvv6/kourt"
-    155 "gno.land/r/gnoswap/gov/staker"
+    159 "gno.land/r/gnoswap/gov/staker"
     134 "gno.land/r/gnoland/blog"
      21 "gno.land/r/gnops/valopers"
       9 "gno.land/r/gov/dao"
@@ -40,6 +40,11 @@
       1 "gno.land/p/g1ecsuj0q572jr0dhu29q9njtnmw03hyu7tyyvv6/governor/v0"
       1 "gno.land/p/g1ecsuj0q572jr0dhu29q9njtnmw03hyu7tyyvv6/grc20votes/v0"
       1 "gno.land/p/g1ecsuj0q572jr0dhu29q9njtnmw03hyu7tyyvv6/twap/v0"
+      1 "gno.land/p/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/checkpoint/v0"
+      1 "gno.land/p/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/curve/v0"
+      1 "gno.land/p/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/governor/v0"
+      1 "gno.land/p/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/grc20votes/v0"
+      1 "gno.land/p/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/twap/v0"
       1 "gno.land/p/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/ammmath"
       1 "gno.land/p/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/ammmathv2"
       1 "gno.land/p/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/zdex/amm/v1"
@@ -114,6 +119,8 @@
       1 "gno.land/p/moul/xdao/v0"
       1 "gno.land/p/moul/xmath/v0"
       1 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/guilds"
+      1 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/guildsv3"
+      1 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/kourtv3"
       1 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/profile"
       1 "gno.land/r/g1w93f099t4pp9jamyghp88p60fvkg39dxz2qzrc/gems5/campaign"
       1 "gno.land/r/g1w93f099t4pp9jamyghp88p60fvkg39dxz2qzrc/vprobe1789431234"
