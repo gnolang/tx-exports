@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-4983
+5256
 ```
 
 ## addpkgs
@@ -11,17 +11,18 @@
 
 ## top realm calls
 ```
-   2226 "gno.land/r/gnoland/wugnot"
-   1020 "gno.land/r/gnoswap/gns"
-    591 "gno.land/r/gnoswap/staker"
-    535 "gno.land/r/gnoswap/position"
-    534 "gno.land/r/gnoswap/router"
-    247 "gno.land/r/gnoswap/gnft"
+   2323 "gno.land/r/gnoland/wugnot"
+   1060 "gno.land/r/gnoswap/gns"
+    642 "gno.land/r/gnoswap/staker"
+    569 "gno.land/r/gnoswap/position"
+    557 "gno.land/r/gnoswap/router"
+    258 "gno.land/r/gnoswap/gnft"
     235 "gno.land/r/g1ecsuj0q572jr0dhu29q9njtnmw03hyu7tyyvv6/kourt"
-    159 "gno.land/r/gnoswap/gov/staker"
+    168 "gno.land/r/gnoswap/gov/staker"
     134 "gno.land/r/gnoland/blog"
+    112 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/kourtv3"
      21 "gno.land/r/gnops/valopers"
-      9 "gno.land/r/gov/dao"
+     11 "gno.land/r/gov/dao"
       8 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/hubv2"
       6 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/pad"
       5 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv2"
@@ -35,6 +36,7 @@
       2 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/pointsv2"
       2 "gno.land/r/gnoswap/emission"
       2 "gno.land/r/gnoswap/pool"
+      1 "gno.land/p/g17khqpukees4237dtn3astzapmp462vjhsz6st4/expect"
       1 "gno.land/p/g1ecsuj0q572jr0dhu29q9njtnmw03hyu7tyyvv6/checkpoint/v0"
       1 "gno.land/p/g1ecsuj0q572jr0dhu29q9njtnmw03hyu7tyyvv6/curve/v0"
       1 "gno.land/p/g1ecsuj0q572jr0dhu29q9njtnmw03hyu7tyyvv6/governor/v0"
@@ -120,7 +122,6 @@
       1 "gno.land/p/moul/xmath/v0"
       1 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/guilds"
       1 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/guildsv3"
-      1 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/kourtv3"
       1 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/profile"
       1 "gno.land/r/g1w93f099t4pp9jamyghp88p60fvkg39dxz2qzrc/gems5/campaign"
       1 "gno.land/r/g1w93f099t4pp9jamyghp88p60fvkg39dxz2qzrc/vprobe1789431234"
