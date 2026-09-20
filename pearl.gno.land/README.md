@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-129297
+129619
 ```
 
 ## addpkgs
@@ -11,19 +11,19 @@
 
 ## top realm calls
 ```
- 108559 "gno.land/r/gnoswap/router"
-  58861 "gno.land/r/gnoland/wugnot"
+ 108790 "gno.land/r/gnoswap/router"
+  59139 "gno.land/r/gnoland/wugnot"
   25913 "gno.land/r/gnoswap/common"
-  24591 "gno.land/r/gnoswap/gns"
-  11153 "gno.land/r/gnoswap/position"
-  10920 "gno.land/r/gnoswap/staker"
+  24961 "gno.land/r/gnoswap/gns"
+  11274 "gno.land/r/gnoswap/position"
+  11041 "gno.land/r/gnoswap/staker"
    4030 "gno.land/r/gnoswap/test_token/test_usdc"
    3279 "gno.land/r/gnoswap/test_token/test_trx"
    3254 "gno.land/r/gnoswap/test_token/test_btc"
    3253 "gno.land/r/gnoswap/test_token/test_atom"
    3252 "gno.land/r/gnoswap/test_token/test_dai"
    3248 "gno.land/r/gnoswap/test_token/test_sol"
-   3001 "gno.land/r/gnoswap/gnft"
+   3006 "gno.land/r/gnoswap/gnft"
    1225 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixels"
     651 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixelsandbox"
     597 "gno.land/r/gnoland/blog"
@@ -170,6 +170,7 @@
       2 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv6"
       2 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/points"
       2 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/zdex/v2"
+      2 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/factory"
       2 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/nftv2"
       2 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/nftv3"
       2 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/nftv4"
