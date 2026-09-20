@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-129619
+129974
 ```
 
 ## addpkgs
@@ -11,19 +11,19 @@
 
 ## top realm calls
 ```
- 108790 "gno.land/r/gnoswap/router"
-  59139 "gno.land/r/gnoland/wugnot"
+ 109029 "gno.land/r/gnoswap/router"
+  59423 "gno.land/r/gnoland/wugnot"
   25913 "gno.land/r/gnoswap/common"
-  24961 "gno.land/r/gnoswap/gns"
-  11274 "gno.land/r/gnoswap/position"
-  11041 "gno.land/r/gnoswap/staker"
+  25335 "gno.land/r/gnoswap/gns"
+  11394 "gno.land/r/gnoswap/position"
+  11161 "gno.land/r/gnoswap/staker"
    4030 "gno.land/r/gnoswap/test_token/test_usdc"
    3279 "gno.land/r/gnoswap/test_token/test_trx"
    3254 "gno.land/r/gnoswap/test_token/test_btc"
    3253 "gno.land/r/gnoswap/test_token/test_atom"
    3252 "gno.land/r/gnoswap/test_token/test_dai"
    3248 "gno.land/r/gnoswap/test_token/test_sol"
-   3006 "gno.land/r/gnoswap/gnft"
+   3009 "gno.land/r/gnoswap/gnft"
    1225 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixels"
     651 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixelsandbox"
     597 "gno.land/r/gnoland/blog"
@@ -106,9 +106,11 @@
       9 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv23"
       9 "gno.land/r/g1nyjym92xfwln6m5xvpyw89k9ut02m07c4ggqzz/crazy_timecapsule"
       9 "gno.land/r/g1pmffzfv3326akjjs27mqp4zgumlnqne7urjm7x/nsmarket/v1"
+      9 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/bounties"
       9 "gno.land/r/sys/namereg/v1"
       8 "gno.land/r/g1hx4z2kwrnzd9up3g0gd4hspc6v78e4r90jkke3/nft55"
       8 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/hub"
+      8 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/vault"
       8 "gno.land/r/g1w93f099t4pp9jamyghp88p60fvkg39dxz2qzrc/gems6/stable"
       8 "gno.land/r/g1x4zvyxlwauaanupr43fjm4l3kltk5h6lzgpvwn/gnotaskv04"
       7 "gno.land/r/g1hx4z2kwrnzd9up3g0gd4hspc6v78e4r90jkke3/nft2"
@@ -204,6 +206,8 @@
       1 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/pointsv2"
       1 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/profile"
       1 "gno.land/r/g1rvzx735nu32qt85wxl06y8gekztfdmpuxy67ux/ambassadorweek"
+      1 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/cointest"
+      1 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/cointest2"
       1 "gno.land/r/g1v6v9nfv9nt2685s6s5tkvf02fak9x0007527tj/tally"
       1 "gno.land/r/g1w93f099t4pp9jamyghp88p60fvkg39dxz2qzrc/gems5/campaign"
       1 "gno.land/r/g1w93f099t4pp9jamyghp88p60fvkg39dxz2qzrc/gems5/stable"
