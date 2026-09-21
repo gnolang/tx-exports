@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-130896
+131246
 ```
 
 ## addpkgs
@@ -11,19 +11,19 @@
 
 ## top realm calls
 ```
- 109703 "gno.land/r/gnoswap/router"
-  60183 "gno.land/r/gnoland/wugnot"
-  26421 "gno.land/r/gnoswap/gns"
+ 109945 "gno.land/r/gnoswap/router"
+  60495 "gno.land/r/gnoland/wugnot"
+  26787 "gno.land/r/gnoswap/gns"
   25913 "gno.land/r/gnoswap/common"
-  11712 "gno.land/r/gnoswap/position"
-  11477 "gno.land/r/gnoswap/staker"
+  11845 "gno.land/r/gnoswap/position"
+  11610 "gno.land/r/gnoswap/staker"
    4030 "gno.land/r/gnoswap/test_token/test_usdc"
    3279 "gno.land/r/gnoswap/test_token/test_trx"
    3254 "gno.land/r/gnoswap/test_token/test_btc"
    3253 "gno.land/r/gnoswap/test_token/test_atom"
    3252 "gno.land/r/gnoswap/test_token/test_dai"
    3248 "gno.land/r/gnoswap/test_token/test_sol"
-   3022 "gno.land/r/gnoswap/gnft"
+   3029 "gno.land/r/gnoswap/gnft"
    1225 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixels"
     651 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixelsandbox"
     597 "gno.land/r/gnoland/blog"
@@ -83,6 +83,7 @@
      13 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g3"
      13 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/pointsv2"
      13 "gno.land/r/g1n9dwyewlgj4a297u6sxan7eveqmqyhy49ur5pm/dex"
+     13 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/market"
      12 "gno.land/r/g19sh6ww9g6ukzhndg4d4zkx25l6nq782f9pfuap/gnowardrobe/v2"
      12 "gno.land/r/g1fy50d2urffjyz8hncjtd5q6nx6sn785p3cuuqg/crazy_token"
      12 "gno.land/r/g1hx4z2kwrnzd9up3g0gd4hspc6v78e4r90jkke3/nftoffers4"
@@ -156,6 +157,7 @@
       3 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/profile"
       3 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/zdex/incentives/v1"
       3 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/nft"
+      3 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/cointest"
       3 "gno.land/r/g1y4u4erj77mrz40gj0wc55k5q32ueywp6l788ha/gasprobe_fastprng_caller"
       3 "gno.land/r/onbloc/ibc/union/access"
       2 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/splitpoc/v1"
@@ -180,8 +182,6 @@
       2 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/nftv4"
       2 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/nftv5"
       2 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/bond"
-      2 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/cointest"
-      2 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/market"
       2 "gno.land/r/g1xr6tgxnpled50h74eafmvxway7z0ytr5rsmeme/nsdata/v2"
       2 "gno.land/r/gnoswap/emission"
       2 "gno.land/r/gnoswap/gov/governance"
