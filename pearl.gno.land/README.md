@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-131944
+132290
 ```
 
 ## addpkgs
@@ -11,19 +11,19 @@
 
 ## top realm calls
 ```
- 110440 "gno.land/r/gnoswap/router"
-  61129 "gno.land/r/gnoland/wugnot"
-  27549 "gno.land/r/gnoswap/gns"
+ 110675 "gno.land/r/gnoswap/router"
+  61364 "gno.land/r/gnoland/wugnot"
+  27943 "gno.land/r/gnoswap/gns"
   25913 "gno.land/r/gnoswap/common"
-  12117 "gno.land/r/gnoswap/position"
-  11879 "gno.land/r/gnoswap/staker"
+  12221 "gno.land/r/gnoswap/position"
+  11983 "gno.land/r/gnoswap/staker"
    4030 "gno.land/r/gnoswap/test_token/test_usdc"
    3279 "gno.land/r/gnoswap/test_token/test_trx"
    3254 "gno.land/r/gnoswap/test_token/test_btc"
    3253 "gno.land/r/gnoswap/test_token/test_atom"
    3252 "gno.land/r/gnoswap/test_token/test_dai"
    3248 "gno.land/r/gnoswap/test_token/test_sol"
-   3040 "gno.land/r/gnoswap/gnft"
+   3043 "gno.land/r/gnoswap/gnft"
    1225 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixels"
     651 "gno.land/r/g188mapat33awn7r9uk08l0jc9my0n07fpmspxel/pixelsandbox"
     597 "gno.land/r/gnoland/blog"
@@ -84,6 +84,7 @@
      13 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/pointsv2"
      13 "gno.land/r/g1n9dwyewlgj4a297u6sxan7eveqmqyhy49ur5pm/dex"
      13 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/market"
+     13 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/timelock_guardian"
      12 "gno.land/r/g19sh6ww9g6ukzhndg4d4zkx25l6nq782f9pfuap/gnowardrobe/v2"
      12 "gno.land/r/g1fy50d2urffjyz8hncjtd5q6nx6sn785p3cuuqg/crazy_token"
      12 "gno.land/r/g1hx4z2kwrnzd9up3g0gd4hspc6v78e4r90jkke3/nftoffers4"
@@ -113,6 +114,7 @@
       9 "gno.land/r/sys/namereg/v1"
       8 "gno.land/r/g1hx4z2kwrnzd9up3g0gd4hspc6v78e4r90jkke3/nft55"
       8 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/hub"
+      8 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/permission_registry"
       8 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/vault"
       8 "gno.land/r/g1w93f099t4pp9jamyghp88p60fvkg39dxz2qzrc/gems6/stable"
       8 "gno.land/r/g1x4zvyxlwauaanupr43fjm4l3kltk5h6lzgpvwn/gnotaskv04"
@@ -143,6 +145,7 @@
       5 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv12"
       5 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/pad"
       5 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/coindemo"
+      5 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/upgrade_registry"
       5 "gno.land/r/nym-vikbez000/telescope"
       4 "gno.land/r/g1gn6t0q9wenwhdda47rkrpfd63kcxjvyp7eqwku/gems3/v1"
       4 "gno.land/r/g1gn6t0q9wenwhdda47rkrpfd63kcxjvyp7eqwku/gems6v2/stablev2"
@@ -159,6 +162,7 @@
       3 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/zdex/incentives/v1"
       3 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/nft"
       3 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/cointest"
+      3 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/service_registry"
       3 "gno.land/r/g1y4u4erj77mrz40gj0wc55k5q32ueywp6l788ha/gasprobe_fastprng_caller"
       3 "gno.land/r/onbloc/ibc/union/access"
       2 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/splitpoc/v1"
