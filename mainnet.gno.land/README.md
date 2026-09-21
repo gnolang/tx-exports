@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-6834
+7225
 ```
 
 ## addpkgs
@@ -11,27 +11,28 @@
 
 ## top realm calls
 ```
-   3048 "gno.land/r/gnoland/wugnot"
-   1381 "gno.land/r/gnoswap/gns"
-    963 "gno.land/r/gnoswap/staker"
-    851 "gno.land/r/gnoswap/position"
-    757 "gno.land/r/gnoswap/router"
-    326 "gno.land/r/gnoswap/gnft"
+   3110 "gno.land/r/gnoland/wugnot"
+   1405 "gno.land/r/gnoswap/gns"
+    987 "gno.land/r/gnoswap/staker"
+    872 "gno.land/r/gnoswap/position"
+    768 "gno.land/r/gnoswap/router"
+    334 "gno.land/r/gnoswap/gnft"
     235 "gno.land/r/g1ecsuj0q572jr0dhu29q9njtnmw03hyu7tyyvv6/kourt"
-    228 "gno.land/r/gnoswap/gov/staker"
+    233 "gno.land/r/gnoswap/gov/staker"
     213 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/kourtv3"
     134 "gno.land/r/gnoland/blog"
-    100 "gno.land/r/nym-thegnomic001/gnomic_airdrop"
+    110 "gno.land/r/nym-thegnomic001/gnomic_airdrop"
      23 "gno.land/r/gnops/valopers"
      13 "gno.land/r/moul/x/daily/erc721/v0"
      13 "gno.land/r/nym-thegnomic001/gnomic"
      11 "gno.land/r/gov/dao"
      10 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv2"
-      8 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/hubv2"
+      9 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/hubv2"
+      7 "gno.land/r/sys/namereg/v0"
       6 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/pad"
-      6 "gno.land/r/sys/namereg/v0"
+      6 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv3"
+      5 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/bond"
       5 "gno.land/r/moul/x/daily/counter/v0"
-      4 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/bond"
       4 "gno.land/r/gnoswap/pool"
       4 "gno.land/r/moul/x/daily/asciiart/v0"
       3 "gno.land/r/demo/defi/grc20factory"
