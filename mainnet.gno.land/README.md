@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-7802
+8060
 ```
 
 ## addpkgs
@@ -11,34 +11,34 @@
 
 ## top realm calls
 ```
-   3546 "gno.land/r/gnoland/wugnot"
-   1481 "gno.land/r/gnoswap/gns"
-   1054 "gno.land/r/gnoswap/staker"
-    934 "gno.land/r/gnoswap/position"
-    830 "gno.land/r/gnoswap/router"
-    349 "gno.land/r/gnoswap/gnft"
-    247 "gno.land/r/gnoswap/gov/staker"
+   3829 "gno.land/r/gnoland/wugnot"
+   1525 "gno.land/r/gnoswap/gns"
+   1095 "gno.land/r/gnoswap/staker"
+    971 "gno.land/r/gnoswap/position"
+    876 "gno.land/r/gnoswap/router"
+    357 "gno.land/r/gnoswap/gnft"
+    260 "gno.land/r/gnoswap/gov/staker"
     235 "gno.land/r/g1ecsuj0q572jr0dhu29q9njtnmw03hyu7tyyvv6/kourt"
     213 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/kourtv3"
-    136 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv3"
-    136 "gno.land/r/nym-thegnomic001/gnomic_airdrop"
+    205 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv3"
+    162 "gno.land/r/nym-thegnomic001/gnomic_airdrop"
     134 "gno.land/r/gnoland/blog"
+     25 "gno.land/r/nym-thegnomic001/gnomic"
      24 "gno.land/r/gnops/valopers"
-     24 "gno.land/r/nym-thegnomic001/gnomic"
-     15 "gno.land/r/sys/namereg/v0"
+     24 "gno.land/r/sys/namereg/v0"
      13 "gno.land/r/moul/x/daily/erc721/v0"
      12 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv2"
      11 "gno.land/r/gov/dao"
       9 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/hubv2"
       6 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/pad"
       5 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/bond"
+      5 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/meta"
       5 "gno.land/r/moul/x/daily/counter/v0"
       4 "gno.land/r/gnoswap/pool"
       4 "gno.land/r/moul/x/daily/asciiart/v0"
       3 "gno.land/r/demo/defi/grc20factory"
       3 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/profile"
       2 "gno.land/r/g1gn6t0q9wenwhdda47rkrpfd63kcxjvyp7eqwku/probe1789429680"
-      2 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/meta"
       2 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/pointsv2"
       2 "gno.land/r/gnoswap/emission"
       1 "gno.land/p/g17khqpukees4237dtn3astzapmp462vjhsz6st4/bitset"
