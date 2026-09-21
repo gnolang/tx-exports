@@ -13,7 +13,7 @@ package bubblerumble
 import (
 	"chain"
 	"chain/banker"
-	"chain/runtime"
+	"chain/runtime/unsafe"
 	"math"
 	"strconv"
 	"strings"
@@ -57,9 +57,12 @@ type Pool struct {
 	History    []Entry
 }
 
+// pkgPath must match gnomod.toml: the realm's own address derives from it.
+const pkgPath = "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble"
+
 var (
 	pools     []*Pool
-	realmAddr = runtime.CurrentRealm().Address()
+	realmAddr = chain.PackageAddress(pkgPath)
 )
 
 // Price of the next bid in a pool with the given base price and n bids so far.
@@ -99,7 +102,7 @@ func (p *Pool) NextPrice() int64 {
 // CreatePool opens a pool. Any ugnot sent with the call seeds its pot.
 // Returns the new pool's id.
 func CreatePool(cur realm, name string, window int64, basePrice int64) int64 {
-	creator := userCaller()
+	creator := userCaller(cur)
 	name = cleanName(name)
 	if window < MinWindow || window > MaxWindow {
 		panic("window must be between 10s and 30d")
@@ -120,7 +123,7 @@ func CreatePool(cur realm, name string, window int64, basePrice int64) int64 {
 // Bid pays at least the current price into a pool's pot and resets its clock;
 // paying k× the price makes this bid's clock window/k (see ClockFor).
 func Bid(cur realm, id int64) {
-	bidder := userCaller()
+	bidder := userCaller(cur)
 	p := pool(id)
 	if p.Cancelled {
 		panic("pool was cancelled")
@@ -161,13 +164,13 @@ func Claim(cur realm, id int64) {
 		panic("already paid out")
 	}
 	p.Paid = true
-	send(p.LastBidder, p.Pot)
+	send(cur, p.LastBidder, p.Pot)
 	chain.Emit("Paid", "id", itoa(id), "winner", p.LastBidder.String(), "pot", itoa(p.Pot))
 }
 
 // Cancel lets the creator take the seed back from a pool nobody has bid on.
 func Cancel(cur realm, id int64) {
-	caller := userCaller()
+	caller := userCaller(cur)
 	p := pool(id)
 	if p.Creator != caller {
 		panic("only the creator can cancel")
@@ -181,13 +184,13 @@ func Cancel(cur realm, id int64) {
 	p.Cancelled = true
 	p.Paid = true
 	if p.Pot > 0 {
-		send(caller, p.Pot)
+		send(cur, caller, p.Pot)
 	}
 	chain.Emit("Cancelled", "id", itoa(id))
 }
 
-func send(to address, ugnot int64) {
-	banker.NewBanker(banker.BankerTypeRealmSend).SendCoins(realmAddr, to, chain.Coins{{"ugnot", ugnot}})
+func send(cur realm, to address, ugnot int64) {
+	banker.NewBanker(banker.BankerTypeRealmSend, cur).SendCoins(realmAddr, to, chain.Coins{{"ugnot", ugnot}})
 }
 
 func pool(id int64) *Pool {
@@ -199,16 +202,16 @@ func pool(id int64) *Pool {
 
 // userCaller is the signer of the transaction, refusing calls relayed through
 // another realm so nobody can bid on someone else's behalf.
-func userCaller() address {
-	r := runtime.PreviousRealm()
-	if !r.IsUser() {
+func userCaller(cur realm) address {
+	prev := cur.Previous()
+	if !prev.IsUserCall() {
 		panic("must be a direct user call")
 	}
-	return r.Address()
+	return prev.Address()
 }
 
 func ugnotSent() int64 {
-	sent := banker.OriginSend()
+	sent := unsafe.OriginSend()
 	for _, c := range sent {
 		if c.Denom != "ugnot" {
 			panic("only ugnot is accepted")
@@ -342,7 +345,7 @@ func (p *Pool) json(withHistory bool) string {
 
 func jsonAll() string {
 	var b strings.Builder
-	b.WriteString("{\"now\":" + itoa(time.Now().Unix()) + ",\"realm\":\"" + runtime.CurrentRealm().PkgPath() + "\",\"pools\":[")
+	b.WriteString("{\"now\":" + itoa(time.Now().Unix()) + ",\"realm\":\"" + pkgPath + "\",\"pools\":[")
 	for i, p := range pools {
 		if i > 0 {
 			b.WriteString(",")
