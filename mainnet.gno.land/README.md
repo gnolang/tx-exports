@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-8697
+9289
 ```
 
 ## addpkgs
@@ -11,22 +11,22 @@
 
 ## top realm calls
 ```
-   4299 "gno.land/r/gnoland/wugnot"
-   1723 "gno.land/r/gnoswap/gns"
-   1230 "gno.land/r/gnoswap/staker"
-   1106 "gno.land/r/gnoswap/position"
-    981 "gno.land/r/gnoswap/router"
-    413 "gno.land/r/gnoswap/gnft"
-    275 "gno.land/r/gnoswap/gov/staker"
+   4362 "gno.land/r/gnoland/wugnot"
+   1749 "gno.land/r/gnoswap/gns"
+   1257 "gno.land/r/gnoswap/staker"
+   1133 "gno.land/r/gnoswap/position"
+    994 "gno.land/r/gnoswap/router"
+    564 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble3"
+    421 "gno.land/r/gnoswap/gnft"
+    278 "gno.land/r/gnoswap/gov/staker"
     235 "gno.land/r/g1ecsuj0q572jr0dhu29q9njtnmw03hyu7tyyvv6/kourt"
-    230 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv3"
+    235 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv3"
     225 "gno.land/r/nym-thegnomic001/gnomic_airdrop"
     213 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/kourtv3"
     134 "gno.land/r/gnoland/blog"
      60 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble"
-     58 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble3"
-     42 "gno.land/r/sys/namereg/v0"
-     32 "gno.land/r/nym-thegnomic001/gnomic"
+     43 "gno.land/r/sys/namereg/v0"
+     33 "gno.land/r/nym-thegnomic001/gnomic"
      24 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble2"
      24 "gno.land/r/gnops/valopers"
      13 "gno.land/r/moul/x/daily/erc721/v0"
@@ -139,8 +139,13 @@
       1 "gno.land/p/moul/x/storagecost/v0"
       1 "gno.land/p/moul/xdao/v0"
       1 "gno.land/p/moul/xmath/v0"
+      1 "gno.land/r/g1d2mt0utzd04hvfd363nj0h6pk8dx0457tuqg8t/probe"
       1 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/guilds"
       1 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/guildsv3"
+      1 "gno.land/r/g1r6luttvrkksxh9h4asjq2qd8zsd5nlkrzvyjur/pgavl"
+      1 "gno.land/r/g1r6luttvrkksxh9h4asjq2qd8zsd5nlkrzvyjur/pgbig"
+      1 "gno.land/r/g1r6luttvrkksxh9h4asjq2qd8zsd5nlkrzvyjur/pgstate"
+      1 "gno.land/r/g1r6luttvrkksxh9h4asjq2qd8zsd5nlkrzvyjur/probe"
       1 "gno.land/r/g1w93f099t4pp9jamyghp88p60fvkg39dxz2qzrc/gems5/campaign"
       1 "gno.land/r/g1w93f099t4pp9jamyghp88p60fvkg39dxz2qzrc/vprobe1789431234"
       1 "gno.land/r/gnoswap/access/v1"
