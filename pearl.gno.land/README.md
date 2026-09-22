@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-132470
+132480
 ```
 
 ## addpkgs
@@ -147,6 +147,7 @@
       5 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv12"
       5 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/pad"
       5 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/coindemo"
+      5 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/permbook_demo"
       5 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/service_registry"
       5 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/upgrade_registry"
       5 "gno.land/r/nym-vikbez000/telescope"
