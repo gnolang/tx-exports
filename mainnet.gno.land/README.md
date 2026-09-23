@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-23649
+26226
 ```
 
 ## addpkgs
@@ -11,16 +11,16 @@
 
 ## top realm calls
 ```
-   4937 "gno.land/r/gnoland/wugnot"
-   3803 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble3"
-   1862 "gno.land/r/gnoswap/gns"
-   1430 "gno.land/r/gnoswap/staker"
-   1288 "gno.land/r/gnoswap/position"
-   1192 "gno.land/r/gnoswap/router"
+   5018 "gno.land/r/gnoland/wugnot"
+   3805 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble3"
+   1878 "gno.land/r/gnoswap/gns"
+   1446 "gno.land/r/gnoswap/staker"
+   1305 "gno.land/r/gnoswap/position"
+   1231 "gno.land/r/gnoswap/router"
     451 "gno.land/r/gnoswap/gnft"
-    372 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv3"
-    324 "gno.land/r/gnoswap/gov/staker"
-    244 "gno.land/r/nym-thegnomic001/gnomic_airdrop"
+    382 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv3"
+    334 "gno.land/r/gnoswap/gov/staker"
+    250 "gno.land/r/nym-thegnomic001/gnomic_airdrop"
     235 "gno.land/r/g1ecsuj0q572jr0dhu29q9njtnmw03hyu7tyyvv6/kourt"
     213 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/kourtv3"
     134 "gno.land/r/gnoland/blog"
@@ -28,7 +28,7 @@
      60 "gno.land/r/sys/namereg/v0"
      55 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble2"
      41 "gno.land/r/nym-thegnomic001/gnomic"
-     24 "gno.land/r/gnops/valopers"
+     25 "gno.land/r/gnops/valopers"
      19 "gno.land/r/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/home"
      13 "gno.land/r/moul/x/daily/erc721/v0"
      12 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv2"
@@ -49,6 +49,7 @@
       3 "gno.land/r/moul/faucet/v0"
       2 "gno.land/r/g1gn6t0q9wenwhdda47rkrpfd63kcxjvyp7eqwku/probe1789429680"
       2 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/pointsv2"
+      2 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/hearth/v1"
       2 "gno.land/r/gnoswap/emission"
       1 "gno.land/p/g17khqpukees4237dtn3astzapmp462vjhsz6st4/bitset"
       1 "gno.land/p/g17khqpukees4237dtn3astzapmp462vjhsz6st4/bloom"
