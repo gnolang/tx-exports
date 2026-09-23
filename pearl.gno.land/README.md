@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-132619
+132674
 ```
 
 ## addpkgs
@@ -126,7 +126,9 @@
       8 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/vault"
       8 "gno.land/r/g1w93f099t4pp9jamyghp88p60fvkg39dxz2qzrc/gems6/stable"
       8 "gno.land/r/g1x4zvyxlwauaanupr43fjm4l3kltk5h6lzgpvwn/gnotaskv04"
+      7 "gno.land/r/g142p4mjutq0dhu3vlfz32ymc490gk9d2sqglrak/costnotest/crowdfunding"
       7 "gno.land/r/g142p4mjutq0dhu3vlfz32ymc490gk9d2sqglrak/gate1mp5/crowdfunding"
+      7 "gno.land/r/g142p4mjutq0dhu3vlfz32ymc490gk9d2sqglrak/gate1v2j/crowdfunding"
       7 "gno.land/r/g1hx4z2kwrnzd9up3g0gd4hspc6v78e4r90jkke3/nft2"
       7 "gno.land/r/g1hx4z2kwrnzd9up3g0gd4hspc6v78e4r90jkke3/nft52"
       7 "gno.land/r/g1mjc0v90uw5kzael8f80k8yje3tjgmn0ey0fzzv/token_factory"
@@ -136,7 +138,6 @@
       7 "gno.land/r/g1pmffzfv3326akjjs27mqp4zgumlnqne7urjm7x/nsdata/v1"
       7 "gno.land/r/g1xr6tgxnpled50h74eafmvxway7z0ytr5rsmeme/nslogic/v3"
       7 "gno.land/r/g1xr6tgxnpled50h74eafmvxway7z0ytr5rsmeme/nsskin/v1"
-      6 "gno.land/r/g142p4mjutq0dhu3vlfz32ymc490gk9d2sqglrak/costnotest/crowdfunding"
       6 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g4"
       6 "gno.land/r/g1gn6t0q9wenwhdda47rkrpfd63kcxjvyp7eqwku/gems/v1"
       6 "gno.land/r/g1gn6t0q9wenwhdda47rkrpfd63kcxjvyp7eqwku/gems3/stable"
@@ -146,6 +147,7 @@
       6 "gno.land/r/g1hx4z2kwrnzd9up3g0gd4hspc6v78e4r90jkke3/nftoffers55"
       6 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv10"
       6 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/hubv2"
+      5 "gno.land/r/g142p4mjutq0dhu3vlfz32ymc490gk9d2sqglrak/gate1v2f/crowdfunding"
       5 "gno.land/r/g1gn6t0q9wenwhdda47rkrpfd63kcxjvyp7eqwku/gems/stable"
       5 "gno.land/r/g1gn6t0q9wenwhdda47rkrpfd63kcxjvyp7eqwku/gems2/stable"
       5 "gno.land/r/g1gn6t0q9wenwhdda47rkrpfd63kcxjvyp7eqwku/gems4/v1"
@@ -158,6 +160,7 @@
       5 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/permbook_demo"
       5 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/upgrade_registry"
       5 "gno.land/r/nym-vikbez000/telescope"
+      4 "gno.land/r/g142p4mjutq0dhu3vlfz32ymc490gk9d2sqglrak/gate1v2h/crowdfunding"
       4 "gno.land/r/g1gn6t0q9wenwhdda47rkrpfd63kcxjvyp7eqwku/gems3/v1"
       4 "gno.land/r/g1gn6t0q9wenwhdda47rkrpfd63kcxjvyp7eqwku/gems6v2/stablev2"
       4 "gno.land/r/g1gn6t0q9wenwhdda47rkrpfd63kcxjvyp7eqwku/revealpoc"
@@ -165,6 +168,9 @@
       4 "gno.land/r/g1hx4z2kwrnzd9up3g0gd4hspc6v78e4r90jkke3/nftoffers3"
       4 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gvs/gsfarmv8"
       3 "gno.land/r/g142p4mjutq0dhu3vlfz32ymc490gk9d2sqglrak/crowdfunding"
+      3 "gno.land/r/g142p4mjutq0dhu3vlfz32ymc490gk9d2sqglrak/gate1v2/crowdfunding"
+      3 "gno.land/r/g142p4mjutq0dhu3vlfz32ymc490gk9d2sqglrak/gate1v2d/crowdfunding"
+      3 "gno.land/r/g142p4mjutq0dhu3vlfz32ymc490gk9d2sqglrak/gate1v2e/crowdfunding"
       3 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/g2"
       3 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/splitpoc/stable"
       3 "gno.land/r/g1hx4z2kwrnzd9up3g0gd4hspc6v78e4r90jkke3/nftprofiles4"
@@ -179,6 +185,7 @@
       3 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/cointest"
       3 "gno.land/r/g1y4u4erj77mrz40gj0wc55k5q32ueywp6l788ha/gasprobe_fastprng_caller"
       3 "gno.land/r/onbloc/ibc/union/access"
+      2 "gno.land/r/g142p4mjutq0dhu3vlfz32ymc490gk9d2sqglrak/gate1v2b/crowdfunding"
       2 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/splitpoc/v1"
       2 "gno.land/r/g1gn6t0q9wenwhdda47rkrpfd63kcxjvyp7eqwku/gasprobe1789457600"
       2 "gno.land/r/g1gn6t0q9wenwhdda47rkrpfd63kcxjvyp7eqwku/gems5/stable"
