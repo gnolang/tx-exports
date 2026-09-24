@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-35083
+36682
 ```
 
 ## addpkgs
@@ -11,15 +11,15 @@
 
 ## top realm calls
 ```
-   5447 "gno.land/r/gnoland/wugnot"
-   3994 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble3"
-   2005 "gno.land/r/gnoswap/gns"
-   1582 "gno.land/r/gnoswap/staker"
-   1438 "gno.land/r/gnoswap/position"
-   1379 "gno.land/r/gnoswap/router"
-    493 "gno.land/r/gnoswap/gnft"
-    420 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv3"
-    385 "gno.land/r/gnoswap/gov/staker"
+   5510 "gno.land/r/gnoland/wugnot"
+   3995 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble3"
+   2022 "gno.land/r/gnoswap/gns"
+   1606 "gno.land/r/gnoswap/staker"
+   1459 "gno.land/r/gnoswap/position"
+   1399 "gno.land/r/gnoswap/router"
+    503 "gno.land/r/gnoswap/gnft"
+    432 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv3"
+    387 "gno.land/r/gnoswap/gov/staker"
     281 "gno.land/r/nym-thegnomic001/gnomic_airdrop"
     235 "gno.land/r/g1ecsuj0q572jr0dhu29q9njtnmw03hyu7tyyvv6/kourt"
     213 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/kourtv3"
@@ -28,7 +28,7 @@
      64 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble"
      64 "gno.land/r/sys/namereg/v0"
      42 "gno.land/r/nym-thegnomic001/gnomic"
-     28 "gno.land/r/gnops/valopers"
+     31 "gno.land/r/gnops/valopers"
      19 "gno.land/r/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/home"
      17 "gno.land/r/moul/x/reaper/v0"
      15 "gno.land/r/g1v7s3j506wqul2zwt90awgjphpx4ztwga0926f7/gnodraw/v0"
@@ -43,8 +43,8 @@
       6 "gno.land/r/demo/profile"
       6 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/meta"
       6 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/pad"
+      6 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/hearth/v1"
       5 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/bond"
-      5 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/hearth/v1"
       5 "gno.land/r/moul/faucet/v0"
       5 "gno.land/r/moul/x/daily/counter/v0"
       4 "gno.land/r/demo/defi/grc20factory"
