@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-38855
+40806
 ```
 
 ## addpkgs
@@ -11,37 +11,38 @@
 
 ## top realm calls
 ```
-   5708 "gno.land/r/gnoland/wugnot"
-   3999 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble3"
-   2096 "gno.land/r/gnoswap/gns"
-   1659 "gno.land/r/gnoswap/staker"
-   1511 "gno.land/r/gnoswap/position"
-   1462 "gno.land/r/gnoswap/router"
-    527 "gno.land/r/gnoswap/gnft"
-    452 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv3"
-    414 "gno.land/r/gnoswap/gov/staker"
-    288 "gno.land/r/nym-thegnomic001/gnomic_airdrop"
+   5870 "gno.land/r/gnoland/wugnot"
+   4001 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble3"
+   2137 "gno.land/r/gnoswap/gns"
+   1734 "gno.land/r/gnoswap/staker"
+   1582 "gno.land/r/gnoswap/position"
+   1513 "gno.land/r/gnoswap/router"
+    544 "gno.land/r/gnoswap/gnft"
+    469 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv3"
+    440 "gno.land/r/gnoswap/gov/staker"
+    295 "gno.land/r/nym-thegnomic001/gnomic_airdrop"
     235 "gno.land/r/g1ecsuj0q572jr0dhu29q9njtnmw03hyu7tyyvv6/kourt"
     213 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/kourtv3"
     134 "gno.land/r/gnoland/blog"
+     81 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble4"
      69 "gno.land/r/sys/namereg/v0"
      65 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble"
      65 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble2"
-     44 "gno.land/r/nym-thegnomic001/gnomic"
-     32 "gno.land/r/gnops/valopers"
+     46 "gno.land/r/nym-thegnomic001/gnomic"
+     36 "gno.land/r/gnops/valopers"
      19 "gno.land/r/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/home"
      17 "gno.land/r/moul/x/reaper/v0"
-     15 "gno.land/r/g1v7s3j506wqul2zwt90awgjphpx4ztwga0926f7/gnodraw/v0"
+     16 "gno.land/r/g1v7s3j506wqul2zwt90awgjphpx4ztwga0926f7/gnodraw/v0"
      13 "gno.land/r/moul/x/daily/erc721/v0"
      12 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv2"
+     12 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/hearth/v1"
      12 "gno.land/r/g1sw5xklxjjuv0yvuxy5f5s3l3mnj0nqq626a9wr/million/v0"
      11 "gno.land/r/gov/dao"
       9 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/hubv2"
       9 "gno.land/r/moul/home"
       8 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/profile"
       8 "gno.land/r/samcrew/memba_appstore_v3"
-      7 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/hearth/v1"
-      6 "gno.land/r/demo/profile"
+      7 "gno.land/r/demo/profile"
       6 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/meta"
       6 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/pad"
       5 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/bond"
@@ -55,6 +56,9 @@
       2 "gno.land/r/g1gn6t0q9wenwhdda47rkrpfd63kcxjvyp7eqwku/probe1789429680"
       2 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/pointsv2"
       2 "gno.land/r/gnoswap/emission"
+      2 "gno.land/r/samcrew/memba_arcade_leaderboard_v1"
+      2 "gno.land/r/samcrew/memba_quest_attestation_v1"
+      2 "gno.land/r/samcrew/memba_reviews_v2"
       1 "gno.land/p/g17khqpukees4237dtn3astzapmp462vjhsz6st4/bitset"
       1 "gno.land/p/g17khqpukees4237dtn3astzapmp462vjhsz6st4/bloom"
       1 "gno.land/p/g17khqpukees4237dtn3astzapmp462vjhsz6st4/datasource"
@@ -384,16 +388,16 @@
       1 "gno.land/r/moul/x/vm/bfdemo/v0"
       1 "gno.land/r/moul/x/wesh/v0"
       1 "gno.land/r/moul/x/wiki/v0"
+      1 "gno.land/r/samcrew/barricade"
+      1 "gno.land/r/samcrew/block_party"
       1 "gno.land/r/samcrew/escrow_v3"
       1 "gno.land/r/samcrew/gnobuilders_badges_v2"
       1 "gno.land/r/samcrew/home"
-      1 "gno.land/r/samcrew/memba_arcade_leaderboard_v1"
       1 "gno.land/r/samcrew/memba_dao_channels_v2"
       1 "gno.land/r/samcrew/memba_feed_v1"
       1 "gno.land/r/samcrew/memba_feedback_v2"
       1 "gno.land/r/samcrew/memba_market_config"
-      1 "gno.land/r/samcrew/memba_quest_attestation_v1"
-      1 "gno.land/r/samcrew/memba_reviews_v2"
+      1 "gno.land/r/samcrew/space_invaders"
 ```
 
 ## top faucet requesters
