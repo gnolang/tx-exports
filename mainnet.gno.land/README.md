@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-42577
+43711
 ```
 
 ## addpkgs
@@ -11,27 +11,27 @@
 
 ## top realm calls
 ```
-   5972 "gno.land/r/gnoland/wugnot"
-   4145 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble3"
-   2166 "gno.land/r/gnoswap/gns"
-   1778 "gno.land/r/gnoswap/staker"
-   1623 "gno.land/r/gnoswap/position"
-   1546 "gno.land/r/gnoswap/router"
-    555 "gno.land/r/gnoswap/gnft"
-    481 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv3"
-    460 "gno.land/r/gnoswap/gov/staker"
-    298 "gno.land/r/nym-thegnomic001/gnomic_airdrop"
+   6063 "gno.land/r/gnoland/wugnot"
+   4161 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble3"
+   2193 "gno.land/r/gnoswap/gns"
+   1813 "gno.land/r/gnoswap/staker"
+   1663 "gno.land/r/gnoswap/position"
+   1572 "gno.land/r/gnoswap/router"
+    567 "gno.land/r/gnoswap/gnft"
+    489 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv3"
+    466 "gno.land/r/gnoswap/gov/staker"
+    324 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble4"
+    299 "gno.land/r/nym-thegnomic001/gnomic_airdrop"
     235 "gno.land/r/g1ecsuj0q572jr0dhu29q9njtnmw03hyu7tyyvv6/kourt"
     213 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/kourtv3"
-    196 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble4"
     134 "gno.land/r/gnoland/blog"
      70 "gno.land/r/sys/namereg/v0"
-     66 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble2"
+     68 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble2"
      65 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble"
      46 "gno.land/r/nym-thegnomic001/gnomic"
      36 "gno.land/r/gnops/valopers"
      19 "gno.land/r/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/home"
-     18 "gno.land/r/g1v7s3j506wqul2zwt90awgjphpx4ztwga0926f7/gnodraw/v0"
+     19 "gno.land/r/g1v7s3j506wqul2zwt90awgjphpx4ztwga0926f7/gnodraw/v0"
      17 "gno.land/r/moul/x/reaper/v0"
      15 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/hearth/v1"
      13 "gno.land/r/moul/x/daily/erc721/v0"
@@ -392,6 +392,7 @@
       1 "gno.land/r/samcrew/barricade"
       1 "gno.land/r/samcrew/block_party"
       1 "gno.land/r/samcrew/escrow_v3"
+      1 "gno.land/r/samcrew/escrow_v4"
       1 "gno.land/r/samcrew/gnobuilders_badges_v2"
       1 "gno.land/r/samcrew/home"
       1 "gno.land/r/samcrew/memba_dao_channels_v2"
