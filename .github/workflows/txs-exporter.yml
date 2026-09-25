@@ -23,6 +23,7 @@ jobs:
       matrix:
         testnet:
           - mainnet.gno.land
+          - onyx.gno.land
           - pearl.gno.land
 
     steps:

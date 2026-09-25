@@ -6,7 +6,7 @@ This file provides guidance to autonomous AI agents when working with code in th
 
 This repository archives raw blockchain transaction data exported from Gno.land chains:
 
-- **Active**: mainnet.gno.land (`gnoland-1`), pearl.gno.land (test16), staging.gno.land
+- **Active**: mainnet.gno.land (`gnoland-1`), onyx.gno.land (test17), pearl.gno.land (test16), staging.gno.land
 - **Historical**: test1–test5, test11, test13, topaz (test14), sapphire (test15), betanet (archived, no longer updated)
 - **Never exported**: test6–test10, test12 — deployed, shut down, no reachable RPC
 
@@ -59,7 +59,7 @@ Each chain directory is self-contained:
 
 ### Transaction data format
 
-**Current format** (mainnet, pearl, sapphire, topaz, test13, test11, betanet, test5, test2, test1):
+**Current format** (mainnet, onyx, pearl, sapphire, topaz, test13, test11, betanet, test5, test2, test1):
 
 ```json
 {"tx": {"msg": [...], "fee": {...}, "signatures": [...], "memo": ""}, "metadata": {"timestamp": "..."}}
@@ -105,7 +105,7 @@ Two ways it differs from the recent testnets:
 
 ### CI
 
-- `.github/workflows/txs-exporter.yml` — runs every 4 hours for mainnet.gno.land and pearl.gno.land
+- `.github/workflows/txs-exporter.yml` — runs every 4 hours for mainnet.gno.land, onyx.gno.land, and pearl.gno.land
 - `.github/workflows/staging-txs-exporter.yml` — runs daily at 18:00 UTC for staging.gno.land
 
 Both workflows auto-commit updated backup files using `git-auto-commit-action`.
