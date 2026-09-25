@@ -23,7 +23,7 @@ jobs:
       matrix:
         testnet:
           - mainnet.gno.land
-          - pearl.gno.land
+          - onyx.gno.land
 
     steps:
       - uses: actions/checkout@v4

@@ -1,8 +1,5 @@
-REMOTE = "https://rpc.pearl.testnets.gno.land"
-SHORTNAME = pearl
-
-# the gno build this chain runs; see GNO_REF in ../rules.mk
-GNO_REF = chain/pearl
+REMOTE = "https://rpc.onyx.testnets.gno.land"
+SHORTNAME = onyx
 
 # Fetch over WebSocket: testnets.gno.land HTTP RPC endpoints WAF-block (403)
 # high-volume batch fetches, which strands the backup. A single WS connection
