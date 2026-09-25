@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-132811
+132818
 ```
 
 ## addpkgs
@@ -193,6 +193,7 @@
       2 "gno.land/r/g142p4mjutq0dhu3vlfz32ymc490gk9d2sqglrak/gate1v2b/crowdfunding"
       2 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/splitpoc/v1"
       2 "gno.land/r/g17khqpukees4237dtn3astzapmp462vjhsz6st4/settlers/nft"
+      2 "gno.land/r/g1dxrp4g8zw90lwsu4v2qqlqkpj7234mdvaayrwf/settlers/nft"
       2 "gno.land/r/g1gn6t0q9wenwhdda47rkrpfd63kcxjvyp7eqwku/gasprobe1789457600"
       2 "gno.land/r/g1gn6t0q9wenwhdda47rkrpfd63kcxjvyp7eqwku/gems5/stable"
       2 "gno.land/r/g1gn6t0q9wenwhdda47rkrpfd63kcxjvyp7eqwku/gems6v2/stablev4"
