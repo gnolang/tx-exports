@@ -24,7 +24,6 @@ jobs:
         testnet:
           - mainnet.gno.land
           - onyx.gno.land
-          - pearl.gno.land
 
     steps:
       - uses: actions/checkout@v4
