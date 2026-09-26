@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-49754
+50327
 ```
 
 ## addpkgs
@@ -11,17 +11,17 @@
 
 ## top realm calls
 ```
-   6408 "gno.land/r/gnoland/wugnot"
+   6418 "gno.land/r/gnoland/wugnot"
    4353 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble3"
    2325 "gno.land/r/gnoswap/gns"
-   1946 "gno.land/r/gnoswap/staker"
-   1807 "gno.land/r/gnoswap/position"
-   1693 "gno.land/r/gnoswap/router"
-   1226 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble4"
+   1956 "gno.land/r/gnoswap/staker"
+   1817 "gno.land/r/gnoswap/position"
+   1697 "gno.land/r/gnoswap/router"
+   1335 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble4"
     606 "gno.land/r/gnoswap/gnft"
     515 "gno.land/r/gnoswap/gov/staker"
-    512 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv3"
-    320 "gno.land/r/nym-thegnomic001/gnomic_airdrop"
+    514 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv3"
+    328 "gno.land/r/nym-thegnomic001/gnomic_airdrop"
     235 "gno.land/r/g1ecsuj0q572jr0dhu29q9njtnmw03hyu7tyyvv6/kourt"
     213 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/kourtv3"
     134 "gno.land/r/gnoland/blog"
@@ -42,8 +42,8 @@
       9 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/hubv2"
       9 "gno.land/r/moul/home"
       9 "gno.land/r/samcrew/memba_appstore_v3"
+      8 "gno.land/r/g17khqpukees4237dtn3astzapmp462vjhsz6st4/settlers/nft"
       7 "gno.land/r/demo/profile"
-      7 "gno.land/r/g17khqpukees4237dtn3astzapmp462vjhsz6st4/settlers/nft"
       7 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/meta"
       6 "gno.land/r/demo/defi/grc20factory"
       6 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/adcol"
@@ -72,6 +72,7 @@
       2 "gno.land/r/g1r6luttvrkksxh9h4asjq2qd8zsd5nlkrzvyjur/pixelgnomes/v2"
       2 "gno.land/r/g1rayfgklwl0aspz488wvrcrvt7t2quy6q06lgk2/home"
       2 "gno.land/r/gnoswap/emission"
+      2 "gno.land/r/moul/x/daily/erc721/v1"
       2 "gno.land/r/samcrew/gnobuilders_badges_v2"
       2 "gno.land/r/samcrew/memba_dao_channels_v2"
       2 "gno.land/r/samcrew/memba_feed_v1"
@@ -217,6 +218,11 @@
       1 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/guilds"
       1 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/guildsv3"
       1 "gno.land/r/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/home/theme/v0"
+      1 "gno.land/r/g1qp5pt8cdq2f6kfdamn3yuxwg6quqnfpyewzz39/revshare"
+      1 "gno.land/r/g1qp5pt8cdq2f6kfdamn3yuxwg6quqnfpyewzz39/service_market"
+      1 "gno.land/r/g1qp5pt8cdq2f6kfdamn3yuxwg6quqnfpyewzz39/service_registry"
+      1 "gno.land/r/g1qp5pt8cdq2f6kfdamn3yuxwg6quqnfpyewzz39/subscriptions"
+      1 "gno.land/r/g1qp5pt8cdq2f6kfdamn3yuxwg6quqnfpyewzz39/timelock_guardian"
       1 "gno.land/r/g1r6luttvrkksxh9h4asjq2qd8zsd5nlkrzvyjur/pgavl"
       1 "gno.land/r/g1r6luttvrkksxh9h4asjq2qd8zsd5nlkrzvyjur/pgbig"
       1 "gno.land/r/g1r6luttvrkksxh9h4asjq2qd8zsd5nlkrzvyjur/pgstate"
@@ -311,7 +317,6 @@
       1 "gno.land/r/moul/x/daily/englishauction/v1"
       1 "gno.land/r/moul/x/daily/erc1155/v0"
       1 "gno.land/r/moul/x/daily/erc20/v0"
-      1 "gno.land/r/moul/x/daily/erc721/v1"
       1 "gno.land/r/moul/x/daily/escrow/v0"
       1 "gno.land/r/moul/x/daily/escrow/v1"
       1 "gno.land/r/moul/x/daily/faucet/v0"
