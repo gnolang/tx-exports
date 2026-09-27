@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-132824
+132837
 ```
 
 ## addpkgs
@@ -152,6 +152,7 @@
       6 "gno.land/r/g1hx4z2kwrnzd9up3g0gd4hspc6v78e4r90jkke3/nftoffers55"
       6 "gno.land/r/g1mv0052e7r6s09f5t9xsqf00nj3tqsgt9dg52jr/gnomemepad/padv10"
       6 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/hubv2"
+      6 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/vesting"
       5 "gno.land/r/g142p4mjutq0dhu3vlfz32ymc490gk9d2sqglrak/gate1v2f/crowdfunding"
       5 "gno.land/r/g1gn6t0q9wenwhdda47rkrpfd63kcxjvyp7eqwku/gems/stable"
       5 "gno.land/r/g1gn6t0q9wenwhdda47rkrpfd63kcxjvyp7eqwku/gems2/stable"
