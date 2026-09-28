@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-132867
+132878
 ```
 
 ## addpkgs
@@ -107,6 +107,7 @@
      10 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/fee_split"
      10 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/grants"
      10 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/service_market"
+     10 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/treasury_board"
      10 "gno.land/r/sys/namereg/v1"
       9 "gno.land/r/g16fz9m7km2rdmq2yqdapeg9a3tzzmjref4wzrd9/crazy_messenger"
       9 "gno.land/r/g1hx4z2kwrnzd9up3g0gd4hspc6v78e4r90jkke3/nft54"
