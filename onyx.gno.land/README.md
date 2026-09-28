@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-0
+9
 ```
 
 ## addpkgs
@@ -11,6 +11,7 @@
 
 ## top realm calls
 ```
+      1 "gno.land/r/gnops/valopers"
 ```
 
 ## top faucet requesters
