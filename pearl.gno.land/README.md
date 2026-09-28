@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-132837
+132867
 ```
 
 ## addpkgs
@@ -12,7 +12,7 @@
 ## top realm calls
 ```
  110785 "gno.land/r/gnoswap/router"
-  61495 "gno.land/r/gnoland/wugnot"
+  61506 "gno.land/r/gnoland/wugnot"
   28117 "gno.land/r/gnoswap/gns"
   25913 "gno.land/r/gnoswap/common"
   12268 "gno.land/r/gnoswap/position"
