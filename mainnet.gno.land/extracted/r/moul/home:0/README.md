@@ -94,6 +94,55 @@ change, never a code one: the renderer registers one placeholder per slot by
 iterating the tree, so writing `content/social.md` and referencing `:social:`
 is the whole of it.
 
+### The slots this page ships with
+
+`content/` is the source of truth, one file per slot, the slug being the file
+name without `.md`. Nothing registers them: `gnohome` reads the directory and
+the realm iterates the tree.
+
+| slot | what it is |
+| --- | --- |
+| `bio` | who I am, and what this page is, in the header column |
+| `social` | the links under it |
+| `now` | what I am working on, hand-written |
+| `stack` | the tools, one line |
+| `numbers` | a counted table, with the date it was counted |
+| `packages` | **generated**, see below |
+| `about` | a collapsed `> [!NOTE]-` explaining that this page is a realm |
+| `layout` | the template all of the above are filled into |
+
+`about` is deliberately last and deliberately collapsed. gnoweb renders an alert
+as `<details>`, and a `-` after the type closes it
+(`gno.land/pkg/gnoweb/markdown/ext_alert.go`), so the mechanism is one click away
+instead of occupying the paragraph where a reader decides whether to keep going.
+
+### `layout` may only reference placeholders that are deployed
+
+An unmatched placeholder survives into the output verbatim (see below), which
+makes the layout slot the one file that can be **ahead of the chain in a way
+that shows**.
+
+Rule: before pushing `layout`, every `:slug:` in it is either a file in
+`content/` or a computed placeholder **the deployed code answers**, which is not
+the same as one this repo implements.
+
+⚠️ **This is currently true of `layout` itself.** It ends with
+`On mygnoscan: :scan.links:`, and `scan.gno` is in this repo but **not in the
+deployed package**: `vm/qfile` on `gno.land/r/moul/home` lists six files and
+none of them is `scan.gno` (re-read 2026-09-28 through mygnoscan's
+`/api/realm`, the RPC being blocked from that host). So `layout` must not be
+pushed on its own. It goes out with the redeploy that carries `scan.gno`, which
+also wipes every slot and is therefore followed by `gnohome tx -all` anyway.
+
+Both of that redeploy's dependencies are now live on mainnet, so it is no
+longer blocked: `p/moul/mygnoscan` and `r/moul/config/v1` both answer
+(checked the same day). What is left is the `MsgAddPackage`, which no account
+session may sign.
+
+`gnohome status` is the check, and `tools/gnohome/scan.go` makes `preview`
+render these links rather than showing a literal `:scan.links:`, so the page
+can be judged before any of it is signed.
+
 ### Images: two gates, and neither is the one you expect
 
 An image in a slot passes **gnoweb's validator** and then the **CSP the site is
@@ -116,9 +165,23 @@ So a GitHub avatar needs no hosting of its own:
 `*.githubusercontent.com` and renders as-is. Verified by running this exact
 page through gnoweb's real goldmark pipeline, not by reading the policy.
 
-Six placeholders are computed from chain state rather than stored, and are
-refused as slot names so nothing can shadow them: `:owner:` `:realm:`
-`:chainid:` `:height:` `:rev:` `:slots:`.
+Eleven placeholders are computed at render time rather than stored, and are
+refused as slot names so nothing can shadow them.
+
+Six come straight from chain state: `:owner:` `:realm:` `:chainid:` `:height:`
+`:rev:` `:slots:`.
+
+Five are explorer links, built by [`p/moul/mygnoscan`](../../../p/moul/mygnoscan)
+(`scan.gno`): `:scan:` is the explorer base URL as plain text, `:scan.realm:`
+`:scan.me:` `:scan.block:` are markdown links to this realm, to the owner's
+account and to the block being rendered, and `:scan.links:` is the three of
+them on one line.
+
+Which explorer they point at is read from
+[`r/moul/config`](../../../r/moul/config), not hardcoded here, so moving every
+one of moul's realms to a different instance is one transaction against that
+realm rather than a redeploy of each. With nothing configured, they fall back
+to `mygnoscan.DefaultBase`, which is what a fresh chain renders.
 
 Three properties worth knowing:
 
@@ -166,6 +229,13 @@ go -C tools tool gnohome status    # what differs from the chain
 go -C tools tool gnohome tx        # the commands to fix that
 ```
 
+⚠️ **`gnohome preview` is the only preview of this realm that means anything.**
+The CI preview link deploys the package to a fresh dev chain, where there are no
+slots and `content/` never travels (the uploader skips sub-directories), so it
+always renders `defaultLayout` and is identical on every content-only PR.
+Confirmed on PR #225, whose preview reads "No layout slot yet" while the change
+was six slots. The bot cannot know this and links it anyway.
+
 The `packages` slot is generated, not written: it is a claim about what is
 deployed, and `contracts.json` already tracks that per network.
 
@@ -176,10 +246,14 @@ go -C tools tool gnohome packages > r/moul/home/content/packages.md
 
 See [`tools/gnohome/README.md`](../../../tools/gnohome/README.md).
 
-## First deploy
+## Deploying
 
-The realm is not on chain yet. `Set` needs the package there first, and a
-`private` package still needs `MsgAddPackage`, which no account session can sign.
+The realm **is live on mainnet** (`gnoland-1`), serving https://gno.land/u/moul.
+What follows applies to a redeploy, or to a first deploy on another network.
+
+⚠️ A redeploy of this path wipes every slot, so it is always followed by
+`gnohome tx -all`. `Set` needs the package on chain first, and a `private`
+package still needs `MsgAddPackage`, which no account session can sign.
 
 **mainnet deploys in two phases.** `gnoland-1` runs
 `vm:p:code_submission_policy = "inert"` (read back from the chain 2026-09-19), so
@@ -203,14 +277,21 @@ It never signs.
 
 ```sh
 gnopm publish -key moul moul/home     # read the report, read the script
-gnopm publish -key moul moul/home | sh
+gnopm publish -key moul moul/home > /tmp/deploy.sh && sh /tmp/deploy.sh
 ```
 
 Then the content, once the realm answers:
 
 ```sh
-go -C tools tool gnohome tx -all | sh
+go -C tools tool gnohome tx -all -batch /tmp/home.tx.json
+sh /tmp/home.tx.sh
 ```
+
+That writes one transaction holding every slot and prints the `gnokey sign`
+and `gnokey broadcast` to run: one passphrase instead of one per slot, and
+atomic. **Never pipe these into `sh`**: `gnokey` reads the passphrase from
+stdin and a pipe takes stdin away, so the prompt fails with
+`inappropriate ioctl for device`.
 
 Run those rather than copying commands from here: anything written down goes
 stale, and the tools recompute from the files as they are.
