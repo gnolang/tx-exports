@@ -4,12 +4,11 @@ This repository archives raw blockchain transaction data from Gno.land chains.
 
 ## Active chains (backed up continuously)
 
-| Chain                                             | Directory           | Frequency        |
-| ------------------------------------------------- | ------------------- | ---------------- |
-| [gno.land (mainnet)](https://gno.land)            | `mainnet.gno.land/` | every 4 hours    |
-| [onyx.gno.land (test17)](https://onyx.gno.land)   | `onyx.gno.land/`    | every 4 hours    |
-| [pearl.gno.land (test16)](https://pearl.gno.land) | `pearl.gno.land/`   | every 4 hours    |
-| [staging.gno.land](https://staging.gno.land)      | `staging.gno.land/` | daily, 18:00 UTC |
+| Chain                                           | Directory           | Frequency        |
+| ----------------------------------------------- | ------------------- | ---------------- |
+| [gno.land (mainnet)](https://gno.land)          | `mainnet.gno.land/` | every 4 hours    |
+| [onyx.gno.land (test17)](https://onyx.gno.land) | `onyx.gno.land/`    | every 4 hours    |
+| [staging.gno.land](https://staging.gno.land)    | `staging.gno.land/` | daily, 18:00 UTC |
 
 > **`gnoland1` is not `gnoland-1`.** Without the dash it is the retired betanet,
 > archived under `betanet.gno.land/`. With the dash it is mainnet, archived under
@@ -17,6 +16,7 @@ This repository archives raw blockchain transaction data from Gno.land chains.
 
 ## Historical chains (archived, no longer updated)
 
+- `pearl.gno.land/` — pearl.gno.land (test16)
 - `betanet.gno.land/` — betanet (chain id `gnoland1`), halted at block 3796411 on 2026-09-14
 - `sapphire.gno.land/` — sapphire.gno.land (test15)
 - `topaz.gno.land/` — topaz.gno.land (test14)
