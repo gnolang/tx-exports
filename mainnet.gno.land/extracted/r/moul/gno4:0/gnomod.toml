@@ -1,0 +1,3 @@
+module = "gno.land/r/moul/gno4"
+gno = "0.9"
+private = true

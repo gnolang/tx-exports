@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-65368
+66065
 ```
 
 ## addpkgs
@@ -11,27 +11,27 @@
 
 ## top realm calls
 ```
-   7763 "gno.land/r/gnoland/wugnot"
-   4529 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble3"
-   3404 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble4"
-   2736 "gno.land/r/gnoswap/gns"
-   2687 "gno.land/r/gnoswap/staker"
-   2456 "gno.land/r/gnoswap/position"
-   2278 "gno.land/r/gnoswap/router"
-   1540 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble5"
+   7780 "gno.land/r/gnoland/wugnot"
+   4535 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble3"
+   3511 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble4"
+   2739 "gno.land/r/gnoswap/gns"
+   2689 "gno.land/r/gnoswap/staker"
+   2460 "gno.land/r/gnoswap/position"
+   2286 "gno.land/r/gnoswap/router"
+   1650 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble5"
     762 "gno.land/r/gnoswap/gnft"
-    709 "gno.land/r/gnoswap/gov/staker"
-    578 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv3"
-    360 "gno.land/r/nym-thegnomic001/gnomic_airdrop"
+    710 "gno.land/r/gnoswap/gov/staker"
+    580 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv3"
+    363 "gno.land/r/nym-thegnomic001/gnomic_airdrop"
     235 "gno.land/r/g1ecsuj0q572jr0dhu29q9njtnmw03hyu7tyyvv6/kourt"
     213 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/kourtv3"
     134 "gno.land/r/gnoland/blog"
-    106 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble2"
+    108 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble2"
      98 "gno.land/r/nym-thegnomic001/gnomic"
      78 "gno.land/r/sys/namereg/v0"
      77 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble"
      61 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/wbubble"
-     49 "gno.land/r/gnops/valopers"
+     52 "gno.land/r/gnops/valopers"
      42 "gno.land/r/moul/x/reaper/v0"
      41 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/gems/v1"
      32 "gno.land/r/moul/home"
