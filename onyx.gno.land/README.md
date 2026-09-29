@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-85
+250
 ```
 
 ## addpkgs
@@ -11,9 +11,13 @@
 
 ## top realm calls
 ```
-     16 "gno.land/r/gnops/valopers"
-      3 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/bazaarv4"
+     66 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens3"
+     65 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens2"
+     35 "gno.land/r/gnops/valopers"
+      8 "gno.land/r/demo/profile"
+      5 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/bazaarv4"
       2 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens"
+      2 "gno.land/r/g1uhp2ct66xap97aqwdlutwvu39y5370gd62xpcs/tally"
       1 "gno.land/p/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/fee/v1"
       1 "gno.land/r/g14kd2xgnkc3vyvdvh0ar6tw7570wpzn3egtevr4/livecheck"
       1 "gno.land/r/g1ezf973jrnr23xkul0pleauz00ufuf0l6vjc0x7/probe"
