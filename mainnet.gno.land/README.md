@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-69321
+70386
 ```
 
 ## addpkgs
@@ -11,25 +11,25 @@
 
 ## top realm calls
 ```
-   8077 "gno.land/r/gnoland/wugnot"
-   4574 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble3"
-   3762 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble4"
-   2817 "gno.land/r/gnoswap/staker"
-   2802 "gno.land/r/gnoswap/gns"
-   2578 "gno.land/r/gnoswap/position"
-   2423 "gno.land/r/gnoswap/router"
-   1998 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble5"
-    799 "gno.land/r/gnoswap/gnft"
-    741 "gno.land/r/gnoswap/gov/staker"
-    592 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv3"
-    368 "gno.land/r/nym-thegnomic001/gnomic_airdrop"
+   8145 "gno.land/r/gnoland/wugnot"
+   4578 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble3"
+   3887 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble4"
+   2831 "gno.land/r/gnoswap/staker"
+   2806 "gno.land/r/gnoswap/gns"
+   2595 "gno.land/r/gnoswap/position"
+   2451 "gno.land/r/gnoswap/router"
+   2229 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble5"
+    803 "gno.land/r/gnoswap/gnft"
+    746 "gno.land/r/gnoswap/gov/staker"
+    600 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv3"
+    369 "gno.land/r/nym-thegnomic001/gnomic_airdrop"
     235 "gno.land/r/g1ecsuj0q572jr0dhu29q9njtnmw03hyu7tyyvv6/kourt"
     213 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/kourtv3"
-    141 "gno.land/r/nym-thegnomic001/gnomic"
+    144 "gno.land/r/nym-thegnomic001/gnomic"
     137 "gno.land/r/gnoland/blog"
     114 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble2"
-     92 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/wbubble"
-     79 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble"
+     95 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/wbubble"
+     80 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble"
      79 "gno.land/r/sys/namereg/v0"
      57 "gno.land/r/gnops/valopers"
      42 "gno.land/r/moul/x/reaper/v0"
