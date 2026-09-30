@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-483
+495
 ```
 
 ## addpkgs
@@ -14,7 +14,7 @@
      95 "gno.land/r/nym-alexiscolin000/gnogolf/golf"
      71 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens3"
      65 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens2"
-     57 "gno.land/r/gnops/valopers"
+     60 "gno.land/r/gnops/valopers"
      14 "gno.land/r/demo/profile"
      13 "gno.land/r/nym-mikecito001/connect4"
       9 "gno.land/r/g1g7dna0gp4nec5rza4q25htj0cjgswrxefp37ep/kewrchess_v2"
@@ -35,6 +35,7 @@
       1 "gno.land/r/g1ezf973jrnr23xkul0pleauz00ufuf0l6vjc0x7/probebad"
       1 "gno.land/r/g1ezf973jrnr23xkul0pleauz00ufuf0l6vjc0x7/spike"
       1 "gno.land/r/g1g7dna0gp4nec5rza4q25htj0cjgswrxefp37ep/kewrchess"
+      1 "gno.land/r/nym-mikecito001/connect4_v2"
 ```
 
 ## top faucet requesters
