@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-521
+549
 ```
 
 ## addpkgs
@@ -11,15 +11,16 @@
 
 ## top realm calls
 ```
-    106 "gno.land/r/nym-alexiscolin000/gnogolf/golf"
+    117 "gno.land/r/nym-alexiscolin000/gnogolf/golf"
      71 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens3"
+     66 "gno.land/r/gnops/valopers"
      65 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens2"
-     65 "gno.land/r/gnops/valopers"
      14 "gno.land/r/demo/profile"
      13 "gno.land/r/nym-mikecito001/connect4"
-      9 "gno.land/r/g1g7dna0gp4nec5rza4q25htj0cjgswrxefp37ep/kewrchess_v2"
+     11 "gno.land/r/g1g7dna0gp4nec5rza4q25htj0cjgswrxefp37ep/kewrchess_v2"
       5 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/bazaarv4"
-      3 "gno.land/r/sys/namereg/v0"
+      5 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/bazaarv5"
+      5 "gno.land/r/sys/namereg/v0"
       2 "gno.land/r/g1gkeydy90k4epq70sayc8s8ql5g767vrf342pl2/tally"
       2 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens"
       2 "gno.land/r/g1nqljuvmcdehspt3dlz9yt2ap92gmnrxj4zcy2v/tally"
@@ -35,6 +36,8 @@
       1 "gno.land/r/g1ezf973jrnr23xkul0pleauz00ufuf0l6vjc0x7/probebad"
       1 "gno.land/r/g1ezf973jrnr23xkul0pleauz00ufuf0l6vjc0x7/spike"
       1 "gno.land/r/g1g7dna0gp4nec5rza4q25htj0cjgswrxefp37ep/kewrchess"
+      1 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/gpushv2"
+      1 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/perk"
       1 "gno.land/r/nym-mikecito001/connect4_v2"
 ```
 
