@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-1109
+1123
 ```
 
 ## addpkgs
@@ -11,12 +11,12 @@
 
 ## top realm calls
 ```
-    503 "gno.land/r/nym-alexiscolin000/gnogolf/golf"
+    517 "gno.land/r/nym-alexiscolin000/gnogolf/golf"
      83 "gno.land/r/gnops/valopers"
      71 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens3"
      65 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens2"
      53 "gno.land/r/nym-mikecito001/connect4_v2"
-     30 "gno.land/r/sys/namereg/v0"
+     32 "gno.land/r/sys/namereg/v0"
      18 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/crowdfund"
      15 "gno.land/r/g1g7dna0gp4nec5rza4q25htj0cjgswrxefp37ep/kewrchess_v2"
      14 "gno.land/r/demo/profile"
