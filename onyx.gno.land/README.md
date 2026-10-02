@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-903
+936
 ```
 
 ## addpkgs
@@ -11,11 +11,12 @@
 
 ## top realm calls
 ```
-    409 "gno.land/r/nym-alexiscolin000/gnogolf/golf"
-     77 "gno.land/r/gnops/valopers"
+    413 "gno.land/r/nym-alexiscolin000/gnogolf/golf"
+     78 "gno.land/r/gnops/valopers"
      71 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens3"
      65 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens2"
      23 "gno.land/r/sys/namereg/v0"
+     18 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/crowdfund"
      15 "gno.land/r/g1g7dna0gp4nec5rza4q25htj0cjgswrxefp37ep/kewrchess_v2"
      14 "gno.land/r/demo/profile"
      13 "gno.land/r/nym-mikecito001/connect4"
@@ -31,6 +32,9 @@
       2 "gno.land/r/g1uqqqz9576j4hyttvq3890p9a6vqa32ut49gfn5/tally"
       1 "gno.land/p/g1g7dna0gp4nec5rza4q25htj0cjgswrxefp37ep/chess"
       1 "gno.land/p/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/fee/v1"
+      1 "gno.land/p/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/coinio"
+      1 "gno.land/p/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/duebook"
+      1 "gno.land/p/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/feeledger"
       1 "gno.land/p/nym-alexiscolin000/gnogolf/course"
       1 "gno.land/p/nym-alexiscolin000/gnogolf/physics"
       1 "gno.land/r/g14kd2xgnkc3vyvdvh0ar6tw7570wpzn3egtevr4/livecheck"
