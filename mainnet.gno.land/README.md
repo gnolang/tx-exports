@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-81760
+82568
 ```
 
 ## addpkgs
@@ -11,29 +11,29 @@
 
 ## top realm calls
 ```
-   8998 "gno.land/r/gnoland/wugnot"
-   4747 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble3"
-   4181 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble4"
-   3181 "gno.land/r/gnoswap/staker"
-   3101 "gno.land/r/gnoswap/gns"
-   2927 "gno.land/r/gnoswap/position"
-   2820 "gno.land/r/gnoswap/router"
-   2717 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble5"
-    880 "gno.land/r/gnoswap/gnft"
+   9015 "gno.land/r/gnoland/wugnot"
+   4867 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble3"
+   4183 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble4"
+   3193 "gno.land/r/gnoswap/staker"
+   3106 "gno.land/r/gnoswap/gns"
+   2938 "gno.land/r/gnoswap/position"
+   2830 "gno.land/r/gnoswap/router"
+   2728 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble5"
+    881 "gno.land/r/gnoswap/gnft"
     854 "gno.land/r/gnoswap/gov/staker"
     675 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv3"
-    400 "gno.land/r/nym-thegnomic001/gnomic_airdrop"
-    353 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens"
+    402 "gno.land/r/nym-thegnomic001/gnomic_airdrop"
+    362 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens"
     237 "gno.land/r/g1ecsuj0q572jr0dhu29q9njtnmw03hyu7tyyvv6/kourt"
     213 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/kourtv3"
-    203 "gno.land/r/nym-thegnomic001/gnomic"
-    155 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/wbubble"
-    138 "gno.land/r/gnoswap/launchpad"
+    205 "gno.land/r/nym-thegnomic001/gnomic"
+    157 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/wbubble"
+    153 "gno.land/r/gnoswap/launchpad"
     137 "gno.land/r/gnoland/blog"
-    123 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble2"
-     91 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble"
+    124 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble2"
+     92 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble"
      79 "gno.land/r/sys/namereg/v0"
-     60 "gno.land/r/gnops/valopers"
+     61 "gno.land/r/gnops/valopers"
      42 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/gems/v1"
      42 "gno.land/r/moul/x/reaper/v0"
      40 "gno.land/r/moul/home"
