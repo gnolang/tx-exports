@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-995
+1109
 ```
 
 ## addpkgs
@@ -11,12 +11,12 @@
 
 ## top realm calls
 ```
-    428 "gno.land/r/nym-alexiscolin000/gnogolf/golf"
-     80 "gno.land/r/gnops/valopers"
+    503 "gno.land/r/nym-alexiscolin000/gnogolf/golf"
+     83 "gno.land/r/gnops/valopers"
      71 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens3"
      65 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens2"
-     31 "gno.land/r/nym-mikecito001/connect4_v2"
-     25 "gno.land/r/sys/namereg/v0"
+     53 "gno.land/r/nym-mikecito001/connect4_v2"
+     30 "gno.land/r/sys/namereg/v0"
      18 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/crowdfund"
      15 "gno.land/r/g1g7dna0gp4nec5rza4q25htj0cjgswrxefp37ep/kewrchess_v2"
      14 "gno.land/r/demo/profile"
@@ -25,6 +25,7 @@
       5 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/bazaarv4"
       5 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/bazaarv5"
       4 "gno.land/r/g16sk4fetd76jdfh63sannkglvj657th2c38eep8/smoke/s30629e2c/counter"
+      4 "gno.land/r/g1eyr3hfdcup4rr5xlcd63vc5t64a03u9kecx2v0/forms"
       4 "gno.land/r/g1la8tv3pxn09atjnjjqgjx0j8vywxngecje5xa4/smoke/s2b7a7ddb/counter"
       2 "gno.land/r/g1gkeydy90k4epq70sayc8s8ql5g767vrf342pl2/tally"
       2 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens"
