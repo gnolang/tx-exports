@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-80205
+80484
 ```
 
 ## addpkgs
@@ -11,27 +11,27 @@
 
 ## top realm calls
 ```
-   8933 "gno.land/r/gnoland/wugnot"
-   4736 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble3"
+   8969 "gno.land/r/gnoland/wugnot"
+   4739 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble3"
    4180 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble4"
-   3126 "gno.land/r/gnoswap/staker"
-   3064 "gno.land/r/gnoswap/gns"
-   2881 "gno.land/r/gnoswap/position"
-   2782 "gno.land/r/gnoswap/router"
-   2701 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble5"
-    870 "gno.land/r/gnoswap/gnft"
-    832 "gno.land/r/gnoswap/gov/staker"
+   3145 "gno.land/r/gnoswap/staker"
+   3079 "gno.land/r/gnoswap/gns"
+   2898 "gno.land/r/gnoswap/position"
+   2795 "gno.land/r/gnoswap/router"
+   2712 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble5"
+    878 "gno.land/r/gnoswap/gnft"
+    837 "gno.land/r/gnoswap/gov/staker"
     675 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv3"
     399 "gno.land/r/nym-thegnomic001/gnomic_airdrop"
     351 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens"
     237 "gno.land/r/g1ecsuj0q572jr0dhu29q9njtnmw03hyu7tyyvv6/kourt"
     213 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/kourtv3"
     198 "gno.land/r/nym-thegnomic001/gnomic"
-    150 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/wbubble"
+    152 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/wbubble"
     137 "gno.land/r/gnoland/blog"
-    127 "gno.land/r/gnoswap/launchpad"
-    122 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble2"
-     88 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble"
+    131 "gno.land/r/gnoswap/launchpad"
+    123 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble2"
+     91 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble"
      79 "gno.land/r/sys/namereg/v0"
      60 "gno.land/r/gnops/valopers"
      42 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/gems/v1"
