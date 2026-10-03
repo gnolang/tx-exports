@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-1884
+1901
 ```
 
 ## addpkgs
@@ -12,8 +12,8 @@
 ## top realm calls
 ```
     712 "gno.land/r/nym-alexiscolin000/gnogolf/golf/v2"
-    536 "gno.land/r/nym-alexiscolin000/gnogolf/golf"
-     84 "gno.land/r/gnops/valopers"
+    543 "gno.land/r/nym-alexiscolin000/gnogolf/golf"
+     86 "gno.land/r/gnops/valopers"
      71 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens3"
      65 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens2"
      53 "gno.land/r/nym-mikecito001/connect4_v2"
@@ -29,6 +29,7 @@
       4 "gno.land/r/g16sk4fetd76jdfh63sannkglvj657th2c38eep8/smoke/s30629e2c/counter"
       4 "gno.land/r/g1eyr3hfdcup4rr5xlcd63vc5t64a03u9kecx2v0/forms"
       4 "gno.land/r/g1la8tv3pxn09atjnjjqgjx0j8vywxngecje5xa4/smoke/s2b7a7ddb/counter"
+      4 "gno.land/r/g1lwmf9enzrekvx4ukae5ckkkn8ej33mtqll0t3c/smoke/s49ab5efb/counter"
       4 "gno.land/r/g1nufzhlvkr7ep9m9t52mk9jfymtn7ywclsaydf8/smoke/s90d530f9/counter"
       2 "gno.land/r/g1gkeydy90k4epq70sayc8s8ql5g767vrf342pl2/tally"
       2 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens"
