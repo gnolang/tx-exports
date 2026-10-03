@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-1163
+1884
 ```
 
 ## addpkgs
@@ -11,7 +11,8 @@
 
 ## top realm calls
 ```
-    533 "gno.land/r/nym-alexiscolin000/gnogolf/golf"
+    712 "gno.land/r/nym-alexiscolin000/gnogolf/golf/v2"
+    536 "gno.land/r/nym-alexiscolin000/gnogolf/golf"
      84 "gno.land/r/gnops/valopers"
      71 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens3"
      65 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens2"
@@ -50,6 +51,7 @@
       1 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/gpushv2"
       1 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/perk"
       1 "gno.land/r/g1sl6fyq6mrc3wydt8xluhxx4aqsudpp9vhv6g2a/gnotif"
+      1 "gno.land/r/nym-alexiscolin000/gnogolf/store"
 ```
 
 ## top faucet requesters
