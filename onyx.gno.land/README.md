@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-2520
+2582
 ```
 
 ## addpkgs
@@ -11,25 +11,26 @@
 
 ## top realm calls
 ```
-    738 "gno.land/r/nym-alexiscolin000/gnogolf/golf/v2"
+    743 "gno.land/r/nym-alexiscolin000/gnogolf/golf/v2"
     545 "gno.land/r/nym-alexiscolin000/gnogolf/golf"
     101 "gno.land/r/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/shots"
-     90 "gno.land/r/gnops/valopers"
+     91 "gno.land/r/gnops/valopers"
+     72 "gno.land/r/nym-mikecito001/connect4_v2"
      71 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens3"
      65 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens2"
-     53 "gno.land/r/nym-mikecito001/connect4_v2"
-     38 "gno.land/r/sys/namereg/v0"
+     39 "gno.land/r/sys/namereg/v0"
+     28 "gno.land/r/nym-moultest123/x/vm/riscvdemo/v0"
+     18 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/fish2"
      18 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/crowdfund"
-     17 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/fish2"
      15 "gno.land/r/g1g7dna0gp4nec5rza4q25htj0cjgswrxefp37ep/kewrchess_v2"
      14 "gno.land/r/demo/profile"
      13 "gno.land/r/nym-mikecito001/connect4"
-     13 "gno.land/r/nym-moultest123/x/vm/riscvdemo/v0"
      12 "gno.land/r/g1u97n45s4s6q7vn5clr8339pv4up455hnqn4aff/gnodice"
+     11 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/budgets"
       9 "gno.land/r/g1sl6fyq6mrc3wydt8xluhxx4aqsudpp9vhv6g2a/gnotif/pingpong"
       9 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/subscriptions"
+      7 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game"
       7 "gno.land/r/g13rqvks880v0hmlfepcj0kkudq0js38d3pc5k6a/pingpong/v0"
-      6 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/budgets"
       5 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/bazaarv4"
       5 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/bazaarv5"
       5 "gno.land/r/g1rzgxl6njyu4c2x89gxvaa9cswrt73rz8mlp7l6/pingpong/v0"
@@ -39,6 +40,7 @@
       4 "gno.land/r/g1lwmf9enzrekvx4ukae5ckkkn8ej33mtqll0t3c/smoke/s49ab5efb/counter"
       4 "gno.land/r/g1nufzhlvkr7ep9m9t52mk9jfymtn7ywclsaydf8/smoke/s90d530f9/counter"
       4 "gno.land/r/g1phjndp6694d7ufa847tyq8sufnzaww7yj3a4hh/smoke/sd70e23eb/counter"
+      3 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game2"
       3 "gno.land/r/g18e6q9hd6ntyjpcakhm08w3xcwhp4m4nwwsz994/smoke/se0114543/counter"
       3 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/fish"
       2 "gno.land/r/g1gkeydy90k4epq70sayc8s8ql5g767vrf342pl2/tally"
@@ -49,6 +51,7 @@
       2 "gno.land/r/g1uqqqz9576j4hyttvq3890p9a6vqa32ut49gfn5/tally"
       2 "gno.land/r/nym-moultest123/x/daily/markovdemo/v0"
       2 "gno.land/r/nym-moultest123/x/daily/triedemo/v0"
+      2 "gno.land/r/nym-moultest123/x/vm/bfdemo/v0"
       1 "gno.land/p/g1g7dna0gp4nec5rza4q25htj0cjgswrxefp37ep/chess"
       1 "gno.land/p/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/penalty/physics/v0"
       1 "gno.land/p/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/penalty/v0"
@@ -177,7 +180,8 @@
       1 "gno.land/p/nym-moultest123/xmath/v0"
       1 "gno.land/p/nym-moultest123/xmath/v1"
       1 "gno.land/p/nym-moultest123/zones/v0"
-      1 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game"
+      1 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/minter"
+      1 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/minter2"
       1 "gno.land/r/g13rqvks880v0hmlfepcj0kkudq0js38d3pc5k6a/gnotif/v0"
       1 "gno.land/r/g14kd2xgnkc3vyvdvh0ar6tw7570wpzn3egtevr4/livecheck"
       1 "gno.land/r/g1ezf973jrnr23xkul0pleauz00ufuf0l6vjc0x7/probe"
@@ -416,7 +420,6 @@
       1 "gno.land/r/nym-moultest123/x/upgrade/store/root/v0"
       1 "gno.land/r/nym-moultest123/x/upgrade/wrap/v0"
       1 "gno.land/r/nym-moultest123/x/upgrade/wrap/v1"
-      1 "gno.land/r/nym-moultest123/x/vm/bfdemo/v0"
       1 "gno.land/r/nym-moultest123/x/wesh/v0"
       1 "gno.land/r/nym-moultest123/x/wiki/v0"
       1 "gno.land/r/nym-moultest123/zones/v0"

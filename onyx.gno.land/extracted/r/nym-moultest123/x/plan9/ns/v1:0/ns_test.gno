@@ -1,0 +1,299 @@
+package ns
+
+import (
+	"strconv"
+	"strings"
+	"testing"
+
+	"gno.land/p/nt/testutils/v0"
+	"gno.land/p/nt/uassert/v0"
+
+	ninep "gno.land/p/nym-moultest123/x/plan9/ninep/v0"
+	synfs "gno.land/p/nym-moultest123/x/plan9/synfs/v0"
+)
+
+// probe is a tiny read-only server, standing in for another realm's tree.
+func probe(name, contents string) ninep.File {
+	t := synfs.New(name, "sys", func() int64 { return 1 })
+	t.Root().Add("value", func() string { return contents })
+	return t.Root()
+}
+
+func TestDemoNamespaceIsSeeded(t *testing.T) {
+	seedDemo()
+	out, err := Run(DemoKey, "ls -u /bin")
+	if err != nil {
+		t.Fatalf("ls: %v", err)
+	}
+	if out != "ls\nrc\n" {
+		t.Errorf("the demo /bin should be a union of two directories: %q", out)
+	}
+	if got := Namespace(DemoKey); !strings.Contains(got, "bind -ac /usr/glenda/bin /bin") {
+		t.Errorf("mount table: %q", got)
+	}
+	if got, _ := Run(DemoKey, "cat /tmp/greeting"); got != "hello from a namespace\n" {
+		t.Errorf("greeting: %q", got)
+	}
+}
+
+func TestRunIsReadOnly(t *testing.T) {
+	seedDemo()
+	if _, err := Run(DemoKey, "echo x > /tmp/f"); err == nil {
+		t.Fatal("Render's shell must refuse a write")
+	}
+	if _, err := Run(DemoKey, "rm /tmp/greeting"); err == nil {
+		t.Fatal("Render's shell must refuse a remove")
+	}
+	if _, err := Run("nobody", "ls /"); err == nil {
+		t.Fatal("an unknown namespace should not be created by a read")
+	}
+}
+
+func TestPostAndBind(cur realm, t *testing.T) {
+	services.Remove("probe")
+	Post(cross(cur), "probe", probe("probe", "42"))
+
+	found := false
+	for _, s := range Services() {
+		if s == "probe" {
+			found = true
+		}
+	}
+	if !found {
+		t.Fatalf("probe is not in /srv: %v", Services())
+	}
+
+	// A fresh namespace sees it through /srv without importing anything.
+	spaces.Remove("tester")
+	spaceFor("tester")
+	defer spaces.Remove("tester")
+	out, err := Run("tester", "cat /srv/probe/value")
+	if err != nil {
+		t.Fatalf("cat through /srv: %v", err)
+	}
+	if out != "42" {
+		t.Errorf("got %q, want 42", out)
+	}
+	services.Remove("probe")
+}
+
+func TestExecWritesToTheCallersOwnNamespace(cur realm, t *testing.T) {
+	alice := testutils.TestAddress("alice")
+	bob := testutils.TestAddress("bob")
+	spaces.Remove(alice.String())
+	spaces.Remove(bob.String())
+
+	testing.SetRealm(testing.NewUserRealm(alice))
+	Exec(cross(cur), "echo 'alice was here' > /tmp/note")
+
+	testing.SetRealm(testing.NewUserRealm(bob))
+	Exec(cross(cur), "echo 'bob was here' > /tmp/note")
+
+	got, err := Run(alice.String(), "cat /tmp/note")
+	if err != nil {
+		t.Fatalf("alice: %v", err)
+	}
+	if got != "alice was here\n" {
+		t.Errorf("alice's namespace: %q", got)
+	}
+	if got, _ = Run(bob.String(), "cat /tmp/note"); got != "bob was here\n" {
+		t.Errorf("bob's namespace: %q", got)
+	}
+
+	// Reset throws a namespace away; the next use rebuilds the default.
+	testing.SetRealm(testing.NewUserRealm(alice))
+	Reset(cross(cur))
+	if _, err := Run(alice.String(), "cat /tmp/note"); err == nil {
+		t.Error("the namespace should be gone after Reset")
+	}
+	spaces.Remove(alice.String())
+	spaces.Remove(bob.String())
+}
+
+func TestExecBindsIntoTheCallersNamespace(cur realm, t *testing.T) {
+	services.Remove("probe")
+	Post(cross(cur), "probe", probe("probe", "42"))
+	defer services.Remove("probe")
+
+	erin := testutils.TestAddress("erin")
+	spaces.Remove(erin.String())
+	testing.SetRealm(testing.NewUserRealm(erin))
+	Exec(cross(cur), "bind /srv/probe /dev")
+
+	if got := mustRun(t, erin.String(), "cat /dev/value"); got != "42" {
+		t.Errorf("read through the mount: %q", got)
+	}
+	if ns := Namespace(erin.String()); !strings.Contains(ns, "bind /srv/probe /dev") {
+		t.Errorf("mount table: %q", ns)
+	}
+	spaces.Remove(erin.String())
+}
+
+func TestSrvListingUsesThePostedName(cur realm, t *testing.T) {
+	services.Remove("aliased")
+	// The server calls its own root "probe"; /srv must show it as "aliased".
+	Post(cross(cur), "aliased", probe("probe", "x"))
+	defer services.Remove("aliased")
+
+	spaces.Remove("lister")
+	spaceFor("lister")
+	out := mustRun(t, "lister", "ls /srv")
+	if !strings.Contains(out, "aliased") {
+		t.Errorf("ls /srv: %q", out)
+	}
+	if strings.Contains(out, "probe") {
+		t.Errorf("/srv leaked the server's own root name: %q", out)
+	}
+	spaces.Remove("lister")
+}
+
+func mustRun(t *testing.T, key, line string) string {
+	t.Helper()
+	out, err := Run(key, line)
+	if err != nil {
+		t.Fatalf("%s: %v", line, err)
+	}
+	return out
+}
+
+// --- the boundary. Three properties the suite would be unsafe without. -------
+
+// A /srv name belongs to the realm that posted it: first come, first served,
+// and then locked.
+func TestPostRejectsASecondOwner(cur realm, t *testing.T) {
+	services.Remove("taken")
+	Post(cross(cur), "taken", probe("taken", "first"))
+	defer services.Remove("taken")
+
+	testing.SetRealm(testing.NewCodeRealm("gno.land/r/other/thing/v0"))
+	uassert.AbortsWithMessage(t, cur,
+		"post: taken is already posted by gno.land/r/nym-moultest123/x/plan9/ns/v1",
+		func() { Post(cross(cur), "taken", probe("taken", "second")) })
+}
+
+// Grafting another realm's tree into your namespace gives you reads and
+// nothing else. ninep.File has no mutating method, so there is no route from a
+// mount to a write against the realm that posted it.
+func TestMountedTreesAreReadOnly(cur realm, t *testing.T) {
+	services.Remove("probe")
+	Post(cross(cur), "probe", probe("probe", "read me"))
+	defer services.Remove("probe")
+
+	frank := testutils.TestAddress("frank")
+	spaces.Remove(frank.String())
+	defer spaces.Remove(frank.String())
+
+	testing.SetRealm(testing.NewUserRealm(frank))
+	Exec(cross(cur), "bind /srv/probe /dev")
+	uassert.Equal(t, "read me", mustRun(t, frank.String(), "cat /dev/value"))
+	uassert.AbortsWithMessage(t, cur, "echo: read-only file server",
+		func() { Exec(cross(cur), "echo nope > /dev/value") })
+}
+
+// A command line stops at the first error and the error leaves the realm as an
+// abort, so a half-applied Exec reverts with its transaction instead of
+// leaving a namespace nobody asked for.
+func TestExecAbortsAtTheFirstError(cur realm, t *testing.T) {
+	grace := testutils.TestAddress("grace")
+	spaces.Remove(grace.String())
+	defer spaces.Remove(grace.String())
+
+	testing.SetRealm(testing.NewUserRealm(grace))
+	uassert.AbortsWithMessage(t, cur, "cat: file does not exist",
+		func() { Exec(cross(cur), "echo ok > /tmp/a; cat /absent; echo never > /tmp/b") })
+}
+
+func TestRenderUnknownCommand(t *testing.T) {
+	if got := Render("nope/x"); !strings.Contains(got, "404") {
+		t.Errorf("got %q", got)
+	}
+}
+
+// ?u= is the only caller-controlled part of every link the pages build, so a
+// value that is neither an address nor the demo key is refused outright.
+func TestRenderRefusesANonAddressNamespace(t *testing.T) {
+	out := Render("ns?u=x%29%20[evil](https://example)")
+	uassert.True(t, strings.Contains(out, "# 404"), out)
+	uassert.False(t, strings.Contains(out, "[evil](https://example)"), out)
+}
+
+// A file's contents are its owner's text. A line of backticks in one used to
+// close the hand-written fence around `cat`'s output, and everything after it
+// rendered as live markdown on the realm's own page.
+func TestCatOutputCannotCloseItsFence(cur realm, t *testing.T) {
+	who := testutils.TestAddress("fencer")
+	testing.SetRealm(testing.NewUserRealm(who))
+	Exec(cross(cur), "echo '```' > /tmp/f; echo '[claim](https://evil.example)' >> /tmp/f")
+	out := Render("cat/tmp/f?u=" + who.String())
+	// md.CodeBlock picks a fence longer than any run of backticks inside, so
+	// the user's three backticks and the link after them stay inside the block.
+	uassert.True(t, strings.Contains(out, "````\n```\n[claim](https://evil.example)\n````\n"), out)
+}
+
+// The command name and the rest of the path come from the URL: escaped in the
+// heading and in the unknown-command page.
+func TestPathDerivedTextIsEscaped(t *testing.T) {
+	for _, path := range []string{"x` [claim](https://evil.example) `", "cat/x` [claim](https://evil.example) `"} {
+		out := Render(path)
+		uassert.False(t, strings.Contains(out, "[claim](https://evil.example)"), out)
+	}
+}
+
+// A service name is chosen by whichever realm posts it, and ValidName refuses
+// only "", ".", ".." and "/": the /srv table escapes it as a cell.
+func TestServiceNameIsTableSafe(cur realm, t *testing.T) {
+	name := "x` | [claim](https://evil.example) |"
+	services.Set(name, &service{owner: "gno.land/r/someone/poster"})
+	defer services.Remove(name)
+	out := Render("")
+	uassert.False(t, strings.Contains(out, "[claim](https://evil.example)"), out)
+}
+
+// A path route reads what it names: the rest of the path is one quoted
+// argument, so a ";" in it is part of the file name and runs nothing.
+func TestPathRouteIsOneArgument(t *testing.T) {
+	// Unquoted, rc would cat /tmp/greeting and then run the second command;
+	// quoted, it looks for one file with a ";" in its name and finds none.
+	out := Render("cat/tmp/greeting;echo")
+	uassert.True(t, strings.Contains(out, "cat: file does not exist"), out)
+	uassert.Equal(t, "'/a;b'", quote("/a;b"))
+}
+
+// Namespaces and services are bounded, and the home page lists a fixed number.
+func TestNamespacesAndServicesAreBounded(cur realm, t *testing.T) {
+	var added []string
+	for i := 0; spaces.Size() < MaxNamespaces; i++ {
+		k := testutils.TestAddress("ns" + strconv.Itoa(i)).String()
+		if spaces.Get(k) == nil {
+			spaces.Set(k, newSpace(k))
+			added = append(added, k)
+		}
+	}
+	defer func() {
+		for _, k := range added {
+			spaces.Remove(k)
+		}
+	}()
+	uassert.PanicsContains(t, cur, "full at", func() { spaceFor(testutils.TestAddress("one-more").String()) })
+	uassert.Equal(t, HomeRecent, strings.Count(Render(""), "](/r/nym-moultest123/x/plan9/ns/v1:ns?u="))
+}
+
+// /srv is bounded: once MaxServices names are posted, a new one is refused,
+// and re-posting is not how a realm gets around it.
+func TestServicesAreBounded(cur realm, t *testing.T) {
+	var added []string
+	for i := 0; services.Size() < MaxServices; i++ {
+		name := "svc" + strconv.Itoa(i)
+		if services.Get(name) == nil {
+			services.Set(name, &service{owner: "gno.land/r/someone/poster"})
+			added = append(added, name)
+		}
+	}
+	defer func() {
+		for _, n := range added {
+			services.Remove(n)
+		}
+	}()
+	testing.SetRealm(testing.NewCodeRealm("gno.land/r/someone/late"))
+	uassert.AbortsContains(t, cur, "/srv is full", func() { Post(cross(cur), "late", probe("late", "x")) })
+}
