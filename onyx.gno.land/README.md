@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-2032
+2087
 ```
 
 ## addpkgs
@@ -11,13 +11,13 @@
 
 ## top realm calls
 ```
-    731 "gno.land/r/nym-alexiscolin000/gnogolf/golf/v2"
+    732 "gno.land/r/nym-alexiscolin000/gnogolf/golf/v2"
     545 "gno.land/r/nym-alexiscolin000/gnogolf/golf"
      86 "gno.land/r/gnops/valopers"
+     79 "gno.land/r/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/shots"
      71 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens3"
      65 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens2"
      53 "gno.land/r/nym-mikecito001/connect4_v2"
-     43 "gno.land/r/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/shots"
      37 "gno.land/r/sys/namereg/v0"
      18 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/crowdfund"
      15 "gno.land/r/g1g7dna0gp4nec5rza4q25htj0cjgswrxefp37ep/kewrchess_v2"
@@ -35,7 +35,9 @@
       4 "gno.land/r/g1lwmf9enzrekvx4ukae5ckkkn8ej33mtqll0t3c/smoke/s49ab5efb/counter"
       4 "gno.land/r/g1nufzhlvkr7ep9m9t52mk9jfymtn7ywclsaydf8/smoke/s90d530f9/counter"
       4 "gno.land/r/g1phjndp6694d7ufa847tyq8sufnzaww7yj3a4hh/smoke/sd70e23eb/counter"
+      3 "gno.land/r/g18e6q9hd6ntyjpcakhm08w3xcwhp4m4nwwsz994/smoke/se0114543/counter"
       3 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/fish"
+      2 "gno.land/r/g13rqvks880v0hmlfepcj0kkudq0js38d3pc5k6a/pingpong/v0"
       2 "gno.land/r/g1gkeydy90k4epq70sayc8s8ql5g767vrf342pl2/tally"
       2 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens"
       2 "gno.land/r/g1nqljuvmcdehspt3dlz9yt2ap92gmnrxj4zcy2v/tally"
@@ -54,12 +56,15 @@
       1 "gno.land/p/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/spendbook"
       1 "gno.land/p/nym-alexiscolin000/gnogolf/course"
       1 "gno.land/p/nym-alexiscolin000/gnogolf/physics"
+      1 "gno.land/r/g13rqvks880v0hmlfepcj0kkudq0js38d3pc5k6a/gnotif/v0"
       1 "gno.land/r/g14kd2xgnkc3vyvdvh0ar6tw7570wpzn3egtevr4/livecheck"
       1 "gno.land/r/g1ezf973jrnr23xkul0pleauz00ufuf0l6vjc0x7/probe"
       1 "gno.land/r/g1ezf973jrnr23xkul0pleauz00ufuf0l6vjc0x7/probebad"
       1 "gno.land/r/g1ezf973jrnr23xkul0pleauz00ufuf0l6vjc0x7/spike"
       1 "gno.land/r/g1g7dna0gp4nec5rza4q25htj0cjgswrxefp37ep/kewrchess"
       1 "gno.land/r/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/shots/impl/v1"
+      1 "gno.land/r/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/shots/impl/v2"
+      1 "gno.land/r/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/shots/impl/v3"
       1 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/gpushv2"
       1 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/perk"
       1 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/party"
