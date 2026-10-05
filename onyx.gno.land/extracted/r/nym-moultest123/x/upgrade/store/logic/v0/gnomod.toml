@@ -1,0 +1,3 @@
+module = "gno.land/r/nym-moultest123/x/upgrade/store/logic/v0"
+gno = "0.9"
+# public: imported by .../store/logic/v1, whose test drives the handover between them
