@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-2582
+2585
 ```
 
 ## addpkgs
@@ -14,7 +14,7 @@
     743 "gno.land/r/nym-alexiscolin000/gnogolf/golf/v2"
     545 "gno.land/r/nym-alexiscolin000/gnogolf/golf"
     101 "gno.land/r/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/shots"
-     91 "gno.land/r/gnops/valopers"
+     92 "gno.land/r/gnops/valopers"
      72 "gno.land/r/nym-mikecito001/connect4_v2"
      71 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens3"
      65 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens2"
