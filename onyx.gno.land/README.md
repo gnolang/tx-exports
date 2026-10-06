@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-2809
+2813
 ```
 
 ## addpkgs
@@ -47,6 +47,7 @@
       3 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game2"
       3 "gno.land/r/g18e6q9hd6ntyjpcakhm08w3xcwhp4m4nwwsz994/smoke/se0114543/counter"
       3 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/fish"
+      2 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game10"
       2 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game4"
       2 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game5"
       2 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game6"
