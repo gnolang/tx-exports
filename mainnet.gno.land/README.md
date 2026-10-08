@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-112220
+112940
 ```
 
 ## addpkgs
@@ -11,22 +11,22 @@
 
 ## top realm calls
 ```
-  10219 "gno.land/r/gnoland/wugnot"
-   7573 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble4"
-   6398 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble5"
-   5267 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble3"
-   3753 "gno.land/r/gnoswap/staker"
-   3491 "gno.land/r/gnoswap/gns"
-   3478 "gno.land/r/gnoswap/position"
-   3358 "gno.land/r/gnoswap/router"
-   3355 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble6"
+  10228 "gno.land/r/gnoland/wugnot"
+   7684 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble4"
+   6511 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble5"
+   5268 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble3"
+   3758 "gno.land/r/gnoswap/staker"
+   3492 "gno.land/r/gnoswap/gns"
+   3481 "gno.land/r/gnoswap/position"
+   3472 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble6"
+   3363 "gno.land/r/gnoswap/router"
    1045 "gno.land/r/gnoswap/gov/staker"
-   1025 "gno.land/r/gnoswap/gnft"
-    893 "gno.land/r/gnoswap/launchpad"
+   1026 "gno.land/r/gnoswap/gnft"
+    926 "gno.land/r/gnoswap/launchpad"
     782 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv3"
     510 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens"
     426 "gno.land/r/nym-thegnomic001/gnomic_airdrop"
-    362 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/wbubble"
+    371 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/wbubble"
     238 "gno.land/r/g1ecsuj0q572jr0dhu29q9njtnmw03hyu7tyyvv6/kourt"
     233 "gno.land/r/nym-thegnomic001/gnomic"
     213 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/kourtv3"
@@ -292,6 +292,12 @@
       1 "gno.land/p/moul/xmath/v1"
       1 "gno.land/p/moul/zones/v0"
       1 "gno.land/p/samcrew/avl"
+      1 "gno.land/p/samcrew/launchpad/currency/v1"
+      1 "gno.land/p/samcrew/launchpad/fairmath/v1"
+      1 "gno.land/p/samcrew/launchpad/merkle/v1"
+      1 "gno.land/p/samcrew/launchpad/meta/v1"
+      1 "gno.land/p/samcrew/launchpad/safemath/v1"
+      1 "gno.land/p/samcrew/launchpad/vesting/v1"
       1 "gno.land/p/samcrew/memba_weighted_host"
       1 "gno.land/p/samcrew/memba_weighted_policy"
       1 "gno.land/r/g17khqpukees4237dtn3astzapmp462vjhsz6st4/settlers/avatar"
@@ -547,6 +553,13 @@
       1 "gno.land/r/samcrew/escrow_v3"
       1 "gno.land/r/samcrew/escrow_v4"
       1 "gno.land/r/samcrew/home"
+      1 "gno.land/r/samcrew/launchpad/config/v1"
+      1 "gno.land/r/samcrew/launchpad/curation/v1"
+      1 "gno.land/r/samcrew/launchpad/drops/v1"
+      1 "gno.land/r/samcrew/launchpad/market/v1"
+      1 "gno.land/r/samcrew/launchpad/nft/v1"
+      1 "gno.land/r/samcrew/launchpad/sales/v1"
+      1 "gno.land/r/samcrew/launchpad/tokens/v1"
       1 "gno.land/r/samcrew/memba_dao"
       1 "gno.land/r/samcrew/space_invaders"
 ```
