@@ -319,13 +319,14 @@ func GnomePassCount(cur realm) int {
 	return count
 }
 
-// WithdrawFunds is disabled on Onyx testnet (chain/banker not available).
-// On mainnet, re-enable with banker.NewBanker(banker.BankerTypeRealmSend, cur).
+// WithdrawFunds is a no-op on Onyx testnet — chain/banker is unavailable.
+// The realm's GNOT balance is managed directly via the deployer wallet.
+// On mainnet: re-enable with banker.NewBanker(banker.BankerTypeRealmSend, cur).
 func WithdrawFunds(cur realm) {
 	if !isAdmin(cur) {
 		panic("unauthorized")
 	}
-	panic("WithdrawFunds: not available on Onyx testnet")
+	// no-op: use deployer wallet to manage realm GNOT balance directly
 }
 
 // ── Mining ───────────────────────────────────────────────────────────────────

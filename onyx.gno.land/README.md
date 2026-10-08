@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-3623
+4054
 ```
 
 ## addpkgs
@@ -13,16 +13,19 @@
 ```
     747 "gno.land/r/nym-alexiscolin000/gnogolf/golf/v2"
     545 "gno.land/r/nym-alexiscolin000/gnogolf/golf"
+    244 "gno.land/r/nym-alexiscolin000/gnoradio/catalog/v1"
     111 "gno.land/r/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/shots"
     100 "gno.land/r/nym-mikecito001/connect4_v2"
      98 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/minter3"
      92 "gno.land/r/gnops/valopers"
      88 "gno.land/r/samcrew/launchpad/sales/v1"
      71 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens3"
+     69 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game16"
      65 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens2"
-     62 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game16"
      56 "gno.land/r/g1a9g8nu3m0xgx58hh36fph49e2xkqm9axlxuf5z/memba_gov"
-     40 "gno.land/r/sys/namereg/v0"
+     55 "gno.land/r/samcrew/connect4"
+     54 "gno.land/r/nym-alexiscolin000/gnoradio/radio/v1"
+     41 "gno.land/r/sys/namereg/v0"
      33 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game3"
      29 "gno.land/r/samcrew/launchpad/drops/v1"
      28 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/budgets"
@@ -31,6 +34,7 @@
      24 "gno.land/r/samcrew/launchpad/config/v1"
      23 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/fish2"
      22 "gno.land/r/g1a9g8nu3m0xgx58hh36fph49e2xkqm9axlxuf5z/memba_bridge_v1"
+     21 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game27"
      21 "gno.land/r/samcrew/launchpad/market/v1"
      20 "gno.land/r/samcrew/launchpad/nft/v1"
      18 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/crowdfund"
@@ -82,7 +86,6 @@
       3 "gno.land/r/g1nmhpk7x6rjh0e43x9d6pw84qy3wu47g8lxw9kp/sonotone"
       3 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/arcade/duel"
       3 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/beacon"
-      3 "gno.land/r/samcrew/connect4"
       3 "gno.land/r/samcrew/memba_reviews_v2"
       2 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game10"
       2 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game12"
@@ -135,6 +138,12 @@
       1 "gno.land/p/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/spendbook"
       1 "gno.land/p/nym-alexiscolin000/gnogolf/course"
       1 "gno.land/p/nym-alexiscolin000/gnogolf/physics"
+      1 "gno.land/p/nym-alexiscolin000/gnoradio/blocks/v0"
+      1 "gno.land/p/nym-alexiscolin000/gnoradio/role/v0"
+      1 "gno.land/p/nym-alexiscolin000/gnoradio/safe/v0"
+      1 "gno.land/p/nym-alexiscolin000/gnoradio/store/v0"
+      1 "gno.land/p/nym-alexiscolin000/gnoradio/svg/v0"
+      1 "gno.land/p/nym-alexiscolin000/gnoradio/text/v0"
       1 "gno.land/p/nym-moultest123/addrset/v0"
       1 "gno.land/p/nym-moultest123/addrset/v1"
       1 "gno.land/p/nym-moultest123/agents/commit/v0"
@@ -251,6 +260,7 @@
       1 "gno.land/p/nym-moultest123/xmath/v0"
       1 "gno.land/p/nym-moultest123/xmath/v1"
       1 "gno.land/p/nym-moultest123/zones/v0"
+      1 "gno.land/p/nym-vikbez000/nightsky/v1"
       1 "gno.land/p/samcrew/avl"
       1 "gno.land/p/samcrew/daoauth"
       1 "gno.land/p/samcrew/launchpad/currency/v1"
@@ -293,6 +303,10 @@
       1 "gno.land/r/g1rzgxl6njyu4c2x89gxvaa9cswrt73rz8mlp7l6/gnotif/v0"
       1 "gno.land/r/g1sl6fyq6mrc3wydt8xluhxx4aqsudpp9vhv6g2a/gnotif"
       1 "gno.land/r/nym-alexiscolin000/gnogolf/store"
+      1 "gno.land/r/nym-alexiscolin000/gnoradio/data"
+      1 "gno.land/r/nym-alexiscolin000/gnoradio/home/v1"
+      1 "gno.land/r/nym-alexiscolin000/gnoradio/tickets/nft"
+      1 "gno.land/r/nym-alexiscolin000/gnoradio/tickets/v1"
       1 "gno.land/r/nym-moultest123/agents/capwallet/v0"
       1 "gno.land/r/nym-moultest123/agents/gnomem/v0"
       1 "gno.land/r/nym-moultest123/agents/jury/v0"
@@ -518,6 +532,9 @@
       1 "gno.land/r/nym-moultest123/x/wesh/v0"
       1 "gno.land/r/nym-moultest123/x/wiki/v0"
       1 "gno.land/r/nym-moultest123/zones/v0"
+      1 "gno.land/r/nym-vikbez000/nightsky"
+      1 "gno.land/r/nym-vikbez000/nightsky/v1"
+      1 "gno.land/r/nym-vikbez000/telescope"
       1 "gno.land/r/samcrew/escrow_v4"
       1 "gno.land/r/samcrew/gnobuilders_badges_v2"
       1 "gno.land/r/samcrew/memba_appstore_v3"
