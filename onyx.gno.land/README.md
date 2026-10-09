@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-4631
+4652
 ```
 
 ## addpkgs
@@ -14,7 +14,7 @@
     747 "gno.land/r/nym-alexiscolin000/gnogolf/golf/v2"
     545 "gno.land/r/nym-alexiscolin000/gnogolf/golf"
     460 "gno.land/r/nym-alexiscolin000/gnoradio/catalog/v1"
-    196 "gno.land/r/nym-alexiscolin000/gnoradio/radio/v1"
+    197 "gno.land/r/nym-alexiscolin000/gnoradio/radio/v1"
     111 "gno.land/r/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/shots"
     100 "gno.land/r/nym-mikecito001/connect4_v2"
      98 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/minter3"
@@ -33,11 +33,11 @@
      28 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/budgets"
      28 "gno.land/r/nym-moultest123/x/vm/riscvdemo/v0"
      27 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game13"
+     24 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/beacon/v2"
      24 "gno.land/r/samcrew/launchpad/config/v1"
      23 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/fish2"
      22 "gno.land/r/g1a9g8nu3m0xgx58hh36fph49e2xkqm9axlxuf5z/memba_bridge_v1"
      21 "gno.land/r/samcrew/launchpad/market/v1"
-     20 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/beacon/v2"
      20 "gno.land/r/samcrew/launchpad/nft/v1"
      18 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/crowdfund"
      17 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/shoal/fish"
@@ -81,6 +81,7 @@
       4 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/coins"
       4 "gno.land/r/g15w4d7t2p36uupmwwucw4j33vdh7l656pxa6fau/smoke/s7b0658b0/counter"
       4 "gno.land/r/g16sk4fetd76jdfh63sannkglvj657th2c38eep8/smoke/s30629e2c/counter"
+      4 "gno.land/r/g17z3zgttrpwqffhm8w4p5567cdn3f069t9gx7vu/smoke/s503e82a/counter"
       4 "gno.land/r/g1a9g8nu3m0xgx58hh36fph49e2xkqm9axlxuf5z/memba_arcade_leaderboard_v1"
       4 "gno.land/r/g1a9g8nu3m0xgx58hh36fph49e2xkqm9axlxuf5z/memba_quest_attestation_v1"
       4 "gno.land/r/g1eyr3hfdcup4rr5xlcd63vc5t64a03u9kecx2v0/forms"
@@ -558,6 +559,7 @@
       1 "gno.land/r/nym-moultest123/x/wesh/v0"
       1 "gno.land/r/nym-moultest123/x/wiki/v0"
       1 "gno.land/r/nym-moultest123/zones/v0"
+      1 "gno.land/r/nym-slavabolisong001/bolisong"
       1 "gno.land/r/nym-vikbez000/nightsky"
       1 "gno.land/r/nym-vikbez000/nightsky/v1"
       1 "gno.land/r/samcrew/escrow_v4"
