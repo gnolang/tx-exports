@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-4626
+4631
 ```
 
 ## addpkgs
@@ -37,12 +37,12 @@
      23 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/fish2"
      22 "gno.land/r/g1a9g8nu3m0xgx58hh36fph49e2xkqm9axlxuf5z/memba_bridge_v1"
      21 "gno.land/r/samcrew/launchpad/market/v1"
+     20 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/beacon/v2"
      20 "gno.land/r/samcrew/launchpad/nft/v1"
      18 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/crowdfund"
      17 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/shoal/fish"
      16 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game14"
      16 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/arcade/duel/v3"
-     16 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/beacon/v2"
      15 "gno.land/r/g1g7dna0gp4nec5rza4q25htj0cjgswrxefp37ep/kewrchess_v2"
      14 "gno.land/r/demo/profile"
      14 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/arcade/speed/v2"
