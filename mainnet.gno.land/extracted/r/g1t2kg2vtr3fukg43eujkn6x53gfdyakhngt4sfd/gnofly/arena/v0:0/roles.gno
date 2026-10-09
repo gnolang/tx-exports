@@ -1,0 +1,75 @@
+package arena
+
+import "gno.land/r/g1t2kg2vtr3fukg43eujkn6x53gfdyakhngt4sfd/gnofly/game/v0"
+
+// The arena realm keeps no roles of its own. Who owns it, who administers
+// it, who referees its rounds and where its fee goes are the answers of the
+// game realm, asked again at every call: a referee removed there is refused
+// here in the same block.
+
+// authority is the set of questions this realm asks about roles.
+type authority interface {
+	Owner() address
+	IsAdmin(addr address) bool
+	IsReferee(addr address) bool
+	Treasury() address
+}
+
+// gameRoles answers with the roles of the game realm.
+type gameRoles struct{}
+
+func (gameRoles) Owner() address              { return game.Owner() }
+func (gameRoles) IsAdmin(addr address) bool   { return game.IsAdmin(addr) }
+func (gameRoles) IsReferee(addr address) bool { return game.IsReferee(addr) }
+func (gameRoles) Treasury() address           { return game.Treasury() }
+
+// roles is the authority of this realm: the game realm, always.
+//
+// It is a variable for one reason. Under `gno test` an imported realm is
+// initialized without a deployer, and a test of this package has no way to
+// become the owner of the game realm, so the tests put their own answers
+// here. Nothing outside the test files assigns it, and there is no setter.
+var roles authority = gameRoles{}
+
+// callerOf returns the verified caller of a crossing function. rlm must be
+// the cur of the crossing function calling this helper: a stale or forged
+// realm value fails IsCurrent, and Previous is only meaningful on a live one.
+//
+// It takes the realm in second position on purpose, like p/nt/ownable does:
+// a function whose first parameter is a realm is a crossing function.
+func callerOf(_ int, rlm realm) address {
+	if !rlm.IsCurrent() {
+		panic(errSpoofedRealm)
+	}
+	return rlm.Previous().Address()
+}
+
+// assertOwner panics unless the caller is the owner of the game realm, and
+// returns the caller.
+func assertOwner(_ int, rlm realm) address {
+	caller := callerOf(0, rlm)
+	if caller != roles.Owner() {
+		panic(errNotOwner)
+	}
+	return caller
+}
+
+// assertAdmin panics unless the caller is an admin of the game realm, and
+// returns the caller.
+func assertAdmin(_ int, rlm realm) address {
+	caller := callerOf(0, rlm)
+	if !roles.IsAdmin(caller) {
+		panic(errNotAdmin)
+	}
+	return caller
+}
+
+// assertReferee panics unless the caller is a referee of the game realm, and
+// returns the caller.
+func assertReferee(_ int, rlm realm) address {
+	caller := callerOf(0, rlm)
+	if !roles.IsReferee(caller) {
+		panic(errNotReferee)
+	}
+	return caller
+}
