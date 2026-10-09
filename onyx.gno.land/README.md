@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-4652
+4798
 ```
 
 ## addpkgs
@@ -12,8 +12,8 @@
 ## top realm calls
 ```
     747 "gno.land/r/nym-alexiscolin000/gnogolf/golf/v2"
+    593 "gno.land/r/nym-alexiscolin000/gnoradio/catalog/v1"
     545 "gno.land/r/nym-alexiscolin000/gnogolf/golf"
-    460 "gno.land/r/nym-alexiscolin000/gnoradio/catalog/v1"
     197 "gno.land/r/nym-alexiscolin000/gnoradio/radio/v1"
     111 "gno.land/r/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/shots"
     100 "gno.land/r/nym-mikecito001/connect4_v2"
@@ -29,11 +29,11 @@
      46 "gno.land/r/gnoland/wugnot"
      41 "gno.land/r/sys/namereg/v0"
      33 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game3"
+     29 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/beacon/v2"
      29 "gno.land/r/samcrew/launchpad/drops/v1"
      28 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/budgets"
      28 "gno.land/r/nym-moultest123/x/vm/riscvdemo/v0"
      27 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game13"
-     24 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/beacon/v2"
      24 "gno.land/r/samcrew/launchpad/config/v1"
      23 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/fish2"
      22 "gno.land/r/g1a9g8nu3m0xgx58hh36fph49e2xkqm9axlxuf5z/memba_bridge_v1"
@@ -158,6 +158,7 @@
       1 "gno.land/p/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/duebook"
       1 "gno.land/p/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/feeledger"
       1 "gno.land/p/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/spendbook"
+      1 "gno.land/p/g1y2tswmrtlany2ffmpyc0uyunk4gt4gv8gtf736/gnosplit/ledger/v0"
       1 "gno.land/p/nym-alexiscolin000/gnogolf/course"
       1 "gno.land/p/nym-alexiscolin000/gnogolf/physics"
       1 "gno.land/p/nym-alexiscolin000/gnoradio/blocks/v0"
@@ -166,6 +167,7 @@
       1 "gno.land/p/nym-alexiscolin000/gnoradio/store/v0"
       1 "gno.land/p/nym-alexiscolin000/gnoradio/svg/v0"
       1 "gno.land/p/nym-alexiscolin000/gnoradio/text/v0"
+      1 "gno.land/p/nym-alexiscolin000/gnosplit/ledger/v0"
       1 "gno.land/p/nym-moultest123/addrset/v0"
       1 "gno.land/p/nym-moultest123/addrset/v1"
       1 "gno.land/p/nym-moultest123/agents/commit/v0"
@@ -333,6 +335,7 @@
       1 "gno.land/r/nym-alexiscolin000/gnogolf/store"
       1 "gno.land/r/nym-alexiscolin000/gnoradio/tickets/nft"
       1 "gno.land/r/nym-alexiscolin000/gnoradio/tickets/v1"
+      1 "gno.land/r/nym-alexiscolin000/gnosplit/v1"
       1 "gno.land/r/nym-gfanton001/gnotif/v0"
       1 "gno.land/r/nym-moultest123/agents/capwallet/v0"
       1 "gno.land/r/nym-moultest123/agents/gnomem/v0"
