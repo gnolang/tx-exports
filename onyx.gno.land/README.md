@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-4798
+4804
 ```
 
 ## addpkgs
@@ -29,7 +29,7 @@
      46 "gno.land/r/gnoland/wugnot"
      41 "gno.land/r/sys/namereg/v0"
      33 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game3"
-     29 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/beacon/v2"
+     33 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/beacon/v2"
      29 "gno.land/r/samcrew/launchpad/drops/v1"
      28 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/budgets"
      28 "gno.land/r/nym-moultest123/x/vm/riscvdemo/v0"
@@ -326,6 +326,7 @@
       1 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/shoal/shoaltoken"
       1 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/arcade/duel/v2"
       1 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/arcade/raffle/v2"
+      1 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/garden/v1"
       1 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/ops"
       1 "gno.land/r/g1rzgxl6njyu4c2x89gxvaa9cswrt73rz8mlp7l6/alpha2/gnotif/v0"
       1 "gno.land/r/g1rzgxl6njyu4c2x89gxvaa9cswrt73rz8mlp7l6/alpha3/echo/v0"

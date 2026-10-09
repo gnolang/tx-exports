@@ -1,0 +1,12 @@
+# This is the REAL onyx testnet deploy path, set 2026-10-09 when the owner said
+# "wire the thing up to a testnet".
+#
+# It is the deploy key's own address namespace, not a name, because `gnotchi` is
+# not registerable: r/sys/names is enforced on onyx and mainnet alike, and
+# registration runs through a single team-held controller. See NOTES.md.
+#
+# So this path moves if a namespace is ever granted, and a realm cannot be
+# edited once deployed -- a change means deploying v2 and migrating. Keep
+# app/js/config.js in step with whatever is actually live.
+module = "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/garden/v1"
+gno = "0.9"
