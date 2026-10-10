@@ -1,0 +1,17 @@
+# hollowmere/v1's module path, explained -- deploy status deliberately NOT recorded here.
+#
+# This file ships on chain exactly as written the moment hollowmere/v1 is deployed, and a
+# realm cannot be edited afterwards. garden/v2/gnomod.toml said "NOT deployed" in this
+# same spot, was deployed, and now carries that false line permanently on chain -- see
+# that file's own comment for the correction and the lesson. Not repeating it here:
+# whether and when this has been deployed lives in the repo root's DECISIONS.md and
+# STATUS.md, both of which can still be edited after the fact, unlike this file.
+#
+# The module path below mirrors garden/garden.gno and garden/v2/garden.gno's own
+# placeholder style: the deploy key's own address namespace, not a name, because
+# `gnotchi` is not registerable today (r/sys/names, team-held controller -- see
+# realms/garden/NOTES.md). Nothing here implies a decision about whether `gnotchi`
+# namespace registration has happened by the time this is actually deployed -- whoever
+# deploys this should re-check that this path is still right first.
+module = "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/hollowmere/v1"
+gno = "0.9"
