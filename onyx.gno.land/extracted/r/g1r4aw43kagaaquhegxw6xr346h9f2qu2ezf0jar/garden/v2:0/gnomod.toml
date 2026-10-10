@@ -1,0 +1,11 @@
+# v2 of the garden realm -- NOT deployed. Authored and tested locally only, per this
+# assignment's brief ("Do not deploy. Do not run gnokey. Do not touch key material.").
+#
+# The module path below mirrors v1's own placeholder style (realms/garden/gnomod.toml):
+# the deploy key's own address namespace, not a name, because `gnotchi` is not
+# registerable (r/sys/names, team-held controller -- see realms/garden/NOTES.md). Bumped
+# to /v2 only; nothing else about the path has changed, and nothing here implies a
+# decision about whether `gnotchi` namespace registration has happened by the time this
+# is actually deployed. Whoever deploys this should re-check that line is still right.
+module = "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/garden/v2"
+gno = "0.9"

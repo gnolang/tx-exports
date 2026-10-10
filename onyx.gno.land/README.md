@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-4830
+4854
 ```
 
 ## addpkgs
@@ -24,8 +24,8 @@
      71 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens3"
      65 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens2"
      56 "gno.land/r/g1a9g8nu3m0xgx58hh36fph49e2xkqm9axlxuf5z/memba_gov"
+     55 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/beacon/v2"
      55 "gno.land/r/samcrew/connect4"
-     51 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/beacon/v2"
      49 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game27"
      46 "gno.land/r/gnoland/wugnot"
      41 "gno.land/r/sys/namereg/v0"
@@ -46,6 +46,7 @@
      15 "gno.land/r/g1g7dna0gp4nec5rza4q25htj0cjgswrxefp37ep/kewrchess_v2"
      14 "gno.land/r/demo/profile"
      14 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/arcade/speed/v2"
+     13 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/arena"
      13 "gno.land/r/nym-mikecito001/connect4"
      13 "gno.land/r/nym-mikecito001/connect4_v4"
      13 "gno.land/r/samcrew/launchpad/curation/v1"
@@ -121,6 +122,7 @@
       2 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/arcade/raffle"
       2 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/arcade/raffle/v3"
       2 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/garden/v1"
+      2 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/hollowmere/v1"
       2 "gno.land/r/g1r6y6ydgcxvrq9ur9v82tr9c3azpwtved7ly3qu/tally"
       2 "gno.land/r/g1rzgxl6njyu4c2x89gxvaa9cswrt73rz8mlp7l6/alpha2/heavy/v0"
       2 "gno.land/r/g1uhp2ct66xap97aqwdlutwvu39y5370gd62xpcs/tally"
@@ -295,6 +297,7 @@
       1 "gno.land/p/samcrew/launchpad/meta/v1"
       1 "gno.land/p/samcrew/launchpad/safemath/v1"
       1 "gno.land/p/samcrew/launchpad/vesting/v1"
+      1 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/arenaview"
       1 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/ads2"
       1 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game17"
       1 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/minter"
