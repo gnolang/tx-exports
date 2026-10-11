@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-127543
+128515
 ```
 
 ## addpkgs
@@ -11,21 +11,21 @@
 
 ## top realm calls
 ```
-  10623 "gno.land/r/gnoland/wugnot"
-   9448 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble4"
-   8331 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble5"
-   5336 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble6"
+  10647 "gno.land/r/gnoland/wugnot"
+   9557 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble4"
+   8444 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble5"
+   5450 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble6"
    5289 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble3"
-   3907 "gno.land/r/gnoswap/staker"
-   3635 "gno.land/r/gnoswap/gns"
-   3620 "gno.land/r/gnoswap/position"
-   3589 "gno.land/r/gnoswap/router"
-   1244 "gno.land/r/gnoswap/launchpad"
+   3922 "gno.land/r/gnoswap/staker"
+   3640 "gno.land/r/gnoswap/gns"
+   3632 "gno.land/r/gnoswap/position"
+   3601 "gno.land/r/gnoswap/router"
+   1272 "gno.land/r/gnoswap/launchpad"
    1139 "gno.land/r/gnoswap/gov/staker"
-   1046 "gno.land/r/gnoswap/gnft"
-    834 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv3"
-    518 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens"
-    445 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/wbubble"
+   1049 "gno.land/r/gnoswap/gnft"
+    837 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv3"
+    520 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens"
+    448 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/wbubble"
     431 "gno.land/r/nym-thegnomic001/gnomic_airdrop"
     243 "gno.land/r/nym-thegnomic001/gnomic"
     238 "gno.land/r/g1ecsuj0q572jr0dhu29q9njtnmw03hyu7tyyvv6/kourt"
@@ -52,8 +52,8 @@
      20 "gno.land/r/g1v7s3j506wqul2zwt90awgjphpx4ztwga0926f7/gnodraw/v0"
      19 "gno.land/r/demo/defi/grc20factory"
      19 "gno.land/r/g1t2kg2vtr3fukg43eujkn6x53gfdyakhngt4sfd/gnofly/nfts/market/bazaar/v1/gnofly"
+     19 "gno.land/r/gov/dao"
      18 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/gems/campaign"
-     17 "gno.land/r/gov/dao"
      15 "gno.land/r/samcrew/launchpad/config/v1"
      14 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/profile"
      13 "gno.land/r/moul/x/daily/erc721/v0"
