@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-5014
+5030
 ```
 
 ## addpkgs
@@ -12,14 +12,14 @@
 ## top realm calls
 ```
     747 "gno.land/r/nym-alexiscolin000/gnogolf/golf/v2"
-    595 "gno.land/r/nym-alexiscolin000/gnoradio/catalog/v1"
+    596 "gno.land/r/nym-alexiscolin000/gnoradio/catalog/v1"
     545 "gno.land/r/nym-alexiscolin000/gnogolf/golf"
     200 "gno.land/r/nym-alexiscolin000/gnoradio/radio/v1"
     111 "gno.land/r/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/shots"
     100 "gno.land/r/nym-mikecito001/connect4_v2"
      98 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/minter3"
+     96 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/beacon/v2"
      92 "gno.land/r/gnops/valopers"
-     91 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/beacon/v2"
      88 "gno.land/r/samcrew/launchpad/sales/v1"
      76 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game16"
      71 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens3"
@@ -44,8 +44,8 @@
      17 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/arena"
      16 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game14"
      16 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/arcade/duel/v3"
+     16 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/arena/v1"
      15 "gno.land/r/g1g7dna0gp4nec5rza4q25htj0cjgswrxefp37ep/kewrchess_v2"
-     15 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/arena/v1"
      14 "gno.land/r/demo/profile"
      14 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/arcade/speed/v2"
      14 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/books"
@@ -81,6 +81,7 @@
       5 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/arcade/duel"
       5 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/hollowmere/v1"
       5 "gno.land/r/g1rzgxl6njyu4c2x89gxvaa9cswrt73rz8mlp7l6/pingpong/v0"
+      5 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/assets"
       5 "gno.land/r/nym-alexiscolin000/gnoradio/data"
       4 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/fishcoin"
       4 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/fishmark"
@@ -347,6 +348,7 @@
       1 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/shoal/shoaltoken"
       1 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/arcade/duel/v2"
       1 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/arcade/raffle/v2"
+      1 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/garden/v3"
       1 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/ops"
       1 "gno.land/r/g1rzgxl6njyu4c2x89gxvaa9cswrt73rz8mlp7l6/alpha2/gnotif/v0"
       1 "gno.land/r/g1rzgxl6njyu4c2x89gxvaa9cswrt73rz8mlp7l6/alpha3/echo/v0"
