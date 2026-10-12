@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-5080
+5091
 ```
 
 ## addpkgs
@@ -15,7 +15,7 @@
     596 "gno.land/r/nym-alexiscolin000/gnoradio/catalog/v1"
     545 "gno.land/r/nym-alexiscolin000/gnogolf/golf"
     200 "gno.land/r/nym-alexiscolin000/gnoradio/radio/v1"
-    113 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/beacon/v2"
+    117 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/beacon/v2"
     111 "gno.land/r/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/shots"
     100 "gno.land/r/nym-mikecito001/connect4_v2"
      98 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/minter3"
@@ -172,6 +172,7 @@
       1 "gno.land/p/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/duebook"
       1 "gno.land/p/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/feeledger"
       1 "gno.land/p/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/journal"
+      1 "gno.land/p/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/lots"
       1 "gno.land/p/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/spendbook"
       1 "gno.land/p/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/statements"
       1 "gno.land/p/g1y2tswmrtlany2ffmpyc0uyunk4gt4gv8gtf736/gnosplit/ledger/v0"
