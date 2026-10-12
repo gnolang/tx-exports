@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-5051
+5065
 ```
 
 ## addpkgs
@@ -16,7 +16,7 @@
     545 "gno.land/r/nym-alexiscolin000/gnogolf/golf"
     200 "gno.land/r/nym-alexiscolin000/gnoradio/radio/v1"
     111 "gno.land/r/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/shots"
-    105 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/beacon/v2"
+    109 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/beacon/v2"
     100 "gno.land/r/nym-mikecito001/connect4_v2"
      98 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/minter3"
      92 "gno.land/r/gnops/valopers"
@@ -49,6 +49,7 @@
      14 "gno.land/r/demo/profile"
      14 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/arcade/speed/v2"
      14 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/books"
+     13 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/garden/v2"
      13 "gno.land/r/nym-mikecito001/connect4"
      13 "gno.land/r/nym-mikecito001/connect4_v4"
      13 "gno.land/r/samcrew/launchpad/curation/v1"
@@ -56,7 +57,6 @@
      12 "gno.land/r/nym-mikecito001/connect4_v3"
      11 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/arcade/duel/v4"
      10 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game11"
-     10 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/garden/v2"
      10 "gno.land/r/nym-gfanton001/echo/v0"
       9 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/fishbay"
       9 "gno.land/r/g1sl6fyq6mrc3wydt8xluhxx4aqsudpp9vhv6g2a/gnotif/pingpong"
@@ -76,14 +76,15 @@
       7 "gno.land/r/nym-vikbez000/telescope"
       6 "gno.land/r/g1a9g8nu3m0xgx58hh36fph49e2xkqm9axlxuf5z/escrow_v4"
       6 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/chat/v1"
+      6 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/hollowmere/v1"
       5 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/bazaarv4"
       5 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/bazaarv5"
       5 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/arcade/duel"
-      5 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/hollowmere/v1"
       5 "gno.land/r/g1rzgxl6njyu4c2x89gxvaa9cswrt73rz8mlp7l6/pingpong/v0"
       5 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/assets"
       5 "gno.land/r/nym-alexiscolin000/gnoradio/data"
       4 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/fishcoin"
+      4 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/fishlive"
       4 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/fishmark"
       4 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/coins"
       4 "gno.land/r/g15w4d7t2p36uupmwwucw4j33vdh7l656pxa6fau/smoke/s7b0658b0/counter"
@@ -112,7 +113,6 @@
       3 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/beacon"
       3 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/statements"
       3 "gno.land/r/samcrew/memba_reviews_v2"
-      2 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/fishlive"
       2 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/fishnft"
       2 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/shoaltoken"
       2 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game10"
