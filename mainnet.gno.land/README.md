@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-137227
+138153
 ```
 
 ## addpkgs
@@ -11,22 +11,22 @@
 
 ## top realm calls
 ```
-  10790 "gno.land/r/gnoland/wugnot"
-  10541 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble4"
-   9467 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble5"
-   6498 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble6"
+  10796 "gno.land/r/gnoland/wugnot"
+  10663 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble4"
+   9590 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble5"
+   6621 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble6"
    5317 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble3"
-   4016 "gno.land/r/gnoswap/staker"
-   3717 "gno.land/r/gnoswap/position"
-   3685 "gno.land/r/gnoswap/gns"
-   3679 "gno.land/r/gnoswap/router"
-   1472 "gno.land/r/gnoswap/launchpad"
-   1177 "gno.land/r/gnoswap/gov/staker"
-   1060 "gno.land/r/gnoswap/gnft"
+   4027 "gno.land/r/gnoswap/staker"
+   3724 "gno.land/r/gnoswap/position"
+   3687 "gno.land/r/gnoswap/gns"
+   3684 "gno.land/r/gnoswap/router"
+   1479 "gno.land/r/gnoswap/launchpad"
+   1179 "gno.land/r/gnoswap/gov/staker"
+   1063 "gno.land/r/gnoswap/gnft"
     863 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv3"
     520 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens"
-    486 "gno.land/r/akkadia/beta/abt"
-    484 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/wbubble"
+    500 "gno.land/r/akkadia/beta/abt"
+    488 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/wbubble"
     432 "gno.land/r/nym-thegnomic001/gnomic_airdrop"
     247 "gno.land/r/nym-thegnomic001/gnomic"
     238 "gno.land/r/g1ecsuj0q572jr0dhu29q9njtnmw03hyu7tyyvv6/kourt"
@@ -42,7 +42,7 @@
      64 "gno.land/r/gnops/valopers"
      52 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubble"
      49 "gno.land/r/gnoswap/gov/governance"
-     45 "gno.land/r/akkadia/beta/user"
+     46 "gno.land/r/akkadia/beta/user"
      43 "gno.land/r/akkadia/beta/definition"
      43 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/gems/v1"
      42 "gno.land/r/moul/x/reaper/v0"
