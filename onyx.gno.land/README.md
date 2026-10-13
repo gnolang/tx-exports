@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-5197
+5209
 ```
 
 ## addpkgs
@@ -107,6 +107,7 @@
       4 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/garden/v3"
       4 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/garden/v4"
       4 "gno.land/r/g1sgeenheqyxeghkurzaf0yndwdre7zhqfalk2q6/smoke/sa3a7d145/counter"
+      4 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/invoices"
       4 "gno.land/r/g1zgg4n0whqpt3mz8ysshqw308kqjv9q5pap8gw7/smoke/sf0601180/counter"
       3 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/fishlab"
       3 "gno.land/r/g12yg9nh4ncma44emgm8msxe8aavzywt0p95tanv/bolo"
