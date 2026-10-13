@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-5110
+5123
 ```
 
 ## addpkgs
@@ -15,7 +15,7 @@
     596 "gno.land/r/nym-alexiscolin000/gnoradio/catalog/v1"
     545 "gno.land/r/nym-alexiscolin000/gnogolf/golf"
     200 "gno.land/r/nym-alexiscolin000/gnoradio/radio/v1"
-    122 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/beacon/v2"
+    126 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/beacon/v2"
     111 "gno.land/r/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/shots"
     100 "gno.land/r/nym-mikecito001/connect4_v2"
      98 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/minter3"
@@ -77,6 +77,7 @@
       6 "gno.land/r/g1a9g8nu3m0xgx58hh36fph49e2xkqm9axlxuf5z/escrow_v4"
       6 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/chat/v1"
       6 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/hollowmere/v1"
+      5 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/fishlive"
       5 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/bazaarv4"
       5 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/bazaarv5"
       5 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/arcade/duel"
@@ -84,7 +85,6 @@
       5 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/assets"
       5 "gno.land/r/nym-alexiscolin000/gnoradio/data"
       4 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/fishcoin"
-      4 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/fishlive"
       4 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/fishmark"
       4 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/coins"
       4 "gno.land/r/g15w4d7t2p36uupmwwucw4j33vdh7l656pxa6fau/smoke/s7b0658b0/counter"
@@ -169,6 +169,7 @@
       1 "gno.land/p/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/fee/v1"
       1 "gno.land/p/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/bls254"
       1 "gno.land/p/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/fenwick"
+      1 "gno.land/p/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/aging"
       1 "gno.land/p/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/coinio"
       1 "gno.land/p/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/depreciation"
       1 "gno.land/p/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/duebook"
@@ -177,6 +178,7 @@
       1 "gno.land/p/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/lots"
       1 "gno.land/p/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/spendbook"
       1 "gno.land/p/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/statements"
+      1 "gno.land/p/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/tiers"
       1 "gno.land/p/g1y2tswmrtlany2ffmpyc0uyunk4gt4gv8gtf736/gnosplit/ledger/v0"
       1 "gno.land/p/nym-alexiscolin000/gnogolf/course"
       1 "gno.land/p/nym-alexiscolin000/gnogolf/physics"
@@ -331,6 +333,7 @@
       1 "gno.land/r/g14kd2xgnkc3vyvdvh0ar6tw7570wpzn3egtevr4/livecheck"
       1 "gno.land/r/g18me5p9kqqxyswd8ytrmlv3q8kvy7uacx2v90ne/echo/v0"
       1 "gno.land/r/g18me5p9kqqxyswd8ytrmlv3q8kvy7uacx2v90ne/gnotif/v0"
+      1 "gno.land/r/g19tr97dsckspdfu4k5mp0rj26vlarzrmdu3nwka/hello"
       1 "gno.land/r/g1ezf973jrnr23xkul0pleauz00ufuf0l6vjc0x7/probe"
       1 "gno.land/r/g1ezf973jrnr23xkul0pleauz00ufuf0l6vjc0x7/probebad"
       1 "gno.land/r/g1ezf973jrnr23xkul0pleauz00ufuf0l6vjc0x7/spike"
