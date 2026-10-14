@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-5251
+5267
 ```
 
 ## addpkgs
@@ -56,6 +56,7 @@
      13 "gno.land/r/samcrew/launchpad/curation/v1"
      12 "gno.land/r/g1u97n45s4s6q7vn5clr8339pv4up455hnqn4aff/gnodice"
      12 "gno.land/r/nym-mikecito001/connect4_v3"
+     12 "gno.land/r/samcrew/memba_notes_rc1"
      11 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/fishlive"
      11 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/arcade/duel/v4"
      11 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/netting"

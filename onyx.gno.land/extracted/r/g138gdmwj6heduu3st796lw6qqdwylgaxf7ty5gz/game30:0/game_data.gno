@@ -1,5 +1,5 @@
-// GnoMoji — Main Game Realm (game29)
-// gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game29
+// GnoMoji — Main Game Realm (game30)
+// gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game30
 //
 // game29 closes the game28 audit holes (see SECURITY_GAME28.md):
 //   - claims and achievements need an ed25519 voucher from the server's claim
@@ -15,7 +15,7 @@ import (
 	"gno.land/p/nt/avl/v0"
 )
 
-const realmPkgPath = "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game29"
+const realmPkgPath = "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game30"
 
 // ── State ────────────────────────────────────────────────────────────────────
 

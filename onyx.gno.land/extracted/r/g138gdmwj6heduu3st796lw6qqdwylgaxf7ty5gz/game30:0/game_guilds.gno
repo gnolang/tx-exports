@@ -255,7 +255,7 @@ func ListTasks(_ string) string {
 // ── Render ───────────────────────────────────────────────────────────────────
 
 func Render(_ string) string {
-	return ufmt.Sprintf("# GnoMoji Game Realm — game29\n\nAdmin: `%s`\n\nPath: `%s`\n\nClaims: server-vouchered (%s)\n\nMigration finalized: %t\n\nMine emoji coins on Gno.land!\n",
+	return ufmt.Sprintf("# GnoMoji Game Realm — game30\n\nAdmin: `%s`\n\nPath: `%s`\n\nClaims: server-vouchered (%s)\n\nMigration finalized: %t\n\nMine emoji coins on Gno.land!\n",
 		admin.String(), realmPkgPath, func() string {
 			if len(claimSignerPubKey) == 32 {
 				return "signer set"

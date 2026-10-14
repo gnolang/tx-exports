@@ -300,7 +300,7 @@ func PassRevenue() int64 { return passRevenueUgnot }
 // TreasuryBalance returns the ugnot held by this realm (pass revenue not yet withdrawn).
 func TreasuryBalance() int64 {
 	realmAddr := chain.PackageAddress("gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game30")
-	coins := banker.NewBanker(banker.BankerTypeReadonly, cur).GetCoins(realmAddr)
+	coins := banker.NewBanker(banker.BankerTypeReadonly).GetCoins(realmAddr)
 	for _, c := range coins {
 		if c.Denom == "ugnot" {
 			return c.Amount
