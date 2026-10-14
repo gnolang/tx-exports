@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-5222
+5239
 ```
 
 ## addpkgs
@@ -56,26 +56,26 @@
      13 "gno.land/r/samcrew/launchpad/curation/v1"
      12 "gno.land/r/g1u97n45s4s6q7vn5clr8339pv4up455hnqn4aff/gnodice"
      12 "gno.land/r/nym-mikecito001/connect4_v3"
+     11 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/fishlive"
      11 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/arcade/duel/v4"
      11 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/netting"
-     10 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/fishlive"
      10 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game11"
      10 "gno.land/r/nym-gfanton001/echo/v0"
       9 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/fishbay"
       9 "gno.land/r/g1sl6fyq6mrc3wydt8xluhxx4aqsudpp9vhv6g2a/gnotif/pingpong"
       9 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/subscriptions"
       8 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/fishduel"
+      8 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game29"
+      8 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/shoal/profile"
       8 "gno.land/r/samcrew/memba_notes_v1"
       7 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game"
       7 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game15"
-      7 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game29"
       7 "gno.land/r/g13rqvks880v0hmlfepcj0kkudq0js38d3pc5k6a/pingpong/v0"
       7 "gno.land/r/g1a9g8nu3m0xgx58hh36fph49e2xkqm9axlxuf5z/gnobuilders_badges_v2"
       7 "gno.land/r/g1a9g8nu3m0xgx58hh36fph49e2xkqm9axlxuf5z/memba_appstore_v3"
       7 "gno.land/r/g1a9g8nu3m0xgx58hh36fph49e2xkqm9axlxuf5z/memba_dao_channels_v2"
       7 "gno.land/r/g1a9g8nu3m0xgx58hh36fph49e2xkqm9axlxuf5z/memba_feed_v1"
       7 "gno.land/r/g1a9g8nu3m0xgx58hh36fph49e2xkqm9axlxuf5z/memba_feedback_v2"
-      7 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/shoal/profile"
       7 "gno.land/r/g1rzgxl6njyu4c2x89gxvaa9cswrt73rz8mlp7l6/alpha2/echo/v0"
       7 "gno.land/r/nym-vikbez000/telescope"
       6 "gno.land/r/g12yg9nh4ncma44emgm8msxe8aavzywt0p95tanv/bolo/v0"
@@ -88,6 +88,7 @@
       5 "gno.land/r/g1rzgxl6njyu4c2x89gxvaa9cswrt73rz8mlp7l6/pingpong/v0"
       5 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/assets"
       5 "gno.land/r/nym-alexiscolin000/gnoradio/data"
+      4 "gno.land/r/g105p0fa3z9g3cym72eqssme755gkvqgjksarq3p/smoke/sa418b4a1/counter"
       4 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/fishcoin"
       4 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/fishmark"
       4 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/coins"
@@ -302,6 +303,7 @@
       1 "gno.land/p/nym-moultest123/x/plan9/ns/v0"
       1 "gno.land/p/nym-moultest123/x/plan9/rc/v0"
       1 "gno.land/p/nym-moultest123/x/plan9/synfs/v0"
+      1 "gno.land/p/nym-moultest123/x/social/crew/v0"
       1 "gno.land/p/nym-moultest123/x/storagecost/v0"
       1 "gno.land/p/nym-moultest123/x/storagecost/v1"
       1 "gno.land/p/nym-moultest123/x/vm/bf/v0"
@@ -579,6 +581,7 @@
       1 "gno.land/r/nym-moultest123/x/provable/v0"
       1 "gno.land/r/nym-moultest123/x/reaper/v0"
       1 "gno.land/r/nym-moultest123/x/reaper/v1"
+      1 "gno.land/r/nym-moultest123/x/social/crews/v0"
       1 "gno.land/r/nym-moultest123/x/upgrade/adminreg/facade/v0"
       1 "gno.land/r/nym-moultest123/x/upgrade/adminreg/impl/v0"
       1 "gno.land/r/nym-moultest123/x/upgrade/adminreg/impl/v1"
