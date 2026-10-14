@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-5239
+5251
 ```
 
 ## addpkgs
@@ -81,6 +81,7 @@
       6 "gno.land/r/g12yg9nh4ncma44emgm8msxe8aavzywt0p95tanv/bolo/v0"
       6 "gno.land/r/g1a9g8nu3m0xgx58hh36fph49e2xkqm9axlxuf5z/escrow_v4"
       6 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/chat/v1"
+      6 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/garden/v4"
       6 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/hollowmere/v1"
       5 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/bazaarv4"
       5 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/bazaarv5"
@@ -107,7 +108,6 @@
       4 "gno.land/r/g1phjndp6694d7ufa847tyq8sufnzaww7yj3a4hh/smoke/sd70e23eb/counter"
       4 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/arcade/speed"
       4 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/garden/v3"
-      4 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/garden/v4"
       4 "gno.land/r/g1sgeenheqyxeghkurzaf0yndwdre7zhqfalk2q6/smoke/sa3a7d145/counter"
       4 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/invoices"
       4 "gno.land/r/g1zgg4n0whqpt3mz8ysshqw308kqjv9q5pap8gw7/smoke/sf0601180/counter"
@@ -361,6 +361,8 @@
       1 "gno.land/r/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/shots/impl/v3"
       1 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/gpushv2"
       1 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/perk"
+      1 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnocial"
+      1 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnocialview"
       1 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/party"
       1 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/profile"
       1 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/shoal/shoaltoken"
