@@ -1,6 +1,9 @@
 REMOTE = "https://rpc.gno.land"
 SHORTNAME = mainnet
 
+# the chain fetch requires the RPC to serve; see check-chain-id in ../rules.mk
+CHAIN_ID = gnoland-1
+
 # the gno build this chain runs; see GNO_REF in ../rules.mk
 GNO_REF = chain/mainnet
 
