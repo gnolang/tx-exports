@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-5270
+5291
 ```
 
 ## addpkgs
@@ -28,7 +28,7 @@
      55 "gno.land/r/samcrew/connect4"
      49 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game27"
      46 "gno.land/r/gnoland/wugnot"
-     42 "gno.land/r/sys/namereg/v0"
+     43 "gno.land/r/sys/namereg/v0"
      33 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game3"
      29 "gno.land/r/samcrew/launchpad/drops/v1"
      28 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/budgets"
@@ -54,9 +54,9 @@
      13 "gno.land/r/nym-mikecito001/connect4"
      13 "gno.land/r/nym-mikecito001/connect4_v4"
      13 "gno.land/r/samcrew/launchpad/curation/v1"
+     13 "gno.land/r/samcrew/memba_notes_rc1"
      12 "gno.land/r/g1u97n45s4s6q7vn5clr8339pv4up455hnqn4aff/gnodice"
      12 "gno.land/r/nym-mikecito001/connect4_v3"
-     12 "gno.land/r/samcrew/memba_notes_rc1"
      11 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/fishlive"
      11 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/arcade/duel/v4"
      11 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/netting"
@@ -65,6 +65,7 @@
       9 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/fishbay"
       9 "gno.land/r/g1sl6fyq6mrc3wydt8xluhxx4aqsudpp9vhv6g2a/gnotif/pingpong"
       9 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/subscriptions"
+      9 "gno.land/r/nym-sixseven067/markets"
       8 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/fishduel"
       8 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game29"
       8 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/shoal/profile"
@@ -607,6 +608,7 @@
       1 "gno.land/r/nym-moultest123/x/wesh/v0"
       1 "gno.land/r/nym-moultest123/x/wiki/v0"
       1 "gno.land/r/nym-moultest123/zones/v0"
+      1 "gno.land/r/nym-sixseven067/home"
       1 "gno.land/r/nym-slavabolisong001/bolisong"
       1 "gno.land/r/nym-vikbez000/nightsky"
       1 "gno.land/r/nym-vikbez000/nightsky/v1"
