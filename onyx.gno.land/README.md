@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-5417
+5473
 ```
 
 ## addpkgs
@@ -16,10 +16,10 @@
     545 "gno.land/r/nym-alexiscolin000/gnogolf/golf"
     200 "gno.land/r/nym-alexiscolin000/gnoradio/radio/v1"
     134 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/beacon/v2"
+    116 "gno.land/r/nym-sixseven067/markets"
     111 "gno.land/r/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/shots"
     100 "gno.land/r/nym-mikecito001/connect4_v2"
      98 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/minter3"
-     95 "gno.land/r/nym-sixseven067/markets"
      92 "gno.land/r/gnops/valopers"
      88 "gno.land/r/samcrew/launchpad/sales/v1"
      76 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game16"
@@ -28,6 +28,7 @@
      56 "gno.land/r/g1a9g8nu3m0xgx58hh36fph49e2xkqm9axlxuf5z/memba_gov"
      55 "gno.land/r/samcrew/connect4"
      49 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game27"
+     48 "gno.land/r/nym-sixseven067/markets/v2"
      46 "gno.land/r/gnoland/wugnot"
      43 "gno.land/r/sys/namereg/v0"
      33 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game3"
@@ -35,7 +36,6 @@
      28 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/budgets"
      28 "gno.land/r/nym-moultest123/x/vm/riscvdemo/v0"
      27 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game13"
-     25 "gno.land/r/nym-sixseven067/markets/v2"
      24 "gno.land/r/samcrew/launchpad/config/v1"
      23 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/fish2"
      22 "gno.land/r/g1a9g8nu3m0xgx58hh36fph49e2xkqm9axlxuf5z/memba_bridge_v1"
@@ -100,6 +100,7 @@
       4 "gno.land/r/g16sk4fetd76jdfh63sannkglvj657th2c38eep8/smoke/s30629e2c/counter"
       4 "gno.land/r/g17z3zgttrpwqffhm8w4p5567cdn3f069t9gx7vu/smoke/s503e82a/counter"
       4 "gno.land/r/g1864g075ukehmsvpu75r5k5hxy0gd5fppc8mvuu/smoke/s79ffdb60/counter"
+      4 "gno.land/r/g18nke2hpu3zue0da9yudzxeugfyxuk3edjj4w79/sonotone2"
       4 "gno.land/r/g1a9g8nu3m0xgx58hh36fph49e2xkqm9axlxuf5z/memba_arcade_leaderboard_v1"
       4 "gno.land/r/g1a9g8nu3m0xgx58hh36fph49e2xkqm9axlxuf5z/memba_quest_attestation_v1"
       4 "gno.land/r/g1eyr3hfdcup4rr5xlcd63vc5t64a03u9kecx2v0/forms"
@@ -379,6 +380,7 @@
       1 "gno.land/r/g1rzgxl6njyu4c2x89gxvaa9cswrt73rz8mlp7l6/gnotif/v0"
       1 "gno.land/r/g1sl6fyq6mrc3wydt8xluhxx4aqsudpp9vhv6g2a/gnotif"
       1 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/inventory"
+      1 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/receivables"
       1 "gno.land/r/nym-alexiscolin000/gnogolf/store"
       1 "gno.land/r/nym-alexiscolin000/gnoradio/tickets/nft"
       1 "gno.land/r/nym-alexiscolin000/gnoradio/tickets/v1"
