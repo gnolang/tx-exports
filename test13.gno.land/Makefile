@@ -1,6 +1,9 @@
 REMOTE = "https://rpc.test13.testnets.gno.land"
 SHORTNAME = test13
 
+# the gno build this chain runs; see GNO_REF in ../rules.mk
+GNO_REF = chain/test13
+
 # Fetch over WebSocket: the HTTP RPC endpoint WAF-blocks (403) high-volume batch
 # fetches, which strands the daily backup. A single WS connection avoids it.
 USE_WS = 1
