@@ -51,6 +51,11 @@ gnokey maketx call -pkgpath gno.land/r/aib/ibc/apps/transfer -func Transfer \
 IBC vouchers are GRC20 tokens minted when receiving tokens from another chain.
 They are burned on transfer back to the source chain.
 
+`Transfer` accepts the local `ibc/{HASH}` spelling and resolves it to the trace
+itself. The counterparty direction is not symmetric: a hand-built ICS-20 payload
+(raw `MsgSendPacket`) has no such resolution step and must carry the expanded
+trace — see the header of `scripts/transfer-atomone-to-gno.sh`.
+
 ```
 gnokey maketx call -pkgpath gno.land/r/aib/ibc/apps/transfer -func Transfer \
     -args "07-tendermint-1" -args "atone1abc..." \
@@ -198,14 +203,16 @@ Voucher tokens can be discovered in two ways:
    field with the token's grc20reg key, ready for direct lookup. Supports
    pagination.
 
-2. **From `grc20reg`** — voucher tokens are registered with the key
-   `gno.land/r/aib/ibc/apps/transfer.{HASH}`, where `{HASH}` is the uppercase
-   hex SHA256 hash from the `ibc/{HASH}` denom. Enumerate entries with the
+2. **From `grc20reg`** — `grc20reg` keys tokens by `rlmPath.symbol`, so voucher
+   tokens are registered as `gno.land/r/aib/ibc/apps/transfer.{SYMBOL}`, where
+   `{SYMBOL}` is the uppercase hex SHA256 hash from the `ibc/{HASH}` denom
+   truncated to `grc20.MaxSymbolLen` (11 chars) — *not* the full hash, which
+   exceeds the symbol length limit. Enumerate entries with the
    `gno.land/r/aib/ibc/apps/transfer.` prefix.
 
 The token name is the base denomination (e.g. `uatom`) and the symbol is the
-full IBC denom (e.g. `ibc/CAEF9C...`). For richer metadata (trace hops, total
-supply), query the render endpoint `voucher/ibc/{HASH}`.
+truncated hash (e.g. `CAEF9CA8CE6`). For the full denom and richer metadata
+(trace hops, total supply), query the render endpoint `voucher/ibc/{HASH}`.
 
 ### Trading
 
@@ -219,8 +226,10 @@ supply), query the render endpoint `voucher/ibc/{HASH}`.
 
 The same base denomination (e.g. `uatom`) arriving from different chains
 produces distinct voucher tokens with different IBC hashes. A DEX should use the
-full `ibc/{HASH}` denom (available as the token symbol) to distinguish them, and
-query `denoms/ibc/{HASH}` to resolve the trace path for display purposes.
+full `ibc/{HASH}` denom to distinguish them — the token symbol is only the
+truncated hash, so read the full denom from the `denom` field of the `vouchers`
+render endpoint — and query `denoms/ibc/{HASH}` to resolve the trace path for
+display purposes.
 
 ## Events
 
