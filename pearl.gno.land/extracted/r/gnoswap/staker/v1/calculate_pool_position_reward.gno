@@ -60,9 +60,9 @@ type calculatePositionRewardParam struct {
 	PositionId uint64
 }
 
-// positionRewardUpdate carries the persisted-state changes produced (but not applied) by
-// calculatePositionReward. They are applied by updatePositionReward, so that only the collect path
-// mutates state while the calculation stays pure.
+// positionRewardUpdate carries the persisted-state changes produced (but not applied) by a calculation.
+// They are applied by the update* functions, so that only the collect path mutates state while the
+// calculation stays pure.
 type positionRewardUpdate struct {
 	poolPath    string
 	pool        *sr.Pool
@@ -73,34 +73,30 @@ type positionRewardUpdate struct {
 	newExternalIncentiveIds []string
 	// Whether the deposit's LastExternalIncentiveUpdatedAt cursor should be advanced to CurrentTime.
 	advanceExternalIncentiveCursor bool
+
+	// Incentive ids the calculation actually produced a reward for, in calculation order. The collect
+	// path walks this instead of iterating the reward map, so delivery order is deterministic.
+	externalIncentiveIds []string
 }
 
-// calculateCollectablePositionReward calculates the aggregated position reward WITHOUT mutating any persisted state.
-//
-// It is the shared, read-only entry point used by both the Collectable* view getters and CollectReward.
-// This keeps the calculation identical for both callers and guarantees views never write.
-func (s *stakerV1) calculateCollectablePositionReward(currentHeight, currentTimestamp int64, positionId uint64) Reward {
-	rewards, _ := s.calculatePositionReward(&calculatePositionRewardParam{
-		CurrentHeight: currentHeight,
-		CurrentTime:   currentTimestamp,
-		Deposits:      s.getDeposits(),
-		Pools:         s.getPools(),
-		PoolTier:      s.getPoolTier(),
-		PositionId:    positionId,
-	})
+// positionRewardContext carries the per-position state that both the internal (GNS emission) and the
+// external (incentive) reward calculations need. Resolving it once lets each path be calculated on its
+// own without duplicating the deposit/pool/reward-state setup.
+type positionRewardContext struct {
+	deposit         *sr.Deposit
+	depositResolver *DepositResolver
+	poolResolver    *PoolResolver
+	rewardState     *RewardState
+	warmupLen       int
 
-	return aggregateRewards(rewards)
+	update positionRewardUpdate
 }
 
-// calculatePositionReward computes a position's per-warmup rewards WITHOUT mutating persisted state.
-//
-// The per-second emission-rate schedule is resolved up-front (resolveInternalRewardSegments) and fed to
-// the single internal-reward calculator, so the calculation needs no reward-cache materialization.
-// External incentive discovery is done into a local set rather than by mutating the deposit. All would-be
-// state changes are returned as a positionRewardUpdate for the caller to apply (collect only).
-func (s *stakerV1) calculatePositionReward(param *calculatePositionRewardParam) ([]Reward, positionRewardUpdate) {
+// newPositionRewardContext resolves the deposit, its pool and a fresh RewardState WITHOUT mutating
+// persisted state. A missing pool is created ephemerally and its persistence is deferred to the
+// update path.
+func (s *stakerV1) newPositionRewardContext(param *calculatePositionRewardParam) *positionRewardContext {
 	deposit := param.Deposits.get(param.PositionId)
-	depositResolver := NewDepositResolver(deposit)
 	poolPath := deposit.TargetPoolPath()
 
 	pool, poolExisted := param.Pools.Get(poolPath)
@@ -110,39 +106,88 @@ func (s *stakerV1) calculatePositionReward(param *calculatePositionRewardParam) 
 	}
 	poolResolver := NewPoolResolver(pool)
 
-	updateParams := positionRewardUpdate{
-		poolPath:    poolPath,
-		pool:        pool,
-		poolExisted: poolExisted,
+	return &positionRewardContext{
+		deposit:         deposit,
+		depositResolver: NewDepositResolver(deposit),
+		poolResolver:    poolResolver,
+		rewardState:     poolResolver.RewardStateOf(deposit),
+		warmupLen:       len(deposit.Warmups()),
+		update: positionRewardUpdate{
+			poolPath:    poolPath,
+			pool:        pool,
+			poolExisted: poolExisted,
+		},
 	}
+}
 
-	lastCollectTime := depositResolver.InternalRewardLastCollectTime()
-
-	// Initializes reward/penalty arrays for rewards and penalties for each warmup
-	rewardState := poolResolver.RewardStateOf(deposit)
-
-	// Resolve the per-second reward-rate schedule (pure) and calculate internal rewards from it.
-	internalSegments := poolResolver.resolveInternalRewardSegments(param.PoolTier, poolPath, lastCollectTime, param.CurrentTime)
-	calculatedInternalRewards, calculatedInternalPenalties := rewardState.calculateInternalReward(internalSegments)
-
-	warmupLen := len(deposit.Warmups())
-	rewards := make([]Reward, warmupLen)
-	for i := 0; i < warmupLen; i++ {
+// newRewards allocates the empty per-warmup reward slice the compute* methods write into.
+func (self *positionRewardContext) newRewards() []Reward {
+	rewards := make([]Reward, self.warmupLen)
+	for i := 0; i < self.warmupLen; i++ {
 		rewards[i] = Reward{
-			Internal:        calculatedInternalRewards[i],
-			InternalPenalty: calculatedInternalPenalties[i],
 			External:        make(map[string]int64),
 			ExternalPenalty: make(map[string]int64),
 		}
 	}
-	rewardState.reset()
 
-	// Build the effective incentive-id set (stored ∪ newly-created-since-last-update) WITHOUT mutating
-	// the deposit. ExternalRewardLastCollectTime falls back to StakeTime for ids not yet persisted, so a
-	// newly-discovered incentive yields the same calculation whether or not it is written to the deposit.
+	return rewards
+}
+
+// computeInternalRewards writes the GNS emission reward and penalty of each warmup into rewards.
+//
+// The per-second emission-rate schedule is resolved up-front (resolveInternalRewardSegments) and fed to
+// the single internal-reward calculator, so the calculation needs no reward-cache update.
+func (self *positionRewardContext) computeInternalRewards(param *calculatePositionRewardParam, rewards []Reward) error {
+	lastCollectTime := self.depositResolver.InternalRewardLastCollectTime()
+
+	// Resolve the per-second reward-rate schedule (pure) and calculate internal rewards from it.
+	internalSegments, err := self.poolResolver.resolveInternalRewardSegments(param.PoolTier, self.update.poolPath, lastCollectTime, param.CurrentTime)
+	if err != nil {
+		return err
+	}
+	calculatedInternalRewards, calculatedInternalPenalties := self.rewardState.calculateInternalReward(internalSegments)
+
+	for i := 0; i < self.warmupLen; i++ {
+		rewards[i].Internal = calculatedInternalRewards[i]
+		rewards[i].InternalPenalty = calculatedInternalPenalties[i]
+	}
+
+	self.rewardState.reset()
+
+	return nil
+}
+
+// discoverExternalIncentives records the incentives created since the deposit's last update on the
+// update, WITHOUT mutating the deposit. The collect path adds them to the deposit's incentive index.
+//
+// ExternalRewardLastCollectTime falls back to StakeTime for ids not yet persisted, so a newly-discovered
+// incentive yields the same calculation whether or not it is written to the deposit.
+func (self *positionRewardContext) discoverExternalIncentives(param *calculatePositionRewardParam) {
+	lastExternalIncentiveUpdatedAt := self.depositResolver.LastExternalIncentiveUpdatedAt()
+	if lastExternalIncentiveUpdatedAt >= param.CurrentTime {
+		return
+	}
+
+	// Discover incentives from this pool's own start-time index. Using the
+	// local resolver keeps calculation read-only even for an ephemeral pool
+	// that has not yet been persisted in param.Pools.
+	newIds := make([]string, 0)
+	self.poolResolver.IncentivesResolver().IterateIncentiveIdsByTime(lastExternalIncentiveUpdatedAt, param.CurrentTime, func(incentiveId string) bool {
+		newIds = append(newIds, incentiveId)
+		return false
+	})
+
+	self.update.newExternalIncentiveIds = newIds
+	self.update.advanceExternalIncentiveCursor = true
+}
+
+// externalIncentiveIds returns the deposit's effective incentive-id set: the ids stored on the deposit
+// plus the ones discoverExternalIncentives found. Call it after discoverExternalIncentives.
+func (self *positionRewardContext) externalIncentiveIds() []string {
 	seen := make(map[string]bool)
 	incentiveIds := make([]string, 0)
-	deposit.IterateExternalIncentiveIds(func(incentiveId string) bool {
+
+	self.deposit.IterateExternalIncentiveIds(func(incentiveId string) bool {
 		if !seen[incentiveId] {
 			seen[incentiveId] = true
 			incentiveIds = append(incentiveIds, incentiveId)
@@ -150,82 +195,166 @@ func (s *stakerV1) calculatePositionReward(param *calculatePositionRewardParam) 
 		return false
 	})
 
-	lastExternalIncentiveUpdatedAt := depositResolver.LastExternalIncentiveUpdatedAt()
-	if lastExternalIncentiveUpdatedAt < param.CurrentTime {
-		// Discover incentives from this pool's own start-time index. Using the
-		// local resolver keeps calculation read-only even for an ephemeral pool
-		// that has not yet been persisted in param.Pools.
-		newIds := make([]string, 0)
-		poolResolver.IncentivesResolver().IterateIncentiveIdsByTime(lastExternalIncentiveUpdatedAt, param.CurrentTime, func(incentiveId string) bool {
-			newIds = append(newIds, incentiveId)
-			return false
-		})
-		updateParams.newExternalIncentiveIds = newIds
-		updateParams.advanceExternalIncentiveCursor = true
-
-		for _, incentiveId := range newIds {
-			if !seen[incentiveId] {
-				seen[incentiveId] = true
-				incentiveIds = append(incentiveIds, incentiveId)
-			}
+	for _, incentiveId := range self.update.newExternalIncentiveIds {
+		if !seen[incentiveId] {
+			seen[incentiveId] = true
+			incentiveIds = append(incentiveIds, incentiveId)
 		}
 	}
 
-	incentivesResolver := poolResolver.IncentivesResolver()
-	for _, incentiveId := range incentiveIds {
-		incentive, ok := incentivesResolver.Get(incentiveId)
-		if !ok {
-			continue
-		}
+	return incentiveIds
+}
 
-		incentiveResolver := NewExternalIncentiveResolver(incentive)
-
-		// Check if incentive is active during this specific collection period
-		if !incentiveResolver.IsStarted(param.CurrentTime) {
-			continue
-		}
-
-		// External incentivized pool.
-		// Calculate reward for each warmup using per-incentive lastCollectTime
-		externalLastCollectTime := depositResolver.ExternalRewardLastCollectTime(incentiveId)
-		externalReward, externalPenalty := rewardState.calculateExternalReward(externalLastCollectTime, param.CurrentTime, incentive)
-
-		for i := range externalReward {
-			if externalReward[i] > 0 || externalPenalty[i] > 0 {
-				rewards[i].External[incentiveId] = externalReward[i]
-				rewards[i].ExternalPenalty[incentiveId] = externalPenalty[i]
-			}
-		}
-
-		rewardState.reset()
+// computeExternalReward writes one incentive's external reward and penalty of each warmup into rewards.
+// An incentive that does not exist on the pool or has not started yet contributes nothing.
+func (self *positionRewardContext) computeExternalReward(param *calculatePositionRewardParam, rewards []Reward, incentiveId string) {
+	incentive, ok := self.poolResolver.IncentivesResolver().Get(incentiveId)
+	if !ok {
+		return
 	}
 
-	return rewards, updateParams
+	incentiveResolver := NewExternalIncentiveResolver(incentive)
+
+	// Check if incentive is active during this specific collection period
+	if !incentiveResolver.IsStarted(param.CurrentTime) {
+		return
+	}
+
+	// External incentivized pool.
+	// Calculate reward for each warmup using per-incentive lastCollectTime
+	externalLastCollectTime := self.depositResolver.ExternalRewardLastCollectTime(incentiveId)
+	externalReward, externalPenalty := self.rewardState.calculateExternalReward(externalLastCollectTime, param.CurrentTime, incentive)
+
+	for i := range externalReward {
+		if externalReward[i] > 0 || externalPenalty[i] > 0 {
+			rewards[i].External[incentiveId] = externalReward[i]
+			rewards[i].ExternalPenalty[incentiveId] = externalPenalty[i]
+		}
+	}
+
+	self.update.externalIncentiveIds = append(self.update.externalIncentiveIds, incentiveId)
+	self.rewardState.reset()
+}
+
+// computeExternalRewards writes every incentive of the deposit into rewards.
+func (self *positionRewardContext) computeExternalRewards(param *calculatePositionRewardParam, rewards []Reward) {
+	self.discoverExternalIncentives(param)
+
+	for _, incentiveId := range self.externalIncentiveIds() {
+		self.computeExternalReward(param, rewards, incentiveId)
+	}
+}
+
+// calculateCollectablePositionReward calculates the aggregated position reward WITHOUT mutating any persisted state.
+//
+// It is the shared, read-only entry point used by the Collectable* view getters.
+// This keeps the calculation identical for every caller and guarantees views never write.
+func (s *stakerV1) calculateCollectablePositionReward(currentHeight, currentTimestamp int64, positionId uint64) (Reward, error) {
+	rewards, _, err := s.calculatePositionReward(&calculatePositionRewardParam{
+		CurrentHeight: currentHeight,
+		CurrentTime:   currentTimestamp,
+		Deposits:      s.getDeposits(),
+		Pools:         s.getPools(),
+		PoolTier:      s.getPoolTier(),
+		PositionId:    positionId,
+	})
+	if err != nil {
+		return Reward{}, err
+	}
+
+	return aggregateRewards(rewards), nil
+}
+
+// calculatePositionReward computes a position's per-warmup internal AND external rewards WITHOUT
+// mutating persisted state. All would-be state changes are returned as a positionRewardUpdate for the
+// caller to apply (collect only).
+func (s *stakerV1) calculatePositionReward(param *calculatePositionRewardParam) ([]Reward, positionRewardUpdate, error) {
+	ctx := s.newPositionRewardContext(param)
+	rewards := ctx.newRewards()
+
+	if err := ctx.computeInternalRewards(param, rewards); err != nil {
+		return nil, positionRewardUpdate{}, err
+	}
+	ctx.computeExternalRewards(param, rewards)
+
+	return rewards, ctx.update, nil
+}
+
+// calculateInternalPositionReward computes only a position's per-warmup GNS emission rewards, WITHOUT
+// mutating persisted state. Used by the emission collect path.
+func (s *stakerV1) calculateInternalPositionReward(param *calculatePositionRewardParam) ([]Reward, positionRewardUpdate, error) {
+	ctx := s.newPositionRewardContext(param)
+	rewards := ctx.newRewards()
+
+	if err := ctx.computeInternalRewards(param, rewards); err != nil {
+		return nil, positionRewardUpdate{}, err
+	}
+
+	return rewards, ctx.update, nil
+}
+
+// calculateExternalPositionReward computes a position's per-warmup reward for one external incentive,
+// WITHOUT mutating persisted state. Used by the external incentive collect path.
+//
+// Incentive discovery still runs over every incentive, so the deposit's incentive index stays complete
+// no matter which incentive the caller asked for.
+func (s *stakerV1) calculateExternalPositionReward(param *calculatePositionRewardParam, incentiveId string) ([]Reward, positionRewardUpdate) {
+	ctx := s.newPositionRewardContext(param)
+	rewards := ctx.newRewards()
+
+	ctx.discoverExternalIncentives(param)
+	ctx.computeExternalReward(param, rewards, incentiveId)
+
+	return rewards, ctx.update
+}
+
+// persistLazyPool persists a pool that calculation created ephemerally because it did not exist yet.
+func (s *stakerV1) persistLazyPool(param *calculatePositionRewardParam, updateParams positionRewardUpdate) {
+	if !updateParams.poolExisted {
+		param.Pools.set(updateParams.poolPath, updateParams.pool)
+	}
+}
+
+// updateInternalRewardCache advances the reward cache up to CurrentTime (halving boundaries). The
+// calculation itself no longer needs this, but downstream unclaimable processing (which reads
+// CurrentReward) and off-chain history rely on the cache, so it is advanced on the emission collect path.
+func (s *stakerV1) updateInternalRewardCache(param *calculatePositionRewardParam, updateParams positionRewardUpdate) {
+	param.PoolTier.cacheRewardForPool(param.CurrentTime, param.Pools, updateParams.poolPath)
+}
+
+// applyExternalIncentiveIndex persists the deposit incentive-index updates discovered during calculation.
+func (s *stakerV1) applyExternalIncentiveIndex(param *calculatePositionRewardParam, updateParams positionRewardUpdate) {
+	if len(updateParams.newExternalIncentiveIds) == 0 && !updateParams.advanceExternalIncentiveCursor {
+		return
+	}
+
+	deposit := param.Deposits.get(param.PositionId)
+	for _, incentiveId := range updateParams.newExternalIncentiveIds {
+		deposit.AddExternalIncentiveId(incentiveId)
+	}
+	if updateParams.advanceExternalIncentiveCursor {
+		deposit.SetLastExternalIncentiveUpdatedAt(param.CurrentTime)
+	}
 }
 
 // updatePositionReward applies the persisted-state changes produced by calculatePositionReward.
 // It is called ONLY by the collect path; the Collectable* view getters discard the update.
 func (s *stakerV1) updatePositionReward(param *calculatePositionRewardParam, updateParams positionRewardUpdate) {
-	// Persist a lazily created pool.
-	if !updateParams.poolExisted {
-		param.Pools.set(updateParams.poolPath, updateParams.pool)
-	}
+	s.persistLazyPool(param, updateParams)
+	s.updateInternalRewardCache(param, updateParams)
+	s.applyExternalIncentiveIndex(param, updateParams)
+}
 
-	// Materialize the reward cache up to CurrentTime (halving boundaries). The calculation itself no
-	// longer needs this, but downstream unclaimable processing (which reads CurrentReward) and off-chain
-	// history rely on the cache, so it is advanced here on collect only.
-	param.PoolTier.cacheRewardForPool(param.CurrentTime, param.Pools, updateParams.poolPath)
+// updateInternalPositionReward applies the state changes belonging to the emission collect path only.
+func (s *stakerV1) updateInternalPositionReward(param *calculatePositionRewardParam, updateParams positionRewardUpdate) {
+	s.persistLazyPool(param, updateParams)
+	s.updateInternalRewardCache(param, updateParams)
+}
 
-	// Persist deposit incentive-index updates discovered during calculation.
-	if len(updateParams.newExternalIncentiveIds) > 0 || updateParams.advanceExternalIncentiveCursor {
-		deposit := param.Deposits.get(param.PositionId)
-		for _, incentiveId := range updateParams.newExternalIncentiveIds {
-			deposit.AddExternalIncentiveId(incentiveId)
-		}
-		if updateParams.advanceExternalIncentiveCursor {
-			deposit.SetLastExternalIncentiveUpdatedAt(param.CurrentTime)
-		}
-	}
+// updateExternalPositionReward applies the state changes belonging to the external collect path only.
+func (s *stakerV1) updateExternalPositionReward(param *calculatePositionRewardParam, updateParams positionRewardUpdate) {
+	s.persistLazyPool(param, updateParams)
+	s.applyExternalIncentiveIndex(param, updateParams)
 }
 
 // internalRewardSegment is a [start, end) span over which the per-second emission reward rate is constant.
@@ -245,10 +374,10 @@ type internalRewardSegment struct {
 // tail rate is recomputed with the same calculatePoolReward arithmetic the cache writer uses, so a
 // schedule resolved from a fully materialized cache and one resolved from the emission halvings are
 // identical.
-func (self *PoolResolver) resolveInternalRewardSegments(poolTier *PoolTier, poolPath string, startTime, endTime int64) []internalRewardSegment {
+func (self *PoolResolver) resolveInternalRewardSegments(poolTier *PoolTier, poolPath string, startTime, endTime int64) ([]internalRewardSegment, error) {
 	segments := make([]internalRewardSegment, 0)
 	if startTime >= endTime {
-		return segments
+		return segments, nil
 	}
 
 	currentReward := self.CurrentReward(startTime)
@@ -267,37 +396,47 @@ func (self *PoolResolver) resolveInternalRewardSegments(poolTier *PoolTier, pool
 	})
 
 	if cursor < endTime {
-		segments = appendInternalRewardTailSegments(segments, poolTier, poolPath, cursor, endTime, currentReward)
+		var err error
+		segments, err = appendInternalRewardTailSegments(segments, poolTier, poolPath, cursor, endTime, currentReward)
+		if err != nil {
+			return nil, err
+		}
 	}
 
-	return segments
+	return segments, nil
 }
 
 // appendInternalRewardTailSegments appends the schedule for the tail [startTime, endTime], where no
 // persisted cache entry exists beyond startTime. Over this span tier/count are constant, so the rate
 // changes only at halving boundaries.
-func appendInternalRewardTailSegments(segments []internalRewardSegment, poolTier *PoolTier, poolPath string, startTime, endTime, baseReward int64) []internalRewardSegment {
+func appendInternalRewardTailSegments(segments []internalRewardSegment, poolTier *PoolTier, poolPath string, startTime, endTime, baseReward int64) ([]internalRewardSegment, error) {
 	tier := poolTier.CurrentTier(poolPath)
 	if tier == 0 || tier >= AllTierCount {
 		// Not currently tiered: the rate cannot increase; the base is 0 after de-tier.
-		return append(segments, internalRewardSegment{start: startTime, end: endTime, rewardPerSecond: baseReward})
+		return append(segments, internalRewardSegment{start: startTime, end: endTime, rewardPerSecond: baseReward}), nil
 	}
 
 	tierRatio, err := poolTier.tierRatio.Get(tier)
 	if err != nil {
-		panic(makeErrorWithDetails(errInvalidPoolTier, err.Error()))
+		return nil, makeErrorWithDetails(errInvalidPoolTier, err.Error())
 	}
 	tierRatioInt64 := int64(tierRatio)
 	tierCount := int64(poolTier.counts[tier])
 
-	halvingTimestamps, halvingEmissions := poolTier.getHalvingBlocksInRange(startTime, endTime)
+	halvingTimestamps, halvingEmissions, err := poolTier.getHalvingBlocksInRange(startTime, endTime)
+	if err != nil {
+		return nil, err
+	}
 
 	segStart := startTime
 	rate := baseReward
 	for i, hv := range halvingTimestamps {
 		if hv <= segStart {
 			// Halving effective at/before the segment start: only switch the rate.
-			rate = calculatePoolReward(halvingEmissions[i], tierRatioInt64, tierCount)
+			rate, err = calculatePoolReward(halvingEmissions[i], tierRatioInt64, tierCount)
+			if err != nil {
+				return nil, err
+			}
 			continue
 		}
 		if hv >= endTime {
@@ -305,11 +444,14 @@ func appendInternalRewardTailSegments(segments []internalRewardSegment, poolTier
 		}
 
 		segments = append(segments, internalRewardSegment{start: segStart, end: hv, rewardPerSecond: rate})
-		rate = calculatePoolReward(halvingEmissions[i], tierRatioInt64, tierCount)
+		rate, err = calculatePoolReward(halvingEmissions[i], tierRatioInt64, tierCount)
+		if err != nil {
+			return nil, err
+		}
 		segStart = hv
 	}
 
-	return append(segments, internalRewardSegment{start: segStart, end: endTime, rewardPerSecond: rate})
+	return append(segments, internalRewardSegment{start: segStart, end: endTime, rewardPerSecond: rate}), nil
 }
 
 // calculates internal unclaimable reward for the pool

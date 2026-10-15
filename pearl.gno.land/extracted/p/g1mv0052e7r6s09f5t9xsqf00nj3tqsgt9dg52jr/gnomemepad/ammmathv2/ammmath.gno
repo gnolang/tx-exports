@@ -96,7 +96,7 @@ func BuyTokens(virtualUgnot, virtualToken, ugnotIn int64) (tokensOut, newVU, new
 	return tokensOut, newVU, newVT
 }
 
-// MaxNetInForTokenOut is the largest net ugnot in that yields tokensOut â‰¤ maxTokensOut
+// MaxNetInForTokenOut is the largest net ugnot in that yields tokensOut <= maxTokensOut
 // (integer CPMM, same floor rules as BuyTokens). Used to fill the last curve tokens
 // without panicking when the user sends too much GNOT.
 func MaxNetInForTokenOut(virtualUgnot, virtualToken, maxTokensOut int64) int64 {
@@ -111,7 +111,7 @@ func MaxNetInForTokenOut(virtualUgnot, virtualToken, maxTokensOut int64) int64 {
 	if !ok {
 		panic("ammmath: k overflow")
 	}
-	// tokensOut â‰¤ max  â‡”  k/(vu+net) â‰¥ targetNewVT  â‡”  vu+net â‰¤ k/targetNewVT (floor)
+	// tokensOut <= max  ⇔  k/(vu+net) >= targetNewVT  ⇔  vu+net <= k/targetNewVT (floor)
 	maxNewVU := k / targetNewVT
 	if maxNewVU <= virtualUgnot {
 		return 0
