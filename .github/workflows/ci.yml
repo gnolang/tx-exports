@@ -65,3 +65,9 @@ jobs:
       - name: rules.mk tx-archive-ensure works
         working-directory: test11.gno.land
         run: make tx-archive-ensure
+
+      # The fetch guard, against a file:// /status fixture: no network needed.
+      - name: rules.mk check-chain-id guard
+        run: |
+          bash tests/chain-id-guard.sh mainnet.gno.land gnoland-1
+          bash tests/chain-id-guard.sh onyx.gno.land onyx-1
