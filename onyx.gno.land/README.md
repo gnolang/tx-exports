@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-5490
+5544
 ```
 
 ## addpkgs
@@ -15,19 +15,19 @@
     596 "gno.land/r/nym-alexiscolin000/gnoradio/catalog/v1"
     545 "gno.land/r/nym-alexiscolin000/gnogolf/golf"
     200 "gno.land/r/nym-alexiscolin000/gnoradio/radio/v1"
+    145 "gno.land/r/nym-sixseven067/markets"
     134 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/beacon/v2"
-    121 "gno.land/r/nym-sixseven067/markets"
     111 "gno.land/r/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/shots"
     100 "gno.land/r/nym-mikecito001/connect4_v2"
      98 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/minter3"
-     92 "gno.land/r/gnops/valopers"
+     93 "gno.land/r/gnops/valopers"
      88 "gno.land/r/samcrew/launchpad/sales/v1"
      76 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game16"
      71 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens3"
+     70 "gno.land/r/nym-sixseven067/markets/v2"
      65 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens2"
      56 "gno.land/r/g1a9g8nu3m0xgx58hh36fph49e2xkqm9axlxuf5z/memba_gov"
      55 "gno.land/r/samcrew/connect4"
-     53 "gno.land/r/nym-sixseven067/markets/v2"
      49 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game27"
      46 "gno.land/r/gnoland/wugnot"
      43 "gno.land/r/sys/namereg/v0"
@@ -43,6 +43,7 @@
      21 "gno.land/r/samcrew/launchpad/market/v1"
      20 "gno.land/r/samcrew/launchpad/nft/v1"
      18 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/crowdfund"
+     18 "gno.land/r/nym-gfanton001/echo/v0"
      17 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/arena"
      16 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game14"
      16 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/arcade/duel/v3"
@@ -63,7 +64,6 @@
      11 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/arcade/duel/v4"
      11 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/netting"
      10 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game11"
-     10 "gno.land/r/nym-gfanton001/echo/v0"
       9 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/fishbay"
       9 "gno.land/r/g1sl6fyq6mrc3wydt8xluhxx4aqsudpp9vhv6g2a/gnotif/pingpong"
       9 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/subscriptions"
