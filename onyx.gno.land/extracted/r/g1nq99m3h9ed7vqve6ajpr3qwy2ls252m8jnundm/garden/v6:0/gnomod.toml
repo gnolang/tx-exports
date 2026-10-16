@@ -1,0 +1,51 @@
+# garden/v6's module path. Deploy status is deliberately NOT recorded here -- see garden/v2's
+# own gnomod.toml for why ("NOT deployed" written in this exact spot was deployed hours later
+# and now lies on chain forever). For the live deploy status, read TESTNET.md -- not this file,
+# which is a build input and cannot be trusted to describe the chain.
+#
+# WHAT v6 IS: garden/v5 plus exactly two fixes and nothing else -- (a) gnomes can be named
+# (SetName, owner-only, after the roll, never during it), and (b) the drand round that produced
+# each gnome is stored and readable (SettledRound). v5 is DEPLOYED AND LIVE on onyx and is
+# immutable, which is why this is a new realm rather than a patch. Read garden.gno's "WHAT v6 IS"
+# section before changing anything here: v5 survived a security audit and three real
+# mutation-testing defect fixes, and every unrelated change to this file is a change that has
+# not been audited.
+#
+# Checklist before ever deploying, full detail in garden.gno's package doc and gnomod.toml's
+# git history. Items 0-6 are v5's own checklist, carried forward UNCHANGED because every one of
+# them is still outstanding; 7-9 are new to v6.
+#
+#  (0) re-confirm the three sale constants, carried over from v4 as placeholders.
+#  (1) adminAddress is the onyx deploy key `gnotchi-deploy`, which is also this namespace -- it
+#      is funded (admin calls cost fees, and v4's old key is dust), but it is still a testnet key
+#      whose mnemonic sits on this host, so change it for anywhere real.
+#  (2) this realm imports the beacon/v2 drand verifier, from the OTHER namespace
+#      (g1r4aw43...), exactly as v5 does -- that cross-namespace import works and must not be
+#      "fixed". It cannot deploy where that path is not live.
+#  (3) numEyes/numNoses/hat/coat catalogue must match the art side exactly.
+#  (4) batchCap and the three named editions (hob/thistle/wick) are BATCH-ONE.md's roster,
+#      re-read it. v6 adds a THIRD place those three names appear -- reservedNameKeys -- so a
+#      roster change is now three edits, not two. TestReservedNamesCoverEveryNamedEdition pins
+#      that they agree.
+#  (5) lockCaredDays is the owner's RECOMMENDATION, not yet confirmed.
+#  (6) genesisGnomeName is an unconfirmed placeholder. NEW IN v6 AND EASY TO MISS: it is no
+#      longer read by nothing -- it is now the genesis gnome's actual on-chain name and its
+#      canonical form must stay in reservedNameKeys, or an ordinary gnome could take it.
+#      TestGenesisNameIsReserved fails if that pairing is broken.
+#  (7) maxNameLen (24) must equal app/js/config.js's NAME_MAX_LEN. Hand-maintained in two
+#      places because Gno cannot read that file at build time;
+#      TestMaxNameLenMatchesTheAppsRule pins this side's value.
+#  (8) RENAMING IS ALLOWED, NOT ONE-SHOT, and NAMES ARE UNIQUE across the collection. Both were
+#      decided by the owner on 2026-10-16 before this file was written. Neither is a constant
+#      that can be flipped -- they are the shape of SetName and of the nameOwner index -- so if
+#      either is wrong, it is wrong before deploy, not after. Nothing on an immutable realm can
+#      change them later.
+#  (9) the invisible-letter denylist and the combining-mark exclusion are carried forward from
+#      v4 verbatim. The combining-mark exclusion is a KNOWN, DOCUMENTED, STILL-OPEN product
+#      question (realms/garden/NOTES.md, v4's finding Y7): it makes zalgo impossible and also
+#      makes Devanagari, Thai and vocalised Hebrew/Arabic unspellable. v6 did not re-decide it.
+#      Decide it before mainnet, not before onyx.
+#
+# MUST NOT use the arcade/... prefix (ARCADE.md 4.7, NOTES.md).
+module = "gno.land/r/g1nq99m3h9ed7vqve6ajpr3qwy2ls252m8jnundm/garden/v6"
+gno = "0.9"
