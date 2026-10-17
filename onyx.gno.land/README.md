@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-5939
+5943
 ```
 
 ## addpkgs
@@ -39,13 +39,13 @@
      28 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/budgets"
      28 "gno.land/r/nym-moultest123/x/vm/riscvdemo/v0"
      27 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game13"
+     25 "gno.land/r/nym-gfanton001/echo/v0"
      24 "gno.land/r/samcrew/launchpad/config/v1"
      23 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/fish2"
      23 "gno.land/r/nym-mnsrehearsal001/nslogic/v2"
      22 "gno.land/r/g1a9g8nu3m0xgx58hh36fph49e2xkqm9axlxuf5z/memba_bridge_v1"
      22 "gno.land/r/nym-mnsrehearsal001/nsnft/v1"
      21 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/shoal/fish"
-     21 "gno.land/r/nym-gfanton001/echo/v0"
      21 "gno.land/r/samcrew/launchpad/market/v1"
      20 "gno.land/r/samcrew/launchpad/nft/v1"
      18 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/crowdfund"
