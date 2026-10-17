@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-5943
+5974
 ```
 
 ## addpkgs
@@ -14,9 +14,9 @@
     750 "gno.land/r/nym-alexiscolin000/gnogolf/golf/v2"
     596 "gno.land/r/nym-alexiscolin000/gnoradio/catalog/v1"
     545 "gno.land/r/nym-alexiscolin000/gnogolf/golf"
-    213 "gno.land/r/nym-sixseven067/markets"
+    220 "gno.land/r/nym-sixseven067/markets"
     200 "gno.land/r/nym-alexiscolin000/gnoradio/radio/v1"
-    152 "gno.land/r/nym-sixseven067/markets/v2"
+    162 "gno.land/r/nym-sixseven067/markets/v2"
     134 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/beacon/v2"
     111 "gno.land/r/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/shots"
     100 "gno.land/r/nym-mikecito001/connect4_v2"
@@ -39,7 +39,7 @@
      28 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/budgets"
      28 "gno.land/r/nym-moultest123/x/vm/riscvdemo/v0"
      27 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game13"
-     25 "gno.land/r/nym-gfanton001/echo/v0"
+     26 "gno.land/r/nym-gfanton001/echo/v0"
      24 "gno.land/r/samcrew/launchpad/config/v1"
      23 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/fish2"
      23 "gno.land/r/nym-mnsrehearsal001/nslogic/v2"
@@ -49,6 +49,7 @@
      21 "gno.land/r/samcrew/launchpad/market/v1"
      20 "gno.land/r/samcrew/launchpad/nft/v1"
      18 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/crowdfund"
+     18 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/payroll"
      17 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/arena"
      16 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game14"
      16 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game29"
@@ -58,7 +59,6 @@
      14 "gno.land/r/demo/profile"
      14 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/arcade/speed/v2"
      14 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/books"
-     14 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/payroll"
      13 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/garden/v2"
      13 "gno.land/r/nym-mikecito001/connect4"
      13 "gno.land/r/nym-mikecito001/connect4_v4"
@@ -98,6 +98,7 @@
       5 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/arcade/duel"
       5 "gno.land/r/g1rzgxl6njyu4c2x89gxvaa9cswrt73rz8mlp7l6/pingpong/v0"
       5 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/assets"
+      5 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/payslips"
       5 "gno.land/r/nym-alexiscolin000/gnoradio/data"
       4 "gno.land/r/g105p0fa3z9g3cym72eqssme755gkvqgjksarq3p/smoke/sa418b4a1/counter"
       4 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/fishcoin"
@@ -398,6 +399,7 @@
       1 "gno.land/r/g1sl6fyq6mrc3wydt8xluhxx4aqsudpp9vhv6g2a/gnotif"
       1 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/inventory"
       1 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/receivables"
+      1 "gno.land/r/g1zrjyzatudmadgqu39d5wfamhdvf0adwlxkz25d/ctlprobe"
       1 "gno.land/r/g1zrjyzatudmadgqu39d5wfamhdvf0adwlxkz25d/pntprobe"
       1 "gno.land/r/nym-alexiscolin000/gnogolf/store"
       1 "gno.land/r/nym-alexiscolin000/gnoradio/tickets/nft"
