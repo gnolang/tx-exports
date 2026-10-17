@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-164200
+165171
 ```
 
 ## addpkgs
@@ -11,25 +11,25 @@
 
 ## top realm calls
 ```
-  13465 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble4"
-  12461 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble5"
-  11290 "gno.land/r/gnoland/wugnot"
-   9503 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble6"
-   5336 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble3"
-   4552 "gno.land/r/gnoswap/staker"
-   4173 "gno.land/r/gnoswap/position"
-   3966 "gno.land/r/gnoswap/router"
-   3878 "gno.land/r/gnoswap/gns"
-   2641 "gno.land/r/akkadia/beta/abt"
-   2111 "gno.land/r/gnoswap/launchpad"
-   1307 "gno.land/r/gnoswap/gov/staker"
-   1137 "gno.land/r/gnoswap/gnft"
-    884 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv3"
-    638 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/wbubble"
+  13575 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble4"
+  12574 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble5"
+  11309 "gno.land/r/gnoland/wugnot"
+   9614 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble6"
+   5338 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble3"
+   4596 "gno.land/r/gnoswap/staker"
+   4209 "gno.land/r/gnoswap/position"
+   3976 "gno.land/r/gnoswap/router"
+   3884 "gno.land/r/gnoswap/gns"
+   2690 "gno.land/r/akkadia/beta/abt"
+   2154 "gno.land/r/gnoswap/launchpad"
+   1315 "gno.land/r/gnoswap/gov/staker"
+   1140 "gno.land/r/gnoswap/gnft"
+    886 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv3"
+    642 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/wbubble"
     520 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens"
-    448 "gno.land/r/akkadia/beta/lotto"
+    457 "gno.land/r/akkadia/beta/lotto"
     433 "gno.land/r/nym-thegnomic001/gnomic_airdrop"
-    303 "gno.land/r/g1nmqhha0ua730vejxqhrelldm4pga5j5ptle5ea/guardians"
+    306 "gno.land/r/g1nmqhha0ua730vejxqhrelldm4pga5j5ptle5ea/guardians"
     255 "gno.land/r/nym-thegnomic001/gnomic"
     238 "gno.land/r/g1ecsuj0q572jr0dhu29q9njtnmw03hyu7tyyvv6/kourt"
     213 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/kourtv3"
