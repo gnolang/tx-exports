@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-6150
+6190
 ```
 
 ## addpkgs
@@ -14,8 +14,8 @@
     750 "gno.land/r/nym-alexiscolin000/gnogolf/golf/v2"
     596 "gno.land/r/nym-alexiscolin000/gnoradio/catalog/v1"
     545 "gno.land/r/nym-alexiscolin000/gnogolf/golf"
-    266 "gno.land/r/nym-sixseven067/markets"
-    213 "gno.land/r/nym-sixseven067/markets/v2"
+    276 "gno.land/r/nym-sixseven067/markets"
+    224 "gno.land/r/nym-sixseven067/markets/v2"
     200 "gno.land/r/nym-alexiscolin000/gnoradio/radio/v1"
     134 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/beacon/v2"
     111 "gno.land/r/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/shots"
@@ -72,6 +72,7 @@
      11 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/netting"
      10 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/pado"
      10 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game11"
+     10 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/deposits"
       9 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/fishbay"
       9 "gno.land/r/g1sl6fyq6mrc3wydt8xluhxx4aqsudpp9vhv6g2a/gnotif/pingpong"
       9 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/subscriptions"
@@ -89,6 +90,7 @@
       7 "gno.land/r/g1a9g8nu3m0xgx58hh36fph49e2xkqm9axlxuf5z/memba_feedback_v2"
       7 "gno.land/r/g1nq99m3h9ed7vqve6ajpr3qwy2ls252m8jnundm/garden/v5"
       7 "gno.land/r/g1rzgxl6njyu4c2x89gxvaa9cswrt73rz8mlp7l6/alpha2/echo/v0"
+      7 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/auction"
       7 "gno.land/r/nym-vikbez000/telescope"
       6 "gno.land/r/g12yg9nh4ncma44emgm8msxe8aavzywt0p95tanv/bolo/v0"
       6 "gno.land/r/g1a9g8nu3m0xgx58hh36fph49e2xkqm9axlxuf5z/escrow_v4"
@@ -172,7 +174,6 @@
       2 "gno.land/r/g1rzgxl6njyu4c2x89gxvaa9cswrt73rz8mlp7l6/alpha2/heavy/v0"
       2 "gno.land/r/g1uhp2ct66xap97aqwdlutwvu39y5370gd62xpcs/tally"
       2 "gno.land/r/g1uqqqz9576j4hyttvq3890p9a6vqa32ut49gfn5/tally"
-      2 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/auction"
       2 "gno.land/r/gov/dao"
       2 "gno.land/r/nym-alexiscolin000/gnoradio/home/v1"
       2 "gno.land/r/nym-alexiscolin000/gnoradio/home/v2"
