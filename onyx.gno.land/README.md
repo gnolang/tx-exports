@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-5997
+6038
 ```
 
 ## addpkgs
@@ -14,9 +14,9 @@
     750 "gno.land/r/nym-alexiscolin000/gnogolf/golf/v2"
     596 "gno.land/r/nym-alexiscolin000/gnoradio/catalog/v1"
     545 "gno.land/r/nym-alexiscolin000/gnogolf/golf"
-    230 "gno.land/r/nym-sixseven067/markets"
+    248 "gno.land/r/nym-sixseven067/markets"
     200 "gno.land/r/nym-alexiscolin000/gnoradio/radio/v1"
-    172 "gno.land/r/nym-sixseven067/markets/v2"
+    189 "gno.land/r/nym-sixseven067/markets/v2"
     134 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/beacon/v2"
     111 "gno.land/r/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/shots"
     100 "gno.land/r/nym-mikecito001/connect4_v2"
@@ -35,11 +35,11 @@
      46 "gno.land/r/gnoland/wugnot"
      44 "gno.land/r/sys/namereg/v0"
      33 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game3"
+     30 "gno.land/r/nym-gfanton001/echo/v0"
      29 "gno.land/r/samcrew/launchpad/drops/v1"
      28 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/budgets"
      28 "gno.land/r/nym-moultest123/x/vm/riscvdemo/v0"
      27 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game13"
-     26 "gno.land/r/nym-gfanton001/echo/v0"
      24 "gno.land/r/samcrew/launchpad/config/v1"
      23 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/fish2"
      23 "gno.land/r/nym-mnsrehearsal001/nslogic/v2"
@@ -397,6 +397,7 @@
       1 "gno.land/r/g1rzgxl6njyu4c2x89gxvaa9cswrt73rz8mlp7l6/alpha3/gnotif/v0"
       1 "gno.land/r/g1rzgxl6njyu4c2x89gxvaa9cswrt73rz8mlp7l6/gnotif/v0"
       1 "gno.land/r/g1sl6fyq6mrc3wydt8xluhxx4aqsudpp9vhv6g2a/gnotif"
+      1 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/cashflow"
       1 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/inventory"
       1 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/receivables"
       1 "gno.land/r/g1zrjyzatudmadgqu39d5wfamhdvf0adwlxkz25d/ctlprobe"
