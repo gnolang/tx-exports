@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-6190
+6211
 ```
 
 ## addpkgs
@@ -14,8 +14,8 @@
     750 "gno.land/r/nym-alexiscolin000/gnogolf/golf/v2"
     596 "gno.land/r/nym-alexiscolin000/gnoradio/catalog/v1"
     545 "gno.land/r/nym-alexiscolin000/gnogolf/golf"
-    276 "gno.land/r/nym-sixseven067/markets"
-    224 "gno.land/r/nym-sixseven067/markets/v2"
+    285 "gno.land/r/nym-sixseven067/markets"
+    233 "gno.land/r/nym-sixseven067/markets/v2"
     200 "gno.land/r/nym-alexiscolin000/gnoradio/radio/v1"
     134 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/beacon/v2"
     111 "gno.land/r/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/shots"
@@ -206,6 +206,7 @@
       1 "gno.land/p/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/fee/v1"
       1 "gno.land/p/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/bls254"
       1 "gno.land/p/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/fenwick"
+      1 "gno.land/p/g1sl6fyq6mrc3wydt8xluhxx4aqsudpp9vhv6g2a/gnomehall/engine"
       1 "gno.land/p/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/aging"
       1 "gno.land/p/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/cashflow"
       1 "gno.land/p/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/coinio"
