@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-6304
+6341
 ```
 
 ## addpkgs
@@ -14,8 +14,8 @@
     750 "gno.land/r/nym-alexiscolin000/gnogolf/golf/v2"
     596 "gno.land/r/nym-alexiscolin000/gnoradio/catalog/v1"
     545 "gno.land/r/nym-alexiscolin000/gnogolf/golf"
-    320 "gno.land/r/nym-sixseven067/markets"
-    276 "gno.land/r/nym-sixseven067/markets/v2"
+    335 "gno.land/r/nym-sixseven067/markets"
+    281 "gno.land/r/nym-sixseven067/markets/v2"
     200 "gno.land/r/nym-alexiscolin000/gnoradio/radio/v1"
     134 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/beacon/v2"
     111 "gno.land/r/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/shots"
@@ -68,6 +68,7 @@
      12 "gno.land/r/g1u97n45s4s6q7vn5clr8339pv4up455hnqn4aff/gnodice"
      12 "gno.land/r/nym-mikecito001/connect4_v3"
      11 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/fishlive"
+     11 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game31"
      11 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/arcade/duel/v4"
      11 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/netting"
      10 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/pado"
@@ -401,6 +402,7 @@
       1 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/party"
       1 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/profile"
       1 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/shoal/shoaltoken"
+      1 "gno.land/r/g1nq99m3h9ed7vqve6ajpr3qwy2ls252m8jnundm/probe/v2"
       1 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/arcade/duel/v2"
       1 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/arcade/raffle/v2"
       1 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/ops"
