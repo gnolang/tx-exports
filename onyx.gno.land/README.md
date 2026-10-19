@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-6341
+6368
 ```
 
 ## addpkgs
@@ -14,8 +14,8 @@
     750 "gno.land/r/nym-alexiscolin000/gnogolf/golf/v2"
     596 "gno.land/r/nym-alexiscolin000/gnoradio/catalog/v1"
     545 "gno.land/r/nym-alexiscolin000/gnogolf/golf"
-    335 "gno.land/r/nym-sixseven067/markets"
-    281 "gno.land/r/nym-sixseven067/markets/v2"
+    346 "gno.land/r/nym-sixseven067/markets"
+    290 "gno.land/r/nym-sixseven067/markets/v2"
     200 "gno.land/r/nym-alexiscolin000/gnoradio/radio/v1"
     134 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/beacon/v2"
     111 "gno.land/r/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/shots"
@@ -125,6 +125,7 @@
       4 "gno.land/r/g1lyg2kndaxj2dqssku0z508u067ectj08nk5txm/smoke/s882abf3e/counter"
       4 "gno.land/r/g1mxn6ay255e8yfzfykk78uphs0fh0ayuhdavnum/smoke/s837ff2ef/counter"
       4 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/shoal/party"
+      4 "gno.land/r/g1nq99m3h9ed7vqve6ajpr3qwy2ls252m8jnundm/garden/v7"
       4 "gno.land/r/g1nufzhlvkr7ep9m9t52mk9jfymtn7ywclsaydf8/smoke/s90d530f9/counter"
       4 "gno.land/r/g1phjndp6694d7ufa847tyq8sufnzaww7yj3a4hh/smoke/sd70e23eb/counter"
       4 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/arcade/speed"
@@ -403,6 +404,7 @@
       1 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/profile"
       1 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/shoal/shoaltoken"
       1 "gno.land/r/g1nq99m3h9ed7vqve6ajpr3qwy2ls252m8jnundm/probe/v2"
+      1 "gno.land/r/g1nq99m3h9ed7vqve6ajpr3qwy2ls252m8jnundm/probe/v3"
       1 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/arcade/duel/v2"
       1 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/arcade/raffle/v2"
       1 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/ops"
