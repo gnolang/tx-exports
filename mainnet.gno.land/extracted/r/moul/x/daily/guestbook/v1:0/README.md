@@ -40,7 +40,7 @@ gnokey maketx call \
   -pkgpath "gno.land/r/REPLACE_ADDR/guestbook" \
   -func Sign \
   -args "gm gno.land!" \
-  -gas-fee 1000000ugnot -gas-wanted 2000000 \
+  -gas-fee 20000ugnot -gas-wanted 2000000 \
   -broadcast -chainid sapphire-1 -remote <rpc> mykey
 ```
 
@@ -126,6 +126,8 @@ port back down into this one.
 ---
 
 Part of **[moul/gno-contracts](https://github.com/moul/gno-contracts)** — moul's versioned gno.land contracts. See the repository for the full catalog, build/test tooling, and usage.
+
+**On mainnet:** [![deployment status](https://gnoscope.com/_badges/shield/status/r/moul/x/daily/guestbook/v1?network=mainnet)](https://gnoscope.com/realm/r/moul/x/daily/guestbook/v1) [![transactions](https://gnoscope.com/_badges/shield/txs/r/moul/x/daily/guestbook/v1?network=mainnet)](https://gnoscope.com/realm/r/moul/x/daily/guestbook/v1) [![unique callers](https://gnoscope.com/_badges/shield/users/r/moul/x/daily/guestbook/v1?network=mainnet)](https://gnoscope.com/realm/r/moul/x/daily/guestbook/v1) [![deployed revision](https://gnoscope.com/_badges/shield/version/r/moul/x/daily/guestbook/v1?network=mainnet)](https://gnoscope.com/realm/r/moul/x/daily/guestbook/v1)
 
 **Dependency graph:**
 

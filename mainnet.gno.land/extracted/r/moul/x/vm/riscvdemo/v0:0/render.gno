@@ -4,9 +4,10 @@ import (
 	"strings"
 
 	"gno.land/p/moul/kit/ui/v0"
+	"gno.land/p/moul/md/v0"
 	"gno.land/p/moul/x/vm/riscv/v0"
 	"gno.land/p/moul/x/vm/vmkit/v0"
-	"gno.land/p/nt/ufmt/v0"
+	"gno.land/p/moul/vendor/nt/ufmt/v2"
 )
 
 // regNames are the ABI names, because nobody reading a register dump thinks in
@@ -61,7 +62,7 @@ func renderHome() string {
 			i.Status.String(),
 			ufmt.Sprintf("%d", i.FuelUsed),
 			ufmt.Sprintf("%d", i.Slices),
-			"`"+ui.Cell(printable(i.Output, 24))+"`",
+			codeCell(printable(i.Output, 24)),
 		)
 		return false
 	})
@@ -241,4 +242,15 @@ func printable(b []byte, max int) string {
 		sb.WriteString("…")
 	}
 	return sb.String()
+}
+
+// codeCell puts already-printable text in a code span inside a table cell.
+// Inside backticks markdown escapes are not applied, so ui.Cell's backslashes
+// would reach the reader verbatim ("Hello, gno\.land"). md.InlineCode builds
+// the span: empty text is no span at all (two bare backticks render as two
+// backticks), a space at either end is padded so CommonMark's strip does not
+// eat it, and the fence outscans any backtick run. The GFM row splitter runs
+// before inline parsing, so the pipe is escaped on top.
+func codeCell(s string) string {
+	return strings.ReplaceAll(md.InlineCode(s), "|", "\\|")
 }

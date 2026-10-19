@@ -5,3 +5,8 @@ gno = "0.9"
 # job is to be redeployed whenever one of the packages it shows off changes, so
 # losing the notes people left is the intended trade rather than a regret.
 private = true
+
+[source]
+  repository = "https://github.com/moul/gno-contracts"
+  path = "r/moul/x/allinone/devtools"
+  revision = "507056d812b505ad16a009f0d60786644ceeb19d"

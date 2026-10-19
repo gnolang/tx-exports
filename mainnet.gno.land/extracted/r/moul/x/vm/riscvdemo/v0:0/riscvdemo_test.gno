@@ -174,6 +174,38 @@ func TestRenderInstanceShowsTheRegisterFile(cur realm, t *testing.T) {
 	uassert.True(t, strings.Contains(out, "halted"), "the status")
 }
 
+// The instance page is all hex: the pc, every register, the image dump.
+// gno.land/p/nt/ufmt/v0 has no %X and no width flags, so this page shipped
+// printing "0x(unhandled verb: %X)" in every cell; the test pins the fix.
+func TestRenderInstanceHex(cur realm, t *testing.T) {
+	resetState()
+	testing.SetRealm(testing.NewUserRealm(alice()))
+
+	// addi a7, zero, 93 ; ecall (exit)
+	id := Upload(cross(cur), "0x9308d005 73000000", "", 0)
+	Step(cross(cur), id, 0)
+
+	out := Render("/" + id)
+	uassert.False(t, strings.Contains(out, "unhandled"), out)
+	uassert.True(t, strings.Contains(out, "| a7 | 0x0000005D | 93 | 93 |"), out)
+	uassert.True(t, strings.Contains(out, "05d00893 00000073"), out)
+}
+
+// The instance list shows output in a code span, where markdown escapes do
+// not apply: ui.Cell's backslashes used to reach the reader as
+// `Hello, gno\.land\\n`. Only the pipe needs escaping inside the span.
+func TestRenderOutputCell(cur realm, t *testing.T) {
+	resetState()
+	testing.SetRealm(testing.NewUserRealm(alice()))
+
+	id := UploadSample(cross(cur), "hello", "", 0)
+	Step(cross(cur), id, 0)
+
+	out := Render("")
+	uassert.True(t, strings.Contains(out, "| `Hello, gno.land\\n` |"), out)
+	uassert.Equal(t, "`a\\|b`", codeCell("a|b"))
+}
+
 func TestRenderUnknownInstance(t *testing.T) {
 	uassert.True(t, strings.Contains(Render("/nope"), "No such instance"))
 }
@@ -190,4 +222,40 @@ func ExampleRender() {
 	// [← all instances](/r/moul/x/vm/riscvdemo/v0)
 	//
 	// **No such instance.** It was never uploaded, or its owner removed it.
+}
+
+// An instance that has written nothing yet shows an empty output cell. Two
+// adjacent backticks are not an empty code span, they render as two
+// backticks.
+func TestRenderEmptyOutputCell(cur realm, t *testing.T) {
+	resetState()
+	testing.SetRealm(testing.NewUserRealm(alice()))
+	UploadSample(cross(cur), "hello", "", 0)
+
+	row := ""
+	for _, line := range strings.Split(Render(""), "\n") {
+		if strings.HasPrefix(line, "| [") {
+			row = line
+		}
+	}
+	uassert.True(t, row != "", "an instance row is rendered")
+	uassert.True(t, strings.HasSuffix(row, "| 0 |  |"), row)
+}
+
+// codeCell follows the three rules of a code span, not only the pipe: empty
+// content is not a span, a space at either end needs a pad, and the fence
+// outscans any backtick run in the content.
+func TestCodeCellRules(t *testing.T) {
+	cases := []struct{ in, want string }{
+		{"", ""},
+		{"Hello, gno.land\\n", "`Hello, gno.land\\n`"},
+		{"a|b", "`a\\|b`"},
+		{" hi ", "`  hi  `"},
+		{" hi", "`  hi `"},
+		{"hi ", "` hi  `"},
+		{"a`b", "``a`b``"},
+	}
+	for _, c := range cases {
+		uassert.Equal(t, c.want, codeCell(c.in), "codeCell("+c.in+")")
+	}
 }

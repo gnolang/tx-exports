@@ -1,3 +1,8 @@
 module = "gno.land/r/moul/x/vm/bfdemo/v0"
 gno = "0.9"
 private = true
+
+[source]
+  repository = "https://github.com/moul/gno-contracts"
+  path = "r/moul/x/vm/bfdemo"
+  revision = "507056d812b505ad16a009f0d60786644ceeb19d"

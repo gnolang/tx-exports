@@ -6,3 +6,8 @@ private = true
 # usual one, a redeploy wipes every crew, share and credit while the coins stay
 # at the address, and it is worth taking while the design is still moving. The
 # v1 in README.md, one realm per crew, is the move that closes the door.
+
+[source]
+  repository = "https://github.com/moul/gno-contracts"
+  path = "r/moul/x/social/crews"
+  revision = "507056d812b505ad16a009f0d60786644ceeb19d"
