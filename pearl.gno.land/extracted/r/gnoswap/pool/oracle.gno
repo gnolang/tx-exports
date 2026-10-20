@@ -1,39 +1,9 @@
 package pool
 
-// ObservationState manages the oracle's historical data
-type ObservationState struct {
-	observations    map[uint16]*Observation // circular buffer of observations
-	index           uint16                  // the most-recently updated index of the observations array
-	cardinality     uint16                  // the current maximum number of observations that are being stored
-	cardinalityNext uint16                  // the next maximum number of observations to store, triggered in observations.write
-}
-
-// ObservationState Getters methods
-func (os *ObservationState) Index() uint16                         { return os.index }
-func (os *ObservationState) Cardinality() uint16                   { return os.cardinality }
-func (os *ObservationState) CardinalityNext() uint16               { return os.cardinalityNext }
-func (os *ObservationState) Observations() map[uint16]*Observation { return os.observations }
-
-// ObservationState Setters methods
-func (os *ObservationState) SetIndex(index uint16) {
-	os.index = index
-}
-
-func (os *ObservationState) SetCardinality(cardinality uint16) {
-	os.cardinality = cardinality
-}
-
-func (os *ObservationState) SetCardinalityNext(cardinalityNext uint16) {
-	os.cardinalityNext = cardinalityNext
-}
-
-func (os *ObservationState) SetObservation(index uint16, observation *Observation) {
-	os.observations[index] = observation
-}
-
-func (os *ObservationState) SetObservations(observations map[uint16]*Observation) {
-	os.observations = observations
-}
+import (
+	"gno.land/p/gnoswap/utils"
+	"gno.land/p/nt/bptree/v0"
+)
 
 type Observation struct {
 	blockTimestamp                    int64  // timestamp of the observation
@@ -43,29 +13,12 @@ type Observation struct {
 }
 
 // Observation Getters methods
-func (o *Observation) BlockTimestamp() int64       { return o.blockTimestamp }
-func (o *Observation) TickCumulative() int64       { return o.tickCumulative }
+func (o *Observation) BlockTimestamp() int64 { return o.blockTimestamp }
+func (o *Observation) TickCumulative() int64 { return o.tickCumulative }
 func (o *Observation) SecondsPerLiquidityCumulativeX128() string {
 	return o.secondsPerLiquidityCumulativeX128
 }
 func (o *Observation) Initialized() bool { return o.initialized }
-
-// Observation Setters methods
-func (o *Observation) SetBlockTimestamp(blockTimestamp int64) {
-	o.blockTimestamp = blockTimestamp
-}
-
-func (o *Observation) SetTickCumulative(tickCumulative int64) {
-	o.tickCumulative = tickCumulative
-}
-
-func (o *Observation) SetSecondsPerLiquidityCumulativeX128(secondsPerLiquidityCumulativeX128 string) {
-	o.secondsPerLiquidityCumulativeX128 = secondsPerLiquidityCumulativeX128
-}
-
-func (o *Observation) SetInitialized(initialized bool) {
-	o.initialized = initialized
-}
 
 func (o *Observation) Clone() *Observation {
 	return &Observation{
@@ -74,24 +27,6 @@ func (o *Observation) Clone() *Observation {
 		secondsPerLiquidityCumulativeX128: o.secondsPerLiquidityCumulativeX128,
 		initialized:                       o.initialized,
 	}
-}
-
-func NewObservationState(currentTime int64) *ObservationState {
-	state := &ObservationState{
-		index:           0,
-		cardinality:     1,
-		cardinalityNext: 1,
-		observations:    make(map[uint16]*Observation),
-	}
-
-	state.observations[0] = NewObservation(
-		currentTime,
-		0,
-		"0",
-		true,
-	)
-
-	return state
 }
 
 func NewObservation(
@@ -115,4 +50,57 @@ func NewDefaultObservation() *Observation {
 		"0",
 		false,
 	)
+}
+
+// ObservationTree is a pool-local oracle ring buffer keyed by index.
+// It owns the B+tree key encoding so oracle code works with uint16 indices.
+type ObservationTree struct {
+	tree *bptree.BPTree
+}
+
+func NewObservationTree() *ObservationTree {
+	return &ObservationTree{tree: bptree.NewBPTreeN(32)}
+}
+
+func (t *ObservationTree) Get(index uint16) (*Observation, bool) {
+	if t == nil || t.tree == nil {
+		return nil, false
+	}
+	value := t.tree.Get(utils.EncodeUint16(index))
+	if value == nil {
+		return nil, false
+	}
+	observation, ok := value.(*Observation)
+	return observation, ok
+}
+
+func (t *ObservationTree) Set(index uint16, observation *Observation) {
+	if t == nil || t.tree == nil {
+		panic("observation tree is not initialized")
+	}
+	t.tree.Set(utils.EncodeUint16(index), observation)
+}
+
+func (t *ObservationTree) Has(index uint16) bool {
+	if t == nil || t.tree == nil {
+		return false
+	}
+	return t.tree.Has(utils.EncodeUint16(index))
+}
+
+// NewObservationsTree creates the pool-path index for oracle observation trees.
+func NewObservationsTree() *bptree.BPTree {
+	return bptree.NewBPTreeN(32)
+}
+
+// NewPoolObservationsTree creates a pool's circular observation buffer.
+func NewPoolObservationsTree(currentTime int64) *ObservationTree {
+	observations := NewObservationTree()
+	observations.Set(0, NewObservation(
+		currentTime,
+		0,
+		"0",
+		true,
+	))
+	return observations
 }

@@ -67,7 +67,7 @@ func (lp *launchpadV1) CollectDepositGns(_ int, rlm realm, depositID string) (in
 
 	// Transfer reward token to depositor
 	if rewardAmount > 0 {
-		common.SafeGRC20Transfer(cross(rlm), rewardTokenPath, deposit.Depositor(), rewardAmount)
+		common.SafeGRC20Transfer(0, rlm, rewardTokenPath, deposit.Depositor(), rewardAmount)
 
 		chain.Emit(
 			"CollectRewardByDepositId",
@@ -80,7 +80,7 @@ func (lp *launchpadV1) CollectDepositGns(_ int, rlm realm, depositID string) (in
 	}
 
 	// Transfer the original GNS deposit back to the depositor
-	common.SafeGRC20Transfer(cross(rlm), GNS_TOKEN_KEY, deposit.Depositor(), withdrawalAmount)
+	common.SafeGRC20Transfer(0, rlm, GNS_TOKEN_KEY, deposit.Depositor(), withdrawalAmount)
 
 	chain.Emit(
 		"CollectDepositGns",
@@ -146,10 +146,10 @@ func (lp *launchpadV1) withdrawDeposit(_ int, rlm realm, deposit *launchpad.Depo
 	// Finalize withdrawal
 	withdrawalAmount := withdrawDeposit(deposit, currentHeight, currentTime)
 
-	// Remove reward state from BPTree after withdrawal
-	// This improves iteration performance for calculateClaimableRewardsForActiveDeposits
-	// and prevents accessing reward state for already withdrawn deposits
-	removeRewardState(rewardManager, deposit.ID())
+	// Remove the reward state and its reserved active claim after withdrawal.
+	if err := removeRewardState(rewardManager, deposit.ID()); err != nil {
+		return "", 0, err
+	}
 
 	// Store updated deposit in state
 	deposits := lp.store.GetDeposits()

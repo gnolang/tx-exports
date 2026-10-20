@@ -17,12 +17,12 @@ var (
 	privateLedger *grc20.PrivateLedger
 	userTeller    grc20.Teller
 
-	owner = ownable.NewWithAddress("g1q5tjjv3kkslzwf2na9y9wk7e5a8ugph8xfsk04") // ADMIN
+	owner = ownable.NewWithAddress("g169d3un6y4sqxxmzwt7le3l5pawlfrhg5aa3xvp") // ADMIN
 )
 
 func init(cur realm) {
 	token, privateLedger = grc20.NewToken("Tron", "TRX", 6, tokenID, cur)
-	userTeller = token.CallerTeller()
+	userTeller = privateLedger.CallerTeller()
 
 	privateLedger.Mint(owner.Owner(), 100_000_000_000_000_000)
 	grc20reg.Register(cross(cur), token, "")
