@@ -1,0 +1,56 @@
+# garden/v9's module path. Deploy status deliberately NOT here -- see garden/v2's for why. For
+# live status read TESTNET.md: this is a build input and cannot be trusted about the chain.
+#
+# WHAT v9 IS: Render's TWO version strings fixed -- v8 went live with its page titled
+# "garden/v7", the rename having been checked by NAME with nobody grepping for the VERSION. No
+# behaviour change. seedDomain says v7 and STAYS: bumping it re-rolls every gnome, see its
+# constant. tools/check-realm-version.js now catches this class.
+#
+# WHAT v8 WAS, and v9 keeps: the genesis gnome is Gaffer, not Sprig -- no new state, no new
+# function, no changed odds. NAMES.md 3a-3b has the reasoning. A realm cannot be edited, so a
+# name change is a redeploy, free only while the sixty are unminted.
+#
+# WHAT v7 IS, and v9 inherits: v6 plus exactly TEN changes, listed in garden.gno's own "WHAT v7
+# IS" block and v7/DESIGN.md -- not copied here, since two copies is how one goes stale. Its two
+# WARNINGS are, being the load-bearing half: a named-edition GUARANTEE was written 2026-10-17 and
+# REMOVED next day (AUDIT-01 RED-1), nothing in its place; and v5 passed an audit while v6 was a
+# surgical copy, so ANYTHING beyond those ten is unreviewed.
+#
+# (Hard 4096-byte toolchain limit; `gno test` refuses a longer file. Detail is in garden.gno.)
+#
+# Checklist before deploying. 0-6 are v5's, 7-9 v6's (still open), 10-14 v7's.
+#
+#  (0) sale constants OK FOR ONYX: 5% + 1 GNOT floor, paid to the gnotchi-opponent key we hold.
+#      RE-DECIDE FOR MAINNET -- a test key is the wrong recipient, and the floor exceeds 5%
+#      on any sale under 20 GNOT.
+#  (1) adminAddress is the onyx key `gnotchi-deploy`. Change it for anywhere real; there is no
+#      admin-transfer function, by design.
+#  (2) imports beacon/v2 from the OTHER namespace (g1r4aw43...), as v5/v6 do -- that import
+#      works and must not be "fixed"; cannot deploy where it is not live.
+#  (3) numEyes/numNoses/hat/coat catalogue must match the art side exactly.
+#  (4) batchCap (60) and the roster hob/thistle/wick/tally/glim/vigil/spruce/yonder are
+#      BATCH-ONE.md's; the eight appear in namedEditionOrder, namedEditionDisplayNames AND
+#      reservedNameKeys, and List's lock message says "eight" -- FOUR edits, not three.
+#  (5) lockCaredDays SETTLED 2026-10-19 at 14 (was 30). Pinned by its own test; the two List
+#      tests are value-agnostic.
+#  (6) genesisGnomeName RE-SETTLED 2026-10-20: Gaffer (was Sprig, v7). Canonical form lives in
+#      reservedNameKeys AND the character slug, which the realm asserts must equal the name.
+#  (7) maxNameLen (24) must equal app/js/config.js's NAME_MAX_LEN. Hand-maintained.
+#  (8) renaming allowed, names unique: the SHAPE of SetName and nameOwner, not constants.
+#  (9) combining-mark exclusion: open product question (NOTES.md, v4 Y7). Mainnet, not onyx.
+# (10) THE BADGER: APPROVED 2026-10-19, reasoning in TRAITS.md 8. Secrets 1 and 4 aim at it and
+#      are the O and E of DONTEATYELLOWSNOW, so cutting it costs two of the seventeen.
+# (11) the nine kinship type WORDS are on chain (KinTypeName), a declared judgement call. The
+#      strict reading drops KinTypeName and TotalKinTypes; nothing else moves.
+# (12) GAS MEASURED: v7 343,689,400; v8 346,569,882 live. ~8.6x under onyx MaxGas. DEPLOY VIA
+#      ops/stage-realm.sh -- addpkg uploads *_test.gno too, doubling gas and putting 258 KB of
+#      tests on chain for ever. Cost on onyx: 25.42 GNOT a deploy, both times.
+# (13) NO named-edition guarantee -- removed 2026-10-18, AUDIT-01 RED-1. Residual miss rate
+#      ACCEPTED (1.43% of full batches). Never add a claim expiry, settle deadline or
+#      stale-claim sweep: each puts a permanent hole in the acrostic.
+# (14) seedDomain is "gnogotchi/garden/v7/seed/v1" and must NEVER be edited -- it re-rolls
+#      everybody. Tried on 2026-10-20 and reverted: it broke a draw-dependent fixture.
+#
+# MUST NOT use the arcade/... prefix (ARCADE.md 4.7, NOTES.md).
+module = "gno.land/r/g1nq99m3h9ed7vqve6ajpr3qwy2ls252m8jnundm/garden/v9"
+gno = "0.9"
