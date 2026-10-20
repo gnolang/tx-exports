@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-6405
+6472
 ```
 
 ## addpkgs
@@ -14,8 +14,8 @@
     750 "gno.land/r/nym-alexiscolin000/gnogolf/golf/v2"
     596 "gno.land/r/nym-alexiscolin000/gnoradio/catalog/v1"
     545 "gno.land/r/nym-alexiscolin000/gnogolf/golf"
-    362 "gno.land/r/nym-sixseven067/markets"
-    311 "gno.land/r/nym-sixseven067/markets/v2"
+    380 "gno.land/r/nym-sixseven067/markets"
+    338 "gno.land/r/nym-sixseven067/markets/v2"
     200 "gno.land/r/nym-alexiscolin000/gnoradio/radio/v1"
     134 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/beacon/v2"
     111 "gno.land/r/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/shots"
@@ -101,6 +101,7 @@
       6 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/loans"
       5 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/bazaarv4"
       5 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/bazaarv5"
+      5 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/edcol"
       5 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/arcade/duel"
       5 "gno.land/r/g1rzgxl6njyu4c2x89gxvaa9cswrt73rz8mlp7l6/pingpong/v0"
       5 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/assets"
@@ -111,6 +112,7 @@
       4 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/fishcoin"
       4 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/fishmark"
       4 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/coins"
+      4 "gno.land/r/g14psmh3mz6zecmg87y93r4wpfd6zgu98w7zyd6h/smoke/sb0e21fb4/counter"
       4 "gno.land/r/g15w4d7t2p36uupmwwucw4j33vdh7l656pxa6fau/smoke/s7b0658b0/counter"
       4 "gno.land/r/g16sk4fetd76jdfh63sannkglvj657th2c38eep8/smoke/s30629e2c/counter"
       4 "gno.land/r/g17z3zgttrpwqffhm8w4p5567cdn3f069t9gx7vu/smoke/s503e82a/counter"
@@ -124,6 +126,7 @@
       4 "gno.land/r/g1lwmf9enzrekvx4ukae5ckkkn8ej33mtqll0t3c/smoke/s49ab5efb/counter"
       4 "gno.land/r/g1lyg2kndaxj2dqssku0z508u067ectj08nk5txm/smoke/s882abf3e/counter"
       4 "gno.land/r/g1mxn6ay255e8yfzfykk78uphs0fh0ayuhdavnum/smoke/s837ff2ef/counter"
+      4 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/efactory"
       4 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/shoal/party"
       4 "gno.land/r/g1nq99m3h9ed7vqve6ajpr3qwy2ls252m8jnundm/garden/v7"
       4 "gno.land/r/g1nufzhlvkr7ep9m9t52mk9jfymtn7ywclsaydf8/smoke/s90d530f9/counter"
@@ -207,6 +210,7 @@
       1 "gno.land/p/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/shootout/v0"
       1 "gno.land/p/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/upgradeable/v0"
       1 "gno.land/p/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/fee/v1"
+      1 "gno.land/p/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/grc1155/v0"
       1 "gno.land/p/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/bls254"
       1 "gno.land/p/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/fenwick"
       1 "gno.land/p/g1sl6fyq6mrc3wydt8xluhxx4aqsudpp9vhv6g2a/gnomehall/engine"
