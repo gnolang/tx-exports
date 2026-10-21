@@ -1,0 +1,249 @@
+package router
+
+import (
+	"errors"
+	"strconv"
+
+	ufmt "gno.land/p/nt/ufmt/v0"
+)
+
+// ErrorMessages define all error message templates used throughout the router
+const (
+	// slippage validation
+	errExactInAmountMismatch  = "consumed input does not match requested (requested=%d, consumed=%d)"
+	errExactOutAmountExceeded = "received more than requested in requested=%d, actual=%d"
+
+	// route validation
+	errInvalidRouteLength = "route length(%d) must be 1~7"
+
+	// quote validation
+	errRoutesQuotesMismatch = "mismatch between routes(%d) and quotes(%d) length"
+	errInvalidQuote         = "invalid quote(%s) at index(%d)"
+	errInvalidQuoteValue    = "quote(%s) at index(%d) must be positive value"
+	errQuoteExceedsMax      = "quote(%s) at index(%d) must be less than or equal to %d"
+	errQuoteSumExceedsMax   = "quote sum exceeds 100 at index(%d)"
+	errInvalidQuoteSum      = "quote sum(%d) must be 100"
+
+	// swap type validation
+	errExactInTooFewReceived = "ExactIn: too few received (min:%d, got:%d)"
+	errExactOutTooMuchSpent  = "ExactOut: too much spent (max:%d, used:%d)"
+
+	// route parsing validation
+	errEmptyRoutes = "routes cannot be empty"
+)
+
+// SwapValidator provides validation methods for swap operations
+type SwapValidator struct{}
+
+// exactOutAmount checks if output amount meets specified requirements.
+// For exact-out swaps, the output must be exactly the specified amount with tolerance up to swapCount units for rounding.
+func (v *SwapValidator) exactOutAmount(resultAmount, specifiedAmount int64, swapCount int64) error {
+	diff := int64(0)
+
+	if resultAmount >= specifiedAmount {
+		diff = resultAmount - specifiedAmount
+	} else {
+		diff = specifiedAmount - resultAmount
+	}
+
+	if diff > swapCount {
+		return ufmt.Errorf(errExactOutAmountExceeded, specifiedAmount, resultAmount)
+	}
+
+	return nil
+}
+
+// exactInAmount checks that the swap consumed exactly the requested input amount.
+func (v *SwapValidator) exactInAmount(resultAmount, specifiedAmount int64) error {
+	if resultAmount != specifiedAmount {
+		return ufmt.Errorf(errExactInAmountMismatch, specifiedAmount, resultAmount)
+	}
+
+	return nil
+}
+
+// slippage ensures swap amounts meet slippage requirements.
+func (v *SwapValidator) slippage(swapType SwapType, amountIn, amountOut, limit int64) error {
+	switch swapType {
+	case ExactIn:
+		if amountOut < limit {
+			return ufmt.Errorf(errExactInTooFewReceived, limit, amountOut)
+		}
+	case ExactOut:
+		if amountIn > limit {
+			return ufmt.Errorf(errExactOutTooMuchSpent, limit, amountIn)
+		}
+	default:
+		return errors.New(errInvalidSwapType)
+	}
+	return nil
+}
+
+// swapType ensures the swap type string is valid.
+func (v *SwapValidator) swapType(swapTypeStr string) (SwapType, error) {
+	swapType, err := trySwapTypeFromStr(swapTypeStr)
+	if err != nil {
+		return Unknown, errors.New(errInvalidSwapType)
+	}
+	return swapType, nil
+}
+
+// amount ensures the amount is properly formatted and positive.
+func (v *SwapValidator) amount(amount int64) (int64, error) {
+	if amount <= 0 {
+		return 0, ufmt.Errorf(ErrInvalidPositiveAmount, amount)
+	}
+	return amount, nil
+}
+
+// RouteParser handles parsing and validation of routes and quotes
+type RouteParser struct{}
+
+// NewRouteParser creates a parser for comma-separated route and quote strings.
+//
+// Returns:
+//   - parser: new RouteParser instance
+func NewRouteParser() *RouteParser {
+	return &RouteParser{}
+}
+
+// ParseRoutes splits route and quote strings and validates their pairing.
+//
+// Parameters:
+//   - routes: comma-separated route paths
+//   - quotes: comma-separated route allocation percentages
+//
+// Returns:
+//   - routePaths: parsed route path strings
+//   - quoteValues: parsed quote strings corresponding one-to-one with routePaths
+//   - err: nil when routes, counts, and quote sum are valid; validation error otherwise
+func (p *RouteParser) ParseRoutes(routes, quotes string) ([]string, []string, error) {
+	// Check for empty routes
+	if routes == "" || quotes == "" {
+		return nil, nil, errors.New(errEmptyRoutes)
+	}
+
+	routesArr := splitSingleChar(routes, ',')
+	quotesArr := splitSingleChar(quotes, ',')
+
+	if err := p.ValidateRoutesAndQuotes(routesArr, quotesArr); err != nil {
+		return nil, nil, err
+	}
+
+	return routesArr, quotesArr, nil
+}
+
+// ValidateRoutesAndQuotes checks route count, route/quote cardinality, and quote sum.
+//
+// Parameters:
+//   - routes: parsed route path strings
+//   - quotes: parsed quote percentage strings
+//
+// Returns:
+//   - err: nil when one to seven routes match quote count and quotes sum to 100; validation error otherwise
+func (p *RouteParser) ValidateRoutesAndQuotes(routes, quotes []string) error {
+	rr := len(routes)
+	qq := len(quotes)
+
+	if rr < 1 || rr > 7 {
+		return ufmt.Errorf(errInvalidRouteLength, rr)
+	}
+
+	if rr != qq {
+		return ufmt.Errorf(errRoutesQuotesMismatch, rr, qq)
+	}
+
+	return p.ValidateQuoteSum(quotes)
+}
+
+// ValidateQuoteSum verifies that each quote is positive, at most 100, and totals 100.
+//
+// Parameters:
+//   - quotes: route allocation percentage strings
+//
+// Returns:
+//   - err: nil when all quotes parse and total 100; invalid value or sum error otherwise
+func (p *RouteParser) ValidateQuoteSum(quotes []string) error {
+	const (
+		maxQuote int8 = 100
+		minQuote int8 = 0
+	)
+
+	var sum int8
+
+	for i, quote := range quotes {
+		qt, err := strconv.ParseInt(quote, 10, 8)
+		if err != nil {
+			return ufmt.Errorf(errInvalidQuote, quote, i)
+		}
+		intQuote := int8(qt)
+
+		// Quote must be positive (> 0) as each route needs a non-zero allocation.
+		// A quote of 0 would mean no swap through that route, which is invalid.
+		if intQuote <= minQuote { // minQuote = 0, so this rejects quote = 0
+			return ufmt.Errorf(errInvalidQuoteValue, quote, i)
+		}
+
+		if intQuote > maxQuote {
+			return ufmt.Errorf(errQuoteExceedsMax, quote, i, maxQuote)
+		}
+
+		if sum > maxQuote-intQuote {
+			return ufmt.Errorf(errQuoteSumExceedsMax, i)
+		}
+
+		sum += intQuote
+	}
+
+	if sum != maxQuote {
+		return ufmt.Errorf(errInvalidQuoteSum, sum)
+	}
+
+	return nil
+}
+
+// finalizeSwap handles post-swap operations and validations.
+func (r *routerV1) finalizeSwap(
+	_ int,
+	rlm realm,
+	inputToken, outputToken string,
+	resultAmountIn, resultAmountOut int64,
+	swapType SwapType,
+	tokenAmountLimit int64,
+	amountSpecified int64,
+	swapCount int64,
+	isSetSqrtPriceLimitX96 bool,
+) (int64, int64) {
+	validator := &SwapValidator{}
+
+	// Handle swap fee
+	resultAmountOutWithoutFee := r.handleSwapFee(0, rlm, outputToken, resultAmountOut)
+
+	// Validate the exact-out target when no caller price limit is set. A
+	// nonzero single-hop limit permits partial output, so only the max-input
+	// slippage check below remains applicable.
+	if swapType == ExactOut && !isSetSqrtPriceLimitX96 {
+		if err := validator.exactOutAmount(resultAmountOutWithoutFee, amountSpecified, swapCount); err != nil {
+			panic(addDetailToError(errSlippage, err.Error()))
+		}
+	}
+
+	// Validate exact in amount if applicable
+	// If sqrtPriceLimitX96 is set, partial consumption up to the price limit is intended
+	if swapType == ExactIn && !isSetSqrtPriceLimitX96 {
+		if err := validator.exactInAmount(resultAmountIn, amountSpecified); err != nil {
+			panic(addDetailToError(errInsufficientLiquidity, err.Error()))
+		}
+	}
+
+	if err := validator.slippage(swapType, resultAmountIn, resultAmountOutWithoutFee, tokenAmountLimit); err != nil {
+		panic(addDetailToError(errSlippage, err.Error()))
+	}
+
+	return resultAmountIn, resultAmountOutWithoutFee
+}
+
+// validateRoutesAndQuotes is a convenience function that parses and validates routes in one call.
+func validateRoutesAndQuotes(routes, quotes string) ([]string, []string, error) {
+	return NewRouteParser().ParseRoutes(routes, quotes)
+}
