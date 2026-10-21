@@ -1,0 +1,134 @@
+package governance
+
+import (
+	"chain"
+	"time"
+
+	"gno.land/p/gnoswap/utils/v1"
+
+	"gno.land/r/gnoswap/access/v1"
+	en "gno.land/r/gnoswap/emission"
+	"gno.land/r/gnoswap/halt/v1"
+
+	"gno.land/r/gnoswap/gov/governance"
+)
+
+// makeConfig creates a new governance configuration.
+func makeConfig(
+	votingStartDelay int64,
+	votingPeriod int64,
+	votingWeightSmoothingDuration int64,
+	quorum int64,
+	proposalCreationThreshold int64,
+	executionDelay int64,
+	executionWindow int64,
+) governance.Config {
+	// Create new configuration with provided parameters. Constructed via the
+	// domain constructor so the Config value is allocated inside the governance
+	// domain realm (satisfies the realm allocation check).
+	return governance.NewConfig(
+		votingStartDelay,
+		votingPeriod,
+		votingWeightSmoothingDuration,
+		quorum,
+		proposalCreationThreshold,
+		executionDelay,
+		executionWindow,
+	)
+}
+
+// Reconfigure updates governance configuration.
+// Only admin or governance contract can call this function.
+// Updates all governance parameters and emits a "Reconfigure" event.
+//
+// Parameters:
+//   - _: Noncrossing implementation-call discriminator; pass 0.
+//   - rlm: Current realm context forwarded unchanged by the governance proxy; validated before external calls.
+//   - votingStartDelay: delay in seconds from proposal creation until voting starts
+//   - votingPeriod: duration in seconds for which voting remains open
+//   - votingWeightSmoothingDuration: duration in seconds used to smooth voting weight snapshots
+//   - quorum: quorum percentage applied to the proposal's quorum-weight base
+//   - proposalCreationThreshold: minimum voting weight required to create a proposal
+//   - executionDelay: delay in seconds from voting end until execution becomes available
+//   - executionWindow: duration in seconds during which an executable proposal may run
+//
+// Returns:
+//   - int64: newly stored governance configuration version
+func (gv *governanceV1) Reconfigure(
+	_ int, rlm realm,
+	votingStartDelay int64,
+	votingPeriod int64,
+	votingWeightSmoothingDuration int64,
+	quorum int64,
+	proposalCreationThreshold int64,
+	executionDelay int64,
+	executionWindow int64,
+) int64 {
+	access.AssertIsRlmCurrent(0, rlm)
+
+	// Check if system is halted before proceeding
+	halt.AssertIsNotHaltedGovernance()
+
+	prev := rlm.Previous()
+	caller := prev.Address()
+	access.AssertIsAdminOrGovernance(caller)
+
+	assertIsValidSmoothingPeriod(votingWeightSmoothingDuration)
+
+	// Create and validate new configuration
+	newCfg := makeConfig(
+		votingStartDelay,
+		votingPeriod,
+		votingWeightSmoothingDuration,
+		quorum,
+		proposalCreationThreshold,
+		executionDelay,
+		executionWindow,
+	)
+
+	currentTime := time.Now().Unix()
+
+	if err := newCfg.IsValid(currentTime); err != nil {
+		panic(makeErrorWithDetails(errInvalidConfiguration, err.Error()))
+	}
+
+	// Mint and distribute GNS tokens as part of the process
+	en.MintAndDistributeGns(cross(rlm))
+
+	// Store previous version for event emission
+	previousVersion := gv.getCurrentConfigVersion()
+
+	// Apply the new configuration
+	nextVersion := gv.reconfigure(0, rlm, newCfg)
+
+	chain.Emit(
+		"Reconfigure",
+		"prevAddr", caller.String(),
+		"prevRealm", prev.PkgPath(),
+		"votingStartDelay", utils.FormatInt(newCfg.VotingStartDelay),
+		"votingPeriod", utils.FormatInt(newCfg.VotingPeriod),
+		"votingWeightSmoothingDuration", utils.FormatInt(newCfg.VotingWeightSmoothingDuration),
+		"quorum", utils.FormatInt(newCfg.Quorum),
+		"proposalCreationThreshold", utils.FormatInt(newCfg.ProposalCreationThreshold),
+		"executionDelay", utils.FormatInt(newCfg.ExecutionDelay),
+		"executionPeriod", utils.FormatInt(newCfg.ExecutionWindow),
+		"newConfigVersion", utils.FormatInt(nextVersion),
+		"prevConfigVersion", utils.FormatInt(previousVersion),
+	)
+
+	return nextVersion
+}
+
+// reconfigure stores the validated configuration with incremented version number.
+func (gv *governanceV1) reconfigure(_ int, rlm realm, cfg governance.Config) int64 {
+	// Generate next version number
+	nextVersion := gv.nextConfigVersion(0, rlm)
+
+	// Store the new configuration with version
+	err := gv.setConfig(0, rlm, nextVersion, cfg)
+	if err != nil {
+		panic("failed to set config: " + err.Error())
+	}
+
+	return nextVersion
+}

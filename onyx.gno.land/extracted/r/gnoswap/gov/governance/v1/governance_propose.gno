@@ -1,0 +1,478 @@
+package governance
+
+import (
+	"chain"
+	"chain/runtime"
+	"errors"
+	"time"
+
+	"gno.land/r/gnoswap/access/v1"
+
+	gnsmath "gno.land/p/gnoswap/gnsmath/v1"
+	"gno.land/p/gnoswap/utils/v1"
+
+	"gno.land/r/gnoswap/gov/xgns"
+	"gno.land/r/gnoswap/halt/v1"
+
+	"gno.land/r/gnoswap/gov/governance"
+)
+
+// ProposeText creates a text proposal for community discussion.
+//
+// Signal proposals for non-binding community sentiment.
+// Used for policy discussions, roadmap planning, and community feedback.
+// No on-chain execution, serves as formal governance record.
+//
+// Parameters:
+//
+//   - _: Internal call discriminator; pass 0.
+//
+//   - rlm: Propagated realm context; validated as current before proposal state writes.
+//
+//   - title: Short, descriptive proposal title (up to 255 characters; 100 is a UX recommendation)
+//
+//   - description: Full proposal content with rationale and context
+//
+// Requirements:
+//   - Caller must hold at least the configured ProposalCreationThreshold amount in xGNS
+//   - No other active proposal from same address
+//   - Title and description must be non-empty
+//
+// Process:
+//   - Configured delay before voting starts (1 day by default)
+//   - Configured voting period (7 days by default)
+//   - Quorum and a strict yes-over-no majority determine the outcome
+//   - No execution phase (signal only)
+//
+// Returns:
+//   - newProposalId: ID of the newly created text proposal
+func (gv *governanceV1) ProposeText(
+	_ int, rlm realm,
+	title string,
+	description string,
+) (newProposalId int64) {
+	access.AssertIsRlmCurrent(0, rlm)
+
+	halt.AssertIsNotHaltedGovernance()
+
+	prev := rlm.Previous()
+	callerAddress := prev.Address()
+
+	createdAt := time.Now().Unix()
+	createdHeight := runtime.ChainHeight()
+	xgnsBalance := xgns.BalanceOf(callerAddress)
+
+	config, ok := gv.getCurrentConfig()
+	if !ok {
+		panic(errors.New(errDataNotFound))
+	}
+
+	// Clean up inactive user proposals before checking if caller already has an active proposal
+	err := gv.removeInactiveUserProposals(0, rlm, callerAddress, createdAt)
+	if err != nil {
+		panic(err)
+	}
+
+	// Check if caller already has an active proposal (one proposal per address)
+	if gv.hasActiveProposal(callerAddress) {
+		panic(errors.New(errAlreadyActiveProposal))
+	}
+
+	// Get timestamp anchor and total voting weight for proposal creation
+	maxVotingWeight, snapshotTime, err := gv.getVotingWeightSnapshot(
+		createdAt,
+		config.VotingWeightSmoothingDuration,
+	)
+	if err != nil {
+		panic(err)
+	}
+	quorumWeight := gv.stakerAccessor.GetTotalxGnsSupply()
+
+	// Create the text proposal with metadata
+	proposal, err := gv.createProposal(
+		0, rlm,
+		governance.Text,
+		config,
+		maxVotingWeight,
+		quorumWeight,
+		snapshotTime,
+		governance.NewProposalMetadata(title, description),
+		NewProposalTextData(),
+		callerAddress,
+		xgnsBalance,
+		createdAt,
+		createdHeight,
+	)
+	if err != nil {
+		panic(err)
+	}
+
+	// Initialize empty voting info tree for this proposal (votes will be added as users vote)
+	err = gv.updateProposalUserVotes(0, rlm, proposal, governance.NewProposalUserVotingInfoTree())
+	if err != nil {
+		panic(err)
+	}
+
+	// Emit proposal creation event for indexing and tracking
+	chain.Emit(
+		"ProposeText",
+		"prevAddr", prev.Address().String(),
+		"prevRealm", prev.PkgPath(),
+		"title", title,
+		"proposalId", utils.FormatInt(proposal.ID()),
+		"quorumAmount", utils.FormatInt(proposal.VotingQuorumAmount()),
+		"maxVotingWeight", utils.FormatInt(proposal.VotingMaxWeight()),
+		"configVersion", utils.FormatInt(proposal.ConfigVersion()),
+		"createdAt", utils.FormatInt(proposal.CreatedAt()),
+	)
+
+	return proposal.ID()
+}
+
+// ProposeCommunityPoolSpend creates a treasury disbursement proposal.
+//
+// Allocates community pool funds for approved purposes.
+// Supports grants, development funding, and protocol incentives.
+// The transfer is attempted when the approved proposal executes.
+//
+// Parameters:
+//
+//   - _: Internal call discriminator; pass 0.
+//
+//   - rlm: Propagated realm context; validated as current before proposal state writes.
+//
+//   - title: Proposal title describing purpose
+//
+//   - description: Detailed justification and budget breakdown
+//
+//   - to: Recipient address for funds
+//
+//   - tokenPath: Registered token contract path (e.g., "gno.land/r/gnoswap/gns")
+//
+//   - amount: Strictly positive amount to transfer (in smallest unit)
+//
+// Requirements:
+//   - Caller must hold at least the configured ProposalCreationThreshold amount in xGNS
+//   - Valid recipient address
+//   - Registered token path
+//   - Community-pool balance is checked at execution, not proposal creation
+//
+// Security:
+//   - Enforces timelock after approval
+//   - Single transfer per proposal
+//   - Tracks all disbursements on-chain
+//
+// Returns:
+//   - newProposalId: ID of the newly created community-pool-spend proposal
+func (gv *governanceV1) ProposeCommunityPoolSpend(
+	_ int, rlm realm,
+	title string,
+	description string,
+	to address,
+	tokenPath string,
+	amount int64,
+) (newProposalId int64) {
+	access.AssertIsRlmCurrent(0, rlm)
+
+	halt.AssertIsNotHaltedGovernance()
+
+	assertIsValidToken(tokenPath)
+
+	createdAt := time.Now().Unix()
+	createdHeight := runtime.ChainHeight()
+
+	prev := rlm.Previous()
+	callerAddress := prev.Address()
+	xgnsBalance := xgns.BalanceOf(callerAddress)
+
+	config, ok := gv.getCurrentConfig()
+	if !ok {
+		panic(errors.New(errDataNotFound))
+	}
+
+	// Clean up inactive user proposals before checking if caller already has an active proposal
+	err := gv.removeInactiveUserProposals(0, rlm, callerAddress, createdAt)
+	if err != nil {
+		panic(err)
+	}
+
+	// Check if caller already has an active proposal (one proposal per address)
+	if gv.hasActiveProposal(callerAddress) {
+		panic(errors.New(errAlreadyActiveProposal))
+	}
+
+	// Get timestamp anchor and total voting weight for proposal creation
+	maxVotingWeight, snapshotTime, err := gv.getVotingWeightSnapshot(
+		createdAt,
+		config.VotingWeightSmoothingDuration,
+	)
+	if err != nil {
+		panic(err)
+	}
+	quorumWeight := gv.stakerAccessor.GetTotalxGnsSupply()
+
+	// Create the community pool spend proposal with execution data
+	proposal, err := gv.createProposal(
+		0, rlm,
+		governance.CommunityPoolSpend,
+		config,
+		maxVotingWeight,
+		quorumWeight,
+		snapshotTime,
+		governance.NewProposalMetadata(title, description),
+		NewProposalCommunityPoolSpendData(tokenPath, to, amount, COMMUNITY_POOL_PATH),
+		callerAddress,
+		xgnsBalance,
+		createdAt,
+		createdHeight,
+	)
+	if err != nil {
+		panic(err)
+	}
+
+	// Initialize empty voting info tree for this proposal (votes will be added as users vote)
+	err = gv.updateProposalUserVotes(0, rlm, proposal, governance.NewProposalUserVotingInfoTree())
+	if err != nil {
+		panic(err)
+	}
+
+	// Emit proposal creation event for indexing and tracking
+	chain.Emit(
+		"ProposeCommunityPoolSpend",
+		"prevAddr", prev.Address().String(),
+		"prevRealm", prev.PkgPath(),
+		"title", title,
+		"to", to.String(),
+		"tokenPath", tokenPath,
+		"amount", utils.FormatInt(amount),
+		"proposalId", utils.FormatInt(proposal.ID()),
+		"quorumAmount", utils.FormatInt(proposal.VotingQuorumAmount()),
+		"maxVotingWeight", utils.FormatInt(proposal.VotingMaxWeight()),
+		"configVersion", utils.FormatInt(proposal.ConfigVersion()),
+		"createdAt", utils.FormatInt(proposal.CreatedAt()),
+	)
+
+	return proposal.ID()
+}
+
+// ProposeParameterChange creates a protocol parameter update proposal.
+//
+// Modifies system parameters through governance.
+// Supports multiple parameter changes in single proposal.
+// Changes apply atomically on execution.
+//
+// Parameters:
+//
+//   - _: Internal call discriminator; pass 0.
+//
+//   - rlm: Propagated realm context; validated as current before proposal state writes.
+//
+//   - title: Clear description of changes
+//
+//   - description: Rationale and impact analysis
+//
+//   - numToExecute: Number of parameter changes
+//
+//   - executions: Raw execution string encoded as messages separated by *GOV*.
+//     Each message is formatted as <pkgPath>*EXE*<function>*EXE*<params>.
+//
+// Example execution format (one registered handler; all seven arguments are required):
+//
+//	gno.land/r/gnoswap/gov/governance*EXE*Reconfigure*EXE*86400,604800,86400,50,1000000000,86400,2592000
+//
+// Requirements:
+//   - Caller must hold at least the configured ProposalCreationThreshold amount in xGNS
+//   - Encoded execution messages must match numToExecute
+//   - Target handlers must exist in the parameter registry
+//   - Parameters must match registered function signatures
+//
+// Returns:
+//   - newProposalId: ID of the newly created parameter-change proposal
+func (gv *governanceV1) ProposeParameterChange(
+	_ int, rlm realm,
+	title string,
+	description string,
+	numToExecute int64,
+	executions string,
+) (newProposalId int64) {
+	access.AssertIsRlmCurrent(0, rlm)
+
+	proposalData := NewProposalExecutionData(numToExecute, executions)
+	assertIsNotHaltedGovernanceForProposalData(proposalData)
+
+	prev := rlm.Previous()
+	callerAddress := prev.Address()
+
+	createdAt := time.Now().Unix()
+	createdHeight := runtime.ChainHeight()
+	xgnsBalance := xgns.BalanceOf(callerAddress)
+
+	config, ok := gv.getCurrentConfig()
+	if !ok {
+		panic(errors.New(errDataNotFound))
+	}
+
+	// Clean up inactive user proposals before checking if caller already has an active proposal
+	err := gv.removeInactiveUserProposals(0, rlm, callerAddress, createdAt)
+	if err != nil {
+		panic(err)
+	}
+
+	// Check if caller already has an active proposal (one proposal per address)
+	if gv.hasActiveProposal(callerAddress) {
+		panic(errors.New(errAlreadyActiveProposal))
+	}
+
+	// Get timestamp anchor and total voting weight for proposal creation
+	maxVotingWeight, snapshotTime, err := gv.getVotingWeightSnapshot(
+		createdAt,
+		config.VotingWeightSmoothingDuration,
+	)
+	if err != nil {
+		panic(err)
+	}
+	quorumWeight := gv.stakerAccessor.GetTotalxGnsSupply()
+
+	// Create the parameter change proposal with execution data
+	proposal, err := gv.createProposal(
+		0, rlm,
+		governance.ParameterChange,
+		config,
+		maxVotingWeight,
+		quorumWeight,
+		snapshotTime,
+		governance.NewProposalMetadata(title, description),
+		proposalData,
+		callerAddress,
+		xgnsBalance,
+		createdAt,
+		createdHeight,
+	)
+	if err != nil {
+		panic(err)
+	}
+
+	// Initialize empty voting info tree for this proposal (votes will be added as users vote)
+	err = gv.updateProposalUserVotes(0, rlm, proposal, governance.NewProposalUserVotingInfoTree())
+	if err != nil {
+		panic(err)
+	}
+
+	// Emit proposal creation event for indexing and tracking
+	chain.Emit(
+		"ProposeParameterChange",
+		"prevAddr", prev.Address().String(),
+		"prevRealm", prev.PkgPath(),
+		"title", title,
+		"numToExecute", utils.FormatInt(numToExecute),
+		"proposalId", utils.FormatInt(proposal.ID()),
+		"quorumAmount", utils.FormatInt(proposal.VotingQuorumAmount()),
+		"maxVotingWeight", utils.FormatInt(proposal.VotingMaxWeight()),
+		"configVersion", utils.FormatInt(proposal.ConfigVersion()),
+		"createdAt", utils.FormatInt(proposal.CreatedAt()),
+	)
+
+	return proposal.ID()
+}
+
+// createProposal handles proposal creation logic.
+// Validates input data, checks proposer eligibility, and creates proposal object.
+func (gv *governanceV1) createProposal(
+	_ int, rlm realm,
+	proposalType governance.ProposalType,
+	config governance.Config,
+	maxVotingWeight int64,
+	quorumWeight int64,
+	snapshotTime int64,
+	proposalMetadata *governance.ProposalMetadata,
+	proposalData *governance.ProposalData,
+	proposerAddress address,
+	proposerXGnsBalance int64,
+	createdAt int64,
+	createdHeight int64,
+) (*governance.Proposal, error) {
+	// Validate proposal metadata (title and description)
+	metadataResolver := NewProposalMetadataResolver(proposalMetadata)
+	err := metadataResolver.Validate()
+	if err != nil {
+		return nil, err
+	}
+
+	// Validate proposal data (type-specific validation)
+	dataResolver := NewProposalDataResolver(proposalData)
+	err = dataResolver.Validate()
+	if err != nil {
+		return nil, err
+	}
+
+	// Check if proposer has enough xGNS balance to create proposal
+	if proposerXGnsBalance < config.ProposalCreationThreshold {
+		return nil, errors.New(errNotEnoughBalance)
+	}
+
+	// Generate unique proposal ID
+	proposalID := gv.nextProposalID(0, rlm)
+
+	// Create proposal status with voting schedule and requirements
+	proposalStatus := NewProposalStatus(
+		config,
+		maxVotingWeight,
+		proposalType.IsExecutable(),
+		createdAt,
+		quorumWeight,
+	)
+
+	// Get current configuration version for tracking
+	configVersion := gv.getCurrentConfigVersion()
+
+	// Create the proposal object with a timestamp anchor for lazy voting-weight lookup
+	proposal := governance.NewProposal(
+		proposalID,
+		proposalStatus,
+		proposalMetadata,
+		proposalData,
+		proposerAddress,
+		configVersion,
+		snapshotTime,
+		createdHeight,
+	)
+
+	// Store the proposal in state
+	success := gv.addProposal(0, rlm, proposal)
+	if !success {
+		return nil, errors.New(errDataNotFound)
+	}
+
+	return proposal, nil
+}
+
+// getVotingWeightSnapshot retrieves the averaged total voting weight for proposal creation.
+// It uses two snapshots (current and current - smoothingPeriod) and averages them.
+func (gv *governanceV1) getVotingWeightSnapshot(
+	current,
+	smoothingPeriod int64,
+) (int64, int64, error) {
+	// Calculate the earlier timestamp by subtracting the smoothing duration
+	snapshotTime := current - smoothingPeriod
+	if snapshotTime < 0 {
+		snapshotTime = 0
+	}
+
+	// Get total delegation at the earlier timestamp from staker history
+	totalAtSnapshot, ok := gv.stakerAccessor.GetTotalDelegationAmountAtSnapshot(snapshotTime)
+	if !ok {
+		totalAtSnapshot = 0
+	}
+
+	totalAtCurrent, ok := gv.stakerAccessor.GetTotalDelegationAmountAtSnapshot(current)
+	if !ok {
+		totalAtCurrent = 0
+	}
+
+	totalVotingWeight := gnsmath.SafeAddInt64(totalAtSnapshot, totalAtCurrent) / 2
+	if totalVotingWeight <= 0 {
+		return 0, snapshotTime, errors.New(errNotEnoughVotingWeight)
+	}
+
+	return totalVotingWeight, snapshotTime, nil
+}
