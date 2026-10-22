@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-7005
+7036
 ```
 
 ## addpkgs
@@ -14,8 +14,8 @@
     750 "gno.land/r/nym-alexiscolin000/gnogolf/golf/v2"
     596 "gno.land/r/nym-alexiscolin000/gnoradio/catalog/v1"
     545 "gno.land/r/nym-alexiscolin000/gnogolf/golf"
-    471 "gno.land/r/nym-sixseven067/markets"
-    392 "gno.land/r/nym-sixseven067/markets/v2"
+    490 "gno.land/r/nym-sixseven067/markets"
+    396 "gno.land/r/nym-sixseven067/markets/v2"
     247 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game31"
     200 "gno.land/r/nym-alexiscolin000/gnoradio/radio/v1"
     134 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/beacon/v2"
@@ -232,6 +232,7 @@
       1 "gno.land/p/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/lots"
       1 "gno.land/p/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/periods"
       1 "gno.land/p/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/spendbook"
+      1 "gno.land/p/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/spendbook/v2"
       1 "gno.land/p/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/statements"
       1 "gno.land/p/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/tiers"
       1 "gno.land/p/g1y2tswmrtlany2ffmpyc0uyunk4gt4gv8gtf736/gnosplit/ledger/v0"
