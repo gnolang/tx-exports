@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-196138
+197173
 ```
 
 ## addpkgs
@@ -11,22 +11,22 @@
 
 ## top realm calls
 ```
-  17054 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble4"
-  16116 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble5"
-  13252 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble6"
-  11718 "gno.land/r/gnoland/wugnot"
-   5407 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble3"
-   4984 "gno.land/r/gnoswap/staker"
-   4562 "gno.land/r/gnoswap/position"
-   4481 "gno.land/r/akkadia/beta/abt"
-   4192 "gno.land/r/gnoswap/router"
-   4026 "gno.land/r/gnoswap/gns"
+  17175 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble4"
+  16238 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble5"
+  13375 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble6"
+  11730 "gno.land/r/gnoland/wugnot"
+   5409 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble3"
+   4990 "gno.land/r/gnoswap/staker"
+   4566 "gno.land/r/gnoswap/position"
+   4490 "gno.land/r/akkadia/beta/abt"
+   4196 "gno.land/r/gnoswap/router"
+   4027 "gno.land/r/gnoswap/gns"
    2759 "gno.land/r/gnoswap/launchpad"
    1431 "gno.land/r/gnoswap/gov/staker"
-   1194 "gno.land/r/gnoswap/gnft"
+   1196 "gno.land/r/gnoswap/gnft"
     927 "gno.land/r/akkadia/beta/lotto"
-    924 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv3"
-    762 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/wbubble"
+    925 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv3"
+    764 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/wbubble"
     587 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens"
     548 "gno.land/r/g1nmqhha0ua730vejxqhrelldm4pga5j5ptle5ea/guardians"
     433 "gno.land/r/nym-thegnomic001/gnomic_airdrop"
@@ -43,7 +43,7 @@
      93 "gno.land/r/g1t2kg2vtr3fukg43eujkn6x53gfdyakhngt4sfd/gnofly/game/v0"
      85 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubble"
      83 "gno.land/r/sys/namereg/v0"
-     75 "gno.land/r/gnoswap/gov/governance"
+     76 "gno.land/r/gnoswap/gov/governance"
      65 "gno.land/r/gnops/valopers"
      60 "gno.land/r/g1zdaz6sypk5tdsjc2fzsqrrn4ttn8qzmnl4waqp/hlgnot"
      43 "gno.land/r/akkadia/beta/definition"
