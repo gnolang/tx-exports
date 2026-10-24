@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-7186
+7197
 ```
 
 ## addpkgs
@@ -439,6 +439,7 @@
       1 "gno.land/r/g1rzgxl6njyu4c2x89gxvaa9cswrt73rz8mlp7l6/alpha3/gnotif/v0"
       1 "gno.land/r/g1rzgxl6njyu4c2x89gxvaa9cswrt73rz8mlp7l6/gnotif/v0"
       1 "gno.land/r/g1sl6fyq6mrc3wydt8xluhxx4aqsudpp9vhv6g2a/gnotif"
+      1 "gno.land/r/g1sl6fyq6mrc3wydt8xluhxx4aqsudpp9vhv6g2a/namesprobe1022"
       1 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/cashflow"
       1 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/inventory"
       1 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/receivables"
@@ -450,19 +451,29 @@
       1 "gno.land/r/gnoswap/common"
       1 "gno.land/r/gnoswap/common/v1"
       1 "gno.land/r/gnoswap/community_pool/v1"
+      1 "gno.land/r/gnoswap/emission"
       1 "gno.land/r/gnoswap/gnft"
       1 "gno.land/r/gnoswap/gns"
       1 "gno.land/r/gnoswap/gov/governance"
+      1 "gno.land/r/gnoswap/gov/governance/v1"
       1 "gno.land/r/gnoswap/gov/staker"
+      1 "gno.land/r/gnoswap/gov/staker/v1"
       1 "gno.land/r/gnoswap/gov/xgns"
       1 "gno.land/r/gnoswap/halt/v1"
       1 "gno.land/r/gnoswap/launchpad"
+      1 "gno.land/r/gnoswap/launchpad/v1"
       1 "gno.land/r/gnoswap/pool"
+      1 "gno.land/r/gnoswap/pool/v1"
       1 "gno.land/r/gnoswap/position"
+      1 "gno.land/r/gnoswap/position/v1"
       1 "gno.land/r/gnoswap/protocol_fee"
+      1 "gno.land/r/gnoswap/protocol_fee/v1"
       1 "gno.land/r/gnoswap/rbac/v1"
       1 "gno.land/r/gnoswap/referral/v1"
       1 "gno.land/r/gnoswap/router"
+      1 "gno.land/r/gnoswap/router/v1"
+      1 "gno.land/r/gnoswap/staker"
+      1 "gno.land/r/gnoswap/staker/v1"
       1 "gno.land/r/nym-alexiscolin000/gnogolf/store"
       1 "gno.land/r/nym-alexiscolin000/gnoradio/tickets/nft"
       1 "gno.land/r/nym-alexiscolin000/gnoradio/tickets/v1"
