@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-7197
+7204
 ```
 
 ## addpkgs
@@ -138,6 +138,7 @@
       4 "gno.land/r/g1nq99m3h9ed7vqve6ajpr3qwy2ls252m8jnundm/garden/v7"
       4 "gno.land/r/g1nufzhlvkr7ep9m9t52mk9jfymtn7ywclsaydf8/smoke/s90d530f9/counter"
       4 "gno.land/r/g1phjndp6694d7ufa847tyq8sufnzaww7yj3a4hh/smoke/sd70e23eb/counter"
+      4 "gno.land/r/g1pxh5lmn4tr4dnllz6zmaapvmc68n6z7l6lt2pw/smoke/s1497168e/counter"
       4 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/arcade/speed"
       4 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/garden/v3"
       4 "gno.land/r/g1r6e9wl3f4wvv56n54zk5dp675cdlepl676cjqw/smoke/s8c97c507/counter"
