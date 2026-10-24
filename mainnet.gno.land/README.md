@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-202859
+203668
 ```
 
 ## addpkgs
@@ -11,24 +11,24 @@
 
 ## top realm calls
 ```
-  17824 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble4"
-  16893 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble5"
-  14040 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble6"
-  11802 "gno.land/r/gnoland/wugnot"
+  17923 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble4"
+  16992 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble5"
+  14140 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble6"
+  11803 "gno.land/r/gnoland/wugnot"
    5413 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble3"
-   5058 "gno.land/r/gnoswap/staker"
-   4770 "gno.land/r/akkadia/beta/abt"
-   4623 "gno.land/r/gnoswap/position"
-   4224 "gno.land/r/gnoswap/router"
-   4040 "gno.land/r/gnoswap/gns"
+   5062 "gno.land/r/gnoswap/staker"
+   4790 "gno.land/r/akkadia/beta/abt"
+   4625 "gno.land/r/gnoswap/position"
+   4225 "gno.land/r/gnoswap/router"
+   4041 "gno.land/r/gnoswap/gns"
    2883 "gno.land/r/gnoswap/launchpad"
    1442 "gno.land/r/gnoswap/gov/staker"
-   1205 "gno.land/r/gnoswap/gnft"
-   1003 "gno.land/r/akkadia/beta/lotto"
+   1206 "gno.land/r/gnoswap/gnft"
+   1043 "gno.land/r/akkadia/beta/lotto"
     945 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv3"
     780 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/wbubble"
     589 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens"
-    548 "gno.land/r/g1nmqhha0ua730vejxqhrelldm4pga5j5ptle5ea/guardians"
+    549 "gno.land/r/g1nmqhha0ua730vejxqhrelldm4pga5j5ptle5ea/guardians"
     433 "gno.land/r/nym-thegnomic001/gnomic_airdrop"
     261 "gno.land/r/nym-thegnomic001/gnomic"
     238 "gno.land/r/g1ecsuj0q572jr0dhu29q9njtnmw03hyu7tyyvv6/kourt"
@@ -119,6 +119,7 @@
       3 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/bazaarv3"
       3 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/stdnft"
       3 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/fishseason"
+      3 "gno.land/r/g1nmqhha0ua730vejxqhrelldm4pga5j5ptle5ea/guardians_store_v1"
       3 "gno.land/r/moul/pilot/v0"
       3 "gno.land/r/moul/reactions/v0"
       3 "gno.land/r/moul/x/daily/handles/v1"
@@ -355,7 +356,6 @@
       1 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnocialview"
       1 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/nomaq"
       1 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/pado"
-      1 "gno.land/r/g1nmqhha0ua730vejxqhrelldm4pga5j5ptle5ea/guardians_store_v1"
       1 "gno.land/r/g1qp5pt8cdq2f6kfdamn3yuxwg6quqnfpyewzz39/crowdfund"
       1 "gno.land/r/g1qp5pt8cdq2f6kfdamn3yuxwg6quqnfpyewzz39/fee_split/v2"
       1 "gno.land/r/g1qp5pt8cdq2f6kfdamn3yuxwg6quqnfpyewzz39/revshare"
