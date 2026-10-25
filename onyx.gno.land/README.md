@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-7209
+7218
 ```
 
 ## addpkgs
@@ -239,6 +239,7 @@
       1 "gno.land/p/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/spendbook/v2"
       1 "gno.land/p/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/statements"
       1 "gno.land/p/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/tiers"
+      1 "gno.land/p/g1y0n2geu0rmdrm9u30c5fmk3ykkl2enw9n9yr2k/agentid"
       1 "gno.land/p/g1y2tswmrtlany2ffmpyc0uyunk4gt4gv8gtf736/gnosplit/ledger/v0"
       1 "gno.land/p/g1zrjyzatudmadgqu39d5wfamhdvf0adwlxkz25d/gnotif/trigger/v0"
       1 "gno.land/p/gnoswap/consts/v1"
@@ -444,6 +445,8 @@
       1 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/cashflow"
       1 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/inventory"
       1 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/receivables"
+      1 "gno.land/r/g1y0n2geu0rmdrm9u30c5fmk3ykkl2enw9n9yr2k/agentbook"
+      1 "gno.land/r/g1y0n2geu0rmdrm9u30c5fmk3ykkl2enw9n9yr2k/agentwallet"
       1 "gno.land/r/g1zrjyzatudmadgqu39d5wfamhdvf0adwlxkz25d/ctlprobe"
       1 "gno.land/r/g1zrjyzatudmadgqu39d5wfamhdvf0adwlxkz25d/ctlprobe2"
       1 "gno.land/r/g1zrjyzatudmadgqu39d5wfamhdvf0adwlxkz25d/ctlprobe3"
