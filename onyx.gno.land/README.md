@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-7274
+7314
 ```
 
 ## addpkgs
@@ -30,13 +30,13 @@
      65 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens2"
      56 "gno.land/r/g1a9g8nu3m0xgx58hh36fph49e2xkqm9axlxuf5z/memba_gov"
      56 "gno.land/r/gnoland/wugnot"
+     55 "gno.land/r/g1nq99m3h9ed7vqve6ajpr3qwy2ls252m8jnundm/garden/v9"
      55 "gno.land/r/samcrew/connect4"
      52 "gno.land/r/nym-mnsrehearsal001/nsdata/v1"
      49 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game27"
      48 "gno.land/r/nym-mnsrehearsal001/nslogic/v1"
      44 "gno.land/r/sys/namereg/v0"
      40 "gno.land/r/nym-gfanton001/echo/v0"
-     35 "gno.land/r/g1nq99m3h9ed7vqve6ajpr3qwy2ls252m8jnundm/garden/v9"
      33 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game3"
      29 "gno.land/r/samcrew/launchpad/drops/v1"
      28 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/budgets"
@@ -179,6 +179,7 @@
       2 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game6"
       2 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game8"
       2 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game9"
+      2 "gno.land/r/g13rqvks880v0hmlfepcj0kkudq0js38d3pc5k6a/echo/v1"
       2 "gno.land/r/g1a9g8nu3m0xgx58hh36fph49e2xkqm9axlxuf5z/memba_market_config"
       2 "gno.land/r/g1gkeydy90k4epq70sayc8s8ql5g767vrf342pl2/tally"
       2 "gno.land/r/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/guildhall/reputation"
@@ -205,6 +206,8 @@
       2 "gno.land/r/samcrew/memba_bridge_v1"
       2 "gno.land/r/samcrew/memba_gov"
       1 "gno.land/p/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/ammmath"
+      1 "gno.land/p/g13rqvks880v0hmlfepcj0kkudq0js38d3pc5k6a/gnotif/admins/v0"
+      1 "gno.land/p/g13rqvks880v0hmlfepcj0kkudq0js38d3pc5k6a/gnotif/trigger/v0"
       1 "gno.land/p/g1a9g8nu3m0xgx58hh36fph49e2xkqm9axlxuf5z/avl"
       1 "gno.land/p/g1a9g8nu3m0xgx58hh36fph49e2xkqm9axlxuf5z/daoauth"
       1 "gno.land/p/g1g7dna0gp4nec5rza4q25htj0cjgswrxefp37ep/chess"
@@ -404,6 +407,7 @@
       1 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/minter5"
       1 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/minter6"
       1 "gno.land/r/g13rqvks880v0hmlfepcj0kkudq0js38d3pc5k6a/gnotif/v0"
+      1 "gno.land/r/g13rqvks880v0hmlfepcj0kkudq0js38d3pc5k6a/gnotif/v1"
       1 "gno.land/r/g14kd2xgnkc3vyvdvh0ar6tw7570wpzn3egtevr4/livecheck"
       1 "gno.land/r/g18me5p9kqqxyswd8ytrmlv3q8kvy7uacx2v90ne/echo/v0"
       1 "gno.land/r/g18me5p9kqqxyswd8ytrmlv3q8kvy7uacx2v90ne/gnotif/v0"
