@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-7218
+7225
 ```
 
 ## addpkgs
@@ -129,6 +129,7 @@
       4 "gno.land/r/g1evgm0jz7h2fxmw976hpejkqcmfahwqnawg8f6l/smoke/s4d0c3cd0/counter"
       4 "gno.land/r/g1eyr3hfdcup4rr5xlcd63vc5t64a03u9kecx2v0/forms"
       4 "gno.land/r/g1f7zlg557rn7u06v30vmyzp4h0jm6t6huuanghf/smoke/sa68b80d/counter"
+      4 "gno.land/r/g1kh9drjcx5x8ptrxgmxtd0qefj5hvtu8jf3pmeu/smoke/s3ca37bc5/counter"
       4 "gno.land/r/g1la8tv3pxn09atjnjjqgjx0j8vywxngecje5xa4/smoke/s2b7a7ddb/counter"
       4 "gno.land/r/g1lwmf9enzrekvx4ukae5ckkkn8ej33mtqll0t3c/smoke/s49ab5efb/counter"
       4 "gno.land/r/g1lyg2kndaxj2dqssku0z508u067ectj08nk5txm/smoke/s882abf3e/counter"
