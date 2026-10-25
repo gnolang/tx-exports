@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-7225
+7274
 ```
 
 ## addpkgs
@@ -36,6 +36,7 @@
      48 "gno.land/r/nym-mnsrehearsal001/nslogic/v1"
      44 "gno.land/r/sys/namereg/v0"
      40 "gno.land/r/nym-gfanton001/echo/v0"
+     35 "gno.land/r/g1nq99m3h9ed7vqve6ajpr3qwy2ls252m8jnundm/garden/v9"
      33 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game3"
      29 "gno.land/r/samcrew/launchpad/drops/v1"
      28 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/budgets"
@@ -431,7 +432,6 @@
       1 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/profile"
       1 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/shoal/shoaltoken"
       1 "gno.land/r/g1nq99m3h9ed7vqve6ajpr3qwy2ls252m8jnundm/garden/v8"
-      1 "gno.land/r/g1nq99m3h9ed7vqve6ajpr3qwy2ls252m8jnundm/garden/v9"
       1 "gno.land/r/g1nq99m3h9ed7vqve6ajpr3qwy2ls252m8jnundm/probe/v2"
       1 "gno.land/r/g1nq99m3h9ed7vqve6ajpr3qwy2ls252m8jnundm/probe/v3"
       1 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/arcade/duel/v2"
