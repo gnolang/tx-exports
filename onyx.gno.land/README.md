@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-7333
+7339
 ```
 
 ## addpkgs
@@ -210,6 +210,7 @@
       1 "gno.land/p/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/ammmath"
       1 "gno.land/p/g13rqvks880v0hmlfepcj0kkudq0js38d3pc5k6a/gnotif/admins/v0"
       1 "gno.land/p/g13rqvks880v0hmlfepcj0kkudq0js38d3pc5k6a/gnotif/trigger/v0"
+      1 "gno.land/p/g188vafzutzvlfw6wt7u3s62xtuvm0epmu8ufmfz/gnomepit/engine"
       1 "gno.land/p/g1a9g8nu3m0xgx58hh36fph49e2xkqm9axlxuf5z/avl"
       1 "gno.land/p/g1a9g8nu3m0xgx58hh36fph49e2xkqm9axlxuf5z/daoauth"
       1 "gno.land/p/g1g7dna0gp4nec5rza4q25htj0cjgswrxefp37ep/chess"
