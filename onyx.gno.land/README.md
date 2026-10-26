@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-7314
+7325
 ```
 
 ## addpkgs
@@ -15,7 +15,7 @@
     596 "gno.land/r/nym-alexiscolin000/gnoradio/catalog/v1"
     566 "gno.land/r/nym-sixseven067/markets"
     545 "gno.land/r/nym-alexiscolin000/gnogolf/golf"
-    414 "gno.land/r/nym-sixseven067/markets/v2"
+    415 "gno.land/r/nym-sixseven067/markets/v2"
     248 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game31"
     200 "gno.land/r/nym-alexiscolin000/gnoradio/radio/v1"
     134 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/beacon/v2"
@@ -28,8 +28,8 @@
      71 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens3"
      66 "gno.land/r/nym-mnsrehearsal001/nsskin/v1"
      65 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens2"
+     57 "gno.land/r/gnoland/wugnot"
      56 "gno.land/r/g1a9g8nu3m0xgx58hh36fph49e2xkqm9axlxuf5z/memba_gov"
-     56 "gno.land/r/gnoland/wugnot"
      55 "gno.land/r/g1nq99m3h9ed7vqve6ajpr3qwy2ls252m8jnundm/garden/v9"
      55 "gno.land/r/samcrew/connect4"
      52 "gno.land/r/nym-mnsrehearsal001/nsdata/v1"
@@ -199,6 +199,7 @@
       2 "gno.land/r/nym-alexiscolin000/gnoradio/home/v2"
       2 "gno.land/r/nym-alexiscolin000/gnoradio/radio/v2"
       2 "gno.land/r/nym-alexiscolin000/gnoradio/tickets/v2"
+      2 "gno.land/r/nym-gfanton001/echo/v1"
       2 "gno.land/r/nym-moultest123/x/daily/markovdemo/v0"
       2 "gno.land/r/nym-moultest123/x/daily/triedemo/v0"
       2 "gno.land/r/nym-moultest123/x/vm/bfdemo/v0"
@@ -264,6 +265,8 @@
       1 "gno.land/p/nym-alexiscolin000/gnoradio/svg/v0"
       1 "gno.land/p/nym-alexiscolin000/gnoradio/text/v0"
       1 "gno.land/p/nym-alexiscolin000/gnosplit/ledger/v0"
+      1 "gno.land/p/nym-gfanton001/gnotif/admins/v0"
+      1 "gno.land/p/nym-gfanton001/gnotif/trigger/v0"
       1 "gno.land/p/nym-moultest123/addrset/v0"
       1 "gno.land/p/nym-moultest123/addrset/v1"
       1 "gno.land/p/nym-moultest123/agents/commit/v0"
@@ -488,6 +491,7 @@
       1 "gno.land/r/nym-alexiscolin000/gnoradio/tickets/v1"
       1 "gno.land/r/nym-alexiscolin000/gnosplit/v1"
       1 "gno.land/r/nym-gfanton001/gnotif/v0"
+      1 "gno.land/r/nym-gfanton001/gnotif/v1"
       1 "gno.land/r/nym-mnsrehearsal001/nsmarket/v2"
       1 "gno.land/r/nym-mnsrehearsal001/nsview/v1"
       1 "gno.land/r/nym-mnsrehearsal001/nsview/v2"
