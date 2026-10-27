@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-7381
+7390
 ```
 
 ## addpkgs
@@ -28,7 +28,7 @@
      71 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens3"
      66 "gno.land/r/nym-mnsrehearsal001/nsskin/v1"
      65 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens2"
-     57 "gno.land/r/gnoland/wugnot"
+     59 "gno.land/r/gnoland/wugnot"
      56 "gno.land/r/g1a9g8nu3m0xgx58hh36fph49e2xkqm9axlxuf5z/memba_gov"
      55 "gno.land/r/g1nq99m3h9ed7vqve6ajpr3qwy2ls252m8jnundm/garden/v9"
      55 "gno.land/r/samcrew/connect4"
@@ -152,6 +152,7 @@
       4 "gno.land/r/g1tm3kjwc74jt7540zj8yrnsf57vjmpc4vchvr38/smoke/sa823c53f/counter"
       4 "gno.land/r/g1uvur63fqmdptrhrkmndkmu8p9t0mljcz63gv34/smoke/s9367a63c/counter"
       4 "gno.land/r/g1vczzzrsjyqdsxmx28vmassc3atryluhm67zhks/smoke/se921fde4/counter"
+      4 "gno.land/r/g1vvu0tl7hfa0wurs85ch7fdz6h80lznvrgthw99/smoke/s5af8e2c8/counter"
       4 "gno.land/r/g1zgg4n0whqpt3mz8ysshqw308kqjv9q5pap8gw7/smoke/sf0601180/counter"
       4 "gno.land/r/nym-alexiscolin000/gnoradio/catalog/v2"
       4 "gno.land/r/nym-mnsrehearsal001/nsnft/v2"
@@ -168,6 +169,7 @@
       3 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/beacon"
       3 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/latefees"
       3 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/statements"
+      3 "gno.land/r/gnoswap/gns"
       3 "gno.land/r/nym-mnsrehearsal001/nsmarket/v1"
       3 "gno.land/r/nym-mnsrehearsal001/nsskin/v2"
       3 "gno.land/r/nym-mnsrehearsal001/nsvote/v1"
@@ -197,6 +199,8 @@
       2 "gno.land/r/g1rzgxl6njyu4c2x89gxvaa9cswrt73rz8mlp7l6/alpha2/heavy/v0"
       2 "gno.land/r/g1uhp2ct66xap97aqwdlutwvu39y5370gd62xpcs/tally"
       2 "gno.land/r/g1uqqqz9576j4hyttvq3890p9a6vqa32ut49gfn5/tally"
+      2 "gno.land/r/gnoswap/pool"
+      2 "gno.land/r/gnoswap/position"
       2 "gno.land/r/gov/dao"
       2 "gno.land/r/nym-alexiscolin000/gnoradio/home/v1"
       2 "gno.land/r/nym-alexiscolin000/gnoradio/home/v2"
@@ -470,7 +474,6 @@
       1 "gno.land/r/gnoswap/community_pool/v1"
       1 "gno.land/r/gnoswap/emission"
       1 "gno.land/r/gnoswap/gnft"
-      1 "gno.land/r/gnoswap/gns"
       1 "gno.land/r/gnoswap/gov/governance"
       1 "gno.land/r/gnoswap/gov/governance/v1"
       1 "gno.land/r/gnoswap/gov/staker"
@@ -479,9 +482,7 @@
       1 "gno.land/r/gnoswap/halt/v1"
       1 "gno.land/r/gnoswap/launchpad"
       1 "gno.land/r/gnoswap/launchpad/v1"
-      1 "gno.land/r/gnoswap/pool"
       1 "gno.land/r/gnoswap/pool/v1"
-      1 "gno.land/r/gnoswap/position"
       1 "gno.land/r/gnoswap/position/v1"
       1 "gno.land/r/gnoswap/protocol_fee"
       1 "gno.land/r/gnoswap/protocol_fee/v1"
