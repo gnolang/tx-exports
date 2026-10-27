@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-7390
+7400
 ```
 
 ## addpkgs
@@ -150,6 +150,7 @@
       4 "gno.land/r/g1sgeenheqyxeghkurzaf0yndwdre7zhqfalk2q6/smoke/sa3a7d145/counter"
       4 "gno.land/r/g1tckf7cf6juxnahtjxle6fslq5gya5wf3stdydy/smoke/s18a88132/counter"
       4 "gno.land/r/g1tm3kjwc74jt7540zj8yrnsf57vjmpc4vchvr38/smoke/sa823c53f/counter"
+      4 "gno.land/r/g1uscs8ra07jz40j2ymdj5tr30plsmxsumyteyhh/smoke/s8c1137ed/counter"
       4 "gno.land/r/g1uvur63fqmdptrhrkmndkmu8p9t0mljcz63gv34/smoke/s9367a63c/counter"
       4 "gno.land/r/g1vczzzrsjyqdsxmx28vmassc3atryluhm67zhks/smoke/se921fde4/counter"
       4 "gno.land/r/g1vvu0tl7hfa0wurs85ch7fdz6h80lznvrgthw99/smoke/s5af8e2c8/counter"
@@ -439,6 +440,7 @@
       1 "gno.land/r/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/shots/impl/v1"
       1 "gno.land/r/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/shots/impl/v2"
       1 "gno.land/r/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/shots/impl/v3"
+      1 "gno.land/r/g1magld5ptgzaktqcexxq0pgq5lmdf0kz6re8hlv/smoke/v1793093992"
       1 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/gpushv2"
       1 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/perk"
       1 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnocial"
