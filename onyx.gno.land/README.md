@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-7372
+7381
 ```
 
 ## addpkgs
@@ -42,8 +42,8 @@
      28 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/budgets"
      28 "gno.land/r/nym-moultest123/x/vm/riscvdemo/v0"
      27 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game13"
+     26 "gno.land/r/g188vafzutzvlfw6wt7u3s62xtuvm0epmu8ufmfz/gnomepit/arena"
      24 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game32"
-     24 "gno.land/r/g188vafzutzvlfw6wt7u3s62xtuvm0epmu8ufmfz/gnomepit/arena"
      24 "gno.land/r/samcrew/launchpad/config/v1"
      23 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/fish2"
      23 "gno.land/r/nym-mnsrehearsal001/nslogic/v2"
@@ -151,6 +151,7 @@
       4 "gno.land/r/g1tckf7cf6juxnahtjxle6fslq5gya5wf3stdydy/smoke/s18a88132/counter"
       4 "gno.land/r/g1tm3kjwc74jt7540zj8yrnsf57vjmpc4vchvr38/smoke/sa823c53f/counter"
       4 "gno.land/r/g1uvur63fqmdptrhrkmndkmu8p9t0mljcz63gv34/smoke/s9367a63c/counter"
+      4 "gno.land/r/g1vczzzrsjyqdsxmx28vmassc3atryluhm67zhks/smoke/se921fde4/counter"
       4 "gno.land/r/g1zgg4n0whqpt3mz8ysshqw308kqjv9q5pap8gw7/smoke/sf0601180/counter"
       4 "gno.land/r/nym-alexiscolin000/gnoradio/catalog/v2"
       4 "gno.land/r/nym-mnsrehearsal001/nsnft/v2"
