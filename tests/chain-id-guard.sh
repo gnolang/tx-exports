@@ -44,8 +44,10 @@ fi
 
 if out=$(make -s -C "$dir" check-chain-id REMOTE="$unreadable" 2>&1); then
   ko "an unreadable RPC is refused: exited 0"
+elif grep -qF -- "curl:" <<<"$out"; then
+  ok "an unreadable RPC is refused, with curl's reason"
 else
-  ok "an unreadable RPC is refused"
+  ko "an unreadable RPC is refused, with curl's reason: $out"
 fi
 
 out=$(make -n -C "$dir" fetch REMOTE="$served" 2>&1)

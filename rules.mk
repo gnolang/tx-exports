@@ -57,7 +57,7 @@ check-chain-id:
 	@if [ -z "$(CHAIN_ID)" ]; then \
 		echo "$(SHORTNAME): CHAIN_ID is not set" >&2; exit 1; \
 	fi
-	@actual=$$(curl -s $(REMOTE)/status | jq -r '.result.node_info.network'); \
+	@actual=$$(curl -fsS $(REMOTE)/status | jq -r '.result.node_info.network'); \
 	if [ "$$actual" != "$(CHAIN_ID)" ]; then \
 		echo "$(SHORTNAME): RPC serves chain '$$actual', expected '$(CHAIN_ID)'" >&2; exit 1; \
 	fi
