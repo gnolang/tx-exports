@@ -42,7 +42,9 @@ tx-archive-ensure: $(TXARCHIVE)/cmd/main.go ## clone/update the gno repo so tx-a
 # not batched over WS). REMOTE stays HTTP(S) so the latest-block curl still works.
 ifeq ($(USE_WS),1)
 WS_FLAG       = -ws
-BACKUP_REMOTE = $(shell echo $(REMOTE) | tr -d '"' | sed -e 's#^http://#ws://#' -e 's#^https://#wss://#')/websocket
+# `|` delimits the sed expressions: make before 4.3 reads `#` inside
+# $(shell ...) as the start of a comment
+BACKUP_REMOTE = $(shell echo $(REMOTE) | tr -d '"' | sed -e 's|^http://|ws://|' -e 's|^https://|wss://|')/websocket
 else
 WS_FLAG       =
 BACKUP_REMOTE = $(REMOTE)
