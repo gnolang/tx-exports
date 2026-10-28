@@ -71,3 +71,8 @@ jobs:
         run: |
           bash tests/chain-id-guard.sh mainnet.gno.land gnoland-1
           bash tests/chain-id-guard.sh onyx.gno.land onyx-1
+
+      # stats on a scratch chain dir: deployed packages listed whatever the key
+      # casing, non-tx files excluded.
+      - name: rules.mk stats
+        run: bash tests/stats.sh
