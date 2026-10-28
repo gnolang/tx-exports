@@ -1,55 +1,84 @@
 #!/usr/bin/env bash
-# Exercises rules.mk's stats target on a scratch chain dir: deployed packages
-# are listed whatever the casing of their JSON keys (`path` in current exports,
-# `Path` in test2/test3), and a chain dir can narrow the files stats reads so a
-# non-tx file (staging's balances) is neither counted nor parsed as a tx.
-# Usage: tests/stats.sh   (from the repo root; needs GNU make, jq)
+# Exercises rules.mk's stats target on scratch chain dirs:
+# - deployed packages are the /vm.m_addpkg messages only (a /vm.m_run package
+#   is not a deploy), whatever the casing of their keys (`path`, or `Path` in
+#   test2/test3);
+# - a chain dir narrows the files stats reads (staging's balances file holds
+#   `addr=coins` lines, not txs);
+# - a corrupt tx line, or a BACKUP_FILES that matches nothing, fails the run.
+# Usage: tests/stats.sh   (from the repo root; needs GNU make, bash, jq)
 set -uo pipefail
-root=$(cd "$(dirname "$0")/.." && pwd)
+root=$(cd -- "$(dirname "$0")/.." >/dev/null && pwd) || exit 1
 fail=0
 ok() { echo "ok   - $1"; }
 ko() {
   echo "FAIL - $1"
   fail=1
 }
+# MAKEFLAGS/MAKELEVEL from a caller would add output or flags to the runs below
+mk() { env -u MAKEFLAGS -u MAKELEVEL make -s -C "$@"; }
 
-work=$(mktemp -d)
+work=$(mktemp -d) || exit 1
 trap 'rm -rf "$work"' EXIT
-cp "$root/rules.mk" "$work/"
-mkdir "$work/chain"
-cat >"$work/chain/Makefile" <<'EOF'
+cp "$root/rules.mk" "$work/" || exit 1
+
+# chain <dir> <BACKUP_FILES>: a scratch chain dir with one tx file and a
+# balances file
+chain() {
+  mkdir "$work/$1" || exit 1
+  cat >"$work/$1/Makefile" <<EOF
 REMOTE = "https://rpc.example.invalid"
 SHORTNAME = example
-BACKUP_FILES = backup_txs_*.jsonl
+BACKUP_FILES = $2
 -include ../rules.mk
 EOF
-cat >"$work/chain/backup_txs_1-3.jsonl" <<'EOF'
+  cat >"$work/$1/backup_txs_1-4.jsonl" <<'EOF'
 {"tx":{"msg":[{"@type":"/vm.m_addpkg","creator":"g1a","package":{"name":"low","path":"gno.land/r/demo/lowercase","files":[]}}]},"metadata":{"timestamp":"1"}}
 {"tx":{"msg":[{"@type":"/vm.m_addpkg","creator":"g1a","package":{"Name":"up","Path":"gno.land/r/demo/capitalized","Files":[]}}]},"metadata":{"timestamp":"2"}}
 {"tx":{"msg":[{"@type":"/vm.m_call","caller":"g1a","pkg_path":"gno.land/r/demo/lowercase","func":"Do","args":[]}]},"metadata":{"timestamp":"3"}}
+{"tx":{"msg":[{"@type":"/vm.m_run","caller":"g1a","package":{"name":"main","path":"","files":[]}}]},"metadata":{"timestamp":"4"}}
 EOF
-printf 'g1a=1000ugnot\ng1b=2000ugnot\n' >"$work/chain/backup_balances.jsonl"
+  printf 'g1a=1000ugnot\ng1b=2000ugnot\n' >"$work/$1/backup_balances.jsonl"
+}
 
-if ! out=$(make -s -C "$work/chain" stats 2>&1); then
+# a README section's lines inside its fence, single-spaced (`uniq -c` pads its
+# counts differently in GNU and BSD coreutils)
+listing() {
+  awk -v h="## $2" '$0 == h {f = 1; next} /^## / {f = 0} f' "$1" |
+    awk '!/^```/ && NF {$1 = $1; print}'
+}
+
+chain good 'backup_txs_*.jsonl'
+if ! out=$(mk "$work/good" stats 2>&1); then
   ko "stats runs: $out"
 elif [ -n "$out" ]; then
   ko "stats runs without errors: $out"
 else
   ok "stats runs without errors"
 fi
-readme=$(cat "$work/chain/README.md" 2>/dev/null)
-section() { awk -v h="## $1" '$0 == h {f = 1; next} /^## / {f = 0} f' <<<"$readme"; }
+readme=$work/good/README.md
+got=$(listing "$readme" addpkgs)
+want=$(printf '1 "%s"\n' gno.land/r/demo/capitalized gno.land/r/demo/lowercase)
+[ "$got" = "$want" ] && ok "addpkgs lists the deploys of both key casings, and no MsgRun" ||
+  ko "addpkgs lists the deploys of both key casings, and no MsgRun: $(tr '\n' '|' <<<"$got")"
+got=$(listing "$readme" 'top realm calls')
+[ "$got" = '1 "gno.land/r/demo/lowercase"' ] && ok "top realm calls lists the calls" ||
+  ko "top realm calls lists the calls: $(tr '\n' '|' <<<"$got")"
+got=$(listing "$readme" TXs)
+[ "$got" = 4 ] && ok "the tx count covers only the tx files" ||
+  ko "the tx count covers only the tx files: $got"
 
-grep -qF '"gno.land/r/demo/lowercase"' <<<"$(section addpkgs)" &&
-  ok "a deploy with a lowercase path is listed" ||
-  ko "a deploy with a lowercase path is listed"
-grep -qF '"gno.land/r/demo/capitalized"' <<<"$(section addpkgs)" &&
-  ok "a deploy with a capitalized Path is listed" ||
-  ko "a deploy with a capitalized Path is listed"
-grep -qF '"gno.land/r/demo/lowercase"' <<<"$(section 'top realm calls')" &&
-  ok "realm calls are listed" ||
-  ko "realm calls are listed"
-[ "$(section TXs | grep -E '^ *[0-9]+ *$' | tr -d ' ')" = 3 ] &&
-  ok "the tx count covers only the tx files" ||
-  ko "the tx count covers only the tx files: $(section TXs | tr '\n' ' ')"
+chain corrupt 'backup_txs_*.jsonl'
+echo '{"tx":' >>"$work/corrupt/backup_txs_1-4.jsonl"
+mk "$work/corrupt" stats >/dev/null 2>&1 && ko "a corrupt tx line fails stats: exited 0" ||
+  ok "a corrupt tx line fails stats"
+
+chain nomatch 'backup_nothing_*.jsonl'
+if mk "$work/nomatch" stats >/dev/null 2>&1; then
+  ko "a BACKUP_FILES matching nothing fails stats: exited 0"
+elif [ -e "$work/nomatch/README.md" ]; then
+  ko "a BACKUP_FILES matching nothing fails stats before writing README.md"
+else
+  ok "a BACKUP_FILES matching nothing fails stats before writing README.md"
+fi
 exit $fail

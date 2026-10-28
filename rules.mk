@@ -86,8 +86,13 @@ fetch: check-chain-id tx-archive-ensure
 	@cat metadata.json | jq -a '.latest_block_height = $(TO_BLOCK)' > /tmp/aa.json
 	@mv /tmp/aa.json metadata.json
 
+# Without a numeric height from the RPC, `seq` would fail inside the backticks
+# and the loop would fetch nothing yet exit 0.
 .PHONY: fetch-all
 fetch-all:
+	@case "$(LATEST_BLOCK_HEIGHT)" in \
+		'' | *[!0-9]*) echo "$(SHORTNAME): no block height from the RPC (got '$(LATEST_BLOCK_HEIGHT)')" >&2; exit 1 ;; \
+	esac
 	@for i in `seq $(FROM_BLOCK) $(MAX_INTERVAL) $(LATEST_BLOCK_HEIGHT)`; do \
 		$(MAKE) -C . fetch FROM_BLOCK="$$i" || exit 1; \
 	done
@@ -96,10 +101,17 @@ fetch-all:
 # backup_*.jsonl also matches non-tx files (staging's balances) narrows it.
 BACKUP_FILES ?= backup_*.jsonl
 
-# Package keys are lowercase (`path`) in current exports and capitalized
-# (`Path`) in older ones (test2, test3).
+# Deployed packages are the /vm.m_addpkg messages (a /vm.m_run carries a
+# package too); their keys are lowercase (`path`) except in test2 and test3,
+# exported before gno#2019's snake_case JSON tags (`Path`).
+#
+# bash with pipefail, so a failing jq or cat fails the run instead of writing
+# an empty section; and a BACKUP_FILES that matches nothing stops it before
+# README.md is touched.
 .PHONY: stats
+stats: SHELL := /usr/bin/env bash -o pipefail
 stats:
+	$(if $(wildcard $(BACKUP_FILES)),,$(error $(SHORTNAME): no file matches BACKUP_FILES=$(BACKUP_FILES)))
 	echo "# $(REMOTE)" > README.md
 	echo >> README.md
 
@@ -111,7 +123,7 @@ stats:
 
 	echo "## addpkgs" >> README.md
 	echo '```' >> README.md
-	cat $(BACKUP_FILES) | jq '.tx.msg[].package | (.path // .Path) | select( . != null )' | sort | uniq -c | sort --stable -nr >> README.md
+	cat $(BACKUP_FILES) | jq '.tx.msg[] | select(.["@type"]=="/vm.m_addpkg") | .package | (.path // .Path) | select( . != null )' | sort | uniq -c | sort --stable -nr >> README.md
 	echo '```' >> README.md
 	echo >> README.md
 
