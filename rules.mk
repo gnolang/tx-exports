@@ -86,6 +86,12 @@ fetch-all:
 		make -C . fetch FROM_BLOCK="$$i"; \
 	done
 
+# The files stats reads: every backup is one tx per line. A chain dir whose
+# backup_*.jsonl also matches non-tx files (staging's balances) narrows it.
+BACKUP_FILES ?= backup_*.jsonl
+
+# Package keys are lowercase (`path`) in current exports and capitalized
+# (`Path`) in older ones (test2, test3).
 .PHONY: stats
 stats:
 	echo "# $(REMOTE)" > README.md
@@ -93,56 +99,27 @@ stats:
 
 	echo "## TXs" >> README.md
 	echo '```' >> README.md
-	cat backup_*.jsonl | wc -l >> README.md
+	cat $(BACKUP_FILES) | wc -l >> README.md
 	echo '```' >> README.md
 	echo >> README.md
 
 	echo "## addpkgs" >> README.md
 	echo '```' >> README.md
-	cat backup_*.jsonl | jq '.tx.msg[].package.Path | select( . != null )' | sort | uniq -c | sort --stable -nr >> README.md
+	cat $(BACKUP_FILES) | jq '.tx.msg[].package | (.path // .Path) | select( . != null )' | sort | uniq -c | sort --stable -nr >> README.md
 	echo '```' >> README.md
 	echo >> README.md
 
 	echo "## top realm calls" >> README.md
 	echo '```' >> README.md
-	cat backup_*.jsonl | jq '.tx.msg[].pkg_path | select( . != null )' | sort | uniq -c | sort --stable -nr >> README.md
+	cat $(BACKUP_FILES) | jq '.tx.msg[].pkg_path | select( . != null )' | sort | uniq -c | sort --stable -nr >> README.md
 	echo '```' >> README.md
 	echo >> README.md
 
 	echo "## top faucet requesters" >> README.md
 	echo '```' >> README.md
-	cat backup_*.jsonl | jq -r '.tx.msg[] | select(.["@type"]=="/bank.MsgSend") | select(.["from_address"]=="g127jydsh6cms3lrtdenydxsckh23a8d6emqcvfa") | .to_address + " " + .amount' | sed 's/ugnot$$//' | awk 'NR == 1 {next} {a[$$1] += $$2} {b[$$1] += 1} END {for (i in a) {if (a[i] >= 500000000){printf "%-15s\t%s\t%s\n", i, b[i], a[i]}}}' | sort -rnk2 >> README.md
+	cat $(BACKUP_FILES) | jq -r '.tx.msg[] | select(.["@type"]=="/bank.MsgSend") | select(.["from_address"]=="g127jydsh6cms3lrtdenydxsckh23a8d6emqcvfa") | .to_address + " " + .amount' | sed 's/ugnot$$//' | awk 'NR == 1 {next} {a[$$1] += $$2} {b[$$1] += 1} END {for (i in a) {if (a[i] >= 500000000){printf "%-15s\t%s\t%s\n", i, b[i], a[i]}}}' | sort -rnk2 >> README.md
 	echo '```' >> README.md
 	echo >> README.md
-
-stats-legacy:
-	echo "# $(REMOTE)" > README.md
-	echo >> README.md
-
-	echo "## TXs" >> README.md
-	echo '```' >> README.md
-	cat backup_*.jsonl | wc -l >> README.md
-	echo '```' >> README.md
-	echo >> README.md
-
-	echo "## addpkgs" >> README.md
-	echo '```' >> README.md
-	cat backup_*.jsonl | jq '.msg[].package.Path | select( . != null )' | sort | uniq -c | sort --stable -nr >> README.md
-	echo '```' >> README.md
-	echo >> README.md
-
-	echo "## top realm calls" >> README.md
-	echo '```' >> README.md
-	cat backup_*.jsonl | jq '.msg[].pkg_path | select( . != null )' | sort | uniq -c | sort --stable -nr >> README.md
-	echo '```' >> README.md
-	echo >> README.md
-
-	echo "## top faucet requesters" >> README.md
-	echo '```' >> README.md
-	cat backup_*.jsonl | jq -r '.msg[] | select(.["@type"]=="/bank.MsgSend") | select(.["from_address"]=="g127jydsh6cms3lrtdenydxsckh23a8d6emqcvfa") | .to_address + " " + .amount' | sed 's/ugnot$$//' | awk 'NR == 1 {next} {a[$$1] += $$2} {b[$$1] += 1} END {for (i in a) {if (a[i] >= 500000000){printf "%-15s\t%s\t%s\n", i, b[i], a[i]}}}' | sort -rnk2 >> README.md
-	echo '```' >> README.md
-	echo >> README.md
-
 
 # Only files with contiguous block ranges may be merged: a coverage gap
 # between two files must stay visible in the file names.
