@@ -6,11 +6,15 @@ EXTRACTOR_DIR ?= extractor
 # local checkout.
 #
 # GNO_REF must match the build the target chain runs, so each chain Makefile
-# pins its node's `chain/*` tag. tx-archive amino-decodes the node's block
-# results with the gno types from this ref, and amino rejects unknown JSON
-# fields: on `master` the fetch dies with `unknown JSON field "errors" for type
-# vm.TypeCheckError` against gnoland1, whose build still carries that field
-# (dropped from master in #5893).
+# pins the gno release tag its nodes run (e.g. `v1.5.1`), bumped with every
+# node upgrade. A `chain/*` name is ambiguous: most exist both as a release
+# branch and as a tag, and `git clone --branch` picks the branch.
+#
+# tx-archive amino-decodes the node's block results with the gno types from
+# this ref, and amino rejects unknown JSON fields: on `master` the fetch dies
+# with `unknown JSON field "errors" for type vm.TypeCheckError` against
+# gnoland1, whose build still carries that field (dropped from master in
+# #5893).
 GNO_REF      ?= master
 # Ref is part of the path so bumping GNO_REF re-clones instead of silently
 # reusing a checkout of the previous ref.
