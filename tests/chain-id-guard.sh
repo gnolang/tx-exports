@@ -2,7 +2,7 @@
 # Exercises rules.mk's check-chain-id guard for one chain dir without network
 # access: the RPC is a file:// fixture whose /status reports the given chain id.
 # Usage: tests/chain-id-guard.sh <chain-dir> <its-chain-id>
-# Needs GNU make >= 4.3 (rules.mk's $(shell sed 's#...#...#') for USE_WS dirs).
+# Needs GNU make, curl and jq.
 set -uo pipefail
 dir=${1:?chain dir}
 id=${2:?chain id}
