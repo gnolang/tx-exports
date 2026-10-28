@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-7458
+7480
 ```
 
 ## addpkgs
@@ -32,13 +32,13 @@
      59 "gno.land/r/gnoland/wugnot"
      56 "gno.land/r/g1a9g8nu3m0xgx58hh36fph49e2xkqm9axlxuf5z/memba_gov"
      55 "gno.land/r/samcrew/connect4"
+     53 "gno.land/r/g1um2pwwnx3gn8p3ryfdert8mhpu4u4up49sc9ru/minichess"
      52 "gno.land/r/nym-mnsrehearsal001/nsdata/v1"
      49 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game27"
      48 "gno.land/r/nym-mnsrehearsal001/nslogic/v1"
      44 "gno.land/r/sys/namereg/v0"
      40 "gno.land/r/nym-gfanton001/echo/v0"
      33 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game3"
-     32 "gno.land/r/g1um2pwwnx3gn8p3ryfdert8mhpu4u4up49sc9ru/minichess"
      29 "gno.land/r/samcrew/launchpad/drops/v1"
      28 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/budgets"
      28 "gno.land/r/nym-moultest123/x/vm/riscvdemo/v0"
