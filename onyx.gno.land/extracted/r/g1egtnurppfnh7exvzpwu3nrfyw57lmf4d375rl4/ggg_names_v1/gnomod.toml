@@ -1,0 +1,5 @@
+module = "gno.land/r/g1egtnurppfnh7exvzpwu3nrfyw57lmf4d375rl4/ggg_names_v1"
+gno = "0.9"
+
+[addpkg]
+  creator = "g1egtnurppfnh7exvzpwu3nrfyw57lmf4d375rl4"
