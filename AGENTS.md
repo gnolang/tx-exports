@@ -52,7 +52,7 @@ go run ./extractor --input-dir test11.gno.land --output-dir test11.gno.land/extr
 
 Each chain directory is self-contained:
 
-- `Makefile` — sets `REMOTE`, `SHORTNAME`, `MAX_INTERVAL`, and includes `../rules.mk`
+- `Makefile` — sets `REMOTE`, `SHORTNAME`, `CHAIN_ID` (the chain id `make fetch` requires the RPC to report), `MAX_INTERVAL`, and includes `../rules.mk`
 - `backup_*.jsonl` — exported transaction data, one JSON object per line, in block-number order
 - `metadata.json` — tracks `latest_block_height` so incremental fetches know where to resume
 - `README.md` — auto-generated stats (tx counts, top deployers, faucet requesters)

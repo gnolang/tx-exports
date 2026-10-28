@@ -48,12 +48,26 @@ WS_FLAG       =
 BACKUP_REMOTE = $(REMOTE)
 endif
 
+# fetch refuses to run unless the RPC serves the chain this directory archives:
+# a hostname can answer for another chain (e.g. a new testnet's RPC hostname
+# served by its predecessor's nodes before launch), and the backup would record
+# that chain's blocks under this directory.
+.PHONY: check-chain-id
+check-chain-id:
+	@if [ -z "$(CHAIN_ID)" ]; then \
+		echo "$(SHORTNAME): CHAIN_ID is not set" >&2; exit 1; \
+	fi
+	@actual=$$(curl -fsS $(REMOTE)/status | jq -r '.result.node_info.network'); \
+	if [ "$$actual" != "$(CHAIN_ID)" ]; then \
+		echo "$(SHORTNAME): RPC serves chain '$$actual', expected '$(CHAIN_ID)'" >&2; exit 1; \
+	fi
+
 # --batch 100: the RPC nodes enforce a 10s WebSocket write deadline (tm2
 # defaultWSWriteWait). Assembling a batch response for tx-archive's default
 # 1000 blocks takes longer than that in tx-dense ranges, and the server
 # drops the connection mid-fetch.
 .PHONY: fetch
-fetch: tx-archive-ensure
+fetch: check-chain-id tx-archive-ensure
 	@echo "Backup from: $(FROM_BLOCK) to $(TO_BLOCK)"
 	cd $(TXARCHIVE) && go run ./cmd backup -verbose $(WS_FLAG) \
 		--batch 100 \
