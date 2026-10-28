@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-7415
+7422
 ```
 
 ## addpkgs
@@ -118,6 +118,7 @@
       4 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/fishcoin"
       4 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/fishmark"
       4 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/coins"
+      4 "gno.land/r/g13z5ugz2v7nuk2capxz5jxkk9u86t8qanef66vr/smoke/s6e99f7f8/counter"
       4 "gno.land/r/g14psmh3mz6zecmg87y93r4wpfd6zgu98w7zyd6h/smoke/sb0e21fb4/counter"
       4 "gno.land/r/g14z28lusnnnd3f4uvga29lhu6h6rp9hlywteztq/smoke/s405cbf7c/counter"
       4 "gno.land/r/g15w4d7t2p36uupmwwucw4j33vdh7l656pxa6fau/smoke/s7b0658b0/counter"
