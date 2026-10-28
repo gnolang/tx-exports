@@ -52,26 +52,20 @@ go run ./extractor --input-dir test11.gno.land --output-dir test11.gno.land/extr
 
 Each chain directory is self-contained:
 
-- `Makefile` — sets `REMOTE`, `SHORTNAME`, `CHAIN_ID` (the chain id `make fetch` requires the RPC to report), `MAX_INTERVAL`, and includes `../rules.mk`
+- `Makefile` — sets `REMOTE`, `SHORTNAME`, `CHAIN_ID` (the chain id `make fetch` requires the RPC to report), `GNO_REF` (the gno release tag the chain's nodes run, bumped with every node upgrade), `MAX_INTERVAL`, and includes `../rules.mk`
 - `backup_*.jsonl` — exported transaction data, one JSON object per line, in block-number order
 - `metadata.json` — tracks `latest_block_height` so incremental fetches know where to resume
 - `README.md` — auto-generated stats (tx counts, top deployers, faucet requesters)
 
 ### Transaction data format
 
-**Current format** (mainnet, onyx, pearl, sapphire, topaz, test13, test11, betanet, test5, test2, test1):
+Every chain, staging included, stores one tx per line in this shape:
 
 ```json
 {"tx": {"msg": [...], "fee": {...}, "signatures": [...], "memo": ""}, "metadata": {"timestamp": "..."}}
 ```
 
-**Legacy format** (staging, test4, test3 — plain `std.Tx`):
-
-```json
-{"msg": [...], "fee": {...}, "signatures": [...], "memo": ""}
-```
-
-Both use Amino JSON encoding (Tendermint2 wire format).
+It is Amino JSON (Tendermint2 wire format). test2 and test3 were exported with an older amino that capitalizes the keys of a `/vm.m_addpkg` package (`Name`, `Path`, `Files`); every other chain uses lowercase keys.
 
 ### Transaction message types relevant to extraction
 
