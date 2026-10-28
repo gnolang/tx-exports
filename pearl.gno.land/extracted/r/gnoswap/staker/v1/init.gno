@@ -1,8 +1,9 @@
 package staker
 
 import (
-	"errors"
 	"time"
+
+	"gno.land/r/gnoswap/access"
 
 	"gno.land/r/gnoswap/emission"
 
@@ -10,7 +11,7 @@ import (
 )
 
 const (
-	defaultDepositGnsAmount    = int64(1_000_000_000)
+	defaultDepositGnsAmount    = int64(100_000_000_000)
 	defaultMinimumRewardAmount = int64(1_000_000_000)
 
 	// unstakingFee is the fee charged when unstaking positions.
@@ -24,9 +25,7 @@ func init(cur realm) {
 
 func registerStakerV1(cur realm) {
 	sr.RegisterInitializer(cross(cur), func(_ int, rlm realm, stakerStore sr.IStakerStore, poolAccessor sr.PoolAccessor, emissionAccessor sr.EmissionAccessor, nftAccessor sr.NFTAccessor) sr.IStaker {
-		if !rlm.IsCurrent() {
-			panic(errors.New(errSpoofedRealm))
-		}
+		access.AssertIsRlmCurrent(0, rlm)
 
 		err := initStoreData(0, rlm, stakerStore, emissionAccessor)
 		if err != nil {
@@ -180,7 +179,7 @@ func initStoreData(_ int, rlm realm, stakerStore sr.IStakerStore, emissionAccess
 	}
 
 	if !stakerStore.HasPoolTierGetEmissionStoreKey() {
-		getEmissionFn := func() int64 {
+		getEmissionFn := func() (int64, error) {
 			return emissionAccessor.GetStakerEmissionAmountPerSecond()
 		}
 
@@ -191,7 +190,7 @@ func initStoreData(_ int, rlm realm, stakerStore sr.IStakerStore, emissionAccess
 	}
 
 	if !stakerStore.HasPoolTierGetHalvingBlocksInRangeStoreKey() {
-		getHalvingBlocksInRangeFn := func(start, end int64) ([]int64, []int64) {
+		getHalvingBlocksInRangeFn := func(start, end int64) ([]int64, []int64, error) {
 			return emissionAccessor.GetStakerEmissionAmountPerSecondInRange(start, end)
 		}
 

@@ -1,2 +1,5 @@
 *.gz diff=gzip
 *.gno linguist-language=Go
+# extracted/ holds package sources byte for byte as deployed on chain: never
+# convert their line endings, whatever the client's core.autocrlf
+*/extracted/** -text

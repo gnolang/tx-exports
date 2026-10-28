@@ -16,7 +16,7 @@ This repository archives raw blockchain transaction data from Gno.land chains.
 
 ## Historical chains (archived, no longer updated)
 
-- `pearl.gno.land/` — pearl.gno.land (test16)
+- `pearl.gno.land/` — pearl.gno.land (test16), halted at block 809589 on 2026-09-29
 - `betanet.gno.land/` — betanet (chain id `gnoland1`), halted at block 3796411 on 2026-09-14
 - `sapphire.gno.land/` — sapphire.gno.land (test15)
 - `topaz.gno.land/` — topaz.gno.land (test14)

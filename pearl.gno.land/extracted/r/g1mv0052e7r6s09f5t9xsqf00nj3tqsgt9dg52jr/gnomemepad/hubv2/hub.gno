@@ -5,7 +5,7 @@
 //   - Any admin may SetModule / TransferAdmin rights via AddAdmin
 //   - Ops helpers: AdminCount, IsAdmin
 //
-// Migrate: deploy hubv2 â†’ re-SetModule all paths â†’ point UI HUB=hubv2
+// Migrate: deploy hubv2 → re-SetModule all paths → point UI HUB=hubv2
 package hubv2
 
 import (
@@ -111,7 +111,7 @@ func RemoveAdmin(cur realm, who address) {
 	if admins.Size() <= 1 {
 		panic("hubv2: cannot remove last admin")
 	}
-	// Prevent lock-out of caller if they're removing themselves as sole remaining â€” already size>1
+	// Prevent lock-out of caller if they're removing themselves as sole remaining — already size>1
 	admins.Remove(who.String())
 	chain.Emit("RemoveAdmin", "addr", who.String())
 }
@@ -179,7 +179,7 @@ func Inited() bool {
 	return inited
 }
 
-// Admin returns first admin (compat) â€” first key in tree iteration order.
+// Admin returns first admin (compat) — first key in tree iteration order.
 func Admin() string {
 	requireInit()
 	out := ""

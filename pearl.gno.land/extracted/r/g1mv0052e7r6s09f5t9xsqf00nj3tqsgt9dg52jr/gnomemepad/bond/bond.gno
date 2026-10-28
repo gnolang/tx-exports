@@ -20,8 +20,9 @@ const (
 	DenomUgnot = "ugnot"
 
 	// Defaults (ugnot, 1 GNOT = 1e6 ugnot)
-	DefaultNormalBondUgnot int64 = 2_000_000  // 2 GNOT
-	DefaultPromoBondUgnot  int64 = 20_000_000 // 20 GNOT ≈ $20 if GNOT ≈ $1
+	// Pearl / current policy: 100 GNOT create bond (admin can SetNormalBond).
+	DefaultNormalBondUgnot int64 = 100_000_000 // 100 GNOT
+	DefaultPromoBondUgnot  int64 = 100_000_000 // same unless StartPromo changes it
 	DefaultPromoDuration   int64 = 10 * 24 * 60 * 60 // 10 days (seconds)
 
 	// Status for UI
