@@ -83,7 +83,7 @@ fetch: check-chain-id tx-archive-ensure
 .PHONY: fetch-all
 fetch-all:
 	@for i in `seq $(FROM_BLOCK) $(MAX_INTERVAL) $(LATEST_BLOCK_HEIGHT)`; do \
-		make -C . fetch FROM_BLOCK="$$i"; \
+		$(MAKE) -C . fetch FROM_BLOCK="$$i" || exit 1; \
 	done
 
 # The files stats reads: every backup is one tx per line. A chain dir whose

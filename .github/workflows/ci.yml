@@ -76,3 +76,7 @@ jobs:
       # casing, non-tx files excluded.
       - name: rules.mk stats
         run: bash tests/stats.sh
+
+      # fetch-all stops at the first failed chunk (each refused by the guard).
+      - name: rules.mk fetch-all
+        run: bash tests/fetch-all.sh
