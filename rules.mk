@@ -174,15 +174,16 @@ join:
 
 # Each run extracts into a fresh extracted.new, so the extractor's numbering of
 # repeated deploys (<path>, <path>:1, …) starts from an empty tree. The new tree
-# replaces extracted/ only when the extractor succeeds and writes at least one
-# package: backups it cannot parse must not empty an existing tree.
+# replaces extracted/ only when the extractor succeeds (a deploy it cannot parse
+# fails it) and has written at least one package (it creates extracted.new only
+# then): backups it cannot parse never drop packages from an existing tree.
 .PHONY: extractor
 extractor:
 	rm -rf extracted.new
 	go run -C "../$(EXTRACTOR_DIR)" . \
 		-source-path "$(shell pwd)" \
 		-output-dir "$(shell pwd)/extracted.new"
-	@[ -d extracted.new ] || { echo "$(SHORTNAME): the extractor wrote no package, extracted/ kept" >&2; exit 1; }
+	@[ -d extracted.new ] || { echo "$(SHORTNAME): the extractor wrote no package, extracted/ not replaced" >&2; exit 1; }
 	rm -rf extracted
 	mv extracted.new extracted
 

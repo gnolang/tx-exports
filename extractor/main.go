@@ -252,7 +252,9 @@ func writePackageMetadata(metadata Metadata, outputDir string) error {
 
 // checkOutputDir refuses an output directory that exists and is not empty:
 // extraction never mixes with an earlier tree, so each run's numbering of
-// repeated deploys stands on its own.
+// repeated deploys stands on its own. A missing output directory is created
+// only when the first package is written: `make extractor` relies on that to
+// tell a run that wrote nothing.
 func checkOutputDir(dir string) error {
 	entries, err := os.ReadDir(dir)
 	if errors.Is(err, os.ErrNotExist) {
