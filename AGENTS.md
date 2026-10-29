@@ -36,8 +36,10 @@ make loop         # Continuous loop: fetch → stats → commit → push (for CI
 tx-archive lives in gnolang/gno at `contribs/tx-archive`, whose `go.mod` replaces gno with `../..`, so it only builds from a gno checkout (no remote `go run …@version`). `make tx-archive-ensure` clones gno at the dir's `GNO_REF` into `~/.cache/tx-exports/gno-<GNO_REF, / as ->`; run it from there:
 
 ```sh
-cd ~/.cache/tx-exports/gno-<GNO_REF>/contribs/tx-archive   # the chain dir's GNO_REF
-go run ./cmd backup --remote <RPC_URL> --from-block <N> --to-block <M> --output-path backup_N-M.jsonl
+cd ~/.cache/tx-exports/gno-<GNO_REF, / as ->/contribs/tx-archive
+# as rules.mk's fetch; USE_WS=1 dirs add -ws and --remote wss://<host>/websocket
+go run ./cmd backup -verbose --batch 100 --remote <RPC_URL> --from-block <N> --to-block <M> \
+  --output-path <absolute chain dir>/backup_<N as %07d>-<M as %07d>.jsonl
 ```
 
 ### Running the extractor
@@ -46,7 +48,8 @@ go run ./cmd backup --remote <RPC_URL> --from-block <N> --to-block <M> --output-
 # From repo root (the extractor is its own Go module), into a fresh dir;
 # `make -C test11.gno.land extractor` writes test11.gno.land/extracted instead
 go run -C extractor . -source-path ../test11.gno.land -output-dir /tmp/test11-extracted
-# test1 stores plain std.Tx lines in txexport-*.log: add -legacy-mode -file-type .log
+# test1-test4 predate {tx, metadata} lines: add -legacy-mode (test1, whose
+# backups are txexport-*.log, also -file-type .log)
 ```
 
 ## Architecture
@@ -55,7 +58,7 @@ go run -C extractor . -source-path ../test11.gno.land -output-dir /tmp/test11-ex
 
 Each chain directory is self-contained:
 
-- `Makefile` — sets `REMOTE`, `SHORTNAME`, `MAX_INTERVAL`, and includes `../rules.mk`. Active chains also set `CHAIN_ID` (the chain id `make fetch` requires the RPC to report) and `GNO_REF` (the gno release tag their nodes run, bumped with every node upgrade); archived dirs keep the `chain/*` `GNO_REF` they were exported with, or none (`master`)
+- `Makefile` — sets `REMOTE` and `SHORTNAME`, and includes `../rules.mk`; tx-archive dirs (all but staging and test1) also set `MAX_INTERVAL`. mainnet and onyx also set `CHAIN_ID` (the chain id `make fetch` requires the RPC to report) and `GNO_REF` (the gno release tag their nodes run, bumped with every node upgrade); archived dirs keep the `chain/*` `GNO_REF` they were exported with, or none (`master`)
 - `backup_*.jsonl` — exported transaction data, one JSON object per line, in block-number order (staging also has `backup_staging_balances.jsonl`: `addr=amountugnot` lines, hence its `BACKUP_FILES`)
 - `metadata.json` — tracks `latest_block_height` so incremental fetches know where to resume
 - `README.md` — auto-generated stats (tx count, deployed packages, top realm calls, top faucet requesters)
@@ -68,7 +71,7 @@ Every `backup_*.jsonl` tx line wraps one `std.Tx` under `tx`:
 {"tx": {"msg": [...], "fee": {...}, "signatures": [...], "memo": ""}, "metadata": {"timestamp": "..."}}
 ```
 
-test2–test4 carry `"blockNum": "<n>"` instead of `metadata`; the first 291 lines of staging's `backup_staging_txs_1-1000.jsonl` carry neither. test1 predates the wrapper: plain `std.Tx` lines in `txexport-*.log`, which the extractor reads with `-legacy-mode`.
+test2–test4 carry `"blockNum": "<n>"` instead of `metadata`; the first 291 lines of staging's `backup_staging_txs_1-1000.jsonl` carry neither. test1 predates the wrapper: plain `std.Tx` lines in `txexport-*.log`. The extractor reads test1–test4's lines with `-legacy-mode`.
 
 It is Amino JSON (Tendermint2 wire format). test1–test3 predate gnolang/gno#2019's snake_case JSON tags, so their `/vm.m_addpkg` package and file keys are capitalized (`Name`, `Path`, `Files`, `Body`); every other chain uses lowercase.
 
