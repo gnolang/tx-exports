@@ -306,18 +306,16 @@ func sortByBlockRange(paths []string) {
 func extractAddMessages[T std.Tx | gnoland.TxWithMetadata](
 	filePath string,
 	unwrapFn func(T) []std.Msg,
-) ([]vm.MsgAddPackage, error) {
+) (_ []vm.MsgAddPackage, err error) {
 	file, err := os.Open(filePath)
 	if err != nil {
 		return nil, fmt.Errorf("unable to open file, %w", err)
 	}
-
-	cleanup := func() error {
+	defer func() {
 		if closeErr := file.Close(); closeErr != nil {
-			return fmt.Errorf("unable to gracefully close file, %w", closeErr)
+			err = errors.Join(err, fmt.Errorf("unable to gracefully close file, %w", closeErr))
 		}
-		return nil
-	}
+	}()
 
 	reader := bufio.NewReader(file)
 
@@ -357,7 +355,7 @@ func extractAddMessages[T std.Tx | gnoland.TxWithMetadata](
 			// a deploy the pinned gno types cannot decode fails the run: skipping
 			// it would drop its package from a rebuilt tree
 			if bytes.Contains(line, []byte(`"/vm.m_addpkg"`)) {
-				return nil, errors.Join(fmt.Errorf("%w in %s: %w", errUnparsableDeploy, filePath, err), cleanup())
+				return nil, fmt.Errorf("%w in %s: %w", errUnparsableDeploy, filePath, err)
 			}
 			slog.Error("error while parsing amino JSON", "error", err, "line", line)
 			continue
@@ -382,7 +380,7 @@ func extractAddMessages[T std.Tx | gnoland.TxWithMetadata](
 		}
 	}
 
-	return msgArr, cleanup()
+	return msgArr, nil
 }
 
 // findFilePaths gathers the file paths for specific file types

@@ -9,6 +9,7 @@ import (
 	"math/rand"
 	"os"
 	"path/filepath"
+	"runtime/debug"
 	"sort"
 	"strconv"
 	"strings"
@@ -547,6 +548,27 @@ func TestExtract_ReadsPastALongLineItSkips(t *testing.T) {
 	assert.Equal(t, "y", readPkgBody(t, outputDir, "r/demo/y"))
 }
 
+func TestExtractAddMessages_ClosesTheFileOnAnError(t *testing.T) {
+	// not parallel: it counts the process's open file descriptors, and with
+	// the GC off, since a collected *os.File closes itself
+	defer debug.SetGCPercent(debug.SetGCPercent(-1))
+
+	nilPackage := txJSON(t, gnoland.TxWithMetadata{Tx: std.Tx{Msgs: []std.Msg{vm.MsgAddPackage{
+		Creator: addressFromString(t, "g1jg8mtutu9khhfwc4nxmuhcpftf0pajdhfvsqf5"),
+	}}}})
+	dir := t.TempDir()
+	writeLines(t, dir, "backup_0000001-0000010.jsonl", nilPackage)
+	unwrapFn := func(data gnoland.TxWithMetadata) []std.Msg { return data.Tx.Msgs }
+
+	before := openFiles(t)
+	for range 20 {
+		_, err := extractAddMessages(filepath.Join(dir, "backup_0000001-0000010.jsonl"), unwrapFn)
+		require.Error(t, err)
+	}
+
+	assert.Equal(t, before, openFiles(t))
+}
+
 func TestSortByBlockRange(t *testing.T) {
 	t.Parallel()
 
@@ -625,6 +647,19 @@ func writeLines(t *testing.T, dir, name string, lines ...string) {
 
 	data := strings.Join(lines, "\n") + "\n"
 	require.NoError(t, os.WriteFile(filepath.Join(dir, name), []byte(data), 0o644))
+}
+
+// openFiles counts the process's open file descriptors. It lists names only:
+// stating them would fail on the descriptor of the listing itself.
+func openFiles(t *testing.T) int {
+	t.Helper()
+
+	dir, err := os.Open("/dev/fd")
+	require.NoError(t, err)
+	defer dir.Close()
+	names, err := dir.Readdirnames(-1)
+	require.NoError(t, err)
+	return len(names)
 }
 
 func readPkgBody(t *testing.T, outputDir, pkgDir string) string {
