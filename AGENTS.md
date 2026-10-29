@@ -79,6 +79,7 @@ It is Amino JSON (Tendermint2 wire format). test1–test3 predate gnolang/gno#20
 - `/vm.m_run` (`MsgRun`) — executes ephemeral code
 - `/bank.MsgSend` — token transfer
 - `/vm.m_enable_pkg` (`MsgEnablePackage`) — activates a parked package (mainnet and onyx)
+- `/vm.m_reject_pkg` (`MsgRejectPackage`) — rejects a parked package (mainnet and onyx)
 
 ### staging.gno.land specifics
 
