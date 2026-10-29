@@ -5,7 +5,7 @@
 # - chunks refused by the chain-id guard (the file:// fixture RPC reports
 #   another chain) stop it at the first one;
 # - it fetches every chunk up to the RPC's height when none fails;
-# - a FROM_BLOCK, MAX_INTERVAL or RPC block height that is not a number (an
+# - a FROM_BLOCK, MAX_INTERVAL or RPC block height that is not a positive number (an
 #   unreachable RPC, a missing metadata.json) fails it before any fetch;
 # - no fetch gets past the guard (git and go stand-ins would log it).
 # Usage: tests/fetch-all.sh   (needs GNU make, curl, jq)
@@ -105,7 +105,7 @@ if [ "$rc" -eq 0 ]; then
   ko "an unreachable RPC fails fetch-all: exited 0"
 elif [ -e "$work/unreachable/x/chunks.log" ]; then
   ko "an unreachable RPC fails fetch-all before any fetch: $(tr '\n' '|' <"$work/unreachable/x/chunks.log")"
-elif ! grep -qF "LATEST_BLOCK_HEIGHT is not a number (got '')" <<<"$out"; then
+elif ! grep -qF "LATEST_BLOCK_HEIGHT is not a positive number (got '')" <<<"$out"; then
   ko "an unreachable RPC fails fetch-all, naming the empty height: $out"
 else
   ok "an unreachable RPC fails fetch-all before any fetch"
@@ -128,7 +128,7 @@ chain nofrom example-1 5
 rm "$work/nofrom/chain/metadata.json" || exit 1
 out=$(mk "$work/nofrom/chain" fetch-all REMOTE="file://$work/nofrom/rpc" MAX_INTERVAL=3 MAKE="$work/nofrom/x/make" 2>&1)
 rc=$?
-if [ "$rc" -eq 0 ] || [ -e "$work/nofrom/x/chunks.log" ] || ! grep -qF "FROM_BLOCK is not a number (got '')" <<<"$out"; then
+if [ "$rc" -eq 0 ] || [ -e "$work/nofrom/x/chunks.log" ] || ! grep -qF "FROM_BLOCK is not a positive number (got '')" <<<"$out"; then
   ko "a missing metadata.json fails fetch-all before any fetch, naming FROM_BLOCK: rc=$rc $out"
 else
   ok "a missing metadata.json fails fetch-all before any fetch, naming FROM_BLOCK"
@@ -138,10 +138,21 @@ fi
 chain nointerval example-1 5
 out=$(mk "$work/nointerval/chain" fetch-all REMOTE="file://$work/nointerval/rpc" MAX_INTERVAL= MAKE="$work/nointerval/x/make" 2>&1)
 rc=$?
-if [ "$rc" -eq 0 ] || [ -e "$work/nointerval/x/chunks.log" ] || ! grep -qF "MAX_INTERVAL is not a number (got '')" <<<"$out"; then
+if [ "$rc" -eq 0 ] || [ -e "$work/nointerval/x/chunks.log" ] || ! grep -qF "MAX_INTERVAL is not a positive number (got '')" <<<"$out"; then
   ko "an empty MAX_INTERVAL fails fetch-all before any fetch: rc=$rc $out"
 else
   ok "an empty MAX_INTERVAL fails fetch-all before any fetch"
+fi
+
+# a zero MAX_INTERVAL makes seq refuse its step inside the backticks: the loop
+# would fetch nothing yet exit 0
+chain zero example-1 25000
+out=$(mk "$work/zero/chain" fetch-all REMOTE="file://$work/zero/rpc" MAX_INTERVAL=0 MAKE="$work/zero/x/make" 2>&1)
+rc=$?
+if [ "$rc" -eq 0 ] || [ -e "$work/zero/x/chunks.log" ] || ! grep -qF "MAX_INTERVAL is not a positive number (got '0')" <<<"$out"; then
+  ko "a zero MAX_INTERVAL fails fetch-all before any fetch: rc=$rc $out"
+else
+  ok "a zero MAX_INTERVAL fails fetch-all before any fetch"
 fi
 
 # the check shares the loop's recipe line, which names $(MAKE), so make -n runs
@@ -149,7 +160,7 @@ fi
 chain dryrun example-1 5
 out=$(mk "$work/dryrun/chain" -n fetch-all REMOTE="file://$work/dryrun/rpc" MAX_INTERVAL= MAKE="$work/dryrun/x/make" 2>&1)
 rc=$?
-if [ "$rc" -eq 0 ] || [ -e "$work/dryrun/x/chunks.log" ] || ! grep -qF "MAX_INTERVAL is not a number (got '')" <<<"$out"; then
+if [ "$rc" -eq 0 ] || [ -e "$work/dryrun/x/chunks.log" ] || ! grep -qF "MAX_INTERVAL is not a positive number (got '')" <<<"$out"; then
   ko "make -n fetch-all refuses an empty MAX_INTERVAL before any fetch: rc=$rc $out"
 else
   ok "make -n fetch-all refuses an empty MAX_INTERVAL before any fetch"
