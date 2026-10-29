@@ -5,12 +5,16 @@ EXTRACTOR_DIR ?= extractor
 # `go run <path>@version` does not work remotely — we must build from a
 # local checkout.
 #
-# GNO_REF must match the build the target chain runs, so each chain Makefile
-# pins its node's `chain/*` tag. tx-archive amino-decodes the node's block
-# results with the gno types from this ref, and amino rejects unknown JSON
-# fields: on `master` the fetch dies with `unknown JSON field "errors" for type
-# vm.TypeCheckError` against gnoland1, whose build still carries that field
-# (dropped from master in #5893).
+# GNO_REF must match the build the target chain runs, so an active chain's
+# Makefile pins the gno release tag its nodes run (e.g. `v1.5.1`), bumped with
+# every node upgrade; archived dirs keep the `chain/*` ref they were exported
+# with. A `chain/*` name is ambiguous: most exist both as a release branch and
+# as a tag, and `git clone --branch` picks the branch.
+#
+# tx-archive amino-decodes the node's block results with the gno types from
+# this ref, and amino rejects unknown JSON fields: on `master` the fetch dies
+# with `unknown JSON field "errors" for type vm.TypeCheckError` against
+# gnoland1, whose build carries that field (dropped from master in #5893).
 GNO_REF      ?= master
 # Ref is part of the path so bumping GNO_REF re-clones instead of silently
 # reusing a checkout of the previous ref.
@@ -42,7 +46,9 @@ tx-archive-ensure: $(TXARCHIVE)/cmd/main.go ## clone/update the gno repo so tx-a
 # not batched over WS). REMOTE stays HTTP(S) so the latest-block curl still works.
 ifeq ($(USE_WS),1)
 WS_FLAG       = -ws
-BACKUP_REMOTE = $(shell echo $(REMOTE) | tr -d '"' | sed -e 's#^http://#ws://#' -e 's#^https://#wss://#')/websocket
+# `|` delimits the sed expressions: make before 4.3 reads `#` inside
+# $(shell ...) as the start of a comment
+BACKUP_REMOTE = $(shell echo $(REMOTE) | tr -d '"' | sed -e 's|^http://|ws://|' -e 's|^https://|wss://|')/websocket
 else
 WS_FLAG       =
 BACKUP_REMOTE = $(REMOTE)
@@ -80,69 +86,67 @@ fetch: check-chain-id tx-archive-ensure
 	@cat metadata.json | jq -a '.latest_block_height = $(TO_BLOCK)' > /tmp/aa.json
 	@mv /tmp/aa.json metadata.json
 
+# FROM_BLOCK, MAX_INTERVAL and the RPC's height must be positive numbers without
+# leading zeros: otherwise `seq` fails inside the backticks (or refuses a zero
+# step) and the loop fetches nothing yet exits 0, or drops to its two-argument
+# form and fetches one block per chunk. They are checked on the loop's own line,
+# which names $(MAKE) and so also runs under `make -n`. `-f %.0f` keeps BSD seq
+# from printing blocks from 1000000 up in exponent form (1e+06).
 .PHONY: fetch-all
 fetch-all:
-	@for i in `seq $(FROM_BLOCK) $(MAX_INTERVAL) $(LATEST_BLOCK_HEIGHT)`; do \
-		make -C . fetch FROM_BLOCK="$$i"; \
+	@for v in "FROM_BLOCK=$(FROM_BLOCK)" "MAX_INTERVAL=$(MAX_INTERVAL)" "LATEST_BLOCK_HEIGHT=$(LATEST_BLOCK_HEIGHT)"; do \
+		case "$${v#*=}" in '' | 0* | *[!0-9]*) echo "$(SHORTNAME): $${v%%=*} is not a positive number (got '$${v#*=}')" >&2; exit 1 ;; esac; \
+	done; \
+	for i in `seq -f %.0f $(FROM_BLOCK) $(MAX_INTERVAL) $(LATEST_BLOCK_HEIGHT)`; do \
+		$(MAKE) -C . fetch FROM_BLOCK="$$i" || exit 1; \
 	done
 
+# The files stats reads, one tx per line: {tx, …} objects, or plain std.Tx in
+# test1's txexport-*.log. A chain dir whose backup_*.jsonl also matches non-tx
+# files (staging's balances) narrows it.
+BACKUP_FILES ?= backup_*.jsonl
+
+# Deployed packages are the /vm.m_addpkg messages (a /vm.m_run carries a
+# package too); their keys are lowercase (`path`) except in test1-test3,
+# exported before gno#2019's snake_case JSON tags (`Path`). Realm calls are the
+# /vm.m_call messages (a package enable or reject carries a pkg_path too).
+#
+# bash with pipefail, so a failing jq or cat fails the run instead of writing
+# an empty section; and a BACKUP_FILES that matches nothing stops it before
+# README.md is touched, as does an empty one (ls alone would list the dir, and
+# cat alone read stdin). That check lists the files with ls: make before 4.4
+# caches the dir at startup, so $(wildcard) misses a backup a fetch wrote
+# earlier in the same run, as on a new chain dir's first run.
 .PHONY: stats
+stats: SHELL := /usr/bin/env bash -o pipefail
 stats:
+	$(if $(and $(strip $(BACKUP_FILES)),$(shell ls $(BACKUP_FILES) 2>/dev/null)),,$(error $(SHORTNAME): no file matches BACKUP_FILES=$(BACKUP_FILES)))
 	echo "# $(REMOTE)" > README.md
 	echo >> README.md
 
 	echo "## TXs" >> README.md
 	echo '```' >> README.md
-	cat backup_*.jsonl | wc -l >> README.md
+	cat $(BACKUP_FILES) | wc -l >> README.md
 	echo '```' >> README.md
 	echo >> README.md
 
 	echo "## addpkgs" >> README.md
 	echo '```' >> README.md
-	cat backup_*.jsonl | jq '.tx.msg[].package.Path | select( . != null )' | sort | uniq -c | sort --stable -nr >> README.md
+	cat $(BACKUP_FILES) | jq '(.tx // .).msg[] | select(.["@type"]=="/vm.m_addpkg") | .package | (.path // .Path) | select( . != null )' | sort | uniq -c | sort --stable -nr >> README.md
 	echo '```' >> README.md
 	echo >> README.md
 
 	echo "## top realm calls" >> README.md
 	echo '```' >> README.md
-	cat backup_*.jsonl | jq '.tx.msg[].pkg_path | select( . != null )' | sort | uniq -c | sort --stable -nr >> README.md
+	cat $(BACKUP_FILES) | jq '(.tx // .).msg[] | select(.["@type"]=="/vm.m_call") | .pkg_path' | sort | uniq -c | sort --stable -nr >> README.md
 	echo '```' >> README.md
 	echo >> README.md
 
 	echo "## top faucet requesters" >> README.md
 	echo '```' >> README.md
-	cat backup_*.jsonl | jq -r '.tx.msg[] | select(.["@type"]=="/bank.MsgSend") | select(.["from_address"]=="g127jydsh6cms3lrtdenydxsckh23a8d6emqcvfa") | .to_address + " " + .amount' | sed 's/ugnot$$//' | awk 'NR == 1 {next} {a[$$1] += $$2} {b[$$1] += 1} END {for (i in a) {if (a[i] >= 500000000){printf "%-15s\t%s\t%s\n", i, b[i], a[i]}}}' | sort -rnk2 >> README.md
+	cat $(BACKUP_FILES) | jq -r '(.tx // .).msg[] | select(.["@type"]=="/bank.MsgSend") | select(.["from_address"]=="g127jydsh6cms3lrtdenydxsckh23a8d6emqcvfa") | .to_address + " " + .amount' | sed 's/ugnot$$//' | awk '{a[$$1] += $$2} {b[$$1] += 1} END {for (i in a) {if (a[i] >= 500000000){printf "%-15s\t%s\t%s\n", i, b[i], a[i]}}}' | sort -rnk2 >> README.md
 	echo '```' >> README.md
 	echo >> README.md
-
-stats-legacy:
-	echo "# $(REMOTE)" > README.md
-	echo >> README.md
-
-	echo "## TXs" >> README.md
-	echo '```' >> README.md
-	cat backup_*.jsonl | wc -l >> README.md
-	echo '```' >> README.md
-	echo >> README.md
-
-	echo "## addpkgs" >> README.md
-	echo '```' >> README.md
-	cat backup_*.jsonl | jq '.msg[].package.Path | select( . != null )' | sort | uniq -c | sort --stable -nr >> README.md
-	echo '```' >> README.md
-	echo >> README.md
-
-	echo "## top realm calls" >> README.md
-	echo '```' >> README.md
-	cat backup_*.jsonl | jq '.msg[].pkg_path | select( . != null )' | sort | uniq -c | sort --stable -nr >> README.md
-	echo '```' >> README.md
-	echo >> README.md
-
-	echo "## top faucet requesters" >> README.md
-	echo '```' >> README.md
-	cat backup_*.jsonl | jq -r '.msg[] | select(.["@type"]=="/bank.MsgSend") | select(.["from_address"]=="g127jydsh6cms3lrtdenydxsckh23a8d6emqcvfa") | .to_address + " " + .amount' | sed 's/ugnot$$//' | awk 'NR == 1 {next} {a[$$1] += $$2} {b[$$1] += 1} END {for (i in a) {if (a[i] >= 500000000){printf "%-15s\t%s\t%s\n", i, b[i], a[i]}}}' | sort -rnk2 >> README.md
-	echo '```' >> README.md
-	echo >> README.md
-
 
 # Only files with contiguous block ranges may be merged: a coverage gap
 # between two files must stay visible in the file names.

@@ -36,7 +36,7 @@ jobs:
           bash export.sh
 
       - name: Run stats script
-        run: make -C ${{ matrix.testnet }} stats-legacy
+        run: make -C ${{ matrix.testnet }} stats
 
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:

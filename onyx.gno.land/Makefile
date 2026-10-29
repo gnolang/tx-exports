@@ -4,6 +4,9 @@ SHORTNAME = onyx
 # the chain fetch requires the RPC to serve; see check-chain-id in ../rules.mk
 CHAIN_ID = onyx-1
 
+# the gno release this chain's nodes run; see GNO_REF in ../rules.mk
+GNO_REF = v1.7.0-rc.1
+
 # Fetch over WebSocket: testnets.gno.land HTTP RPC endpoints WAF-block (403)
 # high-volume batch fetches, which strands the backup. A single WS connection
 # avoids it.

@@ -19,7 +19,7 @@ exception was `gnoland1/`, renamed to `betanet.gno.land/` for exactly that reaso
 
 ## Common Commands
 
-Each chain directory has its own `Makefile` that includes `../rules.mk`. Run these from within the chain directory (e.g., `cd test11.gno.land`):
+Each chain directory has its own `Makefile` that includes `../rules.mk`. Run these from within the chain directory (e.g., `cd onyx.gno.land`; `make fetch` refuses to run where the Makefile declares no `CHAIN_ID`):
 
 ```sh
 make fetch        # Download new transactions from the chain RPC
@@ -33,17 +33,25 @@ make loop         # Continuous loop: fetch → stats → commit → push (for CI
 
 ### Running the backup tool directly
 
+tx-archive lives in gnolang/gno at `contribs/tx-archive`, whose `go.mod` replaces gno with `../..`, so it only builds from a gno checkout (no remote `go run …@version`). `make tx-archive-ensure` clones gno at the dir's `GNO_REF` into `~/.cache/tx-exports/gno-<GNO_REF, / as ->`; run it from there:
+
 ```sh
-# Powered by tx-archive (lives in gnolang/gno at contribs/tx-archive)
-go run github.com/gnolang/gno/contribs/tx-archive/cmd@master backup \
-  --remote <RPC_URL> --from-block <N> --to-block <M> --output-path backup_N-M.jsonl
+cd ~/.cache/tx-exports/gno-<GNO_REF, / as ->/contribs/tx-archive
+# as rules.mk's fetch; USE_WS=1 dirs add -ws and --remote wss://<host>/websocket
+go run ./cmd backup -verbose --batch 100 --remote <RPC_URL> --from-block <N> --to-block <M> \
+  --output-path <absolute chain dir>/backup_<N as %07d>-<M as %07d>.jsonl
+# then, as make fetch does, set the chain dir's metadata.json latest_block_height to M
 ```
 
 ### Running the extractor
 
 ```sh
-# From repo root
-go run ./extractor --input-dir test11.gno.land --output-dir test11.gno.land/extracted
+# From repo root (the extractor is its own Go module), into a fresh dir;
+# `make -C test11.gno.land extractor` writes test11.gno.land/extracted instead
+go run -C extractor . -source-path ../test11.gno.land -output-dir /tmp/test11-extracted
+# test1-test4 predate {tx, metadata} lines: add -legacy-mode (test1, whose
+# backups are txexport-*.log, also -file-type .log); per-dir flags, and why
+# test2/test3 are not rebuilt: extractor/README.md
 ```
 
 ## Architecture
@@ -52,26 +60,22 @@ go run ./extractor --input-dir test11.gno.land --output-dir test11.gno.land/extr
 
 Each chain directory is self-contained:
 
-- `Makefile` — sets `REMOTE`, `SHORTNAME`, `CHAIN_ID` (the chain id `make fetch` requires the RPC to report), `MAX_INTERVAL`, and includes `../rules.mk`
-- `backup_*.jsonl` — exported transaction data, one JSON object per line, in block-number order
+- `Makefile` — sets `REMOTE` and `SHORTNAME`, and includes `../rules.mk`; tx-archive dirs (all but staging and test1) also set `MAX_INTERVAL`. mainnet and onyx also set `CHAIN_ID` (the chain id `make fetch` requires the RPC to report) and `GNO_REF` (the gno release tag their nodes run, bumped with every node upgrade); archived dirs keep the `chain/*` `GNO_REF` they were exported with, or none (`master`)
+- `backup_*.jsonl` — exported transaction data, one JSON object per line, in block-number order (staging also has `backup_staging_balances.jsonl`: `addr=amountugnot` lines, hence its `BACKUP_FILES`)
 - `metadata.json` — tracks `latest_block_height` so incremental fetches know where to resume
-- `README.md` — auto-generated stats (tx counts, top deployers, faucet requesters)
+- `README.md` — auto-generated stats (tx count, deployed packages, top realm calls, top faucet requesters)
 
 ### Transaction data format
 
-**Current format** (mainnet, onyx, pearl, sapphire, topaz, test13, test11, betanet, test5, test2, test1):
+Every `backup_*.jsonl` tx line wraps one `std.Tx` under `tx`:
 
 ```json
 {"tx": {"msg": [...], "fee": {...}, "signatures": [...], "memo": ""}, "metadata": {"timestamp": "..."}}
 ```
 
-**Legacy format** (staging, test4, test3 — plain `std.Tx`):
+test2–test4 carry `"blockNum": "<n>"` instead of `metadata`; the first 291 lines of staging's `backup_staging_txs_1-1000.jsonl` carry neither. test1 predates the wrapper: plain `std.Tx` lines in `txexport-*.log`. The extractor reads test1–test4's lines with `-legacy-mode`.
 
-```json
-{"msg": [...], "fee": {...}, "signatures": [...], "memo": ""}
-```
-
-Both use Amino JSON encoding (Tendermint2 wire format).
+It is Amino JSON (Tendermint2 wire format). test1–test3 predate gnolang/gno#2019's snake_case JSON tags, so their `/vm.m_addpkg` package and file keys are capitalized (`Name`, `Path`, `Files`, `Body`); every other chain uses lowercase.
 
 ### Transaction message types relevant to extraction
 
@@ -79,18 +83,19 @@ Both use Amino JSON encoding (Tendermint2 wire format).
 - `/vm.m_call` (`MsgCall`) — calls a function on an existing realm
 - `/vm.m_run` (`MsgRun`) — executes ephemeral code
 - `/bank.MsgSend` — token transfer
-- `/vm.m_enable_pkg` (`MsgEnablePackage`) — activates a parked package (mainnet only)
+- `/vm.m_enable_pkg` (`MsgEnablePackage`) — activates a parked package (mainnet and onyx)
+- `/vm.m_reject_pkg` (`MsgRejectPackage`) — rejects a parked package (mainnet and onyx)
 
 ### staging.gno.land specifics
 
-Uses `export.sh` instead of tx-archive. It calls `gnogenesis txs export` and `gnogenesis balances export` against the Portal Loop RPC, chunks output into 1000-line JSONL segments, and downloads `genesis.json`. The CI workflow (`staging-txs-exporter.yml`) runs hourly.
+Uses `export.sh` instead of tx-archive. It calls `gnogenesis txs export` and `gnogenesis balances export` against the Portal Loop RPC, chunks output into 1000-line JSONL segments, and downloads `genesis.json`. The CI workflow (`staging-txs-exporter.yml`) runs daily at 18:00 UTC.
 
 ### mainnet.gno.land specifics
 
 Mainnet (`gnoland-1`) launched 2026-09-12 as a fresh chain, not a hardfork of
 betanet, so its export starts at block 1.
 
-Two ways it differs from the recent testnets:
+Two ways it differs from the earlier testnets (onyx also has the second):
 
 - **No `USE_WS=1`.** `rpc.gno.land` does not WAF-block high-volume HTTP batch
   fetches the way the `*.testnets.gno.land` endpoints do, and HTTP is faster
