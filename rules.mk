@@ -90,13 +90,14 @@ fetch: check-chain-id tx-archive-ensure
 # leading zeros: otherwise `seq` fails inside the backticks (or refuses a zero
 # step) and the loop fetches nothing yet exits 0, or drops to its two-argument
 # form and fetches one block per chunk. They are checked on the loop's own line,
-# which names $(MAKE) and so also runs under `make -n`.
+# which names $(MAKE) and so also runs under `make -n`. `-f %.0f` keeps BSD seq
+# from printing blocks from 1000000 up in exponent form (1e+06).
 .PHONY: fetch-all
 fetch-all:
 	@for v in "FROM_BLOCK=$(FROM_BLOCK)" "MAX_INTERVAL=$(MAX_INTERVAL)" "LATEST_BLOCK_HEIGHT=$(LATEST_BLOCK_HEIGHT)"; do \
 		case "$${v#*=}" in '' | 0* | *[!0-9]*) echo "$(SHORTNAME): $${v%%=*} is not a positive number (got '$${v#*=}')" >&2; exit 1 ;; esac; \
 	done; \
-	for i in `seq $(FROM_BLOCK) $(MAX_INTERVAL) $(LATEST_BLOCK_HEIGHT)`; do \
+	for i in `seq -f %.0f $(FROM_BLOCK) $(MAX_INTERVAL) $(LATEST_BLOCK_HEIGHT)`; do \
 		$(MAKE) -C . fetch FROM_BLOCK="$$i" || exit 1; \
 	done
 

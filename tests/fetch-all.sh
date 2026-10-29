@@ -4,7 +4,8 @@
 #   (a stub stands in for the per-chunk make);
 # - chunks refused by the chain-id guard (the file:// fixture RPC reports
 #   another chain) stop it at the first one;
-# - it fetches every chunk up to the RPC's height when none fails;
+# - it fetches every chunk up to the RPC's height when none fails, and numbers
+#   chunks from block 1000000 up in full;
 # - a FROM_BLOCK, MAX_INTERVAL or RPC block height that is not a positive number (an
 #   unreachable RPC, a missing metadata.json) fails it before any fetch;
 # - no fetch gets past the guard (git and go stand-ins would log it).
@@ -93,6 +94,19 @@ if [ "$rc" -eq 0 ] && [ "$chunks" = "$(printf -- '-C . fetch FROM_BLOCK=%s\n' 5 
   ok "fetch-all fetches every chunk up to the RPC's height"
 else
   ko "fetch-all fetches every chunk up to the RPC's height: rc=$rc $(tr '\n' '|' <<<"$chunks")"
+fi
+
+# BSD seq prints numbers from 1000000 up in exponent form (1e+06) unless given
+# a format, and a fetch from block 1e+06 fails
+chain big example-1 1020000
+printf '{\n  "latest_block_height": 1000000\n}\n' >"$work/big/chain/metadata.json"
+mk "$work/big/chain" fetch-all REMOTE="file://$work/big/rpc" MAX_INTERVAL=10000 MAKE="$work/big/x/make" >/dev/null 2>&1
+rc=$?
+chunks=$(cat "$work/big/x/chunks.log" 2>/dev/null)
+if [ "$rc" -eq 0 ] && [ "$chunks" = "$(printf -- '-C . fetch FROM_BLOCK=%s\n' 1000001 1010001)" ]; then
+  ok "fetch-all numbers chunks from block 1000000 up in full"
+else
+  ko "fetch-all numbers chunks from block 1000000 up in full: rc=$rc $(tr '\n' '|' <<<"$chunks")"
 fi
 
 # curl fails on a missing file:// path, so the height is empty, and
