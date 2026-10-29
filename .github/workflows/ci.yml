@@ -72,11 +72,14 @@ jobs:
           bash tests/chain-id-guard.sh mainnet.gno.land gnoland-1
           bash tests/chain-id-guard.sh onyx.gno.land onyx-1
 
-      # stats on a scratch chain dir: deployed packages listed whatever the key
-      # casing, non-tx files excluded.
+      # stats on scratch chain dirs: deploys of both key casings and plain std.Tx
+      # lines, calls only, every faucet transfer, a backup fetched in the same
+      # run; non-tx files excluded; a corrupt line or no matching file fails it.
       - name: rules.mk stats
         run: bash tests/stats.sh
 
-      # fetch-all stops at the first failed chunk (each refused by the guard).
+      # fetch-all fetches chunk by chunk and stops at the first failed one (a
+      # stub's, or one the guard refuses), and fails before any fetch on an
+      # input that is not a number.
       - name: rules.mk fetch-all
         run: bash tests/fetch-all.sh
