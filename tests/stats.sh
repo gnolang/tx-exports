@@ -9,6 +9,7 @@
 # - a chain dir narrows the files stats reads (staging's balances file holds
 #   `addr=coins` lines, not txs);
 # - plain std.Tx lines (test1) are read like {tx, metadata} ones;
+# - a backup written earlier in the same make run is read;
 # - a corrupt tx line, or a BACKUP_FILES that matches nothing, fails the run.
 # Usage: tests/stats.sh   (from the repo root; needs GNU make, bash, jq)
 set -uo pipefail
@@ -79,6 +80,22 @@ got=$(listing "$readme" 'top faucet requesters')
 got=$(listing "$readme" TXs)
 [ "$got" = 9 ] && ok "the tx count covers only the tx files" ||
   ko "the tx count covers only the tx files: $got"
+
+# a new chain dir's first run fetches its first backup, then builds stats in the
+# same make run
+chain fresh 'backup_txs_*.jsonl'
+rm "$work/fresh/backup_txs_1-4.jsonl" || exit 1
+cat >"$work/fresh/seed.mk" <<'EOF'
+seed:
+	echo '{"tx":{"msg":[]},"metadata":{"timestamp":"1"}}' >backup_txs_1-1.jsonl
+EOF
+if ! out=$(mk "$work/fresh" -f Makefile -f seed.mk seed stats 2>&1); then
+  ko "stats reads a backup written earlier in the same run: $out"
+elif [ "$(listing "$work/fresh/README.md" TXs)" = 1 ]; then
+  ok "stats reads a backup written earlier in the same run"
+else
+  ko "stats reads a backup written earlier in the same run: $(listing "$work/fresh/README.md" TXs)"
+fi
 
 # test1 stores plain std.Tx lines, without the {tx, metadata} wrapper
 mkdir "$work/plain" || exit 1
