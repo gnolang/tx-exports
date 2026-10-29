@@ -1,6 +1,8 @@
 REMOTE = test1.gno.land:36657
 SHORTNAME = test1
 LOOP_DURATION = 50000
+# test1's export predates tx-archive: plain std.Tx lines in txexport-*.log
+BACKUP_FILES = txexport-*.log
 
 
 FROM_BLOCK = $(shell cat metadata.json | jq -r '.latest_block_height')
