@@ -1,0 +1,15 @@
+# Dependabot raises no alerts for actions pinned to a commit SHA, so version
+# updates move the pins (and their release comments) to new releases instead.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    # Conventional Commits subjects ("chore: bump …"): Dependabot would otherwise
+    # infer the style from recent history, mostly bot backup commits it skips
+    commit-message:
+      prefix: chore
+    # a release is proposed only once it is a week old
+    cooldown:
+      default-days: 7

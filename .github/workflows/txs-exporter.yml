@@ -8,14 +8,22 @@ on:
   schedule:
     - cron: "0 */4 * * *"
 
+permissions:
+  contents: read
+
+# one run at a time, since each one commits and pushes backups (a newer run
+# replaces one still waiting)
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
 jobs:
+  # Fetches, extracts and builds stats with code from outside this repo, so it
+  # holds no write token: its changes reach the commit job as a patch.
   backup:
     name: "backup ${{ matrix.testnet }}"
     runs-on: ubuntu-latest
     timeout-minutes: 720 # very high; but it can take a while.
-
-    permissions:
-      contents: write
 
     strategy:
       fail-fast: false
@@ -26,13 +34,18 @@ jobs:
           - onyx.gno.land
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-go@v5
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          # the branch tip at job start, not the commit the run was created for:
+          # a run or matrix leg that waited builds on the pushes made before it
+          ref: ${{ github.ref }}
+          persist-credentials: false
+      - uses: actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff # v5.6.0
         with:
           go-version: "1.25.x"
           cache: false
 
-      - uses: actions/cache@v4
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         with:
           path: |
             ~/go/pkg/mod
@@ -44,12 +57,60 @@ jobs:
       - name: Run backup script
         run: make -C ${{ matrix.testnet }} fetch join extractor stats
 
-      - name: Run git pull
-        run: git pull --no-tags origin main
+      - name: Pack the run's changes
+        run: bash .github/scripts/backup-patch.sh pack ${{ matrix.testnet }} "$RUNNER_TEMP/backup.patch"
 
-      - uses: stefanzweifel/git-auto-commit-action@v5
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: backup-${{ matrix.testnet }}
+          path: ${{ runner.temp }}/backup.patch
+          if-no-files-found: error
+          retention-days: 1
+
+  # Pushes each chain's patch with the write token, running none of the code the
+  # backup job builds. The patch may touch only the files a run writes in its
+  # chain dir.
+  commit:
+    name: "commit ${{ matrix.testnet }}"
+    needs: backup
+    # a chain whose export succeeded is committed even if another one failed
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        testnet:
+          - mainnet.gno.land
+          - onyx.gno.land
+
+    permissions:
+      contents: write
+
+    steps:
+      # credentials stay persisted: git-auto-commit-action pushes with them
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          # the branch tip at job start, which holds the pushes made before it
+          ref: ${{ github.ref }}
+
+      # its unzip rewrites every `..` of an entry's path, so an artifact the backup
+      # job crafted cannot write outside the target dir (v4's could)
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: backup-${{ matrix.testnet }}
+          # a dir of its own, away from the runner's files in RUNNER_TEMP
+          path: ${{ runner.temp }}/artifact
+
+      - name: Apply the run's changes
+        run: bash .github/scripts/backup-patch.sh apply ${{ matrix.testnet }} "$RUNNER_TEMP/artifact/backup.patch"
+
+      - uses: stefanzweifel/git-auto-commit-action@b863ae1933cb653a53c021fe36dbb774e1fb9403 # v5.2.0
         with:
           commit_message: "chore: update ${{ matrix.testnet }} backup"
           commit_user_name: "github-actions[bot]"
           commit_user_email: "github-actions[bot]@users.noreply.github.com"
           commit_author: "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
+          file_pattern: ${{ matrix.testnet }}
