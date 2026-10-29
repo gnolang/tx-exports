@@ -1,3 +1,0 @@
-module = "gno.land/r/nym-moultest123/x/upgrade/wrap/v0"
-gno = "0.9"
-# public: imported by .../wrap/v1, which reads its counter; that import IS the pattern

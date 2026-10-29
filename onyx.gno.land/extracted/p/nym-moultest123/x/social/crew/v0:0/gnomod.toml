@@ -1,6 +1,0 @@
-module = "gno.land/p/nym-moultest123/x/social/crew/v0"
-gno = "0.9"
-
-[source]
-  repository = "https://github.com/moul/gno-contracts"
-  path = "p/moul/x/social/crew"

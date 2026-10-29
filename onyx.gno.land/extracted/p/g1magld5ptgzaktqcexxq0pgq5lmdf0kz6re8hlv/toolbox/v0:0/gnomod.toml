@@ -1,7 +1,0 @@
-module = "gno.land/p/g1magld5ptgzaktqcexxq0pgq5lmdf0kz6re8hlv/toolbox/v0"
-gno = "0.9"
-
-[source]
-  repository = "https://github.com/moul/gno-contracts"
-  path = "p/moul/toolbox"
-  revision = "d905e11dcfc739389c7bd9aa83ced28c5e4e22b8"

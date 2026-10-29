@@ -1,3 +1,0 @@
-module = "gno.land/r/nym-moultest123/x/upgrade/selfreg/facade/v0"
-gno = "0.9"
-# public: every implementation realm imports it to register itself from init
