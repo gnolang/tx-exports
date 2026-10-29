@@ -684,6 +684,34 @@ func TestExtract_ReadsOnlyTheSourceDirsOwnFiles(t *testing.T) {
 	assert.Equal(t, []string{"x"}, dirNames(t, filepath.Join(outputDir, "r", "demo")))
 }
 
+func TestExtractAddMessages_DecodesPackageApprovals(t *testing.T) {
+	// not parallel: it swaps the default logger
+	var logs bytes.Buffer
+	defer slog.SetDefault(slog.Default())
+	slog.SetDefault(slog.New(slog.NewTextHandler(&logs, nil)))
+
+	// mainnet and onyx park a new package until it is enabled or rejected: those
+	// txs (messages as mainnet and onyx store them) carry no package, but must
+	// decode rather than be skipped
+	enable := `{"@type":"/vm.m_enable_pkg","approver":"g1yaaa6rcp4ew5yjzdj4yms596wx2dtrj3a86704",` +
+		`"pkg_path":"gno.land/p/demo/x","pkg_hash":"e3d66ccac3af7c4c5d4f8a87b6755f1119ec75fd5f57040d3dfcd28554e883bd",` +
+		`"pkg_height":"9671"}`
+	reject := `{"@type":"/vm.m_reject_pkg","sender":"g1ml9grtwnpzqn3hre5ve5vjdlmv2srrmpmc0dsv","pkg_path":"gno.land/r/demo/y"}`
+	dir := t.TempDir()
+	writeLines(t, dir, "backup_0000001-0000010.jsonl",
+		txJSON(t, addPkgTx(t, "gno.land/r/demo/x", "x")),
+		withMsgs(t, txJSON(t, addPkgTx(t, "gno.land/r/demo/z", "z")), enable),
+		withMsgs(t, txJSON(t, addPkgTx(t, "gno.land/r/demo/z", "z")), reject),
+	)
+	unwrapFn := func(data gnoland.TxWithMetadata) []std.Msg { return data.Tx.Msgs }
+
+	msgs, err := extractAddMessages(filepath.Join(dir, "backup_0000001-0000010.jsonl"), unwrapFn)
+	require.NoError(t, err)
+
+	assert.Len(t, msgs, 1)
+	assert.Empty(t, logs.String())
+}
+
 func TestSortByBlockRange(t *testing.T) {
 	t.Parallel()
 
@@ -747,6 +775,15 @@ func txJSON(t *testing.T, tx gnoland.TxWithMetadata) string {
 	data, err := amino.MarshalJSON(tx)
 	require.NoError(t, err)
 	return string(data)
+}
+
+// withMsgs replaces the msg list of the tx line with msgs (JSON objects).
+func withMsgs(t *testing.T, line string, msgs string) string {
+	t.Helper()
+
+	start, end := strings.Index(line, `"msg":[`), strings.Index(line, `],"fee"`)
+	require.True(t, start >= 0 && end > start, "a tx line: %s", line)
+	return line[:start] + `"msg":[` + msgs + line[end:]
 }
 
 // mustReplace replaces the first old in s with new; old must occur in s.
