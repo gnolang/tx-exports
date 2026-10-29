@@ -325,6 +325,9 @@ func extractAddMessages[T std.Tx | gnoland.TxWithMetadata](
 	// Buffer for lines longer than the reader's 4096-byte buffer
 	tempBuf := make([]byte, 0)
 
+	// Number of the line being parsed, for logs
+	lineNum := 0
+
 	for {
 		var txData T
 
@@ -350,14 +353,15 @@ func extractAddMessages[T std.Tx | gnoland.TxWithMetadata](
 			line = append(tempBuf, line...)
 			tempBuf = nil
 		}
+		lineNum++
 
 		if err := amino.UnmarshalJSON(line, &txData); err != nil {
 			// a deploy the pinned gno types cannot decode fails the run: skipping
 			// it would drop its package from a rebuilt tree
 			if bytes.Contains(line, []byte(`"/vm.m_addpkg"`)) {
-				return nil, fmt.Errorf("%w in %s: %w", errUnparsableDeploy, filePath, err)
+				return nil, fmt.Errorf("%w at %s:%d: %w", errUnparsableDeploy, filePath, lineNum, err)
 			}
-			slog.Error("error while parsing amino JSON", "error", err, "line", line)
+			slog.Warn("skipping a line the extractor cannot parse", "file", filePath, "line", lineNum, "error", err)
 			continue
 		}
 

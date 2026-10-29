@@ -2,10 +2,12 @@ package main
 
 import (
 	"bufio"
+	"bytes"
 	"context"
 	crand "crypto/rand"
 	"encoding/base64"
 	"encoding/json"
+	"log/slog"
 	"math/rand"
 	"os"
 	"path/filepath"
@@ -567,6 +569,29 @@ func TestExtractAddMessages_ClosesTheFileOnAnError(t *testing.T) {
 	}
 
 	assert.Equal(t, before, openFiles(t))
+}
+
+func TestExtractAddMessages_LogsASkippedLineByNumber(t *testing.T) {
+	// not parallel: it swaps the default logger
+	var logs bytes.Buffer
+	defer slog.SetDefault(slog.Default())
+	slog.SetDefault(slog.New(slog.NewTextHandler(&logs, nil)))
+
+	unknownType := mustReplace(t, txJSON(t, addPkgTx(t, "gno.land/r/demo/z", "the-skipped-line")),
+		`"/vm.m_addpkg"`, `"/vm.m_unknown"`)
+	dir := t.TempDir()
+	writeLines(t, dir, "backup_0000001-0000010.jsonl",
+		txJSON(t, addPkgTx(t, "gno.land/r/demo/x", "x")),
+		unknownType,
+	)
+	unwrapFn := func(data gnoland.TxWithMetadata) []std.Msg { return data.Tx.Msgs }
+
+	_, err := extractAddMessages(filepath.Join(dir, "backup_0000001-0000010.jsonl"), unwrapFn)
+	require.NoError(t, err)
+
+	assert.Contains(t, logs.String(), "backup_0000001-0000010.jsonl")
+	assert.Contains(t, logs.String(), "line=2")
+	assert.NotContains(t, logs.String(), "the-skipped-line")
 }
 
 func TestSortByBlockRange(t *testing.T) {
