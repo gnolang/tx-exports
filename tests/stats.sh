@@ -21,12 +21,14 @@ ko() {
   echo "FAIL - $1"
   fail=1
 }
-# MAKEFLAGS, GNUMAKEFLAGS and MAKELEVEL from a caller would add output or flags
-# to the runs below
-mk() { env -u MAKEFLAGS -u GNUMAKEFLAGS -u MAKELEVEL make -s -C "$@"; }
+# MAKEFLAGS, GNUMAKEFLAGS, MAKELEVEL and MAKEFILES from a caller would add
+# output or flags to the runs below
+mk() { env -u MAKEFLAGS -u GNUMAKEFLAGS -u MAKELEVEL -u MAKEFILES make -s -C "$@"; }
 
 work=$(mktemp -d) || exit 1
 trap 'rm -rf "$work"' EXIT
+# jq reads ~/.jq: keep a caller's out
+export HOME=$work/home
 cp "$root/rules.mk" "$work/" || exit 1
 
 # chain <dir> <BACKUP_FILES>: a scratch chain dir with one tx file and a

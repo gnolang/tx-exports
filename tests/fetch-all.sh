@@ -17,12 +17,15 @@ ko() {
   echo "FAIL - $1"
   fail=1
 }
-# MAKEFLAGS, GNUMAKEFLAGS and MAKELEVEL from a caller (e.g. -k) would let a
-# refused fetch build its other prerequisites
-mk() { env -u MAKEFLAGS -u MAKELEVEL -u GNUMAKEFLAGS make -s -C "$@"; }
+# MAKEFLAGS, GNUMAKEFLAGS, MAKELEVEL and MAKEFILES from a caller (e.g. -k) would
+# let a refused fetch build its other prerequisites
+mk() { env -u MAKEFLAGS -u GNUMAKEFLAGS -u MAKELEVEL -u MAKEFILES make -s -C "$@"; }
 
 work=$(mktemp -d) || exit 1
 trap 'rm -rf "$work"' EXIT
+# rules.mk clones gno under $HOME (mkdir -p runs before git), and curl and jq
+# read ~/.curlrc and ~/.jq
+export HOME=$work/home
 cp "$root/rules.mk" "$work/" || exit 1
 # a fetch that gets past the guard clones gno (git) and runs tx-archive (go):
 # these stand-ins log the call and fail, so a regression stays offline
@@ -43,13 +46,13 @@ chain() {
 REMOTE = "https://rpc.example.invalid"
 SHORTNAME = example
 CHAIN_ID = example-1
-MAX_INTERVAL = 10000
+MAX_INTERVAL = 9000
 FROM_BLOCK := $(shell cat metadata.json | jq -r '.latest_block_height + 1')
 LATEST_BLOCK_HEIGHT := $(shell curl -s $(REMOTE)/status | jq -r '.result.sync_info.latest_block_height')
 TO_BLOCK = $(LATEST_BLOCK_HEIGHT)
 -include ../rules.mk
 EOF
-  printf '{\n  "latest_block_height": 0\n}\n' >"$work/$1/chain/metadata.json"
+  printf '{\n  "latest_block_height": 4\n}\n' >"$work/$1/chain/metadata.json"
   if [ -n "$3" ]; then
     printf '{"result":{"node_info":{"network":"%s"},"sync_info":{"latest_block_height":"%s"}}}\n' "$2" "$3"
   else
@@ -64,14 +67,14 @@ EOF
   chmod +x "$work/$1/x/make" || exit 1
 }
 
-# three chunks (from 1, 10001, 20001); the second fails
-chain stub example-1 25000 10001
+# three chunks (from 5, 9005, 18005); the second fails
+chain stub example-1 25000 9005
 mk "$work/stub/chain" fetch-all REMOTE="file://$work/stub/rpc" MAKE="$work/stub/x/make" >/dev/null 2>&1
 rc=$?
 chunks=$(cat "$work/stub/x/chunks.log" 2>/dev/null)
 [ "$rc" -ne 0 ] && ok "fetch-all exits non-zero when a chunk fails" ||
   ko "fetch-all exits non-zero when a chunk fails"
-[ "$chunks" = "$(printf -- '-C . fetch FROM_BLOCK=%s\n' 1 10001)" ] &&
+[ "$chunks" = "$(printf -- '-C . fetch FROM_BLOCK=%s\n' 5 9005)" ] &&
   ok "fetch-all fetches chunk by chunk and stops at the first that fails" ||
   ko "fetch-all fetches chunk by chunk and stops at the first that fails: $(tr '\n' '|' <<<"$chunks")"
 
@@ -86,7 +89,7 @@ chain pass example-1 25000
 mk "$work/pass/chain" fetch-all REMOTE="file://$work/pass/rpc" MAKE="$work/pass/x/make" >/dev/null 2>&1
 rc=$?
 chunks=$(cat "$work/pass/x/chunks.log" 2>/dev/null)
-if [ "$rc" -eq 0 ] && [ "$chunks" = "$(printf -- '-C . fetch FROM_BLOCK=%s\n' 1 10001 20001)" ]; then
+if [ "$rc" -eq 0 ] && [ "$chunks" = "$(printf -- '-C . fetch FROM_BLOCK=%s\n' 5 9005 18005)" ]; then
   ok "fetch-all fetches every chunk up to the RPC's height"
 else
   ko "fetch-all fetches every chunk up to the RPC's height: rc=$rc $(tr '\n' '|' <<<"$chunks")"
@@ -119,10 +122,11 @@ else
   ok "an RPC without a block height fails fetch-all before any fetch"
 fi
 # no metadata.json: FROM_BLOCK is empty, and `seq MAX_INTERVAL HEIGHT` would
-# fetch from the wrong block, or nothing with exit 0
+# fetch from the wrong block (MAX_INTERVAL=3 keeps that regression short: with
+# MAX_INTERVAL above the height, BSD seq counts down, GNU seq prints nothing)
 chain nofrom example-1 5
 rm "$work/nofrom/chain/metadata.json" || exit 1
-out=$(mk "$work/nofrom/chain" fetch-all REMOTE="file://$work/nofrom/rpc" MAKE="$work/nofrom/x/make" 2>&1)
+out=$(mk "$work/nofrom/chain" fetch-all REMOTE="file://$work/nofrom/rpc" MAX_INTERVAL=3 MAKE="$work/nofrom/x/make" 2>&1)
 rc=$?
 if [ "$rc" -eq 0 ] || [ -e "$work/nofrom/x/chunks.log" ] || ! grep -qF "FROM_BLOCK is not a number (got '')" <<<"$out"; then
   ko "a missing metadata.json fails fetch-all before any fetch, naming FROM_BLOCK: rc=$rc $out"
@@ -138,6 +142,17 @@ if [ "$rc" -eq 0 ] || [ -e "$work/nointerval/x/chunks.log" ] || ! grep -qF "MAX_
   ko "an empty MAX_INTERVAL fails fetch-all before any fetch: rc=$rc $out"
 else
   ok "an empty MAX_INTERVAL fails fetch-all before any fetch"
+fi
+
+# the check shares the loop's recipe line, which names $(MAKE), so make -n runs
+# it too instead of dry-running one sub-make per block
+chain dryrun example-1 5
+out=$(mk "$work/dryrun/chain" -n fetch-all REMOTE="file://$work/dryrun/rpc" MAX_INTERVAL= MAKE="$work/dryrun/x/make" 2>&1)
+rc=$?
+if [ "$rc" -eq 0 ] || [ -e "$work/dryrun/x/chunks.log" ] || ! grep -qF "MAX_INTERVAL is not a number (got '')" <<<"$out"; then
+  ko "make -n fetch-all refuses an empty MAX_INTERVAL before any fetch: rc=$rc $out"
+else
+  ok "make -n fetch-all refuses an empty MAX_INTERVAL before any fetch"
 fi
 
 [ ! -e "$work/beyond-guard.log" ] && ok "no fetch got past the guard" ||
