@@ -5,7 +5,9 @@ This tool is a simple parser to extract source code (packages & realms) from log
 **Note:** this tool parses transaction data using the gno data types from the
 version of [gnolang/gno](https://github.com/gnolang/gno) pinned in
 [`go.mod`](./go.mod); it is compatible with whatever that version supports.
-Bump that dependency to stay compatible with newer chain data.
+Bump that dependency to stay compatible with newer chain data: it must know
+every message type mainnet and onyx emit, or their txs are skipped, and a
+deploy it cannot decode fails the run.
 
 ## Running the extractor
 

@@ -97,11 +97,9 @@ Two ways it differs from the recent testnets:
   (tx results are batched over HTTP, not over WS).
 - **`/vm.m_enable_pkg` messages.** Mainnet runs `code_submission_policy = "inert"`,
   so an added package stays parked until an approver sends `MsgEnablePackage`.
-  Those messages are in the export, but the extractor's pinned gno dependency
-  predates the type and logs `unrecognized concrete type full name
-  vm.m_enable_pkg`, skipping the transaction. Non-fatal (the extractor still
-  exits 0, and `m_enable_pkg` carries no package source, so nothing is missing
-  from `extracted/`) but noisy — it needs a dependency bump in `extractor/go.mod`.
+  Those messages are in the export. They carry no package source: the extractor
+  decodes them and moves on, as long as its gno dependency (`extractor/go.mod`)
+  knows the type.
 
 ### CI
 
