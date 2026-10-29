@@ -97,13 +97,13 @@ fetch-all:
 		$(MAKE) -C . fetch FROM_BLOCK="$$i" || exit 1; \
 	done
 
-# The files stats reads, one tx per line: {tx, metadata} objects, or plain
-# std.Tx in test1's txexport-*.log. A chain dir whose backup_*.jsonl also
-# matches non-tx files (staging's balances) narrows it.
+# The files stats reads, one tx per line: {tx, …} objects, or plain std.Tx in
+# test1's txexport-*.log. A chain dir whose backup_*.jsonl also matches non-tx
+# files (staging's balances) narrows it.
 BACKUP_FILES ?= backup_*.jsonl
 
 # Deployed packages are the /vm.m_addpkg messages (a /vm.m_run carries a
-# package too); their keys are lowercase (`path`) except in test2 and test3,
+# package too); their keys are lowercase (`path`) except in test1-test3,
 # exported before gno#2019's snake_case JSON tags (`Path`). Realm calls are the
 # /vm.m_call messages (a package enable or reject carries a pkg_path too).
 #

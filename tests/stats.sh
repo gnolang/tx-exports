@@ -2,7 +2,7 @@
 # Exercises rules.mk's stats target on scratch chain dirs:
 # - deployed packages are the /vm.m_addpkg messages only (a /vm.m_run package
 #   is not a deploy), whatever the casing of their keys (`path`, or `Path` in
-#   test2/test3);
+#   test1-test3);
 # - realm calls are the /vm.m_call messages only (a package enable or reject
 #   carries a pkg_path too);
 # - the faucet section counts every faucet transfer, the first one included;
@@ -11,7 +11,7 @@
 # - plain std.Tx lines (test1) are read like {tx, metadata} ones;
 # - a backup written earlier in the same make run is read;
 # - a corrupt tx line, or a BACKUP_FILES that matches nothing, fails the run.
-# Usage: tests/stats.sh   (from the repo root; needs GNU make, bash, jq)
+# Usage: tests/stats.sh   (needs GNU make, bash, jq)
 set -uo pipefail
 root=$(cd -- "$(dirname "$0")/.." >/dev/null && pwd) || exit 1
 fail=0
@@ -20,8 +20,9 @@ ko() {
   echo "FAIL - $1"
   fail=1
 }
-# MAKEFLAGS/MAKELEVEL from a caller would add output or flags to the runs below
-mk() { env -u MAKEFLAGS -u MAKELEVEL make -s -C "$@"; }
+# MAKEFLAGS, GNUMAKEFLAGS and MAKELEVEL from a caller would add output or flags
+# to the runs below
+mk() { env -u MAKEFLAGS -u GNUMAKEFLAGS -u MAKELEVEL make -s -C "$@"; }
 
 work=$(mktemp -d) || exit 1
 trap 'rm -rf "$work"' EXIT
