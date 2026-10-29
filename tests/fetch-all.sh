@@ -4,8 +4,11 @@
 #   (a stub stands in for the per-chunk make);
 # - chunks refused by the chain-id guard (the file:// fixture RPC reports
 #   another chain) stop it at the first one;
-# - an RPC that reports no block height fails it before any fetch.
-# Usage: tests/fetch-all.sh   (from the repo root; needs GNU make, curl, jq)
+# - it fetches every chunk up to the RPC's height when none fails;
+# - an RPC that reports no block height, or cannot be reached, fails it before
+#   any fetch;
+# - no fetch gets past the guard (git and go stand-ins would log it).
+# Usage: tests/fetch-all.sh   (needs GNU make, curl, jq)
 set -uo pipefail
 root=$(cd -- "$(dirname "$0")/.." >/dev/null && pwd) || exit 1
 fail=0
@@ -14,16 +17,24 @@ ko() {
   echo "FAIL - $1"
   fail=1
 }
-# MAKEFLAGS/MAKELEVEL from a caller (e.g. -k) would let a refused fetch build
-# its other prerequisites
-mk() { env -u MAKEFLAGS -u MAKELEVEL make -s -C "$@"; }
+# MAKEFLAGS, GNUMAKEFLAGS and MAKELEVEL from a caller (e.g. -k) would let a
+# refused fetch build its other prerequisites
+mk() { env -u MAKEFLAGS -u MAKELEVEL -u GNUMAKEFLAGS make -s -C "$@"; }
 
 work=$(mktemp -d) || exit 1
 trap 'rm -rf "$work"' EXIT
 cp "$root/rules.mk" "$work/" || exit 1
+# a fetch that gets past the guard clones gno (git) and runs tx-archive (go):
+# these stand-ins log the call and fail, so a regression stays offline
+mkdir "$work/bin" || exit 1
+for t in git go; do
+  printf '#!/bin/sh\necho "%s $*" >>"%s/beyond-guard.log"\nexit 1\n' "$t" "$work" >"$work/bin/$t"
+  chmod +x "$work/bin/$t" || exit 1
+done
+PATH=$work/bin:$PATH
 
-# chain <name> <network> <height>: a scratch chain dir and its fixture RPC
-# (no height field when <height> is empty)
+# chain <name> <network> <height> [<failing chunk>]: a scratch chain dir and
+# its fixture RPC (no height field when <height> is empty)
 chain() {
   mkdir -p "$work/$1/chain" "$work/$1/rpc" "$work/$1/x" || exit 1
   # chain dirs include ../rules.mk
@@ -44,17 +55,17 @@ EOF
   else
     printf '{"result":{"node_info":{"network":"%s"},"sync_info":{}}}\n' "$2"
   fi >"$work/$1/rpc/status"
-  # the stub logs each per-chunk make call, and fails the chunk from 10001
-  cat >"$work/$1/x/make" <<'EOF'
+  # the stub logs each per-chunk make call, and fails <failing chunk>
+  cat >"$work/$1/x/make" <<EOF
 #!/bin/sh
-printf '%s\n' "$*" >>"${0%/*}/chunks.log"
-case " $* " in *" FROM_BLOCK=10001 "*) exit 2 ;; esac
+printf '%s\n' "\$*" >>"\${0%/*}/chunks.log"
+case " \$* " in *" FROM_BLOCK=${4:-none} "*) exit 2 ;; esac
 EOF
   chmod +x "$work/$1/x/make" || exit 1
 }
 
 # three chunks (from 1, 10001, 20001); the second fails
-chain stub example-1 25000
+chain stub example-1 25000 10001
 mk "$work/stub/chain" fetch-all REMOTE="file://$work/stub/rpc" MAKE="$work/stub/x/make" >/dev/null 2>&1
 rc=$?
 chunks=$(cat "$work/stub/x/chunks.log" 2>/dev/null)
@@ -71,6 +82,32 @@ rc=$?
   ok "a chain refused by the guard stops fetch-all at the first chunk" ||
   ko "a chain refused by the guard stops fetch-all at the first chunk: rc=$rc $(tr '\n' '|' <<<"$out")"
 
+chain pass example-1 25000
+mk "$work/pass/chain" fetch-all REMOTE="file://$work/pass/rpc" MAKE="$work/pass/x/make" >/dev/null 2>&1
+rc=$?
+chunks=$(cat "$work/pass/x/chunks.log" 2>/dev/null)
+if [ "$rc" -eq 0 ] && [ "$chunks" = "$(printf -- '-C . fetch FROM_BLOCK=%s\n' 1 10001 20001)" ]; then
+  ok "fetch-all fetches every chunk up to the RPC's height"
+else
+  ko "fetch-all fetches every chunk up to the RPC's height: rc=$rc $(tr '\n' '|' <<<"$chunks")"
+fi
+
+# curl fails on a missing file:// path, so the height is empty, and
+# `seq 1 MAX_INTERVAL` would run one fetch per block (MAX_INTERVAL=3 keeps
+# that regression short)
+chain unreachable example-1 25000
+out=$(mk "$work/unreachable/chain" fetch-all REMOTE="file://$work/unreachable/missing" MAX_INTERVAL=3 MAKE="$work/unreachable/x/make" 2>&1)
+rc=$?
+if [ "$rc" -eq 0 ]; then
+  ko "an unreachable RPC fails fetch-all: exited 0"
+elif [ -e "$work/unreachable/x/chunks.log" ]; then
+  ko "an unreachable RPC fails fetch-all before any fetch: $(tr '\n' '|' <"$work/unreachable/x/chunks.log")"
+elif ! grep -qF "no block height from the RPC (got '')" <<<"$out"; then
+  ko "an unreachable RPC fails fetch-all, naming the empty height: $out"
+else
+  ok "an unreachable RPC fails fetch-all before any fetch"
+fi
+
 chain noheight example-1 ''
 out=$(mk "$work/noheight/chain" fetch-all REMOTE="file://$work/noheight/rpc" MAKE="$work/noheight/x/make" 2>&1)
 rc=$?
@@ -81,4 +118,6 @@ elif [ -e "$work/noheight/x/chunks.log" ]; then
 else
   ok "an RPC without a block height fails fetch-all before any fetch"
 fi
+[ ! -e "$work/beyond-guard.log" ] && ok "no fetch got past the guard" ||
+  ko "no fetch got past the guard: $(tr '\n' '|' <"$work/beyond-guard.log")"
 exit $fail
