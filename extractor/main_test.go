@@ -525,6 +525,28 @@ func TestExtract_SkipsAnUnparsableLineWithoutADeploy(t *testing.T) {
 	assert.Equal(t, []string{"x", "y"}, dirNames(t, filepath.Join(outputDir, "r", "demo")))
 }
 
+func TestExtract_ReadsPastALongLineItSkips(t *testing.T) {
+	t.Parallel()
+
+	// an undecodable line without a deploy, longer than the reader's 4096-byte
+	// buffer: skipping it must not carry its bytes into the next line
+	sourceDir, outputDir := t.TempDir(), t.TempDir()
+	long := mustReplace(t, txJSON(t, addPkgTx(t, "gno.land/r/demo/z", strings.Repeat("z", 8192))),
+		`"/vm.m_addpkg"`, `"/vm.m_unknown"`)
+	writeLines(t, sourceDir, "backup_0000001-0000010.jsonl",
+		long,
+		txJSON(t, addPkgTx(t, "gno.land/r/demo/y", "y")),
+	)
+
+	require.NoError(t, execExtract(context.Background(), &extractorCfg{
+		fileType:   sourceFileType,
+		sourcePath: sourceDir,
+		outputDir:  outputDir,
+	}))
+
+	assert.Equal(t, "y", readPkgBody(t, outputDir, "r/demo/y"))
+}
+
 func TestSortByBlockRange(t *testing.T) {
 	t.Parallel()
 

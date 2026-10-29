@@ -324,7 +324,7 @@ func extractAddMessages[T std.Tx | gnoland.TxWithMetadata](
 	// Msg array to be returned for further processing
 	msgArr := make([]vm.MsgAddPackage, 0)
 
-	// Buffer to handle lines longer than 64kb
+	// Buffer for lines longer than the reader's 4096-byte buffer
 	tempBuf := make([]byte, 0)
 
 	for {
@@ -346,13 +346,11 @@ func extractAddMessages[T std.Tx | gnoland.TxWithMetadata](
 			continue
 		}
 
-		// Handle long lines
+		// Handle long lines: the buffer holds the line's earlier parts, and is
+		// emptied before parsing so a line that is skipped cannot leak into the next
 		if len(tempBuf) != 0 {
-			// Append last part of line to temporary buffer
-			tempBuf = append(tempBuf, line...)
-
-			// Use line variable to pass it on to amino
-			line = tempBuf
+			line = append(tempBuf, line...)
+			tempBuf = nil
 		}
 
 		if err := amino.UnmarshalJSON(line, &txData); err != nil {
@@ -363,11 +361,6 @@ func extractAddMessages[T std.Tx | gnoland.TxWithMetadata](
 			}
 			slog.Error("error while parsing amino JSON", "error", err, "line", line)
 			continue
-		}
-
-		// Reset tempBuf in case it was used for a long line
-		if tempBuf != nil {
-			tempBuf = nil
 		}
 
 		for _, msg := range unwrapFn(txData) {
