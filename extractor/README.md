@@ -41,8 +41,8 @@ the first in `<path>`, the next ones in `<path>:1`, `<path>:2`, and so on.
 Source files are read by the range in their names (`…_<from>-<to>.jsonl`:
 blocks, or lines for staging's chunks), so the numbering follows the chain
 even where names are not zero-padded. The source files carry no tx results, so
-a numbered deploy may be one the chain rejected.
+any deploy of a path, the first included, may be one the chain rejected.
 
-test2, test3 and test4 keep an older layout, `<path>:<block height>` for later
-deploys: this extractor cannot parse their backups, so their trees are not
-rebuilt.
+test2, test3 and test4 keep an older layout: deploys in `<path>:<block height>`,
+the first one also in `<path>`. This extractor cannot parse their backups, so
+their trees are not rebuilt.
