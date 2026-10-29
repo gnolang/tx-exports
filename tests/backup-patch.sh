@@ -150,4 +150,24 @@ evil gitlink 'g update-index --add --cacheinfo 160000,$(g rev-parse HEAD),chain.
   "a gitlink" staged
 evil mixed 'printf "{}\n" >chain.gno.land/metadata.json && printf "evil\n" >rules.mk' \
   "a patch mixing allowed and other changes"
+
+# the vetting diff failing must refuse the patch, not let it through unvetted:
+# a git that fails only on --raw, applying the refused rules.mk patch
+real_git=$(command -v git) || exit 1
+mkdir "$work/shim" || exit 1
+cat >"$work/shim/git" <<EOF
+#!/bin/sh
+case " \$* " in *" --raw "*) exit 1 ;; esac
+exec "$real_git" "\$@"
+EOF
+chmod +x "$work/shim/git" || exit 1
+clone vetfail || exit 1
+cd "$work/vetfail" || exit 1
+if PATH="$work/shim:$PATH" bash "$script" apply chain.gno.land "$work/rules.patch" >/dev/null 2>&1; then
+  ko "apply refuses a patch its vetting diff failed on: exited 0"
+elif [ -n "$(g status --porcelain)" ]; then
+  ko "apply refuses a patch its vetting diff failed on, changing nothing"
+else
+  ok "apply refuses a patch its vetting diff failed on, changing nothing"
+fi
 exit $fail

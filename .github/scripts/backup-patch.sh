@@ -42,7 +42,7 @@ pack() {
 }
 
 apply() {
-  local dir=$1 patch=$2 index meta path mode refused=0
+  local dir=$1 patch=$2 index raw meta path mode refused=0
   # pack always writes the patch: a missing one means the hand-off broke, and an
   # empty one is an idle run
   [ -f "$patch" ] || {
@@ -54,8 +54,12 @@ apply() {
   # vet the patch on a throwaway index first: git parses it, and this checkout
   # changes only once every path and mode passes
   index=$(mktemp)
+  raw=$(mktemp)
   GIT_INDEX_FILE=$index git read-tree HEAD
   GIT_INDEX_FILE=$index git apply --cached --whitespace=nowarn "$patch"
+  # its own command, not a process substitution, whose failure errexit ignores:
+  # a vetting that read nothing must not pass
+  GIT_INDEX_FILE=$index git diff --cached --raw -z --no-renames HEAD >"$raw"
   while IFS= read -r -d '' meta && IFS= read -r -d '' path; do
     mode=$(cut -d' ' -f2 <<<"$meta")
     # 000000 is a deletion; symlinks (120000) and gitlinks (160000) are refused
@@ -63,8 +67,8 @@ apply() {
       echo "backup-patch: refusing $path (mode $mode)" >&2
       refused=1
     fi
-  done < <(GIT_INDEX_FILE=$index git diff --cached --raw -z --no-renames HEAD)
-  rm -f "$index"
+  done <"$raw"
+  rm -f "$index" "$raw"
   [ "$refused" = 0 ] || return 1
 
   git apply --index --whitespace=nowarn "$patch"
