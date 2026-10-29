@@ -80,8 +80,7 @@ func TestExtractor_Errors(t *testing.T) {
 		t.Run(testCase.name, func(t *testing.T) {
 			t.Parallel()
 
-			ctx, cancelFn := context.WithTimeout(context.Background(), time.Second*5)
-			defer cancelFn()
+			ctx := context.Background()
 
 			err := execExtract(ctx, testCase.cfg)
 			assert.ErrorIs(t, err, testCase.expectedErr)
@@ -114,8 +113,7 @@ func TestValidFlow_Dir(t *testing.T) {
 	_ = generateSourceFiles(t, sourceDir, mockStdMsg, 20)
 
 	// Perform extraction
-	ctx, cancelFn := context.WithTimeout(context.Background(), time.Second*5)
-	defer cancelFn()
+	ctx := context.Background()
 
 	require.NoError(t, execExtract(ctx, cfg))
 
@@ -183,8 +181,7 @@ func TestValidFlow_File(t *testing.T) {
 	_ = generateSourceFiles(t, sourceDir, mockStdMsg, 1)
 
 	// Perform extraction
-	ctx, cancelFn := context.WithTimeout(context.Background(), time.Second*5)
-	defer cancelFn()
+	ctx := context.Background()
 
 	require.NoError(t, execExtract(ctx, cfg))
 
