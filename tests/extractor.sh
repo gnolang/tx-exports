@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
-# Exercises rules.mk's extractor target on a scratch chain dir:
-# - extracted/ is rebuilt from scratch: an earlier tree's leftovers are gone,
-#   repeated deploys are numbered (x, x:1), and a second run gives the same tree;
+# Exercises rules.mk's extractor target on scratch chain dirs:
+# - extracted/ is rebuilt from scratch: an earlier tree's leftovers and an
+#   interrupted run's build dir are dropped, repeated deploys are numbered
+#   (x, x:1), and a second run gives the same tree;
 # - a run that fails leaves the previous extracted/ untouched.
-# Usage: tests/extractor.sh   (from the repo root; needs GNU make, go, jq)
+# Usage: tests/extractor.sh   (needs GNU make, go, jq)
 set -uo pipefail
 root=$(cd -- "$(dirname "$0")/.." >/dev/null && pwd) || exit 1
 fail=0
@@ -12,20 +13,25 @@ ko() {
   echo "FAIL - $1"
   fail=1
 }
-# MAKEFLAGS/MAKELEVEL from a caller would add output or flags to the runs below
-mk() { env -u MAKEFLAGS -u MAKELEVEL make -s -C "$@"; }
+# MAKEFLAGS, GNUMAKEFLAGS, MAKELEVEL and EXTRACTOR_DIR from a caller would add
+# output or flags to the runs below, or point them at another extractor
+mk() { env -u MAKEFLAGS -u GNUMAKEFLAGS -u MAKELEVEL -u EXTRACTOR_DIR make -s -C "$@"; }
 
 work=$(mktemp -d) || exit 1
 trap 'rm -rf "$work"' EXIT
 cp "$root/rules.mk" "$work/" || exit 1
 # chain dirs run the extractor from ../extractor
 ln -s "$root/extractor" "$work/extractor" || exit 1
-mkdir "$work/chain" || exit 1
-cat >"$work/chain/Makefile" <<'EOF'
+
+# chain <name>: a scratch chain dir whose Makefile includes rules.mk
+chain() {
+  mkdir "$work/$1" || return 1
+  cat >"$work/$1/Makefile" <<'EOF'
 REMOTE = "https://rpc.example.invalid"
 SHORTNAME = example
 -include ../rules.mk
 EOF
+}
 
 # a real deploy line, re-pointed at <path> with one file holding <body>
 template=$(awk '/"\/vm.m_addpkg"/ {print; exit}' "$root"/test11.gno.land/backup_*.jsonl)
@@ -36,34 +42,58 @@ deploy() {
      | .tx.msg[0].package.path = $p
      | .tx.msg[0].package.files = [{"name": "x.gno", "body": $b}]' <<<"$template"
 }
+
+chain chain || exit 1
 {
   deploy gno.land/r/demo/x first
   deploy gno.land/r/demo/y only
   deploy gno.land/r/demo/x second
 } >"$work/chain/backup_0000001-0000010.jsonl" || exit 1
-# an earlier tree, with a rerun twin the rebuild must drop
-mkdir -p "$work/chain/extracted/r/demo/stale:0" || exit 1
-
-tree() { (cd "$work/chain/extracted" && find . -type f | sort && cat r/demo/x/x.gno r/demo/x:1/x.gno 2>/dev/null); }
+# an earlier tree holding a dir no deploy in the backups produces, and an
+# interrupted run's partial build dir: the rebuild must drop both
+mkdir -p "$work/chain/extracted/r/demo/stale:0" "$work/chain/extracted.new/r/demo/x" || exit 1
+: >"$work/chain/extracted.new/r/demo/x/x.gno" || exit 1
 
 if ! out=$(mk "$work/chain" extractor 2>&1); then
   ko "extractor runs: $out"
-else
-  got=$(cd "$work/chain/extracted/r/demo" && ls | tr '\n' ' ')
-  [ "$got" = "x x:1 y " ] && ok "extracted/ is rebuilt with numbered repeated deploys" ||
-    ko "extracted/ is rebuilt with numbered repeated deploys: $got"
-  [ "$(cat "$work/chain/extracted/r/demo/x/x.gno")" = first ] &&
-    [ "$(cat "$work/chain/extracted/r/demo/x:1/x.gno")" = second ] &&
-    ok "repeated deploys are numbered in chain order" || ko "repeated deploys are numbered in chain order"
+  exit 1
 fi
-first=$(tree)
+got=$(cd "$work/chain/extracted/r/demo" && ls | tr '\n' ' ')
+if [ "$got" = "x x:1 y " ]; then
+  ok "extracted/ is rebuilt with numbered repeated deploys"
+else
+  ko "extracted/ is rebuilt with numbered repeated deploys: $got"
+fi
+if [ "$(cat "$work/chain/extracted/r/demo/x/x.gno")" = first ] &&
+  [ "$(cat "$work/chain/extracted/r/demo/x:1/x.gno")" = second ]; then
+  ok "repeated deploys are numbered in chain order"
+else
+  ko "repeated deploys are numbered in chain order"
+fi
+cp -R "$work/chain/extracted" "$work/first" || exit 1
 
-mk "$work/chain" extractor >/dev/null 2>&1
-[ "$(tree)" = "$first" ] && ok "a second run gives the same tree" || ko "a second run gives the same tree"
-[ ! -e "$work/chain/extracted.new" ] && ok "no build dir is left behind" || ko "no build dir is left behind"
+if ! out=$(mk "$work/chain" extractor 2>&1); then
+  ko "a second run succeeds: $out"
+elif diff -r "$work/first" "$work/chain/extracted" >/dev/null; then
+  ok "a second run gives the same tree"
+else
+  ko "a second run gives the same tree"
+fi
+if [ ! -e "$work/chain/extracted.new" ]; then
+  ok "no build dir is left behind"
+else
+  ko "no build dir is left behind"
+fi
 
-mk "$work/chain" extractor EXTRACTOR_DIR=missing >/dev/null 2>&1 && ko "a failing run fails: exited 0" ||
+if mk "$work/chain" extractor EXTRACTOR_DIR=missing >/dev/null 2>&1; then
+  ko "a failing run fails: exited 0"
+else
   ok "a failing run fails"
-[ "$(tree)" = "$first" ] && ok "a failing run leaves the previous extracted/ untouched" ||
+fi
+if diff -r "$work/first" "$work/chain/extracted" >/dev/null; then
+  ok "a failing run leaves the previous extracted/ untouched"
+else
   ko "a failing run leaves the previous extracted/ untouched"
+fi
+
 exit $fail
