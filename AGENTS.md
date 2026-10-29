@@ -95,7 +95,7 @@ Uses `export.sh` instead of tx-archive. It calls `gnogenesis txs export` and `gn
 Mainnet (`gnoland-1`) launched 2026-09-12 as a fresh chain, not a hardfork of
 betanet, so its export starts at block 1.
 
-Two ways it differs from the recent testnets:
+Two ways it differs from the earlier testnets (onyx also has the second):
 
 - **No `USE_WS=1`.** `rpc.gno.land` does not WAF-block high-volume HTTP batch
   fetches the way the `*.testnets.gno.land` endpoints do, and HTTP is faster
