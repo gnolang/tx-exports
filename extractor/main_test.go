@@ -500,7 +500,8 @@ func TestExtract_FailsOnADeployItCannotParse(t *testing.T) {
 }
 
 func TestExtract_SkipsAnUnparsableLineWithoutADeploy(t *testing.T) {
-	t.Parallel()
+	// not parallel: it captures the default logger
+	logs := captureLogs(t)
 
 	// a msg type the pinned gno types do not know (such as vm.m_enable_pkg) in
 	// a tx without a deploy: there is no package to lose, even if its memo
@@ -521,10 +522,12 @@ func TestExtract_SkipsAnUnparsableLineWithoutADeploy(t *testing.T) {
 	}))
 
 	assert.Equal(t, []string{"x", "y"}, dirNames(t, filepath.Join(outputDir, "r", "demo")))
+	assert.Equal(t, 1, strings.Count(logs.String(), "skipping a line"))
 }
 
 func TestExtract_ReadsPastALongLineItSkips(t *testing.T) {
-	t.Parallel()
+	// not parallel: it captures the default logger
+	logs := captureLogs(t)
 
 	// an undecodable line without a deploy, longer than the reader's 4096-byte
 	// buffer: skipping it must not carry its bytes into the next line
@@ -543,6 +546,7 @@ func TestExtract_ReadsPastALongLineItSkips(t *testing.T) {
 	}))
 
 	assert.Equal(t, "y", readPkgBody(t, outputDir, "r/demo/y"))
+	assert.Equal(t, 1, strings.Count(logs.String(), "skipping a line"))
 }
 
 func TestExtractAddMessages_ClosesTheFileOnAnError(t *testing.T) {
@@ -607,16 +611,13 @@ func TestExtract_TrimsOnlyTheGnoLandPrefix(t *testing.T) {
 }
 
 func TestExtract_SkipsPackagesThatLeaveTheirDir(t *testing.T) {
-	t.Parallel()
+	// not parallel: it captures the default logger
+	logs := captureLogs(t)
 
 	// package paths and file names come from the chain, and the backups keep
 	// the txs it rejected: none may write outside its package dir, or into a
 	// numbered dir (':')
-	withFile := func(path, name string) string {
-		tx := addPkgTx(t, path, "bad")
-		tx.Tx.Msgs[0].(vm.MsgAddPackage).Package.Files[0].Name = name
-		return txJSON(t, tx)
-	}
+	withFile := func(path, name string) string { return txJSON(t, addPkgFileTx(t, path, name, "bad")) }
 	sourceDir, root := t.TempDir(), t.TempDir()
 	outputDir := filepath.Join(root, "chain", "extracted")
 	writeLines(t, sourceDir, "backup_0000001-0000010.jsonl",
@@ -658,6 +659,7 @@ func TestExtract_SkipsPackagesThatLeaveTheirDir(t *testing.T) {
 		"chain/extracted/r/demo/x:1/x.gno",
 	}, written)
 	assert.Equal(t, "second", readPkgBody(t, outputDir, "r/demo/x:1"))
+	assert.Equal(t, 10, strings.Count(logs.String(), "skipping a package"))
 }
 
 func TestExtract_SkipsPackagesWithNamesItCannotWrite(t *testing.T) {
@@ -667,11 +669,7 @@ func TestExtract_SkipsPackagesWithNamesItCannotWrite(t *testing.T) {
 	// names inside the output dir that a write would still fail on, or that
 	// would clash with what the extractor writes: the run must go on
 	long := strings.Repeat("l", 256)
-	withFile := func(path, name string) gnoland.TxWithMetadata {
-		tx := addPkgTx(t, path, "bad")
-		tx.Tx.Msgs[0].(vm.MsgAddPackage).Package.Files[0].Name = name
-		return tx
-	}
+	withFile := func(path, name string) gnoland.TxWithMetadata { return addPkgFileTx(t, path, name, "bad") }
 	sourceDir, outputDir := t.TempDir(), t.TempDir()
 	writeSourceFile(t, sourceDir, "backup_0000001-0000010.jsonl",
 		addPkgTx(t, "gno.land/r/demo/nul\x00path", "bad"),
@@ -679,7 +677,7 @@ func TestExtract_SkipsPackagesWithNamesItCannotWrite(t *testing.T) {
 		withFile("gno.land/r/demo/b", "colon:1"),
 		withFile("gno.land/r/demo/c", packageMetadataFile),
 		addPkgTx(t, "gno.land/r/demo/"+long, "bad"),
-		withFile("gno.land/r/demo/d", long+".gno"),
+		withFile("gno.land/r/demo/d", long),
 		addPkgTx(t, "gno.land/r/demo/x", "x"),
 	)
 
@@ -854,6 +852,28 @@ func TestExtract_MovesADeployWhoseFilesLandOnAPackageDir(t *testing.T) {
 			}
 		})
 	}
+}
+
+func TestExtract_WritesNamesOfTheLongestLength(t *testing.T) {
+	t.Parallel()
+
+	// a 255-byte path component and file name are the longest the filesystem
+	// takes, and are written
+	long := strings.Repeat("l", maxNameLen)
+	sourceDir, outputDir := t.TempDir(), t.TempDir()
+	writeSourceFile(t, sourceDir, "backup_0000001-0000010.jsonl",
+		addPkgTx(t, "gno.land/r/demo/"+long, "dir"),
+		addPkgFileTx(t, "gno.land/r/demo/f", long, "file"),
+	)
+
+	require.NoError(t, execExtract(context.Background(), &extractorCfg{
+		fileType:   sourceFileType,
+		sourcePath: sourceDir,
+		outputDir:  outputDir,
+	}))
+
+	assert.Equal(t, "dir", readPkgBody(t, outputDir, "r/demo/"+long))
+	assert.Equal(t, []string{long, packageMetadataFile}, dirNames(t, filepath.Join(outputDir, "r", "demo", "f")))
 }
 
 func TestExtract_SkipsADeployWhoseNumberedNameIsTooLong(t *testing.T) {
@@ -1067,7 +1087,8 @@ func TestExtract_PrefersTxOverTopLevelMsgsInLegacyMode(t *testing.T) {
 }
 
 func TestExtract_SkipsANullFileInLegacyMode(t *testing.T) {
-	t.Parallel()
+	// not parallel: it captures the default logger
+	logs := captureLogs(t)
 
 	outputDir, err := legacyExtract(t,
 		blockNumLine(`{"@type":"/vm.m_addpkg",`+legacyCreator+`,"deposit":"",`+
@@ -1077,26 +1098,46 @@ func TestExtract_SkipsANullFileInLegacyMode(t *testing.T) {
 	require.NoError(t, err)
 
 	assert.Equal(t, []string{"x"}, dirNames(t, filepath.Join(outputDir, "r", "demo")))
+	assert.Equal(t, 1, strings.Count(logs.String(), "skipping a package"))
 }
 
 func TestExtract_FailsOnAMalformedDeployInLegacyMode(t *testing.T) {
 	t.Parallel()
 
-	for name, msgs := range map[string]string{
-		"null package":    `{"@type":"/vm.m_addpkg",` + legacyCreator + `,"deposit":"","package":null}`,
-		"invalid deposit": `{"@type":"/vm.m_addpkg",` + legacyCreator + `,"deposit":"1UGNOT",` + legacyPackage + `}`,
-		"non-object msg":  `1,{"@type":"/vm.m_addpkg",` + legacyCreator + `,"deposit":"",` + legacyPackage + `}`,
+	for name, tc := range map[string]struct {
+		msgs  string
+		cause string
+	}{
+		"null package": {
+			`{"@type":"/vm.m_addpkg",` + legacyCreator + `,"deposit":"","package":null}`,
+			"MsgAddPackage is nil",
+		},
+		"invalid deposit": {
+			`{"@type":"/vm.m_addpkg",` + legacyCreator + `,"deposit":"1UGNOT",` + legacyPackage + `}`,
+			"invalid deploy deposit",
+		},
+		"non-object msg": {
+			`1,{"@type":"/vm.m_addpkg",` + legacyCreator + `,"deposit":"",` + legacyPackage + `}`,
+			"cannot unmarshal number",
+		},
 		// a key these formats never carry: decoding it as one of theirs would
 		// misread it (here, a deposit under today's `send`)
-		"unknown key": `{"@type":"/vm.m_addpkg",` + legacyCreator + `,"send":"1ugnot",` + legacyPackage + `}`,
-		"unknown package key": `{"@type":"/vm.m_addpkg",` + legacyCreator + `,"deposit":"",` +
-			`"package":{"name":"x","path":"gno.land/r/demo/x","type":"","files":[{"name":"x.gno","body":"x"}]}}`,
+		"unknown key": {
+			`{"@type":"/vm.m_addpkg",` + legacyCreator + `,"send":"1ugnot",` + legacyPackage + `}`,
+			`unknown field "send"`,
+		},
+		"unknown package key": {
+			`{"@type":"/vm.m_addpkg",` + legacyCreator + `,"deposit":"",` +
+				`"package":{"name":"x","path":"gno.land/r/demo/x","type":"","files":[{"name":"x.gno","body":"x"}]}}`,
+			`unknown field "type"`,
+		},
 	} {
 		t.Run(name, func(t *testing.T) {
 			t.Parallel()
 
-			_, err := legacyExtract(t, blockNumLine(msgs))
+			_, err := legacyExtract(t, blockNumLine(tc.msgs))
 			assert.ErrorIs(t, err, errUnparsableDeploy)
+			assert.ErrorContains(t, err, tc.cause)
 		})
 	}
 }
