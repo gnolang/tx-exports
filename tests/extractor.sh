@@ -131,14 +131,15 @@ else
   ko "a run that writes no package leaves the previous extracted/ untouched"
 fi
 
-# test4's lines predate {tx, metadata}: its chain dir passes -legacy-mode
-chain legacy 'EXTRACTOR_FLAGS = -legacy-mode' || exit 1
-jq -nc '{tx: {msg: [{"@type": "/vm.m_addpkg",
-      creator: "g1jg8mtutu9khhfwc4nxmuhcpftf0pajdhfvsqf5", deposit: "",
-      package: {name: "old", path: "gno.land/r/demo/old",
-        files: [{name: "x.gno", body: "old"}]}}],
-    fee: {gas_wanted: "1", gas_fee: "1ugnot"}, signatures: null, memo: ""},
-  blockNum: "1"}' >"$work/legacy/backup_0000001-0000010.jsonl" || exit 1
+# test1's lines predate {tx, metadata} and sit in .log files: its chain dir
+# passes two flags, and both must reach the extractor
+chain legacy 'EXTRACTOR_FLAGS = -legacy-mode -file-type .log' || exit 1
+jq -nc '{msg: [{"@type": "/vm.m_addpkg",
+    creator: "g1jg8mtutu9khhfwc4nxmuhcpftf0pajdhfvsqf5", deposit: "",
+    package: {Name: "old", Path: "gno.land/r/demo/old",
+      Files: [{Name: "x.gno", Body: "old"}]}}],
+  fee: {gas_wanted: "1", gas_fee: "1ugnot"}, signatures: null, memo: ""}' \
+  >"$work/legacy/txexport-aa.log" || exit 1
 if ! out=$(mk "$work/legacy" extractor 2>&1); then
   ko "a chain dir's EXTRACTOR_FLAGS reach the extractor: $out"
 elif [ "$(cat "$work/legacy/extracted/r/demo/old/x.gno" 2>/dev/null)" = old ]; then
