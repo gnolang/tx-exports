@@ -693,6 +693,97 @@ func TestExtract_SkipsPackagesWithNamesItCannotWrite(t *testing.T) {
 	assert.Equal(t, 6, strings.Count(logs.String(), "skipping a package"))
 }
 
+func TestExtract_MovesADeployPastWhatAnEarlierOneWrote(t *testing.T) {
+	t.Parallel()
+
+	// a package's file where a later deploy needs a dir, or the reverse: the
+	// later deploy moves to its path's next free number
+	for name, tc := range map[string]struct {
+		deploys []gnoland.TxWithMetadata
+		files   map[string]string // file under the output dir: body
+	}{
+		"a file, then a package at its path": {
+			deploys: []gnoland.TxWithMetadata{
+				addPkgFileTx(t, "gno.land/r/demo/x", "x.gno", "file"),
+				addPkgFileTx(t, "gno.land/r/demo/x/x.gno", "a.gno", "pkg"),
+			},
+			files: map[string]string{"r/demo/x/x.gno": "file", "r/demo/x/x.gno:1/a.gno": "pkg"},
+		},
+		"a package, then a file at its path": {
+			deploys: []gnoland.TxWithMetadata{
+				addPkgFileTx(t, "gno.land/r/demo/x/x.gno", "a.gno", "pkg"),
+				addPkgFileTx(t, "gno.land/r/demo/x", "x.gno", "file"),
+			},
+			files: map[string]string{"r/demo/x/x.gno/a.gno": "pkg", "r/demo/x:1/x.gno": "file"},
+		},
+		"a package where another's metadata file goes": {
+			deploys: []gnoland.TxWithMetadata{
+				addPkgFileTx(t, "gno.land/r/demo/m/"+packageMetadataFile, "a.gno", "pkg"),
+				addPkgFileTx(t, "gno.land/r/demo/m", "m.gno", "m"),
+			},
+			files: map[string]string{"r/demo/m/" + packageMetadataFile + "/a.gno": "pkg", "r/demo/m:1/m.gno": "m"},
+		},
+		"a moved deploy's path deployed again": {
+			deploys: []gnoland.TxWithMetadata{
+				addPkgFileTx(t, "gno.land/r/demo/x/license", "a.gno", "pkg"),
+				addPkgFileTx(t, "gno.land/r/demo/x", "license", "first"),
+				addPkgFileTx(t, "gno.land/r/demo/x", "license", "second"),
+			},
+			files: map[string]string{
+				"r/demo/x/license/a.gno": "pkg",
+				"r/demo/x:1/license":     "first",
+				"r/demo/x:2/license":     "second",
+			},
+		},
+	} {
+		t.Run(name, func(t *testing.T) {
+			t.Parallel()
+
+			sourceDir, outputDir := t.TempDir(), t.TempDir()
+			writeSourceFile(t, sourceDir, "backup_0000001-0000010.jsonl", tc.deploys...)
+
+			require.NoError(t, execExtract(context.Background(), &extractorCfg{
+				fileType:   sourceFileType,
+				sourcePath: sourceDir,
+				outputDir:  outputDir,
+			}))
+
+			for file, body := range tc.files {
+				got, err := os.ReadFile(filepath.Join(outputDir, filepath.FromSlash(file)))
+				require.NoError(t, err, file)
+				assert.Equal(t, body, string(got), file)
+			}
+		})
+	}
+}
+
+func TestExtract_SkipsADeployNoNumberCanPlace(t *testing.T) {
+	// not parallel: it captures the default logger
+	logs := captureLogs(t)
+
+	// a file on the way to the package dir, or a numbered name too long for
+	// the filesystem: the deploy is skipped and the run goes on
+	long := strings.Repeat("l", maxNameLen-1)
+	sourceDir, outputDir := t.TempDir(), t.TempDir()
+	writeSourceFile(t, sourceDir, "backup_0000001-0000010.jsonl",
+		addPkgFileTx(t, "gno.land/r/demo/f", "sub", "file"),
+		addPkgFileTx(t, "gno.land/r/demo/f/sub/z", "z.gno", "bad"),
+		addPkgTx(t, "gno.land/r/demo/"+long, "first"),
+		addPkgTx(t, "gno.land/r/demo/"+long, "second"),
+		addPkgTx(t, "gno.land/r/demo/x", "x"),
+	)
+
+	require.NoError(t, execExtract(context.Background(), &extractorCfg{
+		fileType:   sourceFileType,
+		sourcePath: sourceDir,
+		outputDir:  outputDir,
+	}))
+
+	assert.Equal(t, []string{"f", long, "x"}, dirNames(t, filepath.Join(outputDir, "r", "demo")))
+	assert.Equal(t, "first", readPkgBody(t, outputDir, "r/demo/"+long))
+	assert.Equal(t, 2, strings.Count(logs.String(), "skipping a deploy"))
+}
+
 func TestExtract_ReadsOnlyTheSourceDirsOwnFiles(t *testing.T) {
 	t.Parallel()
 
@@ -957,6 +1048,15 @@ func addPkgTx(t *testing.T, path, body string) gnoland.TxWithMetadata {
 			Files: []*std.MemFile{{Name: "x.gno", Body: body}},
 		},
 	}}}}
+}
+
+// addPkgFileTx is a deploy of path with one file, name, holding body.
+func addPkgFileTx(t *testing.T, path, name, body string) gnoland.TxWithMetadata {
+	t.Helper()
+
+	tx := addPkgTx(t, path, body)
+	tx.Tx.Msgs[0].(vm.MsgAddPackage).Package.Files[0].Name = name
+	return tx
 }
 
 func writeSourceFile(t *testing.T, dir, name string, txs ...gnoland.TxWithMetadata) {

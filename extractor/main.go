@@ -185,12 +185,19 @@ func execExtract(ctx context.Context, cfg *extractorCfg) error {
 			for _, msg := range msgs {
 				pkgDir := strings.TrimPrefix(msg.Package.Path, "gno.land/")
 				if !writable(pkgDir, msg.Package.Files) {
-					slog.Warn("skipping a package whose path or file names leave its dir", "path", msg.Package.Path)
+					slog.Warn("skipping a package whose path or file names cannot be written", "path", msg.Package.Path)
 					continue
 				}
 				outputDir := filepath.Join(cfg.outputDir, pkgDir)
 
-				n := deploys[outputDir]
+				n, ok := placeDeploy(cfg.outputDir, outputDir, deploys[outputDir], msg.Package.Files)
+				if !ok {
+					slog.Warn("skipping a deploy that no numbered dir can hold", "path", msg.Package.Path)
+					continue
+				}
+				if n != deploys[outputDir] {
+					slog.Warn("moving a deploy past what an earlier one wrote", "path", msg.Package.Path, "number", n)
+				}
 				deploys[outputDir] = n + 1
 				if n > 0 {
 					outputDir += ":" + strconv.Itoa(n)
@@ -239,6 +246,61 @@ func writable(pkgDir string, files []*std.MemFile) bool {
 	for _, file := range files {
 		if file == nil || file.Name != filepath.Base(file.Name) || !filepath.IsLocal(file.Name) || file.Name == "." ||
 			strings.ContainsAny(file.Name, ":\x00") || len(file.Name) > maxNameLen || file.Name == packageMetadataFile {
+			return false
+		}
+	}
+	return true
+}
+
+// placeDeploy picks the number of a package's next deploy: n, or the first one
+// after it whose dir (dir, or dir:<number>) the earlier deploys left free. One
+// deploy's file can stand where another needs a dir: a package r/x with a file
+// named license, and a package r/x/license. It reports false when no number
+// helps: a file stands on the way to dir, or the numbered name is longer than
+// the filesystem takes.
+func placeDeploy(root, dir string, n int, files []*std.MemFile) (int, bool) {
+	rel, err := filepath.Rel(root, filepath.Dir(dir))
+	if err != nil {
+		return 0, false
+	}
+	way := root
+	for _, part := range strings.Split(rel, string(filepath.Separator)) {
+		way = filepath.Join(way, part)
+		if info, err := os.Lstat(way); err == nil && !info.IsDir() {
+			return 0, false
+		}
+	}
+
+	for ; ; n++ {
+		candidate := dir
+		if n > 0 {
+			candidate += ":" + strconv.Itoa(n)
+		}
+		if len(filepath.Base(candidate)) > maxNameLen {
+			return 0, false
+		}
+		if free(candidate, files) {
+			return n, true
+		}
+	}
+}
+
+// free reports whether a deploy can be written in dir: dir is absent, or a dir
+// in which none of the deploy's files, nor its metadata file, is a dir.
+func free(dir string, files []*std.MemFile) bool {
+	info, err := os.Lstat(dir)
+	if err != nil {
+		return true
+	}
+	if !info.IsDir() {
+		return false
+	}
+	names := []string{packageMetadataFile}
+	for _, file := range files {
+		names = append(names, file.Name)
+	}
+	for _, name := range names {
+		if info, err := os.Lstat(filepath.Join(dir, name)); err == nil && info.IsDir() {
 			return false
 		}
 	}
