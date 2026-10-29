@@ -423,16 +423,14 @@ func TestExtract_ReadsSourceFilesInBlockOrder(t *testing.T) {
 func TestExtract_NumbersRepeatedDeploysInLegacyMode(t *testing.T) {
 	t.Parallel()
 
-	sourceDir, outputDir := t.TempDir(), t.TempDir()
-	file, err := os.Create(filepath.Join(sourceDir, "txexport-aa.log"))
-	require.NoError(t, err)
-	for _, body := range []string{"first", "second"} {
-		raw, err := amino.MarshalJSON(addPkgTx(t, "gno.land/r/demo/x", body).Tx)
-		require.NoError(t, err)
-		_, err = file.Write(append(raw, '\n'))
-		require.NoError(t, err)
+	// test1's plain std.Tx lines, with its capitalized package keys
+	deploy := func(body string) string {
+		return `{"msg":[{"@type":"/vm.m_addpkg",` + legacyCreator + `,"deposit":"",` +
+			`"package":{"Name":"x","Path":"gno.land/r/demo/x","Files":[{"Name":"x.gno","Body":"` + body + `"}]}}],` +
+			`"fee":{"gas_wanted":"1","gas_fee":"1gnot"},"signatures":null,"memo":""}`
 	}
-	require.NoError(t, file.Close())
+	sourceDir, outputDir := t.TempDir(), t.TempDir()
+	writeLines(t, sourceDir, "txexport-aa.log", deploy("first"), deploy("second"))
 
 	require.NoError(t, execExtract(context.Background(), &extractorCfg{
 		fileType:   ".log",
@@ -868,6 +866,11 @@ func TestExtract_FailsOnAMalformedDeployInLegacyMode(t *testing.T) {
 		"null package":    `{"@type":"/vm.m_addpkg",` + legacyCreator + `,"deposit":"","package":null}`,
 		"invalid deposit": `{"@type":"/vm.m_addpkg",` + legacyCreator + `,"deposit":"1UGNOT",` + legacyPackage + `}`,
 		"non-object msg":  `1,{"@type":"/vm.m_addpkg",` + legacyCreator + `,"deposit":"",` + legacyPackage + `}`,
+		// a key these formats never carry: decoding it as one of theirs would
+		// misread it (here, a deposit under today's `send`)
+		"unknown key": `{"@type":"/vm.m_addpkg",` + legacyCreator + `,"send":"1ugnot",` + legacyPackage + `}`,
+		"unknown package key": `{"@type":"/vm.m_addpkg",` + legacyCreator + `,"deposit":"",` +
+			`"package":{"name":"x","path":"gno.land/r/demo/x","type":"","files":[{"name":"x.gno","body":"x"}]}}`,
 	} {
 		t.Run(name, func(t *testing.T) {
 			t.Parallel()

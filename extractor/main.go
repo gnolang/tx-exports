@@ -425,8 +425,10 @@ type legacyLine struct {
 
 // legacyDeploy is a /vm.m_addpkg message in those formats: its deposit is under
 // `deposit`, and test1-test3 capitalize the package keys, which encoding/json
-// matches case-insensitively.
+// matches case-insensitively. It lists every key they carry: any other one
+// fails the decoding rather than being misread.
 type legacyDeploy struct {
+	Type    string `json:"@type"`
 	Creator string `json:"creator"`
 	Deposit string `json:"deposit"`
 	Package *struct {
@@ -465,7 +467,9 @@ func decodeLegacy(line []byte) ([]vm.MsgAddPackage, error) {
 		}
 
 		var msg legacyDeploy
-		if err := json.Unmarshal(raw, &msg); err != nil {
+		decoder := json.NewDecoder(bytes.NewReader(raw))
+		decoder.DisallowUnknownFields()
+		if err := decoder.Decode(&msg); err != nil {
 			return nil, err
 		}
 		if msg.Package == nil {
