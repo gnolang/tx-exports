@@ -189,7 +189,7 @@ func execExtract(ctx context.Context, cfg *extractorCfg) error {
 
 			// Process messages
 			for _, msg := range msgs {
-				outputDir := filepath.Join(cfg.outputDir, strings.TrimLeft(msg.Package.Path, "gno.land/"))
+				outputDir := filepath.Join(cfg.outputDir, strings.TrimPrefix(msg.Package.Path, "gno.land/"))
 
 				n := deploys[outputDir]
 				deploys[outputDir] = n + 1

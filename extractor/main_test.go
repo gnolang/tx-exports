@@ -120,7 +120,7 @@ func TestValidFlow_Dir(t *testing.T) {
 	require.NoError(t, execExtract(ctx, cfg))
 
 	for _, msg := range mockAddPkgMsg {
-		basePath := filepath.Join(outputDir, strings.TrimLeft(msg.Package.Path, "gno.land/"))
+		basePath := filepath.Join(outputDir, strings.TrimPrefix(msg.Package.Path, "gno.land/"))
 
 		// Get metadata path & open metadata file
 		metadataPath := filepath.Join(basePath, packageMetadataFile)
@@ -189,7 +189,7 @@ func TestValidFlow_File(t *testing.T) {
 	require.NoError(t, execExtract(ctx, cfg))
 
 	for _, msg := range mockAddPkgMsg {
-		basePath := filepath.Join(outputDir, strings.TrimLeft(msg.Package.Path, "gno.land/"))
+		basePath := filepath.Join(outputDir, strings.TrimPrefix(msg.Package.Path, "gno.land/"))
 
 		// Get metadata path & open metadata file
 		metadataPath := filepath.Join(basePath, packageMetadataFile)
@@ -319,7 +319,7 @@ func TestWritePackageMetadata(t *testing.T) {
 		md := metadataFromMsg(msg)
 
 		// Get output dir
-		outputDir := filepath.Join(tempDir, strings.TrimLeft(msg.Package.Path, "gno.land/"))
+		outputDir := filepath.Join(tempDir, strings.TrimPrefix(msg.Package.Path, "gno.land/"))
 
 		// Write dir before writing metadata
 		err := os.MkdirAll(outputDir, os.ModePerm)
@@ -358,7 +358,7 @@ func TestWritePackageFiles(t *testing.T) {
 
 	for _, msg := range mockMsgsAddPackage {
 		// Get output dir
-		outputDir := filepath.Join(tempDir, strings.TrimLeft(msg.Package.Path, "gno.land/"))
+		outputDir := filepath.Join(tempDir, strings.TrimPrefix(msg.Package.Path, "gno.land/"))
 
 		// Write dir before writing metadata
 		err := os.MkdirAll(outputDir, os.ModePerm)
@@ -592,6 +592,27 @@ func TestExtractAddMessages_LogsASkippedLineByNumber(t *testing.T) {
 	assert.Contains(t, logs.String(), "backup_0000001-0000010.jsonl")
 	assert.Contains(t, logs.String(), "line=2")
 	assert.NotContains(t, logs.String(), "the-skipped-line")
+}
+
+func TestExtract_TrimsOnlyTheGnoLandPrefix(t *testing.T) {
+	t.Parallel()
+
+	// "gno.land/" is a prefix, not a set of characters: test2 has packages
+	// under github.com/
+	sourceDir, outputDir := t.TempDir(), t.TempDir()
+	writeSourceFile(t, sourceDir, "backup_0000001-0000010.jsonl",
+		addPkgTx(t, "gno.land/r/demo/x", "x"),
+		addPkgTx(t, "github.com/gnolang/y", "y"),
+	)
+
+	require.NoError(t, execExtract(context.Background(), &extractorCfg{
+		fileType:   sourceFileType,
+		sourcePath: sourceDir,
+		outputDir:  outputDir,
+	}))
+
+	assert.Equal(t, "x", readPkgBody(t, outputDir, "r/demo/x"))
+	assert.Equal(t, "y", readPkgBody(t, outputDir, "github.com/gnolang/y"))
 }
 
 func TestSortByBlockRange(t *testing.T) {
