@@ -50,7 +50,7 @@ printf '{"latest_block_height": 20}\n' >metadata.json
 printf '# stats 2\n' >README.md
 rm -r extracted/r/demo/old
 mkdir -p extracted/r/demo/new temp-gno backup_sub
-printf 'new\r\n' >extracted/r/demo/new/new.gno
+printf 'new\r\n\000' >extracted/r/demo/new/new.gno
 printf 'SHORTNAME = evil\n' >Makefile
 printf 'junk\n' >temp-gno/junk
 printf 'nested\n' >backup_sub/x.jsonl
@@ -82,11 +82,11 @@ if [ "$(g ls-files -s chain.gno.land/backup_0000011-0000020.jsonl | cut -d' ' -f
 else
   ko "an executable backup keeps its mode"
 fi
-if printf 'new\r\n' | cmp -s - chain.gno.land/extracted/r/demo/new/new.gno &&
-  g show :chain.gno.land/extracted/r/demo/new/new.gno | cmp -s - <(printf 'new\r\n'); then
-  ok "a file's bytes survive, CR included"
+if printf 'new\r\n\000' | cmp -s - chain.gno.land/extracted/r/demo/new/new.gno &&
+  g show :chain.gno.land/extracted/r/demo/new/new.gno | cmp -s - <(printf 'new\r\n\000'); then
+  ok "a file's bytes survive, CR and NUL included"
 else
-  ko "a file's bytes survive, CR included"
+  ko "a file's bytes survive, CR and NUL included"
 fi
 
 # a run that changes nothing
@@ -115,8 +115,10 @@ evil() {
   }
   clone "target-$1" || return 1
   cd "$work/target-$1" || return 1
-  if bash "$script" apply chain.gno.land "$work/$1.patch" >/dev/null 2>&1; then
+  if out=$(bash "$script" apply chain.gno.land "$work/$1.patch" 2>&1); then
     ko "apply refuses $3: exited 0"
+  elif [[ $out != *"backup-patch: refusing "* ]]; then
+    ko "apply refuses $3, saying so: $out"
   elif [ -n "$(g status --porcelain)" ]; then
     ko "apply refuses $3, changing nothing: $(g status --porcelain | tr '\n' '|')"
   else
@@ -124,6 +126,8 @@ evil() {
   fi
 }
 evil rules 'printf "evil\n" >rules.mk' "a change outside the chain dir"
+evil rootreadme 'printf "evil\n" >README.md' "a run's file name outside the chain dir"
+evil rename 'g mv chain.gno.land/extracted/r/demo/old/old.gno planted.sh' "a rename out of the chain dir"
 evil makefile 'printf "SHORTNAME = evil\n" >chain.gno.land/Makefile' "a change to the chain's Makefile"
 evil other 'printf "y\n" >other.gno.land/backup_0000011-0000020.jsonl' "a change to another chain dir"
 # backup_*.jsonl names a file directly in the chain dir, whose `*` must not
