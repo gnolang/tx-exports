@@ -722,6 +722,28 @@ func TestExtract_SkipsPackagesWithNamesGitRefuses(t *testing.T) {
 	assert.Equal(t, 7, strings.Count(logs.String(), "skipping a package"))
 }
 
+func TestExtract_SkipsADeployWhosePathIsTooLong(t *testing.T) {
+	// not parallel: it captures the default logger
+	logs := captureLogs(t)
+
+	// every component fits, but not the whole path (Linux takes 4,095 bytes)
+	long := strings.TrimSuffix(strings.Repeat(strings.Repeat("l", 250)+"/", 17), "/")
+	sourceDir, outputDir := t.TempDir(), t.TempDir()
+	writeSourceFile(t, sourceDir, "backup_0000001-0000010.jsonl",
+		addPkgTx(t, "gno.land/r/demo/"+long, "bad"),
+		addPkgTx(t, "gno.land/r/demo/x", "x"),
+	)
+
+	require.NoError(t, execExtract(context.Background(), &extractorCfg{
+		fileType:   sourceFileType,
+		sourcePath: sourceDir,
+		outputDir:  outputDir,
+	}))
+
+	assert.Equal(t, []string{"x"}, dirNames(t, filepath.Join(outputDir, "r", "demo")))
+	assert.Equal(t, 1, strings.Count(logs.String(), "skipping a deploy"))
+}
+
 func TestExtract_MovesADeployPastWhatAnEarlierOneWrote(t *testing.T) {
 	t.Parallel()
 

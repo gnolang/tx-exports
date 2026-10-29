@@ -149,6 +149,11 @@ func execExtract(ctx context.Context, cfg *extractorCfg) error {
 	if err := checkOutputDir(cfg.outputDir); err != nil {
 		return err
 	}
+	// absolute, so the path length checks see the paths the writes use
+	root, err := filepath.Abs(cfg.outputDir)
+	if err != nil {
+		return fmt.Errorf("unable to resolve output directory, %w", err)
+	}
 
 	var (
 		decode decodeFn = decodeTx
@@ -188,9 +193,9 @@ func execExtract(ctx context.Context, cfg *extractorCfg) error {
 					slog.Warn("skipping a package whose path or file names cannot be written", "path", msg.Package.Path)
 					continue
 				}
-				outputDir := filepath.Join(cfg.outputDir, pkgDir)
+				outputDir := filepath.Join(root, pkgDir)
 
-				n, ok := placeDeploy(cfg.outputDir, outputDir, deploys[outputDir], msg.Package.Files)
+				n, ok := placeDeploy(root, outputDir, deploys[outputDir], msg.Package.Files)
 				if !ok {
 					slog.Warn("skipping a deploy that no numbered dir can hold", "path", msg.Package.Path)
 					continue
@@ -226,6 +231,10 @@ func execExtract(ctx context.Context, cfg *extractorCfg) error {
 
 // maxNameLen is the longest file or dir name the filesystem takes, in bytes.
 const maxNameLen = 255
+
+// maxPathLen is Linux's PATH_MAX: the longest path it takes, in bytes, with its
+// terminating NUL.
+const maxPathLen = 4096
 
 // writable reports whether a package's path and file names can be written as
 // its dir and files, and committed. They come from the chain, and the source
@@ -264,8 +273,8 @@ func writableName(name string) bool {
 // after it whose dir (dir, or dir:<number>) the earlier deploys left free. One
 // deploy's file can stand where another needs a dir: a package r/x with a file
 // named license, and a package r/x/license. It reports false when no number
-// helps: a file stands on the way to dir, or the numbered name is longer than
-// the filesystem takes.
+// helps: a file stands on the way to dir, or the numbered name or a file's path
+// is longer than the filesystem takes.
 func placeDeploy(root, dir string, n int, files []*std.MemFile) (int, bool) {
 	rel, err := filepath.Rel(root, filepath.Dir(dir))
 	if err != nil {
@@ -279,12 +288,18 @@ func placeDeploy(root, dir string, n int, files []*std.MemFile) (int, bool) {
 		}
 	}
 
+	longest := packageMetadataFile
+	for _, file := range files {
+		if len(file.Name) > len(longest) {
+			longest = file.Name
+		}
+	}
 	for ; ; n++ {
 		candidate := dir
 		if n > 0 {
 			candidate += ":" + strconv.Itoa(n)
 		}
-		if len(filepath.Base(candidate)) > maxNameLen {
+		if len(filepath.Base(candidate)) > maxNameLen || len(filepath.Join(candidate, longest)) >= maxPathLen {
 			return 0, false
 		}
 		if free(candidate, files) {
