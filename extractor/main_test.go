@@ -660,6 +660,39 @@ func TestExtract_SkipsPackagesThatLeaveTheirDir(t *testing.T) {
 	assert.Equal(t, "second", readPkgBody(t, outputDir, "r/demo/x:1"))
 }
 
+func TestExtract_SkipsPackagesWithNamesItCannotWrite(t *testing.T) {
+	// not parallel: it captures the default logger
+	logs := captureLogs(t)
+
+	// names inside the output dir that a write would still fail on, or that
+	// would clash with what the extractor writes: the run must go on
+	long := strings.Repeat("l", 256)
+	withFile := func(path, name string) gnoland.TxWithMetadata {
+		tx := addPkgTx(t, path, "bad")
+		tx.Tx.Msgs[0].(vm.MsgAddPackage).Package.Files[0].Name = name
+		return tx
+	}
+	sourceDir, outputDir := t.TempDir(), t.TempDir()
+	writeSourceFile(t, sourceDir, "backup_0000001-0000010.jsonl",
+		addPkgTx(t, "gno.land/r/demo/nul\x00path", "bad"),
+		withFile("gno.land/r/demo/a", "nul\x00name.gno"),
+		withFile("gno.land/r/demo/b", "colon:1"),
+		withFile("gno.land/r/demo/c", packageMetadataFile),
+		addPkgTx(t, "gno.land/r/demo/"+long, "bad"),
+		withFile("gno.land/r/demo/d", long+".gno"),
+		addPkgTx(t, "gno.land/r/demo/x", "x"),
+	)
+
+	require.NoError(t, execExtract(context.Background(), &extractorCfg{
+		fileType:   sourceFileType,
+		sourcePath: sourceDir,
+		outputDir:  outputDir,
+	}))
+
+	assert.Equal(t, []string{"x"}, dirNames(t, filepath.Join(outputDir, "r", "demo")))
+	assert.Equal(t, 6, strings.Count(logs.String(), "skipping a package"))
+}
+
 func TestExtract_ReadsOnlyTheSourceDirsOwnFiles(t *testing.T) {
 	t.Parallel()
 

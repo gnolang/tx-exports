@@ -184,7 +184,7 @@ func execExtract(ctx context.Context, cfg *extractorCfg) error {
 			// Process messages
 			for _, msg := range msgs {
 				pkgDir := strings.TrimPrefix(msg.Package.Path, "gno.land/")
-				if !confined(pkgDir, msg.Package.Files) {
+				if !writable(pkgDir, msg.Package.Files) {
 					slog.Warn("skipping a package whose path or file names leave its dir", "path", msg.Package.Path)
 					continue
 				}
@@ -217,16 +217,28 @@ func execExtract(ctx context.Context, cfg *extractorCfg) error {
 	return nil
 }
 
-// confined reports whether a package is written inside its own dir. Its path
-// and file names come from the chain, and the source files keep the txs it
-// rejected: the package dir must be a local path below the output dir, without
-// the ':' of the numbered dirs, and each file name a plain name inside it.
-func confined(pkgDir string, files []*std.MemFile) bool {
-	if !filepath.IsLocal(pkgDir) || filepath.Clean(pkgDir) == "." || strings.Contains(pkgDir, ":") {
+// maxNameLen is the longest file or dir name the filesystem takes, in bytes.
+const maxNameLen = 255
+
+// writable reports whether a package's path and file names can be written as
+// its dir and files. They come from the chain, and the source files keep the
+// txs it rejected, so a name the chain refuses must neither escape nor fail the
+// run. The package dir must be a local path below the output dir; each file
+// name a plain name inside it; neither may hold a NUL, the ':' of the numbered
+// dirs, or a name longer than the filesystem takes; and no file may be named
+// like the metadata file.
+func writable(pkgDir string, files []*std.MemFile) bool {
+	if !filepath.IsLocal(pkgDir) || filepath.Clean(pkgDir) == "." || strings.ContainsAny(pkgDir, ":\x00") {
 		return false
 	}
+	for _, part := range strings.Split(pkgDir, "/") {
+		if len(part) > maxNameLen {
+			return false
+		}
+	}
 	for _, file := range files {
-		if file == nil || file.Name != filepath.Base(file.Name) || !filepath.IsLocal(file.Name) || file.Name == "." {
+		if file == nil || file.Name != filepath.Base(file.Name) || !filepath.IsLocal(file.Name) || file.Name == "." ||
+			strings.ContainsAny(file.Name, ":\x00") || len(file.Name) > maxNameLen || file.Name == packageMetadataFile {
 			return false
 		}
 	}
