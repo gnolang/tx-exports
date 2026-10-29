@@ -36,7 +36,10 @@ EOF
 
 # a real deploy line, re-pointed at <path> with one file holding <body>
 template=$(awk '/"\/vm.m_addpkg"/ {print; exit}' "$root"/test11.gno.land/backup_*.jsonl)
-[ -n "$template" ] || exit 1
+[ -n "$template" ] || {
+  ko "test11 backups hold an m_addpkg line"
+  exit 1
+}
 deploy() {
   jq -c --arg p "$1" --arg b "$2" \
     '.tx.msg = [.tx.msg[] | select(.["@type"] == "/vm.m_addpkg")][0:1]
@@ -59,7 +62,7 @@ if ! out=$(mk "$work/chain" extractor 2>&1); then
   ko "extractor runs: $out"
   exit 1
 fi
-got=$(cd "$work/chain/extracted/r/demo" && ls | tr '\n' ' ')
+got=$(cd "$work/chain/extracted/r/demo" && printf '%s ' *)
 if [ "$got" = "x x:1 y " ]; then
   ok "extracted/ is rebuilt with numbered repeated deploys"
 else
@@ -86,11 +89,17 @@ else
   ko "no build dir is left behind"
 fi
 
-if mk "$work/chain" extractor EXTRACTOR_DIR=missing >/dev/null 2>&1; then
+# a run that fails after writing a package: w is new, then a deploy the
+# extractor cannot parse (a field its gno types do not know) stops it
+deploy gno.land/r/demo/w new >"$work/chain/backup_0000011-0000020.jsonl" || exit 1
+deploy gno.land/r/demo/v broken | jq -c '.tx.msg[0].package.newfield = 1' \
+  >"$work/chain/backup_0000021-0000030.jsonl" || exit 1
+if mk "$work/chain" extractor >/dev/null 2>&1; then
   ko "a failing run fails: exited 0"
 else
   ok "a failing run fails"
 fi
+rm -f "$work/chain/backup_0000011-0000020.jsonl" "$work/chain/backup_0000021-0000030.jsonl"
 if diff -r "$work/first" "$work/chain/extracted" >/dev/null; then
   ok "a failing run leaves the previous extracted/ untouched"
 else
