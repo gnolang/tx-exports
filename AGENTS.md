@@ -40,6 +40,7 @@ cd ~/.cache/tx-exports/gno-<GNO_REF, / as ->/contribs/tx-archive
 # as rules.mk's fetch; USE_WS=1 dirs add -ws and --remote wss://<host>/websocket
 go run ./cmd backup -verbose --batch 100 --remote <RPC_URL> --from-block <N> --to-block <M> \
   --output-path <absolute chain dir>/backup_<N as %07d>-<M as %07d>.jsonl
+# then, as make fetch does, set the chain dir's metadata.json latest_block_height to M
 ```
 
 ### Running the extractor
