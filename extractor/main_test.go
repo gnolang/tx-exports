@@ -7,6 +7,7 @@ import (
 	crand "crypto/rand"
 	"encoding/base64"
 	"encoding/json"
+	"log"
 	"log/slog"
 	"math/rand"
 	"os"
@@ -504,10 +505,11 @@ func TestExtract_SkipsAnUnparsableLineWithoutADeploy(t *testing.T) {
 	t.Parallel()
 
 	// a msg type the pinned gno types do not know (such as vm.m_enable_pkg) in
-	// a tx without a deploy: there is no package to lose
+	// a tx without a deploy: there is no package to lose, even if its memo
+	// mentions /vm.m_addpkg
 	sourceDir, outputDir := t.TempDir(), t.TempDir()
-	unknownType := mustReplace(t, txJSON(t, addPkgTx(t, "gno.land/r/demo/z", "z")),
-		`"/vm.m_addpkg"`, `"/vm.m_unknown"`)
+	unknownType := mustReplace(t, mustReplace(t, txJSON(t, addPkgTx(t, "gno.land/r/demo/z", "z")),
+		`"/vm.m_addpkg"`, `"/vm.m_unknown"`), `"memo":""`, `"memo":"not a /vm.m_addpkg"`)
 	writeLines(t, sourceDir, "backup_0000001-0000010.jsonl",
 		txJSON(t, addPkgTx(t, "gno.land/r/demo/x", "x")),
 		unknownType,
@@ -567,9 +569,7 @@ func TestExtractAddMessages_ClosesTheFileOnAnError(t *testing.T) {
 
 func TestExtractAddMessages_LogsASkippedLineByNumber(t *testing.T) {
 	// not parallel: it swaps the default logger
-	var logs bytes.Buffer
-	defer slog.SetDefault(slog.Default())
-	slog.SetDefault(slog.New(slog.NewTextHandler(&logs, nil)))
+	logs := captureLogs(t)
 
 	unknownType := mustReplace(t, txJSON(t, addPkgTx(t, "gno.land/r/demo/z", "the-skipped-line")),
 		`"/vm.m_addpkg"`, `"/vm.m_unknown"`)
@@ -623,10 +623,12 @@ func TestExtract_SkipsPackagesThatLeaveTheirDir(t *testing.T) {
 	outputDir := filepath.Join(root, "chain", "extracted")
 	writeLines(t, sourceDir, "backup_0000001-0000010.jsonl",
 		txJSON(t, addPkgTx(t, "gno.land/r/demo/x", "first")),
-		txJSON(t, addPkgTx(t, "gno.land/r/../../../../escaped", "bad")),
+		// from root/chain/extracted, these land in root, where the walk below looks
+		txJSON(t, addPkgTx(t, "gno.land/r/../../../escaped", "bad")),
+		txJSON(t, addPkgTx(t, "gno.land/r/..", "bad")),
 		txJSON(t, addPkgTx(t, "gno.land/.", "bad")),
 		txJSON(t, addPkgTx(t, "gno.land//abs", "bad")),
-		withFile("gno.land/r/demo/y", "../../../../escaped.gno"),
+		withFile("gno.land/r/demo/y", "../../../../../escaped.gno"),
 		withFile("gno.land/r/demo/y", "sub/x.gno"),
 		withFile("gno.land/r/demo/y", ".."),
 		withFile("gno.land/r/demo/y", "."),
@@ -670,6 +672,7 @@ func TestExtract_ReadsOnlyTheSourceDirsOwnFiles(t *testing.T) {
 	nested := filepath.Join(sourceDir, "extracted", "r", "demo", "x")
 	require.NoError(t, os.MkdirAll(nested, 0o755))
 	writeSourceFile(t, nested, "fake.jsonl", addPkgTx(t, "gno.land/r/demo/fake", "fake"))
+	require.NoError(t, os.Mkdir(filepath.Join(sourceDir, "old.jsonl"), 0o755))
 
 	require.NoError(t, execExtract(context.Background(), &extractorCfg{
 		fileType:   sourceFileType,
@@ -682,9 +685,7 @@ func TestExtract_ReadsOnlyTheSourceDirsOwnFiles(t *testing.T) {
 
 func TestExtractAddMessages_DecodesPackageApprovals(t *testing.T) {
 	// not parallel: it swaps the default logger
-	var logs bytes.Buffer
-	defer slog.SetDefault(slog.Default())
-	slog.SetDefault(slog.New(slog.NewTextHandler(&logs, nil)))
+	logs := captureLogs(t)
 
 	// mainnet and onyx park a new package until it is enabled or rejected: those
 	// txs (messages as mainnet and onyx store them) carry no package, but must
@@ -784,6 +785,99 @@ func TestExtract_FailsOnADeployItCannotParseInLegacyMode(t *testing.T) {
 	assert.ErrorIs(t, err, errUnparsableDeploy)
 }
 
+func TestExtractAddMessages_CountsALongLineOnce(t *testing.T) {
+	// not parallel: it captures the default logger
+	logs := captureLogs(t)
+
+	dir := t.TempDir()
+	writeLines(t, dir, "backup_0000001-0000010.jsonl",
+		txJSON(t, addPkgTx(t, "gno.land/r/demo/x", strings.Repeat("x", 10000))),
+		"not json",
+	)
+
+	_, err := extractAddMessages(filepath.Join(dir, "backup_0000001-0000010.jsonl"), decodeTx)
+	require.NoError(t, err)
+
+	assert.Contains(t, logs.String(), "line=2")
+}
+
+// legacyExtract runs a legacy-mode extraction of lines into a fresh output dir.
+func legacyExtract(t *testing.T, lines ...string) (string, error) {
+	t.Helper()
+
+	sourceDir, outputDir := t.TempDir(), filepath.Join(t.TempDir(), "extracted.new")
+	writeLines(t, sourceDir, "backup_0000001-0000100.jsonl", lines...)
+	return outputDir, execExtract(context.Background(), &extractorCfg{
+		fileType:   sourceFileType,
+		sourcePath: sourceDir,
+		outputDir:  outputDir,
+		legacyMode: true,
+	})
+}
+
+// blockNumLine is a {tx, blockNum} line holding msgs, as in test2-test4.
+func blockNumLine(msgs string) string {
+	return `{"tx":{"msg":[` + msgs + `],"fee":{"gas_wanted":"1","gas_fee":"1ugnot"},"signatures":null,"memo":""},"blockNum":"1"}`
+}
+
+const (
+	legacyCreator = `"creator":"g1jg8mtutu9khhfwc4nxmuhcpftf0pajdhfvsqf5"`
+	legacyPackage = `"package":{"name":"x","path":"gno.land/r/demo/x","files":[{"name":"x.gno","body":"x"}]}`
+)
+
+func TestExtract_ReadsADeployNextToOtherMsgsInLegacyMode(t *testing.T) {
+	t.Parallel()
+
+	outputDir, err := legacyExtract(t, blockNumLine(
+		`{"@type":"/vm.m_call","caller":"g1jg8mtutu9khhfwc4nxmuhcpftf0pajdhfvsqf5","pkg_path":"gno.land/r/demo/x","func":"Do"},`+
+			`{"@type":"/vm.m_addpkg",`+legacyCreator+`,"deposit":"",`+legacyPackage+`}`))
+	require.NoError(t, err)
+
+	assert.Equal(t, "x", readPkgBody(t, outputDir, "r/demo/x"))
+}
+
+func TestExtract_PrefersTxOverTopLevelMsgsInLegacyMode(t *testing.T) {
+	t.Parallel()
+
+	// a {tx, blockNum} line's msgs are under tx: top-level msgs are not the tx's
+	outputDir, err := legacyExtract(t, `{"msg":[{"@type":"/vm.m_addpkg",`+legacyCreator+`,"deposit":"",`+
+		`"package":{"name":"z","path":"gno.land/r/demo/z","files":[{"name":"x.gno","body":"z"}]}}],`+
+		`"tx":{"msg":[{"@type":"/vm.m_addpkg",`+legacyCreator+`,"deposit":"",`+legacyPackage+`}]},"blockNum":"1"}`)
+	require.NoError(t, err)
+
+	assert.Equal(t, []string{"x"}, dirNames(t, filepath.Join(outputDir, "r", "demo")))
+}
+
+func TestExtract_SkipsANullFileInLegacyMode(t *testing.T) {
+	t.Parallel()
+
+	outputDir, err := legacyExtract(t,
+		blockNumLine(`{"@type":"/vm.m_addpkg",`+legacyCreator+`,"deposit":"",`+
+			`"package":{"name":"y","path":"gno.land/r/demo/y","files":[null]}}`),
+		blockNumLine(`{"@type":"/vm.m_addpkg",`+legacyCreator+`,"deposit":"",`+legacyPackage+`}`),
+	)
+	require.NoError(t, err)
+
+	assert.Equal(t, []string{"x"}, dirNames(t, filepath.Join(outputDir, "r", "demo")))
+}
+
+func TestExtract_FailsOnAMalformedDeployInLegacyMode(t *testing.T) {
+	t.Parallel()
+
+	for name, msgs := range map[string]string{
+		"null package":    `{"@type":"/vm.m_addpkg",` + legacyCreator + `,"deposit":"","package":null}`,
+		"invalid deposit": `{"@type":"/vm.m_addpkg",` + legacyCreator + `,"deposit":"1UGNOT",` + legacyPackage + `}`,
+		"non-object msg":  `1,{"@type":"/vm.m_addpkg",` + legacyCreator + `,"deposit":"",` + legacyPackage + `}`,
+	} {
+		t.Run(name, func(t *testing.T) {
+			t.Parallel()
+
+			_, err := legacyExtract(t, blockNumLine(msgs))
+			assert.ErrorIs(t, err, errUnparsableDeploy)
+		})
+	}
+}
+
 func TestSortByBlockRange(t *testing.T) {
 	t.Parallel()
 
@@ -871,6 +965,24 @@ func writeLines(t *testing.T, dir, name string, lines ...string) {
 
 	data := strings.Join(lines, "\n") + "\n"
 	require.NoError(t, os.WriteFile(filepath.Join(dir, name), []byte(data), 0o644))
+}
+
+// captureLogs sends the default logger's output to the returned buffer until
+// the test ends. slog.SetDefault also redirects the log package, which
+// restoring the previous default does not undo, so that is restored too.
+// Tests calling it must not run in parallel.
+func captureLogs(t *testing.T) *bytes.Buffer {
+	t.Helper()
+
+	logs := new(bytes.Buffer)
+	previous, writer, flags := slog.Default(), log.Writer(), log.Flags()
+	t.Cleanup(func() {
+		slog.SetDefault(previous)
+		log.SetOutput(writer)
+		log.SetFlags(flags)
+	})
+	slog.SetDefault(slog.New(slog.NewTextHandler(logs, nil)))
+	return logs
 }
 
 // openFiles counts the process's open file descriptors. It lists names only:
