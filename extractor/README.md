@@ -36,7 +36,8 @@ otherwise it fails and keeps `extracted/`.
 lines: test1's plain `std.Tx` lines, and test2-test4's `{tx, blockNum}` ones. It
 decodes their deploys without the gno types, which reject those formats' fields
 (a deploy's `deposit`) and test1-test3's capitalized package keys, and fails on a
-key those formats never carry. A chain dir passes it to `make extractor` with
+key those formats' deploy messages never carry. A line's other keys, and its
+other message types, are ignored. A chain dir passes it to `make extractor` with
 `EXTRACTOR_FLAGS`: test4 sets `-legacy-mode`, and test1, whose backups are
 `txexport-*.log`, sets `-legacy-mode -file-type .log`.
 
@@ -50,26 +51,39 @@ Each `/vm.m_addpkg` message is extracted to `<output-dir>/<path without
 gno.land/>`, with its files and a `pkg_metadata.json` (creator and deposit).
 
 A path deployed more than once keeps every deploy, numbered in chain order:
-the first in `<path>`, the next ones in `<path>:1`, `<path>:2`, and so on.
-Source files are read by the range in their names (`…_<from>-<to>.jsonl`:
-blocks, or lines for staging's chunks), so the numbering follows the chain
-even where names are not zero-padded. The source files carry no tx results, so
-any deploy of a path, the first included, may be one the chain rejected.
+the first in `<path>` (or `<path>:1` when it moves, see below), the next ones
+in `<path>:1`, `<path>:2`, and so on. Source files are read by the range in
+their names (`…_<from>-<to>.jsonl`: blocks, or lines for staging's chunks), so
+the numbering follows the chain even where names are not zero-padded. Names
+without a range, such as test1's `txexport-a?.log`, are read in name order,
+after those with one. The source files carry no tx results, so any deploy of a
+path, the first included, may be one the chain rejected.
 
 Paths and file names come from the chain, rejected txs included, so a deploy
-never fails the run over them:
+never fails the run over them. A deploy is skipped, with a warning, when:
 
-- A package is skipped, with a warning, when its path or a file name would
-  leave its dir (`..`, an absolute path, `.`), or holds a NUL or a `:` (that
-  of the numbered dirs), or is longer than the filesystem takes, or when a
-  file is named `pkg_metadata.json`.
-- A deploy whose dir an earlier one blocked (a file where it needs a dir, as
-  with a package `r/x` holding a file `license` and a package `r/x/license`)
-  moves to its path's next free number, with a warning. It is skipped when no
-  number helps: a file on the way to its dir, or a numbered name too long.
+- its path would leave the output dir (`..`, an absolute path), or a file name
+  is not a plain name (`sub/x.gno`, an empty name) or its entry is null;
+- a name in its path, or a file name, starts with `.` (git refuses `.git` and
+  obeys `.gitignore`), or holds `~` or `\` (git's 8.3 and NTFS forms of
+  `.git`), a NUL, or the `:` of the numbered dirs;
+- a file is named `pkg_metadata.json`;
+- a name in its path, numbered dir included, or a file name is longer than 255
+  bytes, or a file's absolute path is 4,096 bytes or longer (Linux's
+  `PATH_MAX`).
+
+A skipped deploy takes no number: the path's other deploys are still written.
+
+Every package dir, and every dir above it, is reserved before any deploy is
+written. A first deploy that would write a file where a package needs a dir (a
+package `r/x` with a file `license`, and a package `r/x/license`, whichever the
+chain deployed first) moves to `<path>:1`, with a warning; the path's later
+deploys follow at `<path>:2`, and so on.
 
 test2 and test3 keep an older layout: deploys in `<path>:<block height>`, the
-first one also in `<path>`. Their trees hold every deploy of their backups, so
+first one also in `<path>`, except test3's `r/sdm96/debugz`: its one deploy is
+only in `debugz:364533`, and its `debugz` dir holds the `v1` and `v2`
+sub-packages. Their trees hold every deploy of their backups, so
 they are not rebuilt: their Makefiles do not set `EXTRACTOR_FLAGS`, so `make
 extractor` there fails at the first deploy and keeps the tree. Passing
 `EXTRACTOR_FLAGS=-legacy-mode` would rebuild them in the numbered layout,
