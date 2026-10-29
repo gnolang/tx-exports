@@ -1,3 +1,0 @@
-module = "gno.land/r/samcrew/space_invaders"
-gno = "0.9"
-private = true

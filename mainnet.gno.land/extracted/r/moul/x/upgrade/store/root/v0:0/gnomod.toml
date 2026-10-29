@@ -1,3 +1,0 @@
-module = "gno.land/r/moul/x/upgrade/store/root/v0"
-gno = "0.9"
-# public: every logic realm in this pattern imports it; it is the shared store

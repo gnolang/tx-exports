@@ -1,3 +1,0 @@
-module = "gno.land/r/moul/agents/capwallet/v0"
-gno = "0.9"
-private = true

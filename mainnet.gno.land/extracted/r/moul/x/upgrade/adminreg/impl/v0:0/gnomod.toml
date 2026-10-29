@@ -1,3 +1,0 @@
-module = "gno.land/r/moul/x/upgrade/adminreg/impl/v0"
-gno = "0.9"
-# public: hands its own greeter to the facade; private aborts with "cannot persist object from the private realm"
