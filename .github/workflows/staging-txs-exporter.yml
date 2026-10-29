@@ -95,10 +95,11 @@ jobs:
       - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
           name: backup-${{ matrix.testnet }}
-          path: ${{ runner.temp }}
+          # a dir of its own, away from the runner's files in RUNNER_TEMP
+          path: ${{ runner.temp }}/artifact
 
       - name: Apply the run's changes
-        run: bash .github/scripts/backup-patch.sh apply ${{ matrix.testnet }} "$RUNNER_TEMP/backup.patch"
+        run: bash .github/scripts/backup-patch.sh apply ${{ matrix.testnet }} "$RUNNER_TEMP/artifact/backup.patch"
 
       - uses: stefanzweifel/git-auto-commit-action@b863ae1933cb653a53c021fe36dbb774e1fb9403 # v5.2.0
         with:
