@@ -5,7 +5,8 @@
 #   test1-test3);
 # - realm calls are the /vm.m_call messages only (a package enable or reject
 #   carries a pkg_path too);
-# - the faucet section counts every faucet transfer, the first one included;
+# - the faucet section counts every transfer from the faucet, the first one
+#   included, and lists recipients of 500000000ugnot or more;
 # - a chain dir narrows the files stats reads (staging's balances file holds
 #   `addr=coins` lines, not txs);
 # - plain std.Tx lines (test1) are read like {tx, metadata} ones;
@@ -50,7 +51,8 @@ EOF
 {"tx":{"msg":[{"@type":"/vm.m_reject_pkg","sender":"g1a","pkg_path":"gno.land/r/demo/rejected"}]},"metadata":{"timestamp":"6"}}
 {"tx":{"msg":[{"@type":"/bank.MsgSend","from_address":"g127jydsh6cms3lrtdenydxsckh23a8d6emqcvfa","to_address":"g1x","amount":"300000000ugnot"}]},"metadata":{"timestamp":"7"}}
 {"tx":{"msg":[{"@type":"/bank.MsgSend","from_address":"g127jydsh6cms3lrtdenydxsckh23a8d6emqcvfa","to_address":"g1x","amount":"300000000ugnot"}]},"metadata":{"timestamp":"8"}}
-{"tx":{"msg":[{"@type":"/bank.MsgSend","from_address":"g127jydsh6cms3lrtdenydxsckh23a8d6emqcvfa","to_address":"g1y","amount":"600000000ugnot"}]},"metadata":{"timestamp":"9"}}
+{"tx":{"msg":[{"@type":"/bank.MsgSend","from_address":"g127jydsh6cms3lrtdenydxsckh23a8d6emqcvfa","to_address":"g1y","amount":"500000000ugnot"}]},"metadata":{"timestamp":"9"}}
+{"tx":{"msg":[{"@type":"/bank.MsgSend","from_address":"g1a","to_address":"g1z","amount":"700000000ugnot"}]},"metadata":{"timestamp":"10"}}
 EOF
   printf 'g1a=1000ugnot\ng1b=2000ugnot\n' >"$work/$1/backup_balances.jsonl"
 }
@@ -79,10 +81,11 @@ got=$(listing "$readme" 'top realm calls')
 [ "$got" = '1 "gno.land/r/demo/lowercase"' ] && ok "top realm calls lists the calls, and no enable or reject" ||
   ko "top realm calls lists the calls, and no enable or reject: $(tr '\n' '|' <<<"$got")"
 got=$(listing "$readme" 'top faucet requesters')
-[ "$got" = "$(printf 'g1x 2 600000000\ng1y 1 600000000')" ] && ok "faucet requesters count every transfer" ||
-  ko "faucet requesters count every transfer: $(tr '\n' '|' <<<"$got")"
+[ "$got" = "$(printf 'g1x 2 600000000\ng1y 1 500000000')" ] &&
+  ok "faucet requesters count every transfer from the faucet, from 500000000ugnot up" ||
+  ko "faucet requesters count every transfer from the faucet, from 500000000ugnot up: $(tr '\n' '|' <<<"$got")"
 got=$(listing "$readme" TXs)
-[ "$got" = 9 ] && ok "the tx count covers only the tx files" ||
+[ "$got" = 10 ] && ok "the tx count covers only the tx files" ||
   ko "the tx count covers only the tx files: $got"
 
 # a new chain dir's first run fetches its first backup, then builds stats in the
