@@ -13,7 +13,7 @@ Bump that dependency to stay compatible with newer chain data.
 USAGE
   [flags]
 
-The Gno source code extractor service
+The Gno / TM2 source code extractor service
 
 FLAGS
   -file-type .jsonl        the file type for analysis, with a preceding period (ie .jsonl)
@@ -34,7 +34,11 @@ gno.land/>`, with its files and a `pkg_metadata.json` (creator and deposit).
 
 A path deployed more than once keeps every deploy, numbered in chain order:
 the first in `<path>`, the next ones in `<path>:1`, `<path>:2`, and so on.
-Source files are read by the block range in their names (`…_<from>-<to>.jsonl`),
-so the numbering follows the chain even where names are not zero-padded. The
-source files carry no tx results, so a numbered deploy may be one the chain
-rejected.
+Source files are read by the range in their names (`…_<from>-<to>.jsonl`:
+blocks, or lines for staging's chunks), so the numbering follows the chain
+even where names are not zero-padded. The source files carry no tx results, so
+a numbered deploy may be one the chain rejected.
+
+test2, test3 and test4 keep an older layout, `<path>:<block height>` for later
+deploys: this extractor cannot parse their backups, so their trees are not
+rebuilt.
