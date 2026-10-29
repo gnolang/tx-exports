@@ -11,6 +11,8 @@ import (
 	"log/slog"
 	"os"
 	"path/filepath"
+	"regexp"
+	"sort"
 	"strconv"
 	"strings"
 
@@ -31,6 +33,7 @@ var (
 	errInvalidSourceDir   = errors.New("invalid source directory")
 	errInvalidOutputDir   = errors.New("invalid output directory")
 	errNoSourceFilesFound = errors.New("no source files found, exiting")
+	errOutputDirNotEmpty  = errors.New("output directory is not empty")
 )
 
 // Define extractor config
@@ -138,23 +141,25 @@ func execExtract(ctx context.Context, cfg *extractorCfg) error {
 	if len(sourceFiles) == 0 {
 		return errNoSourceFilesFound
 	}
+	sortByBlockRange(sourceFiles)
+
+	if err := checkOutputDir(cfg.outputDir); err != nil {
+		return err
+	}
 
 	var (
 		unwrapFn = func(data gnoland.TxWithMetadata) []std.Msg {
 			return data.Tx.Msgs
 		}
 
-		heightFn = func(_ gnoland.TxWithMetadata) uint64 {
-			return 0
-		}
-
 		unwrapLegacyFn = func(tx std.Tx) []std.Msg {
 			return tx.Msgs
 		}
 
-		heightLegacyFn = func(_ std.Tx) uint64 {
-			return 0
-		}
+		// deploys counts the deploys of each package dir so far: the first
+		// deploy of a path is extracted to its dir, later ones (failed or
+		// not: the source files carry no tx results) to <dir>:1, <dir>:2, …
+		deploys = make(map[string]int)
 	)
 
 	for _, sourceFile := range sourceFiles {
@@ -171,17 +176,9 @@ func execExtract(ctx context.Context, cfg *extractorCfg) error {
 			)
 
 			if !cfg.legacyMode {
-				msgs, processErr = extractAddMessages(
-					sourceFile,
-					unwrapFn,
-					heightFn,
-				)
+				msgs, processErr = extractAddMessages(sourceFile, unwrapFn)
 			} else {
-				msgs, processErr = extractAddMessages(
-					sourceFile,
-					unwrapLegacyFn,
-					heightLegacyFn,
-				)
+				msgs, processErr = extractAddMessages(sourceFile, unwrapLegacyFn)
 			}
 
 			if processErr != nil {
@@ -192,10 +189,10 @@ func execExtract(ctx context.Context, cfg *extractorCfg) error {
 			for _, msg := range msgs {
 				outputDir := filepath.Join(cfg.outputDir, strings.TrimLeft(msg.Package.Path, "gno.land/"))
 
-				if !cfg.legacyMode {
-					if st, err := os.Stat(outputDir); err == nil && st.IsDir() {
-						outputDir += ":" + strconv.FormatUint(msg.Height, 10)
-					}
+				n := deploys[outputDir]
+				deploys[outputDir] = n + 1
+				if n > 0 {
+					outputDir += ":" + strconv.Itoa(n)
 				}
 
 				// Write dir before writing files
@@ -251,17 +248,64 @@ func writePackageMetadata(metadata Metadata, outputDir string) error {
 	return nil
 }
 
-// AddPackage contains a vm.MsgAddPackage, together with the block height where it appeared.
+// AddPackage contains a vm.MsgAddPackage.
 type AddPackage struct {
 	vm.MsgAddPackage
-	Height uint64
+}
+
+// checkOutputDir refuses an output directory that exists and is not empty:
+// extraction never mixes with an earlier tree, so each run's numbering of
+// repeated deploys stands on its own.
+func checkOutputDir(dir string) error {
+	entries, err := os.ReadDir(dir)
+	if errors.Is(err, os.ErrNotExist) {
+		return nil
+	}
+	if err != nil {
+		return fmt.Errorf("unable to read output directory, %w", err)
+	}
+	if len(entries) > 0 {
+		return fmt.Errorf("%w: %s", errOutputDirNotEmpty, dir)
+	}
+	return nil
+}
+
+// blockRange matches the block range at the end of a source file name
+// (backup_<from>-<to>.jsonl).
+var blockRange = regexp.MustCompile(`(\d+)-(\d+)\.[^./]+$`)
+
+// sortByBlockRange orders source files by the first block of the range in
+// their name, so packages are extracted in chain order: staging's ranges are
+// not zero-padded, so a lexical order would not be the chain order. Names
+// without a range sort lexically, after those with one.
+func sortByBlockRange(paths []string) {
+	from := func(path string) (uint64, bool) {
+		m := blockRange.FindStringSubmatch(filepath.Base(path))
+		if m == nil {
+			return 0, false
+		}
+		n, err := strconv.ParseUint(m[1], 10, 64)
+		return n, err == nil
+	}
+
+	sort.SliceStable(paths, func(i, j int) bool {
+		fi, oki := from(paths[i])
+		fj, okj := from(paths[j])
+		switch {
+		case oki && okj && fi != fj:
+			return fi < fj
+		case oki != okj:
+			return oki
+		default:
+			return paths[i] < paths[j]
+		}
+	})
 }
 
 // extractAddMessages extracts the AddPackage messages
 func extractAddMessages[T std.Tx | gnoland.TxWithMetadata](
 	filePath string,
 	unwrapFn func(T) []std.Msg,
-	heightFn func(T) uint64,
 ) ([]AddPackage, error) {
 	file, err := os.Open(filePath)
 	if err != nil {
@@ -336,10 +380,7 @@ func extractAddMessages[T std.Tx | gnoland.TxWithMetadata](
 				return nil, errors.New("MsgAddPackage is nil")
 			}
 
-			msgArr = append(msgArr, AddPackage{
-				MsgAddPackage: msgAddPkg,
-				Height:        heightFn(txData),
-			})
+			msgArr = append(msgArr, AddPackage{MsgAddPackage: msgAddPkg})
 		}
 	}
 

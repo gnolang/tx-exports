@@ -6,14 +6,6 @@ import (
 	crand "crypto/rand"
 	"encoding/base64"
 	"encoding/json"
-	"github.com/gnolang/gno/gno.land/pkg/gnoland"
-	"github.com/gnolang/gno/gno.land/pkg/sdk/vm"
-	"github.com/gnolang/gno/tm2/pkg/amino"
-	"github.com/gnolang/gno/tm2/pkg/crypto"
-	"github.com/gnolang/gno/tm2/pkg/sdk/bank"
-	"github.com/gnolang/gno/tm2/pkg/std"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 	"math/rand"
 	"os"
 	"path/filepath"
@@ -22,6 +14,15 @@ import (
 	"strings"
 	"testing"
 	"time"
+
+	"github.com/gnolang/gno/gno.land/pkg/gnoland"
+	"github.com/gnolang/gno/gno.land/pkg/sdk/vm"
+	"github.com/gnolang/gno/tm2/pkg/amino"
+	"github.com/gnolang/gno/tm2/pkg/crypto"
+	"github.com/gnolang/gno/tm2/pkg/sdk/bank"
+	"github.com/gnolang/gno/tm2/pkg/std"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 const sourceFileType = ".jsonl"
@@ -99,7 +100,7 @@ func TestValidFlow_Dir(t *testing.T) {
 	t.Cleanup(removeDir(t, sourceDir))
 
 	// Set correct config
-	var cfg = &extractorCfg{
+	cfg := &extractorCfg{
 		fileType:   sourceFileType,
 		sourcePath: sourceDir,
 		outputDir:  outputDir,
@@ -167,7 +168,7 @@ func TestValidFlow_File(t *testing.T) {
 	t.Cleanup(removeDir(t, sourceDir))
 
 	// Set correct config
-	var cfg = &extractorCfg{
+	cfg := &extractorCfg{
 		fileType:   sourceFileType,
 		sourcePath: sourceDir,
 		outputDir:  outputDir,
@@ -281,11 +282,10 @@ func TestExtractAddMessages(t *testing.T) {
 	sourceFiles := generateSourceFiles(t, tempDir, mockMsgs, 20)
 
 	unwrapFn := func(data gnoland.TxWithMetadata) []std.Msg { return data.Tx.Msgs }
-	heightFn := func(_ gnoland.TxWithMetadata) uint64 { return 0 }
 
 	var results []vm.MsgAddPackage
 	for _, sf := range sourceFiles {
-		res, err := extractAddMessages(sf, unwrapFn, heightFn)
+		res, err := extractAddMessages(sf, unwrapFn)
 		require.NoError(t, err)
 		for _, r := range res {
 			results = append(results, r.MsgAddPackage)
@@ -343,6 +343,7 @@ func TestWritePackageMetadata(t *testing.T) {
 		require.Equal(t, md, unmarshalledMetadata)
 	}
 }
+
 func TestWritePackageFiles(t *testing.T) {
 	t.Parallel()
 
@@ -373,7 +374,141 @@ func TestWritePackageFiles(t *testing.T) {
 	}
 }
 
+func TestExtract_NumbersRepeatedDeploysInChainOrder(t *testing.T) {
+	t.Parallel()
+
+	sourceDir, outputDir := t.TempDir(), t.TempDir()
+	writeSourceFile(t, sourceDir, "backup_0000001-0000010.jsonl",
+		addPkgTx(t, "gno.land/r/demo/x", "first"),
+		addPkgTx(t, "gno.land/r/demo/y", "only"),
+	)
+	writeSourceFile(t, sourceDir, "backup_0000011-0000020.jsonl",
+		addPkgTx(t, "gno.land/r/demo/x", "second"),
+		addPkgTx(t, "gno.land/r/demo/x", "third"),
+	)
+
+	require.NoError(t, execExtract(context.Background(), &extractorCfg{
+		fileType:   sourceFileType,
+		sourcePath: sourceDir,
+		outputDir:  outputDir,
+	}))
+
+	assert.Equal(t, []string{"x", "x:1", "x:2", "y"}, dirNames(t, filepath.Join(outputDir, "r", "demo")))
+	assert.Equal(t, "first", readPkgBody(t, outputDir, "r/demo/x"))
+	assert.Equal(t, "second", readPkgBody(t, outputDir, "r/demo/x:1"))
+	assert.Equal(t, "third", readPkgBody(t, outputDir, "r/demo/x:2"))
+	assert.Equal(t, "only", readPkgBody(t, outputDir, "r/demo/y"))
+}
+
+func TestExtract_ReadsSourceFilesInBlockOrder(t *testing.T) {
+	t.Parallel()
+
+	// staging's chunk names are not zero-padded: lexically, 10001-11000
+	// sorts before 1001-2000
+	sourceDir, outputDir := t.TempDir(), t.TempDir()
+	writeSourceFile(t, sourceDir, "backup_staging_txs_10001-11000.jsonl", addPkgTx(t, "gno.land/r/demo/x", "third"))
+	writeSourceFile(t, sourceDir, "backup_staging_txs_1001-2000.jsonl", addPkgTx(t, "gno.land/r/demo/x", "second"))
+	writeSourceFile(t, sourceDir, "backup_staging_txs_1-1000.jsonl", addPkgTx(t, "gno.land/r/demo/x", "first"))
+
+	require.NoError(t, execExtract(context.Background(), &extractorCfg{
+		fileType:   sourceFileType,
+		sourcePath: sourceDir,
+		outputDir:  outputDir,
+	}))
+
+	assert.Equal(t, "first", readPkgBody(t, outputDir, "r/demo/x"))
+	assert.Equal(t, "second", readPkgBody(t, outputDir, "r/demo/x:1"))
+	assert.Equal(t, "third", readPkgBody(t, outputDir, "r/demo/x:2"))
+}
+
+func TestExtract_NumbersRepeatedDeploysInLegacyMode(t *testing.T) {
+	t.Parallel()
+
+	sourceDir, outputDir := t.TempDir(), t.TempDir()
+	file, err := os.Create(filepath.Join(sourceDir, "txexport-aa.log"))
+	require.NoError(t, err)
+	for _, body := range []string{"first", "second"} {
+		raw, err := amino.MarshalJSON(addPkgTx(t, "gno.land/r/demo/x", body).Tx)
+		require.NoError(t, err)
+		_, err = file.Write(append(raw, '\n'))
+		require.NoError(t, err)
+	}
+	require.NoError(t, file.Close())
+
+	require.NoError(t, execExtract(context.Background(), &extractorCfg{
+		fileType:   ".log",
+		sourcePath: sourceDir,
+		outputDir:  outputDir,
+		legacyMode: true,
+	}))
+
+	assert.Equal(t, []string{"x", "x:1"}, dirNames(t, filepath.Join(outputDir, "r", "demo")))
+	assert.Equal(t, "first", readPkgBody(t, outputDir, "r/demo/x"))
+	assert.Equal(t, "second", readPkgBody(t, outputDir, "r/demo/x:1"))
+}
+
+func TestExtract_RefusesANonEmptyOutputDir(t *testing.T) {
+	t.Parallel()
+
+	sourceDir, outputDir := t.TempDir(), t.TempDir()
+	writeSourceFile(t, sourceDir, "backup_0000001-0000010.jsonl", addPkgTx(t, "gno.land/r/demo/x", "new"))
+	require.NoError(t, os.WriteFile(filepath.Join(outputDir, "keep"), []byte("old"), 0o644))
+
+	err := execExtract(context.Background(), &extractorCfg{
+		fileType:   sourceFileType,
+		sourcePath: sourceDir,
+		outputDir:  outputDir,
+	})
+
+	assert.ErrorIs(t, err, errOutputDirNotEmpty)
+	assert.Equal(t, []string{"keep"}, dirNames(t, outputDir))
+}
+
 // Helpers
+func addPkgTx(t *testing.T, path, body string) gnoland.TxWithMetadata {
+	t.Helper()
+
+	return gnoland.TxWithMetadata{Tx: std.Tx{Msgs: []std.Msg{vm.MsgAddPackage{
+		Creator: addressFromString(t, "g1jg8mtutu9khhfwc4nxmuhcpftf0pajdhfvsqf5"),
+		Package: &std.MemPackage{
+			Name:  "x",
+			Path:  path,
+			Files: []*std.MemFile{{Name: "x.gno", Body: body}},
+		},
+	}}}}
+}
+
+func writeSourceFile(t *testing.T, dir, name string, txs ...gnoland.TxWithMetadata) {
+	t.Helper()
+
+	file, err := os.Create(filepath.Join(dir, name))
+	require.NoError(t, err)
+	for _, tx := range txs {
+		require.NoError(t, writeTxToFile(t, tx, file))
+	}
+	require.NoError(t, file.Close())
+}
+
+func readPkgBody(t *testing.T, outputDir, pkgDir string) string {
+	t.Helper()
+
+	body, err := os.ReadFile(filepath.Join(outputDir, filepath.FromSlash(pkgDir), "x.gno"))
+	require.NoError(t, err)
+	return string(body)
+}
+
+func dirNames(t *testing.T, dir string) []string {
+	t.Helper()
+
+	entries, err := os.ReadDir(dir)
+	require.NoError(t, err)
+	names := make([]string, 0, len(entries))
+	for _, e := range entries {
+		names = append(names, e.Name())
+	}
+	return names
+}
+
 func generateSourceFiles(t *testing.T, dir string, mockMsgs []std.Msg, numSourceFiles int) []string {
 	t.Helper()
 
