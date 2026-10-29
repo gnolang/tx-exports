@@ -22,6 +22,9 @@ FLAGS
   -source-path string      the source file or folder containing transaction data
 ```
 
+A `-source-path` dir is read for the files of `-file-type` directly in it, not
+in its subdirs, which in a chain dir hold the `extracted/` tree.
+
 `-output-dir` must be absent or empty: the extractor never writes into an
 earlier tree. In a chain dir, `make extractor` builds a fresh tree and swaps it
 in for `extracted/` only when the run succeeds and writes at least one package;

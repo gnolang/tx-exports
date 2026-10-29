@@ -667,6 +667,26 @@ func TestExtract_SkipsPackagesThatLeaveTheirDir(t *testing.T) {
 	assert.Equal(t, "second", readPkgBody(t, outputDir, "r/demo/x:1"))
 }
 
+func TestExtract_ReadsOnlyTheSourceDirsOwnFiles(t *testing.T) {
+	t.Parallel()
+
+	// a chain dir holds its extracted/ tree: a package file there that looks
+	// like a source file must not be read as one
+	sourceDir, outputDir := t.TempDir(), t.TempDir()
+	writeSourceFile(t, sourceDir, "backup_0000001-0000010.jsonl", addPkgTx(t, "gno.land/r/demo/x", "x"))
+	nested := filepath.Join(sourceDir, "extracted", "r", "demo", "x")
+	require.NoError(t, os.MkdirAll(nested, 0o755))
+	writeSourceFile(t, nested, "fake.jsonl", addPkgTx(t, "gno.land/r/demo/fake", "fake"))
+
+	require.NoError(t, execExtract(context.Background(), &extractorCfg{
+		fileType:   sourceFileType,
+		sourcePath: sourceDir,
+		outputDir:  outputDir,
+	}))
+
+	assert.Equal(t, []string{"x"}, dirNames(t, filepath.Join(outputDir, "r", "demo")))
+}
+
 func TestSortByBlockRange(t *testing.T) {
 	t.Parallel()
 

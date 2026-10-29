@@ -408,34 +408,20 @@ func extractAddMessages[T std.Tx | gnoland.TxWithMetadata](
 	return msgArr, nil
 }
 
-// findFilePaths gathers the file paths for specific file types
-func findFilePaths(startPath string, fileType string) ([]string, error) {
-	filePaths := make([]string, 0)
-
-	walkFn := func(path string, info os.FileInfo, err error) error {
-		if err != nil {
-			return fmt.Errorf("error accessing file: %w", err)
-		}
-
-		// Check if the file is a dir
-		if info.IsDir() {
-			return nil
-		}
-
-		// Check if the file type matches
-		if !strings.HasSuffix(info.Name(), fileType) {
-			return nil
-		}
-
-		// File is not a directory, and is of the type
-		filePaths = append(filePaths, path)
-
-		return nil
+// findFilePaths lists the files of a type directly in a dir. Its subdirs are
+// skipped: a chain dir's extracted/ tree holds package files, not source files.
+func findFilePaths(dir string, fileType string) ([]string, error) {
+	entries, err := os.ReadDir(dir)
+	if err != nil {
+		return nil, fmt.Errorf("unable to read directory, %w", err)
 	}
 
-	// Walk the directory root recursively
-	if walkErr := filepath.Walk(startPath, walkFn); walkErr != nil {
-		return nil, fmt.Errorf("unable to walk directory, %w", walkErr)
+	filePaths := make([]string, 0)
+	for _, entry := range entries {
+		if entry.IsDir() || !strings.HasSuffix(entry.Name(), fileType) {
+			continue
+		}
+		filePaths = append(filePaths, filepath.Join(dir, entry.Name()))
 	}
 
 	return filePaths, nil
