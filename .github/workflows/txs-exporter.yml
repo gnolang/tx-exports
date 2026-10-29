@@ -8,6 +8,14 @@ on:
   schedule:
     - cron: "0 */4 * * *"
 
+permissions:
+  contents: read
+
+# runs queue instead of overlapping: each one commits and pushes backups
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
 jobs:
   backup:
     name: "backup ${{ matrix.testnet }}"
@@ -26,6 +34,7 @@ jobs:
           - onyx.gno.land
 
     steps:
+      # credentials stay persisted: git-auto-commit-action pushes with them
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
       - uses: actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff # v5.6.0
         with:
