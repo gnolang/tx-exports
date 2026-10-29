@@ -9,11 +9,6 @@ Bump that dependency to stay compatible with newer chain data.
 
 ## Running the extractor
 
-The extractor takes in three arguments:
-- the filetype of the archive files,
-- output directory for the extracted packages,
-- the root directory where the archive files are located.
-
 ```
 USAGE
   [flags]
@@ -21,8 +16,24 @@ USAGE
 The Gno source code extractor service
 
 FLAGS
-  -file-type  .jsonl       the file type for analysis, with a preceding period (ie .log)
+  -file-type .jsonl        the file type for analysis, with a preceding period (ie .jsonl)
+  -legacy-mode=false       flag indicating if the legacy tx sheet mode should be used
   -output-dir ./extracted  the output directory for the extracted Gno source code
-  -source-dir .            the root folder containing transaction data
+  -source-path string      the source file or folder containing transaction data
 ```
 
+`-output-dir` must be absent or empty: the extractor never writes into an
+earlier tree. In a chain dir, `make extractor` builds a fresh tree and swaps it
+in for `extracted/` once the run succeeds.
+
+## Output layout
+
+Each `/vm.m_addpkg` message is extracted to `<output-dir>/<path without
+gno.land/>`, with its files and a `pkg_metadata.json` (creator and deposit).
+
+A path deployed more than once keeps every deploy, numbered in chain order:
+the first in `<path>`, the next ones in `<path>:1`, `<path>:2`, and so on.
+Source files are read by the block range in their names (`…_<from>-<to>.jsonl`),
+so the numbering follows the chain even where names are not zero-padded. The
+source files carry no tx results, so a numbered deploy may be one the chain
+rejected.
