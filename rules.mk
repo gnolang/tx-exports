@@ -112,13 +112,14 @@ BACKUP_FILES ?= backup_*.jsonl
 #
 # bash with pipefail, so a failing jq or cat fails the run instead of writing
 # an empty section; and a BACKUP_FILES that matches nothing stops it before
-# README.md is touched. That check lists the files with ls: make before 4.4
+# README.md is touched, as does an empty one (ls alone would list the dir, and
+# cat alone read stdin). That check lists the files with ls: make before 4.4
 # caches the dir at startup, so $(wildcard) misses a backup a fetch wrote
 # earlier in the same run, as on a new chain dir's first run.
 .PHONY: stats
 stats: SHELL := /usr/bin/env bash -o pipefail
 stats:
-	$(if $(shell ls $(BACKUP_FILES) 2>/dev/null),,$(error $(SHORTNAME): no file matches BACKUP_FILES=$(BACKUP_FILES)))
+	$(if $(and $(strip $(BACKUP_FILES)),$(shell ls $(BACKUP_FILES) 2>/dev/null)),,$(error $(SHORTNAME): no file matches BACKUP_FILES=$(BACKUP_FILES)))
 	echo "# $(REMOTE)" > README.md
 	echo >> README.md
 

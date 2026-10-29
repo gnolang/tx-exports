@@ -10,7 +10,8 @@
 #   `addr=coins` lines, not txs);
 # - plain std.Tx lines (test1) are read like {tx, metadata} ones;
 # - a backup written earlier in the same make run is read;
-# - a corrupt tx line, or a BACKUP_FILES that matches nothing, fails the run.
+# - a corrupt tx line, or a BACKUP_FILES that matches nothing or is empty, fails
+#   the run.
 # Usage: tests/stats.sh   (needs GNU make, bash, jq)
 set -uo pipefail
 root=$(cd -- "$(dirname "$0")/.." >/dev/null && pwd) || exit 1
@@ -133,5 +134,16 @@ elif [ -e "$work/nomatch/README.md" ]; then
   ko "a BACKUP_FILES matching nothing fails stats before writing README.md"
 else
   ok "a BACKUP_FILES matching nothing fails stats before writing README.md"
+fi
+
+# an empty BACKUP_FILES matches nothing too (`ls` alone would list the dir, and
+# `cat` alone would read stdin)
+chain empty 'backup_txs_*.jsonl'
+if mk "$work/empty" stats BACKUP_FILES= </dev/null >/dev/null 2>&1; then
+  ko "an empty BACKUP_FILES fails stats: exited 0"
+elif [ -e "$work/empty/README.md" ]; then
+  ko "an empty BACKUP_FILES fails stats before writing README.md"
+else
+  ok "an empty BACKUP_FILES fails stats before writing README.md"
 fi
 exit $fail
