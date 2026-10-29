@@ -36,7 +36,7 @@ make loop         # Continuous loop: fetch → stats → commit → push (for CI
 tx-archive lives in gnolang/gno at `contribs/tx-archive`, whose `go.mod` replaces gno with `../..`, so it only builds from a gno checkout (no remote `go run …@version`). `make tx-archive-ensure` clones gno at the dir's `GNO_REF` into `~/.cache/tx-exports/gno-<GNO_REF, / as ->`; run it from there:
 
 ```sh
-cd ~/.cache/tx-exports/gno-v1.6.0-rc.1/contribs/tx-archive   # onyx's GNO_REF
+cd ~/.cache/tx-exports/gno-<GNO_REF>/contribs/tx-archive   # the chain dir's GNO_REF
 go run ./cmd backup --remote <RPC_URL> --from-block <N> --to-block <M> --output-path backup_N-M.jsonl
 ```
 
