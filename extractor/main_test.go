@@ -693,6 +693,35 @@ func TestExtract_SkipsPackagesWithNamesItCannotWrite(t *testing.T) {
 	assert.Equal(t, 6, strings.Count(logs.String(), "skipping a package"))
 }
 
+func TestExtract_SkipsPackagesWithNamesGitRefuses(t *testing.T) {
+	// not parallel: it captures the default logger
+	logs := captureLogs(t)
+
+	// names git refuses to add (.git in any case or spelling, 8.3 short names,
+	// a backslash form) or that hide files from it (.gitignore): the exporter's
+	// commit would fail, or drop packages
+	sourceDir, outputDir := t.TempDir(), t.TempDir()
+	writeSourceFile(t, sourceDir, "backup_0000001-0000010.jsonl",
+		addPkgTx(t, "gno.land/r/demo/.GIT", "bad"),
+		addPkgTx(t, "gno.land/r/demo/.git/x", "bad"),
+		addPkgFileTx(t, "gno.land/r/demo/a", "git~1", "bad"),
+		addPkgFileTx(t, "gno.land/r/demo/b", ".git.", "bad"),
+		addPkgFileTx(t, "gno.land/r/demo/c", `a\.git`, "bad"),
+		addPkgFileTx(t, "gno.land/r/demo/d", ".gitignore", "*"),
+		addPkgFileTx(t, "gno.land/r/demo/e", ".git", "bad"),
+		addPkgTx(t, "gno.land/r/demo/x", "x"),
+	)
+
+	require.NoError(t, execExtract(context.Background(), &extractorCfg{
+		fileType:   sourceFileType,
+		sourcePath: sourceDir,
+		outputDir:  outputDir,
+	}))
+
+	assert.Equal(t, []string{"x"}, dirNames(t, filepath.Join(outputDir, "r", "demo")))
+	assert.Equal(t, 7, strings.Count(logs.String(), "skipping a package"))
+}
+
 func TestExtract_MovesADeployPastWhatAnEarlierOneWrote(t *testing.T) {
 	t.Parallel()
 

@@ -228,28 +228,36 @@ func execExtract(ctx context.Context, cfg *extractorCfg) error {
 const maxNameLen = 255
 
 // writable reports whether a package's path and file names can be written as
-// its dir and files. They come from the chain, and the source files keep the
-// txs it rejected, so a name the chain refuses must neither escape nor fail the
-// run. The package dir must be a local path below the output dir; each file
-// name a plain name inside it; neither may hold a NUL, the ':' of the numbered
-// dirs, or a name longer than the filesystem takes; and no file may be named
-// like the metadata file.
+// its dir and files, and committed. They come from the chain, and the source
+// files keep the txs it rejected, so a name the chain refuses must neither
+// escape nor fail the run nor the exporter's commit. The package dir must be a
+// local path below the output dir, and each file name a plain name inside it.
+// No path component or file name may start with '.' (., .., and the .git and
+// .gitignore git refuses or obeys), hold '~' or '\' (git's 8.3 and NTFS forms
+// of .git), a NUL, or the ':' of the numbered dirs, or be longer than the
+// filesystem takes; and no file may be named like the metadata file.
 func writable(pkgDir string, files []*std.MemFile) bool {
-	if !filepath.IsLocal(pkgDir) || filepath.Clean(pkgDir) == "." || strings.ContainsAny(pkgDir, ":\x00") {
+	if !filepath.IsLocal(pkgDir) {
 		return false
 	}
 	for _, part := range strings.Split(pkgDir, "/") {
-		if len(part) > maxNameLen {
+		if !writableName(part) {
 			return false
 		}
 	}
 	for _, file := range files {
-		if file == nil || file.Name != filepath.Base(file.Name) || !filepath.IsLocal(file.Name) || file.Name == "." ||
-			strings.ContainsAny(file.Name, ":\x00") || len(file.Name) > maxNameLen || file.Name == packageMetadataFile {
+		if file == nil || file.Name != filepath.Base(file.Name) || !writableName(file.Name) ||
+			file.Name == packageMetadataFile {
 			return false
 		}
 	}
 	return true
+}
+
+// writableName reports whether name passes writable's rules for a path
+// component or file name.
+func writableName(name string) bool {
+	return !strings.HasPrefix(name, ".") && !strings.ContainsAny(name, "~\\:\x00") && len(name) <= maxNameLen
 }
 
 // placeDeploy picks the number of a package's next deploy: n, or the first one
