@@ -131,6 +131,7 @@ func TestValidFlow_Dir(t *testing.T) {
 
 		// Compare metadata
 		expectedMetadata, err := json.Marshal(metadataFromMsg(msg))
+		require.NoError(t, err)
 		assert.Equal(t, expectedMetadata, retrievedMetadata)
 
 		// Close metadata file
@@ -199,6 +200,7 @@ func TestValidFlow_File(t *testing.T) {
 
 		// Compare metadata
 		expectedMetadata, err := json.Marshal(metadataFromMsg(msg))
+		require.NoError(t, err)
 		assert.Equal(t, expectedMetadata, retrievedMetadata)
 
 		// Close metadata file
