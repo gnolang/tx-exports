@@ -73,8 +73,9 @@ jobs:
           bash tests/chain-id-guard.sh onyx.gno.land onyx-1
 
       # stats on scratch chain dirs: deploys of both key casings and plain std.Tx
-      # lines, calls only, every faucet transfer, a backup fetched in the same
-      # run; non-tx files excluded; a corrupt line or no matching file fails it.
+      # lines, calls only, every faucet transfer, a backup written earlier in the
+      # same make run; non-tx files excluded; a corrupt line or no matching file
+      # fails it.
       - name: rules.mk stats
         run: bash tests/stats.sh
 
