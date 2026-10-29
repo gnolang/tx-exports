@@ -615,6 +615,58 @@ func TestExtract_TrimsOnlyTheGnoLandPrefix(t *testing.T) {
 	assert.Equal(t, "y", readPkgBody(t, outputDir, "github.com/gnolang/y"))
 }
 
+func TestExtract_SkipsPackagesThatLeaveTheirDir(t *testing.T) {
+	t.Parallel()
+
+	// package paths and file names come from the chain, and the backups keep
+	// the txs it rejected: none may write outside its package dir, or into a
+	// numbered dir (':')
+	withFile := func(path, name string) string {
+		tx := addPkgTx(t, path, "bad")
+		tx.Tx.Msgs[0].(vm.MsgAddPackage).Package.Files[0].Name = name
+		return txJSON(t, tx)
+	}
+	sourceDir, root := t.TempDir(), t.TempDir()
+	outputDir := filepath.Join(root, "chain", "extracted")
+	writeLines(t, sourceDir, "backup_0000001-0000010.jsonl",
+		txJSON(t, addPkgTx(t, "gno.land/r/demo/x", "first")),
+		txJSON(t, addPkgTx(t, "gno.land/r/../../../../escaped", "bad")),
+		txJSON(t, addPkgTx(t, "gno.land/.", "bad")),
+		txJSON(t, addPkgTx(t, "gno.land//abs", "bad")),
+		withFile("gno.land/r/demo/y", "../../../../escaped.gno"),
+		withFile("gno.land/r/demo/y", "sub/x.gno"),
+		withFile("gno.land/r/demo/y", ".."),
+		withFile("gno.land/r/demo/y", "."),
+		mustReplace(t, txJSON(t, addPkgTx(t, "gno.land/r/demo/y", "bad")),
+			`"files":[{"name":"x.gno","body":"bad"}]`, `"files":[null]`),
+		txJSON(t, addPkgTx(t, "gno.land/r/demo/x", "second")),
+		// after x's second deploy, so writing it would overwrite r/demo/x:1
+		txJSON(t, addPkgTx(t, "gno.land/r/demo/x:1", "bad")),
+	)
+
+	require.NoError(t, execExtract(context.Background(), &extractorCfg{
+		fileType:   sourceFileType,
+		sourcePath: sourceDir,
+		outputDir:  outputDir,
+	}))
+
+	var written []string
+	require.NoError(t, filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
+		if err == nil && !info.IsDir() {
+			rel, _ := filepath.Rel(root, path)
+			written = append(written, filepath.ToSlash(rel))
+		}
+		return err
+	}))
+	assert.Equal(t, []string{
+		"chain/extracted/r/demo/x/pkg_metadata.json",
+		"chain/extracted/r/demo/x/x.gno",
+		"chain/extracted/r/demo/x:1/pkg_metadata.json",
+		"chain/extracted/r/demo/x:1/x.gno",
+	}, written)
+	assert.Equal(t, "second", readPkgBody(t, outputDir, "r/demo/x:1"))
+}
+
 func TestSortByBlockRange(t *testing.T) {
 	t.Parallel()
 

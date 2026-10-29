@@ -189,7 +189,12 @@ func execExtract(ctx context.Context, cfg *extractorCfg) error {
 
 			// Process messages
 			for _, msg := range msgs {
-				outputDir := filepath.Join(cfg.outputDir, strings.TrimPrefix(msg.Package.Path, "gno.land/"))
+				pkgDir := strings.TrimPrefix(msg.Package.Path, "gno.land/")
+				if !confined(pkgDir, msg.Package.Files) {
+					slog.Warn("skipping a package whose path or file names leave its dir", "path", msg.Package.Path)
+					continue
+				}
+				outputDir := filepath.Join(cfg.outputDir, pkgDir)
 
 				n := deploys[outputDir]
 				deploys[outputDir] = n + 1
@@ -216,6 +221,22 @@ func execExtract(ctx context.Context, cfg *extractorCfg) error {
 	}
 
 	return nil
+}
+
+// confined reports whether a package is written inside its own dir. Its path
+// and file names come from the chain, and the source files keep the txs it
+// rejected: the package dir must be a local path below the output dir, without
+// the ':' of the numbered dirs, and each file name a plain name inside it.
+func confined(pkgDir string, files []*std.MemFile) bool {
+	if !filepath.IsLocal(pkgDir) || filepath.Clean(pkgDir) == "." || strings.Contains(pkgDir, ":") {
+		return false
+	}
+	for _, file := range files {
+		if file == nil || file.Name != filepath.Base(file.Name) || !filepath.IsLocal(file.Name) || file.Name == "." {
+			return false
+		}
+	}
+	return true
 }
 
 // writePackageFiles writes all files from a single package to the output directory
