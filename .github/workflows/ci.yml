@@ -68,6 +68,11 @@ jobs:
       - name: restore help looks sane
         run: grep -q -- '-input-path' /tmp/restore-help.out
 
+      # The exporters' patch from their export job to their commit job holds only
+      # the files a run writes.
+      - name: exporter backup patch
+        run: bash tests/backup-patch.sh
+
       # Exercise `make fetch` (via a chain Makefile that includes rules.mk)
       # to the extent possible without a live RPC: we only invoke the
       # tx-archive-ensure target, which clones gno. That validates the
