@@ -1,0 +1,10 @@
+module = "gno.land/p/g1magld5ptgzaktqcexxq0pgq5lmdf0kz6re8hlv/txlink/v0"
+gno = "0.9"
+
+[addpkg]
+  creator = "g1manfred47kzduec920z88wfr64ylksmdcedlf5"
+
+[source]
+  repository = "https://github.com/moul/gno-contracts"
+  path = "p/moul/txlink"
+  revision = "bf382ccb6927f353d16cf26d37dee1d68b58ceda"

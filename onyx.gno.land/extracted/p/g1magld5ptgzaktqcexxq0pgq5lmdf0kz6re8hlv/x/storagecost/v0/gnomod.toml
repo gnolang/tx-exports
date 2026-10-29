@@ -1,0 +1,7 @@
+module = "gno.land/p/g1magld5ptgzaktqcexxq0pgq5lmdf0kz6re8hlv/x/storagecost/v0"
+gno = "0.9"
+
+[source]
+  repository = "https://github.com/moul/gno-contracts"
+  path = "p/moul/x/storagecost"
+  revision = "96f8aef268ca00444bde83349a6d95c021cb71bf"
