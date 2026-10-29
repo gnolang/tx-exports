@@ -4,7 +4,8 @@
 #   interrupted run's build dir are dropped, repeated deploys are numbered
 #   (x, x:1), and a second run gives the same tree;
 # - a run that fails, or that writes no package, leaves the previous extracted/
-#   untouched.
+#   untouched;
+# - a chain dir's EXTRACTOR_FLAGS reach the extractor.
 # Usage: tests/extractor.sh   (needs GNU make, go, jq)
 set -uo pipefail
 root=$(cd -- "$(dirname "$0")/.." >/dev/null && pwd) || exit 1
@@ -24,12 +25,14 @@ cp "$root/rules.mk" "$work/" || exit 1
 # chain dirs run the extractor from ../extractor
 ln -s "$root/extractor" "$work/extractor" || exit 1
 
-# chain <name>: a scratch chain dir whose Makefile includes rules.mk
+# chain <name> [<make line>]: a scratch chain dir whose Makefile includes
+# rules.mk
 chain() {
   mkdir "$work/$1" || return 1
-  cat >"$work/$1/Makefile" <<'EOF'
+  cat >"$work/$1/Makefile" <<EOF
 REMOTE = "https://rpc.example.invalid"
 SHORTNAME = example
+${2-}
 -include ../rules.mk
 EOF
 }
@@ -124,5 +127,18 @@ if diff -r "$work/nopkg-before" "$work/nopkg/extracted" >/dev/null 2>&1; then
   ok "a run that writes no package leaves the previous extracted/ untouched"
 else
   ko "a run that writes no package leaves the previous extracted/ untouched"
+fi
+# test4's lines predate {tx, metadata}: its chain dir passes -legacy-mode
+chain legacy 'EXTRACTOR_FLAGS = -legacy-mode' || exit 1
+printf '%s\n' '{"tx":{"msg":[{"@type":"/vm.m_addpkg","creator":"g1jg8mtutu9khhfwc4nxmuhcpftf0pajdhfvsqf5",'\
+'"deposit":"","package":{"name":"old","path":"gno.land/r/demo/old","files":[{"name":"x.gno","body":"old"}]}}],'\
+'"fee":{"gas_wanted":"1","gas_fee":"1ugnot"},"signatures":null,"memo":""},"blockNum":"1"}' \
+  >"$work/legacy/backup_0000001-0000010.jsonl" || exit 1
+if ! out=$(mk "$work/legacy" extractor 2>&1); then
+  ko "a chain dir's EXTRACTOR_FLAGS reach the extractor: $out"
+elif [ "$(cat "$work/legacy/extracted/r/demo/old/x.gno" 2>/dev/null)" = old ]; then
+  ok "a chain dir's EXTRACTOR_FLAGS reach the extractor"
+else
+  ko "a chain dir's EXTRACTOR_FLAGS reach the extractor"
 fi
 exit $fail

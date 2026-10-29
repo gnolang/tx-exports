@@ -1,4 +1,7 @@
 EXTRACTOR_DIR ?= extractor
+# extractor flags a chain dir's backups need, such as -legacy-mode for the
+# formats older than {tx, metadata} lines (test4)
+EXTRACTOR_FLAGS ?=
 
 # tx-archive lives in the gnolang/gno monorepo under contribs/tx-archive.
 # contribs/*/go.mod files use `replace github.com/gnolang/gno => ../..` so
@@ -180,7 +183,7 @@ join:
 .PHONY: extractor
 extractor:
 	rm -rf extracted.new
-	go run -C "../$(EXTRACTOR_DIR)" . \
+	go run -C "../$(EXTRACTOR_DIR)" . $(EXTRACTOR_FLAGS) \
 		-source-path "$(shell pwd)" \
 		-output-dir "$(shell pwd)/extracted.new"
 	@[ -d extracted.new ] || { echo "$(SHORTNAME): the extractor wrote no package, extracted/ not replaced" >&2; exit 1; }
