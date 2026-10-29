@@ -14,6 +14,50 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # The exporters hand a patch from their backup job to their commit job through
+  # these artifact actions: the same hand-off between two jobs, with the same
+  # pins, so a bump that breaks it fails here rather than in the exporters.
+  handoff-pack:
+    name: artifact hand-off (pack)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+
+      - name: Pack a change
+        run: |
+          printf '# hand-off probe\n' >test11.gno.land/README.md
+          bash .github/scripts/backup-patch.sh pack test11.gno.land "$RUNNER_TEMP/backup.patch"
+
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: handoff-probe
+          path: ${{ runner.temp }}/backup.patch
+          if-no-files-found: error
+          retention-days: 1
+
+  handoff-apply:
+    name: artifact hand-off (apply)
+    needs: handoff-pack
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: handoff-probe
+          path: ${{ runner.temp }}
+
+      - name: Apply it
+        run: |
+          bash .github/scripts/backup-patch.sh apply test11.gno.land "$RUNNER_TEMP/backup.patch"
+          [ "$(cat test11.gno.land/README.md)" = '# hand-off probe' ]
+
   build:
     name: build + smoke test
     runs-on: ubuntu-latest
