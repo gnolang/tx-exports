@@ -11,6 +11,7 @@ import (
 	"io"
 	"log/slog"
 	"os"
+	"path"
 	"path/filepath"
 	"regexp"
 	"sort"
@@ -159,70 +160,82 @@ func execExtract(ctx context.Context, cfg *extractorCfg) error {
 		decode decodeFn = decodeTx
 
 		// deploys counts the deploys of each package dir so far: the first
-		// deploy of a path is extracted to its dir, later ones (failed or
-		// not: the source files carry no tx results) to <dir>:1, <dir>:2, …
+		// deploy of a path is extracted to its dir (or <dir>:1, see below),
+		// later ones (failed or not: the source files carry no tx results)
+		// to the next numbers, <dir>:1, <dir>:2, …
 		deploys = make(map[string]int)
 	)
 	if cfg.legacyMode {
 		decode = decodeLegacy
 	}
 
+	// Every deploy is read before any is written: the dir of each package, and
+	// every dir above it, are reserved, so that no deploy writes a file where a
+	// package needs a dir, whichever comes first in the chain
+	var (
+		pending  []vm.MsgAddPackage
+		pkgDirs  []string
+		reserved = make(map[string]bool)
+	)
 	for _, sourceFile := range sourceFiles {
 		select {
 		case <-ctx.Done():
 			return ctx.Err()
 		default:
-			sourceFile := sourceFile
+		}
 
-			// Extract messages
-			var (
-				msgs       []vm.MsgAddPackage
-				processErr error
-			)
-
-			msgs, processErr = extractAddMessages(sourceFile, decode)
-
-			if processErr != nil {
-				return processErr
+		msgs, err := extractAddMessages(sourceFile, decode)
+		if err != nil {
+			return err
+		}
+		for _, msg := range msgs {
+			pkgDir := strings.TrimPrefix(msg.Package.Path, "gno.land/")
+			if !writable(pkgDir, msg.Package.Files) {
+				slog.Warn("skipping a package whose path or file names cannot be written", "path", msg.Package.Path)
+				continue
 			}
-
-			// Process messages
-			for _, msg := range msgs {
-				pkgDir := strings.TrimPrefix(msg.Package.Path, "gno.land/")
-				if !writable(pkgDir, msg.Package.Files) {
-					slog.Warn("skipping a package whose path or file names cannot be written", "path", msg.Package.Path)
-					continue
-				}
-				outputDir := filepath.Join(root, pkgDir)
-
-				n, ok := placeDeploy(root, outputDir, deploys[outputDir], msg.Package.Files)
-				if !ok {
-					slog.Warn("skipping a deploy that no numbered dir can hold", "path", msg.Package.Path)
-					continue
-				}
-				if n != deploys[outputDir] {
-					slog.Warn("moving a deploy past what an earlier one wrote", "path", msg.Package.Path, "number", n)
-				}
-				deploys[outputDir] = n + 1
-				if n > 0 {
-					outputDir += ":" + strconv.Itoa(n)
-				}
-
-				// Write dir before writing files
-				if dirWriteErr := os.MkdirAll(outputDir, os.ModePerm); dirWriteErr != nil {
-					return fmt.Errorf("unable to write dir, %w", dirWriteErr)
-				}
-
-				// Write the package source code
-				if writeErr := writePackageFiles(msg, outputDir); writeErr != nil {
-					return writeErr
-				}
-
-				// Write the package metadata
-				if writeErr := writePackageMetadata(metadataFromMsg(msg), outputDir); writeErr != nil {
-					return writeErr
-				}
+			pkgDir = path.Clean(pkgDir)
+			pending = append(pending, msg)
+			pkgDirs = append(pkgDirs, pkgDir)
+			for dir := pkgDir; dir != "."; dir = path.Dir(dir) {
+				reserved[dir] = true
 			}
+		}
+	}
+
+	for i, msg := range pending {
+		pkgDir := pkgDirs[i]
+
+		// a first deploy whose file would cover a package dir starts the
+		// numbering at 1: no package dir holds a ':', so <dir>:1 is free
+		n := deploys[pkgDir]
+		if n == 0 && coversPackageDir(pkgDir, msg.Package.Files, reserved) {
+			n = 1
+			slog.Warn("moving a deploy whose files would cover a package dir", "path", msg.Package.Path, "number", n)
+		}
+		outputDir := filepath.Join(root, filepath.FromSlash(pkgDir))
+		if n > 0 {
+			outputDir += ":" + strconv.Itoa(n)
+		}
+		if !fits(outputDir, msg.Package.Files) {
+			slog.Warn("skipping a deploy too long to write", "path", msg.Package.Path, "number", n)
+			continue
+		}
+		deploys[pkgDir] = n + 1
+
+		// Write dir before writing files
+		if dirWriteErr := os.MkdirAll(outputDir, os.ModePerm); dirWriteErr != nil {
+			return fmt.Errorf("unable to write dir, %w", dirWriteErr)
+		}
+
+		// Write the package source code
+		if writeErr := writePackageFiles(msg, outputDir); writeErr != nil {
+			return writeErr
+		}
+
+		// Write the package metadata
+		if writeErr := writePackageMetadata(metadataFromMsg(msg), outputDir); writeErr != nil {
+			return writeErr
 		}
 	}
 
@@ -269,65 +282,32 @@ func writableName(name string) bool {
 	return !strings.HasPrefix(name, ".") && !strings.ContainsAny(name, "~\\:\x00") && len(name) <= maxNameLen
 }
 
-// placeDeploy picks the number of a package's next deploy: n, or the first one
-// after it whose dir (dir, or dir:<number>) the earlier deploys left free. One
-// deploy's file can stand where another needs a dir: a package r/x with a file
-// named license, and a package r/x/license. It reports false when no number
-// helps: a file stands on the way to dir, or the numbered name or a file's path
-// is longer than the filesystem takes.
-func placeDeploy(root, dir string, n int, files []*std.MemFile) (int, bool) {
-	rel, err := filepath.Rel(root, filepath.Dir(dir))
-	if err != nil {
-		return 0, false
+// coversPackageDir reports whether a deploy in pkgDir would write a file, or
+// its metadata file, where a package needs a dir: a package r/x with a file
+// named license, and a package r/x/license.
+func coversPackageDir(pkgDir string, files []*std.MemFile, reserved map[string]bool) bool {
+	if reserved[path.Join(pkgDir, packageMetadataFile)] {
+		return true
 	}
-	way := root
-	for _, part := range strings.Split(rel, string(filepath.Separator)) {
-		way = filepath.Join(way, part)
-		if info, err := os.Lstat(way); err == nil && !info.IsDir() {
-			return 0, false
+	for _, file := range files {
+		if reserved[path.Join(pkgDir, file.Name)] {
+			return true
 		}
 	}
+	return false
+}
 
+// fits reports whether a deploy's dir name, and its files' paths, are short
+// enough for the filesystem: a numbered dir can outgrow the name limit that
+// writable checked, and many components the path limit.
+func fits(dir string, files []*std.MemFile) bool {
 	longest := packageMetadataFile
 	for _, file := range files {
 		if len(file.Name) > len(longest) {
 			longest = file.Name
 		}
 	}
-	for ; ; n++ {
-		candidate := dir
-		if n > 0 {
-			candidate += ":" + strconv.Itoa(n)
-		}
-		if len(filepath.Base(candidate)) > maxNameLen || len(filepath.Join(candidate, longest)) >= maxPathLen {
-			return 0, false
-		}
-		if free(candidate, files) {
-			return n, true
-		}
-	}
-}
-
-// free reports whether a deploy can be written in dir: dir is absent, or a dir
-// in which none of the deploy's files, nor its metadata file, is a dir.
-func free(dir string, files []*std.MemFile) bool {
-	info, err := os.Lstat(dir)
-	if err != nil {
-		return true
-	}
-	if !info.IsDir() {
-		return false
-	}
-	names := []string{packageMetadataFile}
-	for _, file := range files {
-		names = append(names, file.Name)
-	}
-	for _, name := range names {
-		if info, err := os.Lstat(filepath.Join(dir, name)); err == nil && info.IsDir() {
-			return false
-		}
-	}
-	return true
+	return len(filepath.Base(dir)) <= maxNameLen && len(filepath.Join(dir, longest)) < maxPathLen
 }
 
 // writePackageFiles writes all files from a single package to the output directory

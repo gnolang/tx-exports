@@ -744,37 +744,47 @@ func TestExtract_SkipsADeployWhosePathIsTooLong(t *testing.T) {
 	assert.Equal(t, 1, strings.Count(logs.String(), "skipping a deploy"))
 }
 
-func TestExtract_MovesADeployPastWhatAnEarlierOneWrote(t *testing.T) {
-	t.Parallel()
+func TestExtract_MovesADeployWhoseFilesLandOnAPackageDir(t *testing.T) {
+	// not parallel: it captures the default logger
 
-	// a package's file where a later deploy needs a dir, or the reverse: the
-	// later deploy moves to its path's next free number
-	for name, tc := range map[string]struct {
+	// every package's dir, and those above it, is reserved before any write: a
+	// deploy whose file would land on one moves to its path's next number,
+	// whatever the order of the two deploys, so neither is lost
+	for _, tc := range []struct {
+		name    string
 		deploys []gnoland.TxWithMetadata
 		files   map[string]string // file under the output dir: body
+		moves   int
 	}{
-		"a file, then a package at its path": {
+		{
+			name: "a file, then a package at its path",
 			deploys: []gnoland.TxWithMetadata{
 				addPkgFileTx(t, "gno.land/r/demo/x", "x.gno", "file"),
 				addPkgFileTx(t, "gno.land/r/demo/x/x.gno", "a.gno", "pkg"),
 			},
-			files: map[string]string{"r/demo/x/x.gno": "file", "r/demo/x/x.gno:1/a.gno": "pkg"},
+			files: map[string]string{"r/demo/x:1/x.gno": "file", "r/demo/x/x.gno/a.gno": "pkg"},
+			moves: 1,
 		},
-		"a package, then a file at its path": {
+		{
+			name: "a package, then a file at its path",
 			deploys: []gnoland.TxWithMetadata{
 				addPkgFileTx(t, "gno.land/r/demo/x/x.gno", "a.gno", "pkg"),
 				addPkgFileTx(t, "gno.land/r/demo/x", "x.gno", "file"),
 			},
 			files: map[string]string{"r/demo/x/x.gno/a.gno": "pkg", "r/demo/x:1/x.gno": "file"},
+			moves: 1,
 		},
-		"a package where another's metadata file goes": {
+		{
+			name: "a package where another's metadata file goes",
 			deploys: []gnoland.TxWithMetadata{
 				addPkgFileTx(t, "gno.land/r/demo/m/"+packageMetadataFile, "a.gno", "pkg"),
 				addPkgFileTx(t, "gno.land/r/demo/m", "m.gno", "m"),
 			},
 			files: map[string]string{"r/demo/m/" + packageMetadataFile + "/a.gno": "pkg", "r/demo/m:1/m.gno": "m"},
+			moves: 1,
 		},
-		"a moved deploy's path deployed again": {
+		{
+			name: "a moved deploy's path deployed again",
 			deploys: []gnoland.TxWithMetadata{
 				addPkgFileTx(t, "gno.land/r/demo/x/license", "a.gno", "pkg"),
 				addPkgFileTx(t, "gno.land/r/demo/x", "license", "first"),
@@ -785,11 +795,45 @@ func TestExtract_MovesADeployPastWhatAnEarlierOneWrote(t *testing.T) {
 				"r/demo/x:1/license":     "first",
 				"r/demo/x:2/license":     "second",
 			},
+			moves: 1,
+		},
+		{
+			name: "a namespace's file on its later packages' way",
+			deploys: []gnoland.TxWithMetadata{
+				addPkgFileTx(t, "gno.land/r/demo/boards", "a.gno", "boards"),
+				addPkgFileTx(t, "gno.land/r", "newuser", "ns"),
+				addPkgFileTx(t, "gno.land/r/newuser/home", "a.gno", "home"),
+				addPkgFileTx(t, "gno.land/r/newuser/blog", "a.gno", "blog"),
+			},
+			files: map[string]string{
+				"r/demo/boards/a.gno":  "boards",
+				"r:1/newuser":          "ns",
+				"r/newuser/home/a.gno": "home",
+				"r/newuser/blog/a.gno": "blog",
+			},
+			moves: 1,
+		},
+		{
+			name: "a file further up a later package's way",
+			deploys: []gnoland.TxWithMetadata{
+				addPkgFileTx(t, "gno.land/r/demo/f", "sub", "file"),
+				addPkgFileTx(t, "gno.land/r/demo/f/sub/z/w", "a.gno", "w"),
+			},
+			files: map[string]string{"r/demo/f:1/sub": "file", "r/demo/f/sub/z/w/a.gno": "w"},
+			moves: 1,
+		},
+		{
+			name: "a parent after its sub-package",
+			deploys: []gnoland.TxWithMetadata{
+				addPkgFileTx(t, "gno.land/r/demo/x/y", "a.gno", "child"),
+				addPkgFileTx(t, "gno.land/r/demo/x", "a.gno", "parent"),
+			},
+			files: map[string]string{"r/demo/x/y/a.gno": "child", "r/demo/x/a.gno": "parent"},
+			moves: 0,
 		},
 	} {
-		t.Run(name, func(t *testing.T) {
-			t.Parallel()
-
+		t.Run(tc.name, func(t *testing.T) {
+			logs := captureLogs(t)
 			sourceDir, outputDir := t.TempDir(), t.TempDir()
 			writeSourceFile(t, sourceDir, "backup_0000001-0000010.jsonl", tc.deploys...)
 
@@ -804,21 +848,22 @@ func TestExtract_MovesADeployPastWhatAnEarlierOneWrote(t *testing.T) {
 				require.NoError(t, err, file)
 				assert.Equal(t, body, string(got), file)
 			}
+			assert.Equal(t, tc.moves, strings.Count(logs.String(), "moving a deploy"))
+			if tc.moves > 0 {
+				assert.Contains(t, logs.String(), "number=1")
+			}
 		})
 	}
 }
 
-func TestExtract_SkipsADeployNoNumberCanPlace(t *testing.T) {
+func TestExtract_SkipsADeployWhoseNumberedNameIsTooLong(t *testing.T) {
 	// not parallel: it captures the default logger
 	logs := captureLogs(t)
 
-	// a file on the way to the package dir, or a numbered name too long for
-	// the filesystem: the deploy is skipped and the run goes on
+	// a 254-byte name fits, but not with the ":1" of a second deploy
 	long := strings.Repeat("l", maxNameLen-1)
 	sourceDir, outputDir := t.TempDir(), t.TempDir()
 	writeSourceFile(t, sourceDir, "backup_0000001-0000010.jsonl",
-		addPkgFileTx(t, "gno.land/r/demo/f", "sub", "file"),
-		addPkgFileTx(t, "gno.land/r/demo/f/sub/z", "z.gno", "bad"),
 		addPkgTx(t, "gno.land/r/demo/"+long, "first"),
 		addPkgTx(t, "gno.land/r/demo/"+long, "second"),
 		addPkgTx(t, "gno.land/r/demo/x", "x"),
@@ -830,9 +875,9 @@ func TestExtract_SkipsADeployNoNumberCanPlace(t *testing.T) {
 		outputDir:  outputDir,
 	}))
 
-	assert.Equal(t, []string{"f", long, "x"}, dirNames(t, filepath.Join(outputDir, "r", "demo")))
+	assert.Equal(t, []string{long, "x"}, dirNames(t, filepath.Join(outputDir, "r", "demo")))
 	assert.Equal(t, "first", readPkgBody(t, outputDir, "r/demo/"+long))
-	assert.Equal(t, 2, strings.Count(logs.String(), "skipping a deploy"))
+	assert.Equal(t, 1, strings.Count(logs.String(), "skipping a deploy"))
 }
 
 func TestExtract_ReadsOnlyTheSourceDirsOwnFiles(t *testing.T) {
