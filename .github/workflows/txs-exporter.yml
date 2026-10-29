@@ -67,8 +67,9 @@ jobs:
           if-no-files-found: error
           retention-days: 1
 
-  # Pushes each chain's patch with the write token, running no code from outside
-  # this repo. The patch may touch only the files a run writes in its chain dir.
+  # Pushes each chain's patch with the write token, running none of the code the
+  # backup job builds. The patch may touch only the files a run writes in its
+  # chain dir.
   commit:
     name: "commit ${{ matrix.testnet }}"
     needs: backup
