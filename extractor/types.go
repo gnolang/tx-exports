@@ -1,5 +1,7 @@
 package main
 
+import "github.com/gnolang/gno/gno.land/pkg/sdk/vm"
+
 // Metadata defines the metadata info that accompanies
 // gno source code
 type Metadata struct {
@@ -8,7 +10,7 @@ type Metadata struct {
 }
 
 // metadataFromMsg extracts the metadata from a message
-func metadataFromMsg(msg AddPackage) Metadata {
+func metadataFromMsg(msg vm.MsgAddPackage) Metadata {
 	return Metadata{
 		Creator: msg.Creator.String(),
 		Deposit: msg.Send.String(),

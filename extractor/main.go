@@ -171,7 +171,7 @@ func execExtract(ctx context.Context, cfg *extractorCfg) error {
 
 			// Extract messages
 			var (
-				msgs       []AddPackage
+				msgs       []vm.MsgAddPackage
 				processErr error
 			)
 
@@ -217,7 +217,7 @@ func execExtract(ctx context.Context, cfg *extractorCfg) error {
 }
 
 // writePackageFiles writes all files from a single package to the output directory
-func writePackageFiles(msg AddPackage, outputDir string) error {
+func writePackageFiles(msg vm.MsgAddPackage, outputDir string) error {
 	for _, file := range msg.Package.Files {
 		// Get the output path
 		writePath := filepath.Join(outputDir, file.Name)
@@ -246,11 +246,6 @@ func writePackageMetadata(metadata Metadata, outputDir string) error {
 	}
 
 	return nil
-}
-
-// AddPackage contains a vm.MsgAddPackage.
-type AddPackage struct {
-	vm.MsgAddPackage
 }
 
 // checkOutputDir refuses an output directory that exists and is not empty:
@@ -303,11 +298,11 @@ func sortByBlockRange(paths []string) {
 	})
 }
 
-// extractAddMessages extracts the AddPackage messages
+// extractAddMessages extracts the MsgAddPackage messages
 func extractAddMessages[T std.Tx | gnoland.TxWithMetadata](
 	filePath string,
 	unwrapFn func(T) []std.Msg,
-) ([]AddPackage, error) {
+) ([]vm.MsgAddPackage, error) {
 	file, err := os.Open(filePath)
 	if err != nil {
 		return nil, fmt.Errorf("unable to open file, %w", err)
@@ -323,7 +318,7 @@ func extractAddMessages[T std.Tx | gnoland.TxWithMetadata](
 	reader := bufio.NewReader(file)
 
 	// Msg array to be returned for further processing
-	msgArr := make([]AddPackage, 0)
+	msgArr := make([]vm.MsgAddPackage, 0)
 
 	// Buffer to handle lines longer than 64kb
 	tempBuf := make([]byte, 0)
@@ -381,7 +376,7 @@ func extractAddMessages[T std.Tx | gnoland.TxWithMetadata](
 				return nil, errors.New("MsgAddPackage is nil")
 			}
 
-			msgArr = append(msgArr, AddPackage{MsgAddPackage: msgAddPkg})
+			msgArr = append(msgArr, msgAddPkg)
 		}
 	}
 

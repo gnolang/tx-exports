@@ -130,7 +130,7 @@ func TestValidFlow_Dir(t *testing.T) {
 		require.NoError(t, err)
 
 		// Compare metadata
-		expectedMetadata, err := json.Marshal(metadataFromMsg(AddPackage{MsgAddPackage: msg}))
+		expectedMetadata, err := json.Marshal(metadataFromMsg(msg))
 		assert.Equal(t, expectedMetadata, retrievedMetadata)
 
 		// Close metadata file
@@ -198,7 +198,7 @@ func TestValidFlow_File(t *testing.T) {
 		require.NoError(t, err)
 
 		// Compare metadata
-		expectedMetadata, err := json.Marshal(metadataFromMsg(AddPackage{MsgAddPackage: msg}))
+		expectedMetadata, err := json.Marshal(metadataFromMsg(msg))
 		assert.Equal(t, expectedMetadata, retrievedMetadata)
 
 		// Close metadata file
@@ -287,9 +287,7 @@ func TestExtractAddMessages(t *testing.T) {
 	for _, sf := range sourceFiles {
 		res, err := extractAddMessages(sf, unwrapFn)
 		require.NoError(t, err)
-		for _, r := range res {
-			results = append(results, r.MsgAddPackage)
-		}
+		results = append(results, res...)
 	}
 
 	sort.Slice(results, func(i, j int) bool {
@@ -313,7 +311,7 @@ func TestWritePackageMetadata(t *testing.T) {
 	t.Cleanup(removeDir(t, tempDir))
 
 	for _, msg := range mockMsgsAddPackage {
-		md := metadataFromMsg(AddPackage{MsgAddPackage: msg})
+		md := metadataFromMsg(msg)
 
 		// Get output dir
 		outputDir := filepath.Join(tempDir, strings.TrimLeft(msg.Package.Path, "gno.land/"))
@@ -362,7 +360,7 @@ func TestWritePackageFiles(t *testing.T) {
 		require.NoError(t, err)
 
 		// Write the metadata
-		err = writePackageFiles(AddPackage{MsgAddPackage: msg}, outputDir)
+		err = writePackageFiles(msg, outputDir)
 		require.NoError(t, err)
 
 		// Read & compare file
