@@ -99,6 +99,18 @@ else
   ko "an idle run packs an empty patch, which applies as a no-op"
 fi
 
+# pack always writes the patch, empty on an idle run: a missing one means the
+# hand-off between the jobs broke
+clone missing || exit 1
+cd "$work/missing" || exit 1
+if bash "$script" apply chain.gno.land "$work/no-such.patch" >/dev/null 2>&1; then
+  ko "apply fails on a missing patch: exited 0"
+elif [ -n "$(g status --porcelain)" ]; then
+  ko "apply fails on a missing patch, changing nothing"
+else
+  ok "apply fails on a missing patch, changing nothing"
+fi
+
 # evil <name> <shell> <what> [staged]: a patch of the changes <shell> makes in a
 # fresh clone (staged by <shell> itself when `staged`), which apply must refuse
 # on another fresh clone without changing it

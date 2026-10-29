@@ -43,6 +43,12 @@ pack() {
 
 apply() {
   local dir=$1 patch=$2 index meta path mode refused=0
+  # pack always writes the patch: a missing one means the hand-off broke, and an
+  # empty one is an idle run
+  [ -f "$patch" ] || {
+    echo "backup-patch: no patch at $patch" >&2
+    return 1
+  }
   [ -s "$patch" ] || return 0
 
   # vet the patch on a throwaway index first: git parses it, and this checkout
