@@ -464,6 +464,53 @@ func TestExtract_RefusesANonEmptyOutputDir(t *testing.T) {
 	assert.Equal(t, []string{"keep"}, dirNames(t, outputDir))
 }
 
+func TestExtract_CreatesAMissingOutputDir(t *testing.T) {
+	t.Parallel()
+
+	sourceDir := t.TempDir()
+	outputDir := filepath.Join(t.TempDir(), "extracted.new")
+	writeSourceFile(t, sourceDir, "backup_0000001-0000010.jsonl", addPkgTx(t, "gno.land/r/demo/x", "new"))
+
+	require.NoError(t, execExtract(context.Background(), &extractorCfg{
+		fileType:   sourceFileType,
+		sourcePath: sourceDir,
+		outputDir:  outputDir,
+	}))
+
+	assert.Equal(t, "new", readPkgBody(t, outputDir, "r/demo/x"))
+}
+
+func TestSortByBlockRange(t *testing.T) {
+	t.Parallel()
+
+	paths := []string{
+		"txexport-ab.log",
+		"backup_staging_txs_10001-11000.jsonl",
+		"backup_staging_balances.jsonl",
+		"backup_50-60.jsonl",
+		"other_1001-1500.jsonl",
+		"backup_1-100.jsonl",
+		"txexport-aa.log",
+		"backup_staging_txs_1001-2000.jsonl",
+	}
+
+	sortByBlockRange(paths)
+
+	assert.Equal(t, []string{
+		// by the first number of the range, not the last
+		"backup_1-100.jsonl",
+		"backup_50-60.jsonl",
+		// same first number: lexical order
+		"backup_staging_txs_1001-2000.jsonl",
+		"other_1001-1500.jsonl",
+		"backup_staging_txs_10001-11000.jsonl",
+		// names without a range last, in lexical order
+		"backup_staging_balances.jsonl",
+		"txexport-aa.log",
+		"txexport-ab.log",
+	}, paths)
+}
+
 // Helpers
 func addPkgTx(t *testing.T, path, body string) gnoland.TxWithMetadata {
 	t.Helper()
