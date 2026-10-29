@@ -19,7 +19,7 @@ The Gno / TM2 source code extractor service
 
 FLAGS
   -file-type .jsonl        the file type for analysis, with a preceding period (ie .jsonl)
-  -legacy-mode=false       flag indicating if the legacy tx sheet mode should be used
+  -legacy-mode=false       read the formats older than {tx, metadata} lines: plain std.Tx (test1) or {tx, blockNum} (test2-test4)
   -output-dir ./extracted  the output directory for the extracted Gno source code
   -source-path string      the source file or folder containing transaction data
 ```
@@ -31,6 +31,13 @@ in its subdirs, which in a chain dir hold the `extracted/` tree.
 earlier tree. In a chain dir, `make extractor` builds a fresh tree and swaps it
 in for `extracted/` only when the run succeeds and writes at least one package;
 otherwise it fails and keeps `extracted/`.
+
+`-legacy-mode` reads the backups that predate tx-archive's `{tx, metadata}`
+lines: test1's plain `std.Tx` lines, and test2-test4's `{tx, blockNum}` ones. It
+decodes their deploys without the gno types, which reject those formats' fields
+(a deploy's `deposit`) and test1-test3's capitalized package keys. A chain dir
+passes it to `make extractor` with `EXTRACTOR_FLAGS = -legacy-mode`, as test4
+does.
 
 A `/vm.m_addpkg` tx the extractor cannot parse fails the run, since skipping it
 would drop its package from a rebuilt tree. Other lines it cannot parse, such
@@ -48,6 +55,6 @@ blocks, or lines for staging's chunks), so the numbering follows the chain
 even where names are not zero-padded. The source files carry no tx results, so
 any deploy of a path, the first included, may be one the chain rejected.
 
-test2, test3 and test4 keep an older layout: deploys in `<path>:<block height>`,
-the first one also in `<path>`. This extractor cannot parse their backups, so
-their trees are not rebuilt.
+test2 and test3 keep an older layout: deploys in `<path>:<block height>`, the
+first one also in `<path>`. Their trees hold every deploy of their backups, so
+they are not rebuilt, and their Makefiles do not set `EXTRACTOR_FLAGS`.
