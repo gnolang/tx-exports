@@ -270,14 +270,15 @@ func checkOutputDir(dir string) error {
 	return nil
 }
 
-// blockRange matches the block range at the end of a source file name
-// (backup_<from>-<to>.jsonl).
-var blockRange = regexp.MustCompile(`(\d+)-(\d+)\.[^./]+$`)
+// blockRange matches the range at the end of a source file name
+// (backup_<from>-<to>.jsonl), capturing <from>.
+var blockRange = regexp.MustCompile(`(\d+)-\d+\.[^./]+$`)
 
-// sortByBlockRange orders source files by the first block of the range in
-// their name, so packages are extracted in chain order: staging's ranges are
-// not zero-padded, so a lexical order would not be the chain order. Names
-// without a range sort lexically, after those with one.
+// sortByBlockRange orders source files by the start of the range in their
+// name (blocks, or lines for staging's chunks), so packages are extracted in
+// chain order: staging's ranges are not zero-padded, so a lexical order would
+// not be the chain order. Names without a range sort lexically, after those
+// with one.
 func sortByBlockRange(paths []string) {
 	from := func(path string) (uint64, bool) {
 		m := blockRange.FindStringSubmatch(filepath.Base(path))
