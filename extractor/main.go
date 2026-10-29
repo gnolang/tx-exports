@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"bytes"
 	"context"
 	"encoding/json"
 	"errors"
@@ -34,6 +35,7 @@ var (
 	errInvalidOutputDir   = errors.New("invalid output directory")
 	errNoSourceFilesFound = errors.New("no source files found, exiting")
 	errOutputDirNotEmpty  = errors.New("output directory is not empty")
+	errUnparsableDeploy   = errors.New("unable to parse a /vm.m_addpkg tx")
 )
 
 // Define extractor config
@@ -352,6 +354,11 @@ func extractAddMessages[T std.Tx | gnoland.TxWithMetadata](
 		}
 
 		if err := amino.UnmarshalJSON(line, &txData); err != nil {
+			// a deploy the pinned gno types cannot decode fails the run: skipping
+			// it would drop its package from a rebuilt tree
+			if bytes.Contains(line, []byte(`"/vm.m_addpkg"`)) {
+				return nil, errors.Join(fmt.Errorf("%w in %s: %w", errUnparsableDeploy, filePath, err), cleanup())
+			}
 			slog.Error("error while parsing amino JSON", "error", err, "line", line)
 			continue
 		}

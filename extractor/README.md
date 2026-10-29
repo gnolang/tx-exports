@@ -27,6 +27,10 @@ earlier tree. In a chain dir, `make extractor` builds a fresh tree and swaps it
 in for `extracted/` only when the run succeeds and writes at least one package;
 otherwise it fails and keeps `extracted/`.
 
+A `/vm.m_addpkg` tx the extractor cannot parse fails the run, since skipping it
+would drop its package from a rebuilt tree. Other lines it cannot parse, such
+as message types newer than its gno dependency, are logged and skipped.
+
 ## Output layout
 
 Each `/vm.m_addpkg` message is extracted to `<output-dir>/<path without

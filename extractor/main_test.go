@@ -478,6 +478,51 @@ func TestExtract_CreatesAMissingOutputDir(t *testing.T) {
 	assert.Equal(t, "new", readPkgBody(t, outputDir, "r/demo/x"))
 }
 
+func TestExtract_FailsOnADeployItCannotParse(t *testing.T) {
+	t.Parallel()
+
+	// a deploy with a field the pinned gno types do not know, as after a chain
+	// upgrade: skipping it would drop its package from the rebuilt tree
+	sourceDir := t.TempDir()
+	unknownField := mustReplace(t, txJSON(t, addPkgTx(t, "gno.land/r/demo/y", "y")),
+		`"path":"gno.land/r/demo/y"`, `"path":"gno.land/r/demo/y","newfield":1`)
+	writeLines(t, sourceDir, "backup_0000001-0000010.jsonl",
+		txJSON(t, addPkgTx(t, "gno.land/r/demo/x", "x")),
+		unknownField,
+	)
+
+	err := execExtract(context.Background(), &extractorCfg{
+		fileType:   sourceFileType,
+		sourcePath: sourceDir,
+		outputDir:  filepath.Join(t.TempDir(), "extracted.new"),
+	})
+
+	assert.ErrorIs(t, err, errUnparsableDeploy)
+}
+
+func TestExtract_SkipsAnUnparsableLineWithoutADeploy(t *testing.T) {
+	t.Parallel()
+
+	// a msg type the pinned gno types do not know (such as vm.m_enable_pkg) in
+	// a tx without a deploy: there is no package to lose
+	sourceDir, outputDir := t.TempDir(), t.TempDir()
+	unknownType := mustReplace(t, txJSON(t, addPkgTx(t, "gno.land/r/demo/z", "z")),
+		`"/vm.m_addpkg"`, `"/vm.m_unknown"`)
+	writeLines(t, sourceDir, "backup_0000001-0000010.jsonl",
+		txJSON(t, addPkgTx(t, "gno.land/r/demo/x", "x")),
+		unknownType,
+		txJSON(t, addPkgTx(t, "gno.land/r/demo/y", "y")),
+	)
+
+	require.NoError(t, execExtract(context.Background(), &extractorCfg{
+		fileType:   sourceFileType,
+		sourcePath: sourceDir,
+		outputDir:  outputDir,
+	}))
+
+	assert.Equal(t, []string{"x", "y"}, dirNames(t, filepath.Join(outputDir, "r", "demo")))
+}
+
 func TestSortByBlockRange(t *testing.T) {
 	t.Parallel()
 
@@ -532,6 +577,30 @@ func writeSourceFile(t *testing.T, dir, name string, txs ...gnoland.TxWithMetada
 		require.NoError(t, writeTxToFile(t, tx, file))
 	}
 	require.NoError(t, file.Close())
+}
+
+// txJSON is the amino JSON line of tx, as the backups store it.
+func txJSON(t *testing.T, tx gnoland.TxWithMetadata) string {
+	t.Helper()
+
+	data, err := amino.MarshalJSON(tx)
+	require.NoError(t, err)
+	return string(data)
+}
+
+// mustReplace replaces the first old in s with new; old must occur in s.
+func mustReplace(t *testing.T, s, old, new string) string {
+	t.Helper()
+
+	require.Contains(t, s, old)
+	return strings.Replace(s, old, new, 1)
+}
+
+func writeLines(t *testing.T, dir, name string, lines ...string) {
+	t.Helper()
+
+	data := strings.Join(lines, "\n") + "\n"
+	require.NoError(t, os.WriteFile(filepath.Join(dir, name), []byte(data), 0o644))
 }
 
 func readPkgBody(t *testing.T, outputDir, pkgDir string) string {
