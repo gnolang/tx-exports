@@ -1,0 +1,8 @@
+module = "gno.land/r/g1magld5ptgzaktqcexxq0pgq5lmdf0kz6re8hlv/x/upgrade/wrap/v0"
+gno = "0.9"
+# public: imported by .../wrap/v1, which reads its counter; that import IS the pattern
+
+[source]
+  repository = "https://github.com/moul/gno-contracts"
+  path = "r/moul/x/upgrade/wrap/gen0"
+  revision = "d905e11dcfc739389c7bd9aa83ced28c5e4e22b8"

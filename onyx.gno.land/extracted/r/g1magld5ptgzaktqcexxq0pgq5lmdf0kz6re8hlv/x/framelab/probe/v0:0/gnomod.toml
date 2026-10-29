@@ -1,0 +1,8 @@
+module = "gno.land/r/g1magld5ptgzaktqcexxq0pgq5lmdf0kz6re8hlv/x/framelab/probe/v0"
+gno = "0.9"
+private = true
+
+[source]
+  repository = "https://github.com/moul/gno-contracts"
+  path = "r/moul/x/framelab/probe"
+  revision = "d905e11dcfc739389c7bd9aa83ced28c5e4e22b8"
