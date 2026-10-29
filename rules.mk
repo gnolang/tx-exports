@@ -104,7 +104,8 @@ BACKUP_FILES ?= backup_*.jsonl
 
 # Deployed packages are the /vm.m_addpkg messages (a /vm.m_run carries a
 # package too); their keys are lowercase (`path`) except in test2 and test3,
-# exported before gno#2019's snake_case JSON tags (`Path`).
+# exported before gno#2019's snake_case JSON tags (`Path`). Realm calls are the
+# /vm.m_call messages (a package enable or reject carries a pkg_path too).
 #
 # bash with pipefail, so a failing jq or cat fails the run instead of writing
 # an empty section; and a BACKUP_FILES that matches nothing stops it before
@@ -130,7 +131,7 @@ stats:
 
 	echo "## top realm calls" >> README.md
 	echo '```' >> README.md
-	cat $(BACKUP_FILES) | jq '(.tx // .).msg[].pkg_path | select( . != null )' | sort | uniq -c | sort --stable -nr >> README.md
+	cat $(BACKUP_FILES) | jq '(.tx // .).msg[] | select(.["@type"]=="/vm.m_call") | .pkg_path' | sort | uniq -c | sort --stable -nr >> README.md
 	echo '```' >> README.md
 	echo >> README.md
 

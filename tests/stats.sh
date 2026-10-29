@@ -3,6 +3,8 @@
 # - deployed packages are the /vm.m_addpkg messages only (a /vm.m_run package
 #   is not a deploy), whatever the casing of their keys (`path`, or `Path` in
 #   test2/test3);
+# - realm calls are the /vm.m_call messages only (a package enable or reject
+#   carries a pkg_path too);
 # - a chain dir narrows the files stats reads (staging's balances file holds
 #   `addr=coins` lines, not txs);
 # - plain std.Tx lines (test1) are read like {tx, metadata} ones;
@@ -38,6 +40,8 @@ EOF
 {"tx":{"msg":[{"@type":"/vm.m_addpkg","creator":"g1a","package":{"Name":"up","Path":"gno.land/r/demo/capitalized","Files":[]}}]},"metadata":{"timestamp":"2"}}
 {"tx":{"msg":[{"@type":"/vm.m_call","caller":"g1a","pkg_path":"gno.land/r/demo/lowercase","func":"Do","args":[]}]},"metadata":{"timestamp":"3"}}
 {"tx":{"msg":[{"@type":"/vm.m_run","caller":"g1a","package":{"name":"main","path":"","files":[]}}]},"metadata":{"timestamp":"4"}}
+{"tx":{"msg":[{"@type":"/vm.m_enable_pkg","approver":"g1a","pkg_path":"gno.land/p/demo/parked","pkg_hash":"x","pkg_height":"1"}]},"metadata":{"timestamp":"5"}}
+{"tx":{"msg":[{"@type":"/vm.m_reject_pkg","sender":"g1a","pkg_path":"gno.land/r/demo/rejected"}]},"metadata":{"timestamp":"6"}}
 EOF
   printf 'g1a=1000ugnot\ng1b=2000ugnot\n' >"$work/$1/backup_balances.jsonl"
 }
@@ -63,10 +67,10 @@ want=$(printf '1 "%s"\n' gno.land/r/demo/capitalized gno.land/r/demo/lowercase)
 [ "$got" = "$want" ] && ok "addpkgs lists the deploys of both key casings, and no MsgRun" ||
   ko "addpkgs lists the deploys of both key casings, and no MsgRun: $(tr '\n' '|' <<<"$got")"
 got=$(listing "$readme" 'top realm calls')
-[ "$got" = '1 "gno.land/r/demo/lowercase"' ] && ok "top realm calls lists the calls" ||
-  ko "top realm calls lists the calls: $(tr '\n' '|' <<<"$got")"
+[ "$got" = '1 "gno.land/r/demo/lowercase"' ] && ok "top realm calls lists the calls, and no enable or reject" ||
+  ko "top realm calls lists the calls, and no enable or reject: $(tr '\n' '|' <<<"$got")"
 got=$(listing "$readme" TXs)
-[ "$got" = 4 ] && ok "the tx count covers only the tx files" ||
+[ "$got" = 6 ] && ok "the tx count covers only the tx files" ||
   ko "the tx count covers only the tx files: $got"
 
 # test1 stores plain std.Tx lines, without the {tx, metadata} wrapper
