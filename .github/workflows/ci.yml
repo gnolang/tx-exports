@@ -71,3 +71,7 @@ jobs:
         run: |
           bash tests/chain-id-guard.sh mainnet.gno.land gnoland-1
           bash tests/chain-id-guard.sh onyx.gno.land onyx-1
+
+      # extractor rebuilds extracted/ from scratch and swaps it in on success.
+      - name: rules.mk extractor
+        run: bash tests/extractor.sh

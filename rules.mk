@@ -172,11 +172,17 @@ join:
 	done
 	@echo "Done."
 
+# extracted/ is rebuilt from scratch on every run, so the extractor's numbering
+# of repeated deploys (<path>, <path>:1, …) never depends on an earlier tree; the
+# new tree replaces the old one only once the extractor has succeeded.
 .PHONY: extractor
 extractor:
+	rm -rf extracted.new
 	go run -C "../$(EXTRACTOR_DIR)" . \
 		-source-path "$(shell pwd)" \
-		-output-dir "$(shell pwd)/extracted"
+		-output-dir "$(shell pwd)/extracted.new"
+	rm -rf extracted
+	mv extracted.new extracted
 
 .PHONY: loop
 loop:
