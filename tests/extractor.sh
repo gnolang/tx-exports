@@ -15,9 +15,10 @@ ko() {
   echo "FAIL - $1"
   fail=1
 }
-# MAKEFLAGS, GNUMAKEFLAGS, MAKELEVEL and EXTRACTOR_DIR from a caller would add
-# output or flags to the runs below, or point them at another extractor
-mk() { env -u MAKEFLAGS -u GNUMAKEFLAGS -u MAKELEVEL -u EXTRACTOR_DIR make -s -C "$@"; }
+# MAKEFLAGS, GNUMAKEFLAGS, MAKELEVEL, EXTRACTOR_DIR and EXTRACTOR_FLAGS from a
+# caller would add output or flags to the runs below, or point them at another
+# extractor
+mk() { env -u MAKEFLAGS -u GNUMAKEFLAGS -u MAKELEVEL -u EXTRACTOR_DIR -u EXTRACTOR_FLAGS make -s -C "$@"; }
 
 work=$(mktemp -d) || exit 1
 trap 'rm -rf "$work"' EXIT
@@ -26,7 +27,8 @@ cp "$root/rules.mk" "$work/" || exit 1
 ln -s "$root/extractor" "$work/extractor" || exit 1
 
 # chain <name> [<make line>]: a scratch chain dir whose Makefile includes
-# rules.mk
+# rules.mk, with <make line> before the include, as in a chain dir, so that
+# rules.mk's ?= defaults cannot override it
 chain() {
   mkdir "$work/$1" || return 1
   cat >"$work/$1/Makefile" <<EOF
@@ -128,17 +130,20 @@ if diff -r "$work/nopkg-before" "$work/nopkg/extracted" >/dev/null 2>&1; then
 else
   ko "a run that writes no package leaves the previous extracted/ untouched"
 fi
+
 # test4's lines predate {tx, metadata}: its chain dir passes -legacy-mode
 chain legacy 'EXTRACTOR_FLAGS = -legacy-mode' || exit 1
-printf '%s\n' '{"tx":{"msg":[{"@type":"/vm.m_addpkg","creator":"g1jg8mtutu9khhfwc4nxmuhcpftf0pajdhfvsqf5",'\
-'"deposit":"","package":{"name":"old","path":"gno.land/r/demo/old","files":[{"name":"x.gno","body":"old"}]}}],'\
-'"fee":{"gas_wanted":"1","gas_fee":"1ugnot"},"signatures":null,"memo":""},"blockNum":"1"}' \
-  >"$work/legacy/backup_0000001-0000010.jsonl" || exit 1
+jq -nc '{tx: {msg: [{"@type": "/vm.m_addpkg",
+      creator: "g1jg8mtutu9khhfwc4nxmuhcpftf0pajdhfvsqf5", deposit: "",
+      package: {name: "old", path: "gno.land/r/demo/old",
+        files: [{name: "x.gno", body: "old"}]}}],
+    fee: {gas_wanted: "1", gas_fee: "1ugnot"}, signatures: null, memo: ""},
+  blockNum: "1"}' >"$work/legacy/backup_0000001-0000010.jsonl" || exit 1
 if ! out=$(mk "$work/legacy" extractor 2>&1); then
   ko "a chain dir's EXTRACTOR_FLAGS reach the extractor: $out"
 elif [ "$(cat "$work/legacy/extracted/r/demo/old/x.gno" 2>/dev/null)" = old ]; then
   ok "a chain dir's EXTRACTOR_FLAGS reach the extractor"
 else
-  ko "a chain dir's EXTRACTOR_FLAGS reach the extractor"
+  ko "a chain dir's EXTRACTOR_FLAGS reach the extractor: $(cd "$work/legacy" && find extracted -type f 2>&1 | tr '\n' ' ')"
 fi
 exit $fail
