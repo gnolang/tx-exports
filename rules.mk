@@ -86,14 +86,17 @@ fetch: check-chain-id tx-archive-ensure
 	@cat metadata.json | jq -a '.latest_block_height = $(TO_BLOCK)' > /tmp/aa.json
 	@mv /tmp/aa.json metadata.json
 
-# Without a numeric height from the RPC, `seq` would fail inside the backticks
-# and the loop would fetch nothing yet exit 0.
+# FROM_BLOCK, MAX_INTERVAL and the RPC's height must be numbers: otherwise `seq`
+# fails inside the backticks and the loop fetches nothing yet exits 0, or
+# drops to its two-argument form and fetches one block per chunk. They are
+# checked on the loop's own line, which names $(MAKE) and so also runs under
+# `make -n`.
 .PHONY: fetch-all
 fetch-all:
-	@case "$(LATEST_BLOCK_HEIGHT)" in \
-		'' | *[!0-9]*) echo "$(SHORTNAME): no block height from the RPC (got '$(LATEST_BLOCK_HEIGHT)')" >&2; exit 1 ;; \
-	esac
-	@for i in `seq $(FROM_BLOCK) $(MAX_INTERVAL) $(LATEST_BLOCK_HEIGHT)`; do \
+	@for v in "FROM_BLOCK=$(FROM_BLOCK)" "MAX_INTERVAL=$(MAX_INTERVAL)" "LATEST_BLOCK_HEIGHT=$(LATEST_BLOCK_HEIGHT)"; do \
+		case "$${v#*=}" in '' | *[!0-9]*) echo "$(SHORTNAME): $${v%%=*} is not a number (got '$${v#*=}')" >&2; exit 1 ;; esac; \
+	done; \
+	for i in `seq $(FROM_BLOCK) $(MAX_INTERVAL) $(LATEST_BLOCK_HEIGHT)`; do \
 		$(MAKE) -C . fetch FROM_BLOCK="$$i" || exit 1; \
 	done
 

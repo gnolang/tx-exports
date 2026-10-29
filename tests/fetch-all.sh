@@ -5,8 +5,8 @@
 # - chunks refused by the chain-id guard (the file:// fixture RPC reports
 #   another chain) stop it at the first one;
 # - it fetches every chunk up to the RPC's height when none fails;
-# - an RPC that reports no block height, or cannot be reached, fails it before
-#   any fetch;
+# - a FROM_BLOCK, MAX_INTERVAL or RPC block height that is not a number (an
+#   unreachable RPC, a missing metadata.json) fails it before any fetch;
 # - no fetch gets past the guard (git and go stand-ins would log it).
 # Usage: tests/fetch-all.sh   (needs GNU make, curl, jq)
 set -uo pipefail
@@ -102,7 +102,7 @@ if [ "$rc" -eq 0 ]; then
   ko "an unreachable RPC fails fetch-all: exited 0"
 elif [ -e "$work/unreachable/x/chunks.log" ]; then
   ko "an unreachable RPC fails fetch-all before any fetch: $(tr '\n' '|' <"$work/unreachable/x/chunks.log")"
-elif ! grep -qF "no block height from the RPC (got '')" <<<"$out"; then
+elif ! grep -qF "LATEST_BLOCK_HEIGHT is not a number (got '')" <<<"$out"; then
   ko "an unreachable RPC fails fetch-all, naming the empty height: $out"
 else
   ok "an unreachable RPC fails fetch-all before any fetch"
@@ -118,6 +118,28 @@ elif [ -e "$work/noheight/x/chunks.log" ]; then
 else
   ok "an RPC without a block height fails fetch-all before any fetch"
 fi
+# no metadata.json: FROM_BLOCK is empty, and `seq MAX_INTERVAL HEIGHT` would
+# fetch from the wrong block, or nothing with exit 0
+chain nofrom example-1 5
+rm "$work/nofrom/chain/metadata.json" || exit 1
+out=$(mk "$work/nofrom/chain" fetch-all REMOTE="file://$work/nofrom/rpc" MAKE="$work/nofrom/x/make" 2>&1)
+rc=$?
+if [ "$rc" -eq 0 ] || [ -e "$work/nofrom/x/chunks.log" ] || ! grep -qF "FROM_BLOCK is not a number (got '')" <<<"$out"; then
+  ko "a missing metadata.json fails fetch-all before any fetch, naming FROM_BLOCK: rc=$rc $out"
+else
+  ok "a missing metadata.json fails fetch-all before any fetch, naming FROM_BLOCK"
+fi
+
+# an empty MAX_INTERVAL turns `seq FROM MAX_INTERVAL HEIGHT` into one fetch per block
+chain nointerval example-1 5
+out=$(mk "$work/nointerval/chain" fetch-all REMOTE="file://$work/nointerval/rpc" MAX_INTERVAL= MAKE="$work/nointerval/x/make" 2>&1)
+rc=$?
+if [ "$rc" -eq 0 ] || [ -e "$work/nointerval/x/chunks.log" ] || ! grep -qF "MAX_INTERVAL is not a number (got '')" <<<"$out"; then
+  ko "an empty MAX_INTERVAL fails fetch-all before any fetch: rc=$rc $out"
+else
+  ok "an empty MAX_INTERVAL fails fetch-all before any fetch"
+fi
+
 [ ! -e "$work/beyond-guard.log" ] && ok "no fetch got past the guard" ||
   ko "no fetch got past the guard: $(tr '\n' '|' <"$work/beyond-guard.log")"
 exit $fail
