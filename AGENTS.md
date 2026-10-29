@@ -43,8 +43,9 @@ go run ./cmd backup --remote <RPC_URL> --from-block <N> --to-block <M> --output-
 ### Running the extractor
 
 ```sh
-# From repo root (the extractor is its own Go module); `make extractor` in a chain dir does the same
-go run -C extractor . -source-path ../test11.gno.land -output-dir ../test11.gno.land/extracted
+# From repo root (the extractor is its own Go module), into a fresh dir;
+# `make -C test11.gno.land extractor` writes test11.gno.land/extracted instead
+go run -C extractor . -source-path ../test11.gno.land -output-dir /tmp/test11-extracted
 # test1 stores plain std.Tx lines in txexport-*.log: add -legacy-mode -file-type .log
 ```
 
