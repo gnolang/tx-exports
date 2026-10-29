@@ -50,7 +50,8 @@ go run ./cmd backup -verbose --batch 100 --remote <RPC_URL> --from-block <N> --t
 # `make -C test11.gno.land extractor` writes test11.gno.land/extracted instead
 go run -C extractor . -source-path ../test11.gno.land -output-dir /tmp/test11-extracted
 # test1-test4 predate {tx, metadata} lines: add -legacy-mode (test1, whose
-# backups are txexport-*.log, also -file-type .log)
+# backups are txexport-*.log, also -file-type .log); per-dir flags, and why
+# test2/test3 are not rebuilt: extractor/README.md
 ```
 
 ## Architecture
