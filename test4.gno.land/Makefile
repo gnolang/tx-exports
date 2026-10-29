@@ -2,6 +2,9 @@ EXTRACTOR_DIR = extractor
 REMOTE = "https://rpc.test4.gnodevx.network"
 SHORTNAME = test4
 
+# test4's backups are {tx, blockNum} lines, older than {tx, metadata}
+EXTRACTOR_FLAGS = -legacy-mode
+
 # at an average of 3 secs per block (from gnoscan), test4 produces 28_800 blocks per day
 # 100k allows us to be able to catch up
 MAX_INTERVAL = 100000

@@ -3,3 +3,5 @@ txexport.log
 txexport.log.gz
 .idea
 /bin
+# an interrupted `make extractor` build dir
+/*/extracted.new/

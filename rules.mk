@@ -1,4 +1,7 @@
 EXTRACTOR_DIR ?= extractor
+# extractor flags a chain dir's backups need: -legacy-mode for the formats older
+# than {tx, metadata} lines (test4), and -file-type .log for test1's logs
+EXTRACTOR_FLAGS ?=
 
 # tx-archive lives in the gnolang/gno monorepo under contribs/tx-archive.
 # contribs/*/go.mod files use `replace github.com/gnolang/gno => ../..` so
@@ -176,11 +179,24 @@ join:
 	done
 	@echo "Done."
 
+# join, stats and extractor read and rewrite the same chain dir: one at a time,
+# even under make -j (an extractor listing the dir mid-join would miss backups)
+.NOTPARALLEL:
+
+# Each run extracts into a fresh extracted.new, so the extractor's numbering of
+# repeated deploys (<path>, <path>:1, …) starts from an empty tree. The new tree
+# replaces extracted/ only when the extractor succeeds (a deploy it cannot parse
+# fails it) and has written at least one package (it creates extracted.new only
+# then): backups it cannot parse never drop packages from an existing tree.
 .PHONY: extractor
 extractor:
-	go run -C "../$(EXTRACTOR_DIR)" . \
+	rm -rf extracted.new
+	go run -C "../$(EXTRACTOR_DIR)" . $(EXTRACTOR_FLAGS) \
 		-source-path "$(shell pwd)" \
-		-output-dir "$(shell pwd)/extracted"
+		-output-dir "$(shell pwd)/extracted.new"
+	@[ -d extracted.new ] || { echo "$(SHORTNAME): the extractor wrote no package, extracted/ not replaced" >&2; exit 1; }
+	rm -rf extracted
+	mv extracted.new extracted
 
 .PHONY: loop
 loop:

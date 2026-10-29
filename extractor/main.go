@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"bytes"
 	"context"
 	"encoding/json"
 	"errors"
@@ -10,13 +11,17 @@ import (
 	"io"
 	"log/slog"
 	"os"
+	"path"
 	"path/filepath"
+	"regexp"
+	"sort"
 	"strconv"
 	"strings"
 
 	"github.com/gnolang/gno/gno.land/pkg/gnoland"
 	"github.com/gnolang/gno/gno.land/pkg/sdk/vm"
 	"github.com/gnolang/gno/tm2/pkg/amino"
+	"github.com/gnolang/gno/tm2/pkg/crypto"
 	"github.com/gnolang/gno/tm2/pkg/std"
 	"github.com/peterbourgon/ff/v3/ffcli"
 )
@@ -31,6 +36,8 @@ var (
 	errInvalidSourceDir   = errors.New("invalid source directory")
 	errInvalidOutputDir   = errors.New("invalid output directory")
 	errNoSourceFilesFound = errors.New("no source files found, exiting")
+	errOutputDirNotEmpty  = errors.New("output directory is not empty")
+	errUnparsableDeploy   = errors.New("unable to parse a /vm.m_addpkg tx")
 )
 
 // Define extractor config
@@ -96,7 +103,7 @@ func (c *extractorCfg) registerFlags(fs *flag.FlagSet) {
 		&c.legacyMode,
 		"legacy-mode",
 		false,
-		"flag indicating if the legacy tx sheet mode should be used",
+		"read the formats older than {tx, metadata} lines: plain std.Tx (test1) or {tx, blockNum} (test2-test4)",
 	)
 }
 
@@ -126,7 +133,7 @@ func execExtract(ctx context.Context, cfg *extractorCfg) error {
 	var sourceFiles []string
 	sourceFiles = append(sourceFiles, cfg.sourcePath)
 
-	// If source is dir, walk it and add to sourceFiles
+	// If source is dir, list its source files
 	if source.IsDir() {
 		var findErr error
 		sourceFiles, findErr = findFilePaths(cfg.sourcePath, cfg.fileType)
@@ -138,89 +145,173 @@ func execExtract(ctx context.Context, cfg *extractorCfg) error {
 	if len(sourceFiles) == 0 {
 		return errNoSourceFilesFound
 	}
+	sortByBlockRange(sourceFiles)
+
+	if err := checkOutputDir(cfg.outputDir); err != nil {
+		return err
+	}
+	// absolute, so the path length checks see the paths the writes use
+	root, err := filepath.Abs(cfg.outputDir)
+	if err != nil {
+		return fmt.Errorf("unable to resolve output directory, %w", err)
+	}
 
 	var (
-		unwrapFn = func(data gnoland.TxWithMetadata) []std.Msg {
-			return data.Tx.Msgs
-		}
+		decode decodeFn = decodeTx
 
-		heightFn = func(_ gnoland.TxWithMetadata) uint64 {
-			return 0
-		}
-
-		unwrapLegacyFn = func(tx std.Tx) []std.Msg {
-			return tx.Msgs
-		}
-
-		heightLegacyFn = func(_ std.Tx) uint64 {
-			return 0
-		}
+		// deploys counts the deploys of each package dir so far: the first
+		// deploy of a path is extracted to its dir (or <dir>:1, see below),
+		// later ones (failed or not: the source files carry no tx results)
+		// to the next numbers, <dir>:1, <dir>:2, …
+		deploys = make(map[string]int)
 	)
+	if cfg.legacyMode {
+		decode = decodeLegacy
+	}
 
+	// Every deploy is read before any is written: the dir of each package, and
+	// every dir above it, are reserved, so that no deploy writes a file where a
+	// package needs a dir, whichever comes first in the chain
+	var (
+		pending  []vm.MsgAddPackage
+		pkgDirs  []string
+		reserved = make(map[string]bool)
+	)
 	for _, sourceFile := range sourceFiles {
 		select {
 		case <-ctx.Done():
 			return ctx.Err()
 		default:
-			sourceFile := sourceFile
+		}
 
-			// Extract messages
-			var (
-				msgs       []AddPackage
-				processErr error
-			)
-
-			if !cfg.legacyMode {
-				msgs, processErr = extractAddMessages(
-					sourceFile,
-					unwrapFn,
-					heightFn,
-				)
-			} else {
-				msgs, processErr = extractAddMessages(
-					sourceFile,
-					unwrapLegacyFn,
-					heightLegacyFn,
-				)
+		msgs, err := extractAddMessages(sourceFile, decode)
+		if err != nil {
+			return err
+		}
+		for _, msg := range msgs {
+			pkgDir := strings.TrimPrefix(msg.Package.Path, "gno.land/")
+			if !writable(pkgDir, msg.Package.Files) {
+				slog.Warn("skipping a package whose path or file names cannot be written", "path", msg.Package.Path)
+				continue
 			}
-
-			if processErr != nil {
-				return processErr
+			pkgDir = path.Clean(pkgDir)
+			pending = append(pending, msg)
+			pkgDirs = append(pkgDirs, pkgDir)
+			for dir := pkgDir; dir != "."; dir = path.Dir(dir) {
+				reserved[dir] = true
 			}
+		}
+	}
 
-			// Process messages
-			for _, msg := range msgs {
-				outputDir := filepath.Join(cfg.outputDir, strings.TrimLeft(msg.Package.Path, "gno.land/"))
+	for i, msg := range pending {
+		pkgDir := pkgDirs[i]
 
-				if !cfg.legacyMode {
-					if st, err := os.Stat(outputDir); err == nil && st.IsDir() {
-						outputDir += ":" + strconv.FormatUint(msg.Height, 10)
-					}
-				}
+		// a first deploy whose file would cover a package dir starts the
+		// numbering at 1: no package dir holds a ':', so <dir>:1 is free
+		n := deploys[pkgDir]
+		if n == 0 && coversPackageDir(pkgDir, msg.Package.Files, reserved) {
+			n = 1
+			slog.Warn("moving a deploy whose files would cover a package dir", "path", msg.Package.Path, "number", n)
+		}
+		outputDir := filepath.Join(root, filepath.FromSlash(pkgDir))
+		if n > 0 {
+			outputDir += ":" + strconv.Itoa(n)
+		}
+		if !fits(outputDir, msg.Package.Files) {
+			slog.Warn("skipping a deploy too long to write", "path", msg.Package.Path, "number", n)
+			continue
+		}
+		deploys[pkgDir] = n + 1
 
-				// Write dir before writing files
-				if dirWriteErr := os.MkdirAll(outputDir, os.ModePerm); dirWriteErr != nil {
-					return fmt.Errorf("unable to write dir, %w", dirWriteErr)
-				}
+		// Write dir before writing files
+		if dirWriteErr := os.MkdirAll(outputDir, os.ModePerm); dirWriteErr != nil {
+			return fmt.Errorf("unable to write dir, %w", dirWriteErr)
+		}
 
-				// Write the package source code
-				if writeErr := writePackageFiles(msg, outputDir); writeErr != nil {
-					return writeErr
-				}
+		// Write the package source code
+		if writeErr := writePackageFiles(msg, outputDir); writeErr != nil {
+			return writeErr
+		}
 
-				// Write the package metadata
-				if writeErr := writePackageMetadata(metadataFromMsg(msg), outputDir); writeErr != nil {
-					return writeErr
-				}
-			}
+		// Write the package metadata
+		if writeErr := writePackageMetadata(metadataFromMsg(msg), outputDir); writeErr != nil {
+			return writeErr
 		}
 	}
 
 	return nil
 }
 
+// maxNameLen is the longest file or dir name the filesystem takes, in bytes.
+const maxNameLen = 255
+
+// maxPathLen is Linux's PATH_MAX: the longest path it takes, in bytes, with its
+// terminating NUL.
+const maxPathLen = 4096
+
+// writable reports whether a package's path and file names can be written as
+// its dir and files, and committed. They come from the chain, and the source
+// files keep the txs it rejected, so a name the chain refuses must neither
+// escape nor fail the run nor the exporter's commit. The package dir must be a
+// local path below the output dir, and each file name a plain name inside it.
+// No path component or file name may start with '.' (., .., and the .git and
+// .gitignore git refuses or obeys), hold '~' or '\' (git's 8.3 and NTFS forms
+// of .git), a NUL, or the ':' of the numbered dirs, or be longer than the
+// filesystem takes; and no file may be named like the metadata file.
+func writable(pkgDir string, files []*std.MemFile) bool {
+	if !filepath.IsLocal(pkgDir) {
+		return false
+	}
+	for _, part := range strings.Split(pkgDir, "/") {
+		if !writableName(part) {
+			return false
+		}
+	}
+	for _, file := range files {
+		if file == nil || file.Name != filepath.Base(file.Name) || !writableName(file.Name) ||
+			file.Name == packageMetadataFile {
+			return false
+		}
+	}
+	return true
+}
+
+// writableName reports whether name passes writable's rules for a path
+// component or file name.
+func writableName(name string) bool {
+	return !strings.HasPrefix(name, ".") && !strings.ContainsAny(name, "~\\:\x00") && len(name) <= maxNameLen
+}
+
+// coversPackageDir reports whether a deploy in pkgDir would write a file, or
+// its metadata file, where a package needs a dir: a package r/x with a file
+// named license, and a package r/x/license.
+func coversPackageDir(pkgDir string, files []*std.MemFile, reserved map[string]bool) bool {
+	if reserved[path.Join(pkgDir, packageMetadataFile)] {
+		return true
+	}
+	for _, file := range files {
+		if reserved[path.Join(pkgDir, file.Name)] {
+			return true
+		}
+	}
+	return false
+}
+
+// fits reports whether a deploy's dir name, and its files' paths, are short
+// enough for the filesystem: a numbered dir can outgrow the name limit that
+// writable checked, and many components the path limit.
+func fits(dir string, files []*std.MemFile) bool {
+	longest := packageMetadataFile
+	for _, file := range files {
+		if len(file.Name) > len(longest) {
+			longest = file.Name
+		}
+	}
+	return len(filepath.Base(dir)) <= maxNameLen && len(filepath.Join(dir, longest)) < maxPathLen
+}
+
 // writePackageFiles writes all files from a single package to the output directory
-func writePackageFiles(msg AddPackage, outputDir string) error {
+func writePackageFiles(msg vm.MsgAddPackage, outputDir string) error {
 	for _, file := range msg.Package.Files {
 		// Get the output path
 		writePath := filepath.Join(outputDir, file.Name)
@@ -251,41 +342,83 @@ func writePackageMetadata(metadata Metadata, outputDir string) error {
 	return nil
 }
 
-// AddPackage contains a vm.MsgAddPackage, together with the block height where it appeared.
-type AddPackage struct {
-	vm.MsgAddPackage
-	Height uint64
+// checkOutputDir refuses an output directory that exists and is not empty:
+// extraction never mixes with an earlier tree, so each run's numbering of
+// repeated deploys stands on its own. A missing output directory is created
+// only when the first package is written: `make extractor` relies on that to
+// tell a run that wrote nothing.
+func checkOutputDir(dir string) error {
+	entries, err := os.ReadDir(dir)
+	if errors.Is(err, os.ErrNotExist) {
+		return nil
+	}
+	if err != nil {
+		return fmt.Errorf("unable to read output directory, %w", err)
+	}
+	if len(entries) > 0 {
+		return fmt.Errorf("%w: %s", errOutputDirNotEmpty, dir)
+	}
+	return nil
 }
 
-// extractAddMessages extracts the AddPackage messages
-func extractAddMessages[T std.Tx | gnoland.TxWithMetadata](
-	filePath string,
-	unwrapFn func(T) []std.Msg,
-	heightFn func(T) uint64,
-) ([]AddPackage, error) {
+// blockRange matches the range at the end of a source file name
+// (backup_<from>-<to>.jsonl), capturing <from>.
+var blockRange = regexp.MustCompile(`(\d+)-\d+\.[^./]+$`)
+
+// sortByBlockRange orders source files by the start of the range in their
+// name (blocks, or lines for staging's chunks), so packages are extracted in
+// chain order: staging's ranges are not zero-padded, so a lexical order would
+// not be the chain order. Names without a range sort lexically, after those
+// with one.
+func sortByBlockRange(paths []string) {
+	from := func(path string) (uint64, bool) {
+		m := blockRange.FindStringSubmatch(filepath.Base(path))
+		if m == nil {
+			return 0, false
+		}
+		n, err := strconv.ParseUint(m[1], 10, 64)
+		return n, err == nil
+	}
+
+	sort.SliceStable(paths, func(i, j int) bool {
+		fi, oki := from(paths[i])
+		fj, okj := from(paths[j])
+		switch {
+		case oki && okj && fi != fj:
+			return fi < fj
+		case oki != okj:
+			return oki
+		default:
+			return paths[i] < paths[j]
+		}
+	})
+}
+
+// extractAddMessages extracts the MsgAddPackage messages of a source file,
+// decoding each line with decode
+func extractAddMessages(filePath string, decode decodeFn) (_ []vm.MsgAddPackage, err error) {
 	file, err := os.Open(filePath)
 	if err != nil {
 		return nil, fmt.Errorf("unable to open file, %w", err)
 	}
-
-	cleanup := func() error {
+	defer func() {
 		if closeErr := file.Close(); closeErr != nil {
-			return fmt.Errorf("unable to gracefully close file, %w", closeErr)
+			err = errors.Join(err, fmt.Errorf("unable to gracefully close file, %w", closeErr))
 		}
-		return nil
-	}
+	}()
 
 	reader := bufio.NewReader(file)
 
 	// Msg array to be returned for further processing
-	msgArr := make([]AddPackage, 0)
+	msgArr := make([]vm.MsgAddPackage, 0)
 
-	// Buffer to handle lines longer than 64kb
+	// Buffer for lines longer than the reader's 4096-byte buffer
 	tempBuf := make([]byte, 0)
 
-	for {
-		var txData T
+	// Number of the line being parsed, for logs
+	lineNum := 0
 
+	for {
 		line, isPrefix, err := reader.ReadLine()
 
 		// Exit if no more lines in file
@@ -302,78 +435,162 @@ func extractAddMessages[T std.Tx | gnoland.TxWithMetadata](
 			continue
 		}
 
-		// Handle long lines
+		// Handle long lines: the buffer holds the line's earlier parts, and is
+		// emptied before parsing so a line that is skipped cannot leak into the next
 		if len(tempBuf) != 0 {
-			// Append last part of line to temporary buffer
-			tempBuf = append(tempBuf, line...)
-
-			// Use line variable to pass it on to amino
-			line = tempBuf
+			line = append(tempBuf, line...)
+			tempBuf = nil
 		}
+		lineNum++
 
-		if err := amino.UnmarshalJSON(line, &txData); err != nil {
-			slog.Error("error while parsing amino JSON", "error", err, "line", line)
+		deploys, err := decode(line)
+		if err != nil {
+			// a deploy the extractor cannot decode fails the run: skipping it
+			// would drop its package from a rebuilt tree
+			if bytes.Contains(line, []byte(`"/vm.m_addpkg"`)) {
+				return nil, fmt.Errorf("%w at %s:%d: %w", errUnparsableDeploy, filePath, lineNum, err)
+			}
+			slog.Warn("skipping a line the extractor cannot parse", "file", filePath, "line", lineNum, "error", err)
+			continue
+		}
+		msgArr = append(msgArr, deploys...)
+	}
+
+	return msgArr, nil
+}
+
+// decodeFn decodes the deploys of one source line.
+type decodeFn func(line []byte) ([]vm.MsgAddPackage, error)
+
+// decodeTx decodes a {tx, metadata} line with the pinned gno types.
+func decodeTx(line []byte) ([]vm.MsgAddPackage, error) {
+	var data gnoland.TxWithMetadata
+	if err := amino.UnmarshalJSON(line, &data); err != nil {
+		return nil, err
+	}
+
+	var deploys []vm.MsgAddPackage
+	for _, msg := range data.Tx.Msgs {
+		// Only MsgAddPkg should be parsed
+		if msg.Type() != "add_package" {
 			continue
 		}
 
-		// Reset tempBuf in case it was used for a long line
-		if tempBuf != nil {
-			tempBuf = nil
+		deploy, ok := msg.(vm.MsgAddPackage)
+		if !ok {
+			return nil, errors.New("could not cast into MsgAddPackage")
 		}
 
-		for _, msg := range unwrapFn(txData) {
-			// Only MsgAddPkg should be parsed
-			if msg.Type() != "add_package" {
-				continue
-			}
-
-			msgAddPkg, ok := msg.(vm.MsgAddPackage)
-			if !ok {
-				return nil, errors.New("could not cast into MsgAddPackage")
-			}
-
-			if msgAddPkg.Package == nil {
-				return nil, errors.New("MsgAddPackage is nil")
-			}
-
-			msgArr = append(msgArr, AddPackage{
-				MsgAddPackage: msgAddPkg,
-				Height:        heightFn(txData),
-			})
+		if deploy.Package == nil {
+			return nil, errors.New("MsgAddPackage is nil")
 		}
+
+		deploys = append(deploys, deploy)
 	}
 
-	return msgArr, cleanup()
+	return deploys, nil
 }
 
-// findFilePaths gathers the file paths for specific file types
-func findFilePaths(startPath string, fileType string) ([]string, error) {
-	filePaths := make([]string, 0)
+// legacyLine is a source line in a format older than {tx, metadata}: a plain
+// std.Tx (test1) or a {tx, blockNum} object (test2-test4).
+type legacyLine struct {
+	Msg []json.RawMessage `json:"msg"`
+	Tx  *struct {
+		Msg []json.RawMessage `json:"msg"`
+	} `json:"tx"`
+}
 
-	walkFn := func(path string, info os.FileInfo, err error) error {
-		if err != nil {
-			return fmt.Errorf("error accessing file: %w", err)
-		}
+// legacyDeploy is a /vm.m_addpkg message in those formats: its deposit is under
+// `deposit`, and test1-test3 capitalize the package keys, which encoding/json
+// matches case-insensitively. It lists every key they carry: any other one
+// fails the decoding rather than being misread.
+type legacyDeploy struct {
+	Type    string `json:"@type"`
+	Creator string `json:"creator"`
+	Deposit string `json:"deposit"`
+	Package *struct {
+		Name  string `json:"name"`
+		Path  string `json:"path"`
+		Files []*struct {
+			Name string `json:"name"`
+			Body string `json:"body"`
+		} `json:"files"`
+	} `json:"package"`
+}
 
-		// Check if the file is a dir
-		if info.IsDir() {
-			return nil
-		}
-
-		// Check if the file type matches
-		if !strings.HasSuffix(info.Name(), fileType) {
-			return nil
-		}
-
-		// File is not a directory, and is of the type
-		filePaths = append(filePaths, path)
-
-		return nil
+// decodeLegacy decodes the deploys of a line in a format older than
+// {tx, metadata}. It does not use the pinned gno types, whose amino JSON
+// rejects these formats' fields and key casing.
+func decodeLegacy(line []byte) ([]vm.MsgAddPackage, error) {
+	var parsed legacyLine
+	if err := json.Unmarshal(line, &parsed); err != nil {
+		return nil, err
+	}
+	msgs := parsed.Msg
+	if parsed.Tx != nil {
+		msgs = parsed.Tx.Msg
 	}
 
-	// Walk the directory root recursively
-	if walkErr := filepath.Walk(startPath, walkFn); walkErr != nil {
-		return nil, fmt.Errorf("unable to walk directory, %w", walkErr)
+	var deploys []vm.MsgAddPackage
+	for _, raw := range msgs {
+		var head struct {
+			Type string `json:"@type"`
+		}
+		if err := json.Unmarshal(raw, &head); err != nil {
+			return nil, err
+		}
+		if head.Type != "/vm.m_addpkg" {
+			continue
+		}
+
+		var msg legacyDeploy
+		decoder := json.NewDecoder(bytes.NewReader(raw))
+		decoder.DisallowUnknownFields()
+		if err := decoder.Decode(&msg); err != nil {
+			return nil, err
+		}
+		if msg.Package == nil {
+			return nil, errors.New("MsgAddPackage is nil")
+		}
+		creator, err := crypto.AddressFromBech32(msg.Creator)
+		if err != nil {
+			return nil, fmt.Errorf("invalid deploy creator, %w", err)
+		}
+		deposit, err := std.ParseCoins(msg.Deposit)
+		if err != nil {
+			return nil, fmt.Errorf("invalid deploy deposit, %w", err)
+		}
+		files := make([]*std.MemFile, len(msg.Package.Files))
+		for i, file := range msg.Package.Files {
+			if file != nil {
+				files[i] = &std.MemFile{Name: file.Name, Body: file.Body}
+			}
+		}
+
+		deploys = append(deploys, vm.MsgAddPackage{
+			Creator: creator,
+			Send:    deposit,
+			Package: &std.MemPackage{Name: msg.Package.Name, Path: msg.Package.Path, Files: files},
+		})
+	}
+
+	return deploys, nil
+}
+
+// findFilePaths lists the files of a type directly in a dir. Its subdirs are
+// skipped: a chain dir's extracted/ tree holds package files, not source files.
+func findFilePaths(dir string, fileType string) ([]string, error) {
+	entries, err := os.ReadDir(dir)
+	if err != nil {
+		return nil, fmt.Errorf("unable to read directory, %w", err)
+	}
+
+	filePaths := make([]string, 0)
+	for _, entry := range entries {
+		if entry.IsDir() || !strings.HasSuffix(entry.Name(), fileType) {
+			continue
+		}
+		filePaths = append(filePaths, filepath.Join(dir, entry.Name()))
 	}
 
 	return filePaths, nil

@@ -2,10 +2,23 @@ package main
 
 import (
 	"bufio"
+	"bytes"
 	"context"
 	crand "crypto/rand"
 	"encoding/base64"
 	"encoding/json"
+	"log"
+	"log/slog"
+	"math/rand"
+	"os"
+	"path/filepath"
+	"runtime/debug"
+	"sort"
+	"strconv"
+	"strings"
+	"testing"
+	"time"
+
 	"github.com/gnolang/gno/gno.land/pkg/gnoland"
 	"github.com/gnolang/gno/gno.land/pkg/sdk/vm"
 	"github.com/gnolang/gno/tm2/pkg/amino"
@@ -14,14 +27,6 @@ import (
 	"github.com/gnolang/gno/tm2/pkg/std"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"math/rand"
-	"os"
-	"path/filepath"
-	"sort"
-	"strconv"
-	"strings"
-	"testing"
-	"time"
 )
 
 const sourceFileType = ".jsonl"
@@ -76,8 +81,7 @@ func TestExtractor_Errors(t *testing.T) {
 		t.Run(testCase.name, func(t *testing.T) {
 			t.Parallel()
 
-			ctx, cancelFn := context.WithTimeout(context.Background(), time.Second*5)
-			defer cancelFn()
+			ctx := context.Background()
 
 			err := execExtract(ctx, testCase.cfg)
 			assert.ErrorIs(t, err, testCase.expectedErr)
@@ -99,7 +103,7 @@ func TestValidFlow_Dir(t *testing.T) {
 	t.Cleanup(removeDir(t, sourceDir))
 
 	// Set correct config
-	var cfg = &extractorCfg{
+	cfg := &extractorCfg{
 		fileType:   sourceFileType,
 		sourcePath: sourceDir,
 		outputDir:  outputDir,
@@ -110,13 +114,12 @@ func TestValidFlow_Dir(t *testing.T) {
 	_ = generateSourceFiles(t, sourceDir, mockStdMsg, 20)
 
 	// Perform extraction
-	ctx, cancelFn := context.WithTimeout(context.Background(), time.Second*5)
-	defer cancelFn()
+	ctx := context.Background()
 
 	require.NoError(t, execExtract(ctx, cfg))
 
 	for _, msg := range mockAddPkgMsg {
-		basePath := filepath.Join(outputDir, strings.TrimLeft(msg.Package.Path, "gno.land/"))
+		basePath := filepath.Join(outputDir, strings.TrimPrefix(msg.Package.Path, "gno.land/"))
 
 		// Get metadata path & open metadata file
 		metadataPath := filepath.Join(basePath, packageMetadataFile)
@@ -129,7 +132,8 @@ func TestValidFlow_Dir(t *testing.T) {
 		require.NoError(t, err)
 
 		// Compare metadata
-		expectedMetadata, err := json.Marshal(metadataFromMsg(AddPackage{MsgAddPackage: msg}))
+		expectedMetadata, err := json.Marshal(metadataFromMsg(msg))
+		require.NoError(t, err)
 		assert.Equal(t, expectedMetadata, retrievedMetadata)
 
 		// Close metadata file
@@ -167,7 +171,7 @@ func TestValidFlow_File(t *testing.T) {
 	t.Cleanup(removeDir(t, sourceDir))
 
 	// Set correct config
-	var cfg = &extractorCfg{
+	cfg := &extractorCfg{
 		fileType:   sourceFileType,
 		sourcePath: sourceDir,
 		outputDir:  outputDir,
@@ -178,13 +182,12 @@ func TestValidFlow_File(t *testing.T) {
 	_ = generateSourceFiles(t, sourceDir, mockStdMsg, 1)
 
 	// Perform extraction
-	ctx, cancelFn := context.WithTimeout(context.Background(), time.Second*5)
-	defer cancelFn()
+	ctx := context.Background()
 
 	require.NoError(t, execExtract(ctx, cfg))
 
 	for _, msg := range mockAddPkgMsg {
-		basePath := filepath.Join(outputDir, strings.TrimLeft(msg.Package.Path, "gno.land/"))
+		basePath := filepath.Join(outputDir, strings.TrimPrefix(msg.Package.Path, "gno.land/"))
 
 		// Get metadata path & open metadata file
 		metadataPath := filepath.Join(basePath, packageMetadataFile)
@@ -197,7 +200,8 @@ func TestValidFlow_File(t *testing.T) {
 		require.NoError(t, err)
 
 		// Compare metadata
-		expectedMetadata, err := json.Marshal(metadataFromMsg(AddPackage{MsgAddPackage: msg}))
+		expectedMetadata, err := json.Marshal(metadataFromMsg(msg))
+		require.NoError(t, err)
 		assert.Equal(t, expectedMetadata, retrievedMetadata)
 
 		// Close metadata file
@@ -280,16 +284,11 @@ func TestExtractAddMessages(t *testing.T) {
 	mockMsgs, mockMsgsAddPackage := generateMockMsgs(t)
 	sourceFiles := generateSourceFiles(t, tempDir, mockMsgs, 20)
 
-	unwrapFn := func(data gnoland.TxWithMetadata) []std.Msg { return data.Tx.Msgs }
-	heightFn := func(_ gnoland.TxWithMetadata) uint64 { return 0 }
-
 	var results []vm.MsgAddPackage
 	for _, sf := range sourceFiles {
-		res, err := extractAddMessages(sf, unwrapFn, heightFn)
+		res, err := extractAddMessages(sf, decodeTx)
 		require.NoError(t, err)
-		for _, r := range res {
-			results = append(results, r.MsgAddPackage)
-		}
+		results = append(results, res...)
 	}
 
 	sort.Slice(results, func(i, j int) bool {
@@ -313,10 +312,10 @@ func TestWritePackageMetadata(t *testing.T) {
 	t.Cleanup(removeDir(t, tempDir))
 
 	for _, msg := range mockMsgsAddPackage {
-		md := metadataFromMsg(AddPackage{MsgAddPackage: msg})
+		md := metadataFromMsg(msg)
 
 		// Get output dir
-		outputDir := filepath.Join(tempDir, strings.TrimLeft(msg.Package.Path, "gno.land/"))
+		outputDir := filepath.Join(tempDir, strings.TrimPrefix(msg.Package.Path, "gno.land/"))
 
 		// Write dir before writing metadata
 		err := os.MkdirAll(outputDir, os.ModePerm)
@@ -343,6 +342,7 @@ func TestWritePackageMetadata(t *testing.T) {
 		require.Equal(t, md, unmarshalledMetadata)
 	}
 }
+
 func TestWritePackageFiles(t *testing.T) {
 	t.Parallel()
 
@@ -354,14 +354,14 @@ func TestWritePackageFiles(t *testing.T) {
 
 	for _, msg := range mockMsgsAddPackage {
 		// Get output dir
-		outputDir := filepath.Join(tempDir, strings.TrimLeft(msg.Package.Path, "gno.land/"))
+		outputDir := filepath.Join(tempDir, strings.TrimPrefix(msg.Package.Path, "gno.land/"))
 
 		// Write dir before writing metadata
 		err := os.MkdirAll(outputDir, os.ModePerm)
 		require.NoError(t, err)
 
 		// Write the metadata
-		err = writePackageFiles(AddPackage{MsgAddPackage: msg}, outputDir)
+		err = writePackageFiles(msg, outputDir)
 		require.NoError(t, err)
 
 		// Read & compare file
@@ -373,7 +373,945 @@ func TestWritePackageFiles(t *testing.T) {
 	}
 }
 
+func TestExtract_NumbersRepeatedDeploysInChainOrder(t *testing.T) {
+	t.Parallel()
+
+	sourceDir, outputDir := t.TempDir(), t.TempDir()
+	writeSourceFile(t, sourceDir, "backup_0000001-0000010.jsonl",
+		addPkgTx(t, "gno.land/r/demo/x", "first"),
+		addPkgTx(t, "gno.land/r/demo/y", "only"),
+	)
+	writeSourceFile(t, sourceDir, "backup_0000011-0000020.jsonl",
+		addPkgTx(t, "gno.land/r/demo/x", "second"),
+		addPkgTx(t, "gno.land/r/demo/x", "third"),
+	)
+
+	require.NoError(t, execExtract(context.Background(), &extractorCfg{
+		fileType:   sourceFileType,
+		sourcePath: sourceDir,
+		outputDir:  outputDir,
+	}))
+
+	assert.Equal(t, []string{"x", "x:1", "x:2", "y"}, dirNames(t, filepath.Join(outputDir, "r", "demo")))
+	assert.Equal(t, "first", readPkgBody(t, outputDir, "r/demo/x"))
+	assert.Equal(t, "second", readPkgBody(t, outputDir, "r/demo/x:1"))
+	assert.Equal(t, "third", readPkgBody(t, outputDir, "r/demo/x:2"))
+	assert.Equal(t, "only", readPkgBody(t, outputDir, "r/demo/y"))
+}
+
+func TestExtract_NumbersAPathWrittenTwoWaysAsOne(t *testing.T) {
+	t.Parallel()
+
+	// a trailing or doubled slash names the same dir: one numbering, so the
+	// second deploy does not write over the first
+	sourceDir, outputDir := t.TempDir(), t.TempDir()
+	writeSourceFile(t, sourceDir, "backup_0000001-0000010.jsonl",
+		addPkgTx(t, "gno.land/r/demo/x/", "first"),
+		addPkgTx(t, "gno.land/r//demo/x", "second"),
+	)
+
+	require.NoError(t, execExtract(context.Background(), &extractorCfg{
+		fileType:   sourceFileType,
+		sourcePath: sourceDir,
+		outputDir:  outputDir,
+	}))
+
+	assert.Equal(t, "first", readPkgBody(t, outputDir, "r/demo/x"))
+	assert.Equal(t, "second", readPkgBody(t, outputDir, "r/demo/x:1"))
+}
+
+func TestExtract_ReadsSourceFilesInBlockOrder(t *testing.T) {
+	t.Parallel()
+
+	// staging's chunk names are not zero-padded: lexically, 10001-11000
+	// sorts before 1001-2000
+	sourceDir, outputDir := t.TempDir(), t.TempDir()
+	writeSourceFile(t, sourceDir, "backup_staging_txs_10001-11000.jsonl", addPkgTx(t, "gno.land/r/demo/x", "third"))
+	writeSourceFile(t, sourceDir, "backup_staging_txs_1001-2000.jsonl", addPkgTx(t, "gno.land/r/demo/x", "second"))
+	writeSourceFile(t, sourceDir, "backup_staging_txs_1-1000.jsonl", addPkgTx(t, "gno.land/r/demo/x", "first"))
+
+	require.NoError(t, execExtract(context.Background(), &extractorCfg{
+		fileType:   sourceFileType,
+		sourcePath: sourceDir,
+		outputDir:  outputDir,
+	}))
+
+	assert.Equal(t, "first", readPkgBody(t, outputDir, "r/demo/x"))
+	assert.Equal(t, "second", readPkgBody(t, outputDir, "r/demo/x:1"))
+	assert.Equal(t, "third", readPkgBody(t, outputDir, "r/demo/x:2"))
+}
+
+func TestExtract_NumbersRepeatedDeploysInLegacyMode(t *testing.T) {
+	t.Parallel()
+
+	// test1's plain std.Tx lines, with its capitalized package keys
+	deploy := func(body string) string {
+		return `{"msg":[{"@type":"/vm.m_addpkg",` + legacyCreator + `,"deposit":"",` +
+			`"package":{"Name":"x","Path":"gno.land/r/demo/x","Files":[{"Name":"x.gno","Body":"` + body + `"}]}}],` +
+			`"fee":{"gas_wanted":"1","gas_fee":"1gnot"},"signatures":null,"memo":""}`
+	}
+	sourceDir, outputDir := t.TempDir(), t.TempDir()
+	writeLines(t, sourceDir, "txexport-aa.log", deploy("first"), deploy("second"))
+
+	require.NoError(t, execExtract(context.Background(), &extractorCfg{
+		fileType:   ".log",
+		sourcePath: sourceDir,
+		outputDir:  outputDir,
+		legacyMode: true,
+	}))
+
+	assert.Equal(t, []string{"x", "x:1"}, dirNames(t, filepath.Join(outputDir, "r", "demo")))
+	assert.Equal(t, "first", readPkgBody(t, outputDir, "r/demo/x"))
+	assert.Equal(t, "second", readPkgBody(t, outputDir, "r/demo/x:1"))
+}
+
+func TestExtract_RefusesANonEmptyOutputDir(t *testing.T) {
+	t.Parallel()
+
+	sourceDir, outputDir := t.TempDir(), t.TempDir()
+	writeSourceFile(t, sourceDir, "backup_0000001-0000010.jsonl", addPkgTx(t, "gno.land/r/demo/x", "new"))
+	require.NoError(t, os.WriteFile(filepath.Join(outputDir, "keep"), []byte("old"), 0o644))
+
+	err := execExtract(context.Background(), &extractorCfg{
+		fileType:   sourceFileType,
+		sourcePath: sourceDir,
+		outputDir:  outputDir,
+	})
+
+	assert.ErrorIs(t, err, errOutputDirNotEmpty)
+	assert.Equal(t, []string{"keep"}, dirNames(t, outputDir))
+}
+
+func TestExtract_CreatesAMissingOutputDir(t *testing.T) {
+	t.Parallel()
+
+	sourceDir := t.TempDir()
+	outputDir := filepath.Join(t.TempDir(), "extracted.new")
+	writeSourceFile(t, sourceDir, "backup_0000001-0000010.jsonl", addPkgTx(t, "gno.land/r/demo/x", "new"))
+
+	require.NoError(t, execExtract(context.Background(), &extractorCfg{
+		fileType:   sourceFileType,
+		sourcePath: sourceDir,
+		outputDir:  outputDir,
+	}))
+
+	assert.Equal(t, "new", readPkgBody(t, outputDir, "r/demo/x"))
+}
+
+func TestExtract_FailsOnADeployItCannotParse(t *testing.T) {
+	t.Parallel()
+
+	// a deploy with a field the pinned gno types do not know, as after a chain
+	// upgrade: skipping it would drop its package from the rebuilt tree
+	sourceDir := t.TempDir()
+	unknownField := mustReplace(t, txJSON(t, addPkgTx(t, "gno.land/r/demo/y", "y")),
+		`"path":"gno.land/r/demo/y"`, `"path":"gno.land/r/demo/y","newfield":1`)
+	writeLines(t, sourceDir, "backup_0000001-0000010.jsonl",
+		txJSON(t, addPkgTx(t, "gno.land/r/demo/x", "x")),
+		unknownField,
+	)
+
+	err := execExtract(context.Background(), &extractorCfg{
+		fileType:   sourceFileType,
+		sourcePath: sourceDir,
+		outputDir:  filepath.Join(t.TempDir(), "extracted.new"),
+	})
+
+	assert.ErrorIs(t, err, errUnparsableDeploy)
+}
+
+func TestExtract_SkipsAnUnparsableLineWithoutADeploy(t *testing.T) {
+	// not parallel: it captures the default logger
+	logs := captureLogs(t)
+
+	// a msg type the pinned gno types do not know (such as vm.m_enable_pkg) in
+	// a tx without a deploy: there is no package to lose, even if its memo
+	// mentions /vm.m_addpkg
+	sourceDir, outputDir := t.TempDir(), t.TempDir()
+	unknownType := mustReplace(t, mustReplace(t, txJSON(t, addPkgTx(t, "gno.land/r/demo/z", "z")),
+		`"/vm.m_addpkg"`, `"/vm.m_unknown"`), `"memo":""`, `"memo":"not a /vm.m_addpkg"`)
+	writeLines(t, sourceDir, "backup_0000001-0000010.jsonl",
+		txJSON(t, addPkgTx(t, "gno.land/r/demo/x", "x")),
+		unknownType,
+		txJSON(t, addPkgTx(t, "gno.land/r/demo/y", "y")),
+	)
+
+	require.NoError(t, execExtract(context.Background(), &extractorCfg{
+		fileType:   sourceFileType,
+		sourcePath: sourceDir,
+		outputDir:  outputDir,
+	}))
+
+	assert.Equal(t, []string{"x", "y"}, dirNames(t, filepath.Join(outputDir, "r", "demo")))
+	assert.Equal(t, 1, strings.Count(logs.String(), "skipping a line"))
+}
+
+func TestExtract_ReadsPastALongLineItSkips(t *testing.T) {
+	// not parallel: it captures the default logger
+	logs := captureLogs(t)
+
+	// an undecodable line without a deploy, longer than the reader's 4096-byte
+	// buffer: skipping it must not carry its bytes into the next line
+	sourceDir, outputDir := t.TempDir(), t.TempDir()
+	long := mustReplace(t, txJSON(t, addPkgTx(t, "gno.land/r/demo/z", strings.Repeat("z", 8192))),
+		`"/vm.m_addpkg"`, `"/vm.m_unknown"`)
+	writeLines(t, sourceDir, "backup_0000001-0000010.jsonl",
+		long,
+		txJSON(t, addPkgTx(t, "gno.land/r/demo/y", "y")),
+	)
+
+	require.NoError(t, execExtract(context.Background(), &extractorCfg{
+		fileType:   sourceFileType,
+		sourcePath: sourceDir,
+		outputDir:  outputDir,
+	}))
+
+	assert.Equal(t, "y", readPkgBody(t, outputDir, "r/demo/y"))
+	assert.Equal(t, 1, strings.Count(logs.String(), "skipping a line"))
+}
+
+func TestExtractAddMessages_ClosesTheFileOnAnError(t *testing.T) {
+	// not parallel: it counts the process's open file descriptors, and with
+	// the GC off, since a collected *os.File closes itself
+	defer debug.SetGCPercent(debug.SetGCPercent(-1))
+
+	nilPackage := txJSON(t, gnoland.TxWithMetadata{Tx: std.Tx{Msgs: []std.Msg{vm.MsgAddPackage{
+		Creator: addressFromString(t, "g1jg8mtutu9khhfwc4nxmuhcpftf0pajdhfvsqf5"),
+	}}}})
+	dir := t.TempDir()
+	writeLines(t, dir, "backup_0000001-0000010.jsonl", nilPackage)
+
+	before := openFiles(t)
+	for range 20 {
+		_, err := extractAddMessages(filepath.Join(dir, "backup_0000001-0000010.jsonl"), decodeTx)
+		require.Error(t, err)
+	}
+
+	assert.Equal(t, before, openFiles(t))
+}
+
+func TestExtractAddMessages_LogsASkippedLineByNumber(t *testing.T) {
+	// not parallel: it swaps the default logger
+	logs := captureLogs(t)
+
+	unknownType := mustReplace(t, txJSON(t, addPkgTx(t, "gno.land/r/demo/z", "the-skipped-line")),
+		`"/vm.m_addpkg"`, `"/vm.m_unknown"`)
+	dir := t.TempDir()
+	writeLines(t, dir, "backup_0000001-0000010.jsonl",
+		txJSON(t, addPkgTx(t, "gno.land/r/demo/x", "x")),
+		unknownType,
+	)
+
+	_, err := extractAddMessages(filepath.Join(dir, "backup_0000001-0000010.jsonl"), decodeTx)
+	require.NoError(t, err)
+
+	assert.Contains(t, logs.String(), "backup_0000001-0000010.jsonl")
+	assert.Contains(t, logs.String(), "line=2")
+	assert.NotContains(t, logs.String(), "the-skipped-line")
+}
+
+func TestExtract_TrimsOnlyTheGnoLandPrefix(t *testing.T) {
+	t.Parallel()
+
+	// "gno.land/" is a prefix, not a set of characters: test2 has packages
+	// under github.com/
+	sourceDir, outputDir := t.TempDir(), t.TempDir()
+	writeSourceFile(t, sourceDir, "backup_0000001-0000010.jsonl",
+		addPkgTx(t, "gno.land/r/demo/x", "x"),
+		addPkgTx(t, "github.com/gnolang/y", "y"),
+	)
+
+	require.NoError(t, execExtract(context.Background(), &extractorCfg{
+		fileType:   sourceFileType,
+		sourcePath: sourceDir,
+		outputDir:  outputDir,
+	}))
+
+	assert.Equal(t, "x", readPkgBody(t, outputDir, "r/demo/x"))
+	assert.Equal(t, "y", readPkgBody(t, outputDir, "github.com/gnolang/y"))
+}
+
+func TestExtract_SkipsPackagesThatLeaveTheirDir(t *testing.T) {
+	// not parallel: it captures the default logger
+	logs := captureLogs(t)
+
+	// package paths and file names come from the chain, and the backups keep
+	// the txs it rejected: none may write outside its package dir, or into a
+	// numbered dir (':')
+	withFile := func(path, name string) string { return txJSON(t, addPkgFileTx(t, path, name, "bad")) }
+	sourceDir, root := t.TempDir(), t.TempDir()
+	outputDir := filepath.Join(root, "chain", "extracted")
+	writeLines(t, sourceDir, "backup_0000001-0000010.jsonl",
+		txJSON(t, addPkgTx(t, "gno.land/r/demo/x", "first")),
+		// from root/chain/extracted, these land in root, where the walk below looks
+		txJSON(t, addPkgTx(t, "gno.land/r/../../../escaped", "bad")),
+		txJSON(t, addPkgTx(t, "gno.land/r/..", "bad")),
+		txJSON(t, addPkgTx(t, "gno.land/.", "bad")),
+		txJSON(t, addPkgTx(t, "gno.land//abs", "bad")),
+		withFile("gno.land/r/demo/y", "../../../../../escaped.gno"),
+		withFile("gno.land/r/demo/y", "sub/x.gno"),
+		withFile("gno.land/r/demo/y", ".."),
+		withFile("gno.land/r/demo/y", "."),
+		mustReplace(t, txJSON(t, addPkgTx(t, "gno.land/r/demo/y", "bad")),
+			`"files":[{"name":"x.gno","body":"bad"}]`, `"files":[null]`),
+		txJSON(t, addPkgTx(t, "gno.land/r/demo/x", "second")),
+		// after x's second deploy, so writing it would overwrite r/demo/x:1
+		txJSON(t, addPkgTx(t, "gno.land/r/demo/x:1", "bad")),
+	)
+
+	require.NoError(t, execExtract(context.Background(), &extractorCfg{
+		fileType:   sourceFileType,
+		sourcePath: sourceDir,
+		outputDir:  outputDir,
+	}))
+
+	var written []string
+	require.NoError(t, filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
+		if err == nil && !info.IsDir() {
+			rel, _ := filepath.Rel(root, path)
+			written = append(written, filepath.ToSlash(rel))
+		}
+		return err
+	}))
+	assert.Equal(t, []string{
+		"chain/extracted/r/demo/x/pkg_metadata.json",
+		"chain/extracted/r/demo/x/x.gno",
+		"chain/extracted/r/demo/x:1/pkg_metadata.json",
+		"chain/extracted/r/demo/x:1/x.gno",
+	}, written)
+	assert.Equal(t, "second", readPkgBody(t, outputDir, "r/demo/x:1"))
+	assert.Equal(t, 10, strings.Count(logs.String(), "skipping a package"))
+}
+
+func TestExtract_SkipsPackagesWithNamesItCannotWrite(t *testing.T) {
+	// not parallel: it captures the default logger
+	logs := captureLogs(t)
+
+	// names inside the output dir that a write would still fail on, or that
+	// would clash with what the extractor writes: the run must go on
+	long := strings.Repeat("l", 256)
+	withFile := func(path, name string) gnoland.TxWithMetadata { return addPkgFileTx(t, path, name, "bad") }
+	sourceDir, outputDir := t.TempDir(), t.TempDir()
+	writeSourceFile(t, sourceDir, "backup_0000001-0000010.jsonl",
+		addPkgTx(t, "gno.land/r/demo/nul\x00path", "bad"),
+		withFile("gno.land/r/demo/a", "nul\x00name.gno"),
+		withFile("gno.land/r/demo/b", "colon:1"),
+		withFile("gno.land/r/demo/c", packageMetadataFile),
+		addPkgTx(t, "gno.land/r/demo/"+long, "bad"),
+		withFile("gno.land/r/demo/d", long),
+		addPkgTx(t, "gno.land/r/demo/x", "x"),
+	)
+
+	require.NoError(t, execExtract(context.Background(), &extractorCfg{
+		fileType:   sourceFileType,
+		sourcePath: sourceDir,
+		outputDir:  outputDir,
+	}))
+
+	assert.Equal(t, []string{"x"}, dirNames(t, filepath.Join(outputDir, "r", "demo")))
+	assert.Equal(t, 6, strings.Count(logs.String(), "skipping a package"))
+}
+
+func TestExtract_SkipsPackagesWithNamesGitRefuses(t *testing.T) {
+	// not parallel: it captures the default logger
+	logs := captureLogs(t)
+
+	// names git refuses to add (.git in any case or spelling, 8.3 short names,
+	// a backslash form) or that hide files from it (.gitignore): the exporter's
+	// commit would fail, or drop packages
+	sourceDir, outputDir := t.TempDir(), t.TempDir()
+	writeSourceFile(t, sourceDir, "backup_0000001-0000010.jsonl",
+		addPkgTx(t, "gno.land/r/demo/.GIT", "bad"),
+		addPkgTx(t, "gno.land/r/demo/.git/x", "bad"),
+		addPkgFileTx(t, "gno.land/r/demo/a", "git~1", "bad"),
+		addPkgFileTx(t, "gno.land/r/demo/b", ".git.", "bad"),
+		addPkgFileTx(t, "gno.land/r/demo/c", `a\.git`, "bad"),
+		addPkgFileTx(t, "gno.land/r/demo/d", ".gitignore", "*"),
+		addPkgFileTx(t, "gno.land/r/demo/e", ".git", "bad"),
+		addPkgTx(t, "gno.land/r/demo/x", "x"),
+	)
+
+	require.NoError(t, execExtract(context.Background(), &extractorCfg{
+		fileType:   sourceFileType,
+		sourcePath: sourceDir,
+		outputDir:  outputDir,
+	}))
+
+	assert.Equal(t, []string{"x"}, dirNames(t, filepath.Join(outputDir, "r", "demo")))
+	assert.Equal(t, 7, strings.Count(logs.String(), "skipping a package"))
+}
+
+func TestExtract_SkipsADeployWhosePathIsTooLong(t *testing.T) {
+	// not parallel: it captures the default logger
+	logs := captureLogs(t)
+
+	// every component fits, but not the whole path (Linux takes 4,095 bytes)
+	long := strings.TrimSuffix(strings.Repeat(strings.Repeat("l", 250)+"/", 17), "/")
+	sourceDir, outputDir := t.TempDir(), t.TempDir()
+	writeSourceFile(t, sourceDir, "backup_0000001-0000010.jsonl",
+		addPkgTx(t, "gno.land/r/demo/"+long, "bad"),
+		addPkgTx(t, "gno.land/r/demo/x", "x"),
+	)
+
+	require.NoError(t, execExtract(context.Background(), &extractorCfg{
+		fileType:   sourceFileType,
+		sourcePath: sourceDir,
+		outputDir:  outputDir,
+	}))
+
+	assert.Equal(t, []string{"x"}, dirNames(t, filepath.Join(outputDir, "r", "demo")))
+	assert.Equal(t, 1, strings.Count(logs.String(), "skipping a deploy"))
+}
+
+func TestExtract_MovesADeployWhoseFilesLandOnAPackageDir(t *testing.T) {
+	// not parallel: it captures the default logger
+
+	// every package's dir, and those above it, is reserved before any write: a
+	// deploy whose file would land on one moves to its path's next number,
+	// whatever the order of the two deploys, so neither is lost
+	for _, tc := range []struct {
+		name    string
+		deploys []gnoland.TxWithMetadata
+		files   map[string]string // file under the output dir: body
+		moves   int
+	}{
+		{
+			name: "a file, then a package at its path",
+			deploys: []gnoland.TxWithMetadata{
+				addPkgFileTx(t, "gno.land/r/demo/x", "x.gno", "file"),
+				addPkgFileTx(t, "gno.land/r/demo/x/x.gno", "a.gno", "pkg"),
+			},
+			files: map[string]string{"r/demo/x:1/x.gno": "file", "r/demo/x/x.gno/a.gno": "pkg"},
+			moves: 1,
+		},
+		{
+			name: "a package, then a file at its path",
+			deploys: []gnoland.TxWithMetadata{
+				addPkgFileTx(t, "gno.land/r/demo/x/x.gno", "a.gno", "pkg"),
+				addPkgFileTx(t, "gno.land/r/demo/x", "x.gno", "file"),
+			},
+			files: map[string]string{"r/demo/x/x.gno/a.gno": "pkg", "r/demo/x:1/x.gno": "file"},
+			moves: 1,
+		},
+		{
+			name: "a package where another's metadata file goes",
+			deploys: []gnoland.TxWithMetadata{
+				addPkgFileTx(t, "gno.land/r/demo/m/"+packageMetadataFile, "a.gno", "pkg"),
+				addPkgFileTx(t, "gno.land/r/demo/m", "m.gno", "m"),
+			},
+			files: map[string]string{"r/demo/m/" + packageMetadataFile + "/a.gno": "pkg", "r/demo/m:1/m.gno": "m"},
+			moves: 1,
+		},
+		{
+			name: "a moved deploy's path deployed again",
+			deploys: []gnoland.TxWithMetadata{
+				addPkgFileTx(t, "gno.land/r/demo/x/license", "a.gno", "pkg"),
+				addPkgFileTx(t, "gno.land/r/demo/x", "license", "first"),
+				addPkgFileTx(t, "gno.land/r/demo/x", "license", "second"),
+			},
+			files: map[string]string{
+				"r/demo/x/license/a.gno": "pkg",
+				"r/demo/x:1/license":     "first",
+				"r/demo/x:2/license":     "second",
+			},
+			moves: 1,
+		},
+		{
+			name: "a namespace's file on its later packages' way",
+			deploys: []gnoland.TxWithMetadata{
+				addPkgFileTx(t, "gno.land/r/demo/boards", "a.gno", "boards"),
+				addPkgFileTx(t, "gno.land/r", "newuser", "ns"),
+				addPkgFileTx(t, "gno.land/r/newuser/home", "a.gno", "home"),
+				addPkgFileTx(t, "gno.land/r/newuser/blog", "a.gno", "blog"),
+			},
+			files: map[string]string{
+				"r/demo/boards/a.gno":  "boards",
+				"r:1/newuser":          "ns",
+				"r/newuser/home/a.gno": "home",
+				"r/newuser/blog/a.gno": "blog",
+			},
+			moves: 1,
+		},
+		{
+			name: "a file further up a later package's way",
+			deploys: []gnoland.TxWithMetadata{
+				addPkgFileTx(t, "gno.land/r/demo/f", "sub", "file"),
+				addPkgFileTx(t, "gno.land/r/demo/f/sub/z/w", "a.gno", "w"),
+			},
+			files: map[string]string{"r/demo/f:1/sub": "file", "r/demo/f/sub/z/w/a.gno": "w"},
+			moves: 1,
+		},
+		{
+			name: "a parent after its sub-package",
+			deploys: []gnoland.TxWithMetadata{
+				addPkgFileTx(t, "gno.land/r/demo/x/y", "a.gno", "child"),
+				addPkgFileTx(t, "gno.land/r/demo/x", "a.gno", "parent"),
+			},
+			files: map[string]string{"r/demo/x/y/a.gno": "child", "r/demo/x/a.gno": "parent"},
+			moves: 0,
+		},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			logs := captureLogs(t)
+			sourceDir, outputDir := t.TempDir(), t.TempDir()
+			writeSourceFile(t, sourceDir, "backup_0000001-0000010.jsonl", tc.deploys...)
+
+			require.NoError(t, execExtract(context.Background(), &extractorCfg{
+				fileType:   sourceFileType,
+				sourcePath: sourceDir,
+				outputDir:  outputDir,
+			}))
+
+			for file, body := range tc.files {
+				got, err := os.ReadFile(filepath.Join(outputDir, filepath.FromSlash(file)))
+				require.NoError(t, err, file)
+				assert.Equal(t, body, string(got), file)
+			}
+			assert.Equal(t, tc.moves, strings.Count(logs.String(), "moving a deploy"))
+			if tc.moves > 0 {
+				assert.Contains(t, logs.String(), "number=1")
+			}
+		})
+	}
+}
+
+func TestExtract_WritesNamesOfTheLongestLength(t *testing.T) {
+	t.Parallel()
+
+	// a 255-byte path component and file name are the longest the filesystem
+	// takes, and are written
+	long := strings.Repeat("l", maxNameLen)
+	sourceDir, outputDir := t.TempDir(), t.TempDir()
+	writeSourceFile(t, sourceDir, "backup_0000001-0000010.jsonl",
+		addPkgTx(t, "gno.land/r/demo/"+long, "dir"),
+		addPkgFileTx(t, "gno.land/r/demo/f", long, "file"),
+	)
+
+	require.NoError(t, execExtract(context.Background(), &extractorCfg{
+		fileType:   sourceFileType,
+		sourcePath: sourceDir,
+		outputDir:  outputDir,
+	}))
+
+	assert.Equal(t, "dir", readPkgBody(t, outputDir, "r/demo/"+long))
+	assert.Equal(t, []string{long, packageMetadataFile}, dirNames(t, filepath.Join(outputDir, "r", "demo", "f")))
+}
+
+func TestExtract_SkipsADeployWhoseNumberedNameIsTooLong(t *testing.T) {
+	// not parallel: it captures the default logger
+	logs := captureLogs(t)
+
+	// a 254-byte name fits, but not with the ":1" of a second deploy
+	long := strings.Repeat("l", maxNameLen-1)
+	sourceDir, outputDir := t.TempDir(), t.TempDir()
+	writeSourceFile(t, sourceDir, "backup_0000001-0000010.jsonl",
+		addPkgTx(t, "gno.land/r/demo/"+long, "first"),
+		addPkgTx(t, "gno.land/r/demo/"+long, "second"),
+		addPkgTx(t, "gno.land/r/demo/x", "x"),
+	)
+
+	require.NoError(t, execExtract(context.Background(), &extractorCfg{
+		fileType:   sourceFileType,
+		sourcePath: sourceDir,
+		outputDir:  outputDir,
+	}))
+
+	assert.Equal(t, []string{long, "x"}, dirNames(t, filepath.Join(outputDir, "r", "demo")))
+	assert.Equal(t, "first", readPkgBody(t, outputDir, "r/demo/"+long))
+	assert.Equal(t, 1, strings.Count(logs.String(), "skipping a deploy"))
+}
+
+func TestExtract_ReadsOnlyTheSourceDirsOwnFiles(t *testing.T) {
+	t.Parallel()
+
+	// a chain dir holds its extracted/ tree: a package file there that looks
+	// like a source file must not be read as one
+	sourceDir, outputDir := t.TempDir(), t.TempDir()
+	writeSourceFile(t, sourceDir, "backup_0000001-0000010.jsonl", addPkgTx(t, "gno.land/r/demo/x", "x"))
+	nested := filepath.Join(sourceDir, "extracted", "r", "demo", "x")
+	require.NoError(t, os.MkdirAll(nested, 0o755))
+	writeSourceFile(t, nested, "fake.jsonl", addPkgTx(t, "gno.land/r/demo/fake", "fake"))
+	require.NoError(t, os.Mkdir(filepath.Join(sourceDir, "old.jsonl"), 0o755))
+
+	require.NoError(t, execExtract(context.Background(), &extractorCfg{
+		fileType:   sourceFileType,
+		sourcePath: sourceDir,
+		outputDir:  outputDir,
+	}))
+
+	assert.Equal(t, []string{"x"}, dirNames(t, filepath.Join(outputDir, "r", "demo")))
+}
+
+func TestExtractAddMessages_DecodesPackageApprovals(t *testing.T) {
+	// not parallel: it swaps the default logger
+	logs := captureLogs(t)
+
+	// mainnet and onyx park a new package until it is enabled or rejected: those
+	// txs (messages as mainnet and onyx store them) carry no package, but must
+	// decode rather than be skipped
+	enable := `{"@type":"/vm.m_enable_pkg","approver":"g1yaaa6rcp4ew5yjzdj4yms596wx2dtrj3a86704",` +
+		`"pkg_path":"gno.land/p/demo/x","pkg_hash":"e3d66ccac3af7c4c5d4f8a87b6755f1119ec75fd5f57040d3dfcd28554e883bd",` +
+		`"pkg_height":"9671"}`
+	reject := `{"@type":"/vm.m_reject_pkg","sender":"g1ml9grtwnpzqn3hre5ve5vjdlmv2srrmpmc0dsv","pkg_path":"gno.land/r/demo/y"}`
+	dir := t.TempDir()
+	writeLines(t, dir, "backup_0000001-0000010.jsonl",
+		txJSON(t, addPkgTx(t, "gno.land/r/demo/x", "x")),
+		withMsgs(t, txJSON(t, addPkgTx(t, "gno.land/r/demo/z", "z")), enable),
+		withMsgs(t, txJSON(t, addPkgTx(t, "gno.land/r/demo/z", "z")), reject),
+	)
+
+	msgs, err := extractAddMessages(filepath.Join(dir, "backup_0000001-0000010.jsonl"), decodeTx)
+	require.NoError(t, err)
+
+	assert.Len(t, msgs, 1)
+	assert.Empty(t, logs.String())
+}
+
+func TestExtract_ReadsBlockNumLinesInLegacyMode(t *testing.T) {
+	t.Parallel()
+
+	// test2-test4's lines, as tx-archive wrote them before {tx, metadata}: a
+	// {tx, blockNum} object, and a deploy's deposit under `deposit`
+	deploy := func(body string) string {
+		return `{"tx":{"msg":[{"@type":"/vm.m_addpkg","creator":"g1jg8mtutu9khhfwc4nxmuhcpftf0pajdhfvsqf5",` +
+			`"deposit":"1ugnot","package":{"name":"x","path":"gno.land/r/demo/x",` +
+			`"files":[{"name":"x.gno","body":"` + body + `"}]}}],` +
+			`"fee":{"gas_wanted":"1","gas_fee":"1ugnot"},"signatures":null,"memo":""},"blockNum":"64"}`
+	}
+	call := `{"tx":{"msg":[{"@type":"/vm.m_call","caller":"g1jg8mtutu9khhfwc4nxmuhcpftf0pajdhfvsqf5",` +
+		`"send":"","pkg_path":"gno.land/r/demo/x","func":"Do","args":null}],` +
+		`"fee":{"gas_wanted":"1","gas_fee":"1ugnot"},"signatures":null,"memo":""},"blockNum":"65"}`
+	sourceDir, outputDir := t.TempDir(), t.TempDir()
+	writeLines(t, sourceDir, "backup_0000001-0000100.jsonl", deploy("first"), call, deploy("second"))
+
+	require.NoError(t, execExtract(context.Background(), &extractorCfg{
+		fileType:   sourceFileType,
+		sourcePath: sourceDir,
+		outputDir:  outputDir,
+		legacyMode: true,
+	}))
+
+	assert.Equal(t, []string{"x", "x:1"}, dirNames(t, filepath.Join(outputDir, "r", "demo")))
+	assert.Equal(t, "first", readPkgBody(t, outputDir, "r/demo/x"))
+	assert.Equal(t, "second", readPkgBody(t, outputDir, "r/demo/x:1"))
+	metadata, err := os.ReadFile(filepath.Join(outputDir, "r", "demo", "x", packageMetadataFile))
+	require.NoError(t, err)
+	assert.JSONEq(t, `{"creator":"g1jg8mtutu9khhfwc4nxmuhcpftf0pajdhfvsqf5","deposit":"1ugnot"}`, string(metadata))
+}
+
+func TestExtract_ReadsCapitalizedKeysInLegacyMode(t *testing.T) {
+	t.Parallel()
+
+	// test1's plain std.Tx lines; test1-test3 predate snake_case package keys
+	line := `{"msg":[{"@type":"/vm.m_addpkg","creator":"g1jg8mtutu9khhfwc4nxmuhcpftf0pajdhfvsqf5",` +
+		`"deposit":"100gnot","package":{"Name":"avl","Path":"gno.land/p/avl",` +
+		`"Files":[{"Name":"avl.gno","Body":"tree"}]}}],` +
+		`"fee":{"gas_wanted":"1","gas_fee":"1gnot"},"signatures":null,"memo":""}`
+	sourceDir, outputDir := t.TempDir(), t.TempDir()
+	writeLines(t, sourceDir, "txexport-aa.log", line)
+
+	require.NoError(t, execExtract(context.Background(), &extractorCfg{
+		fileType:   ".log",
+		sourcePath: sourceDir,
+		outputDir:  outputDir,
+		legacyMode: true,
+	}))
+
+	body, err := os.ReadFile(filepath.Join(outputDir, "p", "avl", "avl.gno"))
+	require.NoError(t, err)
+	assert.Equal(t, "tree", string(body))
+	metadata, err := os.ReadFile(filepath.Join(outputDir, "p", "avl", packageMetadataFile))
+	require.NoError(t, err)
+	assert.JSONEq(t, `{"creator":"g1jg8mtutu9khhfwc4nxmuhcpftf0pajdhfvsqf5","deposit":"100gnot"}`, string(metadata))
+}
+
+func TestExtract_FailsOnADeployItCannotParseInLegacyMode(t *testing.T) {
+	t.Parallel()
+
+	line := `{"tx":{"msg":[{"@type":"/vm.m_addpkg","creator":"not-an-address","deposit":"",` +
+		`"package":{"name":"x","path":"gno.land/r/demo/x","files":[]}}],"fee":{},"signatures":null,"memo":""},` +
+		`"blockNum":"1"}`
+	sourceDir := t.TempDir()
+	writeLines(t, sourceDir, "backup_0000001-0000100.jsonl", line)
+
+	err := execExtract(context.Background(), &extractorCfg{
+		fileType:   sourceFileType,
+		sourcePath: sourceDir,
+		outputDir:  filepath.Join(t.TempDir(), "extracted.new"),
+		legacyMode: true,
+	})
+
+	assert.ErrorIs(t, err, errUnparsableDeploy)
+}
+
+func TestExtractAddMessages_CountsALongLineOnce(t *testing.T) {
+	// not parallel: it captures the default logger
+	logs := captureLogs(t)
+
+	dir := t.TempDir()
+	writeLines(t, dir, "backup_0000001-0000010.jsonl",
+		txJSON(t, addPkgTx(t, "gno.land/r/demo/x", strings.Repeat("x", 10000))),
+		"not json",
+	)
+
+	_, err := extractAddMessages(filepath.Join(dir, "backup_0000001-0000010.jsonl"), decodeTx)
+	require.NoError(t, err)
+
+	assert.Contains(t, logs.String(), "line=2")
+}
+
+// legacyExtract runs a legacy-mode extraction of lines into a fresh output dir.
+func legacyExtract(t *testing.T, lines ...string) (string, error) {
+	t.Helper()
+
+	sourceDir, outputDir := t.TempDir(), filepath.Join(t.TempDir(), "extracted.new")
+	writeLines(t, sourceDir, "backup_0000001-0000100.jsonl", lines...)
+	return outputDir, execExtract(context.Background(), &extractorCfg{
+		fileType:   sourceFileType,
+		sourcePath: sourceDir,
+		outputDir:  outputDir,
+		legacyMode: true,
+	})
+}
+
+// blockNumLine is a {tx, blockNum} line holding msgs, as in test2-test4.
+func blockNumLine(msgs string) string {
+	return `{"tx":{"msg":[` + msgs + `],"fee":{"gas_wanted":"1","gas_fee":"1ugnot"},"signatures":null,"memo":""},"blockNum":"1"}`
+}
+
+const (
+	legacyCreator = `"creator":"g1jg8mtutu9khhfwc4nxmuhcpftf0pajdhfvsqf5"`
+	legacyPackage = `"package":{"name":"x","path":"gno.land/r/demo/x","files":[{"name":"x.gno","body":"x"}]}`
+)
+
+func TestExtract_ReadsADeployNextToOtherMsgsInLegacyMode(t *testing.T) {
+	t.Parallel()
+
+	outputDir, err := legacyExtract(t, blockNumLine(
+		`{"@type":"/vm.m_call","caller":"g1jg8mtutu9khhfwc4nxmuhcpftf0pajdhfvsqf5","pkg_path":"gno.land/r/demo/x","func":"Do"},`+
+			`{"@type":"/vm.m_addpkg",`+legacyCreator+`,"deposit":"",`+legacyPackage+`}`))
+	require.NoError(t, err)
+
+	assert.Equal(t, "x", readPkgBody(t, outputDir, "r/demo/x"))
+}
+
+func TestExtract_PrefersTxOverTopLevelMsgsInLegacyMode(t *testing.T) {
+	t.Parallel()
+
+	// a {tx, blockNum} line's msgs are under tx: top-level msgs are not the tx's
+	outputDir, err := legacyExtract(t, `{"msg":[{"@type":"/vm.m_addpkg",`+legacyCreator+`,"deposit":"",`+
+		`"package":{"name":"z","path":"gno.land/r/demo/z","files":[{"name":"x.gno","body":"z"}]}}],`+
+		`"tx":{"msg":[{"@type":"/vm.m_addpkg",`+legacyCreator+`,"deposit":"",`+legacyPackage+`}]},"blockNum":"1"}`)
+	require.NoError(t, err)
+
+	assert.Equal(t, []string{"x"}, dirNames(t, filepath.Join(outputDir, "r", "demo")))
+}
+
+func TestExtract_SkipsANullFileInLegacyMode(t *testing.T) {
+	// not parallel: it captures the default logger
+	logs := captureLogs(t)
+
+	outputDir, err := legacyExtract(t,
+		blockNumLine(`{"@type":"/vm.m_addpkg",`+legacyCreator+`,"deposit":"",`+
+			`"package":{"name":"y","path":"gno.land/r/demo/y","files":[null]}}`),
+		blockNumLine(`{"@type":"/vm.m_addpkg",`+legacyCreator+`,"deposit":"",`+legacyPackage+`}`),
+	)
+	require.NoError(t, err)
+
+	assert.Equal(t, []string{"x"}, dirNames(t, filepath.Join(outputDir, "r", "demo")))
+	assert.Equal(t, 1, strings.Count(logs.String(), "skipping a package"))
+}
+
+func TestExtract_FailsOnAMalformedDeployInLegacyMode(t *testing.T) {
+	t.Parallel()
+
+	for name, tc := range map[string]struct {
+		msgs  string
+		cause string
+	}{
+		"null package": {
+			`{"@type":"/vm.m_addpkg",` + legacyCreator + `,"deposit":"","package":null}`,
+			"MsgAddPackage is nil",
+		},
+		"invalid deposit": {
+			`{"@type":"/vm.m_addpkg",` + legacyCreator + `,"deposit":"1UGNOT",` + legacyPackage + `}`,
+			"invalid deploy deposit",
+		},
+		"non-object msg": {
+			`1,{"@type":"/vm.m_addpkg",` + legacyCreator + `,"deposit":"",` + legacyPackage + `}`,
+			"cannot unmarshal number",
+		},
+		// a key these formats never carry: decoding it as one of theirs would
+		// misread it (here, a deposit under today's `send`)
+		"unknown key": {
+			`{"@type":"/vm.m_addpkg",` + legacyCreator + `,"send":"1ugnot",` + legacyPackage + `}`,
+			`unknown field "send"`,
+		},
+		"unknown package key": {
+			`{"@type":"/vm.m_addpkg",` + legacyCreator + `,"deposit":"",` +
+				`"package":{"name":"x","path":"gno.land/r/demo/x","type":"","files":[{"name":"x.gno","body":"x"}]}}`,
+			`unknown field "type"`,
+		},
+	} {
+		t.Run(name, func(t *testing.T) {
+			t.Parallel()
+
+			_, err := legacyExtract(t, blockNumLine(tc.msgs))
+			assert.ErrorIs(t, err, errUnparsableDeploy)
+			assert.ErrorContains(t, err, tc.cause)
+		})
+	}
+}
+
+func TestSortByBlockRange(t *testing.T) {
+	t.Parallel()
+
+	paths := []string{
+		"txexport-ab.log",
+		"backup_staging_txs_10001-11000.jsonl",
+		"backup_staging_balances.jsonl",
+		"backup_50-60.jsonl",
+		"other_1001-1500.jsonl",
+		"backup_1-100.jsonl",
+		"txexport-aa.log",
+		"backup_staging_txs_1001-2000.jsonl",
+	}
+
+	sortByBlockRange(paths)
+
+	assert.Equal(t, []string{
+		// by the first number of the range, not the last
+		"backup_1-100.jsonl",
+		"backup_50-60.jsonl",
+		// same first number: lexical order
+		"backup_staging_txs_1001-2000.jsonl",
+		"other_1001-1500.jsonl",
+		"backup_staging_txs_10001-11000.jsonl",
+		// names without a range last, in lexical order
+		"backup_staging_balances.jsonl",
+		"txexport-aa.log",
+		"txexport-ab.log",
+	}, paths)
+}
+
 // Helpers
+func addPkgTx(t *testing.T, path, body string) gnoland.TxWithMetadata {
+	t.Helper()
+
+	return gnoland.TxWithMetadata{Tx: std.Tx{Msgs: []std.Msg{vm.MsgAddPackage{
+		Creator: addressFromString(t, "g1jg8mtutu9khhfwc4nxmuhcpftf0pajdhfvsqf5"),
+		Package: &std.MemPackage{
+			Name:  "x",
+			Path:  path,
+			Files: []*std.MemFile{{Name: "x.gno", Body: body}},
+		},
+	}}}}
+}
+
+// addPkgFileTx is a deploy of path with one file, name, holding body.
+func addPkgFileTx(t *testing.T, path, name, body string) gnoland.TxWithMetadata {
+	t.Helper()
+
+	tx := addPkgTx(t, path, body)
+	tx.Tx.Msgs[0].(vm.MsgAddPackage).Package.Files[0].Name = name
+	return tx
+}
+
+func writeSourceFile(t *testing.T, dir, name string, txs ...gnoland.TxWithMetadata) {
+	t.Helper()
+
+	file, err := os.Create(filepath.Join(dir, name))
+	require.NoError(t, err)
+	for _, tx := range txs {
+		require.NoError(t, writeTxToFile(t, tx, file))
+	}
+	require.NoError(t, file.Close())
+}
+
+// txJSON is the amino JSON line of tx, as the backups store it.
+func txJSON(t *testing.T, tx gnoland.TxWithMetadata) string {
+	t.Helper()
+
+	data, err := amino.MarshalJSON(tx)
+	require.NoError(t, err)
+	return string(data)
+}
+
+// withMsgs replaces the msg list of the tx line with msgs (JSON objects).
+func withMsgs(t *testing.T, line string, msgs string) string {
+	t.Helper()
+
+	start, end := strings.Index(line, `"msg":[`), strings.Index(line, `],"fee"`)
+	require.True(t, start >= 0 && end > start, "a tx line: %s", line)
+	return line[:start] + `"msg":[` + msgs + line[end:]
+}
+
+// mustReplace replaces the first old in s with new; old must occur in s.
+func mustReplace(t *testing.T, s, old, new string) string {
+	t.Helper()
+
+	require.Contains(t, s, old)
+	return strings.Replace(s, old, new, 1)
+}
+
+func writeLines(t *testing.T, dir, name string, lines ...string) {
+	t.Helper()
+
+	data := strings.Join(lines, "\n") + "\n"
+	require.NoError(t, os.WriteFile(filepath.Join(dir, name), []byte(data), 0o644))
+}
+
+// captureLogs sends the default logger's output to the returned buffer until
+// the test ends. slog.SetDefault also redirects the log package, which
+// restoring the previous default does not undo, so that is restored too.
+// Tests calling it must not run in parallel.
+func captureLogs(t *testing.T) *bytes.Buffer {
+	t.Helper()
+
+	logs := new(bytes.Buffer)
+	previous, writer, flags := slog.Default(), log.Writer(), log.Flags()
+	t.Cleanup(func() {
+		slog.SetDefault(previous)
+		log.SetOutput(writer)
+		log.SetFlags(flags)
+	})
+	slog.SetDefault(slog.New(slog.NewTextHandler(logs, nil)))
+	return logs
+}
+
+// openFiles counts the process's open file descriptors. It lists names only:
+// stating them would fail on the descriptor of the listing itself.
+func openFiles(t *testing.T) int {
+	t.Helper()
+
+	dir, err := os.Open("/dev/fd")
+	require.NoError(t, err)
+	defer dir.Close()
+	names, err := dir.Readdirnames(-1)
+	require.NoError(t, err)
+	return len(names)
+}
+
+func readPkgBody(t *testing.T, outputDir, pkgDir string) string {
+	t.Helper()
+
+	body, err := os.ReadFile(filepath.Join(outputDir, filepath.FromSlash(pkgDir), "x.gno"))
+	require.NoError(t, err)
+	return string(body)
+}
+
+func dirNames(t *testing.T, dir string) []string {
+	t.Helper()
+
+	entries, err := os.ReadDir(dir)
+	require.NoError(t, err)
+	names := make([]string, 0, len(entries))
+	for _, e := range entries {
+		names = append(names, e.Name())
+	}
+	return names
+}
+
 func generateSourceFiles(t *testing.T, dir string, mockMsgs []std.Msg, numSourceFiles int) []string {
 	t.Helper()
 

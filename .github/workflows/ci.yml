@@ -92,6 +92,15 @@ jobs:
       - name: extractor help looks sane
         run: grep -q -- '-output-dir' /tmp/help.out
 
+      - name: test extractor
+        working-directory: extractor
+        run: go test ./...
+
+      # make extractor rebuilds extracted/ from scratch, and swaps it in only
+      # when the run succeeds and writes packages.
+      - name: rules.mk extractor
+        run: bash tests/extractor.sh
+
       - name: clone + build tx-archive (monorepo path)
         run: |
           git clone --depth=1 https://github.com/gnolang/gno.git /tmp/gno
