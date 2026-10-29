@@ -283,11 +283,9 @@ func TestExtractAddMessages(t *testing.T) {
 	mockMsgs, mockMsgsAddPackage := generateMockMsgs(t)
 	sourceFiles := generateSourceFiles(t, tempDir, mockMsgs, 20)
 
-	unwrapFn := func(data gnoland.TxWithMetadata) []std.Msg { return data.Tx.Msgs }
-
 	var results []vm.MsgAddPackage
 	for _, sf := range sourceFiles {
-		res, err := extractAddMessages(sf, unwrapFn)
+		res, err := extractAddMessages(sf, decodeTx)
 		require.NoError(t, err)
 		results = append(results, res...)
 	}
@@ -557,11 +555,10 @@ func TestExtractAddMessages_ClosesTheFileOnAnError(t *testing.T) {
 	}}}})
 	dir := t.TempDir()
 	writeLines(t, dir, "backup_0000001-0000010.jsonl", nilPackage)
-	unwrapFn := func(data gnoland.TxWithMetadata) []std.Msg { return data.Tx.Msgs }
 
 	before := openFiles(t)
 	for range 20 {
-		_, err := extractAddMessages(filepath.Join(dir, "backup_0000001-0000010.jsonl"), unwrapFn)
+		_, err := extractAddMessages(filepath.Join(dir, "backup_0000001-0000010.jsonl"), decodeTx)
 		require.Error(t, err)
 	}
 
@@ -581,9 +578,8 @@ func TestExtractAddMessages_LogsASkippedLineByNumber(t *testing.T) {
 		txJSON(t, addPkgTx(t, "gno.land/r/demo/x", "x")),
 		unknownType,
 	)
-	unwrapFn := func(data gnoland.TxWithMetadata) []std.Msg { return data.Tx.Msgs }
 
-	_, err := extractAddMessages(filepath.Join(dir, "backup_0000001-0000010.jsonl"), unwrapFn)
+	_, err := extractAddMessages(filepath.Join(dir, "backup_0000001-0000010.jsonl"), decodeTx)
 	require.NoError(t, err)
 
 	assert.Contains(t, logs.String(), "backup_0000001-0000010.jsonl")
@@ -703,13 +699,89 @@ func TestExtractAddMessages_DecodesPackageApprovals(t *testing.T) {
 		withMsgs(t, txJSON(t, addPkgTx(t, "gno.land/r/demo/z", "z")), enable),
 		withMsgs(t, txJSON(t, addPkgTx(t, "gno.land/r/demo/z", "z")), reject),
 	)
-	unwrapFn := func(data gnoland.TxWithMetadata) []std.Msg { return data.Tx.Msgs }
 
-	msgs, err := extractAddMessages(filepath.Join(dir, "backup_0000001-0000010.jsonl"), unwrapFn)
+	msgs, err := extractAddMessages(filepath.Join(dir, "backup_0000001-0000010.jsonl"), decodeTx)
 	require.NoError(t, err)
 
 	assert.Len(t, msgs, 1)
 	assert.Empty(t, logs.String())
+}
+
+func TestExtract_ReadsBlockNumLinesInLegacyMode(t *testing.T) {
+	t.Parallel()
+
+	// test2-test4's lines, as tx-archive wrote them before {tx, metadata}: a
+	// {tx, blockNum} object, and a deploy's deposit under `deposit`
+	deploy := func(body string) string {
+		return `{"tx":{"msg":[{"@type":"/vm.m_addpkg","creator":"g1jg8mtutu9khhfwc4nxmuhcpftf0pajdhfvsqf5",` +
+			`"deposit":"1ugnot","package":{"name":"x","path":"gno.land/r/demo/x",` +
+			`"files":[{"name":"x.gno","body":"` + body + `"}]}}],` +
+			`"fee":{"gas_wanted":"1","gas_fee":"1ugnot"},"signatures":null,"memo":""},"blockNum":"64"}`
+	}
+	call := `{"tx":{"msg":[{"@type":"/vm.m_call","caller":"g1jg8mtutu9khhfwc4nxmuhcpftf0pajdhfvsqf5",` +
+		`"send":"","pkg_path":"gno.land/r/demo/x","func":"Do","args":null}],` +
+		`"fee":{"gas_wanted":"1","gas_fee":"1ugnot"},"signatures":null,"memo":""},"blockNum":"65"}`
+	sourceDir, outputDir := t.TempDir(), t.TempDir()
+	writeLines(t, sourceDir, "backup_0000001-0000100.jsonl", deploy("first"), call, deploy("second"))
+
+	require.NoError(t, execExtract(context.Background(), &extractorCfg{
+		fileType:   sourceFileType,
+		sourcePath: sourceDir,
+		outputDir:  outputDir,
+		legacyMode: true,
+	}))
+
+	assert.Equal(t, []string{"x", "x:1"}, dirNames(t, filepath.Join(outputDir, "r", "demo")))
+	assert.Equal(t, "first", readPkgBody(t, outputDir, "r/demo/x"))
+	assert.Equal(t, "second", readPkgBody(t, outputDir, "r/demo/x:1"))
+	metadata, err := os.ReadFile(filepath.Join(outputDir, "r", "demo", "x", packageMetadataFile))
+	require.NoError(t, err)
+	assert.JSONEq(t, `{"creator":"g1jg8mtutu9khhfwc4nxmuhcpftf0pajdhfvsqf5","deposit":"1ugnot"}`, string(metadata))
+}
+
+func TestExtract_ReadsCapitalizedKeysInLegacyMode(t *testing.T) {
+	t.Parallel()
+
+	// test1's plain std.Tx lines; test1-test3 predate snake_case package keys
+	line := `{"msg":[{"@type":"/vm.m_addpkg","creator":"g1jg8mtutu9khhfwc4nxmuhcpftf0pajdhfvsqf5",` +
+		`"deposit":"100gnot","package":{"Name":"avl","Path":"gno.land/p/avl",` +
+		`"Files":[{"Name":"avl.gno","Body":"tree"}]}}],` +
+		`"fee":{"gas_wanted":"1","gas_fee":"1gnot"},"signatures":null,"memo":""}`
+	sourceDir, outputDir := t.TempDir(), t.TempDir()
+	writeLines(t, sourceDir, "txexport-aa.log", line)
+
+	require.NoError(t, execExtract(context.Background(), &extractorCfg{
+		fileType:   ".log",
+		sourcePath: sourceDir,
+		outputDir:  outputDir,
+		legacyMode: true,
+	}))
+
+	body, err := os.ReadFile(filepath.Join(outputDir, "p", "avl", "avl.gno"))
+	require.NoError(t, err)
+	assert.Equal(t, "tree", string(body))
+	metadata, err := os.ReadFile(filepath.Join(outputDir, "p", "avl", packageMetadataFile))
+	require.NoError(t, err)
+	assert.JSONEq(t, `{"creator":"g1jg8mtutu9khhfwc4nxmuhcpftf0pajdhfvsqf5","deposit":"100gnot"}`, string(metadata))
+}
+
+func TestExtract_FailsOnADeployItCannotParseInLegacyMode(t *testing.T) {
+	t.Parallel()
+
+	line := `{"tx":{"msg":[{"@type":"/vm.m_addpkg","creator":"not-an-address","deposit":"",` +
+		`"package":{"name":"x","path":"gno.land/r/demo/x","files":[]}}],"fee":{},"signatures":null,"memo":""},` +
+		`"blockNum":"1"}`
+	sourceDir := t.TempDir()
+	writeLines(t, sourceDir, "backup_0000001-0000100.jsonl", line)
+
+	err := execExtract(context.Background(), &extractorCfg{
+		fileType:   sourceFileType,
+		sourcePath: sourceDir,
+		outputDir:  filepath.Join(t.TempDir(), "extracted.new"),
+		legacyMode: true,
+	})
+
+	assert.ErrorIs(t, err, errUnparsableDeploy)
 }
 
 func TestSortByBlockRange(t *testing.T) {

@@ -20,6 +20,7 @@ import (
 	"github.com/gnolang/gno/gno.land/pkg/gnoland"
 	"github.com/gnolang/gno/gno.land/pkg/sdk/vm"
 	"github.com/gnolang/gno/tm2/pkg/amino"
+	"github.com/gnolang/gno/tm2/pkg/crypto"
 	"github.com/gnolang/gno/tm2/pkg/std"
 	"github.com/peterbourgon/ff/v3/ffcli"
 )
@@ -101,7 +102,7 @@ func (c *extractorCfg) registerFlags(fs *flag.FlagSet) {
 		&c.legacyMode,
 		"legacy-mode",
 		false,
-		"flag indicating if the legacy tx sheet mode should be used",
+		"read the formats older than {tx, metadata} lines: plain std.Tx (test1) or {tx, blockNum} (test2-test4)",
 	)
 }
 
@@ -131,7 +132,7 @@ func execExtract(ctx context.Context, cfg *extractorCfg) error {
 	var sourceFiles []string
 	sourceFiles = append(sourceFiles, cfg.sourcePath)
 
-	// If source is dir, walk it and add to sourceFiles
+	// If source is dir, list its source files
 	if source.IsDir() {
 		var findErr error
 		sourceFiles, findErr = findFilePaths(cfg.sourcePath, cfg.fileType)
@@ -150,19 +151,16 @@ func execExtract(ctx context.Context, cfg *extractorCfg) error {
 	}
 
 	var (
-		unwrapFn = func(data gnoland.TxWithMetadata) []std.Msg {
-			return data.Tx.Msgs
-		}
-
-		unwrapLegacyFn = func(tx std.Tx) []std.Msg {
-			return tx.Msgs
-		}
+		decode decodeFn = decodeTx
 
 		// deploys counts the deploys of each package dir so far: the first
 		// deploy of a path is extracted to its dir, later ones (failed or
 		// not: the source files carry no tx results) to <dir>:1, <dir>:2, …
 		deploys = make(map[string]int)
 	)
+	if cfg.legacyMode {
+		decode = decodeLegacy
+	}
 
 	for _, sourceFile := range sourceFiles {
 		select {
@@ -177,11 +175,7 @@ func execExtract(ctx context.Context, cfg *extractorCfg) error {
 				processErr error
 			)
 
-			if !cfg.legacyMode {
-				msgs, processErr = extractAddMessages(sourceFile, unwrapFn)
-			} else {
-				msgs, processErr = extractAddMessages(sourceFile, unwrapLegacyFn)
-			}
+			msgs, processErr = extractAddMessages(sourceFile, decode)
 
 			if processErr != nil {
 				return processErr
@@ -323,11 +317,9 @@ func sortByBlockRange(paths []string) {
 	})
 }
 
-// extractAddMessages extracts the MsgAddPackage messages
-func extractAddMessages[T std.Tx | gnoland.TxWithMetadata](
-	filePath string,
-	unwrapFn func(T) []std.Msg,
-) (_ []vm.MsgAddPackage, err error) {
+// extractAddMessages extracts the MsgAddPackage messages of a source file,
+// decoding each line with decode
+func extractAddMessages(filePath string, decode decodeFn) (_ []vm.MsgAddPackage, err error) {
 	file, err := os.Open(filePath)
 	if err != nil {
 		return nil, fmt.Errorf("unable to open file, %w", err)
@@ -350,8 +342,6 @@ func extractAddMessages[T std.Tx | gnoland.TxWithMetadata](
 	lineNum := 0
 
 	for {
-		var txData T
-
 		line, isPrefix, err := reader.ReadLine()
 
 		// Exit if no more lines in file
@@ -376,36 +366,134 @@ func extractAddMessages[T std.Tx | gnoland.TxWithMetadata](
 		}
 		lineNum++
 
-		if err := amino.UnmarshalJSON(line, &txData); err != nil {
-			// a deploy the pinned gno types cannot decode fails the run: skipping
-			// it would drop its package from a rebuilt tree
+		deploys, err := decode(line)
+		if err != nil {
+			// a deploy the extractor cannot decode fails the run: skipping it
+			// would drop its package from a rebuilt tree
 			if bytes.Contains(line, []byte(`"/vm.m_addpkg"`)) {
 				return nil, fmt.Errorf("%w at %s:%d: %w", errUnparsableDeploy, filePath, lineNum, err)
 			}
 			slog.Warn("skipping a line the extractor cannot parse", "file", filePath, "line", lineNum, "error", err)
 			continue
 		}
-
-		for _, msg := range unwrapFn(txData) {
-			// Only MsgAddPkg should be parsed
-			if msg.Type() != "add_package" {
-				continue
-			}
-
-			msgAddPkg, ok := msg.(vm.MsgAddPackage)
-			if !ok {
-				return nil, errors.New("could not cast into MsgAddPackage")
-			}
-
-			if msgAddPkg.Package == nil {
-				return nil, errors.New("MsgAddPackage is nil")
-			}
-
-			msgArr = append(msgArr, msgAddPkg)
-		}
+		msgArr = append(msgArr, deploys...)
 	}
 
 	return msgArr, nil
+}
+
+// decodeFn decodes the deploys of one source line.
+type decodeFn func(line []byte) ([]vm.MsgAddPackage, error)
+
+// decodeTx decodes a {tx, metadata} line with the pinned gno types.
+func decodeTx(line []byte) ([]vm.MsgAddPackage, error) {
+	var data gnoland.TxWithMetadata
+	if err := amino.UnmarshalJSON(line, &data); err != nil {
+		return nil, err
+	}
+
+	var deploys []vm.MsgAddPackage
+	for _, msg := range data.Tx.Msgs {
+		// Only MsgAddPkg should be parsed
+		if msg.Type() != "add_package" {
+			continue
+		}
+
+		deploy, ok := msg.(vm.MsgAddPackage)
+		if !ok {
+			return nil, errors.New("could not cast into MsgAddPackage")
+		}
+
+		if deploy.Package == nil {
+			return nil, errors.New("MsgAddPackage is nil")
+		}
+
+		deploys = append(deploys, deploy)
+	}
+
+	return deploys, nil
+}
+
+// legacyLine is a source line in a format older than {tx, metadata}: a plain
+// std.Tx (test1) or a {tx, blockNum} object (test2-test4).
+type legacyLine struct {
+	Msg []json.RawMessage `json:"msg"`
+	Tx  *struct {
+		Msg []json.RawMessage `json:"msg"`
+	} `json:"tx"`
+}
+
+// legacyDeploy is a /vm.m_addpkg message in those formats: its deposit is under
+// `deposit`, and test1-test3 capitalize the package keys, which encoding/json
+// matches case-insensitively.
+type legacyDeploy struct {
+	Creator string `json:"creator"`
+	Deposit string `json:"deposit"`
+	Package *struct {
+		Name  string `json:"name"`
+		Path  string `json:"path"`
+		Files []*struct {
+			Name string `json:"name"`
+			Body string `json:"body"`
+		} `json:"files"`
+	} `json:"package"`
+}
+
+// decodeLegacy decodes the deploys of a line in a format older than
+// {tx, metadata}. It does not use the pinned gno types, whose amino JSON
+// rejects these formats' fields and key casing.
+func decodeLegacy(line []byte) ([]vm.MsgAddPackage, error) {
+	var parsed legacyLine
+	if err := json.Unmarshal(line, &parsed); err != nil {
+		return nil, err
+	}
+	msgs := parsed.Msg
+	if parsed.Tx != nil {
+		msgs = parsed.Tx.Msg
+	}
+
+	var deploys []vm.MsgAddPackage
+	for _, raw := range msgs {
+		var head struct {
+			Type string `json:"@type"`
+		}
+		if err := json.Unmarshal(raw, &head); err != nil {
+			return nil, err
+		}
+		if head.Type != "/vm.m_addpkg" {
+			continue
+		}
+
+		var msg legacyDeploy
+		if err := json.Unmarshal(raw, &msg); err != nil {
+			return nil, err
+		}
+		if msg.Package == nil {
+			return nil, errors.New("MsgAddPackage is nil")
+		}
+		creator, err := crypto.AddressFromBech32(msg.Creator)
+		if err != nil {
+			return nil, fmt.Errorf("invalid deploy creator, %w", err)
+		}
+		deposit, err := std.ParseCoins(msg.Deposit)
+		if err != nil {
+			return nil, fmt.Errorf("invalid deploy deposit, %w", err)
+		}
+		files := make([]*std.MemFile, len(msg.Package.Files))
+		for i, file := range msg.Package.Files {
+			if file != nil {
+				files[i] = &std.MemFile{Name: file.Name, Body: file.Body}
+			}
+		}
+
+		deploys = append(deploys, vm.MsgAddPackage{
+			Creator: creator,
+			Send:    deposit,
+			Package: &std.MemPackage{Name: msg.Package.Name, Path: msg.Package.Path, Files: files},
+		})
+	}
+
+	return deploys, nil
 }
 
 // findFilePaths lists the files of a type directly in a dir. Its subdirs are
