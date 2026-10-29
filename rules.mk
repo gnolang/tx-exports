@@ -1,6 +1,6 @@
 EXTRACTOR_DIR ?= extractor
-# extractor flags a chain dir's backups need, such as -legacy-mode for the
-# formats older than {tx, metadata} lines (test4)
+# extractor flags a chain dir's backups need: -legacy-mode for the formats older
+# than {tx, metadata} lines (test4), and -file-type .log for test1's logs
 EXTRACTOR_FLAGS ?=
 
 # tx-archive lives in the gnolang/gno monorepo under contribs/tx-archive.

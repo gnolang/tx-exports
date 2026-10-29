@@ -11,7 +11,7 @@ ifeq ($(shell echo "$(TO_BLOCK) - $(FROM_BLOCK) > $(MAX_INTERVAL)" | bc ), 1)
 	TO_BLOCK = $(shell echo "$(FROM_BLOCK) + $(MAX_INTERVAL)" | bc)
 endif
 
-# test1's export predates tx-archive: plain std.Tx lines in txexport-*.log
+# the extractor reads txexport-*.log's plain std.Tx lines in its legacy mode
 EXTRACTOR_FLAGS = -legacy-mode -file-type .log
 
 -include ../rules.mk

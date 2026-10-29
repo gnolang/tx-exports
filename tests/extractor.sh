@@ -28,8 +28,9 @@ cp "$root/rules.mk" "$work/" || exit 1
 ln -s "$root/extractor" "$work/extractor" || exit 1
 
 # chain <name> [<make line>]: a scratch chain dir whose Makefile includes
-# rules.mk, with <make line> before the include, as in a chain dir, so that
-# rules.mk's ?= defaults cannot override it
+# rules.mk, with <make line> before the include, as in a chain dir: a rules.mk
+# that set the variable instead of defaulting it with ?= would then override
+# the line, and its check would fail
 chain() {
   mkdir "$work/$1" || return 1
   cat >"$work/$1/Makefile" <<EOF
