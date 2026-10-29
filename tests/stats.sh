@@ -5,6 +5,7 @@
 #   test2/test3);
 # - a chain dir narrows the files stats reads (staging's balances file holds
 #   `addr=coins` lines, not txs);
+# - plain std.Tx lines (test1) are read like {tx, metadata} ones;
 # - a corrupt tx line, or a BACKUP_FILES that matches nothing, fails the run.
 # Usage: tests/stats.sh   (from the repo root; needs GNU make, bash, jq)
 set -uo pipefail
@@ -67,6 +68,29 @@ got=$(listing "$readme" 'top realm calls')
 got=$(listing "$readme" TXs)
 [ "$got" = 4 ] && ok "the tx count covers only the tx files" ||
   ko "the tx count covers only the tx files: $got"
+
+# test1 stores plain std.Tx lines, without the {tx, metadata} wrapper
+mkdir "$work/plain" || exit 1
+cat >"$work/plain/Makefile" <<'EOF'
+REMOTE = "https://rpc.example.invalid"
+SHORTNAME = example
+BACKUP_FILES = txexport-*.log
+-include ../rules.mk
+EOF
+cat >"$work/plain/txexport-aa.log" <<'EOF'
+{"msg":[{"@type":"/vm.m_addpkg","creator":"g1a","package":{"Name":"plain","Path":"gno.land/p/demo/plain","Files":[]}}]}
+{"msg":[{"@type":"/vm.m_call","caller":"g1a","pkg_path":"gno.land/r/demo/plain","func":"Do","args":[]}]}
+EOF
+if ! out=$(mk "$work/plain" stats 2>&1); then
+  ko "stats runs on plain std.Tx lines: $out"
+else
+  got=$(listing "$work/plain/README.md" addpkgs)
+  [ "$got" = '1 "gno.land/p/demo/plain"' ] && ok "addpkgs lists the deploys of plain std.Tx lines" ||
+    ko "addpkgs lists the deploys of plain std.Tx lines: $(tr '\n' '|' <<<"$got")"
+  got=$(listing "$work/plain/README.md" 'top realm calls')
+  [ "$got" = '1 "gno.land/r/demo/plain"' ] && ok "top realm calls lists the calls of plain std.Tx lines" ||
+    ko "top realm calls lists the calls of plain std.Tx lines: $(tr '\n' '|' <<<"$got")"
+fi
 
 chain corrupt 'backup_txs_*.jsonl'
 echo '{"tx":' >>"$work/corrupt/backup_txs_1-4.jsonl"

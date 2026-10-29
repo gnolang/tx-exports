@@ -97,8 +97,9 @@ fetch-all:
 		$(MAKE) -C . fetch FROM_BLOCK="$$i" || exit 1; \
 	done
 
-# The files stats reads: every backup is one tx per line. A chain dir whose
-# backup_*.jsonl also matches non-tx files (staging's balances) narrows it.
+# The files stats reads, one tx per line: {tx, metadata} objects, or plain
+# std.Tx in test1's txexport-*.log. A chain dir whose backup_*.jsonl also
+# matches non-tx files (staging's balances) narrows it.
 BACKUP_FILES ?= backup_*.jsonl
 
 # Deployed packages are the /vm.m_addpkg messages (a /vm.m_run carries a
@@ -123,19 +124,19 @@ stats:
 
 	echo "## addpkgs" >> README.md
 	echo '```' >> README.md
-	cat $(BACKUP_FILES) | jq '.tx.msg[] | select(.["@type"]=="/vm.m_addpkg") | .package | (.path // .Path) | select( . != null )' | sort | uniq -c | sort --stable -nr >> README.md
+	cat $(BACKUP_FILES) | jq '(.tx // .).msg[] | select(.["@type"]=="/vm.m_addpkg") | .package | (.path // .Path) | select( . != null )' | sort | uniq -c | sort --stable -nr >> README.md
 	echo '```' >> README.md
 	echo >> README.md
 
 	echo "## top realm calls" >> README.md
 	echo '```' >> README.md
-	cat $(BACKUP_FILES) | jq '.tx.msg[].pkg_path | select( . != null )' | sort | uniq -c | sort --stable -nr >> README.md
+	cat $(BACKUP_FILES) | jq '(.tx // .).msg[].pkg_path | select( . != null )' | sort | uniq -c | sort --stable -nr >> README.md
 	echo '```' >> README.md
 	echo >> README.md
 
 	echo "## top faucet requesters" >> README.md
 	echo '```' >> README.md
-	cat $(BACKUP_FILES) | jq -r '.tx.msg[] | select(.["@type"]=="/bank.MsgSend") | select(.["from_address"]=="g127jydsh6cms3lrtdenydxsckh23a8d6emqcvfa") | .to_address + " " + .amount' | sed 's/ugnot$$//' | awk 'NR == 1 {next} {a[$$1] += $$2} {b[$$1] += 1} END {for (i in a) {if (a[i] >= 500000000){printf "%-15s\t%s\t%s\n", i, b[i], a[i]}}}' | sort -rnk2 >> README.md
+	cat $(BACKUP_FILES) | jq -r '(.tx // .).msg[] | select(.["@type"]=="/bank.MsgSend") | select(.["from_address"]=="g127jydsh6cms3lrtdenydxsckh23a8d6emqcvfa") | .to_address + " " + .amount' | sed 's/ugnot$$//' | awk 'NR == 1 {next} {a[$$1] += $$2} {b[$$1] += 1} END {for (i in a) {if (a[i] >= 500000000){printf "%-15s\t%s\t%s\n", i, b[i], a[i]}}}' | sort -rnk2 >> README.md
 	echo '```' >> README.md
 	echo >> README.md
 
