@@ -5,7 +5,8 @@
 #   (x, x:1), and a second run gives the same tree;
 # - a run that fails, or that writes no package, leaves the previous extracted/
 #   untouched;
-# - a chain dir's EXTRACTOR_FLAGS reach the extractor.
+# - a chain dir's EXTRACTOR_FLAGS reach the extractor;
+# - make -j runs join and extractor one at a time.
 # Usage: tests/extractor.sh   (needs GNU make, go, jq)
 set -uo pipefail
 root=$(cd -- "$(dirname "$0")/.." >/dev/null && pwd) || exit 1
@@ -146,5 +147,39 @@ elif [ "$(cat "$work/legacy/extracted/r/demo/old/x.gno" 2>/dev/null)" = old ]; t
   ok "a chain dir's EXTRACTOR_FLAGS reach the extractor"
 else
   ko "a chain dir's EXTRACTOR_FLAGS reach the extractor: $(cd "$work/legacy" && find extracted -type f 2>&1 | tr '\n' ' ')"
+fi
+
+# join and extractor read and rewrite the same chain dir, so make -j must run
+# them one at a time. Stubs for the stat join calls and the go extractor calls
+# mark themselves running, then wait up to 2s for the other to run or finish:
+# one that sees the other running records an overlap
+chain par || exit 1
+deploy gno.land/r/demo/x x >"$work/par/backup_0000001-0000010.jsonl" || exit 1
+mkdir "$work/bin" || exit 1
+# stub <command> <other command> <what the command then does>
+stub() {
+  cat >"$work/bin/$1" <<EOF
+#!/bin/sh
+: >"$work/$1.running"
+i=0
+while [ ! -e "$work/$2.running" ] && [ ! -e "$work/$2.done" ] && [ \$i -lt 20 ]; do
+  sleep 0.1
+  i=\$((i + 1))
+done
+[ -e "$work/$2.running" ] && : >"$work/overlap"
+rm "$work/$1.running"
+: >"$work/$1.done"
+$3
+EOF
+  chmod +x "$work/bin/$1"
+}
+stub stat go 'echo 1' || exit 1
+stub go stat 'for a; do out=$a; done; mkdir -p "$out/r"' || exit 1
+if ! out=$(PATH="$work/bin:$PATH" mk "$work/par" -j2 join extractor 2>&1); then
+  ko "make -j runs join and extractor one at a time: $out"
+elif [ -e "$work/overlap" ]; then
+  ko "make -j runs join and extractor one at a time: they overlapped"
+else
+  ok "make -j runs join and extractor one at a time"
 fi
 exit $fail

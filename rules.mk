@@ -175,6 +175,10 @@ join:
 	done
 	@echo "Done."
 
+# join, stats and extractor read and rewrite the same chain dir: one at a time,
+# even under make -j (an extractor listing the dir mid-join would miss backups)
+.NOTPARALLEL:
+
 # Each run extracts into a fresh extracted.new, so the extractor's numbering of
 # repeated deploys (<path>, <path>:1, …) starts from an empty tree. The new tree
 # replaces extracted/ only when the extractor succeeds (a deploy it cannot parse
