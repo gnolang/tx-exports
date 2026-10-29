@@ -1,0 +1,8 @@
+module = "gno.land/r/g1magld5ptgzaktqcexxq0pgq5lmdf0kz6re8hlv/agents/maintainer/v0"
+gno = "0.9"
+private = true
+
+[source]
+  repository = "https://github.com/moul/gno-contracts"
+  path = "r/moul/agents/maintainer"
+  revision = "bf382ccb6927f353d16cf26d37dee1d68b58ceda"

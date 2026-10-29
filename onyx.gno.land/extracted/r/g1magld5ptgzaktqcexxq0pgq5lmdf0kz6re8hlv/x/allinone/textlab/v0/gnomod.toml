@@ -1,0 +1,11 @@
+module = "gno.land/r/g1magld5ptgzaktqcexxq0pgq5lmdf0kz6re8hlv/x/allinone/textlab/v0"
+gno = "0.9"
+
+# Redeployable by its creator. This realm holds no state worth keeping: it runs
+# algorithms over a string in the render path, so a redeploy loses nothing.
+private = true
+
+[source]
+  repository = "https://github.com/moul/gno-contracts"
+  path = "r/moul/x/allinone/textlab"
+  revision = "d905e11dcfc739389c7bd9aa83ced28c5e4e22b8"

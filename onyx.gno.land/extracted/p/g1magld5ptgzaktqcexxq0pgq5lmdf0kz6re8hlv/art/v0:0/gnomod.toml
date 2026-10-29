@@ -1,0 +1,7 @@
+module = "gno.land/p/g1magld5ptgzaktqcexxq0pgq5lmdf0kz6re8hlv/art/v0"
+gno = "0.9"
+
+[source]
+  repository = "https://github.com/moul/gno-contracts"
+  path = "p/moul/art"
+  revision = "bf382ccb6927f353d16cf26d37dee1d68b58ceda"
