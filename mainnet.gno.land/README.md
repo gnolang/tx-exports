@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-227627
+228238
 ```
 
 ## addpkgs
@@ -11,24 +11,24 @@
 
 ## top realm calls
 ```
-  20177 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble5"
+  20277 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble5"
   18442 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble4"
-  17425 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble6"
-  12139 "gno.land/r/gnoland/wugnot"
-   6038 "gno.land/r/akkadia/beta/abt"
+  17525 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble6"
+  12148 "gno.land/r/gnoland/wugnot"
+   6046 "gno.land/r/akkadia/beta/abt"
+   5425 "gno.land/r/gnoswap/staker"
    5421 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble3"
-   5416 "gno.land/r/gnoswap/staker"
    5259 "gno.land/r/g1nmqhha0ua730vejxqhrelldm4pga5j5ptle5ea/guardians_store_v1"
-   4942 "gno.land/r/gnoswap/position"
-   4382 "gno.land/r/gnoswap/router"
-   4142 "gno.land/r/gnoswap/gns"
-   3440 "gno.land/r/gnoswap/launchpad"
+   4949 "gno.land/r/gnoswap/position"
+   4386 "gno.land/r/gnoswap/router"
+   4145 "gno.land/r/gnoswap/gns"
+   3443 "gno.land/r/gnoswap/launchpad"
    3170 "gno.land/r/g1nmqhha0ua730vejxqhrelldm4pga5j5ptle5ea/guardians"
    1537 "gno.land/r/akkadia/beta/lotto"
-   1521 "gno.land/r/gnoswap/gov/staker"
-   1259 "gno.land/r/gnoswap/gnft"
-    972 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv3"
-    875 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/wbubble"
+   1522 "gno.land/r/gnoswap/gov/staker"
+   1260 "gno.land/r/gnoswap/gnft"
+    973 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv3"
+    876 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/wbubble"
     600 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens"
     433 "gno.land/r/nym-thegnomic001/gnomic_airdrop"
     262 "gno.land/r/nym-thegnomic001/gnomic"
