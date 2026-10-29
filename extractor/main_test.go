@@ -399,6 +399,27 @@ func TestExtract_NumbersRepeatedDeploysInChainOrder(t *testing.T) {
 	assert.Equal(t, "only", readPkgBody(t, outputDir, "r/demo/y"))
 }
 
+func TestExtract_NumbersAPathWrittenTwoWaysAsOne(t *testing.T) {
+	t.Parallel()
+
+	// a trailing or doubled slash names the same dir: one numbering, so the
+	// second deploy does not write over the first
+	sourceDir, outputDir := t.TempDir(), t.TempDir()
+	writeSourceFile(t, sourceDir, "backup_0000001-0000010.jsonl",
+		addPkgTx(t, "gno.land/r/demo/x/", "first"),
+		addPkgTx(t, "gno.land/r//demo/x", "second"),
+	)
+
+	require.NoError(t, execExtract(context.Background(), &extractorCfg{
+		fileType:   sourceFileType,
+		sourcePath: sourceDir,
+		outputDir:  outputDir,
+	}))
+
+	assert.Equal(t, "first", readPkgBody(t, outputDir, "r/demo/x"))
+	assert.Equal(t, "second", readPkgBody(t, outputDir, "r/demo/x:1"))
+}
+
 func TestExtract_ReadsSourceFilesInBlockOrder(t *testing.T) {
 	t.Parallel()
 
