@@ -24,7 +24,8 @@ FLAGS
 
 `-output-dir` must be absent or empty: the extractor never writes into an
 earlier tree. In a chain dir, `make extractor` builds a fresh tree and swaps it
-in for `extracted/` once the run succeeds.
+in for `extracted/` only when the run succeeds and writes at least one package;
+otherwise it fails and keeps `extracted/`.
 
 ## Output layout
 

@@ -3,7 +3,8 @@
 # - extracted/ is rebuilt from scratch: an earlier tree's leftovers and an
 #   interrupted run's build dir are dropped, repeated deploys are numbered
 #   (x, x:1), and a second run gives the same tree;
-# - a run that fails leaves the previous extracted/ untouched.
+# - a run that fails, or that writes no package, leaves the previous extracted/
+#   untouched.
 # Usage: tests/extractor.sh   (needs GNU make, go, jq)
 set -uo pipefail
 root=$(cd -- "$(dirname "$0")/.." >/dev/null && pwd) || exit 1
@@ -96,4 +97,23 @@ else
   ko "a failing run leaves the previous extracted/ untouched"
 fi
 
+# backups the extractor parses to no package: an empty build must not replace
+# the previous tree
+chain nopkg || exit 1
+awk '!/"\/vm.m_addpkg"/ {print; exit}' "$root"/test11.gno.land/backup_*.jsonl >"$work/nopkg/backup_0000001-0000010.jsonl" || exit 1
+mkdir -p "$work/nopkg/extracted/r/demo/old" || exit 1
+echo old >"$work/nopkg/extracted/r/demo/old/x.gno" || exit 1
+cp -R "$work/nopkg/extracted" "$work/nopkg-before" || exit 1
+if out=$(mk "$work/nopkg" extractor 2>&1); then
+  ko "a run that writes no package fails: exited 0"
+elif [[ "$out" != *"wrote no package"* ]]; then
+  ko "a run that writes no package fails, saying so: $out"
+else
+  ok "a run that writes no package fails, saying so"
+fi
+if diff -r "$work/nopkg-before" "$work/nopkg/extracted" >/dev/null 2>&1; then
+  ok "a run that writes no package leaves the previous extracted/ untouched"
+else
+  ko "a run that writes no package leaves the previous extracted/ untouched"
+fi
 exit $fail

@@ -172,15 +172,17 @@ join:
 	done
 	@echo "Done."
 
-# extracted/ is rebuilt from scratch on every run, so the extractor's numbering
-# of repeated deploys (<path>, <path>:1, …) never depends on an earlier tree; the
-# new tree replaces the old one only once the extractor has succeeded.
+# Each run extracts into a fresh extracted.new, so the extractor's numbering of
+# repeated deploys (<path>, <path>:1, …) starts from an empty tree. The new tree
+# replaces extracted/ only when the extractor succeeds and writes at least one
+# package: backups it cannot parse must not empty an existing tree.
 .PHONY: extractor
 extractor:
 	rm -rf extracted.new
 	go run -C "../$(EXTRACTOR_DIR)" . \
 		-source-path "$(shell pwd)" \
 		-output-dir "$(shell pwd)/extracted.new"
+	@[ -d extracted.new ] || { echo "$(SHORTNAME): the extractor wrote no package, extracted/ kept" >&2; exit 1; }
 	rm -rf extracted
 	mv extracted.new extracted
 
