@@ -64,7 +64,8 @@ apply() {
     mode=$(cut -d' ' -f2 <<<"$meta")
     # 000000 is a deletion; symlinks (120000) and gitlinks (160000) are refused
     if ! allowed "$dir" "$path" || ! [[ $mode =~ ^(100644|100755|000000)$ ]]; then
-      echo "backup-patch: refusing $path (mode $mode)" >&2
+      # %q keeps a newline in the path from starting a workflow command line
+      printf 'backup-patch: refusing %q (mode %s)\n' "$path" "$mode" >&2
       refused=1
     fi
   done <"$raw"

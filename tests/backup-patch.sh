@@ -151,6 +151,24 @@ evil gitlink 'g update-index --add --cacheinfo 160000,$(g rev-parse HEAD),chain.
 evil mixed 'printf "{}\n" >chain.gno.land/metadata.json && printf "evil\n" >rules.mk' \
   "a patch mixing allowed and other changes"
 
+# a refused path is printed on one line: a newline in it would let the rest
+# read as a workflow command (::error, ::add-mask) in the commit job's log
+clone newline || exit 1
+cd "$work/newline" || exit 1
+cat >"$work/newline.patch" <<'EOF'
+diff --git "a/x\n::error title=forged::hello" "b/x\n::error title=forged::hello"
+new file mode 100644
+index 0000000..e69de29
+EOF
+out=$(bash "$script" apply chain.gno.land "$work/newline.patch" 2>&1)
+if [[ $out != *"backup-patch: refusing "* ]]; then
+  ko "a refused path is printed on one line: not refused: $out"
+elif grep -q '^::' <<<"$out"; then
+  ko "a refused path is printed on one line: $out"
+else
+  ok "a refused path is printed on one line"
+fi
+
 # the vetting diff failing must refuse the patch, not let it through unvetted:
 # a git that fails only on --raw, applying the refused rules.mk patch
 real_git=$(command -v git) || exit 1
