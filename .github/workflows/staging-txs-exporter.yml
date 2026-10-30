@@ -33,7 +33,7 @@ jobs:
           - staging.gno.land
 
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           # the branch tip at job start, not the commit the run was created for:
           # a run or matrix leg that waited builds on the pushes made before it
@@ -86,7 +86,7 @@ jobs:
 
     steps:
       # credentials stay persisted: git-auto-commit-action pushes with them
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           # the branch tip at job start, which holds the pushes made before it
           ref: ${{ github.ref }}
