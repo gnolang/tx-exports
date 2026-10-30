@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-8028
+8059
 ```
 
 ## addpkgs
@@ -440,6 +440,7 @@
       1 "gno.land/r/g1d6kwap7m2hm5yd09hu69punmutvjzx8ew93l4r/smoke/s5bf12d90/counter"
       1 "gno.land/r/g1egtnurppfnh7exvzpwu3nrfyw57lmf4d375rl4/ggg_names_v1"
       1 "gno.land/r/g1evgm0jz7h2fxmw976hpejkqcmfahwqnawg8f6l/smoke/s4d0c3cd0/counter"
+      1 "gno.land/r/g1evppsw0dpfhjjsgj86q8xp52csxl6hrtax8snf/smoke/se69acc48/counter"
       1 "gno.land/r/g1eyr3hfdcup4rr5xlcd63vc5t64a03u9kecx2v0/forms"
       1 "gno.land/r/g1ezf973jrnr23xkul0pleauz00ufuf0l6vjc0x7/parked"
       1 "gno.land/r/g1ezf973jrnr23xkul0pleauz00ufuf0l6vjc0x7/probe"
@@ -1044,7 +1045,7 @@
     544 "gno.land/r/nym-alexiscolin000/gnogolf/golf"
     415 "gno.land/r/nym-sixseven067/markets/v2"
     247 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game31"
-    213 "gno.land/r/g14wv9hyngyrzpxn3ztvnx2jygs50m0240qncm8j/access"
+    237 "gno.land/r/g14wv9hyngyrzpxn3ztvnx2jygs50m0240qncm8j/access"
     199 "gno.land/r/nym-alexiscolin000/gnoradio/radio/v1"
     133 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/beacon/v2"
     110 "gno.land/r/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/shots"
@@ -1160,6 +1161,7 @@
       3 "gno.land/r/g1apvlgws02qs3035lskjdq03dtgvjv35usc0ylk/smoke/sf9d5af99/counter"
       3 "gno.land/r/g1d6kwap7m2hm5yd09hu69punmutvjzx8ew93l4r/smoke/s5bf12d90/counter"
       3 "gno.land/r/g1evgm0jz7h2fxmw976hpejkqcmfahwqnawg8f6l/smoke/s4d0c3cd0/counter"
+      3 "gno.land/r/g1evppsw0dpfhjjsgj86q8xp52csxl6hrtax8snf/smoke/se69acc48/counter"
       3 "gno.land/r/g1eyr3hfdcup4rr5xlcd63vc5t64a03u9kecx2v0/forms"
       3 "gno.land/r/g1f7zlg557rn7u06v30vmyzp4h0jm6t6huuanghf/smoke/sa68b80d/counter"
       3 "gno.land/r/g1jsjnh3fhuxvgeh5d77u9yqc09qjf5kd5vam8zy/smoke/s61d1ff27/counter"
