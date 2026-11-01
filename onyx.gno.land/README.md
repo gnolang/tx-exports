@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-8519
+8565
 ```
 
 ## addpkgs
@@ -1088,7 +1088,7 @@
     595 "gno.land/r/nym-alexiscolin000/gnoradio/catalog/v1"
     565 "gno.land/r/nym-sixseven067/markets"
     544 "gno.land/r/nym-alexiscolin000/gnogolf/golf"
-    453 "gno.land/r/g14wv9hyngyrzpxn3ztvnx2jygs50m0240qncm8j/access"
+    479 "gno.land/r/g14wv9hyngyrzpxn3ztvnx2jygs50m0240qncm8j/access"
     415 "gno.land/r/nym-sixseven067/markets/v2"
     247 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game31"
     199 "gno.land/r/nym-alexiscolin000/gnoradio/radio/v1"
@@ -1121,13 +1121,14 @@
      23 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game32"
      23 "gno.land/r/samcrew/launchpad/config/v1"
      22 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/fish2"
+     22 "gno.land/r/g1pq6pxhgxk2uw5shg5le6glfydpxcu74k0zh069/sinopia/core"
      22 "gno.land/r/nym-mnsrehearsal001/nslogic/v2"
      21 "gno.land/r/g1a9g8nu3m0xgx58hh36fph49e2xkqm9axlxuf5z/memba_bridge_v1"
      21 "gno.land/r/nym-mnsrehearsal001/nsnft/v1"
      20 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/shoal/fish"
      20 "gno.land/r/samcrew/launchpad/market/v1"
      19 "gno.land/r/samcrew/launchpad/nft/v1"
-     17 "gno.land/r/g1pq6pxhgxk2uw5shg5le6glfydpxcu74k0zh069/sinopia/core"
+     18 "gno.land/r/g1pq6pxhgxk2uw5shg5le6glfydpxcu74k0zh069/sinopia/mint/v1"
      17 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/crowdfund"
      17 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/payroll"
      16 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/arena"
@@ -1146,6 +1147,7 @@
      12 "gno.land/r/nym-mikecito001/connect4_v4"
      12 "gno.land/r/samcrew/launchpad/curation/v1"
      12 "gno.land/r/samcrew/memba_notes_rc1"
+     11 "gno.land/r/g1pq6pxhgxk2uw5shg5le6glfydpxcu74k0zh069/sinopia/market/v1"
      11 "gno.land/r/g1u97n45s4s6q7vn5clr8339pv4up455hnqn4aff/gnodice"
      11 "gno.land/r/nym-mikecito001/connect4_v3"
      10 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/fishlive"
@@ -1153,7 +1155,6 @@
      10 "gno.land/r/g19dzk54hhsdc3gllpksuj6gu4a3e6fl8cr6rn4w/minhwa/mint/v1"
      10 "gno.land/r/g19dzk54hhsdc3gllpksuj6gu4a3e6fl8cr6rn4w/minhwa2/core"
      10 "gno.land/r/g19dzk54hhsdc3gllpksuj6gu4a3e6fl8cr6rn4w/sinopia/core"
-     10 "gno.land/r/g1pq6pxhgxk2uw5shg5le6glfydpxcu74k0zh069/sinopia/mint/v1"
      10 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/arcade/duel/v4"
      10 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/netting"
      10 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/reimbursements"
@@ -1194,7 +1195,6 @@
       4 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/bazaarv4"
       4 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/bazaarv5"
       4 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/edcol"
-      4 "gno.land/r/g1pq6pxhgxk2uw5shg5le6glfydpxcu74k0zh069/sinopia/market/v1"
       4 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/arcade/duel"
       4 "gno.land/r/g1rzgxl6njyu4c2x89gxvaa9cswrt73rz8mlp7l6/pingpong/v0"
       4 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/assets"
@@ -1268,6 +1268,7 @@
       2 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/latefees"
       2 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/statements"
       2 "gno.land/r/gnoswap/gns"
+      2 "gno.land/r/nym-gfanton001/echo/v1"
       2 "gno.land/r/nym-mnsrehearsal001/nsmarket/v1"
       2 "gno.land/r/nym-mnsrehearsal001/nsskin/v2"
       2 "gno.land/r/nym-mnsrehearsal001/nsvote/v1"
@@ -1310,7 +1311,6 @@
       1 "gno.land/r/nym-alexiscolin000/gnoradio/home/v2"
       1 "gno.land/r/nym-alexiscolin000/gnoradio/radio/v2"
       1 "gno.land/r/nym-alexiscolin000/gnoradio/tickets/v2"
-      1 "gno.land/r/nym-gfanton001/echo/v1"
       1 "gno.land/r/samcrew/launchpad/tokens/v1"
       1 "gno.land/r/samcrew/memba_bridge_v1"
       1 "gno.land/r/samcrew/memba_gov"
