@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-8838
+8871
 ```
 
 ## addpkgs
@@ -18,6 +18,7 @@
       3 "gno.land/r/nym-slavabolisong001/bolisong"
       2 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/arena"
       2 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/fishtry"
+      2 "gno.land/r/g10u9x5yhwktwa6pwxv4nryp9h58duu7zf9r8q2h/drop"
       2 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game26"
       2 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game28"
       2 "gno.land/r/g188vafzutzvlfw6wt7u3s62xtuvm0epmu8ufmfz/gnomepit/arena"
@@ -384,11 +385,11 @@
       1 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/fishwide"
       1 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/pado"
       1 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/shoaltoken"
-      1 "gno.land/r/g10u9x5yhwktwa6pwxv4nryp9h58duu7zf9r8q2h/drop"
       1 "gno.land/r/g129sqjlp6lmfhf4apa67m69n6lhf77fjn5yzkme/hello"
       1 "gno.land/r/g12ez7yc55whx52tqaastc0l79aa75tfs7jyccm8/smoke/sb442fb48/counter"
       1 "gno.land/r/g12yg9nh4ncma44emgm8msxe8aavzywt0p95tanv/bolo"
       1 "gno.land/r/g12yg9nh4ncma44emgm8msxe8aavzywt0p95tanv/bolo/v0"
+      1 "gno.land/r/g1350wcphynk5rap76vjw5nn7p2wqhmrav0j9dkw/smoke/sc3c67540/counter"
       1 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/ads1"
       1 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/ads2"
       1 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/coins"
@@ -1105,7 +1106,7 @@
 ## top realm calls
 ```
     771 "gno.land/r/nym-alexiscolin000/gnogolf/golf/v2"
-    645 "gno.land/r/g14wv9hyngyrzpxn3ztvnx2jygs50m0240qncm8j/access"
+    669 "gno.land/r/g14wv9hyngyrzpxn3ztvnx2jygs50m0240qncm8j/access"
     595 "gno.land/r/nym-alexiscolin000/gnoradio/catalog/v1"
     565 "gno.land/r/nym-sixseven067/markets"
     544 "gno.land/r/nym-alexiscolin000/gnogolf/golf"
@@ -1231,6 +1232,7 @@
       3 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/fishcoin"
       3 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/fishmark"
       3 "gno.land/r/g12ez7yc55whx52tqaastc0l79aa75tfs7jyccm8/smoke/sb442fb48/counter"
+      3 "gno.land/r/g1350wcphynk5rap76vjw5nn7p2wqhmrav0j9dkw/smoke/sc3c67540/counter"
       3 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/coins"
       3 "gno.land/r/g13z5ugz2v7nuk2capxz5jxkk9u86t8qanef66vr/smoke/s6e99f7f8/counter"
       3 "gno.land/r/g14psmh3mz6zecmg87y93r4wpfd6zgu98w7zyd6h/smoke/sb0e21fb4/counter"
