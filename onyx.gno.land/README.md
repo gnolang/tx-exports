@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-9027
+9051
 ```
 
 ## addpkgs
@@ -385,6 +385,7 @@
       1 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/fishwide"
       1 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/pado"
       1 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/shoaltoken"
+      1 "gno.land/r/g10u9x5yhwktwa6pwxv4nryp9h58duu7zf9r8q2h/drop/v3"
       1 "gno.land/r/g129sqjlp6lmfhf4apa67m69n6lhf77fjn5yzkme/hello"
       1 "gno.land/r/g12ez7yc55whx52tqaastc0l79aa75tfs7jyccm8/smoke/sb442fb48/counter"
       1 "gno.land/r/g12yg9nh4ncma44emgm8msxe8aavzywt0p95tanv/bolo"
@@ -1111,8 +1112,8 @@
 
 ## top realm calls
 ```
+    792 "gno.land/r/g14wv9hyngyrzpxn3ztvnx2jygs50m0240qncm8j/access"
     771 "gno.land/r/nym-alexiscolin000/gnogolf/golf/v2"
-    769 "gno.land/r/g14wv9hyngyrzpxn3ztvnx2jygs50m0240qncm8j/access"
     595 "gno.land/r/nym-alexiscolin000/gnoradio/catalog/v1"
     565 "gno.land/r/nym-sixseven067/markets"
     544 "gno.land/r/nym-alexiscolin000/gnogolf/golf"
