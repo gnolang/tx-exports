@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-9082
+9127
 ```
 
 ## addpkgs
@@ -237,6 +237,7 @@
       1 "gno.land/p/nym-alexiscolin000/gnoradio/svg/v0"
       1 "gno.land/p/nym-alexiscolin000/gnoradio/text/v0"
       1 "gno.land/p/nym-alexiscolin000/gnosplit/ledger/v0"
+      1 "gno.land/p/nym-gfanton001/gnomepit/engine/v0"
       1 "gno.land/p/nym-gfanton001/gnotif/admins/v0"
       1 "gno.land/p/nym-gfanton001/gnotif/trigger/v0"
       1 "gno.land/p/nym-moultest123/addrset/v0"
@@ -834,6 +835,8 @@
       1 "gno.land/r/nym-alexiscolin000/gnosplit/v1"
       1 "gno.land/r/nym-gfanton001/echo/v0"
       1 "gno.land/r/nym-gfanton001/echo/v1"
+      1 "gno.land/r/nym-gfanton001/gnomepit/arena/v0"
+      1 "gno.land/r/nym-gfanton001/gnomepit/standings/v0"
       1 "gno.land/r/nym-gfanton001/gnotif/v0"
       1 "gno.land/r/nym-gfanton001/gnotif/v1"
       1 "gno.land/r/nym-mikecito001/connect4"
@@ -1113,7 +1116,7 @@
 
 ## top realm calls
 ```
-    816 "gno.land/r/g14wv9hyngyrzpxn3ztvnx2jygs50m0240qncm8j/access"
+    840 "gno.land/r/g14wv9hyngyrzpxn3ztvnx2jygs50m0240qncm8j/access"
     771 "gno.land/r/nym-alexiscolin000/gnogolf/golf/v2"
     595 "gno.land/r/nym-alexiscolin000/gnoradio/catalog/v1"
     565 "gno.land/r/nym-sixseven067/markets"
@@ -1142,11 +1145,11 @@
      44 "gno.land/r/sys/namereg/v0"
      39 "gno.land/r/nym-gfanton001/echo/v0"
      32 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game3"
+     32 "gno.land/r/g188vafzutzvlfw6wt7u3s62xtuvm0epmu8ufmfz/gnomepit/arena"
      28 "gno.land/r/samcrew/launchpad/drops/v1"
      27 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/budgets"
      26 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game13"
      26 "gno.land/r/nym-moultest123/x/vm/riscvdemo/v0"
-     25 "gno.land/r/g188vafzutzvlfw6wt7u3s62xtuvm0epmu8ufmfz/gnomepit/arena"
      23 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game32"
      23 "gno.land/r/samcrew/launchpad/config/v1"
      22 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/fish2"
@@ -1288,6 +1291,7 @@
       3 "gno.land/r/g1vvu0tl7hfa0wurs85ch7fdz6h80lznvrgthw99/smoke/s5af8e2c8/counter"
       3 "gno.land/r/g1zgg4n0whqpt3mz8ysshqw308kqjv9q5pap8gw7/smoke/sf0601180/counter"
       3 "gno.land/r/nym-alexiscolin000/gnoradio/catalog/v2"
+      3 "gno.land/r/nym-gfanton001/gnomepit/arena/v0"
       3 "gno.land/r/nym-mnsrehearsal001/nsnft/v2"
       2 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/fishlab"
       2 "gno.land/r/g12yg9nh4ncma44emgm8msxe8aavzywt0p95tanv/bolo"
