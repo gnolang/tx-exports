@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-9404
+9457
 ```
 
 ## addpkgs
@@ -1127,7 +1127,7 @@
 
 ## top realm calls
 ```
-    984 "gno.land/r/g14wv9hyngyrzpxn3ztvnx2jygs50m0240qncm8j/access"
+   1007 "gno.land/r/g14wv9hyngyrzpxn3ztvnx2jygs50m0240qncm8j/access"
     771 "gno.land/r/nym-alexiscolin000/gnogolf/golf/v2"
     595 "gno.land/r/nym-alexiscolin000/gnoradio/catalog/v1"
     565 "gno.land/r/nym-sixseven067/markets"
@@ -1142,28 +1142,28 @@
      94 "gno.land/r/gnops/valopers"
      90 "gno.land/r/g1um2pwwnx3gn8p3ryfdert8mhpu4u4up49sc9ru/minichess"
      87 "gno.land/r/samcrew/launchpad/sales/v1"
+     80 "gno.land/r/g1jz6j9hj6rdf5ltl2kcrpa4jwtdh3w30z0yul06/sinopia3/mint/v1"
      75 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game16"
      70 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens3"
      66 "gno.land/r/g1nq99m3h9ed7vqve6ajpr3qwy2ls252m8jnundm/garden/v9"
      66 "gno.land/r/gnoland/wugnot"
      65 "gno.land/r/nym-mnsrehearsal001/nsskin/v1"
      64 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens2"
-     61 "gno.land/r/g1jz6j9hj6rdf5ltl2kcrpa4jwtdh3w30z0yul06/sinopia3/mint/v1"
      55 "gno.land/r/g1a9g8nu3m0xgx58hh36fph49e2xkqm9axlxuf5z/memba_gov"
      54 "gno.land/r/samcrew/connect4"
      51 "gno.land/r/nym-mnsrehearsal001/nsdata/v1"
+     49 "gno.land/r/g1jz6j9hj6rdf5ltl2kcrpa4jwtdh3w30z0yul06/sinopia3/core"
      48 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game27"
      47 "gno.land/r/nym-mnsrehearsal001/nslogic/v1"
-     46 "gno.land/r/g1jz6j9hj6rdf5ltl2kcrpa4jwtdh3w30z0yul06/sinopia3/core"
      44 "gno.land/r/sys/namereg/v0"
      39 "gno.land/r/nym-gfanton001/echo/v0"
      32 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game3"
      32 "gno.land/r/g188vafzutzvlfw6wt7u3s62xtuvm0epmu8ufmfz/gnomepit/arena"
+     31 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game32"
      28 "gno.land/r/samcrew/launchpad/drops/v1"
      27 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/budgets"
      26 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game13"
      26 "gno.land/r/nym-moultest123/x/vm/riscvdemo/v0"
-     25 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game32"
      23 "gno.land/r/samcrew/launchpad/config/v1"
      22 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/fish2"
      22 "gno.land/r/g1pq6pxhgxk2uw5shg5le6glfydpxcu74k0zh069/sinopia/core"
