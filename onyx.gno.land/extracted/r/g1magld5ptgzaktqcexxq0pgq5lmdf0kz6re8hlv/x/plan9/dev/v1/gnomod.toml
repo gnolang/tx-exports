@@ -1,0 +1,10 @@
+module = "gno.land/r/g1magld5ptgzaktqcexxq0pgq5lmdf0kz6re8hlv/x/plan9/dev/v1"
+gno = "0.9"
+
+# public: posts its own tree into r/moul/x/plan9/ns, and a private realm may
+# not persist an object it owns into another realm
+
+[source]
+  repository = "https://github.com/moul/gno-contracts"
+  path = "r/moul/x/plan9/dev"
+  revision = "8e012ba39c65d365e36c0b5b84ad07002d293ef0"

@@ -1,0 +1,8 @@
+module = "gno.land/r/g1magld5ptgzaktqcexxq0pgq5lmdf0kz6re8hlv/x/upgrade/selfreg/impl/v1"
+gno = "0.9"
+# public: hands its own greeter to the facade; private aborts with "cannot persist object from the private realm"
+
+[source]
+  repository = "https://github.com/moul/gno-contracts"
+  path = "r/moul/x/upgrade/selfreg/impl/gen1"
+  revision = "4c02d6d9369d80732665898a5c4a95002c68bfd4"

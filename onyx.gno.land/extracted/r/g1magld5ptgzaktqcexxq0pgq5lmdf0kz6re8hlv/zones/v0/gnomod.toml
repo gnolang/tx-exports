@@ -1,0 +1,9 @@
+module = "gno.land/r/g1magld5ptgzaktqcexxq0pgq5lmdf0kz6re8hlv/zones/v0"
+gno = "0.9"
+
+# public: the registry is meant to be read by other realms (a config generator for node operators first), and a private realm cannot be imported
+
+[source]
+  repository = "https://github.com/moul/gno-contracts"
+  path = "r/moul/zones"
+  revision = "8e012ba39c65d365e36c0b5b84ad07002d293ef0"
