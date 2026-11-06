@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-263707
+264430
 ```
 
 ## addpkgs
@@ -632,25 +632,25 @@
 
 ## top realm calls
 ```
-  25530 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble5"
-  22868 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble6"
+  25634 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble5"
+  22978 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble6"
   18441 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble4"
-  12629 "gno.land/r/gnoland/wugnot"
-   7939 "gno.land/r/akkadia/beta/abt"
-   5939 "gno.land/r/gnoswap/staker"
+  12634 "gno.land/r/gnoland/wugnot"
+   7954 "gno.land/r/akkadia/beta/abt"
+   5952 "gno.land/r/gnoswap/staker"
    5426 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble3"
-   5370 "gno.land/r/gnoswap/position"
+   5383 "gno.land/r/gnoswap/position"
    5267 "gno.land/r/g1nmqhha0ua730vejxqhrelldm4pga5j5ptle5ea/guardians_store_v1"
-   4643 "gno.land/r/gnoswap/router"
-   4354 "gno.land/r/gnoswap/gns"
-   4270 "gno.land/r/gnoswap/launchpad"
+   4645 "gno.land/r/gnoswap/router"
+   4356 "gno.land/r/gnoswap/gns"
+   4272 "gno.land/r/gnoswap/launchpad"
    3169 "gno.land/r/g1nmqhha0ua730vejxqhrelldm4pga5j5ptle5ea/guardians"
-   2101 "gno.land/r/akkadia/beta/lotto"
-   2066 "gno.land/r/gnoswap/gov/staker"
+   2121 "gno.land/r/akkadia/beta/lotto"
+   2067 "gno.land/r/gnoswap/gov/staker"
    1358 "gno.land/r/gnoswap/gnft"
-   1008 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/wbubble"
+   1009 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/wbubble"
     985 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv3"
-    951 "gno.land/r/g138mdf0gqzue3ra2r335upclngn8t8r0n72cn3h/access"
+    974 "gno.land/r/g138mdf0gqzue3ra2r335upclngn8t8r0n72cn3h/access"
     607 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens"
     432 "gno.land/r/nym-thegnomic001/gnomic_airdrop"
     306 "gno.land/r/akkadia/beta/user"
@@ -673,9 +673,9 @@
      42 "gno.land/r/akkadia/beta/definition"
      42 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/gems/v1"
      41 "gno.land/r/moul/x/reaper/v0"
+     41 "gno.land/r/nym-wizards001/drop"
      37 "gno.land/r/moul/home"
      33 "gno.land/r/g17khqpukees4237dtn3astzapmp462vjhsz6st4/settlers/nft"
-     33 "gno.land/r/nym-wizards001/drop"
      32 "gno.land/r/demo/profile"
      31 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/perk"
      29 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/hearth/v1"
