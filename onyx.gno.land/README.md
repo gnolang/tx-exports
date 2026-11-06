@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-9794
+9827
 ```
 
 ## addpkgs
@@ -442,6 +442,7 @@
       1 "gno.land/r/g14kd2xgnkc3vyvdvh0ar6tw7570wpzn3egtevr4/parkcheck"
       1 "gno.land/r/g14psmh3mz6zecmg87y93r4wpfd6zgu98w7zyd6h/smoke/sb0e21fb4/counter"
       1 "gno.land/r/g14wv9hyngyrzpxn3ztvnx2jygs50m0240qncm8j/access"
+      1 "gno.land/r/g14yulh9a9gwg3yq4fyzlpak6magm7c5xeauswjn/smoke/sa6517853/counter"
       1 "gno.land/r/g14z28lusnnnd3f4uvga29lhu6h6rp9hlywteztq/smoke/s405cbf7c/counter"
       1 "gno.land/r/g15w4d7t2p36uupmwwucw4j33vdh7l656pxa6fau/smoke/s7b0658b0/counter"
       1 "gno.land/r/g16sk4fetd76jdfh63sannkglvj657th2c38eep8/smoke/s30629e2c/counter"
@@ -1198,7 +1199,7 @@
 
 ## top realm calls
 ```
-   1223 "gno.land/r/g14wv9hyngyrzpxn3ztvnx2jygs50m0240qncm8j/access"
+   1248 "gno.land/r/g14wv9hyngyrzpxn3ztvnx2jygs50m0240qncm8j/access"
     771 "gno.land/r/nym-alexiscolin000/gnogolf/golf/v2"
     595 "gno.land/r/nym-alexiscolin000/gnoradio/catalog/v1"
     565 "gno.land/r/nym-sixseven067/markets"
@@ -1335,6 +1336,7 @@
       3 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/coins"
       3 "gno.land/r/g13z5ugz2v7nuk2capxz5jxkk9u86t8qanef66vr/smoke/s6e99f7f8/counter"
       3 "gno.land/r/g14psmh3mz6zecmg87y93r4wpfd6zgu98w7zyd6h/smoke/sb0e21fb4/counter"
+      3 "gno.land/r/g14yulh9a9gwg3yq4fyzlpak6magm7c5xeauswjn/smoke/sa6517853/counter"
       3 "gno.land/r/g14z28lusnnnd3f4uvga29lhu6h6rp9hlywteztq/smoke/s405cbf7c/counter"
       3 "gno.land/r/g15w4d7t2p36uupmwwucw4j33vdh7l656pxa6fau/smoke/s7b0658b0/counter"
       3 "gno.land/r/g16sk4fetd76jdfh63sannkglvj657th2c38eep8/smoke/s30629e2c/counter"
