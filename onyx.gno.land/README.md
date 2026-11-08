@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-10122
+10158
 ```
 
 ## addpkgs
@@ -553,6 +553,7 @@
       1 "gno.land/r/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/shots/impl/v3"
       1 "gno.land/r/g1lwmf9enzrekvx4ukae5ckkkn8ej33mtqll0t3c/smoke/s49ab5efb/counter"
       1 "gno.land/r/g1lyg2kndaxj2dqssku0z508u067ectj08nk5txm/smoke/s882abf3e/counter"
+      1 "gno.land/r/g1m9hulsjldvskrpuyajgq9mvwrqk0zveu8zvgga/smoke/s542735f0/counter"
       1 "gno.land/r/g1magld5ptgzaktqcexxq0pgq5lmdf0kz6re8hlv/agents/capwallet/v0"
       1 "gno.land/r/g1magld5ptgzaktqcexxq0pgq5lmdf0kz6re8hlv/agents/gnomem/v0"
       1 "gno.land/r/g1magld5ptgzaktqcexxq0pgq5lmdf0kz6re8hlv/agents/jury/v0"
@@ -1202,7 +1203,7 @@
 
 ## top realm calls
 ```
-   1511 "gno.land/r/g14wv9hyngyrzpxn3ztvnx2jygs50m0240qncm8j/access"
+   1535 "gno.land/r/g14wv9hyngyrzpxn3ztvnx2jygs50m0240qncm8j/access"
     771 "gno.land/r/nym-alexiscolin000/gnogolf/golf/v2"
     595 "gno.land/r/nym-alexiscolin000/gnoradio/catalog/v1"
     565 "gno.land/r/nym-sixseven067/markets"
@@ -1231,8 +1232,8 @@
      48 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game27"
      47 "gno.land/r/nym-mnsrehearsal001/nslogic/v1"
      44 "gno.land/r/sys/namereg/v0"
+     40 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game32"
      39 "gno.land/r/nym-gfanton001/echo/v0"
-     36 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game32"
      32 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game3"
      32 "gno.land/r/g188vafzutzvlfw6wt7u3s62xtuvm0epmu8ufmfz/gnomepit/arena"
      30 "gno.land/r/g1th0masp67zfs9lg6d34qhghldhg6kjcqjuv7c2/gnoslinger/v0"
@@ -1362,6 +1363,7 @@
       3 "gno.land/r/g1la8tv3pxn09atjnjjqgjx0j8vywxngecje5xa4/smoke/s2b7a7ddb/counter"
       3 "gno.land/r/g1lwmf9enzrekvx4ukae5ckkkn8ej33mtqll0t3c/smoke/s49ab5efb/counter"
       3 "gno.land/r/g1lyg2kndaxj2dqssku0z508u067ectj08nk5txm/smoke/s882abf3e/counter"
+      3 "gno.land/r/g1m9hulsjldvskrpuyajgq9mvwrqk0zveu8zvgga/smoke/s542735f0/counter"
       3 "gno.land/r/g1mxn6ay255e8yfzfykk78uphs0fh0ayuhdavnum/smoke/s837ff2ef/counter"
       3 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/efactory"
       3 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/shoal/party"
