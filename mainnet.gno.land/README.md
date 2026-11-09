@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-276271
+277080
 ```
 
 ## addpkgs
@@ -305,6 +305,7 @@
       1 "gno.land/r/g1hl9dtl90l8pultlz2wxh54xdj8mz4r2myly5fu/public_good_guide_20261008"
       1 "gno.land/r/g1hryvj3upm2c89tk0ge976nvh6dl5ukldkx9r45/sugarproxy"
       1 "gno.land/r/g1j4ehkkrqcr53a233wamtvqggt3skr86c6777xd/guardians_pilot_v1"
+      1 "gno.land/r/g1kw3pcg8std2w989me6akdj3lkv7m8fhefldc0t/ggg_names_v1"
       1 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/adstation"
       1 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubble"
       1 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble2"
@@ -632,24 +633,24 @@
 
 ## top realm calls
 ```
-  27653 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble5"
-  25026 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble6"
+  27766 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble5"
+  25144 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble6"
   18443 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble4"
-  12825 "gno.land/r/gnoland/wugnot"
-   8200 "gno.land/r/akkadia/beta/abt"
-   6116 "gno.land/r/gnoswap/staker"
-   5521 "gno.land/r/gnoswap/position"
+  12833 "gno.land/r/gnoland/wugnot"
+   8205 "gno.land/r/akkadia/beta/abt"
+   6117 "gno.land/r/gnoswap/staker"
+   5522 "gno.land/r/gnoswap/position"
    5429 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble3"
    5267 "gno.land/r/g1nmqhha0ua730vejxqhrelldm4pga5j5ptle5ea/guardians_store_v1"
-   4754 "gno.land/r/gnoswap/router"
-   4549 "gno.land/r/gnoswap/launchpad"
-   4446 "gno.land/r/gnoswap/gns"
+   4761 "gno.land/r/gnoswap/router"
+   4554 "gno.land/r/gnoswap/launchpad"
+   4449 "gno.land/r/gnoswap/gns"
    3169 "gno.land/r/g1nmqhha0ua730vejxqhrelldm4pga5j5ptle5ea/guardians"
-   2370 "gno.land/r/gnoswap/gov/staker"
-   2186 "gno.land/r/akkadia/beta/lotto"
-   1406 "gno.land/r/g138mdf0gqzue3ra2r335upclngn8t8r0n72cn3h/access"
+   2381 "gno.land/r/gnoswap/gov/staker"
+   2223 "gno.land/r/akkadia/beta/lotto"
+   1430 "gno.land/r/g138mdf0gqzue3ra2r335upclngn8t8r0n72cn3h/access"
    1391 "gno.land/r/gnoswap/gnft"
-   1051 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/wbubble"
+   1053 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/wbubble"
     990 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv3"
     611 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens"
     432 "gno.land/r/nym-thegnomic001/gnomic_airdrop"
@@ -658,14 +659,14 @@
     238 "gno.land/r/g1ecsuj0q572jr0dhu29q9njtnmw03hyu7tyyvv6/kourt"
     215 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/perk2"
     212 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/kourtv3"
-    172 "gno.land/r/gnoswap/emission"
+    174 "gno.land/r/gnoswap/emission"
     167 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble2"
     167 "gno.land/r/g1nmqhha0ua730vejxqhrelldm4pga5j5ptle5ea/guardians_reveal_bridge_v1"
     138 "gno.land/r/gnoland/blog"
     134 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble"
     114 "gno.land/r/gnoswap/gov/governance"
     110 "gno.land/r/g1t2kg2vtr3fukg43eujkn6x53gfdyakhngt4sfd/gnofly/nfts/planes"
-    108 "gno.land/r/nym-wizards001/drop"
+    109 "gno.land/r/nym-wizards001/drop"
      97 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubble"
      93 "gno.land/r/g1t2kg2vtr3fukg43eujkn6x53gfdyakhngt4sfd/gnofly/game/v0"
      84 "gno.land/r/sys/namereg/v0"
@@ -741,6 +742,7 @@
       3 "gno.land/r/moul/x/daily/urlshort/v1"
       3 "gno.land/r/moul/x/daily/vault/v0"
       3 "gno.land/r/samcrew/memba_arcade_leaderboard_v1"
+      2 "gno.land/r/g1hryvj3upm2c89tk0ge976nvh6dl5ukldkx9r45/sugarproxy"
       2 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/bazaarv2"
       2 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/bazaarv3"
       2 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/stdnft"
@@ -761,7 +763,6 @@
       1 "gno.land/r/g17290cwvmrapvp869xfnhhawa8sm9edpufzat7d/router_checker"
       1 "gno.land/r/g17mgsf396a9ysyj4z22ft0zc0xv8ka6dns4fx7f/tokenfactory"
       1 "gno.land/r/g1gn6t0q9wenwhdda47rkrpfd63kcxjvyp7eqwku/probe1789429680"
-      1 "gno.land/r/g1hryvj3upm2c89tk0ge976nvh6dl5ukldkx9r45/sugarproxy"
       1 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/vesting"
       1 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/bazaarv1"
       1 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/gcol"
