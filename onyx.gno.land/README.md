@@ -2,14 +2,14 @@
 
 ## TXs
 ```
-10831
+10872
 ```
 
 ## addpkgs
 ```
+      5 "gno.land/p/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/poker/cards"
       5 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game29"
       5 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game30"
-      4 "gno.land/p/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/poker/cards"
       4 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnocialview"
       4 "gno.land/r/g1zrjyzatudmadgqu39d5wfamhdvf0adwlxkz25d/namesprobe"
       3 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/fishlive"
@@ -17,6 +17,7 @@
       3 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game27"
       3 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game31"
       3 "gno.land/r/nym-slavabolisong001/bolisong"
+      2 "gno.land/p/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/poker/holdem"
       2 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/arena"
       2 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/fishtry"
       2 "gno.land/r/g10u9x5yhwktwa6pwxv4nryp9h58duu7zf9r8q2h/drop"
@@ -26,6 +27,7 @@
       2 "gno.land/r/g1ezf973jrnr23xkul0pleauz00ufuf0l6vjc0x7/probebad"
       2 "gno.land/r/g1jz6j9hj6rdf5ltl2kcrpa4jwtdh3w30z0yul06/sinopia3/gallery"
       2 "gno.land/r/g1jz6j9hj6rdf5ltl2kcrpa4jwtdh3w30z0yul06/sinopia3/reader"
+      2 "gno.land/r/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/poker"
       2 "gno.land/r/g1nq99m3h9ed7vqve6ajpr3qwy2ls252m8jnundm/garden/v6"
       2 "gno.land/r/g1sl6fyq6mrc3wydt8xluhxx4aqsudpp9vhv6g2a/gnomepit/arena"
       2 "gno.land/r/g1u97n45s4s6q7vn5clr8339pv4up455hnqn4aff/gnodice"
@@ -938,12 +940,16 @@
       1 "gno.land/r/nym-mikecito001/connect4_v4"
       1 "gno.land/r/nym-mnsrehearsal001/nsdata/v1"
       1 "gno.land/r/nym-mnsrehearsal001/nsdata/v2"
+      1 "gno.land/r/nym-mnsrehearsal001/nsdata/v3"
       1 "gno.land/r/nym-mnsrehearsal001/nslogic/v1"
       1 "gno.land/r/nym-mnsrehearsal001/nslogic/v2"
+      1 "gno.land/r/nym-mnsrehearsal001/nslogic/v3"
       1 "gno.land/r/nym-mnsrehearsal001/nsmarket/v1"
       1 "gno.land/r/nym-mnsrehearsal001/nsmarket/v2"
       1 "gno.land/r/nym-mnsrehearsal001/nsnft/v1"
       1 "gno.land/r/nym-mnsrehearsal001/nsnft/v2"
+      1 "gno.land/r/nym-mnsrehearsal001/nsnft/v3"
+      1 "gno.land/r/nym-mnsrehearsal001/nsreserve/v3"
       1 "gno.land/r/nym-mnsrehearsal001/nsskin/v1"
       1 "gno.land/r/nym-mnsrehearsal001/nsskin/v2"
       1 "gno.land/r/nym-mnsrehearsal001/nsview/v1"
@@ -1209,7 +1215,7 @@
 
 ## top realm calls
 ```
-   2160 "gno.land/r/g14wv9hyngyrzpxn3ztvnx2jygs50m0240qncm8j/access"
+   2183 "gno.land/r/g14wv9hyngyrzpxn3ztvnx2jygs50m0240qncm8j/access"
     771 "gno.land/r/nym-alexiscolin000/gnogolf/golf/v2"
     595 "gno.land/r/nym-alexiscolin000/gnoradio/catalog/v1"
     565 "gno.land/r/nym-sixseven067/markets"
