@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-10925
+10966
 ```
 
 ## addpkgs
@@ -845,6 +845,7 @@
       1 "gno.land/r/g1th0masp67zfs9lg6d34qhghldhg6kjcqjuv7c2/gnoslinger/profiles/v0"
       1 "gno.land/r/g1th0masp67zfs9lg6d34qhghldhg6kjcqjuv7c2/gnoslinger/v0"
       1 "gno.land/r/g1tm3kjwc74jt7540zj8yrnsf57vjmpc4vchvr38/smoke/sa823c53f/counter"
+      1 "gno.land/r/g1tndl7xjrlry4jkpl4ry566ra0fqrtv33rluxel/smoke/se1f1d742/counter"
       1 "gno.land/r/g1uhp2ct66xap97aqwdlutwvu39y5370gd62xpcs/tally"
       1 "gno.land/r/g1um2pwwnx3gn8p3ryfdert8mhpu4u4up49sc9ru/minichess"
       1 "gno.land/r/g1uqqqz9576j4hyttvq3890p9a6vqa32ut49gfn5/tally"
@@ -1215,7 +1216,7 @@
 
 ## top realm calls
 ```
-   2232 "gno.land/r/g14wv9hyngyrzpxn3ztvnx2jygs50m0240qncm8j/access"
+   2256 "gno.land/r/g14wv9hyngyrzpxn3ztvnx2jygs50m0240qncm8j/access"
     771 "gno.land/r/nym-alexiscolin000/gnogolf/golf/v2"
     595 "gno.land/r/nym-alexiscolin000/gnoradio/catalog/v1"
     565 "gno.land/r/nym-sixseven067/markets"
@@ -1335,6 +1336,7 @@
       5 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/hollowmere/v1"
       5 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/loans"
       4 "gno.land/r/g18nke2hpu3zue0da9yudzxeugfyxuk3edjj4w79/sonotone2"
+      4 "gno.land/r/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/poker"
       4 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/bazaarv4"
       4 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/bazaarv5"
       4 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/edcol"
