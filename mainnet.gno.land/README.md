@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-293348
+293932
 ```
 
 ## addpkgs
@@ -633,13 +633,13 @@
 
 ## top realm calls
 ```
-  30260 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble5"
-  27658 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble6"
+  30374 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble5"
+  27764 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble6"
   18443 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble4"
   13145 "gno.land/r/gnoland/wugnot"
-   8486 "gno.land/r/akkadia/beta/abt"
-   6332 "gno.land/r/gnoswap/staker"
-   5695 "gno.land/r/gnoswap/position"
+   8495 "gno.land/r/akkadia/beta/abt"
+   6333 "gno.land/r/gnoswap/staker"
+   5696 "gno.land/r/gnoswap/position"
    5430 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble3"
    5267 "gno.land/r/g1nmqhha0ua730vejxqhrelldm4pga5j5ptle5ea/guardians_store_v1"
    5046 "gno.land/r/gnoswap/launchpad"
@@ -647,8 +647,8 @@
    4643 "gno.land/r/gnoswap/gns"
    3182 "gno.land/r/g1nmqhha0ua730vejxqhrelldm4pga5j5ptle5ea/guardians"
    2993 "gno.land/r/gnoswap/gov/staker"
-   2444 "gno.land/r/akkadia/beta/lotto"
-   1960 "gno.land/r/g138mdf0gqzue3ra2r335upclngn8t8r0n72cn3h/access"
+   2454 "gno.land/r/akkadia/beta/lotto"
+   1982 "gno.land/r/g138mdf0gqzue3ra2r335upclngn8t8r0n72cn3h/access"
    1424 "gno.land/r/gnoswap/gnft"
    1093 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/wbubble"
     991 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv3"
@@ -667,8 +667,8 @@
     137 "gno.land/r/nym-wizards001/drop"
     114 "gno.land/r/gnoswap/gov/governance"
     112 "gno.land/r/g1t2kg2vtr3fukg43eujkn6x53gfdyakhngt4sfd/gnofly/nfts/planes"
+    110 "gno.land/r/sys/namereg/v0"
      99 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubble"
-     96 "gno.land/r/sys/namereg/v0"
      93 "gno.land/r/g1t2kg2vtr3fukg43eujkn6x53gfdyakhngt4sfd/gnofly/game/v0"
      66 "gno.land/r/gnops/valopers"
      62 "gno.land/r/g1zdaz6sypk5tdsjc2fzsqrrn4ttn8qzmnl4waqp/hlgnot"
@@ -730,6 +730,7 @@
       4 "gno.land/r/moul/agents/receipt/v0"
       4 "gno.land/r/moul/x/daily/counter/v0"
       4 "gno.land/r/samcrew/connect4"
+      4 "gno.land/r/sys/users"
       3 "gno.land/r/g1747t5m2f08plqjlrjk2q0qld7465hxz8gkx59c/home"
       3 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/bazaarv4"
       3 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/col3333"
