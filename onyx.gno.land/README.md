@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-11047
+11093
 ```
 
 ## addpkgs
@@ -236,6 +236,10 @@
       1 "gno.land/p/gnoswap/consts/v1"
       1 "gno.land/p/gnoswap/gnsmath/v1"
       1 "gno.land/p/gnoswap/int256/v1"
+      1 "gno.land/p/gnoswap/order/access/manager/v0"
+      1 "gno.land/p/gnoswap/order/dca/v0"
+      1 "gno.land/p/gnoswap/order/limit/v0"
+      1 "gno.land/p/gnoswap/order/whitelist/v0"
       1 "gno.land/p/gnoswap/rbac/v1"
       1 "gno.land/p/gnoswap/store/v1"
       1 "gno.land/p/gnoswap/uint256/v1"
@@ -903,16 +907,26 @@
       1 "gno.land/r/gnoswap/halt/v1"
       1 "gno.land/r/gnoswap/launchpad"
       1 "gno.land/r/gnoswap/launchpad/v1"
+      1 "gno.land/r/gnoswap/launchpad/v2"
+      1 "gno.land/r/gnoswap/order/dca"
+      1 "gno.land/r/gnoswap/order/dca/impl/v0"
+      1 "gno.land/r/gnoswap/order/halt"
+      1 "gno.land/r/gnoswap/order/keeper"
+      1 "gno.land/r/gnoswap/order/limit"
+      1 "gno.land/r/gnoswap/order/limit/impl/v0"
+      1 "gno.land/r/gnoswap/order/whitelist"
       1 "gno.land/r/gnoswap/pool"
       1 "gno.land/r/gnoswap/pool/v1"
       1 "gno.land/r/gnoswap/position"
       1 "gno.land/r/gnoswap/position/v1"
       1 "gno.land/r/gnoswap/protocol_fee"
       1 "gno.land/r/gnoswap/protocol_fee/v1"
+      1 "gno.land/r/gnoswap/protocol_fee/v2"
       1 "gno.land/r/gnoswap/rbac/v1"
       1 "gno.land/r/gnoswap/referral/v1"
       1 "gno.land/r/gnoswap/router"
       1 "gno.land/r/gnoswap/router/v1"
+      1 "gno.land/r/gnoswap/router/v2"
       1 "gno.land/r/gnoswap/staker"
       1 "gno.land/r/gnoswap/staker/v1"
       1 "gno.land/r/nym-alexiscolin000/gnogolf/golf"
@@ -1216,7 +1230,7 @@
 
 ## top realm calls
 ```
-   2280 "gno.land/r/g14wv9hyngyrzpxn3ztvnx2jygs50m0240qncm8j/access"
+   2303 "gno.land/r/g14wv9hyngyrzpxn3ztvnx2jygs50m0240qncm8j/access"
     771 "gno.land/r/nym-alexiscolin000/gnogolf/golf/v2"
     595 "gno.land/r/nym-alexiscolin000/gnoradio/catalog/v1"
     565 "gno.land/r/nym-sixseven067/markets"
@@ -1238,8 +1252,8 @@
      66 "gno.land/r/gnoland/wugnot"
      65 "gno.land/r/nym-mnsrehearsal001/nsskin/v1"
      64 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens2"
+     60 "gno.land/r/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/poker"
      59 "gno.land/r/g1jz6j9hj6rdf5ltl2kcrpa4jwtdh3w30z0yul06/sinopia3/core"
-     58 "gno.land/r/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/poker"
      55 "gno.land/r/g1a9g8nu3m0xgx58hh36fph49e2xkqm9axlxuf5z/memba_gov"
      54 "gno.land/r/samcrew/connect4"
      51 "gno.land/r/nym-mnsrehearsal001/nsdata/v1"
@@ -1345,6 +1359,7 @@
       4 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/assets"
       4 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/invoices"
       4 "gno.land/r/g1ut6uspuh73e02yauxpmyt8g3wwddaq8utagvm3/payslips"
+      4 "gno.land/r/gnoswap/rbac/v1"
       4 "gno.land/r/gov/dao"
       4 "gno.land/r/nym-alexiscolin000/gnoradio/data"
       3 "gno.land/r/g105p0fa3z9g3cym72eqssme755gkvqgjksarq3p/smoke/sa418b4a1/counter"
