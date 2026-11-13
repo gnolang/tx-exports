@@ -5,7 +5,7 @@ SHORTNAME = mainnet
 CHAIN_ID = gnoland-1
 
 # the gno release this chain's nodes run; see GNO_REF in ../rules.mk
-GNO_REF = v1.7.0
+GNO_REF = v1.7.1
 
 # No USE_WS: unlike the *.testnets.gno.land endpoints, rpc.gno.land does not
 # WAF-block high-volume HTTP batch fetches, and HTTP is the faster transport
