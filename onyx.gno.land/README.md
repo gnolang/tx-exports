@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-11201
+11272
 ```
 
 ## addpkgs
@@ -1231,7 +1231,7 @@
 
 ## top realm calls
 ```
-   2400 "gno.land/r/g14wv9hyngyrzpxn3ztvnx2jygs50m0240qncm8j/access"
+   2424 "gno.land/r/g14wv9hyngyrzpxn3ztvnx2jygs50m0240qncm8j/access"
     771 "gno.land/r/nym-alexiscolin000/gnogolf/golf/v2"
     595 "gno.land/r/nym-alexiscolin000/gnoradio/catalog/v1"
     565 "gno.land/r/nym-sixseven067/markets"
@@ -1241,6 +1241,7 @@
     199 "gno.land/r/nym-alexiscolin000/gnoradio/radio/v1"
     133 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/beacon/v2"
     110 "gno.land/r/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/shots"
+    108 "gno.land/r/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/poker"
      99 "gno.land/r/nym-mikecito001/connect4_v2"
      97 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/minter3"
      94 "gno.land/r/gnops/valopers"
@@ -1252,7 +1253,6 @@
      66 "gno.land/r/g1nq99m3h9ed7vqve6ajpr3qwy2ls252m8jnundm/garden/v9"
      66 "gno.land/r/gnoland/wugnot"
      65 "gno.land/r/nym-mnsrehearsal001/nsskin/v1"
-     64 "gno.land/r/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/poker"
      64 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens2"
      59 "gno.land/r/g1jz6j9hj6rdf5ltl2kcrpa4jwtdh3w30z0yul06/sinopia3/core"
      55 "gno.land/r/g1a9g8nu3m0xgx58hh36fph49e2xkqm9axlxuf5z/memba_gov"
@@ -1263,7 +1263,7 @@
      44 "gno.land/r/sys/namereg/v0"
      40 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game32"
      39 "gno.land/r/nym-gfanton001/echo/v0"
-     35 "gno.land/r/g1th0masp67zfs9lg6d34qhghldhg6kjcqjuv7c2/gnoslinger/v0"
+     37 "gno.land/r/g1th0masp67zfs9lg6d34qhghldhg6kjcqjuv7c2/gnoslinger/v0"
      32 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game3"
      32 "gno.land/r/g188vafzutzvlfw6wt7u3s62xtuvm0epmu8ufmfz/gnomepit/arena"
      28 "gno.land/r/samcrew/launchpad/drops/v1"
