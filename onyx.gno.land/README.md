@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-11272
+11296
 ```
 
 ## addpkgs
@@ -1231,7 +1231,7 @@
 
 ## top realm calls
 ```
-   2424 "gno.land/r/g14wv9hyngyrzpxn3ztvnx2jygs50m0240qncm8j/access"
+   2447 "gno.land/r/g14wv9hyngyrzpxn3ztvnx2jygs50m0240qncm8j/access"
     771 "gno.land/r/nym-alexiscolin000/gnogolf/golf/v2"
     595 "gno.land/r/nym-alexiscolin000/gnoradio/catalog/v1"
     565 "gno.land/r/nym-sixseven067/markets"
@@ -1244,7 +1244,7 @@
     108 "gno.land/r/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/poker"
      99 "gno.land/r/nym-mikecito001/connect4_v2"
      97 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/minter3"
-     94 "gno.land/r/gnops/valopers"
+     95 "gno.land/r/gnops/valopers"
      93 "gno.land/r/g1jz6j9hj6rdf5ltl2kcrpa4jwtdh3w30z0yul06/sinopia3/mint/v1"
      90 "gno.land/r/g1um2pwwnx3gn8p3ryfdert8mhpu4u4up49sc9ru/minichess"
      87 "gno.land/r/samcrew/launchpad/sales/v1"
