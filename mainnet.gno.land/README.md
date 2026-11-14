@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-300242
+301261
 ```
 
 ## addpkgs
@@ -633,28 +633,28 @@
 
 ## top realm calls
 ```
-  31376 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble5"
-  28792 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble6"
+  31487 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble5"
+  28905 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble6"
   18443 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble4"
-  13235 "gno.land/r/gnoland/wugnot"
-   8563 "gno.land/r/akkadia/beta/abt"
+  13243 "gno.land/r/gnoland/wugnot"
+   8592 "gno.land/r/akkadia/beta/abt"
    6416 "gno.land/r/gnoswap/staker"
    5765 "gno.land/r/gnoswap/position"
    5430 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble3"
    5267 "gno.land/r/g1nmqhha0ua730vejxqhrelldm4pga5j5ptle5ea/guardians_store_v1"
    5119 "gno.land/r/gnoswap/launchpad"
-   4981 "gno.land/r/gnoswap/router"
-   4692 "gno.land/r/gnoswap/gns"
-   3221 "gno.land/r/gnoswap/gov/staker"
+   4984 "gno.land/r/gnoswap/router"
+   4695 "gno.land/r/gnoswap/gns"
+   3254 "gno.land/r/gnoswap/gov/staker"
    3182 "gno.land/r/g1nmqhha0ua730vejxqhrelldm4pga5j5ptle5ea/guardians"
-   2478 "gno.land/r/akkadia/beta/lotto"
-   2198 "gno.land/r/g138mdf0gqzue3ra2r335upclngn8t8r0n72cn3h/access"
+   2509 "gno.land/r/akkadia/beta/lotto"
+   2222 "gno.land/r/g138mdf0gqzue3ra2r335upclngn8t8r0n72cn3h/access"
    1430 "gno.land/r/gnoswap/gnft"
    1106 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/wbubble"
-    991 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv3"
+    993 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv3"
     618 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens"
     432 "gno.land/r/nym-thegnomic001/gnomic_airdrop"
-    318 "gno.land/r/gnoswap/emission"
+    324 "gno.land/r/gnoswap/emission"
     314 "gno.land/r/akkadia/beta/user"
     267 "gno.land/r/nym-thegnomic001/gnomic"
     238 "gno.land/r/g1ecsuj0q572jr0dhu29q9njtnmw03hyu7tyyvv6/kourt"
@@ -672,7 +672,7 @@
      93 "gno.land/r/g1t2kg2vtr3fukg43eujkn6x53gfdyakhngt4sfd/gnofly/game/v0"
      66 "gno.land/r/gnops/valopers"
      62 "gno.land/r/g1zdaz6sypk5tdsjc2fzsqrrn4ttn8qzmnl4waqp/hlgnot"
-     56 "gno.land/r/sys/users"
+     61 "gno.land/r/sys/users"
      42 "gno.land/r/akkadia/beta/definition"
      42 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/gems/v1"
      41 "gno.land/r/moul/x/reaper/v0"
