@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-302113
+302723
 ```
 
 ## addpkgs
@@ -633,28 +633,28 @@
 
 ## top realm calls
 ```
-  31608 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble5"
-  29025 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble6"
+  31712 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble5"
+  29129 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble6"
   18443 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble4"
-  13265 "gno.land/r/gnoland/wugnot"
-   8604 "gno.land/r/akkadia/beta/abt"
-   6433 "gno.land/r/gnoswap/staker"
-   5780 "gno.land/r/gnoswap/position"
+  13270 "gno.land/r/gnoland/wugnot"
+   8625 "gno.land/r/akkadia/beta/abt"
+   6438 "gno.land/r/gnoswap/staker"
+   5783 "gno.land/r/gnoswap/position"
    5430 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble3"
    5267 "gno.land/r/g1nmqhha0ua730vejxqhrelldm4pga5j5ptle5ea/guardians_store_v1"
    5128 "gno.land/r/gnoswap/launchpad"
-   4996 "gno.land/r/gnoswap/router"
-   4702 "gno.land/r/gnoswap/gns"
-   3266 "gno.land/r/gnoswap/gov/staker"
+   4999 "gno.land/r/gnoswap/router"
+   4705 "gno.land/r/gnoswap/gns"
+   3272 "gno.land/r/gnoswap/gov/staker"
    3182 "gno.land/r/g1nmqhha0ua730vejxqhrelldm4pga5j5ptle5ea/guardians"
    2509 "gno.land/r/akkadia/beta/lotto"
-   2249 "gno.land/r/g138mdf0gqzue3ra2r335upclngn8t8r0n72cn3h/access"
-   1432 "gno.land/r/gnoswap/gnft"
-   1108 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/wbubble"
+   2271 "gno.land/r/g138mdf0gqzue3ra2r335upclngn8t8r0n72cn3h/access"
+   1433 "gno.land/r/gnoswap/gnft"
+   1109 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/wbubble"
     993 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv3"
     618 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens"
     432 "gno.land/r/nym-thegnomic001/gnomic_airdrop"
-    326 "gno.land/r/gnoswap/emission"
+    327 "gno.land/r/gnoswap/emission"
     315 "gno.land/r/akkadia/beta/user"
     268 "gno.land/r/nym-thegnomic001/gnomic"
     238 "gno.land/r/g1ecsuj0q572jr0dhu29q9njtnmw03hyu7tyyvv6/kourt"
