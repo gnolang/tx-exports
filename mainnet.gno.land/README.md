@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-304147
+305055
 ```
 
 ## addpkgs
@@ -633,28 +633,28 @@
 
 ## top realm calls
 ```
-  31937 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble5"
-  29358 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble6"
+  32047 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble5"
+  29470 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble6"
   18443 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble4"
-  13284 "gno.land/r/gnoland/wugnot"
-   8669 "gno.land/r/akkadia/beta/abt"
-   6457 "gno.land/r/gnoswap/staker"
-   5801 "gno.land/r/gnoswap/position"
+  13292 "gno.land/r/gnoland/wugnot"
+   8702 "gno.land/r/akkadia/beta/abt"
+   6460 "gno.land/r/gnoswap/staker"
+   5803 "gno.land/r/gnoswap/position"
    5430 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble3"
    5267 "gno.land/r/g1nmqhha0ua730vejxqhrelldm4pga5j5ptle5ea/guardians_store_v1"
-   5179 "gno.land/r/gnoswap/launchpad"
-   5007 "gno.land/r/gnoswap/router"
-   4715 "gno.land/r/gnoswap/gns"
-   3314 "gno.land/r/gnoswap/gov/staker"
+   5183 "gno.land/r/gnoswap/launchpad"
+   5012 "gno.land/r/gnoswap/router"
+   4722 "gno.land/r/gnoswap/gns"
+   3358 "gno.land/r/gnoswap/gov/staker"
    3182 "gno.land/r/g1nmqhha0ua730vejxqhrelldm4pga5j5ptle5ea/guardians"
-   2509 "gno.land/r/akkadia/beta/lotto"
-   2319 "gno.land/r/g138mdf0gqzue3ra2r335upclngn8t8r0n72cn3h/access"
-   1434 "gno.land/r/gnoswap/gnft"
-   1111 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/wbubble"
-    993 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv3"
+   2516 "gno.land/r/akkadia/beta/lotto"
+   2343 "gno.land/r/g138mdf0gqzue3ra2r335upclngn8t8r0n72cn3h/access"
+   1435 "gno.land/r/gnoswap/gnft"
+   1112 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/wbubble"
+    994 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv3"
     618 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens"
     432 "gno.land/r/nym-thegnomic001/gnomic_airdrop"
-    334 "gno.land/r/gnoswap/emission"
+    342 "gno.land/r/gnoswap/emission"
     316 "gno.land/r/akkadia/beta/user"
     268 "gno.land/r/nym-thegnomic001/gnomic"
     238 "gno.land/r/g1ecsuj0q572jr0dhu29q9njtnmw03hyu7tyyvv6/kourt"
