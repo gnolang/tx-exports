@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-305055
+305740
 ```
 
 ## addpkgs
@@ -633,22 +633,22 @@
 
 ## top realm calls
 ```
-  32047 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble5"
-  29470 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble6"
+  32158 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble5"
+  29581 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble6"
   18443 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble4"
-  13292 "gno.land/r/gnoland/wugnot"
-   8702 "gno.land/r/akkadia/beta/abt"
+  13294 "gno.land/r/gnoland/wugnot"
+   8726 "gno.land/r/akkadia/beta/abt"
    6460 "gno.land/r/gnoswap/staker"
    5803 "gno.land/r/gnoswap/position"
    5430 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble3"
    5267 "gno.land/r/g1nmqhha0ua730vejxqhrelldm4pga5j5ptle5ea/guardians_store_v1"
-   5183 "gno.land/r/gnoswap/launchpad"
-   5012 "gno.land/r/gnoswap/router"
+   5184 "gno.land/r/gnoswap/launchpad"
+   5013 "gno.land/r/gnoswap/router"
    4722 "gno.land/r/gnoswap/gns"
    3358 "gno.land/r/gnoswap/gov/staker"
    3182 "gno.land/r/g1nmqhha0ua730vejxqhrelldm4pga5j5ptle5ea/guardians"
-   2516 "gno.land/r/akkadia/beta/lotto"
-   2343 "gno.land/r/g138mdf0gqzue3ra2r335upclngn8t8r0n72cn3h/access"
+   2521 "gno.land/r/akkadia/beta/lotto"
+   2366 "gno.land/r/g138mdf0gqzue3ra2r335upclngn8t8r0n72cn3h/access"
    1435 "gno.land/r/gnoswap/gnft"
    1112 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/wbubble"
     994 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv3"
@@ -670,8 +670,8 @@
     112 "gno.land/r/g1t2kg2vtr3fukg43eujkn6x53gfdyakhngt4sfd/gnofly/nfts/planes"
      99 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubble"
      93 "gno.land/r/g1t2kg2vtr3fukg43eujkn6x53gfdyakhngt4sfd/gnofly/game/v0"
+     67 "gno.land/r/sys/users"
      66 "gno.land/r/gnops/valopers"
-     65 "gno.land/r/sys/users"
      62 "gno.land/r/g1zdaz6sypk5tdsjc2fzsqrrn4ttn8qzmnl4waqp/hlgnot"
      42 "gno.land/r/akkadia/beta/definition"
      42 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/gems/v1"
