@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-311441
+312172
 ```
 
 ## addpkgs
@@ -633,28 +633,28 @@
 
 ## top realm calls
 ```
-  33050 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble5"
-  30477 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble6"
+  33162 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble5"
+  30593 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble6"
   18443 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble4"
-  13404 "gno.land/r/gnoland/wugnot"
-   8804 "gno.land/r/akkadia/beta/abt"
-   6509 "gno.land/r/gnoswap/staker"
-   5844 "gno.land/r/gnoswap/position"
+  13414 "gno.land/r/gnoland/wugnot"
+   8805 "gno.land/r/akkadia/beta/abt"
+   6518 "gno.land/r/gnoswap/staker"
+   5851 "gno.land/r/gnoswap/position"
    5430 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble3"
-   5299 "gno.land/r/gnoswap/launchpad"
+   5306 "gno.land/r/gnoswap/launchpad"
    5267 "gno.land/r/g1nmqhha0ua730vejxqhrelldm4pga5j5ptle5ea/guardians_store_v1"
-   5063 "gno.land/r/gnoswap/router"
-   4776 "gno.land/r/gnoswap/gns"
-   3504 "gno.land/r/gnoswap/gov/staker"
+   5071 "gno.land/r/gnoswap/router"
+   4782 "gno.land/r/gnoswap/gns"
+   3527 "gno.land/r/gnoswap/gov/staker"
    3182 "gno.land/r/g1nmqhha0ua730vejxqhrelldm4pga5j5ptle5ea/guardians"
-   2581 "gno.land/r/akkadia/beta/lotto"
-   2559 "gno.land/r/g138mdf0gqzue3ra2r335upclngn8t8r0n72cn3h/access"
-   1446 "gno.land/r/gnoswap/gnft"
-   1126 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/wbubble"
+   2588 "gno.land/r/akkadia/beta/lotto"
+   2584 "gno.land/r/g138mdf0gqzue3ra2r335upclngn8t8r0n72cn3h/access"
+   1447 "gno.land/r/gnoswap/gnft"
+   1129 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/wbubble"
     994 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv3"
     618 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens"
     432 "gno.land/r/nym-thegnomic001/gnomic_airdrop"
-    365 "gno.land/r/gnoswap/emission"
+    369 "gno.land/r/gnoswap/emission"
     318 "gno.land/r/akkadia/beta/user"
     273 "gno.land/r/nym-thegnomic001/gnomic"
     238 "gno.land/r/g1ecsuj0q572jr0dhu29q9njtnmw03hyu7tyyvv6/kourt"
