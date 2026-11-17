@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-310791
+311441
 ```
 
 ## addpkgs
@@ -633,22 +633,22 @@
 
 ## top realm calls
 ```
-  32946 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble5"
-  30372 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble6"
+  33050 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble5"
+  30477 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble6"
   18443 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble4"
-  13400 "gno.land/r/gnoland/wugnot"
-   8795 "gno.land/r/akkadia/beta/abt"
-   6504 "gno.land/r/gnoswap/staker"
-   5839 "gno.land/r/gnoswap/position"
+  13404 "gno.land/r/gnoland/wugnot"
+   8804 "gno.land/r/akkadia/beta/abt"
+   6509 "gno.land/r/gnoswap/staker"
+   5844 "gno.land/r/gnoswap/position"
    5430 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble3"
    5299 "gno.land/r/gnoswap/launchpad"
    5267 "gno.land/r/g1nmqhha0ua730vejxqhrelldm4pga5j5ptle5ea/guardians_store_v1"
-   5061 "gno.land/r/gnoswap/router"
+   5063 "gno.land/r/gnoswap/router"
    4776 "gno.land/r/gnoswap/gns"
    3504 "gno.land/r/gnoswap/gov/staker"
    3182 "gno.land/r/g1nmqhha0ua730vejxqhrelldm4pga5j5ptle5ea/guardians"
-   2577 "gno.land/r/akkadia/beta/lotto"
-   2536 "gno.land/r/g138mdf0gqzue3ra2r335upclngn8t8r0n72cn3h/access"
+   2581 "gno.land/r/akkadia/beta/lotto"
+   2559 "gno.land/r/g138mdf0gqzue3ra2r335upclngn8t8r0n72cn3h/access"
    1446 "gno.land/r/gnoswap/gnft"
    1126 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/wbubble"
     994 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv3"
@@ -665,7 +665,7 @@
     142 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble"
     139 "gno.land/r/nym-wizards001/drop"
     138 "gno.land/r/gnoland/blog"
-    128 "gno.land/r/sys/namereg/v0"
+    129 "gno.land/r/sys/namereg/v0"
     114 "gno.land/r/gnoswap/gov/governance"
     112 "gno.land/r/g1t2kg2vtr3fukg43eujkn6x53gfdyakhngt4sfd/gnofly/nfts/planes"
      99 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubble"
