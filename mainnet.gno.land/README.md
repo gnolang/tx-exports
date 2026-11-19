@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-320614
+321079
 ```
 
 ## addpkgs
@@ -649,24 +649,24 @@
   33960 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble5"
   31407 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble6"
   18443 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble4"
-  13567 "gno.land/r/gnoland/wugnot"
-   8940 "gno.land/r/akkadia/beta/abt"
-   6593 "gno.land/r/gnoswap/staker"
-   5916 "gno.land/r/gnoswap/position"
-   5524 "gno.land/r/gnoswap/launchpad"
+  13588 "gno.land/r/gnoland/wugnot"
+   8945 "gno.land/r/akkadia/beta/abt"
+   6598 "gno.land/r/gnoswap/staker"
+   5920 "gno.land/r/gnoswap/position"
+   5564 "gno.land/r/gnoswap/launchpad"
    5430 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble3"
    5267 "gno.land/r/g1nmqhha0ua730vejxqhrelldm4pga5j5ptle5ea/guardians_store_v1"
-   5169 "gno.land/r/gnoswap/router"
-   4879 "gno.land/r/gnoswap/gns"
-   3962 "gno.land/r/gnoswap/gov/staker"
+   5180 "gno.land/r/gnoswap/router"
+   4890 "gno.land/r/gnoswap/gns"
+   4021 "gno.land/r/gnoswap/gov/staker"
    3182 "gno.land/r/g1nmqhha0ua730vejxqhrelldm4pga5j5ptle5ea/guardians"
-   2921 "gno.land/r/g138mdf0gqzue3ra2r335upclngn8t8r0n72cn3h/access"
+   2945 "gno.land/r/g138mdf0gqzue3ra2r335upclngn8t8r0n72cn3h/access"
    2609 "gno.land/r/akkadia/beta/lotto"
    1456 "gno.land/r/gnoswap/gnft"
-   1153 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/wbubble"
+   1154 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/wbubble"
     995 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv3"
     620 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens"
-    442 "gno.land/r/gnoswap/emission"
+    451 "gno.land/r/gnoswap/emission"
     433 "gno.land/r/nym-thegnomic001/gnomic_airdrop"
     319 "gno.land/r/akkadia/beta/user"
     280 "gno.land/r/nym-thegnomic001/gnomic"
@@ -685,9 +685,9 @@
      93 "gno.land/r/g1t2kg2vtr3fukg43eujkn6x53gfdyakhngt4sfd/gnofly/game/v0"
      91 "gno.land/r/sys/users"
      73 "gno.land/r/gnops/valopers"
+     71 "gno.land/r/gnoswap/order/dca"
      62 "gno.land/r/g1zdaz6sypk5tdsjc2fzsqrrn4ttn8qzmnl4waqp/hlgnot"
-     55 "gno.land/r/gnoswap/order/dca"
-     43 "gno.land/r/gov/dao"
+     45 "gno.land/r/gov/dao"
      42 "gno.land/r/akkadia/beta/definition"
      42 "gno.land/r/g17cjym5e9hhws46lt6329pv2gtx2ay0503hgems/gems/v1"
      41 "gno.land/r/moul/x/reaper/v0"
