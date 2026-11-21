@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-326293
+326949
 ```
 
 ## addpkgs
@@ -646,31 +646,31 @@
 
 ## top realm calls
 ```
-  33965 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble5"
+  33966 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble5"
   31413 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble6"
   18443 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble4"
-  13684 "gno.land/r/gnoland/wugnot"
+  13696 "gno.land/r/gnoland/wugnot"
    9015 "gno.land/r/akkadia/beta/abt"
    6657 "gno.land/r/gnoswap/staker"
-   5966 "gno.land/r/gnoswap/position"
+   5967 "gno.land/r/gnoswap/position"
    5738 "gno.land/r/gnoswap/launchpad"
    5431 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble3"
    5267 "gno.land/r/g1nmqhha0ua730vejxqhrelldm4pga5j5ptle5ea/guardians_store_v1"
-   5238 "gno.land/r/gnoswap/router"
-   4965 "gno.land/r/gnoswap/gns"
-   4337 "gno.land/r/gnoswap/gov/staker"
-   3208 "gno.land/r/g138mdf0gqzue3ra2r335upclngn8t8r0n72cn3h/access"
-   3182 "gno.land/r/g1nmqhha0ua730vejxqhrelldm4pga5j5ptle5ea/guardians"
+   5247 "gno.land/r/gnoswap/router"
+   4972 "gno.land/r/gnoswap/gns"
+   4353 "gno.land/r/gnoswap/gov/staker"
+   3233 "gno.land/r/g138mdf0gqzue3ra2r335upclngn8t8r0n72cn3h/access"
+   3183 "gno.land/r/g1nmqhha0ua730vejxqhrelldm4pga5j5ptle5ea/guardians"
    2762 "gno.land/r/akkadia/beta/lotto"
    1465 "gno.land/r/gnoswap/gnft"
-   1169 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/wbubble"
+   1170 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/wbubble"
     999 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv3"
     620 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens"
-    506 "gno.land/r/gnoswap/emission"
+    508 "gno.land/r/gnoswap/emission"
     433 "gno.land/r/nym-thegnomic001/gnomic_airdrop"
     320 "gno.land/r/akkadia/beta/user"
-    290 "gno.land/r/nym-thegnomic001/gnomic"
-    259 "gno.land/r/gnoswap/order/dca"
+    292 "gno.land/r/nym-thegnomic001/gnomic"
+    275 "gno.land/r/gnoswap/order/dca"
     247 "gno.land/r/g1ecsuj0q572jr0dhu29q9njtnmw03hyu7tyyvv6/kourt"
     215 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/perk2"
     212 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/kourtv3"
@@ -695,7 +695,7 @@
      33 "gno.land/r/g17khqpukees4237dtn3astzapmp462vjhsz6st4/settlers/nft"
      32 "gno.land/r/demo/profile"
      31 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/perk"
-     29 "gno.land/r/demo/defi/grc20factory"
+     30 "gno.land/r/demo/defi/grc20factory"
      29 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/hearth/v1"
      25 "gno.land/r/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/home"
      24 "gno.land/r/g1t2kg2vtr3fukg43eujkn6x53gfdyakhngt4sfd/gnofly/nfts/market/bazaar/v1/gnofly"
@@ -715,9 +715,9 @@
      10 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/meta"
      10 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/seafish"
      10 "gno.land/r/g1wx60nkcp5lfsxmedeg7sfs47tzxkath05u63t4/trialmint/stable"
+     10 "gno.land/r/gnoswap/pool"
      10 "gno.land/r/moul/blog"
      10 "gno.land/r/nym-wizards001/gov"
-      9 "gno.land/r/gnoswap/pool"
       9 "gno.land/r/samcrew/memba_appstore_v3"
       8 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/hubv2"
       8 "gno.land/r/g1t2kg2vtr3fukg43eujkn6x53gfdyakhngt4sfd/gnofly/arena/v0"
