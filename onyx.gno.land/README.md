@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-12574
+12604
 ```
 
 ## addpkgs
@@ -466,6 +466,8 @@
       1 "gno.land/r/g17qqz5nhc99390qanhl7nxq9c2augjjadh0k65h/patusfenixv3"
       1 "gno.land/r/g17qqz5nhc99390qanhl7nxq9c2augjjadh0k65h/patusfenixv4"
       1 "gno.land/r/g17qqz5nhc99390qanhl7nxq9c2augjjadh0k65h/patusfenixv5"
+      1 "gno.land/r/g17qqz5nhc99390qanhl7nxq9c2augjjadh0k65h/patusfenixv6"
+      1 "gno.land/r/g17qqz5nhc99390qanhl7nxq9c2augjjadh0k65h/patusfenixv7"
       1 "gno.land/r/g17z3zgttrpwqffhm8w4p5567cdn3f069t9gx7vu/smoke/s503e82a/counter"
       1 "gno.land/r/g1864g075ukehmsvpu75r5k5hxy0gd5fppc8mvuu/smoke/s79ffdb60/counter"
       1 "gno.land/r/g18e6q9hd6ntyjpcakhm08w3xcwhp4m4nwwsz994/smoke/se0114543/counter"
@@ -1248,7 +1250,7 @@
 
 ## top realm calls
 ```
-   3558 "gno.land/r/g14wv9hyngyrzpxn3ztvnx2jygs50m0240qncm8j/access"
+   3581 "gno.land/r/g14wv9hyngyrzpxn3ztvnx2jygs50m0240qncm8j/access"
     771 "gno.land/r/nym-alexiscolin000/gnogolf/golf/v2"
     595 "gno.land/r/nym-alexiscolin000/gnoradio/catalog/v1"
     565 "gno.land/r/nym-sixseven067/markets"
@@ -1266,7 +1268,7 @@
      90 "gno.land/r/g1um2pwwnx3gn8p3ryfdert8mhpu4u4up49sc9ru/minichess"
      87 "gno.land/r/samcrew/launchpad/sales/v1"
      75 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game16"
-     70 "gno.land/r/g1jz6j9hj6rdf5ltl2kcrpa4jwtdh3w30z0yul06/sinopia3/core"
+     71 "gno.land/r/g1jz6j9hj6rdf5ltl2kcrpa4jwtdh3w30z0yul06/sinopia3/core"
      70 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens3"
      70 "gno.land/r/gnoland/wugnot"
      66 "gno.land/r/g1nq99m3h9ed7vqve6ajpr3qwy2ls252m8jnundm/garden/v9"
@@ -1480,6 +1482,8 @@
       1 "gno.land/r/g17qqz5nhc99390qanhl7nxq9c2augjjadh0k65h/patusfenixv2"
       1 "gno.land/r/g17qqz5nhc99390qanhl7nxq9c2augjjadh0k65h/patusfenixv3"
       1 "gno.land/r/g17qqz5nhc99390qanhl7nxq9c2augjjadh0k65h/patusfenixv4"
+      1 "gno.land/r/g17qqz5nhc99390qanhl7nxq9c2augjjadh0k65h/patusfenixv6"
+      1 "gno.land/r/g17qqz5nhc99390qanhl7nxq9c2augjjadh0k65h/patusfenixv7"
       1 "gno.land/r/g19dzk54hhsdc3gllpksuj6gu4a3e6fl8cr6rn4w/minhwa/engines/genesis"
       1 "gno.land/r/g19dzk54hhsdc3gllpksuj6gu4a3e6fl8cr6rn4w/minhwa/spike/engine"
       1 "gno.land/r/g19dzk54hhsdc3gllpksuj6gu4a3e6fl8cr6rn4w/minhwa/spike/mover"
