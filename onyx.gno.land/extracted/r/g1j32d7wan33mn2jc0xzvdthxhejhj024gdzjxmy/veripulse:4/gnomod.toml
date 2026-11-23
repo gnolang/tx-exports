@@ -1,0 +1,5 @@
+module = "gno.land/r/g1j32d7wan33mn2jc0xzvdthxhejhj024gdzjxmy/veripulse"
+
+[package]
+name = "veripulse"
+description = "VeriPulse: Deterministic AI Agent Audit & Escrow Protocol on Gno.land Onyx"

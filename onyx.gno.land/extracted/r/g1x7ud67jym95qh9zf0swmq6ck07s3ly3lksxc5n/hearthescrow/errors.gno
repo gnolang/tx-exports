@@ -1,0 +1,30 @@
+package hearthescrow
+
+import "errors"
+
+var (
+	ErrDirectUserCallRequired   = errors.New("hearthescrow: direct user call (maketx call) required")
+	ErrInvalidDeposit           = errors.New("hearthescrow: deposit must be a positive single ugnot coin")
+	ErrDepositTooLarge          = errors.New("hearthescrow: deposit exceeds safe basis-point math bound")
+	ErrInsufficientRealmBalance = errors.New("hearthescrow: realm balance below locked accounting")
+	ErrInvalidTitle             = errors.New("hearthescrow: title must be 1..120 characters")
+	ErrInvalidRecipient         = errors.New("hearthescrow: recipient address is invalid")
+	ErrSelfEscrow               = errors.New("hearthescrow: depositor and recipient must differ")
+	ErrInvalidArbiter           = errors.New("hearthescrow: arbiter address is invalid or matches a party")
+	ErrInvalidDeadline          = errors.New("hearthescrow: deadline height must be in the future")
+	ErrInvalidMilestones        = errors.New("hearthescrow: must provide 1..20 milestones with matching titles and positive bps summing to 10000")
+	ErrEscrowNotFound           = errors.New("hearthescrow: escrow not found")
+	ErrUnauthorized             = errors.New("hearthescrow: caller is not authorized for this action")
+	ErrEscrowNotActive          = errors.New("hearthescrow: escrow is not active")
+	ErrEscrowNotDisputed        = errors.New("hearthescrow: escrow is not disputed")
+	ErrMilestoneOutOfRange      = errors.New("hearthescrow: milestone index out of range")
+	ErrMilestoneNotPending      = errors.New("hearthescrow: milestone is not pending")
+	ErrMilestoneAlreadyApproved = errors.New("hearthescrow: milestone already approved")
+	ErrInvalidDeliverable       = errors.New("hearthescrow: deliverable note/URI must be 1..240 characters")
+	ErrNoArbiter                = errors.New("hearthescrow: escrow has no arbiter configured")
+	ErrInvalidDisputeReason     = errors.New("hearthescrow: dispute reason must be 1..280 characters")
+	ErrInvalidResolutionNote    = errors.New("hearthescrow: resolution note must be at most 280 characters")
+	ErrInvalidSplitBps          = errors.New("hearthescrow: recipient split bps must be between 0 and 10000")
+	ErrDeadlineNotReached       = errors.New("hearthescrow: deadline block height has not been reached")
+	ErrNothingToRelease         = errors.New("hearthescrow: no remaining funds in escrow")
+)
