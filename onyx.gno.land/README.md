@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-12659
+12691
 ```
 
 ## addpkgs
@@ -38,8 +38,10 @@
       2 "gno.land/r/nym-moultest123/x/vm/riscvdemo/v0"
       1 "gno.land/p/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/ammmath"
       1 "gno.land/p/g10u9x5yhwktwa6pwxv4nryp9h58duu7zf9r8q2h/grc20"
+      1 "gno.land/p/g10yuqyktt4777jn8rt3nmuhw4suz9mvypaec7ac/escrowmath"
       1 "gno.land/p/g13rqvks880v0hmlfepcj0kkudq0js38d3pc5k6a/gnotif/admins/v0"
       1 "gno.land/p/g13rqvks880v0hmlfepcj0kkudq0js38d3pc5k6a/gnotif/trigger/v0"
+      1 "gno.land/p/g13v0akxftts4jk0cq55ch4u6yp3hyzn89h4xv7j/counterlib"
       1 "gno.land/p/g188vafzutzvlfw6wt7u3s62xtuvm0epmu8ufmfz/gnomepit/engine"
       1 "gno.land/p/g19dzk54hhsdc3gllpksuj6gu4a3e6fl8cr6rn4w/minhwa/art/genesis/v1"
       1 "gno.land/p/g19dzk54hhsdc3gllpksuj6gu4a3e6fl8cr6rn4w/minhwa/engine/v1"
@@ -408,6 +410,7 @@
       1 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/pado"
       1 "gno.land/r/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/shoaltoken"
       1 "gno.land/r/g10u9x5yhwktwa6pwxv4nryp9h58duu7zf9r8q2h/drop/v3"
+      1 "gno.land/r/g10yuqyktt4777jn8rt3nmuhw4suz9mvypaec7ac/bountyforge"
       1 "gno.land/r/g129sqjlp6lmfhf4apa67m69n6lhf77fjn5yzkme/hello"
       1 "gno.land/r/g12ez7yc55whx52tqaastc0l79aa75tfs7jyccm8/smoke/sb442fb48/counter"
       1 "gno.land/r/g12rxjx3t687evfdtmvgqs3g7v0psaqqz2lsju65/smoke/s69d3c814/counter"
@@ -451,6 +454,7 @@
       1 "gno.land/r/g13rqvks880v0hmlfepcj0kkudq0js38d3pc5k6a/gnotif/v0"
       1 "gno.land/r/g13rqvks880v0hmlfepcj0kkudq0js38d3pc5k6a/gnotif/v1"
       1 "gno.land/r/g13rqvks880v0hmlfepcj0kkudq0js38d3pc5k6a/pingpong/v0"
+      1 "gno.land/r/g13v0akxftts4jk0cq55ch4u6yp3hyzn89h4xv7j/counter"
       1 "gno.land/r/g13z5ugz2v7nuk2capxz5jxkk9u86t8qanef66vr/smoke/s6e99f7f8/counter"
       1 "gno.land/r/g14kd2xgnkc3vyvdvh0ar6tw7570wpzn3egtevr4/livecheck"
       1 "gno.land/r/g14kd2xgnkc3vyvdvh0ar6tw7570wpzn3egtevr4/parkcheck"
@@ -788,6 +792,7 @@
       1 "gno.land/r/g1magld5ptgzaktqcexxq0pgq5lmdf0kz6re8hlv/x/wiki/v0"
       1 "gno.land/r/g1magld5ptgzaktqcexxq0pgq5lmdf0kz6re8hlv/zones/v0"
       1 "gno.land/r/g1mpyle408yask9wxwcs694ch8vnx7mx0xr9nrsf/smoke/s8e782f36/counter"
+      1 "gno.land/r/g1mqx99g0wjfzmjgpespuhq26kd59f3ek5cmkntv/gnometavern"
       1 "gno.land/r/g1mxn6ay255e8yfzfykk78uphs0fh0ayuhdavnum/smoke/s837ff2ef/counter"
       1 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/bazaarv4"
       1 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/bazaarv5"
@@ -1251,7 +1256,7 @@
 
 ## top realm calls
 ```
-   3631 "gno.land/r/g14wv9hyngyrzpxn3ztvnx2jygs50m0240qncm8j/access"
+   3654 "gno.land/r/g14wv9hyngyrzpxn3ztvnx2jygs50m0240qncm8j/access"
     771 "gno.land/r/nym-alexiscolin000/gnogolf/golf/v2"
     595 "gno.land/r/nym-alexiscolin000/gnoradio/catalog/v1"
     565 "gno.land/r/nym-sixseven067/markets"
