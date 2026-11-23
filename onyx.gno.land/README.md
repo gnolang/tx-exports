@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-12982
+13023
 ```
 
 ## addpkgs
@@ -45,6 +45,7 @@
       2 "gno.land/r/nym-moultest123/x/daily/triedemo/v0"
       2 "gno.land/r/nym-moultest123/x/vm/bfdemo/v0"
       2 "gno.land/r/nym-moultest123/x/vm/riscvdemo/v0"
+      2 "gno.land/r/nym-tavern777/quests"
       1 "gno.land/p/g10ragdr3cjqkael8rslpw4y6rlelhev4h0fswcx/ammmath"
       1 "gno.land/p/g10u9x5yhwktwa6pwxv4nryp9h58duu7zf9r8q2h/grc20"
       1 "gno.land/p/g12dcsmwccgdxasqde2eumua88tlrkw83kqf6tcz/mimir"
@@ -66,6 +67,7 @@
       1 "gno.land/p/g1a9g8nu3m0xgx58hh36fph49e2xkqm9axlxuf5z/avl"
       1 "gno.land/p/g1a9g8nu3m0xgx58hh36fph49e2xkqm9axlxuf5z/daoauth"
       1 "gno.land/p/g1dmwvymew9ku97tp30xka70w4tnn8cydh2tct9p/dev1/renown"
+      1 "gno.land/p/g1dmwvymew9ku97tp30xka70w4tnn8cydh2tct9p/renown/v0"
       1 "gno.land/p/g1g7dna0gp4nec5rza4q25htj0cjgswrxefp37ep/chess"
       1 "gno.land/p/g1gu8mdvjg8l5wj2ytknhs7pmyu0rmeclyvvlsd8/commitreveal"
       1 "gno.land/p/g1jdc6h96he7wf7xfycu6u7wqhv5j762qtxu5k5t/assurance"
@@ -559,8 +561,12 @@
       1 "gno.land/r/g1c6ggzkkxre6ytm84pdg279ydnuzunxlw4rja7p/smoke/sa5729b15/counter"
       1 "gno.land/r/g1d6kwap7m2hm5yd09hu69punmutvjzx8ew93l4r/smoke/s5bf12d90/counter"
       1 "gno.land/r/g1dhfkhl3pw090kulklkar9v0urhh4f6zjqjmuwn/smoke/s7936f37b/counter"
+      1 "gno.land/r/g1dmwvymew9ku97tp30xka70w4tnn8cydh2tct9p/barkeep/v0"
       1 "gno.land/r/g1dmwvymew9ku97tp30xka70w4tnn8cydh2tct9p/dev1/barkeep"
       1 "gno.land/r/g1dmwvymew9ku97tp30xka70w4tnn8cydh2tct9p/dev1/questboard"
+      1 "gno.land/r/g1dmwvymew9ku97tp30xka70w4tnn8cydh2tct9p/lounge/v0"
+      1 "gno.land/r/g1dmwvymew9ku97tp30xka70w4tnn8cydh2tct9p/questboard/v0"
+      1 "gno.land/r/g1dmwvymew9ku97tp30xka70w4tnn8cydh2tct9p/townhall/v0"
       1 "gno.land/r/g1e4jarvm80rz800tmw8nvx43j2fq2z9atkya5na/cutpurse/v1"
       1 "gno.land/r/g1e4jarvm80rz800tmw8nvx43j2fq2z9atkya5na/cutpurse/v2"
       1 "gno.land/r/g1e4jarvm80rz800tmw8nvx43j2fq2z9atkya5na/cutpurse/v3"
@@ -617,6 +623,7 @@
       1 "gno.land/r/g1kad4f5muevsfy4tww6lgnk7smlwp5zmxc9rxzs/e2ecanary"
       1 "gno.land/r/g1kh9drjcx5x8ptrxgmxtd0qefj5hvtu8jf3pmeu/smoke/s3ca37bc5/counter"
       1 "gno.land/r/g1kkcw4krnhxadt08gjxs5ud2jhv87rtlzt29thy/milestone_escrow"
+      1 "gno.land/r/g1klfptn25xf37smf27vqr4g6qlmtwc0lz6y5mcj/questboard"
       1 "gno.land/r/g1la8tv3pxn09atjnjjqgjx0j8vywxngecje5xa4/smoke/s2b7a7ddb/counter"
       1 "gno.land/r/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/guildhall"
       1 "gno.land/r/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/guildhall/bounties"
@@ -881,6 +888,7 @@
       1 "gno.land/r/g1pq6pxhgxk2uw5shg5le6glfydpxcu74k0zh069/sinopia/mint/v1"
       1 "gno.land/r/g1pq6pxhgxk2uw5shg5le6glfydpxcu74k0zh069/sinopia/reader"
       1 "gno.land/r/g1pxh5lmn4tr4dnllz6zmaapvmc68n6z7l6lt2pw/smoke/s1497168e/counter"
+      1 "gno.land/r/g1pzn6rn8q0pfmq4xje4j8086ncnldavyz8skgp3/idlewatt"
       1 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/arcade/duel"
       1 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/arcade/duel/v2"
       1 "gno.land/r/g1r4aw43kagaaquhegxw6xr346h9f2qu2ezf0jar/arcade/duel/v3"
@@ -905,6 +913,7 @@
       1 "gno.land/r/g1r6y6ydgcxvrq9ur9v82tr9c3azpwtved7ly3qu/tally"
       1 "gno.land/r/g1rlt0yjd800rxzvlnncaduf7emfrmvqhjrgt97j/smoke/s60e48f14/counter"
       1 "gno.land/r/g1rvmc7kl9fdcewa4m065gj8at9fjavf7s8ds4x7/smoke/s86df4826/counter"
+      1 "gno.land/r/g1rwxskhs8tm98yxcj5tuehwplwnqzacuqsqgrtq/questboard"
       1 "gno.land/r/g1rzgxl6njyu4c2x89gxvaa9cswrt73rz8mlp7l6/alpha2/broken/v0"
       1 "gno.land/r/g1rzgxl6njyu4c2x89gxvaa9cswrt73rz8mlp7l6/alpha2/echo/v0"
       1 "gno.land/r/g1rzgxl6njyu4c2x89gxvaa9cswrt73rz8mlp7l6/alpha2/gnotif/v0"
@@ -1278,7 +1287,6 @@
       1 "gno.land/r/nym-sixseven067/home"
       1 "gno.land/r/nym-sixseven067/markets"
       1 "gno.land/r/nym-sixseven067/markets/v2"
-      1 "gno.land/r/nym-tavern777/quests"
       1 "gno.land/r/nym-vikbez000/nightsky"
       1 "gno.land/r/nym-vikbez000/nightsky/v1"
       1 "gno.land/r/nym-vikbez000/telescope"
@@ -1309,7 +1317,7 @@
 
 ## top realm calls
 ```
-   3725 "gno.land/r/g14wv9hyngyrzpxn3ztvnx2jygs50m0240qncm8j/access"
+   3749 "gno.land/r/g14wv9hyngyrzpxn3ztvnx2jygs50m0240qncm8j/access"
     771 "gno.land/r/nym-alexiscolin000/gnogolf/golf/v2"
     595 "gno.land/r/nym-alexiscolin000/gnoradio/catalog/v1"
     565 "gno.land/r/nym-sixseven067/markets"
