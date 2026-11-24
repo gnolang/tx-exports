@@ -1,0 +1,335 @@
+package waveweaver_provenance
+
+import (
+	"chain"
+	"strconv"
+	"strings"
+
+	"gno.land/p/nt/avl/v0"
+	"gno.land/p/nt/ufmt/v0"
+)
+
+const (
+	// MinAntiSlopQAPermille enforces WaveWeaver Stage 6 Golden Set QA >= 85.0% (850/1000).
+	MinAntiSlopQAPermille = 850
+	AnchoredEvent         = "WaveWeaverProvenanceAnchored"
+)
+
+// Publication represents an audited, anti-AI-slop calibrated media release anchored on-chain.
+type Publication struct {
+	Seq              int
+	ID               string
+	ChannelSlug      string
+	Title            string
+	Sha256Digest     string
+	QAScorePermille  int
+	SlopRemovedCount int
+	CitationCount    int
+	FormatsCSV       string
+	SummaryMarkdown  string
+	Author           address
+}
+
+var (
+	// Single-owner realm persistence: *Publication lives ONLY in pubsByID.
+	// Secondary indexes map string -> cleanID string (zero multi-parent pointer aliasing).
+	pubsByID      *avl.Tree // id -> *Publication
+	pubsByDigest  *avl.Tree // 64-char hex sha256 -> id (string)
+	pubsBySeq     *avl.Tree // zero-padded seq -> id (string)
+	channelCounts *avl.Tree // channelSlug -> int
+	nextSeq       int
+)
+
+func init() {
+	pubsByID = avl.NewTree()
+	pubsByDigest = avl.NewTree()
+	pubsBySeq = avl.NewTree()
+	channelCounts = avl.NewTree()
+}
+
+func normalizeSha256(raw string) string {
+	s := strings.ToLower(strings.TrimSpace(raw))
+	if len(s) >= 2 && s[:2] == "0x" {
+		s = s[2:]
+	}
+	if len(s) != 64 {
+		panic("waveweaver: sha256 digest must be 64 hex characters")
+	}
+	for i := 0; i < len(s); i++ {
+		c := s[i]
+		if !((c >= '0' && c <= '9') || (c >= 'a' && c <= 'f')) {
+			panic("waveweaver: sha256 digest contains non-hex character")
+		}
+	}
+	return s
+}
+
+func cleanSlug(raw string) string {
+	s := strings.TrimSpace(raw)
+	if s == "" || len(s) > 64 {
+		panic("waveweaver: invalid identifier or channel slug")
+	}
+	for i := 0; i < len(s); i++ {
+		c := s[i]
+		ok := (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') || c == '-' || c == '_'
+		if !ok {
+			panic("waveweaver: slug may only contain [a-zA-Z0-9_-]")
+		}
+	}
+	return s
+}
+
+func padSeq(n int) string {
+	s := strconv.Itoa(n)
+	for len(s) < 6 {
+		s = "0" + s
+	}
+	return s
+}
+
+func formatPermille(p int) string {
+	whole := p / 10
+	frac := p % 10
+	return ufmt.Sprintf("%d.%d", whole, frac)
+}
+
+func jsonEscape(s string) string {
+	out := strings.Replace(s, "\\", "\\\\", -1)
+	out = strings.Replace(out, "\"", "\\\"", -1)
+	out = strings.Replace(out, "\n", " ", -1)
+	out = strings.Replace(out, "\r", " ", -1)
+	return out
+}
+
+// AnchorPublication enforces deterministic Anti-AI-Slop & citation invariants before committing on-chain provenance.
+func AnchorPublication(
+	cur realm,
+	id string,
+	channelSlug string,
+	title string,
+	sha256Digest string,
+	qaScorePermille int,
+	slopRemovedCount int,
+	citationCount int,
+	formatsCSV string,
+	summaryMarkdown string,
+) string {
+	if !cur.IsCurrent() {
+		panic("waveweaver: spoofed realm frame")
+	}
+	cleanID := cleanSlug(id)
+	cleanCh := cleanSlug(channelSlug)
+	cleanTitle := strings.TrimSpace(title)
+	if cleanTitle == "" || len(cleanTitle) > 200 {
+		panic("waveweaver: title must be 1..200 chars")
+	}
+	normHash := normalizeSha256(sha256Digest)
+
+	if qaScorePermille < MinAntiSlopQAPermille || qaScorePermille > 1000 {
+		panic("waveweaver: Stage 6 Anti-AI-Slop QA score below 850 permille (85.0%) minimum gate")
+	}
+	if slopRemovedCount < 0 {
+		panic("waveweaver: slopRemovedCount must be non-negative")
+	}
+	if citationCount < 1 {
+		panic("waveweaver: at least 1 verified primary-source citation is required")
+	}
+	if pubsByID.Has(cleanID) {
+		panic("waveweaver: duplicate publication ID")
+	}
+	if pubsByDigest.Has(normHash) {
+		panic("waveweaver: duplicate sha256 content digest already anchored")
+	}
+
+	cleanFormats := strings.TrimSpace(formatsCSV)
+	if cleanFormats == "" {
+		cleanFormats = "9:16_AVATAR_VIDEO,VISUAL_CAROUSEL,LONG_ARTICLE,PODCAST_AUDIO,MICRO_THREAD"
+	}
+	cleanSummary := strings.TrimSpace(summaryMarkdown)
+	if len(cleanSummary) > 1200 {
+		cleanSummary = cleanSummary[:1200]
+	}
+
+	caller := cur.Previous().Address()
+	nextSeq++
+	pub := &Publication{
+		Seq:              nextSeq,
+		ID:               cleanID,
+		ChannelSlug:      cleanCh,
+		Title:            cleanTitle,
+		Sha256Digest:     normHash,
+		QAScorePermille:  qaScorePermille,
+		SlopRemovedCount: slopRemovedCount,
+		CitationCount:    citationCount,
+		FormatsCSV:       cleanFormats,
+		SummaryMarkdown:  cleanSummary,
+		Author:           caller,
+	}
+
+	pubsByID.Set(cleanID, pub)
+	pubsByDigest.Set(normHash, cleanID)
+	pubsBySeq.Set(padSeq(nextSeq), cleanID)
+
+	prevCount := 0
+	if v := channelCounts.Get(cleanCh); v != nil {
+		prevCount = v.(int)
+	}
+	channelCounts.Set(cleanCh, prevCount+1)
+
+	chain.Emit(
+		AnchoredEvent,
+		"id", cleanID,
+		"channel", cleanCh,
+		"sha256", normHash,
+		"qa_permille", strconv.Itoa(qaScorePermille),
+		"author", caller.String(),
+	)
+
+	return ufmt.Sprintf("ANCHORED:%s:0x%s:QA=%s", cleanID, normHash, formatPermille(qaScorePermille))
+}
+
+// VerifyDigest allows AI agents (via gnomcp) and readers to verify a SHA-256 content digest without gas.
+func VerifyDigest(sha256Digest string) string {
+	s := strings.ToLower(strings.TrimSpace(sha256Digest))
+	if len(s) >= 2 && s[:2] == "0x" {
+		s = s[2:]
+	}
+	if len(s) != 64 {
+		return `{"verified":false,"error":"invalid_sha256_length"}`
+	}
+	idVal := pubsByDigest.Get(s)
+	if idVal == nil {
+		return ufmt.Sprintf(`{"verified":false,"sha256":"0x%s"}`, s)
+	}
+	raw := pubsByID.Get(idVal.(string))
+	if raw == nil {
+		return ufmt.Sprintf(`{"verified":false,"sha256":"0x%s"}`, s)
+	}
+	pub := raw.(*Publication)
+	return ufmt.Sprintf(
+		`{"verified":true,"seq":%d,"id":"%s","channel":"%s","title":"%s","sha256":"0x%s","qa_score":"%s","citations":%d,"slop_removed":%d,"author":"%s"}`,
+		pub.Seq,
+		jsonEscape(pub.ID),
+		jsonEscape(pub.ChannelSlug),
+		jsonEscape(pub.Title),
+		pub.Sha256Digest,
+		formatPermille(pub.QAScorePermille),
+		pub.CitationCount,
+		pub.SlopRemovedCount,
+		pub.Author.String(),
+	)
+}
+
+// TotalPublications returns the total count of verified publications anchored in this realm.
+func TotalPublications() int {
+	return pubsByID.Size()
+}
+
+// ChannelCount returns the number of isolated WaveWeaver content channels with anchored records.
+func ChannelCount() int {
+	return channelCounts.Size()
+}
+
+// Render serves native gnoweb Markdown views:
+//   - ""                  -> Registry dashboard, channel isolation summary & verified publications
+//   - "channel/<slug>"    -> Channel-scoped publications
+//   - "pub/<id>"          -> Full provenance certificate for a single publication
+//   - "verify/<sha256>"   -> Direct SHA-256 digest lookup
+func Render(path string) string {
+	cleanPath := strings.Trim(path, "/")
+	if len(cleanPath) > 4 && cleanPath[:4] == "pub/" {
+		return renderPublicationDetail(cleanPath[4:])
+	}
+	if len(cleanPath) > 8 && cleanPath[:8] == "channel/" {
+		return renderDashboard(cleanPath[8:])
+	}
+	if len(cleanPath) > 7 && cleanPath[:7] == "verify/" {
+		return renderVerify(cleanPath[7:])
+	}
+	return renderDashboard("")
+}
+
+func renderDashboard(filterChannel string) string {
+	out := "# WaveWeaver — On-Chain Anti-AI-Slop Content Provenance Registry\n\n"
+	out += "> **8-Stage Human-in-the-Loop AI Media OS**: Stage 5 Anti-AI-Slop Calibration + Stage 6 Golden Set QA Gate (`>= 85.0`) + Stage 8 `SHA-256` Provenance Realm.\n\n"
+	out += ufmt.Sprintf(
+		"- **Verified Publications Anchored**: `%d`  \n- **Isolated Content Channels**: `%d`  \n- **Deterministic On-Chain Gate**: `QAScore >= 85.0` & `Primary Citations >= 1`\n\n",
+		pubsByID.Size(),
+		channelCounts.Size(),
+	)
+
+	if channelCounts.Size() > 0 {
+		out += "## Isolated Multi-Tenant Channels (`Org -> Workspace -> ContentChannel`)\n\n"
+		channelCounts.Iterate("", "", func(chKey string, val any) bool {
+			cnt := val.(int)
+			out += ufmt.Sprintf("- **`%s`** (`%d` verified releases) — [Filter Channel](?:/channel/%s)\n", chKey, cnt, chKey)
+			return false
+		})
+		if filterChannel != "" {
+			out += ufmt.Sprintf("\n*Showing channel filter: `%s` — [Back to All Channels](?:)*\n", filterChannel)
+		}
+		out += "\n"
+	}
+
+	out += "## Anchored Content Provenance Ledger\n\n"
+	if pubsBySeq.Size() == 0 {
+		out += "*No publications anchored yet.*\n"
+		return out
+	}
+
+	out += "| # | Publication ID | Channel | Title | Anti-Slop QA | Citations | SHA-256 Digest |\n"
+	out += "| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n"
+
+	pubsBySeq.ReverseIterate("", "", func(_ string, val any) bool {
+		idStr := val.(string)
+		raw := pubsByID.Get(idStr)
+		if raw == nil {
+			return false
+		}
+		pub := raw.(*Publication)
+		if filterChannel != "" && pub.ChannelSlug != filterChannel {
+			return false
+		}
+		shortHash := pub.Sha256Digest[:10] + "..." + pub.Sha256Digest[56:]
+		out += ufmt.Sprintf(
+			"| %d | [`%s`](?:/pub/%s) | `%s` | %s | **%s / 100** (`-%d` slop) | `%d` | `0x%s` |\n",
+			pub.Seq,
+			pub.ID,
+			pub.ID,
+			pub.ChannelSlug,
+			pub.Title,
+			formatPermille(pub.QAScorePermille),
+			pub.SlopRemovedCount,
+			pub.CitationCount,
+			shortHash,
+		)
+		return false
+	})
+
+	return out
+}
+
+func renderPublicationDetail(id string) string {
+	raw := pubsByID.Get(strings.TrimSpace(id))
+	if raw == nil {
+		return ufmt.Sprintf("# Publication Not Found\n\nNo anchored publication matches ID `%s`.\n", id)
+	}
+	pub := raw.(*Publication)
+	out := ufmt.Sprintf("# Provenance Certificate · `%s`\n\n", pub.ID)
+	out += ufmt.Sprintf("- **Title**: %s\n", pub.Title)
+	out += ufmt.Sprintf("- **Isolated Channel**: `%s`\n", pub.ChannelSlug)
+	out += ufmt.Sprintf("- **Canonical SHA-256 Digest**: `0x%s`\n", pub.Sha256Digest)
+	out += ufmt.Sprintf("- **Stage 6 Golden Set QA Score**: **`%s / 100.0`** (`%d` LLM slop clichés stripped)\n", formatPermille(pub.QAScorePermille), pub.SlopRemovedCount)
+	out += ufmt.Sprintf("- **Verified Primary Citations**: `%d`\n", pub.CitationCount)
+	out += ufmt.Sprintf("- **5 Synchronized Media Formats**: `%s`\n", pub.FormatsCSV)
+	out += ufmt.Sprintf("- **Anchored By**: `%s`\n\n", pub.Author.String())
+	if pub.SummaryMarkdown != "" {
+		out += "## Calibrated Executive Summary\n\n" + pub.SummaryMarkdown + "\n\n"
+	}
+	out += "[<- Back to Provenance Registry](?:)\n"
+	return out
+}
+
+func renderVerify(digest string) string {
+	return "# SHA-256 Digest Verification\n\n```json\n" + VerifyDigest(digest) + "\n```\n\n[<- Back to Provenance Registry](?:)\n"
+}

@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-13114
+13172
 ```
 
 ## addpkgs
@@ -18,6 +18,10 @@
       3 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game12"
       3 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game27"
       3 "gno.land/r/g138gdmwj6heduu3st796lw6qqdwylgaxf7ty5gz/game31"
+      3 "gno.land/r/g19wmd95cwm3s0w0c5592tgu3zh4zgrtlggvugnj/bouncer/v0"
+      3 "gno.land/r/g19wmd95cwm3s0w0c5592tgu3zh4zgrtlggvugnj/vault/v1"
+      3 "gno.land/r/g19wmd95cwm3s0w0c5592tgu3zh4zgrtlggvugnj/vault/v2"
+      3 "gno.land/r/g1kevlnv7ukvlx70w390fshwwsp9e2mr9dkaptmd/waveweaver_provenance"
       3 "gno.land/r/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/poker"
       3 "gno.land/r/g1udyt8ywv489087rn5td39m8t3peve3hxjz08w2/kolektif"
       3 "gno.land/r/nym-slavabolisong001/bolisong"
@@ -35,6 +39,7 @@
       2 "gno.land/r/g1csu73nv8c38a8xru5vk6wgq0ltnpvzd79a6udn/gnosage"
       2 "gno.land/r/g1e4jarvm80rz800tmw8nvx43j2fq2z9atkya5na/cutpurse"
       2 "gno.land/r/g1ezf973jrnr23xkul0pleauz00ufuf0l6vjc0x7/probebad"
+      2 "gno.land/r/g1fhjafn467h28wvh7lvd7xek0h8nds6u0hugzga/bountyboard"
       2 "gno.land/r/g1jxrrf695x7r3h0wqvmkq2vyyqy39wjraxyph3j/nandloom/v0"
       2 "gno.land/r/g1jz6j9hj6rdf5ltl2kcrpa4jwtdh3w30z0yul06/sinopia3/gallery"
       2 "gno.land/r/g1jz6j9hj6rdf5ltl2kcrpa4jwtdh3w30z0yul06/sinopia3/reader"
@@ -66,6 +71,7 @@
       1 "gno.land/p/g19dzk54hhsdc3gllpksuj6gu4a3e6fl8cr6rn4w/sinopia/engine/v1"
       1 "gno.land/p/g19dzk54hhsdc3gllpksuj6gu4a3e6fl8cr6rn4w/sinopia/safe/v1"
       1 "gno.land/p/g19dzk54hhsdc3gllpksuj6gu4a3e6fl8cr6rn4w/sinopia/types/v1"
+      1 "gno.land/p/g19wmd95cwm3s0w0c5592tgu3zh4zgrtlggvugnj/bouncer/badge/v0"
       1 "gno.land/p/g1a9g8nu3m0xgx58hh36fph49e2xkqm9axlxuf5z/avl"
       1 "gno.land/p/g1a9g8nu3m0xgx58hh36fph49e2xkqm9axlxuf5z/daoauth"
       1 "gno.land/p/g1dmwvymew9ku97tp30xka70w4tnn8cydh2tct9p/dev1/renown"
@@ -546,6 +552,7 @@
       1 "gno.land/r/g19dzk54hhsdc3gllpksuj6gu4a3e6fl8cr6rn4w/sinopia/reader"
       1 "gno.land/r/g19j4y5lzwkcuguf8a95pjueuhn7ay58gm0y3wen/ordnance"
       1 "gno.land/r/g19tr97dsckspdfu4k5mp0rj26vlarzrmdu3nwka/hello"
+      1 "gno.land/r/g19wmd95cwm3s0w0c5592tgu3zh4zgrtlggvugnj/bouncer/v1"
       1 "gno.land/r/g1a0cdtzx9tyx2gd9mszuvfgl8t5wvw8lzna4ujr/market"
       1 "gno.land/r/g1a0cdtzx9tyx2gd9mszuvfgl8t5wvw8lzna4ujr/shop"
       1 "gno.land/r/g1a9g8nu3m0xgx58hh36fph49e2xkqm9axlxuf5z/escrow_v4"
@@ -631,10 +638,13 @@
       1 "gno.land/r/g1jz6j9hj6rdf5ltl2kcrpa4jwtdh3w30z0yul06/sinopia3/mint/v1"
       1 "gno.land/r/g1jz6j9hj6rdf5ltl2kcrpa4jwtdh3w30z0yul06/sinopia3/randomness/drand"
       1 "gno.land/r/g1kad4f5muevsfy4tww6lgnk7smlwp5zmxc9rxzs/e2ecanary"
+      1 "gno.land/r/g1kevlnv7ukvlx70w390fshwwsp9e2mr9dkaptmd/waveweaver_provenance_v1"
+      1 "gno.land/r/g1kevlnv7ukvlx70w390fshwwsp9e2mr9dkaptmd/ww_ping"
       1 "gno.land/r/g1kh9drjcx5x8ptrxgmxtd0qefj5hvtu8jf3pmeu/smoke/s3ca37bc5/counter"
       1 "gno.land/r/g1kkcw4krnhxadt08gjxs5ud2jhv87rtlzt29thy/milestone_escrow"
       1 "gno.land/r/g1klfptn25xf37smf27vqr4g6qlmtwc0lz6y5mcj/questboard"
       1 "gno.land/r/g1la8tv3pxn09atjnjjqgjx0j8vywxngecje5xa4/smoke/s2b7a7ddb/counter"
+      1 "gno.land/r/g1llc3lq3zmjtjdk29dk52munrzxt5ne746cl7r8/mandate"
       1 "gno.land/r/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/guildhall"
       1 "gno.land/r/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/guildhall/bounties"
       1 "gno.land/r/g1lnkytfqcjwllws63gvf0mv9yt04aswy4y9amhm/guildhall/campaigns"
@@ -986,6 +996,13 @@
       1 "gno.land/r/g1z4kaltz0g3qj5ey8jefjwfkeqah428vv4syy85/releasetrail"
       1 "gno.land/r/g1zdyqzhwsg2ayg9rjh8txhgm42ntu0aajda6x7y/smoke/s5f26c0fe/counter"
       1 "gno.land/r/g1zgg4n0whqpt3mz8ysshqw308kqjv9q5pap8gw7/smoke/sf0601180/counter"
+      1 "gno.land/r/g1zjumaghw5cgzhyj46eygvd452p6the6n56dppx/lamplighter/lastorders/v1"
+      1 "gno.land/r/g1zjumaghw5cgzhyj46eygvd452p6the6n56dppx/lamplighter/registry"
+      1 "gno.land/r/g1zjumaghw5cgzhyj46eygvd452p6the6n56dppx/lamplighter/registry/v1"
+      1 "gno.land/r/g1zjumaghw5cgzhyj46eygvd452p6the6n56dppx/lamplighter/registry/v2"
+      1 "gno.land/r/g1zjumaghw5cgzhyj46eygvd452p6the6n56dppx/lamplighter/taproom"
+      1 "gno.land/r/g1zjumaghw5cgzhyj46eygvd452p6the6n56dppx/lamplighter/taproom/v1"
+      1 "gno.land/r/g1zjumaghw5cgzhyj46eygvd452p6the6n56dppx/lamplighter/taproom/v2"
       1 "gno.land/r/g1zrjyzatudmadgqu39d5wfamhdvf0adwlxkz25d/ctlprobe"
       1 "gno.land/r/g1zrjyzatudmadgqu39d5wfamhdvf0adwlxkz25d/ctlprobe2"
       1 "gno.land/r/g1zrjyzatudmadgqu39d5wfamhdvf0adwlxkz25d/ctlprobe3"
@@ -1331,7 +1348,7 @@
 
 ## top realm calls
 ```
-   3775 "gno.land/r/g14wv9hyngyrzpxn3ztvnx2jygs50m0240qncm8j/access"
+   3797 "gno.land/r/g14wv9hyngyrzpxn3ztvnx2jygs50m0240qncm8j/access"
     771 "gno.land/r/nym-alexiscolin000/gnogolf/golf/v2"
     595 "gno.land/r/nym-alexiscolin000/gnoradio/catalog/v1"
     565 "gno.land/r/nym-sixseven067/markets"
