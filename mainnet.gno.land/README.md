@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-332610
+333157
 ```
 
 ## addpkgs
@@ -649,25 +649,25 @@
   33966 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble5"
   31425 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble6"
   18443 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble4"
-  13820 "gno.land/r/gnoland/wugnot"
-   9094 "gno.land/r/akkadia/beta/abt"
+  13823 "gno.land/r/gnoland/wugnot"
+   9095 "gno.land/r/akkadia/beta/abt"
    6744 "gno.land/r/gnoswap/staker"
    6036 "gno.land/r/gnoswap/position"
    5910 "gno.land/r/gnoswap/launchpad"
    5432 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble3"
-   5333 "gno.land/r/gnoswap/router"
+   5335 "gno.land/r/gnoswap/router"
    5267 "gno.land/r/g1nmqhha0ua730vejxqhrelldm4pga5j5ptle5ea/guardians_store_v1"
-   5052 "gno.land/r/gnoswap/gns"
-   4741 "gno.land/r/gnoswap/gov/staker"
-   3522 "gno.land/r/g138mdf0gqzue3ra2r335upclngn8t8r0n72cn3h/access"
+   5056 "gno.land/r/gnoswap/gns"
+   4753 "gno.land/r/gnoswap/gov/staker"
+   3548 "gno.land/r/g138mdf0gqzue3ra2r335upclngn8t8r0n72cn3h/access"
    3183 "gno.land/r/g1nmqhha0ua730vejxqhrelldm4pga5j5ptle5ea/guardians"
    2813 "gno.land/r/akkadia/beta/lotto"
    1471 "gno.land/r/gnoswap/gnft"
    1188 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/wbubble"
    1001 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv3"
     620 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens"
-    573 "gno.land/r/gnoswap/emission"
-    485 "gno.land/r/gnoswap/order/dca"
+    576 "gno.land/r/gnoswap/emission"
+    503 "gno.land/r/gnoswap/order/dca"
     433 "gno.land/r/nym-thegnomic001/gnomic_airdrop"
     321 "gno.land/r/akkadia/beta/user"
     310 "gno.land/r/nym-thegnomic001/gnomic"
@@ -680,7 +680,7 @@
     145 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble"
     138 "gno.land/r/gnoland/blog"
     137 "gno.land/r/sys/namereg/v0"
-    118 "gno.land/r/sys/users"
+    121 "gno.land/r/sys/users"
     114 "gno.land/r/gnoswap/gov/governance"
     112 "gno.land/r/g1t2kg2vtr3fukg43eujkn6x53gfdyakhngt4sfd/gnofly/nfts/planes"
      99 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubble"
