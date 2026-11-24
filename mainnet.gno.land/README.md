@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-335342
+335775
 ```
 
 ## addpkgs
@@ -647,27 +647,27 @@
 ## top realm calls
 ```
   33966 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble5"
-  31431 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble6"
+  31435 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble6"
   18443 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble4"
-  13857 "gno.land/r/gnoland/wugnot"
-   9216 "gno.land/r/akkadia/beta/abt"
+  13861 "gno.land/r/gnoland/wugnot"
+   9234 "gno.land/r/akkadia/beta/abt"
    6793 "gno.land/r/gnoswap/staker"
-   6074 "gno.land/r/gnoswap/position"
-   5969 "gno.land/r/gnoswap/launchpad"
+   6077 "gno.land/r/gnoswap/position"
+   5972 "gno.land/r/gnoswap/launchpad"
    5432 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble3"
-   5356 "gno.land/r/gnoswap/router"
+   5360 "gno.land/r/gnoswap/router"
    5267 "gno.land/r/g1nmqhha0ua730vejxqhrelldm4pga5j5ptle5ea/guardians_store_v1"
-   5084 "gno.land/r/gnoswap/gns"
-   4873 "gno.land/r/gnoswap/gov/staker"
-   3643 "gno.land/r/g138mdf0gqzue3ra2r335upclngn8t8r0n72cn3h/access"
+   5092 "gno.land/r/gnoswap/gns"
+   4923 "gno.land/r/gnoswap/gov/staker"
+   3667 "gno.land/r/g138mdf0gqzue3ra2r335upclngn8t8r0n72cn3h/access"
    3183 "gno.land/r/g1nmqhha0ua730vejxqhrelldm4pga5j5ptle5ea/guardians"
-   2813 "gno.land/r/akkadia/beta/lotto"
+   2820 "gno.land/r/akkadia/beta/lotto"
    1475 "gno.land/r/gnoswap/gnft"
-   1192 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/wbubble"
+   1193 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/wbubble"
    1002 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv3"
     620 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens"
-    597 "gno.land/r/gnoswap/emission"
-    565 "gno.land/r/gnoswap/order/dca"
+    605 "gno.land/r/gnoswap/emission"
+    581 "gno.land/r/gnoswap/order/dca"
     433 "gno.land/r/nym-thegnomic001/gnomic_airdrop"
     324 "gno.land/r/akkadia/beta/user"
     311 "gno.land/r/nym-thegnomic001/gnomic"
