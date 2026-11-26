@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-340156
+340765
 ```
 
 ## addpkgs
@@ -649,30 +649,30 @@
 ## top realm calls
 ```
   33966 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble5"
-  31446 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble6"
+  31449 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble6"
   18443 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble4"
-  13910 "gno.land/r/gnoland/wugnot"
-   9379 "gno.land/r/akkadia/beta/abt"
-   6833 "gno.land/r/gnoswap/staker"
-   6121 "gno.land/r/gnoswap/position"
-   6032 "gno.land/r/gnoswap/launchpad"
+  13916 "gno.land/r/gnoland/wugnot"
+   9396 "gno.land/r/akkadia/beta/abt"
+   6849 "gno.land/r/gnoswap/staker"
+   6133 "gno.land/r/gnoswap/position"
+   6040 "gno.land/r/gnoswap/launchpad"
    5432 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble3"
-   5387 "gno.land/r/gnoswap/router"
+   5398 "gno.land/r/gnoswap/router"
    5267 "gno.land/r/g1nmqhha0ua730vejxqhrelldm4pga5j5ptle5ea/guardians_store_v1"
-   5128 "gno.land/r/gnoswap/gns"
-   5115 "gno.land/r/gnoswap/gov/staker"
-   3861 "gno.land/r/g138mdf0gqzue3ra2r335upclngn8t8r0n72cn3h/access"
+   5146 "gno.land/r/gnoswap/gov/staker"
+   5134 "gno.land/r/gnoswap/gns"
+   3885 "gno.land/r/g138mdf0gqzue3ra2r335upclngn8t8r0n72cn3h/access"
    3183 "gno.land/r/g1nmqhha0ua730vejxqhrelldm4pga5j5ptle5ea/guardians"
    2837 "gno.land/r/akkadia/beta/lotto"
    1480 "gno.land/r/gnoswap/gnft"
-   1198 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/wbubble"
+   1203 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/wbubble"
    1002 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv3"
-    721 "gno.land/r/gnoswap/order/dca"
-    639 "gno.land/r/gnoswap/emission"
-    620 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens"
+    737 "gno.land/r/gnoswap/order/dca"
+    645 "gno.land/r/gnoswap/emission"
+    622 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens"
     433 "gno.land/r/nym-thegnomic001/gnomic_airdrop"
     325 "gno.land/r/akkadia/beta/user"
-    314 "gno.land/r/nym-thegnomic001/gnomic"
+    316 "gno.land/r/nym-thegnomic001/gnomic"
     247 "gno.land/r/g1ecsuj0q572jr0dhu29q9njtnmw03hyu7tyyvv6/kourt"
     215 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/perk2"
     212 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/kourtv3"
