@@ -1,0 +1,144 @@
+package veil_vote
+
+import (
+	"testing"
+
+	"gno.land/p/g1c3m9uesphlhmj6fkx6nsh3fvhw8apqyjwyhe04/groth16/v2"
+	"gno.land/p/g1c3m9uesphlhmj6fkx6nsh3fvhw8apqyjwyhe04/semaphore/v1"
+)
+
+const (
+	group1Root = "15a424cd40c03bc1e069f90ea4c8d5d0769e6f45a90a37d94abb5fdfbe15ffec"
+	group2Root = "24c7c546821c07bd81695b5d290c8d69f617d25d5df9856b81bfbc69166bcb09"
+	id0Comm    = "135d250fea6e2057923268e507ea86d7337da14f5ce313302cb0db3c445c2859"
+	id1Comm    = "07cbd8da449651472a459983c73128122dc002fba61dbb400bd3ef8daf168579"
+	id2Comm    = "23d2cb21e081f7c75930da74846ea866aff29233a7fe38caefdbe0719f0c941a"
+	nonMemComm = "2145ac5e074e03763115424fcc75a4b0938ef056f0cc5e70aad3d6ac4ab1f6e4"
+)
+
+func assertPanics(t *testing.T, label string, fn func()) {
+	t.Helper()
+	if r := revive(fn); r == nil {
+		t.Fatalf("%s: expected panic, but succeeded", label)
+	}
+}
+
+func TestAdversarialVotingSuite(cur realm, t *testing.T) {
+	testing.SetRealm(testing.NewUserRealm(admin))
+	CreateGroup(cross(cur), 1, 10, admin)
+	AddMember(cross(cur), 1, id0Comm)
+	AddMember(cross(cur), 1, id1Comm)
+	AddMember(cross(cur), 1, id2Comm)
+	PublishRoot(cross(cur), 1, group1Root)
+
+	CreateGroup(cross(cur), 2, 10, admin)
+	AddMember(cross(cur), 2, id1Comm)
+	AddMember(cross(cur), 2, id2Comm)
+	PublishRoot(cross(cur), 2, group2Root)
+
+	CreatePoll(cross(cur), 42, 1, "Proposal 42", "Abstain,Yes,No", 0, 0)
+	CreatePoll(cross(cur), 43, 1, "Proposal 43", "Abstain,Yes,No", 0, 0)
+
+	voter := address("g1jg8mtutu9khhfwc4nxmuhcpftf0pajdhfvsqf5")
+	attacker := address("g1us8428u2a5satrlxzagqqa5m6vmuze025anjlj")
+
+	// 14. Unauthorized administrative & membership mutations rejected.
+	testing.SetRealm(testing.NewUserRealm(attacker))
+	assertPanics(t, "unauth CreateGroup", func() { CreateGroup(cross(cur), 99, 10, attacker) })
+	assertPanics(t, "unauth AddMember", func() { AddMember(cross(cur), 1, nonMemComm) })
+	assertPanics(t, "unauth PublishRoot", func() { PublishRoot(cross(cur), 1, group2Root) })
+	assertPanics(t, "unauth CreatePoll", func() { CreatePoll(cross(cur), 99, 1, "Bad", "A,B", 0, 0) })
+	assertPanics(t, "unauth ClosePoll", func() { ClosePoll(cross(cur), 42) })
+
+	testing.SetRealm(testing.NewUserRealm(voter))
+
+	// 5 & 13. Modified vote choice rejected AND failed verification does NOT consume nullifier.
+	assertPanics(t, "modified vote choice", func() {
+		Vote(cross(cur), 42, 10, group1Root, "2af197ec9b84740036ac16459f6215cf33504b4706336ae0950758ca4d7c6924", 2, "174db53701702787751d44f00919cb67c201f93d1f8821e2688a0be34fe932700303db8b6a17fd7845a31ee4b26f1497b1d7bc63575c51a434bf930790c9a4b5", "05b8817442c82d9dffd5b70e8f21a4980127ee41cd83c8693db85c7d09570f861696a4c099ce81608e8a5fa0aab4850a4318aa1ff39e0ac0d20e3f3544113dd10bba28452d53a067b6bb7b6b60a6f0de57931d97a18f2443c3086ee66dd3631f164a8f9fe62bb4ba9a5ccc7fa17dc3a9807608eec1541eb4bb110c5dbe2bb42c", "15dd7501d1735f9319e166ac8125ada85d688f396c91f3e9d1915786f03b53642579da6fa928092ea883942ee451308218975c9e108faf9328bb09604ddb6ccb")
+	})
+	if GetPollTally(42, 2) != 0 {
+		t.Fatalf("tally updated on failed vote")
+	}
+
+	// 1 & 15. Valid member id0 votes option 1 in poll 42 (using same nullifier that failed above!).
+	res := Vote(cross(cur), 42, 10, group1Root, "2af197ec9b84740036ac16459f6215cf33504b4706336ae0950758ca4d7c6924", 1, "174db53701702787751d44f00919cb67c201f93d1f8821e2688a0be34fe932700303db8b6a17fd7845a31ee4b26f1497b1d7bc63575c51a434bf930790c9a4b5", "05b8817442c82d9dffd5b70e8f21a4980127ee41cd83c8693db85c7d09570f861696a4c099ce81608e8a5fa0aab4850a4318aa1ff39e0ac0d20e3f3544113dd10bba28452d53a067b6bb7b6b60a6f0de57931d97a18f2443c3086ee66dd3631f164a8f9fe62bb4ba9a5ccc7fa17dc3a9807608eec1541eb4bb110c5dbe2bb42c", "15dd7501d1735f9319e166ac8125ada85d688f396c91f3e9d1915786f03b53642579da6fa928092ea883942ee451308218975c9e108faf9328bb09604ddb6ccb")
+	if res != "RECORDED" || GetPollTally(42, 1) != 1 {
+		t.Fatalf("valid vote failed: res=%s tally=%d", res, GetPollTally(42, 1))
+	}
+
+	// 3. Same identity cannot vote twice in one poll.
+	assertPanics(t, "double vote in same poll", func() {
+		Vote(cross(cur), 42, 10, group1Root, "2af197ec9b84740036ac16459f6215cf33504b4706336ae0950758ca4d7c6924", 1, "174db53701702787751d44f00919cb67c201f93d1f8821e2688a0be34fe932700303db8b6a17fd7845a31ee4b26f1497b1d7bc63575c51a434bf930790c9a4b5", "05b8817442c82d9dffd5b70e8f21a4980127ee41cd83c8693db85c7d09570f861696a4c099ce81608e8a5fa0aab4850a4318aa1ff39e0ac0d20e3f3544113dd10bba28452d53a067b6bb7b6b60a6f0de57931d97a18f2443c3086ee66dd3631f164a8f9fe62bb4ba9a5ccc7fa17dc3a9807608eec1541eb4bb110c5dbe2bb42c", "15dd7501d1735f9319e166ac8125ada85d688f396c91f3e9d1915786f03b53642579da6fa928092ea883942ee451308218975c9e108faf9328bb09604ddb6ccb")
+	})
+
+	// 4. Same identity CAN vote in distinct poll (poll 43).
+	res2 := Vote(cross(cur), 43, 10, group1Root, "297099ff989f5070ff453194d1e34fa6987f5c4c9ab11622b0fc3aba0a47a738", 2, "0397a926e7024bd4d233f6b32a1973199e018610d7d5ab6b84ec9719dcce20f60b341a1c6f2aef681b0f57f4f5c054d2f68b213c8119f72718ef8792ddbdd578", "068f6b0a9afeef7f9fc914edd15085f2e24bbf3b077c55acd4e3cee4c263c01628df3887b1aad48c9ee703d1b506351198bbaa150c5dda4b1cb34a7b5a58545721a5f4288773276d25e78f24014857d7d61652cd4a4b1feb81ee558ac4201e081854f6e09022ae1100c78c0eb096e2601f23dbf9dcdbe72201da58da1eed9a8d", "2c4f0085431a26642be7dd10c7137e3a366100acd68eb8c306e9443e3b50e7bc0c0ce672e30db68506380a35a22c8a2e87ea169cd2f78ca2dcb7e35e78af7194")
+	if res2 != "RECORDED" || GetPollTally(43, 2) != 1 {
+		t.Fatalf("distinct poll vote failed")
+	}
+
+	// 6. Proof for another poll (poll 43) rejected in poll 42.
+	assertPanics(t, "proof for another poll", func() {
+		Vote(cross(cur), 42, 10, group1Root, "297099ff989f5070ff453194d1e34fa6987f5c4c9ab11622b0fc3aba0a47a738", 2, "0397a926e7024bd4d233f6b32a1973199e018610d7d5ab6b84ec9719dcce20f60b341a1c6f2aef681b0f57f4f5c054d2f68b213c8119f72718ef8792ddbdd578", "068f6b0a9afeef7f9fc914edd15085f2e24bbf3b077c55acd4e3cee4c263c01628df3887b1aad48c9ee703d1b506351198bbaa150c5dda4b1cb34a7b5a58545721a5f4288773276d25e78f24014857d7d61652cd4a4b1feb81ee558ac4201e081854f6e09022ae1100c78c0eb096e2601f23dbf9dcdbe72201da58da1eed9a8d", "2c4f0085431a26642be7dd10c7137e3a366100acd68eb8c306e9443e3b50e7bc0c0ce672e30db68506380a35a22c8a2e87ea169cd2f78ca2dcb7e35e78af7194")
+	})
+
+	// 7. Proof for another group (group 2) rejected in group 1 poll 42.
+	assertPanics(t, "proof for another group", func() {
+		Vote(cross(cur), 42, 10, group2Root, "00d169b4cca75838761555d418ce2cf343c54d568aa550b716028efbfc923034", 1, "0eddfa704dcb3728a77760ed4d868ab9a1901e719c88a7bd9a1d93c78b73422a1513e0cf5e4c3eeba71a2e0dd190d6ac2aaf39bec956c972342769ff69fae4a3", "1cf2c63eff40b3af85ffce4531a184e121a0edc5229902893074d1f8b383e0a804a2c3e9a6beff3b45ed38342a029959b112fb8ccd435c0ec2de3c1dbf05fedc1660e76361cc3c2a9e9a03ea7c94668956c9317f20dff309e625f91bd5df927429e8c6c32db73757659fcbec79d2aa9d0d7aa5539aca73c7a0f8651be3e72ee3", "0507b91f55cc34a51428422e78478fc6ede88f1b5883fab482c84751de7c46b1236283c94a0636fcbff0495724967795e193bb8b48bed81ece71d12679c68fe5")
+	})
+
+	// 2 & 8. Arbitrary / unauthorized Merkle root (e.g. nonmember forged root) rejected.
+	assertPanics(t, "arbitrary root", func() {
+		Vote(cross(cur), 42, 10, nonMemComm, "00d169b4cca75838761555d418ce2cf343c54d568aa550b716028efbfc923034", 2, "11952eab0f49b62f73cc8d714199c2898217e3c3b34d249fca9a2ad749eb4dfb1640cd40c255149fa46529214d68897732abb7caf0afc920b52d72c5c012196d", "235a182fe82b97943780606cd7156d7f86edcf500c78898f8643fc45652eeed52080e8017ab2231e3d83e9d2b4a3d3aa42d7f3981ca54d81b368d99452b9536d2f17dc4eebb77959aac60a0355ce6b27c55a4f0146190e13e5be591a5b3ef1051d49458f0bdb643a97d51be7739bbe0d142458a70b5a7c42f5d8eedd81e8540a", "2dd368188b433a965f01dff746c33532f38156688093ca44d62bd5c6befc60c60cbed97544d35ac7795cc9a5bafe2cbc79e07fb2de3058eae89292a555057692")
+	})
+
+	// 9. Unsupported circuit depth rejected.
+	assertPanics(t, "unsupported depth", func() {
+		Vote(cross(cur), 42, 20, group1Root, "00d169b4cca75838761555d418ce2cf343c54d568aa550b716028efbfc923034", 2, "11952eab0f49b62f73cc8d714199c2898217e3c3b34d249fca9a2ad749eb4dfb1640cd40c255149fa46529214d68897732abb7caf0afc920b52d72c5c012196d", "235a182fe82b97943780606cd7156d7f86edcf500c78898f8643fc45652eeed52080e8017ab2231e3d83e9d2b4a3d3aa42d7f3981ca54d81b368d99452b9536d2f17dc4eebb77959aac60a0355ce6b27c55a4f0146190e13e5be591a5b3ef1051d49458f0bdb643a97d51be7739bbe0d142458a70b5a7c42f5d8eedd81e8540a", "2dd368188b433a965f01dff746c33532f38156688093ca44d62bd5c6befc60c60cbed97544d35ac7795cc9a5bafe2cbc79e07fb2de3058eae89292a555057692")
+	})
+
+	// 11. Invalid vote option rejected.
+	assertPanics(t, "invalid vote option", func() {
+		Vote(cross(cur), 42, 10, group1Root, "00d169b4cca75838761555d418ce2cf343c54d568aa550b716028efbfc923034", 99, "11952eab0f49b62f73cc8d714199c2898217e3c3b34d249fca9a2ad749eb4dfb1640cd40c255149fa46529214d68897732abb7caf0afc920b52d72c5c012196d", "235a182fe82b97943780606cd7156d7f86edcf500c78898f8643fc45652eeed52080e8017ab2231e3d83e9d2b4a3d3aa42d7f3981ca54d81b368d99452b9536d2f17dc4eebb77959aac60a0355ce6b27c55a4f0146190e13e5be591a5b3ef1051d49458f0bdb643a97d51be7739bbe0d142458a70b5a7c42f5d8eedd81e8540a", "2dd368188b433a965f01dff746c33532f38156688093ca44d62bd5c6befc60c60cbed97544d35ac7795cc9a5bafe2cbc79e07fb2de3058eae89292a555057692")
+	})
+
+	// 18. Multiple distinct members can vote successfully (id1 votes option 2 in poll 42).
+	res3 := Vote(cross(cur), 42, 10, group1Root, "00d169b4cca75838761555d418ce2cf343c54d568aa550b716028efbfc923034", 2, "11952eab0f49b62f73cc8d714199c2898217e3c3b34d249fca9a2ad749eb4dfb1640cd40c255149fa46529214d68897732abb7caf0afc920b52d72c5c012196d", "235a182fe82b97943780606cd7156d7f86edcf500c78898f8643fc45652eeed52080e8017ab2231e3d83e9d2b4a3d3aa42d7f3981ca54d81b368d99452b9536d2f17dc4eebb77959aac60a0355ce6b27c55a4f0146190e13e5be591a5b3ef1051d49458f0bdb643a97d51be7739bbe0d142458a70b5a7c42f5d8eedd81e8540a", "2dd368188b433a965f01dff746c33532f38156688093ca44d62bd5c6befc60c60cbed97544d35ac7795cc9a5bafe2cbc79e07fb2de3058eae89292a555057692")
+	if res3 != "RECORDED" || GetPollTally(42, 2) != 1 {
+		t.Fatalf("second member vote failed")
+	}
+
+	// 12. Closed poll rejects submissions.
+	testing.SetRealm(testing.NewUserRealm(admin))
+	ClosePoll(cross(cur), 43)
+	testing.SetRealm(testing.NewUserRealm(voter))
+	assertPanics(t, "closed poll", func() {
+		Vote(cross(cur), 43, 10, group1Root, "00d169b4cca75838761555d418ce2cf343c54d568aa550b716028efbfc923034", 2, "11952eab0f49b62f73cc8d714199c2898217e3c3b34d249fca9a2ad749eb4dfb1640cd40c255149fa46529214d68897732abb7caf0afc920b52d72c5c012196d", "235a182fe82b97943780606cd7156d7f86edcf500c78898f8643fc45652eeed52080e8017ab2231e3d83e9d2b4a3d3aa42d7f3981ca54d81b368d99452b9536d2f17dc4eebb77959aac60a0355ce6b27c55a4f0146190e13e5be591a5b3ef1051d49458f0bdb643a97d51be7739bbe0d142458a70b5a7c42f5d8eedd81e8540a", "2dd368188b433a965f01dff746c33532f38156688093ca44d62bd5c6befc60c60cbed97544d35ac7795cc9a5bafe2cbc79e07fb2de3058eae89292a555057692")
+	})
+
+	// 10 & 16. Incorrect VK and cross-app replay rejected at Primitives layer.
+	badVK, _ := groth16.ParseVerifyingKeyHex(
+		"00000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000002",
+		"152d159944b6d88fd1e5c8e3336e270bb6956c69f61964d19f8be60015836d6b05bb0e8c9211d3ae16a5e44d560cd6bd74ea4a32d2b44454203299807c03069f21a09bd6fe2a29d7913429d04364a85263051961f33a8b878cd7eb0c86919e960a6303d71be529a2eb1be9efad9159f2818ad3265d621fe76a12d56e75355be5",
+		"04b4875e565d752408ff5a5625620a5574896c0032d2e354558511855c9e15a5018d0d040f63a84958f65d03802f7a0b857cb35240aa2706f10db80a5cd294c82008ff8c448f369e4aa08365134857a096fa57258d931919c87544c98b5514ed21e6c90c9f0864316e2bb42f496c1cf3eb95692a117ffdbda4c65fb9b46ff17e",
+		"2cb31954675c838a5e0177fa1c8f92e8513c8a7357b45c3c65e0b8b7683e069d1249a2b200f6b97eb74c15126f435a38c6731f217f8eb8e0aa07c6472f92c69409e312327885a4a7aa473501c58796b1f81d66248ed457cb0d8c0f0e38c254fb2cf1a911880f9b6f0f0955a3bb575a269738714f2d1e485060fc5258d7f63a6a",
+		[]string{
+			"00000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000002",
+			"00000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000002",
+			"00000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000002",
+			"00000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000002",
+			"00000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000002",
+		},
+	)
+	badVKs := semaphore.NewVKRegistry()
+	_ = badVKs.Register(10, badVK)
+	rBytes, _ := decodeHex32(group1Root)
+	nBytes, _ := decodeHex32("2af197ec9b84740036ac16459f6215cf33504b4706336ae0950758ca4d7c6924")
+	pf, _ := groth16.ParseProofHex("174db53701702787751d44f00919cb67c201f93d1f8821e2688a0be34fe932700303db8b6a17fd7845a31ee4b26f1497b1d7bc63575c51a434bf930790c9a4b5", "05b8817442c82d9dffd5b70e8f21a4980127ee41cd83c8693db85c7d09570f861696a4c099ce81608e8a5fa0aab4850a4318aa1ff39e0ac0d20e3f3544113dd10bba28452d53a067b6bb7b6b60a6f0de57931d97a18f2443c3086ee66dd3631f164a8f9fe62bb4ba9a5ccc7fa17dc3a9807608eec1541eb4bb110c5dbe2bb42c", "15dd7501d1735f9319e166ac8125ada85d688f396c91f3e9d1915786f03b53642579da6fa928092ea883942ee451308218975c9e108faf9328bb09604ddb6ccb")
+	if err := semaphore.VerifyAndConsume(badVKs, groups, semaphore.NewNullifierSet(), 1, 10, rBytes, nBytes, semaphore.Uint64ToBE32(1), semaphore.Uint64ToBE32(42), pf); err == nil {
+		t.Fatalf("expected error for incorrect VK")
+	}
+	if err := semaphore.VerifyAndConsume(vks, groups, semaphore.NewNullifierSet(), 1, 10, rBytes, nBytes, semaphore.Uint64ToBE32(1), semaphore.DomainScope("appB", 42), pf); err == nil {
+		t.Fatalf("expected error for cross-app scope replay")
+	}
+}
