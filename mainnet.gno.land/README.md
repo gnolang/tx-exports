@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-342743
+343378
 ```
 
 ## addpkgs
@@ -651,27 +651,27 @@
   33966 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble5"
   31453 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble6"
   18443 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble4"
-  13961 "gno.land/r/gnoland/wugnot"
-   9422 "gno.land/r/akkadia/beta/abt"
-   6869 "gno.land/r/gnoswap/staker"
+  13962 "gno.land/r/gnoland/wugnot"
+   9442 "gno.land/r/akkadia/beta/abt"
+   6870 "gno.land/r/gnoswap/staker"
    6146 "gno.land/r/gnoswap/position"
-   6043 "gno.land/r/gnoswap/launchpad"
+   6083 "gno.land/r/gnoswap/launchpad"
    5432 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble3"
-   5418 "gno.land/r/gnoswap/router"
+   5420 "gno.land/r/gnoswap/router"
    5267 "gno.land/r/g1nmqhha0ua730vejxqhrelldm4pga5j5ptle5ea/guardians_store_v1"
-   5261 "gno.land/r/gnoswap/gov/staker"
-   5174 "gno.land/r/gnoswap/gns"
-   3982 "gno.land/r/g138mdf0gqzue3ra2r335upclngn8t8r0n72cn3h/access"
+   5263 "gno.land/r/gnoswap/gov/staker"
+   5175 "gno.land/r/gnoswap/gns"
+   4006 "gno.land/r/g138mdf0gqzue3ra2r335upclngn8t8r0n72cn3h/access"
    3183 "gno.land/r/g1nmqhha0ua730vejxqhrelldm4pga5j5ptle5ea/guardians"
-   2837 "gno.land/r/akkadia/beta/lotto"
-   1483 "gno.land/r/gnoswap/gnft"
-   1207 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/wbubble"
+   2845 "gno.land/r/akkadia/beta/lotto"
+   1484 "gno.land/r/gnoswap/gnft"
+   1208 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/wbubble"
    1005 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv3"
-    807 "gno.land/r/gnoswap/order/dca"
-    663 "gno.land/r/gnoswap/emission"
+    837 "gno.land/r/gnoswap/order/dca"
+    664 "gno.land/r/gnoswap/emission"
     622 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens"
     433 "gno.land/r/nym-thegnomic001/gnomic_airdrop"
-    325 "gno.land/r/akkadia/beta/user"
+    326 "gno.land/r/akkadia/beta/user"
     318 "gno.land/r/nym-thegnomic001/gnomic"
     247 "gno.land/r/g1ecsuj0q572jr0dhu29q9njtnmw03hyu7tyyvv6/kourt"
     215 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/perk2"
