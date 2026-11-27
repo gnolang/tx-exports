@@ -2,7 +2,7 @@
 
 ## TXs
 ```
-343378
+343917
 ```
 
 ## addpkgs
@@ -304,6 +304,8 @@
       1 "gno.land/r/g17khqpukees4237dtn3astzapmp462vjhsz6st4/settlers/avatar"
       1 "gno.land/r/g17mgsf396a9ysyj4z22ft0zc0xv8ka6dns4fx7f/tokenfactory"
       1 "gno.land/r/g19t6f4f4ptt3m949jznalfsx2h8aj696llul0nj/million/v0"
+      1 "gno.land/r/g1asuhqmgrngvn0au8ez4ffckep9692r5adg7cmq/tittys"
+      1 "gno.land/r/g1asuhqmgrngvn0au8ez4ffckep9692r5adg7cmq/tittys2"
       1 "gno.land/r/g1c5txl47ea73x9g535lefzs8u6engjrsswvvfch/hello"
       1 "gno.land/r/g1d2mt0utzd04hvfd363nj0h6pk8dx0457tuqg8t/probe"
       1 "gno.land/r/g1ecsuj0q572jr0dhu29q9njtnmw03hyu7tyyvv6/kourt"
@@ -651,24 +653,24 @@
   33966 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble5"
   31453 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble6"
   18443 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble4"
-  13962 "gno.land/r/gnoland/wugnot"
-   9442 "gno.land/r/akkadia/beta/abt"
+  13966 "gno.land/r/gnoland/wugnot"
+   9451 "gno.land/r/akkadia/beta/abt"
    6870 "gno.land/r/gnoswap/staker"
    6146 "gno.land/r/gnoswap/position"
-   6083 "gno.land/r/gnoswap/launchpad"
+   6089 "gno.land/r/gnoswap/launchpad"
    5432 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/bubblerumble3"
-   5420 "gno.land/r/gnoswap/router"
+   5423 "gno.land/r/gnoswap/router"
+   5273 "gno.land/r/gnoswap/gov/staker"
    5267 "gno.land/r/g1nmqhha0ua730vejxqhrelldm4pga5j5ptle5ea/guardians_store_v1"
-   5263 "gno.land/r/gnoswap/gov/staker"
-   5175 "gno.land/r/gnoswap/gns"
-   4006 "gno.land/r/g138mdf0gqzue3ra2r335upclngn8t8r0n72cn3h/access"
+   5177 "gno.land/r/gnoswap/gns"
+   4030 "gno.land/r/g138mdf0gqzue3ra2r335upclngn8t8r0n72cn3h/access"
    3183 "gno.land/r/g1nmqhha0ua730vejxqhrelldm4pga5j5ptle5ea/guardians"
    2845 "gno.land/r/akkadia/beta/lotto"
    1484 "gno.land/r/gnoswap/gnft"
-   1208 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/wbubble"
+   1209 "gno.land/r/g1leu8d2vsplhehcfkjg50mwgdpxdkt8tztu95wr/wbubble"
    1005 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/gnomi/padv3"
-    837 "gno.land/r/gnoswap/order/dca"
-    664 "gno.land/r/gnoswap/emission"
+    873 "gno.land/r/gnoswap/order/dca"
+    666 "gno.land/r/gnoswap/emission"
     622 "gno.land/r/g1n4pl5uc4yt5r96m9w6fmdznx3x0jyg8l6arhmt/bazaar/c/bazaargens"
     433 "gno.land/r/nym-thegnomic001/gnomic_airdrop"
     326 "gno.land/r/akkadia/beta/user"
