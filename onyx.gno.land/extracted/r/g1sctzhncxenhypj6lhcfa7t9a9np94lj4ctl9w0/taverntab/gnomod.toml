@@ -1,0 +1,8 @@
+# Tavern Tab realm module.
+# TODO (deploy step): replace DEPLOYER_G1_ADDRESS with the g1 address of
+# the gnokey key that will deploy this realm, e.g.:
+#   module = "gno.land/r/g1qypqxpq9qcrsszg2pvxq6rs0zqg3yyc5v7sa8c/taverntab"
+# Then run `gno mod tidy` if the toolchain asks for it. The realm path
+# on-chain becomes exactly this module path.
+module = "gno.land/r/g1sctzhncxenhypj6lhcfa7t9a9np94lj4ctl9w0/taverntab"
+gno = "0.9"
